@@ -1,12 +1,11 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 
-namespace ScreenToGif.UserControls
+namespace ScreenToGif.UserControls;
+
+public partial class MouseEventsPanel : UserControl
 {
-    public partial class MouseClicksPanel : UserControl
+    public MouseEventsPanel()
     {
-        public MouseClicksPanel()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

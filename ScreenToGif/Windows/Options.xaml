@@ -2,9 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-        xmlns:u="clr-namespace:ScreenToGif.Util"
-        xmlns:t="clr-namespace:ScreenToGif.Settings"
+        xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
+        xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
+        xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
         Title="{DynamicResource S.Options.Title}" Height="610" Width="800" MinWidth="680" MinHeight="460" 
         Background="{DynamicResource Panel.Background}" Icon="/Resources/Logo.ico" 
         SizeToContent="Width" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
@@ -25,7 +25,6 @@
 
         <CommandBinding Command="{StaticResource Command.BrowseFfmpeg}" CanExecute="BrowseFfmpeg_CanExecute" Executed="BrowseFfmpeg_Execute"/>
         <CommandBinding Command="{StaticResource Command.BrowseGifski}" CanExecute="BrowseGifski_CanExecute" Executed="BrowseGifski_Execute"/>
-        <CommandBinding Command="{StaticResource Command.BrowseSharpDx}" CanExecute="BrowseSharpDx_CanExecute" Executed="BrowseSharpDx_Execute"/>
     </Window.CommandBindings>
 
     <Window.Resources>
@@ -64,8 +63,8 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <n:ExtendedRadioButton x:Name="AppRadio" Text="{DynamicResource S.Options.App}" Icon="{StaticResource Vector.Application}" IsChecked="True"/>
-                <n:ExtendedRadioButton x:Name="RecorderRadio" Text="{DynamicResource S.Options.Recorder}" Icon="{StaticResource Vector.Record}"/>
+                <n:ExtendedRadioButton x:Name="AppRadio" Text="{DynamicResource S.Options.App}" Icon="{StaticResource Vector.Application}"/>
+                <n:ExtendedRadioButton x:Name="RecorderRadio" Text="{DynamicResource S.Options.Recorder}" Icon="{StaticResource Vector.Record}" IsChecked="True"/>
                 <n:ExtendedRadioButton x:Name="EditorRadio" Text="{DynamicResource S.Options.Editor}" Icon="{StaticResource Vector.Editor}"/>
                 <n:ExtendedRadioButton x:Name="AutomaticRadio" Text="{DynamicResource S.Options.Tasks}" Icon="{StaticResource Vector.Encoder}"/>
                 <n:ExtendedRadioButton x:Name="ShortcutsRadio" Text="{DynamicResource S.Options.Shortcuts}" Icon="{StaticResource Vector.Keyboard}"/>
@@ -387,9 +386,9 @@
 
                                 <n:ExtendedCheckBox x:Name="UpdatesCheckBox" Text="{DynamicResource S.Options.App.General.CheckForUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
                                 <StackPanel Visibility="{Binding CheckForUpdates, Converter={StaticResource Bool2Visibility}}">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.PortableUpdate}" Info="{DynamicResource S.Options.App.General.PortableUpdate.Info}" 
+                                    <n:ExtendedCheckBox x:Name="PortableUpdateCheckBox" Text="{DynamicResource S.Options.App.General.PortableUpdate}" Info="{DynamicResource S.Options.App.General.PortableUpdate.Info}" 
                                                         Margin="30,3,5,3" IsChecked="{Binding Path=PortableUpdate, Mode=TwoWay}"/>
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.ForceUpdateAsAdmin}" Margin="30,3,5,3" IsChecked="{Binding Path=ForceUpdateAsAdmin, Mode=TwoWay}"/>
+                                    <n:ExtendedCheckBox x:Name="AdminUpdateCheckBox" Text="{DynamicResource S.Options.App.General.ForceUpdateAsAdmin}" Margin="30,3,5,3" IsChecked="{Binding Path=ForceUpdateAsAdmin, Mode=TwoWay}"/>
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.UpdateOnClose}" Margin="30,3,5,3" IsChecked="{Binding Path=InstallUpdates, Mode=TwoWay}"/>
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.PromptToInstall}" Margin="45,3,5,3" IsChecked="{Binding Path=PromptToInstall, Mode=TwoWay}"
                                                         Visibility="{Binding InstallUpdates, Converter={StaticResource Bool2Visibility}}"/>
@@ -477,27 +476,27 @@
 
                                 <n:ExtendedRadioButton Grid.Row="0" Grid.Column="1" x:Name="ManualRadioButton" ContentHeight="26" ContentWidth="26"
                                                        Text="{DynamicResource S.Options.Recorder.Frequency.Manual}" Padding="5" Margin="0,0,0,5" TextWrapping="Wrap"
-                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.Manual}}" 
+                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:CaptureFrequencies.Manual}}" 
                                                        Icon="{StaticResource Vector.Camera}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Manual.Info}"/>
 
                                 <n:ExtendedRadioButton Grid.Row="0" Grid.Column="2" x:Name="InteractionRadioButton" ContentHeight="26" ContentWidth="26"
                                                        Text="{DynamicResource S.Options.Recorder.Frequency.Interaction}" Padding="5" Margin="0,0,0,5" TextWrapping="Wrap"
-                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.Interaction}}" 
+                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:CaptureFrequencies.Interaction}}" 
                                                        Icon="{StaticResource Vector.Cursor}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Interaction.Info}"/>
 
                                 <n:ExtendedRadioButton Grid.Row="0" Grid.Column="3" x:Name="PerSecondRadioButton" ContentHeight="26" ContentWidth="26" 
                                                        Text="{DynamicResource S.Options.Recorder.Frequency.Second}" Padding="5" Margin="0,0,0,5" TextWrapping="Wrap"
-                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerSecond}}" 
+                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:CaptureFrequencies.PerSecond}}" 
                                                        Icon="{StaticResource Vector.Delay}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Second.Info}"/>
 
                                 <n:ExtendedRadioButton Grid.Row="0" Grid.Column="4" x:Name="PerMinuteRadioButton" ContentHeight="26" ContentWidth="26"
                                                        Text="{DynamicResource S.Options.Recorder.Frequency.Minute}" Padding="5" Margin="0,0,0,5" TextWrapping="Wrap"
-                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerMinute}}" 
+                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:CaptureFrequencies.PerMinute}}" 
                                                        Icon="{StaticResource Vector.Delay.Minute}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Minute.Info}"/>
 
                                 <n:ExtendedRadioButton Grid.Row="0" Grid.Column="5" x:Name="PerHourRadioButton" ContentHeight="26" ContentWidth="26"
                                                        Text="{DynamicResource S.Options.Recorder.Frequency.Hour}" Padding="5" Margin="0,0,0,5" TextWrapping="Wrap"
-                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerHour}}"
+                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:CaptureFrequencies.PerHour}}"
                                                        Icon="{StaticResource Vector.Delay.Hour}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Hour.Info}"/>
 
                                 <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" Margin="0,0,5,0" Visibility="{Binding ElementName=PerSecondRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibility}, FallbackValue=Collapsed}">
@@ -508,7 +507,23 @@
                                     <n:IntegerUpDown Minimum="10" Maximum="25000" Value="{Binding Path=PlaybackDelayHour, Mode=TwoWay}" MinWidth="80" Visibility="{Binding ElementName=PerHourRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Playback.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
+                                
+                                <WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Margin="0,5,0,0"
+                                           Visibility="{Binding ElementName=InteractionRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}">
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Trigger}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0" VerticalAlignment="Center"/>
+                                    <n:IntegerUpDown Minimum="0" Maximum="25000" Value="{Binding Path=TriggerDelayInteraction, Mode=TwoWay}" MinWidth="80" />
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Trigger.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center"
+                                               TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                </WrapPanel>
 
+                                <WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Margin="0,5,0,0"
+                                           Visibility="{Binding ElementName=ManualRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}">
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Trigger}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0" VerticalAlignment="Center"/>
+                                    <n:IntegerUpDown Minimum="0" Maximum="25000" Value="{Binding Path=TriggerDelayManual, Mode=TwoWay}" MinWidth="80" />
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Trigger.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center"
+                                               TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                </WrapPanel>
+                                
                                 <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Options.Recorder.FixedFramerate}" 
                                                     Info="{DynamicResource S.Options.Recorder.FixedFramerate.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"
                                                     Visibility="{Binding ElementName=PerSecondRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}"/>
@@ -1150,7 +1165,10 @@
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Greece}" Tag="el" Content="Greek / Ελληνικά" Author="Χρήστος Μητσιάρης"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Hungary}" Tag="hu" Content="Hungarian / Magyar" Author="László Földes"
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Israel}" Tag="he" Content="Hebrew / עברי" Author="Elishy"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=he, Converter={StaticResource TagToSelection}}"/>
+
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Hungary}" Tag="hu" Content="Hungarian / Magyar" Author="László Földes, György Kőszeg"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=hu, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Italy}" Tag="it" Content="Italian / Italiano" Author="HispidaBytes, Michele Locati, Giovanni Rinaldin"
@@ -1404,16 +1422,16 @@
 
                                     <TextBlock Text="{DynamicResource S.Options.Upload.Proxy.Mode}" VerticalAlignment="Center" Margin="5" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                     <ComboBox Grid.Column="1" Margin="3" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding Source={x:Static t:UserSettings.All}, Path=ProxyMode}">
-                                        <ComboBoxItem Content="{DynamicResource S.Options.Upload.Proxy.Mode.Disabled}" Tag="{x:Static u:ProxyType.Disabled}"/>
-                                        <ComboBoxItem Content="{DynamicResource S.Options.Upload.Proxy.Mode.Manual}" Tag="{x:Static u:ProxyType.Manual}"/>
-                                        <ComboBoxItem Content="{DynamicResource S.Options.Upload.Proxy.Mode.System}" Tag="{x:Static u:ProxyType.System}"/>
+                                        <ComboBoxItem Content="{DynamicResource S.Options.Upload.Proxy.Mode.Disabled}" Tag="{x:Static e:ProxyTypes.Disabled}"/>
+                                        <ComboBoxItem Content="{DynamicResource S.Options.Upload.Proxy.Mode.Manual}" Tag="{x:Static e:ProxyTypes.Manual}"/>
+                                        <ComboBoxItem Content="{DynamicResource S.Options.Upload.Proxy.Mode.System}" Tag="{x:Static e:ProxyTypes.System}"/>
                                     </ComboBox>
 
                                     <TextBlock Grid.Column="2" Text="{DynamicResource S.Options.Upload.Proxy.Host}" VerticalAlignment="Center" Margin="10,5,5,5" Visibility="{Binding ElementName=ProxyHostTextBox, Path=Visibility}"
                                                Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                     <n:ExtendedTextBox Grid.Column="3" x:Name="ProxyHostTextBox" Margin="5,3" VerticalContentAlignment="Center" TextWrapping="Wrap"
                                                        Text="{Binding ProxyHost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                       Visibility="{Binding ProxyMode, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProxyType.Manual}}"/>
+                                                       Visibility="{Binding ProxyMode, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static e:ProxyTypes.Manual}}"/>
 
                                     <TextBlock Grid.Column="4" Text="{DynamicResource S.Options.Upload.Proxy.Port}" VerticalAlignment="Center" Margin="10,5,5,5" Visibility="{Binding ElementName=ProxyHostTextBox, Path=Visibility}"
                                                Foreground="{DynamicResource Element.Foreground.Medium}"/>
@@ -1421,7 +1439,7 @@
                                                      Visibility="{Binding ElementName=ProxyHostTextBox, Path=Visibility}"/>
 
                                     <TextBlock Grid.Column="2" Grid.ColumnSpan="5" Margin="5,3" Text="{DynamicResource S.Options.Upload.Proxy.Mode.System.Info}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                               Visibility="{Binding ProxyMode, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProxyType.System}}" 
+                                               Visibility="{Binding ProxyMode, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static e:ProxyTypes.System}}" 
                                                TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </Grid>
 
@@ -1523,7 +1541,6 @@
 
                             <n:Card Grid.Column="0" x:Name="FfmpegImageCard" Header="FFmpeg" Margin="0" Click="FfmpegImageCard_Click"/>
                             <n:Card Grid.Column="1" x:Name="GifskiImageCard" Header="Gifski" Margin="0" Click="GifskiImageCard_Click"/>
-                            <n:Card Grid.Column="2" x:Name="SharpDxImageCard" Header="SharpDx" Margin="0" Click="SharpDxImageCard_Click"/>
                         </Grid>
 
                         <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Options.Extras.FfmpegLocation}"/>
@@ -1560,24 +1577,6 @@
 
                             <n:ExtendedButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
                                               ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseGifski}"/>
-                        </Grid>
-
-                        <n:LabelSeparator Grid.Row="6" Text="{DynamicResource S.Options.Extras.SharpDxLocation}"/>
-                        <Grid Grid.Row="7">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
-
-                            <n:ExtendedTextBox Grid.Column="0" x:Name="SharpDxLocationTextBox" Margin="10,3,0,3" Text="{Binding SharpDxLocationFolder, Source={x:Static t:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
-                                               Tag="SharpDX" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
-
-                            <n:ExtendedButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
-                                              ToolTip="{DynamicResource S.Options.Extras.SharpDxLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="SelectSharpDx_Click"/>
-
-                            <n:ExtendedButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
-                                              ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseSharpDx}"/>
                         </Grid>
 
                         <StackPanel Grid.Row="9" Orientation="Horizontal">

@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Windows.Markup;
 
-namespace ScreenToGif.Controls.Ribbon
-{
-    [ContentProperty("SizeDefinitions")]
-    public class GroupSizeDefinition
-    {
-        public List<ItemSizeDefinition> SizeDefinitions { get; set; } = new List<ItemSizeDefinition>();
+namespace ScreenToGif.Controls.Ribbon;
 
-        public bool IsCollapsed { get; set; }
-    }
+[ContentProperty("SizeDefinitions")]
+public class GroupSizeDefinition
+{
+    public List<ItemSizeDefinition> SizeDefinitions { get; set; } = new();
+
+    public bool IsCollapsed { get; set; }
 }

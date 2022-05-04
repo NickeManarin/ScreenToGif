@@ -4,12 +4,12 @@
         xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:l="clr-namespace:ScreenToGif.Windows"
-        xmlns:u="clr-namespace:ScreenToGif.Util"
-        xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+        xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
         xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
         xmlns:h="clr-namespace:ScreenToGif.Controls.Shapes" 
-        xmlns:t="clr-namespace:ScreenToGif.Settings"
+        xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
         xmlns:o="clr-namespace:ScreenToGif.UserControls"
+        xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
         x:Name="EditorWindow" Title="{DynamicResource S.Editor.Title}" MinHeight="500" MinWidth="700" 
         Background="{DynamicResource Panel.Background.Level3}" UseLayoutRounding="True" Icon="/Resources/Logo.ico"
         FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
@@ -264,6 +264,7 @@
         <CommandBinding Command="{StaticResource Command.DeleteNext}" CanExecute="DeleteNext_CanExecute" Executed="DeleteNext_Executed"/>
         <CommandBinding Command="{StaticResource Command.RemoveDuplicates}" CanExecute="RemoveDuplicates_CanExecute" Executed="RemoveDuplicates_Executed"/>
         <CommandBinding Command="{StaticResource Command.Reduce}" CanExecute="Reduce_CanExecute" Executed="Reduce_Executed"/>
+        <CommandBinding Command="{StaticResource Command.SmoothLoop}" CanExecute="RemoveDuplicates_CanExecute" Executed="SmoothLoop_Executed"/>
 
         <!--Reordering-->
         <CommandBinding Command="{StaticResource Command.Reverse}" CanExecute="Reordering_CanExecute" Executed="Reverse_Executed"/>
@@ -288,7 +289,7 @@
 
         <CommandBinding Command="{StaticResource Command.FreeDrawing}" CanExecute="Image_CanExecute" Executed="FreeDrawing_Executed"/>
         <CommandBinding Command="{StaticResource Command.Shapes}" CanExecute="Image_CanExecute" Executed="Shapes_Executed"/>
-        <CommandBinding Command="{StaticResource Command.MouseClicks}" CanExecute="Image_CanExecute" Executed="MouseClicks_Executed"/>
+        <CommandBinding Command="{StaticResource Command.MouseEvents}" CanExecute="Image_CanExecute" Executed="MouseEvents_Executed"/>
         <CommandBinding Command="{StaticResource Command.Watermark}" CanExecute="Image_CanExecute" Executed="Watermark_Executed"/>
         <CommandBinding Command="{StaticResource Command.Border}" CanExecute="Image_CanExecute" Executed="Border_Executed"/>
         <CommandBinding Command="{StaticResource Command.Shadow}" CanExecute="Image_CanExecute" Executed="Shadow_Executed"/>
@@ -862,13 +863,14 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="16"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Content="{DynamicResource S.Editor.Edit.Frames}" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Content="{DynamicResource S.Editor.Edit.Frames}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="{DynamicResource Element.Foreground.Gray112}"/>
 
@@ -887,7 +889,12 @@
                                           ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                           ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Grid Grid.Row="0" Grid.Column="3">
+                        <n:ExtendedButton Grid.Row="0" Grid.Column="3" x:Name="SmoothLoopButton" Text="{DynamicResource S.Editor.Edit.Frames.SmoothLoop}" Icon="{StaticResource Vector.Repeat}"
+                                          MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical}" Command="{StaticResource Command.SmoothLoop}"
+                                          ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
+                                          ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <Grid Grid.Row="0" Grid.Column="4">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -1118,8 +1125,8 @@
                                           ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                           ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ExtendedButton Grid.Row="0" Grid.Column="3" Text="{DynamicResource S.Editor.Image.Clicks}" Icon="{StaticResource Vector.Cursor}"
-                                          MinWidth="55" ContentHeight="28" ContentWidth="32" Command="{StaticResource Command.MouseClicks}" Style="{StaticResource Style.Button.Vertical}"
+                        <n:ExtendedButton Grid.Row="0" Grid.Column="3" Text="{DynamicResource S.Editor.Image.MouseEvents}" Icon="{StaticResource Vector.Cursor}"
+                                          MinWidth="55" ContentHeight="28" ContentWidth="32" Command="{StaticResource Command.MouseEvents}" Style="{StaticResource Style.Button.Vertical}"
                                           ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                           ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
@@ -1582,7 +1589,7 @@
                           Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
                           Visibility="{Binding ElementName=ProgressGrid, Path=Visibility}" Background="Transparent">
 
-                        <Grid Visibility="{Binding ProgressType, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProgressType.Bar}}">
+                        <Grid Visibility="{Binding ProgressType, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static e:ProgressTypes.Bar}}">
                             <Rectangle Name="ProgressHorizontalRectangle" Height="{Binding Source={x:Static t:UserSettings.All}, Path=ProgressThickness}"
                                        Visibility="{Binding ProgressOrientation, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static Orientation.Horizontal}}"
                                        Fill="{Binding ProgressColor, Source={x:Static t:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}" 
@@ -1601,7 +1608,7 @@
                                    Foreground="{Binding ProgressFontColor, Source={x:Static t:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}" 
                                    VerticalAlignment="{Binding ProgressVerticalAligment, Source={x:Static t:UserSettings.All}}" 
                                    HorizontalAlignment="{Binding ProgressHorizontalAligment, Source={x:Static t:UserSettings.All}}"
-                                   Visibility="{Binding ProgressType, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProgressType.Text}}"
+                                   Visibility="{Binding ProgressType, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static e:ProgressTypes.Text}}"
                                    FontFamily="{Binding ElementName=ProgressFontComboBox, Path=SelectedItem}" 
                                    FontStyle="{Binding ElementName=ProgressFontStyleComboBox, Path=SelectedValue}"
                                    FontWeight="{Binding ElementName=ProgressFontWeightComboBox, Path=SelectedValue}"
@@ -1817,9 +1824,9 @@
 
                             <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Clipboard.Behavior}"/>
                             <RadioButton Grid.Row="3" x:Name="PasteBeforeRadioButton" Content="{DynamicResource S.Clipboard.Before}" Margin="10,5,5,5" 
-                                         IsChecked="{Binding PasteBehavior, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:PasteBehavior.BeforeSelected}}"/>
+                                         IsChecked="{Binding PasteBehavior, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:PasteBehaviors.BeforeSelected}}"/>
                             <RadioButton Grid.Row="4" x:Name="PasteAfterRadioButton" Content="{DynamicResource S.Clipboard.After}" Margin="10,5,5,5"
-                                         IsChecked="{Binding PasteBehavior, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:PasteBehavior.AfterSelected}}"/>
+                                         IsChecked="{Binding PasteBehavior, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:PasteBehaviors.AfterSelected}}"/>
                         </Grid>
 
                         <o:ResizePanel x:Name="ResizePanel" Visibility="Collapsed"/>
@@ -2890,7 +2897,7 @@
                             </Grid>
                         </Grid>
 
-                        <Grid x:Name="MouseClicksGrid" Visibility="Collapsed">
+                        <Grid x:Name="MouseEventsGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
@@ -2901,6 +2908,7 @@
                             <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Border.Appearance}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -2941,40 +2949,44 @@
                                     <TextBlock Text="Rectangle" Tag="{StaticResource Vector.Rectangle}"/>
                                 </ComboBox>-->
 
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Left}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:ColorBox Grid.Row="1" Grid.Column="1" x:Name="LeftButtonClickColor" Margin="10,5"
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.MouseHighlight.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:ColorBox Grid.Row="1" Grid.Column="1" x:Name="MouseHighlightColor" Margin="10,5"
+                                            SelectedColor="{Binding Source={x:Static t:UserSettings.All}, Path=MouseHighlightColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Left}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:ColorBox Grid.Row="2" Grid.Column="1" x:Name="LeftButtonClickColor" Margin="10,5"
                                             SelectedColor="{Binding Source={x:Static t:UserSettings.All}, Path=LeftMouseButtonClicksColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Middle}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:ColorBox Grid.Row="2" Grid.Column="1" x:Name="MiddleButtonClickColor" Margin="10,5"
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Middle}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:ColorBox Grid.Row="3" Grid.Column="1" x:Name="MiddleButtonClickColor" Margin="10,5"
                                             SelectedColor="{Binding Source={x:Static t:UserSettings.All}, Path=MiddleMouseButtonClicksColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Right}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:ColorBox Grid.Row="3" Grid.Column="1" x:Name="RightButtonClickColor" Margin="10,5"
+                                <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Right}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:ColorBox Grid.Row="4" Grid.Column="1" x:Name="RightButtonClickColor" Margin="10,5"
                                             SelectedColor="{Binding Source={x:Static t:UserSettings.All}, Path=RightMouseButtonClicksColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:DoubleUpDown Grid.Row="4" Grid.Column="1" x:Name="ClickWidthDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
-                                                Value="{Binding Source={x:Static t:UserSettings.All}, Path=MouseClicksWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:DoubleUpDown Grid.Row="5" Grid.Column="1" x:Name="ClickWidthDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
+                                                Value="{Binding Source={x:Static t:UserSettings.All}, Path=MouseEventsWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:DoubleUpDown Grid.Row="5" Grid.Column="1" x:Name="ClickHeightDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
-                                                Value="{Binding Source={x:Static t:UserSettings.All}, Path=MouseClicksHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Grid.Row="6" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:DoubleUpDown Grid.Row="6" Grid.Column="1" x:Name="ClickHeightDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
+                                                Value="{Binding Source={x:Static t:UserSettings.All}, Path=MouseEventsHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                             <!--<n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Preview}"/>
                             <Grid Grid.Row="3" x:Name="PreviewGrid" Margin="10,5">
                                 <Viewbox x:Name="PreviewViewBox" Child="{StaticResource Vector.Cursor}" Height="20" Width="20" Stretch="Uniform">
                                     <Viewbox.Margin>
                                         <MultiBinding Converter="{StaticResource DoubleToThicknessConverter}">
-                                            <Binding Source="{x:Static t:UserSettings.All}" Path="MouseClicksWidth"/>
-                                            <Binding Source="{x:Static t:UserSettings.All}" Path="MouseClicksHeight"/>
+                                            <Binding Source="{x:Static t:UserSettings.All}" Path="MouseEventsWidth"/>
+                                            <Binding Source="{x:Static t:UserSettings.All}" Path="MouseEventsHeight"/>
                                         </MultiBinding>
                                     </Viewbox.Margin>
                                 </Viewbox>
 
                                 <Ellipse Fill="{Binding ElementName=MouseBackgroundColor, Path=SelectedBrush, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                         Width="{Binding Source={x:Static t:UserSettings.All}, Path=MouseClicksWidth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                         Height="{Binding Source={x:Static t:UserSettings.All}, Path=MouseClicksHeight, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Width="{Binding Source={x:Static t:UserSettings.All}, Path=MouseEventsWidth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="{Binding Source={x:Static t:UserSettings.All}, Path=MouseEventsHeight, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
                             </Grid>-->
                         </Grid>
@@ -3261,19 +3273,19 @@
 
                                 <n:ExtendedRadioButton Grid.Row="0" Grid.Column="0" x:Name="PixelationRadioButton" Icon="{StaticResource Vector.Pixelate}" Text="{DynamicResource S.Obfuscate.Type.Pixelate}" 
                                                        IsChecked="{Binding ObfuscationMode, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, 
-                                                       ConverterParameter={x:Static u:ObfuscationMode.Pixelation}}" Margin="0,2" Padding="2" MinHeight="30"/>
+                                                       ConverterParameter={x:Static e:ObfuscationModes.Pixelation}}" Margin="0,2" Padding="2" MinHeight="30"/>
 
                                 <n:ExtendedRadioButton Grid.Row="0" Grid.Column="1" x:Name="BlurRadioButton" Icon="{StaticResource Vector.Blur}" Text="{StaticResource S.Obfuscate.Type.Blur}"
                                                        IsChecked="{Binding ObfuscationMode, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, 
-                                                       ConverterParameter={x:Static u:ObfuscationMode.Blur}}" Margin="0,2" Padding="2" MinHeight="30"/>
+                                                       ConverterParameter={x:Static e:ObfuscationModes.Blur}}" Margin="0,2" Padding="2" MinHeight="30"/>
 
                                 <n:ExtendedRadioButton Grid.Row="1" Grid.Column="0" x:Name="DarkenRadioButton" Icon="{StaticResource Vector.Darken}" Text="{StaticResource S.Obfuscate.Type.Darken}"
                                                        IsChecked="{Binding ObfuscationMode, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, 
-                                                       ConverterParameter={x:Static u:ObfuscationMode.Darken}}" Margin="0,2" Padding="2" MinHeight="30"/>
+                                                       ConverterParameter={x:Static e:ObfuscationModes.Darken}}" Margin="0,2" Padding="2" MinHeight="30"/>
 
                                 <n:ExtendedRadioButton Grid.Row="1" Grid.Column="1" x:Name="LightenRadioButton" Icon="{StaticResource Vector.Lighten}" Text="{StaticResource S.Obfuscate.Type.Lighten}"
                                                        IsChecked="{Binding ObfuscationMode, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, 
-                                                       ConverterParameter={x:Static u:ObfuscationMode.Lighten}}" Margin="0,2" Padding="2" MinHeight="30"/>
+                                                       ConverterParameter={x:Static e:ObfuscationModes.Lighten}}" Margin="0,2" Padding="2" MinHeight="30"/>
                             </Grid>
 
                             <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Obfuscate.Options}"/>
@@ -3382,11 +3394,11 @@
 
                                 <n:ExtendedRadioButton Grid.Column="0" x:Name="BarRadioButton" Icon="{StaticResource Vector.Progress}" Text="{DynamicResource S.Progress.Type.Bar}" 
                                                        IsChecked="{Binding ProgressType, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, 
-                                                       ConverterParameter={x:Static u:ProgressType.Bar}}" Margin="0,2" Padding="2" MinHeight="30"/>
+                                                       ConverterParameter={x:Static e:ProgressTypes.Bar}}" Margin="0,2" Padding="2" MinHeight="30"/>
 
                                 <n:ExtendedRadioButton Grid.Column="1" x:Name="TextRadioButton" Icon="{StaticResource Vector.FreeText}" Text="{StaticResource S.Progress.Type.Text}"
                                                        IsChecked="{Binding ProgressType, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, 
-                                                       ConverterParameter={x:Static u:ProgressType.Text}}" Margin="0,2" Padding="2" MinHeight="30"/>
+                                                       ConverterParameter={x:Static e:ProgressTypes.Text}}" Margin="0,2" Padding="2" MinHeight="30"/>
                             </Grid>
 
                             <Expander Grid.Row="2" Header="{DynamicResource S.Caption.Font}" IsExpanded="{Binding IsProgressFontGroupExpanded, Source={x:Static t:UserSettings.All}}"
@@ -3895,11 +3907,11 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ExtendedRadioButton Grid.Row="0" Grid.Column="0" x:Name="FadeToFrameRadioButton" Icon="{StaticResource Vector.Image}" 
-                                                       IsChecked="{Binding FadeToType, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:FadeToType.NextFrame}}"
+                                                       IsChecked="{Binding FadeToType, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:FadeModes.NextFrame}}"
                                                        Text="{DynamicResource S.Transitions.FadeTo.Frame}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="0,2" Padding="2" MinHeight="30"/>
 
                                 <n:ExtendedRadioButton Grid.Row="0" Grid.Column="1" x:Name="FadeToColorRadioButton" Icon="{StaticResource Vector.Colors}" 
-                                                       IsChecked="{Binding FadeToType, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:FadeToType.Color}}"
+                                                       IsChecked="{Binding FadeToType, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:FadeModes.Color}}"
                                                        Text="{DynamicResource S.Transitions.FadeTo.Color}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="0,2" Padding="2" MinHeight="30"/>
                             </Grid>
 
@@ -4203,6 +4215,61 @@
                                         <MultiBinding Converter="{StaticResource FormatConverter}">
                                             <Binding ElementName="DuplicatesTextBlock" Path="Tag"/>
                                             <Binding Source="{x:Static t:UserSettings.All}" Path="DuplicatesSimilarity"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+
+                        <Grid x:Name="SmoothLoopGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.SmoothLoop.Header}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.RemoveDuplicates.Similarity}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:DoubleUpDown Grid.Row="0" Grid.Column="1" x:Name="SmoothLoopSimilarityDoubleUpDown" Minimum="0.1" Maximum="100" Margin="10,5" MinWidth="80" 
+                                                Value="{Binding Source={x:Static t:UserSettings.All}, Path=SmoothLoopSimilarity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.SmoothLoop.StartThreshold}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="SmoothLoopThresholdDoubleUpDown" Minimum="1" Margin="10,5" MinWidth="80" 
+                                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=SmoothLoopStartThreshold, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.SmoothLoop.From}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,5" 
+                                          SelectedIndex="{Binding Source={x:Static t:UserSettings.All}, Path=SmoothLoopFrom, Converter={StaticResource EnumToInt}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBoxItem Content="{DynamicResource S.SmoothLoop.From.Last}"/>
+                                    <ComboBoxItem Content="{DynamicResource S.SmoothLoop.From.First}"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Width="15" Height="15" Background="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
+                                <TextBlock Grid.Column="1" x:Name="SmoothLoopTextBlock" Foreground="{DynamicResource Element.Foreground.Detail}" Tag="{DynamicResource S.SmoothLoop.Info}"
+                                           FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource FormatConverter}">
+                                            <Binding ElementName="SmoothLoopTextBlock" Path="Tag"/>
+                                            <Binding Source="{x:Static t:UserSettings.All}" Path="SmoothLoopSimilarity"/>
                                         </MultiBinding>
                                     </TextBlock.Text>
                                 </TextBlock>

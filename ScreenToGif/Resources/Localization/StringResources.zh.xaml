@@ -49,7 +49,7 @@
     <s:String x:Key="S.SavingSettings.Message">ScreenToGif 似乎没有足够的特权将设置保存到磁盘。&#10;&#10;您想以管理员权限重试一次吗？</s:String>
     
     <s:String x:Key="S.Exiting.Title">退出 ScreenToGif</s:String>
-    <s:String x:Key="S.Exiting.Instruction">你确定要退出吗？</s:String>
+    <s:String x:Key="S.Exiting.Instruction">您确定要退出吗？</s:String>
     <s:String x:Key="S.Exiting.Message">所有窗口将被关闭，托盘图标将被移除。</s:String>
     
     <!--Warnings • Graphics engine-->
@@ -57,13 +57,13 @@
     <s:String x:Key="S.Warning.Graphics.Instruction">切换到正确的图形适配器，以捕获所选的屏幕</s:String>
     <s:String x:Key="S.Warning.Graphics.Message">由于 DirectX 的限制，ScreenToGif 必须与被捕获的屏幕在同一个图形适配器上运行。</s:String>
     <s:String x:Key="S.Warning.Graphics.Action">打开 Windows 设置 > 系统 > 显示 > 图形设置，或点击下面的链接，为 ScreenToGif 切换图形适配器设置。</s:String>
-    <s:String x:Key="S.Warning.Graphics.Action.Legacy">打开你的图形适配器的图形设置，为ScreenToGif切换图形适配器。</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action.Legacy">打开您的图形适配器的图形设置，为ScreenToGif切换图形适配器。</s:String>
     <s:String x:Key="S.Warning.Graphics.Switch">打开 Windows 设置</s:String>
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Space">空格键</s:String>
     <s:String x:Key="S.Keys.Enter">回车键</s:String>
-    <s:String x:Key="S.Keys.Esc">Esc键</s:String>
+    <s:String x:Key="S.Keys.Esc">Esc 键</s:String>
     
     <!--Mouse-->
     <s:String x:Key="S.Mouse.Right">右键单击</s:String>
@@ -109,6 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">删除所有下一帧</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">删除重复项</s:String>
     <s:String x:Key="S.Command.Reduce">减少帧数</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">创建平滑循环</s:String>
     <s:String x:Key="S.Command.Reverse">反向动画</s:String>
     <s:String x:Key="S.Command.Yoyo">溜溜球，使动画前进和后退</s:String>
     <s:String x:Key="S.Command.MoveLeft">移动所选择帧到左侧</s:String>
@@ -164,6 +165,7 @@
     <s:String x:Key="S.Updater.Header">一个新的更新可用</s:String>
     <s:String x:Key="S.Updater.NewRelease">新版本发布！</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">新版本 {0} 可用！&#x0d;点击此处查看。</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">看来您的系统不再被支持，或者更新系统时发生了一些变化。尝试从网站上手动下载它。</s:String>
     <s:String x:Key="S.Updater.Version">版本</s:String>
     <s:String x:Key="S.Updater.Portable">便携版</s:String>
     <s:String x:Key="S.Updater.Installer">安装程序</s:String>
@@ -198,10 +200,8 @@
     <s:String x:Key="S.Options.Donate">捐赠</s:String>
     <s:String x:Key="S.Options.About">关于</s:String>
     <s:String x:Key="S.Options.Other">其它</s:String>
-    <s:String x:Key="S.Options.Warning.Follow.Header">光标后面缺少快捷键</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Header">光标后缺少快捷键</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">为了使用鼠标光标跟随功能，必须设置一个快捷键，以便在需要时进行切换。</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">缺少屏幕捕获的依赖项</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">为了使用 Desktop Duplication API 捕获屏幕，必须下载 SharpDx 库。</s:String>
     
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">启动</s:String>
@@ -259,7 +259,7 @@
     <s:String x:Key="S.Options.App.General.UpdateOnClose">关闭应用程序后自动安装更新</s:String>
     <s:String x:Key="S.Options.App.General.PortableUpdate">强制下载便携版本</s:String>
     <s:String x:Key="S.Options.App.General.PortableUpdate.Info">（需要通过解压缩和替换可执行文件来进行手动安装）</s:String>
-    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">强制更新以提升特权运行</s:String>
+    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">强制更新时提升特权</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">在安装开始之前提示我</s:String>
 
     <!--Options • Recorder-->
@@ -284,7 +284,7 @@
     
     <s:String x:Key="S.Options.Recorder.Mode">捕获模式</s:String>
     <s:String x:Key="S.Options.Recorder.Bitblt.Info">使用较旧的捕获方法，该方法较慢，可能无法捕获游戏，但不需要其他插件。</s:String>
-    <s:String x:Key="S.Options.Recorder.DirectX.Info">使用桌面复制 API 捕获方法，该方法更快，并且可以捕获全屏游戏，但是需要 SharpDx 插件和 Windows 8 或更高版本系统。</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">使用桌面复制 API 捕获方法，该方法更快，并且可以捕获全屏游戏，但是需要 Windows 8 或更高版本系统。</s:String>
     <s:String x:Key="S.Options.Recorder.File">保存到文件</s:String>
     <s:String x:Key="S.Options.Recorder.File.Info">捕获的每一帧将直接作为图像保存在磁盘上。</s:String>
     <s:String x:Key="S.Options.Recorder.Cache">内存缓存</s:String>
@@ -297,7 +297,7 @@
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression">无压缩</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">（捕获帧时不应执行压缩）</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize">缓存大小：</s:String>
-    <s:String x:Key="S.Options.Recorder.CacheSize.Info">（以MB为单位。达到此大小后，数据将被写入/丢弃到磁盘上）</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize.Info">（以 MB 为单位。达到此大小后，数据将被写入/丢弃到磁盘上）</s:String>
     <s:String x:Key="S.Options.Recorder.PreventBlackFrames">防止捕获全黑帧。</s:String>
     <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">（防止具有内存缓存的 BitBlt 错误地导致所有像素均为黑色的帧）</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">录制时显示鼠标光标</s:String>
@@ -311,12 +311,12 @@
     <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">在捕获过程中强制清理内存</s:String>
     <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">（减少捕捉过程中的内存使用，但会降低性能）</s:String>
     
-    <s:String x:Key="S.Options.Recorder.Guidelines">指导方针</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines">辅助线</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">三分法则</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">单击切换三分法则准线的显示。</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">十字准线</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">点击切换十字准线的显示。</s:String>
-    <s:String x:Key="S.Options.Recorder.Guidelines.Info">指南仅在录像机暂停或停止时显示。</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">辅助线仅在录像机暂停或停止时显示。</s:String>
     
     <s:String x:Key="S.Options.Recorder.HideTitleBar">隐藏标题栏（精简模式）</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">启用屏幕放大镜</s:String>
@@ -335,7 +335,7 @@
     <s:String x:Key="S.Options.Recorder.RememberSize">记住录制区域的先前大小</s:String>
     <s:String x:Key="S.Options.Recorder.RememberPosition">记住录制区域的先前位置</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">在开始前倒计时</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">（秒，开始录制前延时）</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">（以秒为单位，开始录制前延时）</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">启用光标跟随</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">（录制区域将根据光标的位置重新定位）</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">（录制区域开始重新定位缓冲区边距）</s:String>
@@ -467,8 +467,8 @@
     <s:String x:Key="S.Options.Storage.DeleteEverything">关闭应用程序时从缓存中删除所有文件</s:String>
     <s:String x:Key="S.Options.Storage.AskDeleteEverything">在从缓存中删除所有文件之前询问我。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">自动删除旧项目</s:String>
-    <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">当打开应用程序时，超过配置时间的已关闭项目将被后台任务删除。</s:String>
-    <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">（在几天之内，打开编辑器后，任何旧项目都将被删除/丢弃）</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">打开应用程序时，超过配置时间的已关闭项目将被后台任务删除。</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">（天数，在打开应用程序后，任何超过这个时间的已关闭项目将被删除/丢弃）</s:String>
     
     <!--Options • Storage > Clear cache-->
     <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - 清除缓存</s:String>
@@ -585,9 +585,6 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski 可执行文件的路径中包含一个或多个无效字符。请为该可执行文件选择一个有效位置。</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx 位置（SharpDX.dll，SharpDX.Direct3D11.dll 和 SharpDX.DXGI.dll）</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">选择 SharpDx 库的位置</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">SharpDx 库的路径中包含一个或多个无效字符。 请为这些库选择一个有效位置。</s:String>
-    <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg 许可证</s:String>
-    <s:String x:Key="S.Options.Extras.License.Gifski">Gifski 许可证</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx 许可证</s:String>
     <s:String x:Key="S.Options.Extras.Permission.Header">文件夹中缺少写入权限</s:String>
     <s:String x:Key="S.Options.Extras.Permission.Observation">由于缺少写入权限，无法将下载内容保存在文件夹中。&#10;&#10;您是否要以管理员权限启动下载程序以完成下载？</s:String>
@@ -614,7 +611,7 @@
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">版本：</s:String>
     <s:String x:Key="S.Options.About.UpdateCheck">检查更新</s:String>
-    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">你已经更新到最新版本，无需更新。</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">您已经更新到最新版本，无需更新。</s:String>
     <s:String x:Key="S.Options.About.Author">作者：Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store 版本。 某些功能由于强制策略而被禁用。</s:String>
     <s:String x:Key="S.Options.About.Contact">联系</s:String>
@@ -646,9 +643,9 @@
     <s:String x:Key="S.Localization.Warning.Repeated">您不能添加相同名称的资源</s:String>
     <s:String x:Key="S.Localization.Warning.Repeated.Info">尝试删除重复的资源或使用其他语言代码。</s:String>
     <s:String x:Key="S.Localization.Warning.Redundant">冗余语言代码</s:String>
-    <s:String x:Key="S.Localization.Warning.Redundant.Info">“ {0}”代码是多余的。 尝试改用“ {1}”。</s:String>
+    <s:String x:Key="S.Localization.Warning.Redundant.Info">“{0}” 代码是多余的。 尝试改用 “{1}”。</s:String>
     <s:String x:Key="S.Localization.Warning.Unknown">未知语言</s:String>
-    <s:String x:Key="S.Localization.Warning.Unknown.Info">无法将“ {0}”及其家族识别为有效的语言代码。</s:String>
+    <s:String x:Key="S.Localization.Warning.Unknown.Info">无法将 “{0}” 及其家族识别为有效的语言代码。</s:String>
     <s:String x:Key="S.Localization.Warning.NotPossible">无法导入本地化资源。</s:String>
 
     <!--Recorder-->
@@ -686,13 +683,12 @@
     <s:String x:Key="S.Recorder.Timer.Total">总帧数：</s:String>
     <s:String x:Key="S.Recorder.Timer.Manual">手动捕获：</s:String>
     <s:String x:Key="S.Recorder.Timer.Paused">捕获已暂停。</s:String>
-    <s:String x:Key="S.Recorder.Timer.Imprecise">你的电脑不支持精确的捕捉模式，&#10;这意味着可能永远无法达到目标帧率。</s:String>
+    <s:String x:Key="S.Recorder.Timer.Imprecise">您的电脑不支持精确的捕捉模式，&#10;这意味着可能永远无法达到目标帧率。</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">无法捕获屏幕</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">无法捕获屏幕。5 次尝试后，捕获方法未返回任何帧。</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">无法开始/暂停捕获屏幕</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">使用桌面复制 Desktop Duplication API 捕获屏幕需要 Windows 8 或更高版本。</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">为了使用 Desktop Duplication API 捕获屏幕，需要 SharpDx 库。 进入 选项 > 附加功能 下载。</s:String>
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">区域</s:String>
@@ -780,7 +776,7 @@
     <s:String x:Key="S.Preset.Default.Title">默认 ({0})</s:String>
     <s:String x:Key="S.Preset.Default.Description">编码器的默认预设。</s:String>
     <s:String x:Key="S.Preset.Twitter.Title">用于 Twitter ({0})</s:String>
-    <s:String x:Key="S.Preset.Twitter.Description">遵守 Twitter 上传限制 （大小和分辨率除外）。</s:String> 
+    <s:String x:Key="S.Preset.Twitter.Description">遵守 Twitter 上传限制（大小和分辨率除外）。</s:String> 
     <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
     <s:String x:Key="S.Preset.Hevc.Description">高效视频编码。</s:String>
     <s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>
@@ -851,7 +847,7 @@
     <s:String x:Key="S.ImportVideo.Frames">帧数：</s:String>
     <s:String x:Key="S.ImportVideo.Duration">持续时间：</s:String>
     <s:String x:Key="S.ImportVideo.Error">无法加载视频。</s:String>
-    <s:String x:Key="S.ImportVideo.Error.Detail">预览器无法启动。 请尝试与其他硬件开发商联系或检查视频是否未损坏。&#x0d;如果您使用的是 MediaPlayer，请检查 Windows 功能“ Media Features/Windows Media Player”是否已打开，并确保您具有必需的视频编解码器。</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">预览器无法启动。请尝试使用其他导入器或检查视频是否未损坏。&#x0d;如果您使用的是 MediaPlayer，请检查 Windows 功能中 “媒体功能/Windows Media Player” 是否已打开，并确保您有所需的视频编解码器。</s:String>
     <s:String x:Key="S.ImportVideo.Timeout">获取帧预览超时。</s:String>
     <s:String x:Key="S.ImportVideo.Nothing">没有选择的帧将被导入。</s:String>
     
@@ -959,9 +955,9 @@
     <s:String x:Key="S.Editor.Welcome.Import">拖入图片、视频或项目来导入</s:String>
     <s:String x:Key="S.Editor.Welcome.ThankYou">非常感谢您使用我的应用！</s:String>
     <s:String x:Key="S.Editor.Welcome.Size">帧率越低，颜色数或帧之间的变化越小，尺寸越小</s:String>
-    <s:String x:Key="S.Editor.Welcome.Contact">你希望联系我们？打开“选项 > 关于”可以找到联系方式</s:String>
+    <s:String x:Key="S.Editor.Welcome.Contact">您希望联系我们？打开“选项 > 关于”可以找到联系方式</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">遇到问题了？请通过“反馈”工具联系我</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">你想试试新版录像机界面吗？转到“选项 > 录像机”以启用</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">您想试试新版录像机界面吗？转到“选项 > 录像机”以启用</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">录制</s:String>
@@ -1021,13 +1017,14 @@
     <!--Editor • Playback tab • Playback Options-->
     <s:String x:Key="S.Editor.PlaybackOptions.Header">播放选项</s:String>
     <s:String x:Key="S.Editor.PlaybackOptions.Loop">播放期间循环播放</s:String>
-    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">仅在播放期间使用。&#x0d;如果要更改用于导出GIF和APNG的循环设置，&#x0d;某些编码器的“另存为”面板中将提供该循环设置。</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">仅在播放期间使用。&#x0d;如果要更改用于导出 GIF 和 APNG 的循环设置，&#x0d;某些编码器的“另存为”面板中将提供该循环设置。</s:String>
     
     <!--Editor • Edit tab • Frames-->  
     <s:String x:Key="S.Editor.Edit.Frames">帧</s:String>
     <s:String x:Key="S.Editor.Edit.Delete">删除</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">移除重复</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">减少帧数</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">平滑循环</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">删除之前所有</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">删除之后所有</s:String>
     
@@ -1088,18 +1085,18 @@
     <!--Editor • Messages-->
     <s:String x:Key="S.Editor.Clipboard.InvalidCut.Title">剪切操作</s:String>
     <s:String x:Key="S.Editor.Clipboard.InvalidCut.Instruction">您不能剪切所有帧。</s:String>
-    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">录制需要至少一帧。</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">录制至少需要一帧。</s:String>
     <s:String x:Key="S.Editor.DeleteAll.Title">全部删除</s:String>
     <s:String x:Key="S.Editor.DeleteAll.Instruction">您确定要删除所有帧吗？</s:String>
     <s:String x:Key="S.Editor.DeleteAll.Message">此操作将放弃当前已打开的项目且无法撤消。要继续吗？</s:String>
     <s:String x:Key="S.Editor.DiscardProject.Title">舍弃项目</s:String>
     <s:String x:Key="S.Editor.DiscardProject.Instruction">您确定要舍弃此项目吗？</s:String>
-    <s:String x:Key="S.Editor.DiscardProject.Message">此操作将舍弃这个项目并删除所有帧。\n\r您无法撤消此操作。</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Message">此操作将舍弃这个项目并删除所有帧。&#x0d;您无法撤消此操作。</s:String>
     <s:String x:Key="S.Editor.DiscardPreviousProject.Instruction">您要舍弃以前的项目吗？</s:String>
     <s:String x:Key="S.Editor.DiscardPreviousProject.Message">如果您选择保留，以前的项目将可在“最近项目”中打开。</s:String>
     <s:String x:Key="S.Editor.DeleteFrames.Title">删除帧</s:String>
     <s:String x:Key="S.Editor.DeleteFrames.Instruction">您确定要删除吗？</s:String>
-    <s:String x:Key="S.Editor.DeleteFrames.Message">此操作将删除 {0} 帧。\n\r您可以稍后撤消。</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Message">此操作将删除 {0} 帧。&#x0d;您可以稍后撤消。</s:String>
     <s:String x:Key="S.Editor.Exiting.Title">退出编辑器</s:String>
     <s:String x:Key="S.Editor.Exiting.Instruction">您确实要退出吗？</s:String>
     <s:String x:Key="S.Editor.Exiting.Message">您正在处理的项目可以在“最近项目”中再次打开。</s:String>
@@ -1137,7 +1134,8 @@
     <s:String x:Key="S.Editor.Warning.Ffmpeg">找不到 FFmpeg。将其添加到 PATH 环境变量或在设置中配置其路径。</s:String>
     <s:String x:Key="S.Editor.Warning.Gifski">找不到 Gifski。将其添加到 PATH 环境变量或在设置中配置其路径。</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">驱动器上没有足够的空间供应用程序存储缓存（{0}% 左右）。单击此处打开“选项” > “临时文件”，以释放一些空间。</s:String>
-    <s:String x:Key="S.Editor.Warning.DifferentDpi">您尝试使用不支持的 DPI 导入多个图像。 其中一些已导入，另一些则需要单独导入。</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">您试图导入多张不同 DPI 的图片，这不被支持。其中一些图片被导入，其他的则需要单独导入。</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentSize">您试图导入多张不同尺寸的图片，这不被支持。其中一些图片被导入，其他的则需要单独导入。</s:String>
     
     <!--Editor • Status-->
     <s:String x:Key="S.Editor.RetrievingFromCache">从缓存中检索帧</s:String>
@@ -1158,6 +1156,8 @@
     <s:String x:Key="S.Editor.ApplyingTransition">正在应用过渡效果</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">正在准备保存</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">取消载入并放弃项目。</s:String>
+    <s:String x:Key="S.Editor.FindingLoop">寻找完美循环</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">丢弃循环中未使用的帧</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">帧：</s:String>
@@ -1297,6 +1297,16 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">使用平均值</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">使用总和</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">此操作会分析每个帧（逐个像素），并删除至少为 {0} %的类似于其最近邻的帧。&#x0d;您可以选择是否要调整帧的延迟（显示持续时间）。</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">创建平滑循环</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">先忽略：</s:String>
+    <s:String x:Key="S.SmoothLoop.From">比较自：</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">结束</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">开始</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">尝试查找至少 {0} % 类似于开始帧的帧，并删除所有后续帧。&#x0d;您可以选择是否要忽略一些初始帧，并从开始（阈值之后）或结束开始比较。</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">忽略的帧数需要小于总帧数。</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">无法使用所选设置创建平滑循环。</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">文本</s:String>
@@ -1367,7 +1377,7 @@
     <s:String x:Key="S.MouseClicks.Color.Left">左键颜色：</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">中键颜色：</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">右键颜色：</s:String>
-    <s:String x:Key="S.MouseClicks.Warning.None">您的项目没有检测到鼠标点击。</s:String>
+    <s:String x:Key="S.MouseClicks.Warning.None">您的项目中没有检测到鼠标点击。</s:String>
     
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">图像</s:String>
@@ -1682,7 +1692,7 @@
     <!--Editor • Save as > Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">保存选项</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">部分导出</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">将文件保存到你选择的文件夹</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">将文件保存到您选择的文件夹</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">覆盖（若已存在）</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">同时另存为项目（相同文件夹与文件名）</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">上传文件</s:String>
@@ -1739,8 +1749,8 @@
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">您需要在命令文本框中输入编码后置命令才能执行他们。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Partial.NoSelection">如果可以选择仅导出选定的帧，则必须至少选择一帧。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Partial.InvalidExpression">部分导出项目的表达式无效。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Upload.None">没有选择上传服务。你需要选择一个服务。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">您无法上传到选定的服务，因为它没有被授权。 转到选项>云服务授权此应用程序。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">没有选择上传服务。您需要选择一个服务。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">您无法上传到选定的服务，因为它没有被授权。 转到 选项 > 上传服务 授权此应用程序。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">您不能选择复制链接的选项，因为您没有设置上传文件。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">您需要选择输出文件夹。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">输出目录不存在。</s:String>

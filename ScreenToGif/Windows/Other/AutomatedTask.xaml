@@ -2,9 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+        xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        xmlns:t="clr-namespace:ScreenToGif.ViewModel.Tasks"
+        xmlns:t="clr-namespace:ScreenToGif.ViewModel.Tasks;assembly=ScreenToGif.ViewModel"
         Title="{DynamicResource S.Options.Tasks.Title}" Width="370" Height="400" MinWidth="350" MinHeight="300" 
         WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
 
@@ -73,7 +73,7 @@
                 </u:ComboBoxItemTemplateSelector.DropDownTemplate>
 
                 <t:BaseTaskViewModel Image="Vector.Info"/>
-                <t:MouseClicksViewModel Image="Vector.Cursor"/>
+                <t:MouseEventsViewModel Image="Vector.Cursor"/>
                 <t:KeyStrokesViewModel Image="Vector.Keyboard"/>
                 <t:DelayViewModel Image="Vector.Clock"/>
                 <t:ProgressViewModel Image="Vector.Progress"/>

@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <RoutedUICommand x:Key="Command.NewRecording" Text="S.Command.NewRecording">
@@ -212,6 +212,12 @@
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 
+    <RoutedUICommand x:Key="Command.SmoothLoop" Text="S.Command.SmoothLoop">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Shift + H</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
     <RoutedUICommand x:Key="Command.Reverse" Text="S.Command.Reverse">
         <RoutedUICommand.InputGestures>
             <KeyGesture>Ctrl + Shift + R</KeyGesture>
@@ -291,7 +297,7 @@
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 
-    <RoutedUICommand x:Key="Command.MouseClicks" Text="S.Command.MouseClicks">
+    <RoutedUICommand x:Key="Command.MouseEvents" Text="S.Command.MouseEvents">
         <RoutedUICommand.InputGestures>
             <KeyGesture>Alt + I</KeyGesture>
         </RoutedUICommand.InputGestures>

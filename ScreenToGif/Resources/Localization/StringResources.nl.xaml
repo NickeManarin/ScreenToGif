@@ -109,6 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">Verwijder alle volgende frames</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Duplicaten verwijderen</s:String>
     <s:String x:Key="S.Command.Reduce">Verminder het aantal frames</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">Een vloeiende lus aanmaken</s:String>
     <s:String x:Key="S.Command.Reverse">Animatie omkeren</s:String>
     <s:String x:Key="S.Command.Yoyo">Laat de animatie vooruit en achteruit gaan</s:String>
     <s:String x:Key="S.Command.MoveLeft">Verplaats het geselecteerde frame naar links</s:String>
@@ -164,6 +165,7 @@
     <s:String x:Key="S.Updater.Header">Er is een nieuwe update beschikbaar</s:String>
     <s:String x:Key="S.Updater.NewRelease">Nieuwe uitgave!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">Nieuwe uitgave beschikbaar, Versie {0}!&#10;Klik hier voor meer details.</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">Het lijkt erop dat jouw systeem niet langer wordt ondersteund of dat er iets is veranderd in het updatesysteem. Probeer het handmatig te downloaden van de website.</s:String>
     <s:String x:Key="S.Updater.Version">Versie</s:String>
     <s:String x:Key="S.Updater.Portable">Portable</s:String>
     <s:String x:Key="S.Updater.Installer">Installatieprogramma</s:String>
@@ -200,9 +202,7 @@
     <s:String x:Key="S.Options.Other">Overige</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Geen sneltoets voor het volgen van de cursor</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Om de functie voor het volgen van de muiscursor te gebruiken, moet je een sneltoets instellen om deze indien nodig te wisselen.</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Ontbrekende afhankelijkheden voor schermopname</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">Om het scherm vast te leggen met de Desktop Duplication API, moet je de SharpDx-bibliotheken downloaden.</s:String>
-    
+
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Opstarten</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Manual">Handmatig&#10;starten</s:String>
@@ -244,7 +244,7 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Restore">Alle vensters herstellen</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Left">Linkermuisknop:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">Linkermuisknop (x2):</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">Middelste klik:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">Middenmuisknop:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">Venster:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">Of anders, opent:</s:String>
     <s:String x:Key="S.Options.App.General">Algemeen</s:String>
@@ -253,7 +253,7 @@
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Bevestiging vragen bij het sluiten van het programa (d.m.v. 'Afsluiten').</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Hardwareversnelling uitschakelen.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(De gebruikersinterface wordt weergegeven via softwaremodus)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Controleren op nieuw vertalingen.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Controleren op nieuwe vertalingen.</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Bijgewerkte vertalingen worden automatisch gedownload en geïnstalleerd)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Controleer op updates bij het opstarten.</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Updates automatisch installeren na het sluiten van de app.</s:String>
@@ -583,9 +583,6 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Locatie van Gifski selecteren</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski-bibliotheek</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Het pad van Gifski bevat een of meer ongeldige tekens. Selecteer de juiste locatie van het bestand.</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx-map (SharpDX.dll, SharpDX.Direct3D11.dll en SharpDX.DXGI.dll)</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">Selecteer de locatie van de SharpDx-bibliotheken</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">Het pad voor de SharpDx-bibliotheken bevat een of meer ongeldige tekens. Selecteer alstublieft een geldige map voor die bibliotheken.</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg licentie</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski licentie</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx-licentie</s:String>
@@ -613,6 +610,8 @@
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Versie:</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">Controleren op updates</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">Dit is al de jongste versie.</s:String>
     <s:String x:Key="S.Options.About.Author">Auteur: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store versie. Sommige functies zijn niet beschikbaar door opgelegde beperkingen.</s:String>
     <s:String x:Key="S.Options.About.Contact">Contact</s:String>
@@ -690,8 +689,7 @@
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Het was niet mogelijk om het scherm vast te leggen. De opnamemethode heeft na 5 pogingen geen frame geretourneerd.</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">Het vastleggen/pauzeren van het scherm was niet mogelijk</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 of nieuwer is vereist om het scherm vast te leggen met de Desktop Duplication API.</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">De SharpDx-bibliotheken zijn vereist om het scherm vast te leggen met de Desktop Duplication API. Ga naar Opties > Extra's om het te downloaden.</s:String>
-    
+
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Gebied</s:String>
     <s:String x:Key="S.Recorder.Area.Select">Selecteer een gebied</s:String>
@@ -1026,6 +1024,7 @@
     <s:String x:Key="S.Editor.Edit.Delete">Verwijderen</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Duplicaten&#10;verwijderen</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">Frames&#10;verminderen</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Vloeiende&#x0d;Lus</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Alles hiervoor verwijderen</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Alles hierna verwijderen</s:String>
     
@@ -1136,6 +1135,7 @@
     <s:String x:Key="S.Editor.Warning.Gifski">Gifski is niet beschikbaar. Voeg deze toe aan de PATH systeemvariabele of stel de locatie in bij Instellingen.</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">Er is niet onvoldoende ruimte beschikbaar op de harde schijf ({0}% over). Klik hier om Instellingen > Tijdelijke bestanden te openen en extra vrije ruimte te maken.</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentDpi">Je hebt geprobeerd meerdere afbeeldingen met verschillende DPI's te importeren, wat niet wordt ondersteund. Sommige zijn geïmporteerd, de andere moeten apart worden geïmporteerd.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentSize">U heeft geprobeerd meerdere afbeeldingen met verschillende formaten te importeren, wat niet wordt ondersteund. Sommige afbeeldingen zijn ingelezen, anderen moeten afzonderlijk worden geïmporteerd.</s:String>
     
     <!--Editor • Status-->
     <s:String x:Key="S.Editor.RetrievingFromCache">Frames ophalen uit de tijdelijke opslag</s:String>
@@ -1156,6 +1156,8 @@
     <s:String x:Key="S.Editor.ApplyingTransition">Overgangseffect toepassen</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Opslaan voorbereiden</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">Annuleer het laden en gooi het project weg.</s:String>
+    <s:String x:Key="S.Editor.FindingLoop">De perfecte lus zoeken</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">Ongebruikte frames verwijderen</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Frame:</s:String>
@@ -1295,6 +1297,17 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Gemiddelde gebruiken</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Totaal gebruiken</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">Deze actie analyseert elk frame (pixel per pixel) en verwijderd alle frames die op zijn minst {0} % gelijk zijn aan frame ervoor of erna.&#10;U kunt kiezen of de vertraging van de frames (duur van de vertoningen) aangepast moet worden.</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">Vloeiende lus maken</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">Eerste negeren:</s:String>
+    <s:String x:Key="S.SmoothLoop.From">Vergelijken met:</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">Einde</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">Begin</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">Probeert een frame te vinden dat minstens {0}% lijkt op het startframe en verwijdert alle latere frames.&#x0d; Je kunt kiezen of je enkele initiële frames wilt negeren en de vergelijking vanaf het begin (na de drempel) of het einde wilt starten.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">Het aantal te negeren frames moet kleiner zijn dan het totale aantal frames.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Met de geselecteerde instellingen was het niet mogelijk om een vloeiende lus te maken.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">Er is al een vloeiende lus op basis van geselecteerde instellingen.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Tekst</s:String>
@@ -1681,7 +1694,13 @@
     <s:String x:Key="S.SaveAs.SaveOptions">Opties opslaan</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Gedeeltelijk exporteren.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Sla het bestand op in een map naar keuze.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overschrijven (indien bestand al bestaat).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">Overschrijven?</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Waarschuwen</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Alleen waarschuwen als er al een bestand met dezelfde naam bestaat.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Vragen</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Vraagt of de gebruiker wil dat het bestand wordt overschreven.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Toestaan</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Overschrijft gewoon het bestand.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Project ook opslaan (dezelfde map, dezelfde bestandsnaam).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Bestand uploaden.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Naar klembord kopiëren.</s:String>
@@ -1771,6 +1790,11 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Frames exporteren</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Weet je zeker dat je de frames wilt exporteren?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Deze actie zal {0} frames direct in geselecteerde map exporteren</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">Overschrijven</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Mag het bestand overschreven worden?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">Een bestand met de naam '{0}' bestaat al in deze map.\r\nMag dit overschreven worden?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">Mogen deze bestanden overschreven worden?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">Een of meer bestanden met dezelfde naam staan al in deze map.\r\nMogen deze overschreven worden?</s:String>
     
     <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">Opdrachtweergave</s:String>

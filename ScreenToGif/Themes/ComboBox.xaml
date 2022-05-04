@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:c="clr-namespace:ScreenToGif.Controls"
-                    xmlns:v="clr-namespace:ScreenToGif.Util.Converters">
+                    xmlns:v="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util">
 
     <!--ComboBox Style-->
     <Style x:Key="Style.ToggleButton.ComboBox" TargetType="{x:Type ToggleButton}">
@@ -430,6 +430,19 @@
             <Separator Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Width="1" Margin="0"/>
             <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Title}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
             <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Description}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Gray112}" 
+                       TextTrimming="CharacterEllipsis" FontSize="11" VerticalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Template.ComboBox.SimpleNoIcon">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{Binding Title}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Text="{Binding Description}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Gray112}" 
                        TextTrimming="CharacterEllipsis" FontSize="11" VerticalAlignment="Center"/>
         </Grid>
     </DataTemplate>

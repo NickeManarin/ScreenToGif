@@ -51,7 +51,7 @@
     <s:String x:Key="S.Exiting.Title">Выход из ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">Вы уверены, что хотите выйти?</s:String>
     <s:String x:Key="S.Exiting.Message">Все окна и значок в трее будут закрыты.</s:String>
-    
+
     <!--Warnings • Graphics engine-->
     <s:String x:Key="S.Warning.Graphics.Title">Переключите графический адаптер</s:String>
     <s:String x:Key="S.Warning.Graphics.Instruction">Переключитесь на правильный графический адаптер, чтобы сделать снимок выбранного экрана.</s:String>
@@ -109,6 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">Удалить все следующие кадры</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Удалить дубликаты</s:String>
     <s:String x:Key="S.Command.Reduce">Уменьшить количество кадров</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">Создать плавную петлю</s:String>
     <s:String x:Key="S.Command.Reverse">Реверс анимации</s:String>
     <s:String x:Key="S.Command.Yoyo">Йойо, т.е. анимация + реверс</s:String>
     <s:String x:Key="S.Command.MoveLeft">Переместить выбранный кадр влево</s:String>
@@ -164,6 +165,7 @@
     <s:String x:Key="S.Updater.Header">Доступно обновление</s:String>
     <s:String x:Key="S.Updater.NewRelease">Новая версия!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">Доступна новая версия {0}! Показать детали.</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">Возможно ваша система больше не поддерживается или что-то мешает обновлению. Попробуйте загрузить его вручную с сайта.</s:String>
     <s:String x:Key="S.Updater.Version">Версия</s:String>
     <s:String x:Key="S.Updater.Portable">Портативная</s:String>
     <s:String x:Key="S.Updater.Installer">Установщик</s:String>
@@ -200,9 +202,7 @@
     <s:String x:Key="S.Options.Other">Прочее</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Нет сочетания клавиш - следовать за курсором</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Необходимо установить сочетание клавиш для переключения этой функции.</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Нет сочетания клавиш - запись экрана</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">Для захвата экрана с помощью Desktop Duplication API необходимо загрузить библиотеки SharpDx.</s:String>
-    
+
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Автозапуск</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Manual">Вручную</s:String>
@@ -368,7 +368,7 @@
     <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Подтверждать выход из редактора (если открыт проект).</s:String>
     <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Тройной клик - выбор текста.</s:String>
     <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Отрисовывать контур вокруг букв.</s:String>
-    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Пропускать кадры при предпросмотре,</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Пропускать кадры при предпросмотре.</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">если не удается отобразить их вовремя.</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Пропускать кадры при необходимости.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory">Лимит истории отмен/повторов,</s:String>
@@ -583,9 +583,6 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Укажите путь к Gifski</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Библиотека Gifski</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Путь к Gifski содержит недопустимые символы. Выберите правильное расположение файла.</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">Путь к SharpDx (SharpDX.dll, SharpDX.Direct3D11.dll и SharpDX.DXGI.dll)</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">Укажите путь к SharpDx</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">Путь к SharpDx содержит недопустимые символы. Выберите правильное расположение файлов.</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">Лицензия FFmpeg</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Лицензия Gifski</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">Лицензия SharpDx</s:String>
@@ -613,6 +610,8 @@
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Версия:</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">Проверить обновления</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">У вас последняя версия.</s:String>
     <s:String x:Key="S.Options.About.Author">Автор: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Версия магазина Microsoft. Некоторые функции отключены из-за принудительных политик.</s:String>
     <s:String x:Key="S.Options.About.Contact">Контакты</s:String>
@@ -623,7 +622,7 @@
     <s:String x:Key="S.Options.About.Technical.License">Лицензия:</s:String>
     <s:String x:Key="S.Options.About.Technical.Free">(Данное ПО полностью бесплатное)</s:String>
     <s:String x:Key="S.Options.About.Technical.SourceCode">Исходный код:</s:String>
-    <s:String x:Key="S.Options.About.Technical.Privacy">Правила конфиденциальности:</s:String>
+    <s:String x:Key="S.Options.About.Technical.Privacy">Конфиденциальность:</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">Огромное спасибо</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">И всем, кто пишет отзывы, предложения, качественные переводы и финансово поддерживает.</s:String>
     
@@ -690,8 +689,7 @@
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Не удалось захватить экран. Метод захвата не вернул ни одного кадра после 5 попыток.</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">Не удалось запустить / приостановить захват экрана</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 или новее требуется для захвата экрана с помощью Desktop Duplication API.</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">SharpDx необходим для захвата экрана с помощью Desktop Duplication API. Перейдите в меню Параметры > Дополнительно, чтобы загрузить его.</s:String>
-    
+
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Регион</s:String>
     <s:String x:Key="S.Recorder.Area.Select">Выбор области</s:String>
@@ -1018,7 +1016,7 @@
     
     <!--Editor • Playback tab • Playback Options-->
     <s:String x:Key="S.Editor.PlaybackOptions.Header">Параметры</s:String>
-    <s:String x:Key="S.Editor.PlaybackOptions.Loop">Зациклить</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop">Зациклить воспроизведение (петля)</s:String>
     <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">Только для воспроизведения.&#x0d;Если вы хотите изменить настройки циклов для экспорта GIF и Apng,&#x0d;то они доступны на панели "Сохранить как" для некоторых кодеров.</s:String>
     
     <!--Editor • Edit tab • Frames-->  
@@ -1026,6 +1024,7 @@
     <s:String x:Key="S.Editor.Edit.Delete">Удалить&#x0d;выбранные</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Удалить&#x0d;дубликаты</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">Удалить&#x0d;несколько</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Плавная&#x0d;петля</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Удалить&#x0d;до начала</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Удалить&#x0d;до конца</s:String>
     
@@ -1136,6 +1135,7 @@
     <s:String x:Key="S.Editor.Warning.Gifski">Gifski нет. Добавьте его в переменные окружения Path или нажмите здесь, чтобы открыть "Настройки > Дополнительно" и указать путь.</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">На диске недостаточно места для хранения файлов кэша ({0}%). Нажмите здесь, чтобы открыть "Настройки > Файлы и папки" для освобождения места.</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentDpi">Попытка импорта нескольких изображений с разными DPI. Импорт частичен, импортируйте пропущенные изображения отдельно.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentSize">Вы пытались добавить несколько изображений с разными размерами, это не поддерживается. Некоторые из них были добавлены, другие придется добавлять отдельно.</s:String>
     
     <!--Editor • Status-->
     <s:String x:Key="S.Editor.RetrievingFromCache">Извлечение кадров из кэша</s:String>
@@ -1156,6 +1156,8 @@
     <s:String x:Key="S.Editor.ApplyingTransition">Применение эффекта перехода</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Подготовка к сохранению</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">Отменить загрузку и удалить проект.</s:String>
+    <s:String x:Key="S.Editor.FindingLoop">Поиск идеальной петли</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">Удаление кадров, не используемых в петле</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Кадр:</s:String>
@@ -1295,6 +1297,17 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Среднее</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Сумма</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">Анализирует каждый кадр (пиксель за пикселем) и удаляет те, которые больше чем на {0}% похожи на ближайшего соседа.&#x0d; Вы можете отрегулировать продолжительность кадров.</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">Создание плавной петли</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">Игнорировать первые:</s:String>
+    <s:String x:Key="S.SmoothLoop.From">Сравнить с:</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">Конец</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">Начало</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">Пытатся найти кадр, хотя бы на {0} % похожий на начальный кадр, и удалить все последующие кадры.&#x0d;Вы можете выбрать, хотите ли вы игнорировать некоторые начальные кадры и начать ли сравнение с начала (после порога) или с конца.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">Количество игнорируемых кадров должно быть меньше, чем общее количество кадров.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Не удалось создать плавную петлю с этими настройками.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">У вас уже есть плавная петля на основе выбранных настроек.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Текст</s:String>
@@ -1566,7 +1579,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster">Более быстрый процесс кодирования.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster.Info">Может привести к снижению качества gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Циклы:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Looped">Зациклить.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Зацикленный gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Повторять бесконечно.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Число повторов.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Включить прозрачность.</s:String>
@@ -1681,7 +1694,13 @@
     <s:String x:Key="S.SaveAs.SaveOptions">Параметры сохранения</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Частичный экспорт.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Сохраните файл в папку по вашему выбору.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Перезаписать (если существует).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">Перезаписать?</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Предупреждение</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Предупреждать, что существует другой файл с таким же именем.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Запрос</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Запрос, хочет ли пользователь перезаписать файл.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Разрешить</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Просто перезапишет файл.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Проект тоже сохранить (те же имя и папка).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Загрузить файл.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Копировать в буфер обмена.</s:String>
@@ -1771,6 +1790,11 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Экспорт кадров</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Вы уверены что хотите выполнить экспорт кадров?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Данное действие выполнит экспорт {0} кадров в выбранную папку.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">Перезапись</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Хотите перезаписать файл?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">Файл с именем '{0}' уже существует в этой папке.\r\nХотите перезаписать его?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">Хотите перезаписать файлы?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">Один или несколько файлов с таким же именем уже существуют в этой папке.\r\nХотите перезаписать их?</s:String>
     
     <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">Предпросмотр команд</s:String>
@@ -1819,7 +1843,7 @@
     <s:String x:Key="S.FontWeights.Black">Жирный</s:String>
     <s:String x:Key="S.FontWeights.Bold">Полужирный</s:String>
     <s:String x:Key="S.FontWeights.DemiBold">Почти полужирный</s:String>
-    <s:String x:Key="S.FontWeights.ExtraBlack">Экстра-жирный</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBlack">Еще жирнее</s:String>
     <s:String x:Key="S.FontWeights.ExtraBold">Экстра-полужирный</s:String>
     <s:String x:Key="S.FontWeights.ExtraLight">Экстра-светлый</s:String>
     <s:String x:Key="S.FontWeights.Heavy">Более жирный</s:String>
@@ -1829,8 +1853,8 @@
     <s:String x:Key="S.FontWeights.Regular">Нормальный</s:String>
     <s:String x:Key="S.FontWeights.SemiBold">Полу-полужирный</s:String>
     <s:String x:Key="S.FontWeights.Thin">Тонкий</s:String>
-    <s:String x:Key="S.FontWeights.UltraBlack">Сверх-жирный</s:String>
-    <s:String x:Key="S.FontWeights.UltraBold">Сверх-полужирный</s:String>
+    <s:String x:Key="S.FontWeights.UltraBlack">Супер-жирный</s:String>
+    <s:String x:Key="S.FontWeights.UltraBold">Ультра-жирный</s:String>
     <s:String x:Key="S.FontWeights.UltraLight">Сверх-светлый</s:String>
     
     <!--VerticalAlignment-->
@@ -1858,6 +1882,6 @@
     <s:String x:Key="S.TextDecorations.None">Нет</s:String>
     <s:String x:Key="S.TextDecorations.Underline">Подчеркнутый</s:String>
     <s:String x:Key="S.TextDecorations.Strikethrough">Зачеркнутый</s:String>
-    <s:String x:Key="S.TextDecorations.OverLine">OverLine</s:String>
-    <s:String x:Key="S.TextDecorations.Baseline">Baseline</s:String>
+    <s:String x:Key="S.TextDecorations.OverLine">Линия сверху</s:String>
+    <s:String x:Key="S.TextDecorations.Baseline">На линии</s:String>
 </ResourceDictionary>

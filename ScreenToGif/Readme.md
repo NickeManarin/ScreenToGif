@@ -2,22 +2,23 @@
 
 This is the current project of ScreenToGif.  
 
-_VS 2019 and .Net 4.8 or newer required._
+_VS 2022 and .NET 6 or newer required._
 
-## What's new? (Version 2.34)
+## What's new? (Version 2.36)
 
-• Added option to manually check for updates (@MaledongGit).  
+• New installer and portable versions with the full package (no .NET 6 download required) are available alongside with the lighter versions, which still require the installation of .NET 6 desktop runtime.  
+• New installer package (MSIX) available.  
+• Added an option to prompt to overwrite when saving (enabled by default).  
+• Updated the Danish, French, German, Hungarian, Polish, Norwegian, Russian, and Simplified Chinese localizations.  
 
 ### Fixed:
 
-♦ The frame navigation using keyboard arrows and home/end buttons was not working.  
-♦ If you loaded two editors with a project, the frame list of the first one was being overwritten.  
-♦ The keyboard navigation of the screen recorder (newer or older variants) was out of order (@pawlos).  
-♦ Some shortcut key were not working for the screen recorder actions (@pawlos).   
-♦ Disabled Gifski on x86, since it's unsupported (@MaledongGit).  
-♦ Added progress info when processing frames at start and made it possible to cancel during a task (@pawlos).  
-♦ The option to cancel a frame altering process was not appearing if the editor already loaded something before.
-♦ The text displayed at startup when an update was available was not being updated when the application language had changed.    
+♦ The smooth loop feature was not working properly.
+♦ A new message will be displayed if you already have a smooth loop based on current settings instead of a warning.
+♦ It was not possible to set the app to start at Windows startup.
+♦ A settings migration issue from 2.31 to newer versions was fixed.
+♦ It was not possible to export as PSD.
+♦ When not having permission to save the settings to the installation location, the app would not try to save to AppData.  
 
 ### Known Bugs:
   

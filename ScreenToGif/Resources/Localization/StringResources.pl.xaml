@@ -721,9 +721,9 @@
     <s:String x:Key="S.Editor.Image">Obraz</s:String>
     <s:String x:Key="S.Editor.Transitions">Przejścia</s:String>
     <s:String x:Key="S.Editor.Statistics">Statystyki</s:String>
-    <s:String x:Key="S.Editor.Options">Opcje</s:String>
+    <s:String x:Key="S.Editor.Options">Ustawienia</s:String>
     <s:String x:Key="S.Editor.Help">Pomoc</s:String>
-    <s:String x:Key="S.Editor.Extras">Dodatki</s:String>
+    <s:String x:Key="S.Editor.Extras">Opcje</s:String>
     <!--<s:String x:Key="S.Editor.UpdateAvailable">A new update is available!</s:String>-->
     <!--<s:String x:Key="S.Editor.UpdateAvailable.Info">Click here to read more about it.</s:String>-->
     <s:String x:Key="S.Editor.FrameNumbersInfo">Całkowita liczba klatek, liczba wybranych klatek, indeks wybranych klatek</s:String>

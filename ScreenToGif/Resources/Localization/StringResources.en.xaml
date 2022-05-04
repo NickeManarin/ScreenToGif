@@ -109,6 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">Delete all next frames</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Remove duplicates</s:String>
     <s:String x:Key="S.Command.Reduce">Reduce frame count</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">Create a smooth loop</s:String>
     <s:String x:Key="S.Command.Reverse">Reverse animation</s:String>
     <s:String x:Key="S.Command.Yoyo">Makes the animation go forward and backwards</s:String>
     <s:String x:Key="S.Command.MoveLeft">Move the selected frame to the left</s:String>
@@ -164,6 +165,7 @@
     <s:String x:Key="S.Updater.Header">A new update is available</s:String>
     <s:String x:Key="S.Updater.NewRelease">New release!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">New release available, Version {0}!&#x0d;Click here for more details.</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">It appears that your system is no longer supported or something changed in the update system. Try downloading it manually from the website.</s:String>
     <s:String x:Key="S.Updater.Version">Version</s:String>
     <s:String x:Key="S.Updater.Portable">Portable</s:String>
     <s:String x:Key="S.Updater.Installer">Installer</s:String>
@@ -200,9 +202,7 @@
     <s:String x:Key="S.Options.Other">Other</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Missing shortcut key for cursor following</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">In order to use the mouse cursor following feature, you must set a shortcut key to toggle it when needed.</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Missing dependencies for screen capture</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">In order to capture the screen with the Desktop Duplication API, you must download the SharpDx libraries.</s:String>
-    
+
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Startup</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Manual">Start&#10;manually</s:String>
@@ -280,11 +280,13 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Frames will be captured in a 'per hour' basis (timelapse),&#10;given the framerate denominator set on the recorder screen.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">Playback delay:</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(In ms, each captured frame will be set to this delay)</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger">Trigger delay:</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">(In ms, each frame capture will wait this amount of time before starting)</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">Each frame will be captured in interval of {0}.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">Capture mode</s:String>
     <s:String x:Key="S.Options.Recorder.Bitblt.Info">Use the older capture method, which is slower and may not work capturing games,&#10;but requires no additional plug-ins.</s:String>
-    <s:String x:Key="S.Options.Recorder.DirectX.Info">Use the Desktop Duplication API capture method, which is faster and&#10;is able to capture fullscreen games, but requires the SharpDx plug-in and Windows 8 or newer.</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">Use the Desktop Duplication API capture method, which is faster and&#10;is able to capture fullscreen games, but requires Windows 8 or newer.</s:String>
     <s:String x:Key="S.Options.Recorder.File">Save to&#10;file</s:String>
     <s:String x:Key="S.Options.Recorder.File.Info">Each frame captured will be saved directly as an image on disk.</s:String>
     <s:String x:Key="S.Options.Recorder.Cache">Memory&#10;cache</s:String>
@@ -583,9 +585,6 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Select the location of the Gifski library</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski library</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">The path of Gifski library contains one or more invalid characters. Please, select a valid location for that library.</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx folder (SharpDX.dll, SharpDX.Direct3D11.dll and SharpDX.DXGI.dll)</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">Select the location of the SharpDx libraries</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">The path for the SharpDx libraries contains one or more invalid characters. Please, select a valid folder for those libraries.</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg license</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski license</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx license</s:String>
@@ -692,8 +691,7 @@
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">It was not possible to capture the screen. The capture method returned no frame after 5 tries.</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">It was not possible to start/pause capturing the screen</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 or newer is required for capturing the screen using the Desktop Duplication API.</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">The SharpDx libraries are required in order to capture the screen using the Desktop Duplication API. Go to Options > Extras to download it.</s:String>
-    
+
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Area</s:String>
     <s:String x:Key="S.Recorder.Area.Select">Select an area</s:String>
@@ -796,22 +794,28 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Supports saving the animation with a transparent background.</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">High quality • Graphics</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Better for recordings with a lower quantity of colors.</s:String>
-    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - Higher quality</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • Balanced</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Good quality for photo-like images using Wu's quantizer without dithering.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • High quality</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Description">High quality for photo-like images using Wu's quantizer with higher bit level and Floyd-Steinberg error diffusion dithering.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT • Low quality, faster</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">Quantizing all frames with the same predefined 'web-safe' palette and Bayer 8x8 ordered dithering.</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg • Higher quality</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">Higher image quality, but with a greater file size.</s:String>
-    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - Lower quality</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg • Lower quality</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Description">Lower image quality, but with a smaller file size.</s:String>
-    <s:String x:Key="S.Preset.Gif.Gifski.High.Title">Gifski - Higher quality</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Title">Gifski • Higher quality</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.High.Description">Higher image quality, but with a greater file size.</s:String>
-    <s:String x:Key="S.Preset.Gif.Gifski.Low.Title">Gifski - Lower quality</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Title">Gifski • Lower quality</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.Low.Description">Lower image quality, but with a smaller file size.</s:String>
-    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski - Lower quality and faster encoding</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski • Lower quality and faster encoding</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.Fast.Description">Even lower image quality, with a faster encoding, but with a smaller file size.</s:String>
-    <s:String x:Key="S.Preset.Gif.System.Low.Title">System - Low quality</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Title">System • Low quality</s:String>
     <s:String x:Key="S.Preset.Gif.System.Low.Description">Low quality but faster encoding.</s:String>
     
-    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg - High quality</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg • High quality</s:String>
     <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">High image quality and small file size, but slower encoding.</s:String>
-    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg - Lower quality</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg • Lower quality</s:String>
     <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">Lower image quality, small file size and faster encoding.</s:String>
     <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">High quality</s:String>
     <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">High image quality and small file size.</s:String>
@@ -1028,6 +1032,7 @@
     <s:String x:Key="S.Editor.Edit.Delete">Delete</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Remove&#x0d;Duplicates</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">Reduce&#x0d;Frame Count</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Smooth&#x0d;Loop</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Delete All Previous</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Delete All Next</s:String>
     
@@ -1061,7 +1066,7 @@
     <s:String x:Key="S.Editor.Image.Overlay">Overlay</s:String>
     <s:String x:Key="S.Editor.Image.FreeDrawing">Free&#x0d;Drawing</s:String>
     <s:String x:Key="S.Editor.Image.Shape">Shapes</s:String>
-    <s:String x:Key="S.Editor.Image.Clicks">Mouse&#x0d;Clicks</s:String>
+    <s:String x:Key="S.Editor.Image.MouseEvents">Mouse&#x0d;Events</s:String>
     <s:String x:Key="S.Editor.Image.Watermark">Watermark</s:String>
     <s:String x:Key="S.Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="S.Editor.Image.Border">Border</s:String>
@@ -1137,7 +1142,8 @@
     <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg not present. Add it to the Path environment variables or click here to open Options > Extras to set the location.</s:String>
     <s:String x:Key="S.Editor.Warning.Gifski">Gifski not present. Add it to the Path environment variables or click here to open Options > Extras to set the location.</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">There's not enough space left on the drive where this app stores its cache ({0}% left). Click here to open Options > Temporary Files to free some space.</s:String>
-    <s:String x:Key="S.Editor.Warning.DifferentDpi">You tried to import multiple images with different DPIs, which is not supported. Some of them got imported, the others need to be imported separately.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">You tried to import multiple images with different DPIs, which is not supported. Some of them got imported, others need to be imported separately.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentSize">You tried to import multiple images with different sizes, which is not supported. Some of them got imported, others need to be imported separately.</s:String>
     
     <!--Editor • Status-->
     <s:String x:Key="S.Editor.RetrievingFromCache">Retrieving frames from the cache</s:String>
@@ -1158,6 +1164,8 @@
     <s:String x:Key="S.Editor.ApplyingTransition">Applying the transition effect</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Preparing to save</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">Cancel loading and discard project.</s:String>
+    <s:String x:Key="S.Editor.FindingLoop">Finding perfect loop</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">Discarding frames not used in loop</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Frame:</s:String>
@@ -1297,6 +1305,17 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Use the average</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Use the sum</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">This action analyzes each frame (pixel by pixel) and removes the ones that are at least {0} % similar to its immediate neighbor.&#x0d;You can choose if you want to adjust the delay (duration of exhibition) of the frames.</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">Create smooth loop</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">Ignore first:</s:String>
+    <s:String x:Key="S.SmoothLoop.From">Compare from:</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">End</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">Start</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">Tries to find a frame at least {0} % similar to the start frame and deletes all later frames.&#x0d;You can choose if you want to ignore some initial frames and initiate the comparison from the start (after the threshold) or the end.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">The number of frames to ignore needs to be smaller than the total number of frames.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">It was not possible to create a smooth loop with the selected settings.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">You already have a smooth loop based on selected settings.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Text</s:String>
@@ -1362,12 +1381,12 @@
     <s:String x:Key="S.Shapes.Shapes.Remove">Remove</s:String>
     <s:String x:Key="S.Shapes.Fill">Fill</s:String>
 
-    <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">Mouse Clicks</s:String>
+    <!--Editor • Mouse events-->
+    <s:String x:Key="S.MouseEvents">Mouse Events</s:String>
+    <s:String x:Key="S.MouseHighlight.Color">Mouse Highlight Color:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Left">Left button color:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">Middle button color:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">Right button color:</s:String>
-    <s:String x:Key="S.MouseClicks.Warning.None">There's no detected mouse clicks on your project.</s:String>
     
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">Image</s:String>
@@ -1523,6 +1542,8 @@
     <s:String x:Key="S.SaveAs.Encoder.Info">Encoder responsible for generating the output file.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">Built-in encoder.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft">KGy SOFT</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft.Info">KGy SOFT GIF Encoder.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Info">Encoder made available by the system.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
@@ -1530,7 +1551,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">External encoder, made by Gif.ski.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Options">Encoder options</s:String>
-    
+
     <!--Editor • Save as > FFmpeg-->
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Enable the advanced mode.</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Manually input the parameters to control the encoder.</s:String>
@@ -1582,7 +1603,110 @@
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Chroma key:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither">Dither:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Bayer scale:</s:String>
-    
+
+    <!--Editor • Save as > KGy SOFT options-->
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer">Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor">Background Color:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor.Info">Pixels with alpha (transparency) that are considered opaque by the selected quantizer will be blended with this color before getting the quantized color.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold">Alpha Threshold:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold.Info">Determines the input alpha value under which the quantized color will be transparent.&#x0d;&#x0a;If 0, then the result will never have transparency.&#x0d;&#x0a;If 255, then only fully transparent pixels are considered transparent.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold">White Threshold:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold.Info">Determines the lowest input brightness to consider the result color white.&#x0d;&#x0a;It affects the brightness of the result. An error diffusion dithering may compensate for the value of this parameter though.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping">Direct Mapping</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping.Info">When checked, the quantized color is determined by a direct mapping rather than looking up the nearest palette entry.&#x0d;&#x0a;It speeds up quantization but may end up in a higher contrast result. An error diffusion dithering may compensate for the value of this parameter though.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize">Palette Size:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize.Info">Determines the maximum size of the palette per frame.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel">Custom bit level.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">When checked, the bit level can be configured manually.&#x0d;&#x0a;⚠️ Warning: The highest bit level might require a LOT of memory!</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BitLevel.Info">Higher value means more accuracy, larger target color space, slower processing and larger memory usage.&#x0d;&#x0a;For example, if 1, then the result can have no more than 8 colors, or when 2, no more than 64 colors.&#x0d;&#x0a;For Octree and Wu quantizers it affects also maximum number of monochromatic shades.&#x0d;&#x0a;For example, if 5 (which is the default for Wu quantizer), only 32 monochromatic shades can be differentiated.&#x0d;&#x0a;⚠️ Caution: The Wu quantizer consumes at least 650 MB with the highest value.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">Black and White</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">Fixed 1 bpp palette with the black and white colors.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">Grayscale 4 colors</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4.Info">Fixed 2 bpp palette with 4 grayscale entries.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16">Grayscale 16 colors</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16.Info">Fixed 4 bpp palette with 16 grayscale entries.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale">Grayscale 256 colors</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale.Info">Fixed 8 bpp palette with 256 grayscale entries.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette">System default 4 bpp palette</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette.Info">Fixed 4 bpp palette using the standard 16 sRGB colors.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette">System default 8 bpp palette</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette.Info">Fixed 8 bpp palette including the 'web-safe' colors and transparency.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332">RGB 332 palette</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332.Info">Fixed 8 bpp palette using the RGB 332 color space.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree">Octree Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree.Info">Optimizing palette for each frame with the Octree algorithm.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut">Median Cut Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut.Info">Optimizing palette for each frame with the Median Cut algorithm.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu">Wu Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu.Info">Optimizing palette for each frame with Xiaolin Wu's algorithm.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer">Ditherer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength">Strength:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength.Info">The strength of the ditherer, or 0 to auto calibrate strength.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed">Seed:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed.Info">An integer seed to be used to produce a specific random dithering pattern.&#x0d;&#x0a;Leave empty to use a random seed for every frame.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None">None</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None.Info">Frames are quantized without dithering.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing">Serpentine Processing</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing.Info">When checked, the error propagation direction is altered from line to line.&#x0d;&#x0a;This helps to reduce the ripple effect of the error diffusion dithering.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2">Bayer 2x2 (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2.Info">The 2x2 Bayer matrix pattern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3">Bayer 3x3 (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3.Info">The 3x3 Bayer matrix pattern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4">Bayer 4x4 (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4.Info">The 4x4 Bayer matrix pattern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8">Bayer 8x8 (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8.Info">The 8x8 Bayer matrix pattern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone">Dotted Halftone (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone.Info">A 8x8 matrix with a dotted halftone pattern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise">Blue Noise (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise.Info">A 64x64 matrix with a blue noise pattern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson">Atkinson (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson.Info">Bill Atkinson's 4x3 matrix with 6 effective values.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes">Burkes (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes.Info">D. Burkes' 5x2 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg">Floyd-Steinberg (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg.Info">The original 3x2 matrix by Floyd and Steinberg.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke">Jarvis-Judice-Ninke (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke.Info">An 5x3 matrix by Jarvis, Judice and Ninke.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3">Sierra 3 (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3.Info">Frankie Sierra's 5x3 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2">Sierra 2 (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2.Info">Frankie Sierra's 5x2 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite">Sierra Lite (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite.Info">Frankie Sierra's 3x2 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce">Stevenson-Arce (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce.Info">A 7x4 hexagonal matrix by Stevenson and Arce.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki">Stucki (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki.Info">Stucki's 5x3 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer">Random Noise</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer.Info">Random white noise.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer">Interleaved Gradient Noise</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer.Info">Nonrandom gradient noise generated by a formula.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Preview">Preview</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame">Show current frame.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">When checked, the preview shows the current frame instead of a standard image example.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Refresh">Auto preview is disabled due to the high memory requirement of the current settings. Click to refresh the preview.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Error">Failed to generate preview: {0}&#x0d;&#x0a;Click to try to generate it again.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Animation">Animation Settings</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop">Endless loop.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop.Info">When checked, the animation will be looped indefinitely.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">Back and forth.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">When checked, the animation will be played back and forth.&#x0d;&#x0a;This is achieved by duplicating the frames meaning larger file size and longer encoding time.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">Repeat Count:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Specifies how many times the animation will be played.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">Allow delta frames.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">When checked, unchanged pixels are attempted to be detected during the encoding.&#x0d;&#x0a;When using with an optimized quantizer, this option makes possible for a frame to have more than 256 colors.&#x0d;&#x0a;This option is ignored if the quantizer does not use transparency and Allow Clipped Frames is unchecked.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">Delta Tolerance:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">Specifies the maximum tolerance when detecting changed pixels.&#x0d;&#x0a;If 0, then no difference is tolerated at all.&#x0d;&#x0a;If 255, then there might be frames (or even all of them) that are added with no content.&#x0d;&#x0a;Reasonable range is between 0 and 16 for an optimized quantizer. The ones with fixed colors can be used with somewhat larger values with dithering.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">If Delta Tolerance is too high the result might have poor quality. Click to reset delta tolerance.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames">Allow clipped frames.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info">When checked, the encoder is allowed to add smaller frames than the actual resolution.&#x0d;&#x0a;If Allow Delta Frames is unchecked, then allows only clipping possible transparent borders.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaIgnored">Allow Delta Frames is ignored because the current configuration does not use alpha and Allow Clipped Frames is unchecked. Click to enable clipped frames.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedIgnored">Allow Clipped Frames has no effect because the current configuration does not use alpha and Allow Delta Frames is unchecked. Click to enable delta frames.</s:String>
+
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Apng options</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.Prediction">Prediction:</s:String>
@@ -1683,7 +1807,13 @@
     <s:String x:Key="S.SaveAs.SaveOptions">Export options</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Export partially.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Save the file to a folder of your choice.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overwrite (if already exists).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">Overwrite?</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Warn</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Only warns that another file exists with the same name.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Prompt</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Asks if the user wants to overwrite the file.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Allow</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Simply overwrites the file.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Save as project too (same folder, same filename).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Upload the file.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copy to the clipboard.</s:String>
@@ -1773,6 +1903,11 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Export Frames</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Are you sure that you want to export the frames?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">This action will export {0} frames directly into the selected folder.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">Overwrite</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Would you like to overwrite the file?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">A file with the name '{0}' already exists in that folder.\r\nWould you like to overwrite it?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">Would you like to overwrite the files?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">One or more files with the same name already exist in that folder.\r\nWould you like to overwrite them?</s:String>
     
     <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">Command Previewer</s:String>
