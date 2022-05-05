@@ -1643,7 +1643,7 @@ internal class EncodingManager
                     firstPass += $"-f {preset.Type.ToString().ToLower().Replace("mkv", "matroska")} ";
                     firstPass += "{O}";
 
-                    //Second pass, using a similar command with some ajustments.
+                    //Second pass, using a similar command with some adjustments.
                     if (videoPreset.Pass > 1)
                         secondPass = "-hide_banner " + firstPass.Replace("-pass 1", "-pass 2").Replace("pass=1", "pass=2");
                 }
