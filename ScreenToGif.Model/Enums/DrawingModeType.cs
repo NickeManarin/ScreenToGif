@@ -14,5 +14,5 @@ public enum DrawingModeType
     Circle,
     Triangle,
     Arrow,
-    Baloon,
+    Balloon,
 }
