@@ -33,7 +33,7 @@ public class Apng : IDisposable
     #region Properties
 
     /// <summary>
-    /// The stream which the apgn is written on.
+    /// The stream which the apng is written on.
     /// </summary>
     private Stream InternalStream { get; set; }
 
@@ -48,7 +48,7 @@ public class Apng : IDisposable
     internal int RepeatCount { get; set; } = 0;
 
     /// <summary>
-    /// True if it's the first frame of the apgn.
+    /// True if it's the first frame of the apng.
     /// </summary>
     private bool IsFirstFrame { get; set; } = true;
 
