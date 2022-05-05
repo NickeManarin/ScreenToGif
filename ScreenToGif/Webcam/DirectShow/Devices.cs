@@ -93,7 +93,7 @@ public class DsDevice : IDisposable
     /// <param name="cat">Any one of FilterCategory</param>
     public static DsDevice[] GetDevicesOfCat(Guid cat)
     {
-        //Use arrayList to build the retun list since it is easily resizable.
+        //Use arrayList to build the return list since it is easily resizable.
         DsDevice[] devret;
         var devs = new ArrayList();
 
@@ -210,7 +210,7 @@ public static class DsError
         // If a severe error has occurred
         if (hr >= 0)
             return;
-            
+
         var s = GetErrorText(hr);
 
         //If a string is returned, build a com error from it

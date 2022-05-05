@@ -109,23 +109,23 @@ public class EncoderListViewItem : ListViewItem
     public static readonly DependencyProperty CommandOutputProperty = DependencyProperty.Register(nameof(CommandOutput), typeof(string), typeof(EncoderListViewItem),
         new FrameworkPropertyMetadata(null));
 
-        
+
     public static readonly DependencyProperty TotalTimeProperty = DependencyProperty.Register(nameof(TotalTime), typeof(TimeSpan), typeof(EncoderListViewItem),
         new PropertyMetadata(TimeSpan.Zero));
-        
-    public static readonly DependencyProperty TimeToAnalyzeProperty = DependencyProperty.Register(nameof(TimeToAnalyze), typeof(TimeSpan), typeof(EncoderListViewItem), 
+
+    public static readonly DependencyProperty TimeToAnalyzeProperty = DependencyProperty.Register(nameof(TimeToAnalyze), typeof(TimeSpan), typeof(EncoderListViewItem),
         new PropertyMetadata(TimeSpan.Zero, TimeSpan_PropertyChanged));
 
-    public static readonly DependencyProperty TimeToEncodeProperty = DependencyProperty.Register(nameof(TimeToEncode), typeof(TimeSpan), typeof(EncoderListViewItem), 
+    public static readonly DependencyProperty TimeToEncodeProperty = DependencyProperty.Register(nameof(TimeToEncode), typeof(TimeSpan), typeof(EncoderListViewItem),
         new PropertyMetadata(TimeSpan.Zero, TimeSpan_PropertyChanged));
 
-    public static readonly DependencyProperty TimeToUploadProperty = DependencyProperty.Register(nameof(TimeToUpload), typeof(TimeSpan), typeof(EncoderListViewItem), 
+    public static readonly DependencyProperty TimeToUploadProperty = DependencyProperty.Register(nameof(TimeToUpload), typeof(TimeSpan), typeof(EncoderListViewItem),
         new PropertyMetadata(TimeSpan.Zero, TimeSpan_PropertyChanged));
 
-    public static readonly DependencyProperty TimeToCopyProperty = DependencyProperty.Register(nameof(TimeToCopy), typeof(TimeSpan), typeof(EncoderListViewItem), 
+    public static readonly DependencyProperty TimeToCopyProperty = DependencyProperty.Register(nameof(TimeToCopy), typeof(TimeSpan), typeof(EncoderListViewItem),
         new PropertyMetadata(TimeSpan.Zero, TimeSpan_PropertyChanged));
 
-    public static readonly DependencyProperty TimeToExecuteProperty = DependencyProperty.Register(nameof(TimeToExecute), typeof(TimeSpan), typeof(EncoderListViewItem), 
+    public static readonly DependencyProperty TimeToExecuteProperty = DependencyProperty.Register(nameof(TimeToExecute), typeof(TimeSpan), typeof(EncoderListViewItem),
         new PropertyMetadata(TimeSpan.Zero, TimeSpan_PropertyChanged));
 
     #endregion
@@ -429,7 +429,7 @@ public class EncoderListViewItem : ListViewItem
         get => (TimeSpan)GetValue(TotalTimeProperty);
         set => SetValue(TotalTimeProperty, value);
     }
-        
+
     /// <summary>
     /// The time it took to analyze the frames.
     /// </summary>
@@ -617,7 +617,7 @@ public class EncoderListViewItem : ListViewItem
                 }
                 catch (Exception e)
                 {
-                    LogWriter.Log(e, "Error while openning the upload link");
+                    LogWriter.Log(e, "Error while opening the upload link");
                 }
             };
 
@@ -644,7 +644,7 @@ public class EncoderListViewItem : ListViewItem
                 }
                 catch (Exception ex)
                 {
-                    Dialog.Ok("Open File", "Error while openning the file", ex.Message);
+                    Dialog.Ok("Open File", "Error while opening the file", ex.Message);
                 }
             };
 

@@ -51,7 +51,7 @@ internal class DirectImageCapture : BaseCapture
     protected internal DisplayModeRotation DisplayRotation;
 
     /// <summary>
-    /// The texture used to copy the pixel data from the desktop to the destination image. 
+    /// The texture used to copy the pixel data from the desktop to the destination image.
     /// </summary>
     protected internal Texture2D StagingTexture;
 
@@ -99,7 +99,7 @@ internal class DirectImageCapture : BaseCapture
     protected internal int TrueBottom => Top + OffsetTop + Height;
 
     /// <summary>
-    /// Flag that holds the information wheter the previous capture had a major crash.
+    /// Flag that holds the information whether the previous capture had a major crash.
     /// </summary>
     protected internal bool MajorCrashHappened = false;
 
@@ -145,7 +145,7 @@ internal class DirectImageCapture : BaseCapture
         using (var multiThread = Device.QueryInterface<Multithread>())
             multiThread.SetMultithreadProtected(true);
 
-        //Texture used to copy contents from the GPU to be accesible by the CPU.
+        //Texture used to copy contents from the GPU to be accessible by the CPU.
         StagingTexture = new Texture2D(Device, new Texture2DDescription
         {
             ArraySize = 1,
@@ -160,7 +160,7 @@ internal class DirectImageCapture : BaseCapture
             Usage = ResourceUsage.Staging
         });
 
-        //Texture that is used to recieve the pixel data from the GPU.
+        //Texture that is used to receive the pixel data from the GPU.
         BackingTexture = new Texture2D(Device, new Texture2DDescription
         {
             ArraySize = 1,
@@ -213,7 +213,7 @@ internal class DirectImageCapture : BaseCapture
         try
         {
             //Gets the output with the bigger area being intersected.
-            var output = factory.Adapters1.SelectMany(s => s.Outputs).FirstOrDefault(f => f.Description.DeviceName == DeviceName) ?? 
+            var output = factory.Adapters1.SelectMany(s => s.Outputs).FirstOrDefault(f => f.Description.DeviceName == DeviceName) ??
                          factory.Adapters1.SelectMany(s => s.Outputs).OrderByDescending(f =>
                          {
                              var x = Math.Max(Left, f.Description.DesktopBounds.Left);
@@ -237,7 +237,7 @@ internal class DirectImageCapture : BaseCapture
 
             if (DisplayRotation != DisplayModeRotation.Identity)
             {
-                //Texture that is used to recieve the pixel data from the GPU.
+                //Texture that is used to receive the pixel data from the GPU.
                 TransformTexture = new Texture2D(Device, new Texture2DDescription
                 {
                     ArraySize = 1,
@@ -416,7 +416,7 @@ internal class DirectImageCapture : BaseCapture
         {
             try
             {
-                //Only release the frame if there was a sucess in capturing it.
+                //Only release the frame if there was a success in capturing it.
                 if (res.Success)
                     DuplicatedOutput.ReleaseFrame();
             }
@@ -522,7 +522,7 @@ internal class DirectImageCapture : BaseCapture
                 //Gets the cursor image and merges with the staging texture.
                 GetCursor(StagingTexture, info, frame);
             }
-                
+
             //Saves the most recent capture time.
             LastProcessTime = Math.Max(info.LastPresentTime, info.LastMouseUpdateTime);
 
@@ -801,7 +801,7 @@ internal class DirectImageCapture : BaseCapture
         if (screenTexture == null || CursorShapeBuffer?.Length == 0)// || !info.PointerPosition.Visible)
         {
             //FallbackCursorCapture(frame);
-                
+
             //if (CursorShapeBuffer != null)
             return false;
         }
@@ -865,7 +865,7 @@ internal class DirectImageCapture : BaseCapture
 
         //Copy back the cursor texture to the screen texture.
         Device.ImmediateContext.CopySubresourceRegion(CursorStagingTexture, 0, null, screenTexture, 0, cursorLeft, cursorTop);
-            
+
         return true;
     }
 
@@ -919,7 +919,7 @@ internal class DirectImageCapture : BaseCapture
             {
                 var pos = (row - offsetY) * rect.Pitch + (col - offsetX) * 4;
                 var and = (buffer[row * pitch + col / 8] & mask) == mask; //Mask is take from the first half of the cursor image.
-                var xor = (buffer[row * pitch + col / 8 + actualHeight * pitch] & mask) == mask; //Mask is taken from the second half of the cursor image, hence the "+ height * pitch". 
+                var xor = (buffer[row * pitch + col / 8 + actualHeight * pitch] & mask) == mask; //Mask is taken from the second half of the cursor image, hence the "+ height * pitch".
 
                 //Reads current pixel and applies AND and XOR. (AND/XOR ? White : Black)
                 Marshal.WriteByte(rect.DataPointer, pos, (byte)((Marshal.ReadByte(rect.DataPointer, pos) & (and ? 255 : 0)) ^ (xor ? 255 : 0)));
@@ -981,7 +981,7 @@ internal class DirectImageCapture : BaseCapture
                     return;
                 }
 
-                //Applies the XOR opperation with the current color.
+                //Applies the XOR operation with the current color.
                 Marshal.WriteByte(rect.DataPointer, surfaceIndex, (byte)(buffer[bufferIndex] ^ Marshal.ReadByte(rect.DataPointer, surfaceIndex)));
                 Marshal.WriteByte(rect.DataPointer, surfaceIndex + 1, (byte)(buffer[bufferIndex + 1] ^ Marshal.ReadByte(rect.DataPointer, surfaceIndex + 1)));
                 Marshal.WriteByte(rect.DataPointer, surfaceIndex + 2, (byte)(buffer[bufferIndex + 2] ^ Marshal.ReadByte(rect.DataPointer, surfaceIndex + 2)));
@@ -1031,7 +1031,7 @@ internal class DirectImageCapture : BaseCapture
             //_justStarted = false;
 
             //https://stackoverflow.com/a/6374151/1735672
-            //Bitmap struct, is used to get the cursor shape when SharpDX fails to do so. 
+            //Bitmap struct, is used to get the cursor shape when SharpDX fails to do so.
             var infoHeader = new BitmapInfoHeader();
             infoHeader.biSize = (uint)Marshal.SizeOf(infoHeader);
             infoHeader.biBitCount = 32;

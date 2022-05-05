@@ -126,7 +126,7 @@ public static class Other
 
         return new Size(formattedText.Width, formattedText.Height);
     }
-    
+
     internal static Size Scale(this Size size, double scale)
     {
         return new Size(Math.Round(size.Width * scale, MidpointRounding.AwayFromZero), Math.Round(size.Height * scale, MidpointRounding.AwayFromZero));
@@ -136,7 +136,7 @@ public static class Other
     {
         return new Point(Math.Round(point.X * scale, MidpointRounding.AwayFromZero), Math.Round(point.Y * scale, MidpointRounding.AwayFromZero));
     }
-    
+
     /// <summary>
     /// Gets the DPI of the current window.
     /// </summary>
@@ -186,7 +186,7 @@ public static class Other
         using (var source = new HwndSource(new HwndSourceParameters()))
             return source.CompositionTarget?.TransformToDevice.M11 ?? 1D;
     }
-    
+
     public static List<DetectedRegion> AdjustPosition(this List<DetectedRegion> list, double x, double y)
     {
         foreach (var region in list)
@@ -223,14 +223,14 @@ public static class Other
         {
             if (destProps.All(x => x.Name != sourceProp.Name))
                 continue;
-                
+
             var p = destProps.First(x => x.Name == sourceProp.Name);
 
             if (p.CanWrite)
                 p.SetValue(dest, sourceProp.GetValue(source, null), null);
         }
     }
-        
+
     #region List
 
     public static List<FrameInfo> CopyList(this List<FrameInfo> target)
@@ -240,7 +240,7 @@ public static class Other
     }
 
     /// <summary>
-    /// Creates an index list based on the start and end indexes (positions). 
+    /// Creates an index list based on the start and end indexes (positions).
     /// </summary>
     /// <param name="start">The start index.</param>
     /// <param name="end">The end index. If it's a lower value than the start index, the start becomes the end and vice-versa.</param>
@@ -254,7 +254,7 @@ public static class Other
     }
 
     /// <summary>
-    /// Creates an index list based on the start and end indexes (positions). 
+    /// Creates an index list based on the start and end indexes (positions).
     /// </summary>
     /// <param name="start">The start index.</param>
     /// <param name="quantity">The quantity indexes to create.</param>
@@ -268,10 +268,10 @@ public static class Other
     }
 
     /// <summary>
-    /// Makes a Yo-yo efect with the given List (List + Reverted List)
+    /// Makes a Yo-yo effect with the given List (List + Reverted List)
     /// </summary>
-    /// <param name="list">The list to apply the efect</param>
-    /// <returns>A List with the Yo-yo efect</returns>
+    /// <param name="list">The list to apply the effect</param>
+    /// <returns>A List with the Yo-yo effect</returns>
     public static List<FrameInfo> Yoyo(List<FrameInfo> list)
     {
         var listReverted = new List<FrameInfo>(list);
@@ -366,7 +366,7 @@ public static class Other
     /// </summary>
     public static string AdjustPath(string path)
     {
-        //If the path is relative, File.Exists() was returning C:\\Windows\\System32\ffmpeg.exe when the app was lauched from the "Open with" context menu.
+        //If the path is relative, File.Exists() was returning C:\\Windows\\System32\ffmpeg.exe when the app was launched from the "Open with" context menu.
         //So, in order to get the correct location, I need to combine the current base directory with the relative path.
         if (!string.IsNullOrWhiteSpace(path) && !Path.IsPathRooted(path))
         {
@@ -381,11 +381,11 @@ public static class Other
 
     public static bool IsFfmpegPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
     {
-        //If the path is relative, File.Exists() was returning C:\\Windows\\System32\ffmpeg.exe when the app was lauched from the "Open with" context menu.
+        //If the path is relative, File.Exists() was returning C:\\Windows\\System32\ffmpeg.exe when the app was launched from the "Open with" context menu.
         //So, in order to get the correct location, I need to combine the current base directory with the relative path.
         var realPath = AdjustPath(UserSettings.All.FfmpegLocation);
 
-        //File location already choosen or detected.
+        //File location already chosen or detected.
         if (!string.IsNullOrWhiteSpace(realPath) && File.Exists(realPath))
             return true;
 
@@ -442,11 +442,11 @@ public static class Other
 
     public static bool IsGifskiPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
     {
-        //If the path is relative, File.Exists() was returning C:\\Windows\\System32\Gifski.dll when the app was lauched from the "Open with" context menu.
+        //If the path is relative, File.Exists() was returning C:\\Windows\\System32\Gifski.dll when the app was launched from the "Open with" context menu.
         //So, in order to get the correct location, I need to combine the current base directory with the relative path.
         var realPath = AdjustPath(UserSettings.All.GifskiLocation);
 
-        //File location already choosen or detected.
+        //File location already chosen or detected.
         if (!string.IsNullOrWhiteSpace(realPath) && File.Exists(realPath))
             return true;
 

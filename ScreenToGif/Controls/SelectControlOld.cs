@@ -25,7 +25,7 @@ public class SelectControlOld : Control
     #region Variables
 
     /// <summary>
-    /// Resizing adorner uses Thumbs for visual elements.  
+    /// Resizing adorner uses Thumbs for visual elements.
     /// The Thumbs have built-in mouse input handling.
     /// </summary>
     private Thumb _topLeft, _topRight, _bottomLeft, _bottomRight, _top, _bottom, _left, _right;
@@ -136,7 +136,7 @@ public class SelectControlOld : Control
     public static readonly DependencyProperty EmbeddedModeProperty = DependencyProperty.Register(nameof(EmbeddedMode), typeof(bool), typeof(SelectControlOld), new PropertyMetadata(false));
 
     public static readonly RoutedEvent SelectionAcceptedEvent = EventManager.RegisterRoutedEvent(nameof(SelectionAccepted), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SelectControlOld));
-        
+
     public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent(nameof(SelectionChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SelectControlOld));
 
     public static readonly RoutedEvent SelectionCanceledEvent = EventManager.RegisterRoutedEvent(nameof(SelectionCanceled), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SelectControlOld));
@@ -568,7 +568,7 @@ public class SelectControlOld : Control
 
         try
         {
-            //The image is already 7 pixels offset of the current position. 
+            //The image is already 7 pixels offset of the current position.
             _croppedImage.Source = new CroppedBitmap(BackImage, new Int32Rect((int)scaledPoint.X, (int)scaledPoint.Y, scaledSize, scaledSize));
         }
         catch (Exception)
@@ -604,7 +604,7 @@ public class SelectControlOld : Control
             return;
         }
 
-        //Show the controls always closest to the given point, if there's no space on the current monitor, 
+        //Show the controls always closest to the given point, if there's no space on the current monitor,
         //try finding the second closest point, or else show inside the selection rectangle.
 
         if (!point.HasValue)
@@ -1299,7 +1299,7 @@ public class SelectControlOld : Control
         if (_rectangle.IsMouseCaptured)
             _rectangle?.ReleaseMouseCapture();
 
-        //A quick double quick will fire this event, whe it should fire the OnMouseLeftButtonUp.
+        //A quick double quick will fire this event, when it should fire the OnMouseLeftButtonUp.
         if (Selected.IsEmpty || Selected.Width < 10 || Selected.Height < 10)
             return;
 

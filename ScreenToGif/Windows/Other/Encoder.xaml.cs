@@ -67,7 +67,7 @@ public partial class Encoder : Window, IEncoding
     }
 
     #endregion
-        
+
 
     public EncoderListViewItem EncodingAdded(int id)
     {
@@ -145,7 +145,7 @@ public partial class Encoder : Window, IEncoding
     }
 
     /// <summary>
-    /// Tries to close the Window if there's no enconding active.
+    /// Tries to close the Window if there's no encoding active.
     /// </summary>
     public static void TryClose()
     {

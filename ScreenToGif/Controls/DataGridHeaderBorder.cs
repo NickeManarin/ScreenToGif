@@ -119,7 +119,7 @@ public sealed class DataGridHeaderBorder : Border
     private bool UsingBorderImplementation => (Background != null) || (BorderBrush != null);
 
     /// <summary>
-    ///     Property that indicates the brush to use when drawing seperators between headers.
+    ///     Property that indicates the brush to use when drawing separators between headers.
     /// </summary>
     public Brush SeparatorBrush
     {
@@ -134,7 +134,7 @@ public sealed class DataGridHeaderBorder : Border
         DependencyProperty.Register("SeparatorBrush", typeof(Brush), typeof(DataGridHeaderBorder), new FrameworkPropertyMetadata(null));
 
     /// <summary>
-    ///     Property that indicates the Visibility for the header seperators.
+    ///     Property that indicates the Visibility for the header separators.
     /// </summary>
     public Visibility SeparatorVisibility
     {
@@ -143,7 +143,7 @@ public sealed class DataGridHeaderBorder : Border
     }
 
     /// <summary>
-    ///     DependencyProperty for SeperatorBrush.
+    ///     DependencyProperty for SeparatorBrush.
     /// </summary>
     public static readonly DependencyProperty SeparatorVisibilityProperty =
         DependencyProperty.Register("SeparatorVisibility", typeof(Visibility), typeof(DataGridHeaderBorder), new FrameworkPropertyMetadata(Visibility.Visible));

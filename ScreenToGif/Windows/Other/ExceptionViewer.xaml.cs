@@ -15,8 +15,8 @@ public partial class ExceptionViewer
     /// Default constructor.
     /// </summary>
     /// <param name="ex">The Exception to show.</param>
-    /// <param name="aditional">Aditional details.</param>
-    public ExceptionViewer(Exception ex, string aditional = null)
+    /// <param name="additional">Additional details.</param>
+    public ExceptionViewer(Exception ex, string additional = null)
     {
         InitializeComponent();
 
@@ -26,13 +26,13 @@ public partial class ExceptionViewer
 
         TypeLabel.Text = ex.GetType().Name;
         MessageTextBox.Text = ex.Message;
-        StackTextBox.Text = (!string.IsNullOrWhiteSpace(aditional) ? aditional + Environment.NewLine : "") + ex.StackTrace;
+        StackTextBox.Text = (!string.IsNullOrWhiteSpace(additional) ? additional + Environment.NewLine : "") + ex.StackTrace;
         SourceTextBox.Text = ex.Source;
 
         if (ex.TargetSite != null)
             SourceTextBox.Text += "." + ex.TargetSite.Name;
 
-        //If there's aditional details.
+        //If there's additional details.
         if (!string.IsNullOrEmpty(ex.HelpLink))
             StackTextBox.Text += Environment.NewLine + Environment.NewLine + ex.HelpLink;
 

@@ -166,7 +166,7 @@ internal class DirectChangedImageCapture : DirectImageCapture
         {
             try
             {
-                //Only release the frame if there was a sucess in capturing it.
+                //Only release the frame if there was a success in capturing it.
                 if (res.Success)
                     DuplicatedOutput.ReleaseFrame();
             }

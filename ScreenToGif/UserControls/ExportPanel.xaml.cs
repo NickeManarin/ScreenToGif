@@ -397,7 +397,7 @@ public partial class ExportPanel : UserControl, IPanel
                 //Gifski only runs on x64.
                 if (Environment.Is64BitProcess)
                     AddDistinct(presets, GifskiGifPreset.Defaults);
-                    
+
                 AddDistinct(presets, SystemGifPreset.Default);
                 break;
             }
@@ -1104,14 +1104,14 @@ public partial class ExportPanel : UserControl, IPanel
                 LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Message")))
             return;
 
-        var resetted = GeneratePresets(preset.Type, new List<ExportPreset>()).FirstOrDefault(f => f.TitleKey == preset.TitleKey);
+        var hasReset = GeneratePresets(preset.Type, new List<ExportPreset>()).FirstOrDefault(f => f.TitleKey == preset.TitleKey);
 
-        if (resetted == null)
+        if (hasReset == null)
             return; //TODO: What to do? Tell the user that this is an old preset, which is not being used anymore.
 
         UserSettings.All.ExportPresets.Remove(preset);
-        UserSettings.All.ExportPresets.Add(resetted);
-        LoadPresets(resetted.Type, resetted);
+        UserSettings.All.ExportPresets.Add(hasReset);
+        LoadPresets(hasReset.Type, hasReset);
     }
 
 
@@ -1548,7 +1548,7 @@ public partial class ExportPanel : UserControl, IPanel
 
         try
         {
-            //If the file name template result changed, it will be imposible to open the previous file. The user should simple try to save it again.
+            //If the file name template result changed, it will be impossible to open the previous file. The user should simple try to save it again.
             ProcessHelper.StartWithShell(Path.Combine(preset.OutputFolder, PathHelper.ReplaceRegexInName(preset.OutputFilename) + preset.Extension));
         }
         catch (Exception ex)

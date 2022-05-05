@@ -13,7 +13,7 @@ public class ExtendedToggleButton : ToggleButton
     #region Variables
 
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(ExtendedToggleButton), new FrameworkPropertyMetadata("Button"));
-        
+
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(Brush), typeof(ExtendedToggleButton), new FrameworkPropertyMetadata());
 
     public static readonly DependencyProperty KeyGestureProperty = DependencyProperty.Register(nameof(KeyGesture), typeof(string), typeof(ExtendedToggleButton), new FrameworkPropertyMetadata(""));
@@ -22,7 +22,7 @@ public class ExtendedToggleButton : ToggleButton
 
     public static readonly DependencyProperty ContentWidthProperty = DependencyProperty.Register(nameof(ContentWidth), typeof(double), typeof(ExtendedToggleButton), new FrameworkPropertyMetadata(double.NaN));
 
-    /// <summary> 
+    /// <summary>
     /// DependencyProperty for <see cref="TextWrapping" /> property.
     /// </summary>
     public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register(nameof(TextWrapping), typeof(TextWrapping), typeof(ExtendedToggleButton),
@@ -89,8 +89,8 @@ public class ExtendedToggleButton : ToggleButton
     }
 
     /// <summary>
-    /// The TextWrapping property controls whether or not text wraps 
-    /// when it reaches the flow edge of its containing block box. 
+    /// The TextWrapping property controls whether or not text wraps
+    /// when it reaches the flow edge of its containing block box.
     /// </summary>
     public TextWrapping TextWrapping
     {
@@ -99,9 +99,9 @@ public class ExtendedToggleButton : ToggleButton
     }
 
     /// <summary>
-    /// True if the button should ajust itself for dark mode.
+    /// True if the button should adjust itself for dark mode.
     /// </summary>
-    [Description("True if the button should ajust itself for dark mode.")]
+    [Description("True if the button should adjust itself for dark mode.")]
     public bool DarkMode
     {
         get => (bool)GetValue(DarkModeProperty);
@@ -119,9 +119,9 @@ public class ExtendedToggleButton : ToggleButton
     }
 
     /// <summary>
-    /// True if the button should be diplayed with a warning color.
+    /// True if the button should be displayed with a warning color.
     /// </summary>
-    [Description("True if the button should be diplayed with a warning color.")]
+    [Description("True if the button should be displayed with a warning color.")]
     public bool IsImportant
     {
         get => (bool)GetValue(IsImportantProperty);

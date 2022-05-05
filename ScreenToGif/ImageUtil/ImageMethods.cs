@@ -42,7 +42,7 @@ public static class ImageMethods
     /// <param name="source">The color that will be converted to the chroma key, which in turn will be treated as transparent. If null, takes all colors with transparency and convert to the chroma.</param>
     /// <param name="chroma">The color that will be treated as transparent.</param>
     /// <param name="taskId">The id of the encoding task.</param>
-    /// <param name="tokenSource">The cancelation token source.</param>
+    /// <param name="tokenSource">The cancellation token source.</param>
     /// <returns>The export project, with the images already scanned and altered.</returns>
     public static ExportProject PaintAndCutForTransparency(ExportProject project, System.Windows.Media.Color? source, System.Windows.Media.Color chroma, int taskId, CancellationTokenSource tokenSource)
     {
@@ -260,14 +260,14 @@ public static class ImageMethods
     }
 
     /// <summary>
-    /// Analizes all frames (from the end to the start) and paints all unchanged pixels with a given color, 
+    /// Analyzes all frames (from the end to the start) and paints all unchanged pixels with a given color,
     /// after, it cuts the image to reduce filesize.
     /// </summary>
-    /// <param name="project">The project with frames to analize.</param>
+    /// <param name="project">The project with frames to analyze.</param>
     /// <param name="chroma">The color to paint the unchanged pixels.</param>
     /// <param name="taskId">The Id of the current Task.</param>
-    /// <param name="tokenSource">The cancelation token source.</param>
-    /// <returns>The project contaning all frames and its cut points.</returns>
+    /// <param name="tokenSource">The cancellation token source.</param>
+    /// <returns>The project containing all frames and its cut points.</returns>
     public static ExportProject PaintTransparentAndCut(ExportProject project, System.Windows.Media.Color chroma, int taskId, CancellationTokenSource tokenSource)
     {
         using (var oldStream = new FileStream(project.ChunkPath, FileMode.Open, FileAccess.Read, FileShare.Read))
@@ -490,13 +490,13 @@ public static class ImageMethods
     }
 
     /// <summary>
-    /// Analizes all frames (from the end to the start) and paints all unchanged pixels with a given color, 
+    /// Analyzes all frames (from the end to the start) and paints all unchanged pixels with a given color,
     /// after, it cuts the image to reduce filesize.
     /// </summary>
-    /// <param name="project">The project with frames to analize.</param>
+    /// <param name="project">The project with frames to analyze.</param>
     /// <param name="taskId">The Id of the Task.</param>
-    /// <param name="tokenSource">The cancelation token source.</param>
-    /// <returns>The project contaning all frames and its cut points.</returns>
+    /// <param name="tokenSource">The cancellation token source.</param>
+    /// <returns>The project containing all frames and its cut points.</returns>
     public static ExportProject CutUnchanged(ExportProject project, int taskId, CancellationTokenSource tokenSource)
     {
         using (var oldStream = new FileStream(project.ChunkPath, FileMode.Open, FileAccess.Read, FileShare.Read))
@@ -962,7 +962,7 @@ public static class ImageMethods
                             #endregion
                         }
                     }
-                }); //SPEEEEEED, alot!
+                }); //SPEEEEEED, a lot!
 
                 #endregion
             }
@@ -1576,8 +1576,8 @@ public static class ImageMethods
             else
             {
                 drawingContext.DrawImage(source, new Rect(0, 0, width / scale, height / scale));
-            }                
-        }            
+            }
+        }
 
         //(int)Math.Round(width * scale)
 
@@ -1986,7 +1986,7 @@ public static class ImageMethods
             return distance <= opacityDistance ? opacityPower / 100d * ((distance * 100d) / opacityDistance) / 100d : 1d;
         }
 
-        //TODO: Option to avoid smoothing near the edges. 
+        //TODO: Option to avoid smoothing near the edges.
         //var distance = new[] { xx - rectX, yy - rectY, rectX + width - xx, rectY + height - yy }.OrderBy(o => o).First();
 
         var left2 = xx - rectX;

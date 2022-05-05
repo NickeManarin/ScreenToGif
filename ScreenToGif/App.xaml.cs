@@ -38,7 +38,7 @@ public partial class App : IDisposable
     private bool _accepted;
     private readonly List<Exception> _exceptionList = new();
     private readonly object _lock = new();
-        
+
     #endregion
 
     #region Events
@@ -94,8 +94,8 @@ public partial class App : IDisposable
         #region If set, it allows only one instance per user
 
         //The singleton works on a per-user and per-executable mode.
-        //Meaning that a different user and/or a different executable intances can co-exist.
-        //Part of this code wont work on debug mode, since the SetForegroundWindow() needs focus on the foreground window calling the method.
+        //Meaning that a different user and/or a different executable instances can co-exist.
+        //Part of this code won't work on debug mode, since the SetForegroundWindow() needs focus on the foreground window calling the method.
         if (UserSettings.All.SingleInstance && !Arguments.NewInstance)
         {
             try
@@ -109,7 +109,7 @@ public partial class App : IDisposable
 
                     _mutex = new Mutex(true, mutexName, out _accepted);
 
-                    //If the mutext failed to be accepted, it means that another process already openned it.
+                    //If the mutext failed to be accepted, it means that another process already opened it.
                     if (!_accepted)
                     {
                         var warning = true;
@@ -190,7 +190,7 @@ public partial class App : IDisposable
         //var test = new Windows.EditorEx(); test.ShowDialog(); return;
         //var test = new Windows.NewWebcam(); test.ShowDialog(); return;
         //var test = Settings.UserSettings.All.StartupTop;
-            
+
         #region Tasks
 
         Task.Factory.StartNew(MainViewModel.ClearTemporaryFiles, TaskCreationOptions.LongRunning);
@@ -384,9 +384,9 @@ public partial class App : IDisposable
 
     internal static void RegisterShortcuts()
     {
-        //TODO: If startup/editor is open and focused, should I let the hotkeys work? 
+        //TODO: If startup/editor is open and focused, should I let the hotkeys work?
 
-        //Registers all shortcuts. 
+        //Registers all shortcuts.
         var screen = HotKeyCollection.Default.TryRegisterHotKey(UserSettings.All.RecorderModifiers, UserSettings.All.RecorderShortcut, () =>
             { if (!Global.IgnoreHotKeys && MainViewModel.OpenRecorder.CanExecute(null)) MainViewModel.OpenRecorder.Execute(null); }, true);
 
@@ -433,7 +433,7 @@ public partial class App : IDisposable
                     ExceptionDialog.Ok(exception, "ScreenToGif", "Unhandled exception", exception.Message);
             });
 
-            //By removing the exception, the same exception can be displayed later.  
+            //By removing the exception, the same exception can be displayed later.
             _exceptionList.Remove(exception);
         }
     }

@@ -192,7 +192,7 @@ public partial class NewRecorder
 
         _viewModel.IsDirectMode = UserSettings.All.UseDesktopDuplication;
         _viewModel.Monitors = MonitorHelper.AllMonitorsGranular();
-            
+
         await UpdatePositioning(true);
 
         if (UserSettings.All.CursorFollowing)
@@ -242,7 +242,7 @@ public partial class NewRecorder
                 _regionSelection.WindowState = WindowState.Normal;
 
             IsFollowing = UserSettings.All.CursorFollowing;
-                
+
             if (!IsFollowing || UserSettings.All.FollowShortcut != Key.None)
                 return;
 
@@ -293,7 +293,7 @@ public partial class NewRecorder
             }
 
             //If the Shift key is pressed, the sizing mode is enabled (bottom right).
-            if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0) 
+            if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0)
             {
                 switch (key)
                 {
@@ -314,12 +314,12 @@ public partial class NewRecorder
                         e.Handled = true;
                         break;
                 }
-                    
+
                 return;
             }
 
             //If the Control key is pressed, the sizing mode is enabled (top left).
-            if ((Keyboard.Modifiers & ModifierKeys.Control) != 0) 
+            if ((Keyboard.Modifiers & ModifierKeys.Control) != 0)
             {
                 switch (key)
                 {
@@ -346,7 +346,7 @@ public partial class NewRecorder
         }
 
         //If no other key is pressed, move the region.
-        switch (key) 
+        switch (key)
         {
             case Key.Left:
                 MoveWindow(step, 0, 0, 0);
@@ -388,7 +388,7 @@ public partial class NewRecorder
         if (Mouse.LeftButton == MouseButtonState.Pressed)
             DragMove();
     }
-        
+
     private void RegionSelection_PositionChanged(object sender, RoutedEventArgs e)
     {
         DetectMonitorChanges();
@@ -456,7 +456,7 @@ public partial class NewRecorder
         MoveCommandPanel();
         DisplaySelection();
     }
-        
+
     private void SizeIntegerBox_MouseWheel(object sender, MouseWheelEventArgs e)
     {
         var relativePoint = e.GetPosition(WidthIntegerBox);
@@ -473,7 +473,7 @@ public partial class NewRecorder
 
         rec.Follow();
     }
-        
+
     private void MinimizeButton_Click(object sender, RoutedEventArgs e)
     {
         _regionSelection.Hide();
@@ -583,7 +583,7 @@ public partial class NewRecorder
 
             return;
         }
-            
+
         if (Keyboard.Modifiers.HasFlag(UserSettings.All.StopModifiers) && e.Key == UserSettings.All.StopShortcut && (Stage == RecorderStages.Recording || Stage == RecorderStages.Paused || Stage == RecorderStages.PreStarting))
             await Stop();
         else if (Keyboard.Modifiers.HasFlag(UserSettings.All.DiscardModifiers) && e.Key == UserSettings.All.DiscardShortcut)
@@ -613,15 +613,15 @@ public partial class NewRecorder
                 RecordClicked = MouseButtons.Middle;
             else
                 RecordClicked = MouseButtons.None;
-                
+
             _posX = (int)Math.Round(args.PosX / _regionSelection.Scale, MidpointRounding.AwayFromZero);
             _posY = (int)Math.Round(args.PosY / _regionSelection.Scale, MidpointRounding.AwayFromZero);
-                
+
             if (Stage == RecorderStages.Recording && args.IsInteraction && UserSettings.All.CaptureFrequency == CaptureFrequencies.Interaction)
             {
                 var controlHit = VisualTreeHelper.HitTest(this, Mouse.GetPosition(this));
                 var selectionHit = _regionSelection.IsVisible && _regionSelection.Opacity > 0 ? VisualTreeHelper.HitTest(_regionSelection, Mouse.GetPosition(_regionSelection)) : null;
-                    
+
                 if (controlHit == null && selectionHit == null)
                     await Snap();
             }
@@ -631,7 +631,7 @@ public partial class NewRecorder
             LogWriter.Log(e, "Error in mouse hook target.");
         }
     }
-        
+
 
     #region Timers
 
@@ -653,7 +653,7 @@ public partial class NewRecorder
 
         if (IsRegionIntersected())
             WindowState = WindowState.Minimized;
-            
+
         Title = "ScreenToGif";
         IsRecording = true;
 
@@ -694,17 +694,17 @@ public partial class NewRecorder
         }
 
         //Limit to the current screen (only if in DirectX mode).
-        //_viewModel.Region = new Rect(new Point((_viewModel.Region.X + _offsetX).Clamp(_viewModel.MaximumBounds.Left - 1, _viewModel.MaximumBounds.Width - _viewModel.Region.Width + 1), 
+        //_viewModel.Region = new Rect(new Point((_viewModel.Region.X + _offsetX).Clamp(_viewModel.MaximumBounds.Left - 1, _viewModel.MaximumBounds.Width - _viewModel.Region.Width + 1),
         //    (_viewModel.Region.Y + _offsetY).Clamp(_viewModel.MaximumBounds.Top - 1, _viewModel.MaximumBounds.Height - _viewModel.Region.Height + 1)), _viewModel.Region.Size);
 
         //Limit to the current screen.
-        _viewModel.Region = new Rect(new Point((_viewModel.Region.X + _offsetX).Clamp(_viewModel.CurrentMonitor.Bounds.Left - 1, _viewModel.CurrentMonitor.Bounds.Width - _viewModel.Region.Width + 1), 
+        _viewModel.Region = new Rect(new Point((_viewModel.Region.X + _offsetX).Clamp(_viewModel.CurrentMonitor.Bounds.Left - 1, _viewModel.CurrentMonitor.Bounds.Width - _viewModel.Region.Width + 1),
             (_viewModel.Region.Y + _offsetY).Clamp(_viewModel.CurrentMonitor.Bounds.Top - 1, _viewModel.CurrentMonitor.Bounds.Height - _viewModel.Region.Height + 1)), _viewModel.Region.Size);
 
         //Tell the capture helper that the position changed.
         if (Capture == null)
             return;
-            
+
         Capture.Left = (int)CaptureRegion.Left;
         Capture.Top = (int)CaptureRegion.Top;
     }
@@ -726,7 +726,7 @@ public partial class NewRecorder
 
         if (!IsLoaded || (Stage != RecorderStages.Recording && Stage == RecorderStages.PreStarting))
             return;
-            
+
         await Stop();
     }
 
@@ -749,12 +749,12 @@ public partial class NewRecorder
         }
 
         //This code it's kind of broken. It's not taking into consideration the relative position of the window on the secondary monitor.
-        //It will move the window to the primary monitor, but it won't keep the same axis.  
+        //It will move the window to the primary monitor, but it won't keep the same axis.
 
         var diff = _regionSelection.Scale / main.Scale;
         var left = _viewModel.Region.Left / diff;
         var top = _viewModel.Region.Top / diff;
-            
+
         if (main.Bounds.Top > top)
             top = main.Bounds.Top;
 
@@ -954,7 +954,7 @@ public partial class NewRecorder
                 {
                     if (UserSettings.All.RecorderCompactMode)
                     {
-                        args.CanExecute = Stage == RecorderStages.Recording && ((UserSettings.All.CaptureFrequency != CaptureFrequencies.Manual && UserSettings.All.CaptureFrequency != CaptureFrequencies.Interaction && 
+                        args.CanExecute = Stage == RecorderStages.Recording && ((UserSettings.All.CaptureFrequency != CaptureFrequencies.Manual && UserSettings.All.CaptureFrequency != CaptureFrequencies.Interaction &&
                             !UserSettings.All.RecorderDisplayDiscard) || FrameCount > 0) || Stage is RecorderStages.Paused or RecorderStages.PreStarting;
                         return;
                     }
@@ -1038,7 +1038,7 @@ public partial class NewRecorder
                     IsRecording = true;
                     Topmost = true;
 
-                    //Tries to move the command pannel away from the recording area.
+                    //Tries to move the command panel away from the recording area.
                     MoveCommandPanel(true);
 
                     //Detects a possible intersection of capture region and capture controls.
@@ -1091,7 +1091,7 @@ public partial class NewRecorder
                     _regionSelection.HideGuidelines();
                     SetTaskbarButtonOverlay();
 
-                    //Tries to move the command pannel away from the recording area.
+                    //Tries to move the command panel away from the recording area.
                     MoveCommandPanel(true);
 
                     //If it's interaction mode, the capture is done via Snap().
@@ -1128,7 +1128,7 @@ public partial class NewRecorder
         {
             Arguments.ClearAutomationArgs();
 
-            //Wait a bit, then refresh the commands. Some of the commands are dependant of the FrameCount property.
+            //Wait a bit, then refresh the commands. Some of the commands are dependent of the FrameCount property.
             await Task.Delay(TimeSpan.FromMilliseconds(200));
 
             CommandManager.InvalidateRequerySuggested();
@@ -1228,7 +1228,7 @@ public partial class NewRecorder
 
             _limitTimer.Stop();
             PauseCapture();
-                
+
             FrequencyIntegerUpDown.IsEnabled = true;
             _regionSelection.DisplayGuidelines();
             SetTaskbarButtonOverlay();
@@ -1315,7 +1315,7 @@ public partial class NewRecorder
     {
         Pause();
 
-        if (UserSettings.All.NotifyRecordingDiscard && !Dialog.Ask(LocalizationHelper.Get("S.Recorder.Discard.Title"), 
+        if (UserSettings.All.NotifyRecordingDiscard && !Dialog.Ask(LocalizationHelper.Get("S.Recorder.Discard.Title"),
                 LocalizationHelper.Get("S.Recorder.Discard.Instruction"), LocalizationHelper.Get("S.Recorder.Discard.Message"), false))
             return;
 
@@ -1419,7 +1419,7 @@ public partial class NewRecorder
 
         Capture.OnError += exception =>
         {
-            //Pause the recording and show the error.  
+            //Pause the recording and show the error.
             _viewModel.PauseCommand.Execute(null, null);
 
             if (exception is GraphicsConfigurationException)
@@ -1521,14 +1521,14 @@ public partial class NewRecorder
                 }
 
                 SizeTextBlock.Text = _viewModel.CurrentMonitor.FriendlyName;
-                SizeTextBlock.ToolTip = 
+                SizeTextBlock.ToolTip =
                     LocalizationHelper.GetWithFormat("S.Recorder.Screen.Name.Info1", "Graphics adapter: {0}", _viewModel.CurrentMonitor.AdapterName) +
                     Environment.NewLine +
                     LocalizationHelper.GetWithFormat("S.Recorder.Screen.Name.Info2", "Resolution: {0} x {1}", _viewModel.CurrentMonitor.Bounds.Width, _viewModel.CurrentMonitor.Bounds.Height) +
                     (Math.Abs(_viewModel.CurrentMonitor.Scale - 1) > 0.001 ? Environment.NewLine + LocalizationHelper.GetWithFormat("S.Recorder.Screen.Name.Info3", "Native resolution: {0} x {1}", _viewModel.CurrentMonitor.NativeBounds.Width, _viewModel.CurrentMonitor.NativeBounds.Height) : "")  +
                     Environment.NewLine +
                     LocalizationHelper.GetWithFormat("S.Recorder.Screen.Name.Info4", "DPI: {0} ({1:0.##}%)", _viewModel.CurrentMonitor.Dpi, _viewModel.CurrentMonitor.Scale * 100d);
-                    
+
                 return;
             }
             default:
@@ -1560,7 +1560,7 @@ public partial class NewRecorder
         if (_viewModel.Region.Width < 25 || _viewModel.Region.Height < 25)
             return;
 
-        #region Calculate the available spaces for all four sides 
+        #region Calculate the available spaces for all four sides
 
         //If the selected region is passing the bottom edge of the display, it means that there are no space available on the bottom.
         //If the selected region is inside (bottom is below the top most part), it means that there are space available.
@@ -1634,7 +1634,7 @@ public partial class NewRecorder
         {
             //First move the command window to the final monitor, so that the UI scale can be adjusted.
             this.MoveToScreen(monitor);
-                
+
             _viewModel.CurrentControlMonitor = monitor;
         }
 
@@ -1703,7 +1703,7 @@ public partial class NewRecorder
 
         _followTimer.Stop();
     }
-        
+
     private void SwitchFrequency(object sender, ExecutedRoutedEventArgs e)
     {
         //When this event is fired from clicking on the switch button.
@@ -1874,10 +1874,10 @@ public partial class NewRecorder
 
     private void ResizeWindow(int left, int top, int right, int bottom)
     {
-        //Resize to top left increases heigth/width when reaching the limit.
+        //Resize to top left increases height/width when reaching the limit.
 
         var newLeft = left < 0 ? Math.Max(_viewModel.Region.Left + left, _viewModel.MaximumBounds.Left - 1) : left > 0 ? _viewModel.Region.Left + left : _viewModel.Region.Left;
-        var newTop = top < 0 ? Math.Max(_viewModel.Region.Top + top, _viewModel.MaximumBounds.Top - 1) : top > 0 ? _viewModel.Region.Top + top : _viewModel.Region.Top; 
+        var newTop = top < 0 ? Math.Max(_viewModel.Region.Top + top, _viewModel.MaximumBounds.Top - 1) : top > 0 ? _viewModel.Region.Top + top : _viewModel.Region.Top;
         var width = (right > 0 ? Math.Min(_viewModel.Region.Width + right, _viewModel.MaximumBounds.Right - _viewModel.Region.Left + 1) - left : right < 0 ? _viewModel.Region.Width + right + (left > 0 ? -left : 0) : _viewModel.Region.Width - left);
         var height = (bottom > 0 ? Math.Min(_viewModel.Region.Height + bottom, _viewModel.MaximumBounds.Bottom - _viewModel.Region.Top + 1) - top : bottom < 0 ? _viewModel.Region.Height + bottom + (top > 0 ? -top : 0) : _viewModel.Region.Height - top);
 

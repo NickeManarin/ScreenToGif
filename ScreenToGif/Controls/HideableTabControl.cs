@@ -165,7 +165,7 @@ public class HideableTabControl : TabControl
         visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))));
         _hideButton.BeginAnimation(VisibilityProperty, visibilityAnimation);
 
-        //Marging = 5,5,0,-1
+        //Margin = 5,5,0,-1
         var marginAnimation = new ThicknessAnimation(_tabPanel.Margin, new Thickness(5, 5, 0, -1), new Duration(new TimeSpan(0, 0, 0, 0, 1)))
         {
             EasingFunction = new PowerEase { Power = 8 }
@@ -199,7 +199,7 @@ public class HideableTabControl : TabControl
         visibilityAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Collapsed, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0))));
         _hideButton.BeginAnimation(VisibilityProperty, visibilityAnimation);
 
-        //Marging = 5,5,0,5
+        //Margin = 5,5,0,5
         var marginAnimation = new ThicknessAnimation(_tabPanel.Margin, new Thickness(5, 5, 0, 5), new Duration(new TimeSpan(0, 0, 0, 0, 1)))
         {
             EasingFunction = new PowerEase { Power = 8 }
@@ -231,7 +231,7 @@ public class HideableTabControl : TabControl
 
     public void UpdateVisual(bool isActivated = true)
     {
-        //Shows only a white foreground when: 
+        //Shows only a white foreground when:
 
         //var color = Glass.GlassColor;
         //var ness = Glass.GlassColor.GetBrightness();
@@ -239,7 +239,7 @@ public class HideableTabControl : TabControl
 
         //var darkForeground = !SystemParameters.IsGlassEnabled || !Other.IsGlassSupported() || Glass.GlassColor.GetBrightness() > 973 || !isActivated;
         var darkForeground = !SystemParameters.IsGlassEnabled || !isActivated;
-        //var darkForeground = !SystemParameters.IsGlassEnabled || !Other.IsWin8OrHigher() || aa.V > 0.5 || !isActivated;           
+        //var darkForeground = !SystemParameters.IsGlassEnabled || !Other.IsWin8OrHigher() || aa.V > 0.5 || !isActivated;
         var showBackground = true;// !Other.IsGlassSupported();
 
         //Console.WriteLine("!IsGlassEnabled: " + !SystemParameters.IsGlassEnabled);
