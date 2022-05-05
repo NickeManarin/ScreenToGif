@@ -11,7 +11,7 @@ public enum EncodingStatus
     Processing,
 
     /// <summary>
-    /// The Encoding was canceled. So aparently "cancelled" (with two L's) is also a valid grammar. Huh, that's strange.
+    /// The Encoding was canceled. So apparently "cancelled" (with two L's) is also a valid grammar. Huh, that's strange.
     /// </summary>
     Canceled,
 
