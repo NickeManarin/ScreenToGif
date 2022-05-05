@@ -12,8 +12,8 @@ using ScreenToGif.Util;
 namespace ScreenToGif.Native.Helpers
 {
     /// <summary>
-    /// This class allows you to tap keyboard and mouse and / or to detect their activity even when an 
-    /// application runs in background or does not have any user interface at all. This class raises 
+    /// This class allows you to tap keyboard and mouse and / or to detect their activity even when an
+    /// application runs in background or does not have any user interface at all. This class raises
     /// common .NET events with KeyEventArgs and MouseEventArgs so you can easily retrive any information you need.
     /// </summary>
     public class InputHook
@@ -31,34 +31,34 @@ namespace ScreenToGif.Native.Helpers
         private const int HookKeyboardLowLevel = 13;
 
         /// <summary>
-        /// The WM_KEYDOWN message is posted to the window with the keyboard focus when a nonsystem 
+        /// The WM_KEYDOWN message is posted to the window with the keyboard focus when a nonsystem
         /// key is pressed. A nonsystem key is a key that is pressed when the ALT key is not pressed.
         /// </summary>
         private const int MessageKeydown = 0x100;
 
         /// <summary>
-        /// The WM_KEYUP message is posted to the window with the keyboard focus when a nonsystem 
-        /// key is released. A nonsystem key is a key that is pressed when the ALT key is not pressed, 
+        /// The WM_KEYUP message is posted to the window with the keyboard focus when a nonsystem
+        /// key is released. A nonsystem key is a key that is pressed when the ALT key is not pressed,
         /// or a keyboard key that is pressed when a window has the keyboard focus.
         /// </summary>
         private const int MessageKeyUp = 0x101;
 
         /// <summary>
-        /// The WM_SYSKEYDOWN message is posted to the window with the keyboard focus when the user 
-        /// presses the F10 key (which activates the menu bar) or holds down the ALT key and then 
-        /// presses another key. It also occurs when no window currently has the keyboard focus; 
-        /// in this case, the WM_SYSKEYDOWN message is sent to the active window. The window that 
-        /// receives the message can distinguish between these two contexts by checking the context 
-        /// code in the lParam parameter. 
+        /// The WM_SYSKEYDOWN message is posted to the window with the keyboard focus when the user
+        /// presses the F10 key (which activates the menu bar) or holds down the ALT key and then
+        /// presses another key. It also occurs when no window currently has the keyboard focus;
+        /// in this case, the WM_SYSKEYDOWN message is sent to the active window. The window that
+        /// receives the message can distinguish between these two contexts by checking the context
+        /// code in the lParam parameter.
         /// </summary>
         private const int MessageSystemKeyDown = 0x104;
 
         /// <summary>
-        /// The WM_SYSKEYUP message is posted to the window with the keyboard focus when the user 
-        /// releases a key that was pressed while the ALT key was held down. It also occurs when no 
-        /// window currently has the keyboard focus; in this case, the WM_SYSKEYUP message is sent 
-        /// to the active window. The window that receives the message can distinguish between 
-        /// these two contexts by checking the context code in the lParam parameter. 
+        /// The WM_SYSKEYUP message is posted to the window with the keyboard focus when the user
+        /// releases a key that was pressed while the ALT key was held down. It also occurs when no
+        /// window currently has the keyboard focus; in this case, the WM_SYSKEYUP message is sent
+        /// to the active window. The window that receives the message can distinguish between
+        /// these two contexts by checking the context code in the lParam parameter.
         /// </summary>
         private const int MessageSystemKeyUp = 0x105;
 
@@ -162,7 +162,7 @@ namespace ScreenToGif.Native.Helpers
         }
 
         /// <summary>
-        /// Creates an instance of UserActivityHook object and installs both or one of mouse and/or keyboard hooks and starts rasing events
+        /// Creates an instance of UserActivityHook object and installs both or one of mouse and/or keyboard hooks and starts raising events
         /// </summary>
         /// <param name="installMouseHook"><b>true</b> if mouse events must be monitored</param>
         /// <param name="installKeyboardHook"><b>true</b> if keyboard events must be monitored</param>
@@ -189,7 +189,7 @@ namespace ScreenToGif.Native.Helpers
         #region Methods
 
         /// <summary>
-        /// Installs both mouse and keyboard hooks and starts rasing events
+        /// Installs both mouse and keyboard hooks and starts raising events
         /// </summary>
         /// <exception cref="Win32Exception">Any windows problem.</exception>
         public void Start()
@@ -198,7 +198,7 @@ namespace ScreenToGif.Native.Helpers
         }
 
         /// <summary>
-        /// Installs both or one of mouse and/or keyboard hooks and starts rasing events
+        /// Installs both or one of mouse and/or keyboard hooks and starts raising events
         /// </summary>
         /// <param name="installMouseHook"><b>true</b> if mouse events must be monitored</param>
         /// <param name="installKeyboardHook"><b>true</b> if keyboard events must be monitored</param>
@@ -221,13 +221,13 @@ namespace ScreenToGif.Native.Helpers
                 //If SetWindowsHookEx fails.
                 if (_mouseHookHandle == 0)
                 {
-                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
+                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set.
                     var errorCode = Marshal.GetLastWin32Error();
-                    
+
                     //Cleans up.
                     Stop(true, false, false);
-                    
-                    //Initializes and throws a new instance of the Win32Exception class with the specified error. 
+
+                    //Initializes and throws a new instance of the Win32Exception class with the specified error.
                     throw new Win32Exception(errorCode);
                 }
             }
@@ -244,20 +244,20 @@ namespace ScreenToGif.Native.Helpers
                 //If SetWindowsHookEx fails.
                 if (_keyboardHookHandle == 0)
                 {
-                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
+                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set.
                     var errorCode = Marshal.GetLastWin32Error();
-                    
+
                     //Cleans up.
                     Stop(false, true, false);
-                    
-                    //Initializes and throws a new instance of the Win32Exception class with the specified error. 
+
+                    //Initializes and throws a new instance of the Win32Exception class with the specified error.
                     throw new Win32Exception(errorCode);
                 }
             }
         }
 
         /// <summary>
-        /// Stops monitoring both mouse and keyboard events and rasing events.
+        /// Stops monitoring both mouse and keyboard events and raising events.
         /// </summary>
         /// <exception cref="Win32Exception">Any windows problem.</exception>
         public void Stop()
@@ -266,7 +266,7 @@ namespace ScreenToGif.Native.Helpers
         }
 
         /// <summary>
-        /// Stops monitoring both or one of mouse and/or keyboard events and rasing events.
+        /// Stops monitoring both or one of mouse and/or keyboard events and raising events.
         /// </summary>
         /// <param name="uninstallMouseHook"><b>true</b> if mouse hook must be uninstalled</param>
         /// <param name="uninstallKeyboardHook"><b>true</b> if keyboard hook must be uninstalled</param>
@@ -279,17 +279,17 @@ namespace ScreenToGif.Native.Helpers
             {
                 //Uninstalls the hook.
                 var retMouse = User32.UnhookWindowsHookEx(_mouseHookHandle);
-                
+
                 //Resets the invalid handle.
                 _mouseHookHandle = 0;
-                
+
                 //if failed and exception must be thrown.
                 if (retMouse == 0 && throwExceptions)
                 {
-                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
+                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set.
                     var errorCode = Marshal.GetLastWin32Error();
-                    
-                    //Initializes and throws a new instance of the Win32Exception class with the specified error. 
+
+                    //Initializes and throws a new instance of the Win32Exception class with the specified error.
                     throw new Win32Exception(errorCode);
                 }
             }
@@ -306,10 +306,10 @@ namespace ScreenToGif.Native.Helpers
                 //If failed and exception must be thrown
                 if (retKeyboard == 0 && throwExceptions)
                 {
-                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
+                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set.
                     var errorCode = Marshal.GetLastWin32Error();
-                    
-                    //Initializes and throws a new instance of the Win32Exception class with the specified error. 
+
+                    //Initializes and throws a new instance of the Win32Exception class with the specified error.
                     throw new Win32Exception(errorCode);
                 }
             }
@@ -329,7 +329,7 @@ namespace ScreenToGif.Native.Helpers
 
             if (_clickCount != 2)
                 return;
-            
+
             OnMouseActivity?.Invoke(this, new SimpleMouseGesture(type, point.X, point.Y, _leftButton, _rightButton, _middleButton, _extraButton, _extra2Button));
             _clickCount = 0;
         }
@@ -339,24 +339,24 @@ namespace ScreenToGif.Native.Helpers
         /// https://docs.microsoft.com/en-us/windows/win32/winmsg/lowlevelmouseproc
         /// </summary>
         /// <param name="code">
-        /// Specifies whether the hook procedure must process the message. 
-        /// If code is HC_ACTION, the hook procedure must process the message. 
-        /// If code is less than zero, the hook procedure must pass the message to the 
+        /// Specifies whether the hook procedure must process the message.
+        /// If code is HC_ACTION, the hook procedure must process the message.
+        /// If code is less than zero, the hook procedure must pass the message to the
         /// CallNextHookEx function without further processing and must return the value returned by CallNextHookEx.
         /// </param>
         /// <param name="type">
-        /// Same as wParam. Specifies whether the message was sent by the current thread. 
-        /// If the message was sent by the current thread, it is nonzero; otherwise, it is zero. 
+        /// Same as wParam. Specifies whether the message was sent by the current thread.
+        /// If the message was sent by the current thread, it is nonzero; otherwise, it is zero.
         /// </param>
         /// <param name="structure">
-        /// Same as lParam. Pointer to a CWPSTRUCT structure that contains details about the message. 
+        /// Same as lParam. Pointer to a CWPSTRUCT structure that contains details about the message.
         /// </param>
         /// <returns>
-        /// If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
-        /// If nCode is greater than or equal to zero, it is highly recommended that you call CallNextHookEx 
-        /// and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC 
-        /// hooks will not receive hook notifications and may behave incorrectly as a result. If the hook 
-        /// procedure does not call CallNextHookEx, the return value should be zero. 
+        /// If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx.
+        /// If nCode is greater than or equal to zero, it is highly recommended that you call CallNextHookEx
+        /// and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC
+        /// hooks will not receive hook notifications and may behave incorrectly as a result. If the hook
+        /// procedure does not call CallNextHookEx, the return value should be zero.
         /// </returns>
         private IntPtr MouseHookProc(int code, uint type, IntPtr structure)
         {
@@ -367,7 +367,7 @@ namespace ScreenToGif.Native.Helpers
             //Marshall the data from callback.
             var mouse = (MouseHook) Marshal.PtrToStructure(structure, typeof(MouseHook));
             var data = new WordLevel.WordUnion { Number = mouse.MouseData };
-            
+
             #region Mouse actions
 
             switch ((NativeMouseEvents) type)
@@ -378,7 +378,7 @@ namespace ScreenToGif.Native.Helpers
                     {
                         var isXDragging = Math.Abs(mouse.Point.X - _dragStartPoint.X) > SystemParameters.MinimumHorizontalDragDistance;
                         var isYDragging = Math.Abs(mouse.Point.Y - _dragStartPoint.Y) > SystemParameters.MinimumVerticalDragDistance;
-                        
+
                         _isDragging = isXDragging || isYDragging;
 
                         if (_isDragging)
@@ -387,7 +387,7 @@ namespace ScreenToGif.Native.Helpers
                             break;
                         }
                     }
-                    
+
                     OnMouseActivity?.Invoke(this, new SimpleMouseGesture(NativeMouseEvents.MouseMove, mouse.Point.X, mouse.Point.Y, _leftButton, _rightButton, _middleButton, _extraButton, _extra2Button));
                     break;
                 }
@@ -459,7 +459,7 @@ namespace ScreenToGif.Native.Helpers
                 case NativeMouseEvents.MiddleButtonDown:
                 {
                     DetectDoubleClick(NativeMouseEvents.MiddleButtonDoubleClick, mouse.Point);
-                    
+
                     _middleButton = MouseButtonState.Pressed;
                     OnMouseActivity?.Invoke(this, new SimpleMouseGesture(NativeMouseEvents.MiddleButtonDown, mouse.Point.X, mouse.Point.Y, _leftButton, _rightButton, _middleButton, _extraButton, _extra2Button));
                     break;
@@ -540,7 +540,7 @@ namespace ScreenToGif.Native.Helpers
                 //default: I can't return now, it will break the click detector.
                 //return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
                 //HU3HU3 - A little funny momment: I just frooze my cursor by returning 1 instead of calling the next hook. - Nicke
-                //Congrats to myself. ;D 
+                //Congrats to myself. ;D
                 //05:24 AM 01/02/2014 (day-month-year)
             }
 
@@ -555,25 +555,25 @@ namespace ScreenToGif.Native.Helpers
         /// https://docs.microsoft.com/en-us/windows/win32/winmsg/lowlevelkeyboardproc
         /// </summary>
         /// <param name="code">
-        /// Specifies whether the hook procedure must process the message. 
-        /// If code is HC_ACTION, the hook procedure must process the message. 
-        /// If code is less than zero, the hook procedure must pass the message to the 
-        /// CallNextHookEx function without further processing and must return the 
+        /// Specifies whether the hook procedure must process the message.
+        /// If code is HC_ACTION, the hook procedure must process the message.
+        /// If code is less than zero, the hook procedure must pass the message to the
+        /// CallNextHookEx function without further processing and must return the
         /// value returned by CallNextHookEx.
         /// </param>
         /// <param name="wParam">
-        /// Specifies whether the message was sent by the current thread. 
-        /// If the message was sent by the current thread, it is nonzero; otherwise, it is zero. 
+        /// Specifies whether the message was sent by the current thread.
+        /// If the message was sent by the current thread, it is nonzero; otherwise, it is zero.
         /// </param>
         /// <param name="lParam">
-        /// Pointer to a CWPSTRUCT structure that contains details about the message. 
+        /// Pointer to a CWPSTRUCT structure that contains details about the message.
         /// </param>
         /// <returns>
-        /// If code is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
-        /// If code is greater than or equal to zero, it is highly recommended that you call CallNextHookEx 
-        /// and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC 
-        /// hooks will not receive hook notifications and may behave incorrectly as a result. If the hook 
-        /// procedure does not call CallNextHookEx, the return value should be zero. 
+        /// If code is less than zero, the hook procedure must return the value returned by CallNextHookEx.
+        /// If code is greater than or equal to zero, it is highly recommended that you call CallNextHookEx
+        /// and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC
+        /// hooks will not receive hook notifications and may behave incorrectly as a result. If the hook
+        /// procedure does not call CallNextHookEx, the return value should be zero.
         /// </returns>
         private IntPtr KeyboardHookProc(int code, uint wParam, IntPtr lParam)
         {
@@ -594,7 +594,7 @@ namespace ScreenToGif.Native.Helpers
 
                 var isDownShift = (User32.GetKeyState(KeyShift) & 0x80) == 0x80;
                 var isDownCapslock = User32.GetKeyState(KeyCapital) != 0;
-             
+
 
                 var e = new CustomKeyEventArgs(KeyInterop.KeyFromVirtualKey(keyboard.KeyCode), isDownCapslock ^ isDownShift, isInjected);
 
