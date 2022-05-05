@@ -38,7 +38,7 @@ public static class LocalizationHelper
             
         #endregion
 
-        //Copy all MergedDictionarys into a auxiliar list.
+        //Copy all MergedDictionaries into a auxiliary list.
         var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
 
         #region Selected Culture
@@ -262,7 +262,7 @@ public static class LocalizationHelper
 
     public static void SaveDefaultResource(string path)
     {
-        //Copy all MergedDictionarys into a auxiliar list.
+        //Copy all MergedDictionaries into a auxiliary list.
         var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
 
         try
@@ -325,7 +325,7 @@ public static class LocalizationHelper
 
     public static List<ResourceDictionary> GetLocalizations()
     {
-        //Copy all MergedDictionarys into a auxiliar list.
+        //Copy all MergedDictionaries into a auxiliary list.
         var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
 
         return dictionaryList.Where(x => x.Source.OriginalString.Contains("StringResource")).ToList();

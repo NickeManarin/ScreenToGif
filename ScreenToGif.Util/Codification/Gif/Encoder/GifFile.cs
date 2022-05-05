@@ -52,7 +52,7 @@ public class GifFile : IDisposable
 
 
     /// <summary>
-    /// The stream which the gif is writen on.
+    /// The stream which the gif is written on.
     /// </summary>
     private Stream InternalStream { get; set; }
 
@@ -92,7 +92,7 @@ public class GifFile : IDisposable
     private int AdjustedTime { get; set; }
 
     /// <summary>
-    /// If a quantizer needs to be contructed only once (for example, to use with PaletteQuantizers), this property will be used.
+    /// If a quantizer needs to be constructed only once (for example, to use with PaletteQuantizers), this property will be used.
     /// </summary>
     private Quantizer GlobalQuantizer { get; set; }
 

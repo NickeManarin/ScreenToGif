@@ -23,7 +23,7 @@ public static class DataGridHelper
 
         if (cell == null)
         {
-            // now try to bring into view and retreive the cell
+            // now try to bring into view and retrieve the cell
             dg.ScrollIntoView(rowContainer, dg.Columns[column]);
             cell = (DataGridCell)presenter.ItemContainerGenerator.ContainerFromIndex(column);
         }

@@ -10,7 +10,7 @@ public class Psd : IDisposable
     #region Properties
 
     /// <summary>
-    /// The stream which the psd is writen on.
+    /// The stream which the psd is written on.
     /// </summary>
     private Stream InternalStream { get; set; }
 
