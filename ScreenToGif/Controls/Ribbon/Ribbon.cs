@@ -33,11 +33,11 @@ public class Ribbon : TabControl
 
     #region Properties
 
-    public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(Modes), typeof(Ribbon), 
+    public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(Modes), typeof(Ribbon),
         new FrameworkPropertyMetadata(Modes.Ribbon, FrameworkPropertyMetadataOptions.AffectsRender, Mode_Changed));
 
     public static DependencyProperty IsDisplayingContentProperty = DependencyProperty.Register(nameof(IsDisplayingContent), typeof(bool), typeof(Ribbon), new PropertyMetadata(true));
-        
+
     public static DependencyProperty OptionsCommandProperty = DependencyProperty.Register(nameof(OptionsCommand), typeof(ICommand), typeof(Ribbon), new PropertyMetadata(null));
 
     public static DependencyProperty FeedbackCommandProperty = DependencyProperty.Register(nameof(FeedbackCommand), typeof(ICommand), typeof(Ribbon), new PropertyMetadata(null));
@@ -114,9 +114,9 @@ public class Ribbon : TabControl
             _tabPanel.PreviewMouseWheel += TabControl_PreviewMouseWheel;
             _tabPanel.PreviewMouseLeftButtonDown += TabPanel_MouseLeftButtonDown;
         }
-            
+
         SelectionChanged += Ribbon_SelectionChanged;
-            
+
         if (_notificationButton != null)
             _notificationButton.Checked += NotificationButton_Checked;
 
@@ -172,7 +172,7 @@ public class Ribbon : TabControl
             KeyFrames = { new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5))) }
         });
 
-        //Decrease the size of the TabItem list. 
+        //Decrease the size of the TabItem list.
         _tabScrollViewer.BeginAnimation(MarginProperty, new ThicknessAnimation(_tabPanel.Margin, new Thickness(0, 0, 0, 0), new Duration(new TimeSpan(0, 0, 0, 1)))
         {
             EasingFunction = new PowerEase { Power = 9 }
@@ -297,7 +297,7 @@ public class Ribbon : TabControl
             KeyFrames = { new DiscreteObjectKeyFrame(Visibility.Collapsed, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0))) }
         });
 
-        //Marging = 0,0,0,5
+        //Margin = 0,0,0,5
         _tabScrollViewer.BeginAnimation(MarginProperty, new ThicknessAnimation(_tabPanel.Margin, new Thickness(0, 0, 0, 2), new Duration(new TimeSpan(0, 0, 0, 1)))
         {
             EasingFunction = new PowerEase { Power = 9 }
