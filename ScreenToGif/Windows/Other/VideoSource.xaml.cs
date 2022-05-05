@@ -395,7 +395,7 @@ public partial class VideoSource : Window
             else
             {
                 await GetVideoDetails();
-                await SucessLoading();
+                await SuccessLoading();
             }
         }
         catch (Exception ex)
@@ -551,13 +551,13 @@ public partial class VideoSource : Window
         _wasPreviewChangedRegistered = true;
 
         //If the video was loaded successfully.
-        await SucessLoading();
+        await SuccessLoading();
     }
 
     /// <summary>
     /// If the previewers loading went okay.
     /// </summary>
-    private async Task SucessLoading()
+    private async Task SuccessLoading()
     {
         //Size Labels
         WidthTextBlock.Text = VideoWidth.ToString("d", CultureInfo.CurrentUICulture);
