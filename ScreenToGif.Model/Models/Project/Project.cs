@@ -10,7 +10,7 @@ public class Project
     /// Just the name to the project file.
     /// </summary>
     public string Name { get; set; }
-        
+
     /// <summary>
     /// The full path of the project (saved by the user).
     /// It's the path + filename + extension.
@@ -38,7 +38,7 @@ public class Project
     /// <summary>
     /// The canvas height of the project.
     /// </summary>
-    public int Heigth { get; set; }
+    public int Height { get; set; }
 
     /// <summary>
     /// The DPI of the X axis of the project.
