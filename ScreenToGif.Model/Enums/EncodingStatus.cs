@@ -16,7 +16,7 @@ public enum EncodingStatus
     Canceled,
 
     /// <summary>
-    /// An error hapenned with the encoding process.
+    /// An error happened with the encoding process.
     /// </summary>
     Error,
 

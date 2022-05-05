@@ -14,7 +14,7 @@ namespace ScreenToGif.Native.Helpers
     /// <summary>
     /// This class allows you to tap keyboard and mouse and / or to detect their activity even when an
     /// application runs in background or does not have any user interface at all. This class raises
-    /// common .NET events with KeyEventArgs and MouseEventArgs so you can easily retrive any information you need.
+    /// common .NET events with KeyEventArgs and MouseEventArgs so you can easily retrieve any information you need.
     /// </summary>
     public class InputHook
     {
@@ -270,7 +270,7 @@ namespace ScreenToGif.Native.Helpers
         /// </summary>
         /// <param name="uninstallMouseHook"><b>true</b> if mouse hook must be uninstalled</param>
         /// <param name="uninstallKeyboardHook"><b>true</b> if keyboard hook must be uninstalled</param>
-        /// <param name="throwExceptions"><b>true</b> if exceptions which occured during uninstalling must be thrown</param>
+        /// <param name="throwExceptions"><b>true</b> if exceptions which occurred during uninstalling must be thrown</param>
         /// <exception cref="Win32Exception">Any windows problem.</exception>
         public void Stop(bool uninstallMouseHook, bool uninstallKeyboardHook, bool throwExceptions)
         {
@@ -577,7 +577,7 @@ namespace ScreenToGif.Native.Helpers
         /// </returns>
         private IntPtr KeyboardHookProc(int code, uint wParam, IntPtr lParam)
         {
-            //Indicates if any of the underlaying events set the e.Handled flag.
+            //Indicates if any of the underlying events set the e.Handled flag.
             var handled = false;
 
             //If it was Ok and there are no listeners.

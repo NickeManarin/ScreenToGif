@@ -51,7 +51,7 @@ namespace ScreenToGif.Native.External
         ///<param name="nYSrc">The topmost y-coordinate of the source rectangle (in pixels).</param>
         ///<param name="dwRop">A raster-operation code.</param>
         ///<returns>
-        ///<c>true</c> if the operation succeedes, <c>false</c> otherwise. To get extended error information, call <see cref="System.Runtime.InteropServices.Marshal.GetLastWin32Error"/>.
+        ///<c>true</c> if the operation succeeds, <c>false</c> otherwise. To get extended error information, call <see cref="System.Runtime.InteropServices.Marshal.GetLastWin32Error"/>.
         ///</returns>
         [DllImport(Constants.Gdi32, EntryPoint = "BitBlt", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]

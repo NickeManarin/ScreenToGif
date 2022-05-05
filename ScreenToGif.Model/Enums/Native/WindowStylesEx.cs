@@ -27,7 +27,7 @@ public enum WindowStylesEx : uint
     OverlappedWindow = (WindowEdge | ClientEdge),
     PaletteWindow = (WindowEdge | ToolWindow | TopMost),
     Layered = 0x00080000,
-    NoInheritLayout = 0x00100000, // Disable inheritence of mirroring by children
+    NoInheritLayout = 0x00100000, // Disable inheritance of mirroring by children
     LayoutRtl = 0x00400000, // Right to left mirroring
     Composited = 0x02000000,
     NoActivate = 0x08000000,
