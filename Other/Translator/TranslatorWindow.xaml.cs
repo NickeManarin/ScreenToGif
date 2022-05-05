@@ -116,7 +116,7 @@ public partial class TranslatorWindow : Window
         }
 
         HeaderLabel.Content = "Downloading resources...";
-        StatusBand.Info("Dowloading selected translations...");
+        StatusBand.Info("Downloading selected translations...");
 
         await DownloadResourcesAsync(baseCulture, specificCulture);
         ShowTranslations(baseCulture, specificCulture);
@@ -217,7 +217,7 @@ public partial class TranslatorWindow : Window
             AddExtension = true,
             CheckFileExists = true,
             Title = "Open a Resource Dictionary",
-            Filter = "Resource Dictionay (*.xaml)|*.xaml;",
+            Filter = "Resource Dictionary (*.xaml)|*.xaml;",
             InitialDirectory = Path.GetFullPath(_tempPath)
         };
 

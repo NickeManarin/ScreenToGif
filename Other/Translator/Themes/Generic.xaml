@@ -345,7 +345,7 @@
                         <n:ImageButton Grid.Column="2" x:Name="SuppressButton" Content="{DynamicResource Vector.Close}" MaxSize="18" 
                                        HorizontalContentAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource Style.Button.NoText}" MinWidth="30">
                             <n:ImageButton.ToolTip>
-                                <ToolTip Content="Supress" Placement="Top" HorizontalOffset="-5"/>
+                                <ToolTip Content="Suppress" Placement="Top" HorizontalOffset="-5"/>
                             </n:ImageButton.ToolTip>
                             <!--<local:ImageButton.Triggers>
                                 <EventTrigger RoutedEvent="Button.Click">
