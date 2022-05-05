@@ -42,9 +42,9 @@ public static class LogWriter
     /// </summary>
     /// <param name="ex">The Exception to write.</param>
     /// <param name="title">The name of the error</param>
-    /// <param name="aditional">Aditional information.</param>
+    /// <param name="additional">Additional information.</param>
     /// <param name="isFallback">Fallbacks to the Documents folder.</param>
-    public static void Log(Exception ex, string title, object aditional = null, bool isFallback = false)
+    public static void Log(Exception ex, string title, object additional = null, bool isFallback = false)
     {
         try
         {
@@ -89,8 +89,8 @@ public static class LogWriter
                     writer.WriteLine($"► Title - {Environment.NewLine}\t{title}");
                     writer.WriteLine(FormattableString.Invariant($"♦ [Version] Date/Hour - {Environment.NewLine}\t[{UserSettings.All?.VersionText}] {DateTime.Now}"));
 
-                    if (aditional != null)
-                        writer.WriteLine($"◄ Aditional - {Environment.NewLine}\t{aditional}");
+                    if (additional != null)
+                        writer.WriteLine($"◄ Additional - {Environment.NewLine}\t{additional}");
 
                     WriteDetails(writer, ex, 1);
 
@@ -106,7 +106,7 @@ public static class LogWriter
         {
             //One last trial.
             if (!isFallback)
-                Log(ex, title, aditional, true);
+                Log(ex, title, additional, true);
         }
     }
 
@@ -114,10 +114,10 @@ public static class LogWriter
     /// Writes the details to the error log on disk.
     /// </summary>
     /// <param name="title">The name of the error</param>
-    /// <param name="aditional">Additional information.</param>
+    /// <param name="additional">Additional information.</param>
     /// <param name="secondAdditional">Additional information.</param>
     /// <param name="isFallback">Fallbacks to the Documents folder.</param>
-    public static void Log(string title, object aditional = null, object secondAdditional = null, bool isFallback = false)
+    public static void Log(string title, object additional = null, object secondAdditional = null, bool isFallback = false)
     {
         try
         {
@@ -162,11 +162,11 @@ public static class LogWriter
                     writer.WriteLine($"► Title - {Environment.NewLine}\t{title}");
                     writer.WriteLine(FormattableString.Invariant($"♦ [Version] Date/Hour - {Environment.NewLine}\t[{UserSettings.All?.VersionText}] {DateTime.Now}"));
 
-                    if (aditional != null)
-                        writer.WriteLine($"◄ Aditional - {Environment.NewLine}\t{aditional}");
+                    if (additional != null)
+                        writer.WriteLine($"◄ Additional - {Environment.NewLine}\t{additional}");
 
                     if (secondAdditional != null)
-                        writer.WriteLine($"◄ Second Aditional - {Environment.NewLine}\t{secondAdditional}");
+                        writer.WriteLine($"◄ Second Additional - {Environment.NewLine}\t{secondAdditional}");
 
                     writer.WriteLine();
                     writer.WriteLine("----------------------------------");
@@ -180,7 +180,7 @@ public static class LogWriter
         {
             //One last trial.
             if (!isFallback)
-                Log(title, aditional, secondAdditional, true);
+                Log(title, additional, secondAdditional, true);
         }
     }
 }

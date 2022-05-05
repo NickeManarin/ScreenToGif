@@ -1,9 +1,9 @@
 using System.IO;
 using System.Text;
 
-namespace ScreenToGif.Util.Codification.Psd.AditionalLayers;
+namespace ScreenToGif.Util.Codification.Psd.AdditionalLayers;
 
-internal class MetadataContent : IAditionalLayerInfo
+internal class MetadataContent : IAdditionalLayerInfo
 {
     internal string Signature { get; }
 
