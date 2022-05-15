@@ -88,24 +88,17 @@
                           LeftClickCommand="{Binding TrayLeftClick}" DoubleLeftClickCommand="{Binding TrayDoubleLeftClick}" MiddleClickCommand="{Binding TrayMiddleClick}">
                 <n:NotifyIcon.ContextMenu>
                     
-                    <!--
-                        DON'T change the names of ExtendedMenuItems here,
-                        because we need apply localizations by replacing "_"
-                        to "."
-                    -->
-                    
                     <ContextMenu>
-                        <n:ExtendedMenuItem x:Name="NewRecording"  Header ="{DynamicResource S.NewRecording}" Icon="{StaticResource Vector.Record.New}" Command="{Binding OpenRecorder}" InputGestureText="{Binding RecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <n:ExtendedMenuItem x:Name="NewWebcamRecording" Header ="{DynamicResource S.NewWebcamRecording}" Icon="{StaticResource Vector.Camera.New}" Command="{Binding OpenWebcamRecorder}" InputGestureText="{Binding WebcamRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <n:ExtendedMenuItem x:Name="NewBoardRecording" Header="{DynamicResource S.NewBoardRecording}" Icon="{StaticResource Vector.Board.New}" Command="{Binding OpenBoardRecorder}" InputGestureText="{Binding BoardRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ExtendedMenuItem Header ="{StaticResource S.NewRecording}" Icon="{StaticResource Vector.Record.New}" Command="{Binding OpenRecorder}" InputGestureText="{Binding RecorderGesture, UpdateSourceTrigger=PropertyChanged}" Tag="S.NewRecording"/>
+                        <n:ExtendedMenuItem Header ="{StaticResource S.NewWebcamRecording}" Icon="{StaticResource Vector.Camera.New}" Command="{Binding OpenWebcamRecorder}" InputGestureText="{Binding WebcamRecorderGesture, UpdateSourceTrigger=PropertyChanged}" Tag="S.NewWebcamRecording"/>
+                        <n:ExtendedMenuItem Header="{StaticResource S.NewBoardRecording}" Icon="{StaticResource Vector.Board.New}" Command="{Binding OpenBoardRecorder}" InputGestureText="{Binding BoardRecorderGesture, UpdateSourceTrigger=PropertyChanged}" Tag="S.NewBoardRecording"/>
                         <Separator/>
-                        <n:ExtendedMenuItem x:Name="StartUp_Editor" Header="{DynamicResource S.StartUp.Editor}" Icon="{StaticResource Vector.Editor}" Command="{Binding OpenEditor}" InputGestureText="{Binding EditorGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <n:ExtendedMenuItem x:Name="StartUp_Options" Header="{DynamicResource S.StartUp.Options}" Icon="{StaticResource Vector.Options}" Command="{Binding OpenOptions}" InputGestureText="{Binding OptionsGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <n:ExtendedMenuItem x:Name="Feedback_Feedback" Header="{DynamicResource S.Feedback.Feedback}" Icon="{StaticResource Vector.Application}" Command="{Binding OpenFeedback}"/>
-                        <n:ExtendedMenuItem x:Name="Troubleshoot_Title" Header="{DynamicResource S.Troubleshoot.Title}" Icon="{StaticResource Vector.Warning}" Command="{Binding OpenTroubleshoot}"/>
+                        <n:ExtendedMenuItem Header="{StaticResource S.StartUp.Editor}" Icon="{StaticResource Vector.Editor}" Command="{Binding OpenEditor}" InputGestureText="{Binding EditorGesture, UpdateSourceTrigger=PropertyChanged}" Tag="S.StartUp.Editor"/>
+                        <n:ExtendedMenuItem Header="{StaticResource S.StartUp.Options}" Icon="{StaticResource Vector.Options}" Command="{Binding OpenOptions}" InputGestureText="{Binding OptionsGesture, UpdateSourceTrigger=PropertyChanged}" Tag="S.StartUp.Options"/>
+                        <n:ExtendedMenuItem Header="{StaticResource S.Feedback.Feedback}" Icon="{StaticResource Vector.Application}" Command="{Binding OpenFeedback}" Tag="S.Feedback.Feedback"/>
+                        <n:ExtendedMenuItem Header="{StaticResource S.Troubleshoot.Title}" Icon="{StaticResource Vector.Warning}" Command="{Binding OpenTroubleshoot}" Tag="S.Troubleshoot.Title"/>
                         <Separator/>
-                        <n:ExtendedMenuItem x:Name="Exit" Header="{DynamicResource S.Exit}" Icon="{StaticResource Vector.Close}" Command="{Binding ExitApplication}" 
-                                            InputGestureText="{Binding ExitGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ExtendedMenuItem Header="{StaticResource S.Exit}" Icon="{StaticResource Vector.Close}" Command="{Binding ExitApplication}" InputGestureText="{Binding ExitGesture, UpdateSourceTrigger=PropertyChanged}" Tag="S.Exit"/>
                     </ContextMenu>
                 </n:NotifyIcon.ContextMenu>
             </n:NotifyIcon>

@@ -690,16 +690,8 @@ public partial class Options : Window, INotification
         try
         {
             LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
-             
-             //Apply for the Context Menu, because for some purpose,
-             //DynamicResource doesn't work on Headers of MenuItems
-             if (App.NotifyIcon != null)
-             {
-                 foreach (ExtendedMenuItem mItem in App.NotifyIcon.ContextMenu.Items.OfType<ExtendedMenuItem>())
-                 {
-                        mItem.Header = LocalizationHelper.Get("S."+ mItem.Name.Replace("_", "."));
-                 }
-             }
+
+            ForceUpdateSystemTray();
         }
         catch (Exception ex)
         {
@@ -761,6 +753,17 @@ public partial class Options : Window, INotification
         {
             LogWriter.Log(ex, "Open MailTo");
         }
+    }
+
+    private void ForceUpdateSystemTray()
+    {
+        if (App.NotifyIcon == null || App.NotifyIcon.ContextMenu == null)
+            return;
+
+        var items = App.NotifyIcon.ContextMenu.Items.OfType<ExtendedMenuItem>();
+
+        foreach (var item in items)
+            item.Header = LocalizationHelper.Get((string) item.Tag);
     }
 
     #endregion
