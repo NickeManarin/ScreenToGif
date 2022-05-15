@@ -61,7 +61,7 @@ public class AwareTabItem : TabItem
     /// <summary>
     /// This method is called when any of our dependency properties change.
     /// </summary>
-    /// <param name="d">Depedency Object</param>
+    /// <param name="d">Dependency Object</param>
     /// <param name="e">EventArgs</param>
     private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -71,7 +71,7 @@ public class AwareTabItem : TabItem
     /// <summary>
     /// This method is called when any of our dependency properties change.
     /// </summary>
-    /// <param name="d">Depedency Object</param>
+    /// <param name="d">Dependency Object</param>
     /// <param name="e">EventArgs</param>
     private static void ShowBackground_OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {

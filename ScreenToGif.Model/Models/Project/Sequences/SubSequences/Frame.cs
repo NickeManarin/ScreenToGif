@@ -3,7 +3,7 @@ namespace ScreenToGif.Domain.Models.Project.Sequences.SubSequences;
 public class Frame
 {
     /// <summary>
-    /// The time, in miliseconds that the frame should be visible.
+    /// The time, in milliseconds that the frame should be visible.
     /// </summary>
     public uint Delay { get; set; }
 

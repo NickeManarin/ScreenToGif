@@ -335,7 +335,7 @@ internal class DrawingCanvas : Control
                     e.Handled = true;
                 break;
 
-            //TODO: Cntrl + C, Ctrl + V, 
+            //TODO: Cntrl + C, Ctrl + V,
         }
 
         base.OnPreviewKeyDown(e);
@@ -645,7 +645,7 @@ internal class DrawingCanvas : Control
                 Width = Math.Max(canvas.StrokeThickness, 1),
             };
         }
-            
+
         if (canvas._selectedShapes == null)
             return;
 
@@ -736,7 +736,7 @@ internal class DrawingCanvas : Control
             var shape = new Polyline
             {
                 Stroke = new SolidColorBrush(stroke.DrawingAttributes.Color),
-                StrokeThickness = StrokeThickness, //How? These strokes can recieve pressure info.
+                StrokeThickness = StrokeThickness, //How? These strokes can receive pressure info.
                 StrokeDashArray = StrokeDashArray,
                 FillRule = FillRule.EvenOdd,
                 Stretch = Stretch.Fill

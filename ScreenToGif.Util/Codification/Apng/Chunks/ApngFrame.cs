@@ -42,12 +42,12 @@ public class ApngFrame
     internal byte BitDepth { get; set; }
 
     /// <summary>
-    /// The whole image data, including auxiliar chunks.
+    /// The whole image data, including auxiliary chunks.
     /// </summary>
     public byte[] ImageData { get; set; }
 
     /// <summary>
-    /// The delay of the frame in miliseconds.
+    /// The delay of the frame in milliseconds.
     /// </summary>
     public int Delay { get; set; }
 

@@ -9,7 +9,7 @@ public static class IdentityHelper
         get
         {
 #if DEPENDANT_SINGLE
-            //Dependant, Single File
+            //Dependent, Single File
             return ApplicationTypes.DependantSingle;
 #elif FULL_SINGLE
             //Full, Single File
@@ -31,7 +31,7 @@ public static class IdentityHelper
         get
         {
 #if DEPENDANT_SINGLE
-            return "Framework Dependant, Single File";
+            return "Framework Dependent, Single File";
 #elif FULL_SINGLE
             return "Full, Single File";
 #elif FULL_MULTI_MSIX

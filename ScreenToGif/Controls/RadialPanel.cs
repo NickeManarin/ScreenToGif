@@ -16,7 +16,7 @@ public class RadialPanel : Panel
     {
         foreach (UIElement elem in Children)
         {
-            //Give Infinite size as the avaiable size for all the children.
+            //Give Infinite size as the available size for all the children.
             elem.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
         }
 
@@ -36,7 +36,7 @@ public class RadialPanel : Panel
         //Degrees converted to Radian by multiplying with PI/180
         var incrementalAngularSpace = (360.0 / Children.Count) * (Math.PI / 180);
 
-        //An approximate radii based on the avialable size , obviusly a better approach is needed here.
+        //An approximate radii based on the available size , obviusly a better approach is needed here.
         var radiusX = finalSize.Width / 2.4;
         var radiusY = finalSize.Height / 2.4;
 
@@ -45,7 +45,7 @@ public class RadialPanel : Panel
             //Calculate the point on the circle for the element.
             var childPoint = new Point(Math.Cos(angle) * radiusX, -Math.Sin(angle) * radiusY);
 
-            //Offsetting the point to the Avalable rectangular area which is FinalSize.
+            //Offsetting the point to the available rectangular area which is FinalSize.
             var actualChildPoint = new Point(finalSize.Width / 2 + childPoint.X - elem.DesiredSize.Width / 2, finalSize.Height / 2 + childPoint.Y - elem.DesiredSize.Height / 2);
 
             //Call Arrange method on the child element by giving the calculated point as the placementPoint.

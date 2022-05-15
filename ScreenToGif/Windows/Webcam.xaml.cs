@@ -53,7 +53,7 @@ public partial class Webcam
     private int _offsetX;
 
     /// <summary>
-    /// The amout of pixels of the window border. Height.
+    /// The amount of pixels of the window border. Height.
     /// </summary>
     private int _offsetY;
 
@@ -108,7 +108,7 @@ public partial class Webcam
 
         for (var i = 0; i < _filters.VideoInputDevices.Count; i++)
             devicesList.Add(_filters.VideoInputDevices[i].Name);
-            
+
         return devicesList;
     }
 
@@ -147,7 +147,7 @@ public partial class Webcam
 
         if (source?.CompositionTarget != null)
             _scale = source.CompositionTarget.TransformToDevice.M11;
-            
+
         #endregion
 
         #region Window Offset
@@ -471,7 +471,7 @@ public partial class Webcam
 
         //if (!UserSettings.All.SnapshotMode)
         {
-            //Only display the Record text when not in snapshot mode. 
+            //Only display the Record text when not in snapshot mode.
             Title = "ScreenToGif";
             Stage = RecorderStages.Stopped;
         }
@@ -499,7 +499,7 @@ public partial class Webcam
 
             if (Stage != RecorderStages.Stopped && Stage != RecorderStages.PreStarting && Project.Any)
             {
-                //If not Already Stoped nor Pre Starting and FrameCount > 0, Stops
+                //If not Already Stopped nor Pre Starting and FrameCount > 0, Stops
                 Close();
             }
             else if ((Stage == RecorderStages.PreStarting || Stage == RecorderStages.Snapping) && !Project.Any)

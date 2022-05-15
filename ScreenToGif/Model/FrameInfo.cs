@@ -17,7 +17,7 @@ public class FrameInfo : IFrame
     #region Constructors
 
     /// <summary>
-    /// The parameterless contructor.
+    /// The parameterless constructor.
     /// </summary>
     public FrameInfo()
     {}
@@ -208,7 +208,7 @@ public class FrameInfo : IFrame
     /// <summary>
     /// This works as a migration method for mouse events. Before storing the button
     /// type only bool was stored to mark the clicks. During opening old project it will
-    /// be converted to Left mouse button click loosing some info unfortunately.
+    /// be converted to Left mouse button click losing some info unfortunately.
     /// </summary>
     /// <param name="context"></param>
     [OnDeserialized]

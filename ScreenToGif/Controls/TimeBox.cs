@@ -467,7 +467,7 @@ public class TimeBox : ExtendedTextBox
 
             Selected = aux;
         }
-            
+
         UpdateSource();
 
         base.OnPreviewLostKeyboardFocus(e);
@@ -580,10 +580,10 @@ public class TimeBox : ExtendedTextBox
         prop?.UpdateSource();
     }
 
-    private TimeSpan Change(TimeSpan? current, int delta, TimeSpan ammount)
+    private TimeSpan Change(TimeSpan? current, int delta, TimeSpan amount)
     {
-        return delta > 0 ? current?.Add(ammount) ?? Maximum ?? new TimeSpan(0, 23, 59, 59, 999) :
-            current?.Subtract(ammount) ?? Minimum ?? new TimeSpan(0, 0, 0);
+        return delta > 0 ? current?.Add(amount) ?? Maximum ?? new TimeSpan(0, 23, 59, 59, 999) :
+            current?.Subtract(amount) ?? Minimum ?? new TimeSpan(0, 0, 0);
     }
 
     #endregion

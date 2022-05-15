@@ -1,4 +1,4 @@
-using ScreenToGif.Util.Codification.Psd.AditionalLayers;
+using ScreenToGif.Util.Codification.Psd.AdditionalLayers;
 using System.IO;
 using System.Text;
 
@@ -18,7 +18,7 @@ internal class LayerRecord : IPsdContent
 
     public string Name { get; set; }
 
-    public List<IAditionalLayerInfo> AditionalInfo { get; set; } = new();
+    public List<IAdditionalLayerInfo> AdditionalInfo { get; set; } = new();
 
     public long Length => Content?.Length ?? 0;
 
@@ -50,14 +50,14 @@ internal class LayerRecord : IPsdContent
                 stream.WriteByte(0); //Filler, 1 byte
 
                 var name = StreamHelpers.GetPascalStringAsBytes(Encoding.Unicode.GetBytes(Name));
-                var aditionalLayerInfo = AditionalInfo.SelectMany(s => s.Content).ToArray();
+                var additionalLayerInfo = AdditionalInfo.SelectMany(s => s.Content).ToArray();
 
-                stream.WriteUInt32(BitHelper.ConvertEndian((uint)(4 + 4 + name.Length + aditionalLayerInfo.Length))); //Extra data length, 4 bytes.
+                stream.WriteUInt32(BitHelper.ConvertEndian((uint)(4 + 4 + name.Length + additionalLayerInfo.Length))); //Extra data length, 4 bytes.
                 stream.WriteInt32(BitHelper.ConvertEndian(0)); //Layer mask size, 4 bytes.
                 stream.WriteInt32(BitHelper.ConvertEndian(0)); //Blending ranges size, 4 bytes.
 
                 stream.WriteBytes(name); //Layer name, pascal string as bytes.
-                stream.WriteBytes(aditionalLayerInfo); //List of aditional layer info, XX bytes.
+                stream.WriteBytes(additionalLayerInfo); //List of additional layer info, XX bytes.
 
                 //Padding.
 

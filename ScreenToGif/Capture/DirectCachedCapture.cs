@@ -186,7 +186,7 @@ internal class DirectCachedCapture : DirectImageCapture
         {
             try
             {
-                //Only release the frame if there was a sucess in capturing it.
+                //Only release the frame if there was a success in capturing it.
                 if (res.Success)
                     DuplicatedOutput.ReleaseFrame();
             }
@@ -281,7 +281,7 @@ internal class DirectCachedCapture : DirectImageCapture
                         //        top = Math.Max(dirtyRectangles[dirtyIndex].Top, Top - OffsetTop);
                         //        bottom = Math.Min(dirtyRectangles[dirtyIndex].Bottom, Top + Height - OffsetTop);
 
-                        //        //left = Math.Min(dirtyRectangles[dirtyIndex].Bottom, Top + Height - OffsetTop); 
+                        //        //left = Math.Min(dirtyRectangles[dirtyIndex].Bottom, Top + Height - OffsetTop);
                         //        //right = Math.Max(dirtyRectangles[dirtyIndex].Top, Top - OffsetTop);
                         //        //top = Math.Max(dirtyRectangles[dirtyIndex].Left, Left - OffsetLeft);
                         //        //bottom = Math.Min(dirtyRectangles[dirtyIndex].Right, Left + Width - OffsetLeft);
@@ -292,10 +292,10 @@ internal class DirectCachedCapture : DirectImageCapture
                         //    case DisplayModeRotation.Rotate180:
                         //    {
                         //        //TODO:
-                        //        left = Math.Max(dirtyRectangles[dirtyIndex].Top + OffsetTop, Top); 
-                        //        right = Math.Min(dirtyRectangles[dirtyIndex].Bottom + OffsetTop, Top + Height); 
+                        //        left = Math.Max(dirtyRectangles[dirtyIndex].Top + OffsetTop, Top);
+                        //        right = Math.Min(dirtyRectangles[dirtyIndex].Bottom + OffsetTop, Top + Height);
                         //        top = Math.Min(dirtyRectangles[dirtyIndex].Right + OffsetLeft, Left + Width);
-                        //        bottom = Math.Max(dirtyRectangles[dirtyIndex].Left + OffsetLeft, Left); 
+                        //        bottom = Math.Max(dirtyRectangles[dirtyIndex].Left + OffsetLeft, Left);
                         //        break;
                         //    }
 
@@ -398,7 +398,7 @@ internal class DirectCachedCapture : DirectImageCapture
         {
             try
             {
-                //Only release the frame if there was a sucess in capturing it.
+                //Only release the frame if there was a success in capturing it.
                 if (res.Success)
                     DuplicatedOutput.ReleaseFrame();
             }
@@ -433,7 +433,7 @@ internal class DirectCachedCapture : DirectImageCapture
                 resource.Dispose();
                 return FrameCount;
 
-                //TODO: if only the mouse changed, but there's no frame accumulated, but there's data in the texture from the previous frame, I need to merge with the cursor and add to the list. 
+                //TODO: if only the mouse changed, but there's no frame accumulated, but there's data in the texture from the previous frame, I need to merge with the cursor and add to the list.
             }
 
             //Saves the most recent capture time.
@@ -524,7 +524,7 @@ internal class DirectCachedCapture : DirectImageCapture
         {
             try
             {
-                //Only release the frame if there was a sucess in capturing it.
+                //Only release the frame if there was a success in capturing it.
                 if (res.Success)
                     DuplicatedOutput.ReleaseFrame();
             }
@@ -651,7 +651,7 @@ internal class DirectCachedCapture : DirectImageCapture
         {
             try
             {
-                //Only release the frame if there was a sucess in capturing it.
+                //Only release the frame if there was a success in capturing it.
                 if (res.Success)
                     DuplicatedOutput.ReleaseFrame();
             }
@@ -686,7 +686,7 @@ internal class DirectCachedCapture : DirectImageCapture
                 resource.Dispose();
                 return FrameCount;
 
-                //TODO: if only the mouse changed, but there's no frame accumulated, but there's data in the texture from the previous frame, I need to merge with the cursor and add to the list. 
+                //TODO: if only the mouse changed, but there's no frame accumulated, but there's data in the texture from the previous frame, I need to merge with the cursor and add to the list.
             }
 
             //Saves the most recent capture time.
@@ -766,7 +766,7 @@ internal class DirectCachedCapture : DirectImageCapture
         {
             try
             {
-                //Only release the frame if there was a sucess in capturing it.
+                //Only release the frame if there was a success in capturing it.
                 if (res.Success)
                     DuplicatedOutput.ReleaseFrame();
             }

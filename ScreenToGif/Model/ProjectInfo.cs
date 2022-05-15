@@ -82,7 +82,7 @@ public class ProjectInfo
     public string FullPath => Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Recording", RelativePath);
 
     /// <summary>
-    /// Full path to the serialized project file. 
+    /// Full path to the serialized project file.
     /// </summary>
     public string ProjectPath => Path.Combine(FullPath, "Project.json");
 
@@ -115,7 +115,7 @@ public class ProjectInfo
     /// The latest index of the current list of frames, or -1.
     /// </summary>
     public int LatestIndex => Frames?.Count - 1 ?? -1;
-        
+
 
     #region Methods
 
@@ -191,7 +191,7 @@ public class ProjectInfo
 
     public void CreateMutex()
     {
-        //TODO: Validate the possibility of openning this project.
+        //TODO: Validate the possibility of opening this project.
         //I need to make sure that i'll release the mutexes.
 
         MutexList.Add(RelativePath);
@@ -248,8 +248,8 @@ public class ProjectInfo
                         export.Frames.Add(new ExportFrame
                         {
                             DataPosition = pos,
-                            DataLength = image.Pixels.LongLength, 
-                            Delay = info.Delay, 
+                            DataLength = image.Pixels.LongLength,
+                            Delay = info.Delay,
                             Rect = new Int32Rect(0,0, image.Width, image.Height),
                             ImageDepth = image.Depth
                         });
@@ -336,7 +336,7 @@ public class ProjectInfo
             Directory.CreateDirectory(export.Path);
 
         #endregion
-            
+
         if (useBytes)
         {
             export.Frames = new List<ExportFrame>();

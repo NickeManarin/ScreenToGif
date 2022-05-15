@@ -13,9 +13,9 @@ public static class LogWriter
     /// </summary>
     /// <param name="ex">The Exception to write.</param>
     /// <param name="title">The name of the error</param>
-    /// <param name="aditional">Aditional information.</param>
+    /// <param name="additional">Additional information.</param>
     /// <param name="isFallback">Fallbacks to the Documents folder.</param>
-    public static void Log(Exception ex, string title, object aditional = null, bool isFallback = false)
+    public static void Log(Exception ex, string title, object additional = null, bool isFallback = false)
     {
         try
         {
@@ -69,8 +69,8 @@ public static class LogWriter
                     if (bad != null)
                         writer.WriteLine($"► Fuslog - {Environment.NewLine}\t{bad.FusionLog}");
 
-                    if (aditional != null)
-                        writer.WriteLine($"◄ Aditional - {Environment.NewLine}\t{aditional}");
+                    if (additional != null)
+                        writer.WriteLine($"◄ Additional - {Environment.NewLine}\t{additional}");
 
                     writer.WriteLine($"♠ StackTrace - {Environment.NewLine}{ex.StackTrace}");
 
@@ -116,7 +116,7 @@ public static class LogWriter
         {
             //One last trial.
             if (!isFallback)
-                Log(ex, title, aditional, true);
+                Log(ex, title, additional, true);
         }
     }
 }

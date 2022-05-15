@@ -106,7 +106,7 @@ public partial class Options : Window, INotification
         StoreTextBlock.Visibility = Visibility.Visible;
 #elif FULL_MULTI_MSIX
         PortableUpdateCheckBox.Visibility = Visibility.Collapsed;
-        AdminUpdateCheckBox.Visibility = Visibility.Collapsed;     
+        AdminUpdateCheckBox.Visibility = Visibility.Collapsed;
 #endif
     }
 
@@ -1481,7 +1481,7 @@ public partial class Options : Window, INotification
         #endregion
 #endif
     }
-    
+
     private void LocationTextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
         var box = sender as TextBox;
@@ -1587,7 +1587,7 @@ public partial class Options : Window, INotification
 
         CheckTools(false, true);
     }
-    
+
 
     private void BrowseFfmpeg_CanExecute(object sender, CanExecuteRoutedEventArgs e)
     {
@@ -1598,7 +1598,7 @@ public partial class Options : Window, INotification
     {
         e.CanExecute = IsLoaded && GifskiImageCard.Status == ExtrasStatus.Ready;
     }
-    
+
     private void BrowseFfmpeg_Execute(object sender, ExecutedRoutedEventArgs e)
     {
         try
@@ -1642,7 +1642,7 @@ public partial class Options : Window, INotification
             LogWriter.Log(ex, "Error while trying to browse the Gifski folder.");
         }
     }
-    
+
 
     private void ExtrasHyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
     {
@@ -1707,7 +1707,7 @@ public partial class Options : Window, INotification
         }
         catch (Exception ex)
         {
-            LogWriter.Log(ex, "Checking the existance of external tools.");
+            LogWriter.Log(ex, "Checking the existence of external tools.");
             StatusBand.Error("It was not possible to check the existence of the external tools.");
         }
     }
@@ -1724,8 +1724,8 @@ public partial class Options : Window, INotification
         }
         catch (Exception ex)
         {
-            LogWriter.Log(ex, "Error • Openning the Donation website");
-            ErrorDialog.Ok(Title, "Error openning the donation website", ex.Message, ex);
+            LogWriter.Log(ex, "Error • Opening the Donation website");
+            ErrorDialog.Ok(Title, "Error opening the donation website", ex.Message, ex);
         }
     }
 
@@ -1737,9 +1737,9 @@ public partial class Options : Window, INotification
         }
         catch (Exception ex)
         {
-            LogWriter.Log(ex, "Error • Openning the Donation website");
+            LogWriter.Log(ex, "Error • Opening the Donation website");
 
-            ErrorDialog.Ok(Title, "Error openning the donation website", ex.Message, ex);
+            ErrorDialog.Ok(Title, "Error opening the donation website", ex.Message, ex);
         }
     }
 
@@ -1753,9 +1753,9 @@ public partial class Options : Window, INotification
         }
         catch (Exception ex)
         {
-            LogWriter.Log(ex, "Error • Openning the Donation website");
+            LogWriter.Log(ex, "Error • Opening the Donation website");
 
-            ErrorDialog.Ok(LocalizationHelper.Get("S.Options.Title"), "Error openning the donation website", ex.Message, ex);
+            ErrorDialog.Ok(LocalizationHelper.Get("S.Options.Title"), "Error opening the donation website", ex.Message, ex);
         }
     }
 
@@ -1767,8 +1767,8 @@ public partial class Options : Window, INotification
         }
         catch (Exception ex)
         {
-            LogWriter.Log(ex, "Error • Openning the Patreon website");
-            ErrorDialog.Ok(Title, "Error openning the Patreon website", ex.Message, ex);
+            LogWriter.Log(ex, "Error • Opening the Patreon website");
+            ErrorDialog.Ok(Title, "Error opening the Patreon website", ex.Message, ex);
         }
     }
 
@@ -1780,9 +1780,9 @@ public partial class Options : Window, INotification
         }
         catch (Exception ex)
         {
-            LogWriter.Log(ex, "Error • Openning the Flattr website");
+            LogWriter.Log(ex, "Error • Opening the Flattr website");
 
-            ErrorDialog.Ok(LocalizationHelper.Get("S.Options.Title"), "Error openning the Flattr website", ex.Message, ex);
+            ErrorDialog.Ok(LocalizationHelper.Get("S.Options.Title"), "Error opening the Flattr website", ex.Message, ex);
         }
     }
 
@@ -1794,8 +1794,8 @@ public partial class Options : Window, INotification
         }
         catch (Exception ex)
         {
-            LogWriter.Log(ex, "Error • Openning the Steam website");
-            ErrorDialog.Ok(Title, "Error openning the Steam website", ex.Message, ex);
+            LogWriter.Log(ex, "Error • Opening the Steam website");
+            ErrorDialog.Ok(Title, "Error opening the Steam website", ex.Message, ex);
         }
     }
 
@@ -1807,8 +1807,8 @@ public partial class Options : Window, INotification
         }
         catch (Exception ex)
         {
-            LogWriter.Log(ex, "Error • Openning the GOG website");
-            ErrorDialog.Ok(Title, "Error openning the GOG website", ex.Message, ex);
+            LogWriter.Log(ex, "Error • Opening the GOG website");
+            ErrorDialog.Ok(Title, "Error opening the GOG website", ex.Message, ex);
         }
     }
 
@@ -1820,8 +1820,8 @@ public partial class Options : Window, INotification
         }
         catch (Exception ex)
         {
-            LogWriter.Log(ex, "Error • Openning the Ko-fi website");
-            ErrorDialog.Ok(Title, "Error openning the Ko-fi website", ex.Message, ex);
+            LogWriter.Log(ex, "Error • Opening the Ko-fi website");
+            ErrorDialog.Ok(Title, "Error opening the Ko-fi website", ex.Message, ex);
         }
     }
 
@@ -1843,8 +1843,8 @@ public partial class Options : Window, INotification
         }
         catch (Exception ex)
         {
-            LogWriter.Log(ex, "Error • Openning the donation website");
-            ErrorDialog.Ok(Title, "Error openning the donation website", ex.Message, ex);
+            LogWriter.Log(ex, "Error • Opening the donation website");
+            ErrorDialog.Ok(Title, "Error opening the donation website", ex.Message, ex);
         }
     }
 
@@ -1926,7 +1926,7 @@ public partial class Options : Window, INotification
             e.Cancel = true;
             return;
         }
-        
+
         #endregion
 
         Global.IgnoreHotKeys = false;

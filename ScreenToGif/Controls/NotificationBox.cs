@@ -20,7 +20,7 @@ public class NotificationBox : ItemsControl
     #region Variables
 
     /// <summary>
-    /// The start point of the draging operation.
+    /// The start point of the dragging operation.
     /// </summary>
     private Point _dragStart = new Point(0, 0);
 
@@ -213,7 +213,7 @@ public class NotificationBox : ItemsControl
             actual.Text = item.Text;
             //TODO: Should this exist?
         }
-            
+
         CommandManager.InvalidateRequerySuggested();
         GC.Collect();
 
@@ -278,7 +278,7 @@ public class NotificationBox : ItemsControl
 
         HasAnyEncoding = Items.OfType<EncoderListViewItem>().Any();
         HasAnyActiveEncoding = Items.OfType<EncoderListViewItem>().Any(a => a.Status == EncodingStatus.Processing);
-            
+
         return enc;
     }
 
@@ -409,10 +409,10 @@ public class NotificationBox : ItemsControl
 
         //Removes view.
         var enc = Items.OfType<EncoderListViewItem>().FirstOrDefault(w => w.Id == id);
-            
+
         if (enc == null)
             return null;
-            
+
         enc.CancelClicked -= CancelEncoding_Clicked;
         enc.PreviewMouseLeftButtonDown -= Encoding_PreviewMouseLeftButtonDown;
         enc.PreviewMouseLeftButtonUp -= Encoding_PreviewMouseLeftButtonUp;

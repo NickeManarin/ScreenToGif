@@ -1,6 +1,6 @@
-namespace ScreenToGif.Util.Codification.Psd.AditionalLayers;
+namespace ScreenToGif.Util.Codification.Psd.AdditionalLayers;
 
-interface IMetadata : IAditionalLayerInfo
+interface IMetadata : IAdditionalLayerInfo
 {
     string Signature { get; }
 

@@ -76,14 +76,14 @@ public class EditorViewModel : BaseViewModel
 
     public EditorViewModel()
     {
-            
+
     }
 
     #region Methods
 
     internal void Init()
     {
-        RenderedImage = new WriteableBitmap(Project.Width, Project.Heigth, Project.HorizontalDpi, Project.VerticalDpi, PixelFormats.Bgra32, null);
+        RenderedImage = new WriteableBitmap(Project.Width, Project.Height, Project.HorizontalDpi, Project.VerticalDpi, PixelFormats.Bgra32, null);
     }
 
     internal void Render()
@@ -105,7 +105,7 @@ public class EditorViewModel : BaseViewModel
     //How are the frames/data going to be stored in the disk?
     //Project file for the user + opened project should have a cache
     //  Project file for user: I'll need to create a file spec.
-    //  Cache folder for the app: 
+    //  Cache folder for the app:
 
     //As a single cache for each track? (storing as pixel array, to improve performance)
     //I'll need a companion json with positions and other details.

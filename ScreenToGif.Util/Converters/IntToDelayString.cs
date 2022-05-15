@@ -6,7 +6,7 @@ using System.Windows.Data;
 namespace ScreenToGif.Util.Converters;
 
 /// <summary>
-/// Converts a Integer to a String formated as Delay (Example: 1 ms)
+/// Converts a Integer to a String formatted as Delay (Example: 1 ms)
 /// </summary>
 public class IntToDelayString : IValueConverter
 {

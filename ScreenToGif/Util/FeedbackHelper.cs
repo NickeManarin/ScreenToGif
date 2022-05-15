@@ -22,7 +22,7 @@ internal static class FeedbackHelper
             return false;
 
         //Please, don't try to log with this email and password. :/
-        //Everytime someone does this, I have to change the password and the Feedback feature stops working until I update the app.
+        //Every time someone does this, I have to change the password and the Feedback feature stops working until I update the app.
         var passList = (Secret.Password ?? "").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (var t in passList)
@@ -40,7 +40,7 @@ internal static class FeedbackHelper
         {
             using var smtp = new SmtpClient
             {
-                Timeout = 6 * 60 * 1000, //Minutes, seconds, miliseconds
+                Timeout = 6 * 60 * 1000, //Minutes, seconds, milliseconds
                 Port = Secret.Port,
                 Host = Secret.Host,
                 EnableSsl = true,

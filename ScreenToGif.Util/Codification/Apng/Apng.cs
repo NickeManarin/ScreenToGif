@@ -33,7 +33,7 @@ public class Apng : IDisposable
     #region Properties
 
     /// <summary>
-    /// The stream which the apgn is writen on.
+    /// The stream which the apng is written on.
     /// </summary>
     private Stream InternalStream { get; set; }
 
@@ -48,7 +48,7 @@ public class Apng : IDisposable
     internal int RepeatCount { get; set; } = 0;
 
     /// <summary>
-    /// True if it's the first frame of the apgn.
+    /// True if it's the first frame of the apng.
     /// </summary>
     private bool IsFirstFrame { get; set; } = true;
 
@@ -72,7 +72,7 @@ public class Apng : IDisposable
     public ActlChunk Actl { get; private set; }
 
     /// <summary>
-    /// All the chunks of the Png, except IHDR, acTL and IEND. 
+    /// All the chunks of the Png, except IHDR, acTL and IEND.
     /// </summary>
     internal List<Chunk> Chunks { get; } = new();
 
@@ -156,7 +156,7 @@ public class Apng : IDisposable
                     InternalStream.WriteUInt32(BitHelper.ConvertEndian(CrcHelper.Calculate(InternalStream.PeekBytes(InternalStream.Position - (data.Length + 8), data.Length + 8)))); //CRC, 4 bytes.
                 }
             }
-                
+
             IsFirstFrame = false;
         }
     }
@@ -213,7 +213,7 @@ public class Apng : IDisposable
             //End reached, prematurely or not.
             if (chunk == null || chunk.ChunkType == "IEND")
                 break;
-                
+
             //Chunks can be grouped into frames.
             if (new[] {"fcTL", "fdAT", "IDAT"}.Contains(chunk.ChunkType))
             {
@@ -269,7 +269,7 @@ public class Apng : IDisposable
                 //Image header chunk. 25 bytes.
                 Ihdr.Write(stream, fctl.Width, fctl.Height);
 
-                //Any other auxiliar chunks.
+                //Any other auxiliary chunks.
                 foreach (var other in otherChunks)
                     other.Write(stream);
 

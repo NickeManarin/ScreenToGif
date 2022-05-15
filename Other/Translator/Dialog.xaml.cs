@@ -10,7 +10,7 @@ namespace Translator;
 public partial class Dialog : Window
 {
     /// <summary>
-    /// Default contructor.
+    /// Default constructor.
     /// </summary>
     public Dialog()
     {

@@ -23,7 +23,7 @@ public static class DataGridHelper
 
         if (cell == null)
         {
-            // now try to bring into view and retreive the cell
+            // now try to bring into view and retrieve the cell
             dg.ScrollIntoView(rowContainer, dg.Columns[column]);
             cell = (DataGridCell)presenter.ItemContainerGenerator.ContainerFromIndex(column);
         }
@@ -110,7 +110,7 @@ public static class DataGridHelper
 
     public static bool Sort(this DataGrid grid, ListSortDirection direction, string property, string second = null)
     {
-        //If there's already a sort defind in another property.
+        //If there's already a sort defined in another property.
         foreach (var column in grid.Columns)
         {
             if (column.SortDirection.HasValue)

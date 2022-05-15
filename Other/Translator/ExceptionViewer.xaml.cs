@@ -31,7 +31,7 @@ public partial class ExceptionViewer
         if (ex.TargetSite != null)
             SourceTextBox.Text += "." + ex.TargetSite.Name;
 
-        //If there's aditional details.
+        //If there's additional details.
         if (!string.IsNullOrEmpty(ex.HelpLink))
             StackTextBox.Text += Environment.NewLine + Environment.NewLine + ex.HelpLink;
 

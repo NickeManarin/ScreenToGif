@@ -112,7 +112,7 @@ public class Other
         if (ignoreNone && key == Key.None)
             return "";
 
-        //Get the modifers as text.
+        //Get the modifiers as text.
         var modifiersText = Enum.GetValues(modifier.GetType()).OfType<ModifierKeys>()
             .Where(x => x != ModifierKeys.None && modifier.HasFlag(x))
             .Aggregate("", (current, mod) =>
@@ -213,7 +213,7 @@ public class Other
 
     public static string GetSelectKeyText(ModifierKeys modifier = ModifierKeys.None)
     {
-        //Get the modifers as text.
+        //Get the modifiers as text.
         var modifiersText = Enum.GetValues(modifier.GetType()).OfType<ModifierKeys>()
             .Where(x => x != ModifierKeys.None && modifier.HasFlag(x))
             .Aggregate("", (current, mod) =>

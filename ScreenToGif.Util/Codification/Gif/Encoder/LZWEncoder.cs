@@ -138,7 +138,7 @@ internal class LzwEncoder
                     {
                         var leftBuffer = new byte[bitEncoder.Length - 255];
 
-                        //Removes the last writen 255 bytes.
+                        //Removes the last written 255 bytes.
                         bitEncoder.OutList.CopyTo(255, leftBuffer, 0, leftBuffer.Length);
                         bitEncoder.OutList.Clear();
                         bitEncoder.OutList.AddRange(leftBuffer);

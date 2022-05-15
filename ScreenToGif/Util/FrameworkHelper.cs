@@ -50,7 +50,7 @@ internal static class FrameworkHelper
     }
 
     /// <summary>
-    /// Searchs for the current .Net Framework version installed.
+    /// Searches for the current .Net Framework version installed.
     /// Code adapted from https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed
     /// </summary>
     internal static string QueryFrameworkVersion()
@@ -98,7 +98,7 @@ internal static class FrameworkHelper
     }
 
     /// <summary>
-    /// Searchs for the current .Net Framework version installed and returns true if has the necessary version installed.
+    /// Searches for the current .Net Framework version installed and returns true if has the necessary version installed.
     /// Code adapted from https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed
     /// </summary>
     internal static bool HasFramework()

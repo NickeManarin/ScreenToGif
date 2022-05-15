@@ -172,7 +172,7 @@ public partial class Recorder
         _viewModel.IsDirectMode = UserSettings.All.UseDesktopDuplication;
 
         await UpdatePositioning(true);
-            
+
         #endregion
 
         UpdateSize();
@@ -364,7 +364,7 @@ public partial class Recorder
                 break;
         }
     }
-        
+
     private void CommandGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         if (Mouse.LeftButton == MouseButtonState.Pressed)
@@ -465,7 +465,7 @@ public partial class Recorder
     }
 
     #endregion
-        
+
     #region Hooks
 
     /// <summary>
@@ -585,7 +585,7 @@ public partial class Recorder
 
             #endregion
 
-            if (target is { ProcessName: "ScreenToGif" }) 
+            if (target is { ProcessName: "ScreenToGif" })
                 return;
 
             //Clear up the selected window frame.
@@ -896,7 +896,7 @@ public partial class Recorder
                     }
 
                     StartCapture();
-                        
+
                     Stage = RecorderStages.Recording;
                     AutoFitButtons();
                     SetTaskbarButtonOverlay();
@@ -909,19 +909,19 @@ public partial class Recorder
                 #endregion
 
                 #endregion
-                    
+
                 case RecorderStages.Paused:
 
                     #region To record again
 
                     Stage = RecorderStages.Recording;
                     Title = "ScreenToGif";
-                        
+
                     SetTaskbarButtonOverlay();
                     await PrepareCapture(false);
                     HideGuidelines();
                     AutoFitButtons();
-                        
+
                     //If it's interaction mode, the capture is done via Snap().
                     if (UserSettings.All.CaptureFrequency == CaptureFrequencies.Interaction)
                         return;
@@ -948,7 +948,7 @@ public partial class Recorder
         {
             Arguments.ClearAutomationArgs();
 
-            //Wait a bit, then refresh the commands. Some of the commands are dependant of the FrameCount property.
+            //Wait a bit, then refresh the commands. Some of the commands are dependent of the FrameCount property.
             await Task.Delay(TimeSpan.FromMilliseconds(GetCaptureInterval() + 200));
 
             CommandManager.InvalidateRequerySuggested();
@@ -1033,7 +1033,7 @@ public partial class Recorder
 
             Stage = RecorderStages.Paused;
             Title = "ScreenToGif";
-                
+
             PauseCapture();
             _limitTimer.Stop();
 
@@ -1062,7 +1062,7 @@ public partial class Recorder
 
             _limitTimer.Stop();
             await StopCapture();
-                
+
             if (Stage is RecorderStages.Recording or RecorderStages.Paused && Project?.Any == true)
             {
                 #region Finishes if it's recording and it has any frames
@@ -1199,7 +1199,7 @@ public partial class Recorder
                 return;
 
             _viewModel.ButtonStyle = (Style)FindResource("Style.Button.NoText");
-                
+
             MinimizeVisibility = Visibility.Collapsed;
 
             if (IsThin)
@@ -1211,7 +1211,7 @@ public partial class Recorder
                 return;
 
             _viewModel.ButtonStyle = (Style)FindResource("Style.Button.Horizontal");
-                
+
             MinimizeVisibility = Visibility.Visible;
 
             if (IsThin)
@@ -1328,7 +1328,7 @@ public partial class Recorder
                 left = 0;
             }
 
-            //The catch here is to get the closest monitor from current Top/Left point. 
+            //The catch here is to get the closest monitor from current Top/Left point.
             var monitors = MonitorHelper.AllMonitorsGranular();
             var closest = monitors.FirstOrDefault(x => x.Bounds.Contains(new Point((int)left, (int)top))) ?? monitors.FirstOrDefault(x => x.IsPrimary) ?? monitors.FirstOrDefault();
 
@@ -1417,7 +1417,7 @@ public partial class Recorder
         _viewModel.Monitors = MonitorHelper.AllMonitorsGranular();
 
         //Detect closest screen to the point (previously selected top/left point or current mouse coordinate).
-        var point = startup ? (double.IsNaN(UserSettings.All.RecorderTop) || double.IsNaN(UserSettings.All.RecorderLeft) ? 
+        var point = startup ? (double.IsNaN(UserSettings.All.RecorderTop) || double.IsNaN(UserSettings.All.RecorderLeft) ?
             Native.Helpers.Other.GetMousePosition(_scale, Left, Top) : new Point((int)UserSettings.All.RecorderLeft, (int)UserSettings.All.RecorderTop)) : new Point((int) Left, (int) Top);
         var closest = _viewModel.Monitors.FirstOrDefault(x => x.Bounds.Contains(point)) ?? _viewModel.Monitors.FirstOrDefault(x => x.IsPrimary) ?? _viewModel.Monitors.FirstOrDefault();
 
@@ -1538,7 +1538,7 @@ public partial class Recorder
         {
             Dispatcher?.Invoke(() =>
             {
-                //Pause the recording and show the error.  
+                //Pause the recording and show the error.
                 Pause();
 
                 if (exception is GraphicsConfigurationException)

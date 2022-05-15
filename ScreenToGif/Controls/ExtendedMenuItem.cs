@@ -82,9 +82,9 @@ public class ExtendedMenuItem : MenuItem
     }
 
     /// <summary>
-    /// True if the menu should ajust itself for dark mode.
+    /// True if the menu should adjust itself for dark mode.
     /// </summary>
-    [Description("True if the menu should ajust itself for dark mode.")]
+    [Description("True if the menu should adjust itself for dark mode.")]
     public bool DarkMode
     {
         get => (bool)GetValue(DarkModeProperty);
