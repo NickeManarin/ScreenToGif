@@ -690,6 +690,16 @@ public partial class Options : Window, INotification
         try
         {
             LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
+             
+             //Apply for the Context Menu, because for some purpose,
+             //DynamicResource doesn't work on Headers of MenuItems
+             if (App.NotifyIcon != null)
+             {
+                 foreach (ExtendedMenuItem mItem in App.NotifyIcon.ContextMenu.Items.OfType<ExtendedMenuItem>())
+                 {
+                        mItem.Header = LocalizationHelper.Get("S."+ mItem.Name.Replace("_", "."));
+                 }
+             }
         }
         catch (Exception ex)
         {
