@@ -1156,6 +1156,9 @@
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
 
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Finland}" Tag="fi" Content="Finnish / Suomi" Author="VeikkoM"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=fi, Converter={StaticResource TagToSelection}}"/>
+                            
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.France}" Tag="fr" Content="French / Français" Author="Largo, Sébastien 'Tr4ncer' Villemain, Adrick"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
 
