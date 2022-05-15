@@ -243,7 +243,7 @@ internal class ImageChannelData : IPsdContent
     /// Adds the literal run to the result 
     /// </summary> 
     /// <param name="result">The result where the literals should be added.</param> 
-    /// <param name="literals">The list of literals that will be appeneded to the result.</param> 
+    /// <param name="literals">The list of literals that will be appended to the result.</param> 
     private static void AddLiterals(IList<byte> result, IList<byte> literals)
     {
         if (literals.Count > 0)

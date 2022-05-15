@@ -31,7 +31,7 @@ public class MostUsedQuantizer : PaletteQuantizer
         var colorTable = Colors.AsParallel().GroupBy(x => x) //Grouping based on its value.
             .OrderByDescending(g => g.Count()) //Order by most frequent values.
             .Select(g => g.FirstOrDefault()) //Take the first among the group.
-            .Take(MaxColorsWithTransparency).ToList(); //Take all the colors neeeded.
+            .Take(MaxColorsWithTransparency).ToList(); //Take all the colors needed.
 
         if (TransparentColor.HasValue)
             colorTable.Add(TransparentColor.Value);

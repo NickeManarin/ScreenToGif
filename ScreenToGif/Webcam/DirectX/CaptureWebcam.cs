@@ -25,15 +25,15 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
 {
     #region Properties
 
-    /// <summary> 
-    ///  The video capture device filter. Read-only. To use a different 
-    ///  device, dispose of the current Capture instance and create a new 
-    ///  instance with the desired device. 
+    /// <summary>
+    ///  The video capture device filter. Read-only. To use a different
+    ///  device, dispose of the current Capture instance and create a new
+    ///  instance with the desired device.
     /// </summary>
     public Filter VideoDevice { get; private set; }
 
     /// <summary>
-    ///  The control that will host the preview window. 
+    ///  The control that will host the preview window.
     /// </summary>
     public ContentControl PreviewWindow { get; set; }
 
@@ -74,8 +74,8 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
 
     #region Enum
 
-    /// <summary> 
-    /// Possible states of the interal filter graph.
+    /// <summary>
+    /// Possible states of the internal filter graph.
     /// </summary>
     protected enum GraphState
     {
@@ -164,7 +164,7 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
     protected Filter VideoCompressor = null;
 
     /// <summary>
-    /// Grabber filter interface. 
+    /// Grabber filter interface.
     /// </summary>
     private CoreStreaming.IBaseFilter _baseGrabFlt;
 
@@ -230,7 +230,7 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
 
     #region Protected Methods
 
-    /// <summary> 
+    /// <summary>
     ///  Create a new filter graph and add filters (devices, compressors, misc),
     ///  but leave the filters unconnected. Call RenderGraph()
     ///  to connect the filters.
@@ -250,12 +250,12 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
 
             //Link the CaptureGraphBuilder to the filter graph
             var hr = CaptureGraphBuilder.SetFiltergraph(GraphBuilder);
-                
-            if (hr < 0) 
+
+            if (hr < 0)
                 Marshal.ThrowExceptionForHR(hr);
 
             var comType = Type.GetTypeFromCLSID(Uuid.Clsid.SampleGrabber);
-                
+
             if (comType == null)
                 throw new Exception("DirectShow SampleGrabber not installed/registered!");
 
@@ -265,15 +265,15 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
             _baseGrabFlt = (CoreStreaming.IBaseFilter) SampGrabber;
 
             var media = new CoreStreaming.AmMediaType();
-                
+
             //Get the video device and add it to the filter graph
             if (VideoDevice != null)
             {
                 VideoDeviceFilter = (CoreStreaming.IBaseFilter)Marshal.BindToMoniker(VideoDevice.MonikerString);
 
                 hr = GraphBuilder.AddFilter(VideoDeviceFilter, "Video Capture Device");
-                    
-                if (hr < 0) 
+
+                if (hr < 0)
                     Marshal.ThrowExceptionForHR(hr);
 
                 media.majorType = Uuid.MediaType.Video;
@@ -287,8 +287,8 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
                     Marshal.ThrowExceptionForHR(hr);
 
                 hr = GraphBuilder.AddFilter(_baseGrabFlt, "Grabber");
-                    
-                if (hr < 0) 
+
+                if (hr < 0)
                     Marshal.ThrowExceptionForHR(hr);
             }
 
@@ -316,7 +316,7 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
 
             VideoStreamConfig = o as ExtendStreaming.IAMStreamConfig;
 
-            // Retreive the media control interface (for starting/stopping graph)
+            // Retrieve the media control interface (for starting/stopping graph)
             MediaControl = (ControlStreaming.IMediaControl)GraphBuilder;
 
             // Reload any video crossbars
@@ -341,9 +341,9 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
     /// <summary>
     ///  Disconnect and remove all filters except the device
     ///  and compressor filters. This is the opposite of
-    ///  renderGraph(). Soem properties such as FrameRate
+    ///  renderGraph(). Some properties such as FrameRate
     ///  can only be set when the device output pins are not
-    ///  connected. 
+    ///  connected.
     /// </summary>
     protected void DerenderGraph()
     {
@@ -389,7 +389,7 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
 
         if (pinEnum == null)
             return;
-            
+
         pinEnum.Reset();
 
         if (hr != 0)
@@ -405,7 +405,7 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
 
             if (hr != 0 || pins[0] == null)
                 continue;
-                
+
             //Get the pin it is connected to
             pins[0].ConnectedTo(out var pinTo);
 
@@ -419,7 +419,7 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
                     // Recurse down this branch
                     RemoveDownstream(info.filter, true);
 
-                    // Disconnect 
+                    // Disconnect
                     GraphBuilder.Disconnect(pinTo);
                     GraphBuilder.Disconnect(pins[0]);
 
@@ -440,7 +440,7 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
     }
 
     /// <summary>
-    ///  Connects the filters of a previously created graph 
+    ///  Connects the filters of a previously created graph
     ///  (created by CreateGraph()). Once rendered the graph
     ///  is ready to be used. This method may also destroy
     ///  streams if we have streams we no longer want.
@@ -456,8 +456,8 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
         CreateGraph();
 
         // Derender the graph if we have a capture or preview stream
-        // that we no longer want. We can't derender the capture and 
-        // preview streams seperately. 
+        // that we no longer want. We can't derender the capture and
+        // preview streams separately.
         // Notice the second case will leave a capture stream intact
         // even if we no longer want it. This allows the user that is
         // not using the preview to Stop() and Start() without
@@ -473,8 +473,8 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
             var med = Uuid.MediaType.Video;
 
             var hr = CaptureGraphBuilder.RenderStream(cat, med, VideoDeviceFilter, _baseGrabFlt, null);
-                
-            if (hr < 0) 
+
+            if (hr < 0)
                 Marshal.ThrowExceptionForHR(hr);
 
             //Get the IVideoWindow interface
@@ -483,14 +483,14 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
             // Set the video window to be a child of the main window
             var source = PresentationSource.FromVisual(PreviewWindow) as HwndSource;
             hr = VideoWindow.put_Owner(source.Handle);
-                
-            if (hr < 0) 
+
+            if (hr < 0)
                 Marshal.ThrowExceptionForHR(hr);
 
             //Set video window style
             hr = VideoWindow.put_WindowStyle(ControlStreaming.WindowStyle.Child | ControlStreaming.WindowStyle.ClipChildren | ControlStreaming.WindowStyle.ClipSiblings);
-                
-            if (hr < 0) 
+
+            if (hr < 0)
                 Marshal.ThrowExceptionForHR(hr);
 
             //Position video window in client rect of owner window
@@ -499,8 +499,8 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
 
             //Make the video window visible, now that it is properly positioned.
             hr = VideoWindow.put_Visible(ControlStreaming.OABool.True);
-                
-            if (hr < 0) 
+
+            if (hr < 0)
                 Marshal.ThrowExceptionForHR(hr);
 
             IsPreviewRendered = true;
@@ -516,8 +516,8 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
                 throw new NotSupportedException("Unknown Grabber Media Format");
 
             _videoInfoHeader = (EditStreaming.VideoInfoHeader)Marshal.PtrToStructure(media.formatPtr, typeof(EditStreaming.VideoInfoHeader));
-                
-            Marshal.FreeCoTaskMem(media.formatPtr); 
+
+            Marshal.FreeCoTaskMem(media.formatPtr);
             media.formatPtr = IntPtr.Zero;
         }
 
@@ -531,11 +531,11 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
     /// </summary>
     protected void StartPreviewIfNeeded()
     {
-        // Render preview 
+        // Render preview
         if (WantPreviewRendered && IsPreviewRendered)
         {
             // Run the graph (ignore errors)
-            // We can run the entire graph becuase the capture
+            // We can run the entire graph because the capture
             // stream should not be rendered (and that is enforced
             // in the if statement above)
             MediaControl.Run();
@@ -546,13 +546,13 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
     protected void OnPreviewWindowResize(object sender, EventArgs e)
     {
         // Position video window in client rect of owner window.
-        VideoWindow?.SetWindowPosition(0, 0, 
-            (int)(PreviewWindow.ActualWidth * Scale), 
+        VideoWindow?.SetWindowPosition(0, 0,
+            (int)(PreviewWindow.ActualWidth * Scale),
             (int)(PreviewWindow.ActualHeight * Scale)); //-70
     }
 
     /// <summary>
-    ///  Completely tear down a filter graph and 
+    ///  Completely tear down a filter graph and
     ///  release all associated resources.
     /// </summary>
     protected void DestroyGraph()
@@ -570,7 +570,7 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
         IsPreviewRendered = false;
 
         // Remove filters from the graph
-        // This should be unnecessary but the Nvidia WDM video driver cannot be used by this application 
+        // This should be unnecessary but the Nvidia WDM video driver cannot be used by this application
         // again unless we remove it. Ideally, we should simply enumerate all the filters in the graph and remove them (ignore errors).
         if (GraphBuilder != null)
         {
@@ -620,7 +620,7 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
 
     public int BufferCB(double sampleTime, IntPtr pBuffer, int bufferLen)
     {
-        if (CaptureFrameEvent == null) 
+        if (CaptureFrameEvent == null)
             return 1;
 
         var width = _videoInfoHeader.BmiHeader.Width;
@@ -676,7 +676,7 @@ public class CaptureWebcam : EditStreaming.ISampleGrabberCB, IDisposable
         //Allocs the byte array.
         var handleObj = GCHandle.Alloc(_savedArray, GCHandleType.Pinned);
 
-        //Gets the addres of the pinned object.
+        //Gets the address of the pinned object.
         var address = handleObj.AddrOfPinnedObject();
 
         //Puts the buffer inside the byte array.

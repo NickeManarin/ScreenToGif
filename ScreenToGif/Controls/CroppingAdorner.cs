@@ -153,7 +153,7 @@ public class CroppingAdorner : Adorner
         _thumbLeft.DragDelta += HandleLeft;
         _thumbCenter.DragDelta += HandleCenter;
 
-        //Clipping interior should be withing the bounds of the adorned element.
+        //Clipping interior should be within the bounds of the adorned element.
         if (adornedElement is FrameworkElement element)
             element.SizeChanged += AdornedElement_SizeChanged;
     }
@@ -547,7 +547,7 @@ public class CroppingAdorner : Adorner
 
     #region Visual Tree Override
 
-    // Override the VisualChildrenCount and GetVisualChild properties to interface with 
+    // Override the VisualChildrenCount and GetVisualChild properties to interface with
     // the adorner's visual collection.
     protected override int VisualChildrenCount => _visualCollection.Count;
 

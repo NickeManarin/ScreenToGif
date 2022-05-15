@@ -53,7 +53,7 @@ internal class EncodingManager
     #region Variables
 
     public static List<EncodingItem> Encodings { get; set; } = new List<EncodingItem>();
-        
+
     /// <summary>
     /// List of CancellationTokenSource, used to cancel each task.
     /// </summary>
@@ -124,7 +124,7 @@ internal class EncodingManager
         }
         catch (Exception ex)
         {
-            ErrorDialog.Ok("Task Error", "Unable to start the encoding task", "A generic error occured while trying to start the encoding task.", ex);
+            ErrorDialog.Ok("Task Error", "Unable to start the encoding task", "A generic error occurred while trying to start the encoding task.", ex);
             LogWriter.Log(ex, "Errow while starting the task.");
         }
 
@@ -156,7 +156,7 @@ internal class EncodingManager
             return;
 
         item.CurrentFrame = currentFrame;
-            
+
         Application.Current.Dispatcher.Invoke(() => EncodingUpdated(item));
     }
 
@@ -248,7 +248,7 @@ internal class EncodingManager
                 break;
             }
             case EncodingStatus.Error:
-            {    
+            {
                 item.Exception = exception;
                 break;
             }
@@ -285,7 +285,7 @@ internal class EncodingManager
                 item.SavedToDisk = true;
             }
         }
-            
+
         Application.Current.Dispatcher.Invoke(() => EncodingUpdated(item, wasStatusUpdated));
     }
 
@@ -397,7 +397,7 @@ internal class EncodingManager
                 continue;
 
             var view = window.EncodingAdded(id);
-                
+
             if (view != null)
                 ViewList.Add(view);
         }
@@ -885,7 +885,7 @@ internal class EncodingManager
 
                             if (!fileInfo2.Exists || fileInfo2.Length == 0)
                                 throw new Exception("Error while encoding the gif with Gifski. Empty output file.", new Win32Exception()) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
-                                
+
                             #endregion
 
                             break;
@@ -963,7 +963,7 @@ internal class EncodingManager
                     else
                     {
                         var fileName = Path.Combine(preset.OutputFolder, preset.ResolvedFilename + ".zip");
-                            
+
                         if (File.Exists(fileName))
                             File.Delete(fileName);
 
@@ -1146,7 +1146,7 @@ internal class EncodingManager
 
                     uploadPreset.History.Add(history);
                     UserSettings.Save();
-                        
+
                     if (history.Result != 200)
                         throw new Exception(history.Message);
 
@@ -1413,7 +1413,7 @@ internal class EncodingManager
         {
             case ExportFormats.Gif:
             {
-                #region Gif 
+                #region Gif
 
                 if (preset is not FfmpegGifPreset gifPreset)
                     return;
@@ -1534,7 +1534,7 @@ internal class EncodingManager
                     //Format and output.
                     firstPass += "-f webp {O}";
                 }
-                    
+
                 break;
 
                 #endregion
@@ -1643,7 +1643,7 @@ internal class EncodingManager
                     firstPass += $"-f {preset.Type.ToString().ToLower().Replace("mkv", "matroska")} ";
                     firstPass += "{O}";
 
-                    //Second pass, using a similar command with some ajustments.
+                    //Second pass, using a similar command with some adjustments.
                     if (videoPreset.Pass > 1)
                         secondPass = "-hide_banner " + firstPass.Replace("-pass 1", "-pass 2").Replace("pass=1", "pass=2");
                 }
@@ -1692,7 +1692,7 @@ internal class EncodingManager
 
                 for (var block = 0; block < split.Length; block++)
                 {
-                    //frame=  321 fps=170 q=-0.0 Lsize=      57kB time=00:00:14.85 bitrate=  31.2kbits/s speed=7.87x    
+                    //frame=  321 fps=170 q=-0.0 Lsize=      57kB time=00:00:14.85 bitrate=  31.2kbits/s speed=7.87x
                     if (!split[block].StartsWith("frame="))
                         continue;
 
@@ -1768,7 +1768,7 @@ internal class EncodingManager
 
                 for (var block = 0; block < split.Length; block++)
                 {
-                    //frame=  321 fps=170 q=-0.0 Lsize=      57kB time=00:00:14.85 bitrate=  31.2kbits/s speed=7.87x    
+                    //frame=  321 fps=170 q=-0.0 Lsize=      57kB time=00:00:14.85 bitrate=  31.2kbits/s speed=7.87x
                     if (!split[block].StartsWith("frame="))
                         continue;
 
@@ -1834,42 +1834,42 @@ internal class EncodingItem
     public string Text { get; set; }
 
     public int FrameCount { get; set; }
-        
+
     public int CurrentFrame { get; set; }
 
     public bool IsIndeterminate { get; set; }
 
     public long SizeInBytes { get; set; }
-        
+
     public string OutputFilename { get; set; }
-        
+
     public bool SavedToDisk { get; set; }
 
     public bool AreMultipleFiles { get; set; }
 
 
     public bool CopiedToClipboard { get; set; }
-        
+
     public Exception CopyTaskException { get; set; }
-        
-        
+
+
     public bool CommandExecuted { get; set; }
-        
+
     public string Command { get; set; }
-        
+
     public string CommandOutput { get; set; }
-        
+
     public Exception CommandTaskException { get; set; }
 
 
     public bool Uploaded { get; set; }
-        
+
     public string UploadLink { get; set; }
-        
+
     public string UploadLinkDisplay { get; set; }
-        
+
     public string DeletionLink { get; set; }
-        
+
     public Exception UploadTaskException { get; set; }
 
     public Exception Exception { get; set; }

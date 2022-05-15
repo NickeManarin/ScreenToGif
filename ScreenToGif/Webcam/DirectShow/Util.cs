@@ -64,7 +64,7 @@ public class Util
         public int ClrImportant;
     }
 
-    /// <summary> 
+    /// <summary>
     /// Free the nested structures and release any COM objects within an AMMediaType struct.
     /// </summary>
     public static void FreeAMMediaType(CoreStreaming.AmMediaType mediaType)
@@ -83,7 +83,7 @@ public class Util
     /// DsLong is a wrapper class around a <see cref="System.Int64"/> value type.
     /// </summary>
     /// <remarks>
-    /// This class is necessary to enable null paramters passing.
+    /// This class is necessary to enable null parameters passing.
     /// </remarks>
     [StructLayout(LayoutKind.Sequential)]
     public class DsLong
@@ -176,7 +176,7 @@ public class Util
     /// DsGuid is a wrapper class around a System.Guid value type.
     /// </summary>
     /// <remarks>
-    /// This class is necessary to enable null paramters passing.
+    /// This class is necessary to enable null parameters passing.
     /// </remarks>
     [StructLayout(LayoutKind.Explicit)]
     public class DsGuid
@@ -187,7 +187,7 @@ public class Util
         public static readonly DsGuid Empty = Guid.Empty;
 
         /// <summary>
-        /// Empty constructor. 
+        /// Empty constructor.
         /// Initialize it with System.Guid.Empty
         /// </summary>
         public DsGuid()

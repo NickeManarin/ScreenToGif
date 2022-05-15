@@ -455,7 +455,7 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
                     }
                     catch (Exception ex)
                     {
-                        LogWriter.Log(ex, "Openning the Help link");
+                        LogWriter.Log(ex, "Opening the Help link");
                     }
                 }
             };
@@ -506,7 +506,7 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
                     if (Global.UpdateAvailable == null)
                         return;
 
-                    //Try to install the update, closing the app if sucessful.
+                    //Try to install the update, closing the app if successful.
                     if (InstallUpdate(true))
                         Application.Current.Shutdown(69);
                 }
@@ -981,7 +981,7 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
 
             ParseDownloadUrls(release, version);
 
-            Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), 
+            Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"),
                 Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate));
 
             //Download update to be installed when the app closes.
@@ -1049,7 +1049,7 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
                     return name.EndsWith(".light.setup." + moniker + ".msi") || name.EndsWith(".light.setup.msi");
                 });
 
-                //If missing light (framework dependant) variant, download full package.
+                //If missing light (framework dependent) variant, download full package.
                 if (installer == null)
                 {
                     portable = (release.Element("assets") ?? release.Element("items"))?.Elements().FirstOrDefault(f =>
@@ -1166,7 +1166,7 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
 
             ParseDownloadUrls(release, version);
 
-            //With Fosshub, the download must be manual. 
+            //With Fosshub, the download must be manual.
             Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), Global.UpdateAvailable.Version),
                 StatusType.Update, "update", PromptUpdate));
         }
@@ -1196,7 +1196,7 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
 
                 Global.UpdateAvailable.ActivePath = Path.Combine(folder, Global.UpdateAvailable.ActiveName);
 
-                //Check if installer was alread downloaded.
+                //Check if installer was already downloaded.
                 if (File.Exists(Global.UpdateAvailable.ActivePath))
                 {
                     //Minor issue, if for some reason, the update has the exact same size, this won't work properly. I would need to check a hash.
@@ -1265,7 +1265,7 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
                 return false;
 
             //TODO: Check if Windows is not turning off.
-            
+
             var runAfterwards = false;
 
             //Prompt if:
@@ -1310,7 +1310,7 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
 
             //msiexec /i PATH INSTALLDIR="" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE=No ADDLOCAL=Binary
             //msiexec /a PATH TARGETDIR="" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE=yes ADDLOCAL=Binary
-                
+
             var startInfo = new ProcessStartInfo
             {
                 FileName = "msiexec",

@@ -15,7 +15,7 @@ public class StatusBand : Control
     #region Variables
 
     private Grid _warningGrid;
-    private Button _supressButton;
+    private Button _suppressButton;
 
     #endregion
 
@@ -24,7 +24,7 @@ public class StatusBand : Control
     public static readonly DependencyProperty IdProperty = DependencyProperty.Register(nameof(Id), typeof(int), typeof(StatusBand), new FrameworkPropertyMetadata(0));
 
     public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(StatusType), typeof(StatusBand), new FrameworkPropertyMetadata(StatusType.None));
-        
+
     public static readonly DependencyProperty ReasonProperty = DependencyProperty.Register(nameof(Reason), typeof(StatusReasons), typeof(StatusBand), new FrameworkPropertyMetadata(StatusReasons.None));
 
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(StatusBand));
@@ -85,7 +85,7 @@ public class StatusBand : Control
     }
 
     /// <summary>
-    /// Event raised when the StatusBand gets dismissed/supressed.
+    /// Event raised when the StatusBand gets dismissed/suppressed.
     /// </summary>
     public event RoutedEventHandler Dismissed
     {
@@ -106,10 +106,10 @@ public class StatusBand : Control
     {
         _warningGrid = GetTemplateChild("WarningGrid") as Grid;
         var link = GetTemplateChild("MainHyperlink") as Hyperlink;
-        _supressButton = GetTemplateChild("SuppressButton") as ExtendedButton;
+        _suppressButton = GetTemplateChild("SuppressButton") as ExtendedButton;
 
-        if (_supressButton != null)
-            _supressButton.Click += SupressButton_Click;
+        if (_suppressButton != null)
+            _suppressButton.Click += SuppressButton_Click;
 
         if (Action != null && link != null)
             link.Click += (sender, args) => Action.Invoke();
@@ -186,7 +186,7 @@ public class StatusBand : Control
 
     #endregion
 
-    private void SupressButton_Click(object sender, RoutedEventArgs e)
+    private void SuppressButton_Click(object sender, RoutedEventArgs e)
     {
         Hide();
     }

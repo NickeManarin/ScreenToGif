@@ -100,7 +100,7 @@ public class NeuralQuantizer : Quantizer
     private int[] _frequencies;
 
     /// <summary>
-    /// Alpha values controlling how far towards a target co-ordinate any neighbouring neurons are moved.
+    /// Alpha values controlling how far towards a target coordinate any neighbouring neurons are moved.
     /// </summary>
     private int[] _neighbourhoodAlphas;
 
@@ -125,7 +125,7 @@ public class NeuralQuantizer : Quantizer
 
     /// <summary>
     /// Bias for fractions. The larger this value is, the larger IntBias will be.
-    /// Larger values will also make the bias of a neuron a more significant factor than the distance from the supplied co-ordinate when identifying the best neuron for a given co-ordinate.
+    /// Larger values will also make the bias of a neuron a more significant factor than the distance from the supplied coordinate when identifying the best neuron for a given coordinate.
     /// </summary>
     private const int IntBiasShift = 16;
 
@@ -370,7 +370,7 @@ public class NeuralQuantizer : Quantizer
         //Set the initial alpha values for neighbouring neurons.
         SetNeighbourhoodAlphas(_neighbourhoodAlphas, neighbourhoodSize, alpha, RadiusBias);
 
-        //Get the number of pixels to skip beween samples.
+        //Get the number of pixels to skip between samples.
         var step = GetPixelIndexIncrement(_pixelBytesCount);
 
         #endregion
@@ -487,7 +487,7 @@ public class NeuralQuantizer : Quantizer
     /// Finds the best neuron (close to the supplied color but not already chosen too many times) and returns its index in the neural network.
     /// </summary>
     /// <returns>
-    /// The index in the neural network of a neuron which is close to the supplied co-ordinate but which hasn't already been chosen too many times.
+    /// The index in the neural network of a neuron which is close to the supplied coordinate but which hasn't already been chosen too many times.
     /// </returns>
     private int FindClosestAndReturnBestNeuron(int blue, int green, int red)
     {
@@ -551,9 +551,9 @@ public class NeuralQuantizer : Quantizer
 
             #region Calculate the bias distance
 
-            //Bias distance takes into account the distance between the neuron and the co-ordinate, and also the neuron's bias.
+            //Bias distance takes into account the distance between the neuron and the coordinate, and also the neuron's bias.
             //The more frequently a neuron has already been chosen, the lower its bias, so less frequently-chosen neurons have a better chance of being returned by this method.
-            //This ensures that the distribution of neurons is densest in areas of the network space which have most co-ordinates in the learning data.
+            //This ensures that the distribution of neurons is densest in areas of the network space which have most coordinates in the learning data.
             var biasDistance = distance - (_biases[neuronIndex] >> (IntBiasShift - NetworkBiasShift));
 
             if (biasDistance < bestBiasDistance)
@@ -734,7 +734,7 @@ public class NeuralQuantizer : Quantizer
     /// <param name="neuron2">The other neuron, whose value should be swapped with the first neuron.</param>
     private static void SwapNeurons(int[] neuron1, int[] neuron2)
     {
-        //Swaps the values of each of the co-ordinates of the 2 neurons.
+        //Swaps the values of each of the coordinates of the 2 neurons.
         for (var i = 0; i < neuron1.Length; i++)
         {
             var temp = neuron1[i];

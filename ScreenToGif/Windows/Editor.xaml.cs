@@ -205,14 +205,14 @@ namespace ScreenToGif.Windows
         /// </summary>
         public bool IsEncoderWindow { get; } = false;
 
-        private readonly EditorViewModel _viewModel; 
+        private readonly EditorViewModel _viewModel;
 
         private CancellationTokenSource _previewToken;
 
         private Action<object, RoutedEventArgs> _applyAction = null;
 
         private bool _abortLoading;
-        
+
         /// <summary>
         /// Lock used to prevent firing multiple times (at the same time) both the Activated/Deactivated events.
         /// </summary>
@@ -263,7 +263,7 @@ namespace ScreenToGif.Windows
 
                 var result = await Task.Run(Load);
                 LoadCallback(result);
-                
+
                 return;
             }
 
@@ -1656,7 +1656,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             var index = await Task.Run(() => RemoveDuplicatesAsync((decimal)UserSettings.All.DuplicatesSimilarity, UserSettings.All.DuplicatesRemoval, UserSettings.All.DuplicatesDelay));
-            
+
             for (var i = _viewModel.Frames.Count - 1; i >= Project.Frames.Count; i--)
                 _viewModel.Frames.RemoveAt(i);
 
@@ -1702,7 +1702,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             await Task.Run(() => ReduceFrameCount(selected, UserSettings.All.ReduceFactor, UserSettings.All.ReduceCount, UserSettings.All.ReduceDelay));
-            
+
             for (var i = _viewModel.Frames.Count - 1; i >= Project.Frames.Count; i--)
                 _viewModel.Frames.RemoveAt(i);
 
@@ -2000,7 +2000,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             await Task.Run(() => Resize(settings.Width, settings.Height, settings.Dpi, settings.ScalingMode));
-            
+
             await LoadSelectedStarter(0, Project.Frames.Count - 1);
 
             ClosePanel();
@@ -2287,7 +2287,7 @@ namespace ScreenToGif.Windows
             var index = FrameListView.SelectedIndex;
             var dpi = ZoomBoxControl.ImageDpi;
             var selected = await Task.Run(() => TitleFrame(render, index, dpi));
-            
+
             await LoadSelectedStarter(selected, Project.Frames.Count - 1);
 
             ClosePanel();
@@ -2331,7 +2331,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             await Task.Run(() => KeyStrokesAsync(KeyStrokesViewModel.FromSettings()));
-            
+
             await LoadSelectedStarter(0, Project.Frames.Count - 1);
 
             ClosePanel();
@@ -2470,7 +2470,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             await Task.Run(() => MouseEventsAsync(MouseEventsViewModel.FromSettings()));
-            
+
             await LoadSelectedStarter(0, Project.Frames.Count - 1);
 
             ClosePanel();
@@ -2762,7 +2762,7 @@ namespace ScreenToGif.Windows
 
             geometry = Geometry.Combine(geometry, rectangle, GeometryCombineMode.Xor, null);
 
-            //Sicne the geometry is bound to the screen, it needs to be scaled to follow the image scale.
+            //Since the geometry is bound to the screen, it needs to be scaled to follow the image scale.
             geometry.Transform = new ScaleTransform(this.Scale() / ZoomBoxControl.ImageScale, this.Scale() / ZoomBoxControl.ImageScale);
 
             var clippedImage = new Image
@@ -2846,7 +2846,7 @@ namespace ScreenToGif.Windows
             ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             await Task.Run(() => ProgressAsync(ProgressViewModel.FromSettings()));
-            
+
             await LoadSelectedStarter(0, Project.Frames.Count - 1);
 
             ClosePanel();
@@ -2894,7 +2894,7 @@ namespace ScreenToGif.Windows
             await LoadSelectedStarter(selected, Project.Frames.Count - 1);
 
             ShowHint("S.Hint.Transition");
-            
+
             ClosePanel();
         }
 
@@ -3183,7 +3183,7 @@ namespace ScreenToGif.Windows
                 await InsertImportFrom(fileNames.ToList());
 
             #endregion
-            
+
             ClosePanel(removeEvent: true);
             CommandManager.InvalidateRequerySuggested();
             GC.Collect();
@@ -3582,7 +3582,7 @@ namespace ScreenToGif.Windows
 
                 if (_abortLoading)
                     return false;
-                
+
                 if (corruptedList.Any())
                 {
                     Dispatcher.InvokeAsync(() =>
@@ -3758,7 +3758,7 @@ namespace ScreenToGif.Windows
                         UpdateProgress(index);
                     }
                 });
-                
+
                 if (Project.Frames.Count > 0)
                     Dispatcher.Invoke(() => { FilledList = true; });
 
@@ -4236,7 +4236,7 @@ namespace ScreenToGif.Windows
 
             if (bitmap.PixelHeight != (int)previousSize.Height || bitmap.PixelWidth != (int)previousSize.Width)
                 previousSize = new Size(bitmap.PixelWidth, bitmap.PixelHeight);
-            
+
             if (bitmap.Format != PixelFormats.Bgra32)
                 bitmap = new FormatConvertedBitmap(bitmap, PixelFormats.Bgra32, null, 0);
 
@@ -4352,7 +4352,7 @@ namespace ScreenToGif.Windows
                 PlayMenuItem.Header = LocalizationHelper.Get("S.Editor.Playback.Play");
                 PlayMenuItem.Icon = FindResource("Vector.Play") as Brush;
             }
-            
+
             SetFocusOnCurrentFrame();
             UpdateOtherStatistics();
         }
@@ -4817,11 +4817,11 @@ namespace ScreenToGif.Windows
             var height = onLoad ? UserSettings.All.EditorHeight : Height;
             var state = onLoad ? UserSettings.All.EditorWindowState : WindowState;
 
-            //If the position was never set, let it center on screen. 
+            //If the position was never set, let it center on screen.
             if (double.IsNaN(top) && double.IsNaN(left))
                 return false;
 
-            //The catch here is to get the closest monitor from current Top/Left point. 
+            //The catch here is to get the closest monitor from current Top/Left point.
             var monitors = MonitorHelper.AllMonitorsScaled(this.Scale());
             var closest = monitors.FirstOrDefault(x => x.Bounds.Contains(new Point((int)left, (int)top))) ?? monitors.FirstOrDefault(x => x.IsPrimary);
 
@@ -5187,7 +5187,7 @@ namespace ScreenToGif.Windows
                                 else
                                 {
                                     //Reversed range.
-                                    //The CopyToExport() method bellow has no support for this yet, so it just copies the frames in order anyway.
+                                    //The CopyToExport() method below has no support for this yet, so it just copies the frames in order anyway.
                                     for (var i = start; i >= end; i--)
                                         indexes.Add(i); //indexes.Add(frames[i]);
                                 }
@@ -5230,7 +5230,7 @@ namespace ScreenToGif.Windows
                         else
                         {
                             //Reversed playback.
-                            //The CopyToExport() method bellow has no support for this yet, so it just copies the frames in order anyway.
+                            //The CopyToExport() method below has no support for this yet, so it just copies the frames in order anyway.
                             span = TimeSpan.FromMilliseconds(Project.Frames.Sum(s => s.Delay));
 
                             for (var i = Project.Frames.Count - 1; i >= 0; i--)
@@ -5326,7 +5326,7 @@ namespace ScreenToGif.Windows
 
             return true;
         }
-        
+
         private void Discard(ProjectInfo project)
         {
             ShowProgress(LocalizationHelper.Get("S.Editor.DiscardingFrames"), project.Frames.Count);
@@ -5489,7 +5489,7 @@ namespace ScreenToGif.Windows
                             new Typeface(model.FontFamily, model.FontStyle, model.FontWeight, default), fontSize, new SolidColorBrush(model.FontColor),
                             null, TextFormattingMode.Ideal);
 
-                        var width = formatted.Width + 4; //2px padding for both sides. 
+                        var width = formatted.Width + 4; //2px padding for both sides.
                         var height = formatted.Height;
                         var left = model.HorizontalAlignment == HorizontalAlignment.Left ? 0 :
                             model.HorizontalAlignment == HorizontalAlignment.Right ? image.Width - width :
@@ -5619,7 +5619,7 @@ namespace ScreenToGif.Windows
                     //if (outer == auxList.Count - 1 && amount <= model.KeyStrokesEarlierBy)
                     //    auxList[outer].KeyList.InsertRange(auxList[outer].KeyList.Count, auxList[0].KeyList);
 
-                    //Check next itens.
+                    //Check next items.
                     for (var inner = outer + 1; inner < auxList.Count - 1; inner++)
                     {
                         //For each frame, check if a next frame needs to show their key strokes.
@@ -5643,7 +5643,7 @@ namespace ScreenToGif.Windows
             if (model.KeyStrokesExtended)
             {
                 //Checks from the end to the start, if there is a key stroke that needs to 'bleed'/'delayed' into the next frames.
-                //I need to check from the end to the start so the keystrokes stays in position. 
+                //I need to check from the end to the start so the keystrokes stays in position.
                 for (var outer = auxList.Count - 1; outer > 0; outer--)
                 {
                     var amount = 0;
@@ -5655,7 +5655,7 @@ namespace ScreenToGif.Windows
                         auxList[1].KeyList = new List<IKeyGesture>(listA);
                     }
 
-                    //Check previous itens.
+                    //Check previous items.
                     for (var inner = outer - 1; inner >= 0; inner--)
                     {
                         //For each frame, check if a previous frame needs to show their key strokes.
@@ -5825,7 +5825,7 @@ namespace ScreenToGif.Windows
                     drawingContext.DrawImage(image, new Rect(0, 0, image.Width, image.Height));
                     drawingContext.DrawRectangle(new SolidColorBrush(model.KeyStrokesBackgroundColor), null, new Rect(Math.Round(leftRectangle, 0), Math.Round(topRectangle, 0), Math.Round(widthRectangle, 0), Math.Round(heightRectangle, 0)));
 
-                    //This code will draw the outline outside the text. 
+                    //This code will draw the outline outside the text.
                     if (UserSettings.All.DrawOutlineOutside)
                     {
                         drawingContext.DrawGeometry(null, pen, geometry);
@@ -6303,7 +6303,7 @@ namespace ScreenToGif.Windows
             var found = -1;
             var count = 0;
             var max = Math.Abs(start - end) + 1;
-            
+
             while (count < max)
             {
                 UpdateProgress(count++);
@@ -6316,7 +6316,7 @@ namespace ScreenToGif.Windows
 
                 start += step;
             }
-            
+
             if (found == -1 || found == threshold - 1 || found == Project.Frames.Count - 1)
                 return found;
 
@@ -6405,7 +6405,7 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(() => IsLoading = true);
 
-            //Calculate opacity increment. When fading to a color, it will add a frame with a 100% opacity at the end. 
+            //Calculate opacity increment. When fading to a color, it will add a frame with a 100% opacity at the end.
             var increment = 1F / (frameCount + (UserSettings.All.FadeToType == FadeModes.NextFrame ? 1 : 0));
             var previousName = Path.GetFileNameWithoutExtension(Project.Frames[selected].Path);
             var previousFolder = Path.GetDirectoryName(Project.Frames[selected].Path);

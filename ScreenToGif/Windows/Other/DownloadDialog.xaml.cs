@@ -51,7 +51,7 @@ public partial class DownloadDialog : Window
 
         if (Global.UpdateAvailable.MustDownloadManually)
             StatusBand.Warning(LocalizationHelper.Get("S.Updater.NoNewRelease.Info"));
-        
+
         #endregion
 
         try
@@ -72,11 +72,11 @@ public partial class DownloadDialog : Window
                 var splited = Global.UpdateAvailable.Description.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
 
                 WhatsNewParagraph.Inlines.Add(splited[0].Replace(" What's new?\r\n\r\n", ""));
-                FixesParagraph.Inlines.Add(splited.Length > 1 ? splited[1].Replace(" Bug fixes:\r\n\r\n", "").Replace(" Fixed:\r\n\r\n", "") : "Aparently nothing.");
+                FixesParagraph.Inlines.Add(splited.Length > 1 ? splited[1].Replace(" Bug fixes:\r\n\r\n", "").Replace(" Fixed:\r\n\r\n", "") : "Apparently nothing.");
             }
             else
             {
-                //If the release detail was obtained by querying Fosshub, no release note is available. 
+                //If the release detail was obtained by querying Fosshub, no release note is available.
                 MainFlowDocument.Blocks.Remove(WhatsNewParagraphTitle);
                 MainFlowDocument.Blocks.Remove(FixesParagraphTitle);
                 MainFlowDocument.Blocks.Remove(FixesParagraph);

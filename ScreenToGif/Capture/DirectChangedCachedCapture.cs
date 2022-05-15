@@ -155,7 +155,7 @@ internal class DirectChangedCachedCapture : DirectCachedCapture
         {
             try
             {
-                //Only release the frame if there was a sucess in capturing it.
+                //Only release the frame if there was a success in capturing it.
                 if (res.Success)
                     DuplicatedOutput.ReleaseFrame();
             }
@@ -221,7 +221,7 @@ internal class DirectChangedCachedCapture : DirectCachedCapture
 
                             Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0, new ResourceRegion(movedRectangles[movedIndex].SourcePoint.X, movedRectangles[movedIndex].SourcePoint.Y, 0, sourceWidth, sourceHeight, 1),
                                 BackingTexture, 0, left - Left, top - Top);
-                                
+
                             wasCaptured = true;
                         }
                     }
@@ -330,7 +330,7 @@ internal class DirectChangedCachedCapture : DirectCachedCapture
         {
             try
             {
-                //Only release the frame if there was a sucess in capturing it.
+                //Only release the frame if there was a success in capturing it.
                 if (res.Success)
                     DuplicatedOutput.ReleaseFrame();
             }

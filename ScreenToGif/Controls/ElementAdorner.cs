@@ -48,7 +48,7 @@ internal class ElementAdorner : Adorner
     private Rectangle _borderRectangle;
 
     /// <summary>
-    /// Resizing adorner uses Thumbs for visual elements.  
+    /// Resizing adorner uses Thumbs for visual elements.
     /// The Thumbs have built-in mouse input handling.
     /// </summary>
     private readonly Thumb _topLeft, _topRight, _bottomLeft, _bottomRight, _middleBottom, _middleTop, _leftMiddle, _rightMiddle;
@@ -157,8 +157,8 @@ internal class ElementAdorner : Adorner
     /// <returns>The final size</returns>
     protected override Size ArrangeOverride(Size finalSize)
     {
-        // desiredWidth and desiredHeight are the width and height of the element that's being adorned.  
-        // These will be used to place the ResizingAdorner at the corners of the adorned element.  
+        // desiredWidth and desiredHeight are the width and height of the element that's being adorned.
+        // These will be used to place the ResizingAdorner at the corners of the adorned element.
         var desiredWidth = AdornedElement.DesiredSize.Width;
         var desiredHeight = AdornedElement.DesiredSize.Height;
 
@@ -377,8 +377,8 @@ internal class ElementAdorner : Adorner
 
         _adornedElement.RenderTransformOrigin = new Point(0.5, 0.5);
 
-        if (_adornedElement.RenderTransform is RotateTransform tranform)
-            Angle = tranform.Angle;
+        if (_adornedElement.RenderTransform is RotateTransform transform)
+            Angle = transform.Angle;
 
         _visualChildren.Add(_rotationThumb);
     }
@@ -478,7 +478,7 @@ internal class ElementAdorner : Adorner
         _adornedElement.Height = height;
         _adornedElement.Width = width;
 
-        //TODO: Maybe trap mouse while draging with ClipCursor(ref r);
+        //TODO: Maybe trap mouse while dragging with ClipCursor(ref r);
 
         AfterManipulation();
     }

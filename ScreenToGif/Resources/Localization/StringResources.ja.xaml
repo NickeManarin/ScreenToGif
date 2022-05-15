@@ -1749,7 +1749,7 @@
     <!--<s:String x:Key="S.SaveAs.Upload.Select.Title">Select an upload preset</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Upload.Select.Description">Pick one from this list.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Upload.Unavailable.Title">No upload preset available for this format</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Upload.Unavailable.Description">Add a preset by using the button bellow.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Unavailable.Description">Add a preset by using the button below.</s:String>-->
     
     <!--Editor • Save as > Upload > Dialogs-->
     <!--<s:String x:Key="S.SaveAs.Upload.Ask.Delete.Title">Deleting the Upload Preset</s:String>-->

@@ -53,7 +53,7 @@ public partial class Insert : Window
 
 
     /// <summary>
-    /// Default contructor.
+    /// Default constructor.
     /// </summary>
     /// <param name="currentList">The current list.</param>
     /// <param name="newList">The list to be inserted.</param>
@@ -117,7 +117,7 @@ public partial class Insert : Window
 
         #endregion
 
-        #region Add 
+        #region Add
 
         _selectedElement = e.Source as UIElement;
 
@@ -515,7 +515,7 @@ public partial class Insert : Window
                     {
                         //The back canvas.
                         context.DrawRectangle(new SolidColorBrush(UserSettings.All.InsertFillColor), null,
-                            new Rect(new Point(0, 0), new Point(Math.Round(RightCanvas.ActualWidth * scaleDiffRight, MidpointRounding.AwayFromZero), 
+                            new Rect(new Point(0, 0), new Point(Math.Round(RightCanvas.ActualWidth * scaleDiffRight, MidpointRounding.AwayFromZero),
                                 Math.Round(RightCanvas.ActualHeight * scaleDiffRight, MidpointRounding.AwayFromZero))));
 
                         var topPoint = Dispatcher.Invoke<double>(() => Canvas.GetTop(LeftImage)) * scaleDiffRight;

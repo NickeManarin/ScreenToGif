@@ -21,7 +21,7 @@ public class DragScrollGrid : Grid
     #region Properties
 
     /// <summary>
-    /// If true, will enable te value increase/decrease by sideway drag.
+    /// If true, will enable the value increase/decrease by sideway drag.
     /// </summary>
     public bool IsDraggable
     {
@@ -60,7 +60,7 @@ public class DragScrollGrid : Grid
         if (!IsMouseCaptured) return;
         if ((int)_lastPosition.X == (int)e.GetPosition(this).X) return;
 
-        if (_lastPosition.X > e.GetPosition(this).X) 
+        if (_lastPosition.X > e.GetPosition(this).X)
         {
             //To the Left.
             //Value--;

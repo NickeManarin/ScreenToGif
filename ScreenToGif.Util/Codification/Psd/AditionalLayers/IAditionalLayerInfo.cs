@@ -1,6 +1,6 @@
-namespace ScreenToGif.Util.Codification.Psd.AditionalLayers;
+namespace ScreenToGif.Util.Codification.Psd.AdditionalLayers;
 
-interface IAditionalLayerInfo : IPsdContent
+interface IAdditionalLayerInfo : IPsdContent
 {
     string Key { get; }
 }

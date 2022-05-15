@@ -23,7 +23,7 @@ public class SelectControl : Control
     #region Variables
 
     /// <summary>
-    /// Resizing adorner uses Thumbs for visual elements.  
+    /// Resizing adorner uses Thumbs for visual elements.
     /// The Thumbs have built-in mouse input handling.
     /// </summary>
     private Thumb _topLeft, _topRight, _bottomLeft, _bottomRight, _top, _bottom, _left, _right;
@@ -117,7 +117,7 @@ public class SelectControl : Control
     /// This makes the zoom view to be hidden everywhere else.
     /// </summary>
     private bool _wasHoverFocusChanged;
-        
+
     public List<DetectedRegion> Windows = new List<DetectedRegion>();
 
     public BitmapSource BackImage;
@@ -127,7 +127,7 @@ public class SelectControl : Control
     #region Dependency Properties
 
     public static readonly DependencyProperty ParentLeftProperty = DependencyProperty.Register(nameof(ParentLeft), typeof(double), typeof(SelectControl), new PropertyMetadata(0d));
-        
+
     public static readonly DependencyProperty ParentTopProperty = DependencyProperty.Register(nameof(ParentTop), typeof(double), typeof(SelectControl), new PropertyMetadata(0d));
 
     public static readonly DependencyProperty IsPickingRegionProperty = DependencyProperty.Register(nameof(IsPickingRegion), typeof(bool), typeof(SelectControl), new PropertyMetadata(true));
@@ -135,7 +135,7 @@ public class SelectControl : Control
     public static readonly DependencyProperty SelectedProperty = DependencyProperty.Register(nameof(Selected), typeof(Rect), typeof(SelectControl), new PropertyMetadata(Rect.Empty, Selected_PropertyChanged));
 
     public static readonly DependencyProperty NonExpandedSelectionProperty = DependencyProperty.Register(nameof(NonExpandedSelection), typeof(Rect), typeof(SelectControl), new PropertyMetadata(Rect.Empty));
-        
+
     public static readonly DependencyProperty NonExpandedNativeSelectionProperty = DependencyProperty.Register(nameof(NonExpandedNativeSelection), typeof(Rect), typeof(SelectControl), new PropertyMetadata(Rect.Empty));
 
     public static readonly DependencyProperty FinishedSelectionProperty = DependencyProperty.Register(nameof(FinishedSelection), typeof(bool), typeof(SelectControl), new PropertyMetadata(false));
@@ -145,7 +145,7 @@ public class SelectControl : Control
     public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register(nameof(Scale), typeof(double), typeof(SelectControl), new PropertyMetadata(1d));
 
     public static readonly DependencyProperty EmbeddedModeProperty = DependencyProperty.Register(nameof(EmbeddedMode), typeof(bool), typeof(SelectControl), new PropertyMetadata(false));
-        
+
     public static readonly DependencyProperty AnimateBorderProperty = DependencyProperty.Register(nameof(AnimateBorder), typeof(bool), typeof(SelectControl), new PropertyMetadata(false));
 
 
@@ -289,7 +289,7 @@ public class SelectControl : Control
         _sizeGrid = Template.FindName("SizeGrid", this) as Grid;
         //_sizeTextBlock = Template.FindName("SizeTextBlock", this) as TextBlock;
         //_sizeNativeTextBlock = Template.FindName("NativeSizeTextBlock", this) as TextBlock;
-            
+
         //_rectGrid = Template.FindName("RectGrid", this) as Grid;
         //_closeRectButton = Template.FindName("CloseSizeWidgetButton", this) as ImageButton;
         //_moveSizeWidgetGrid = Template.FindName("MoveSizeWidgetGrid", this) as Grid;
@@ -383,7 +383,7 @@ public class SelectControl : Control
             if (!IsMouseCaptured || e.LeftButton != MouseButtonState.Pressed)
                 return;
 
-            //Move 1 pixel to corrent the position of the selection to the cursor.
+            // Move 1 pixel to current the position of the selection to the cursor.
             current.X++;
             current.Y++;
 
@@ -711,7 +711,7 @@ public class SelectControl : Control
             return;
         }
 
-        //Show the controls always closest to the given point, if there's no space on the current monitor, 
+        //Show the controls always closest to the given point, if there's no space on the current monitor,
         //try finding the second closest point, or else show inside the selection rectangle.
 
         if (!point.HasValue)
@@ -1271,7 +1271,7 @@ public class SelectControl : Control
             return;
         }
 
-        //In a predetermined selection mode (window or screen) 
+        //In a predetermined selection mode (window or screen)
         if (control.Mode == ModeType.Fullscreen || control.Mode == ModeType.Window)
         {
             control.NonExpandedSelection = control.Selected.Offset(0); //In this case Offset is just rounding the selection points.
@@ -1319,7 +1319,7 @@ public class SelectControl : Control
 
     private void Rectangle_MouseMove(object sender, MouseEventArgs e)
     {
-        if (Mode != ModeType.Region || !_rectangle.IsMouseCaptured || e.LeftButton != MouseButtonState.Pressed) 
+        if (Mode != ModeType.Region || !_rectangle.IsMouseCaptured || e.LeftButton != MouseButtonState.Pressed)
             return;
 
         //A quick double click will fire this event, when it should fire the OnMouseLeftButtonUp.
@@ -1364,7 +1364,7 @@ public class SelectControl : Control
         if (_rectangle.IsMouseCaptured)
             _rectangle?.ReleaseMouseCapture();
 
-        //A quick double quick will fire this event, whe it should fire the OnMouseLeftButtonUp.
+        //A quick double quick will fire this event, when it should fire the OnMouseLeftButtonUp.
         if (Selected.IsEmpty || Selected.Width < 10 || Selected.Height < 10)
             return;
 

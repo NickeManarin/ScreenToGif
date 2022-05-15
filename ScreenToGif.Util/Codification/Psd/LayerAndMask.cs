@@ -20,7 +20,7 @@ internal class LayerAndMask : IPsdContent
 
                 stream.WriteUInt32(BitHelper.ConvertEndian((uint)0)); //Length of the Mask block, 4 bytes.
 
-                //Aditional LayerInfo goes here. TODO
+                //Additional LayerInfo goes here. TODO
 
                 stream.WritePadding(2); //Pad to multiple of 2 bytes.
 

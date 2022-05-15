@@ -22,7 +22,7 @@ public static class LocalizationHelper
     public static string CurrentCulture { get; set; }
 
     public static CultureInfo CurrentCultureInfo { get; set; }
-        
+
     public static void SelectCulture(string culture)
     {
         CurrentCultureInfo ??= CultureInfo.CurrentUICulture;
@@ -35,10 +35,10 @@ public static class LocalizationHelper
 
         if (culture.Equals("auto") || culture.Length < 2)
             culture = CurrentCultureInfo.Name;
-            
+
         #endregion
 
-        //Copy all MergedDictionarys into a auxiliar list.
+        //Copy all MergedDictionaries into a auxiliary list.
         var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
 
         #region Selected Culture
@@ -113,7 +113,7 @@ public static class LocalizationHelper
 
     /// <summary>
     /// This is what happens:
-    /// 
+    ///
     ///Get date of available resource
     ///  if resource available is newer than assembly
     ///      if there is already a translation downloaded
@@ -150,7 +150,7 @@ public static class LocalizationHelper
 
                 return;
             }
-            
+
             //If a translation was previously downloaded.
             if (File.Exists(file))
             {
@@ -163,7 +163,7 @@ public static class LocalizationHelper
                 DownloadLatest(file, culture);
             }
 
-            //If a new translation was not downloaded (now or previously), ignore the following code. 
+            //If a new translation was not downloaded (now or previously), ignore the following code.
             if (!File.Exists(file))
                 return;
 
@@ -192,7 +192,7 @@ public static class LocalizationHelper
         }
         catch (Exception ex)
         {
-            LogWriter.Log(ex, "Check for an updated localization recource");
+            LogWriter.Log(ex, "Check for an updated localization resource");
         }
     }
 
@@ -231,7 +231,7 @@ public static class LocalizationHelper
     /// <summary>
     /// Downloads the available localization resource.
     /// </summary>
-    /// <param name="file">The destination path of the recource.</param>
+    /// <param name="file">The destination path of the resource.</param>
     /// <param name="culture">The culture of the resource to be downloaded.</param>
     private static void DownloadLatest(string file, string culture)
     {
@@ -262,7 +262,7 @@ public static class LocalizationHelper
 
     public static void SaveDefaultResource(string path)
     {
-        //Copy all MergedDictionarys into a auxiliar list.
+        //Copy all MergedDictionaries into a auxiliary list.
         var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
 
         try
@@ -325,7 +325,7 @@ public static class LocalizationHelper
 
     public static List<ResourceDictionary> GetLocalizations()
     {
-        //Copy all MergedDictionarys into a auxiliar list.
+        //Copy all MergedDictionaries into a auxiliary list.
         var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
 
         return dictionaryList.Where(x => x.Source.OriginalString.Contains("StringResource")).ToList();
@@ -374,7 +374,7 @@ public static class LocalizationHelper
                     }
                 }
             }
-                
+
             //Insert at the new position.
             Application.Current.Resources.MergedDictionaries.Insert(newIndex, dictionaryAux);
 

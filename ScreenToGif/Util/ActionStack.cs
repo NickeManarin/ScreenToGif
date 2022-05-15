@@ -800,7 +800,7 @@ public static class ActionStack
                 break;
             case EditAction.Add:
 
-                #region Remove the added frames                   
+                #region Remove the added frames
 
                 foreach (var index in latestRedo.Indexes.OrderByDescending(x => x))
                 {
@@ -903,7 +903,7 @@ public static class ActionStack
         //Pop all iteration from Undo stack
         for (var i = 0; i < count; i++)
             current = Undo(current, false);
-            
+
         ClearUndo();
         ClearRedo();
 
@@ -912,7 +912,7 @@ public static class ActionStack
 
     #endregion
 
-    #region Auxiliar
+    #region Auxiliary
 
     /// <summary>
     ///Creates the destination folder where the frames will be stored.
@@ -1026,7 +1026,7 @@ public static class ActionStack
     /// <returns>True if able to Reset.</returns>
     public static bool CanReset()
     {
-        //Can only reset if there's one or more state changes that won't be ignored. 
+        //Can only reset if there's one or more state changes that won't be ignored.
         return UndoStack.Count > 0 || (UndoStack.Count == 1 && UndoStack.All(x => !x.IgnoreWhenReset));
     }
 

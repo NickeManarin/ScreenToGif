@@ -1,9 +1,9 @@
 using System.IO;
 using System.Text;
 
-namespace ScreenToGif.Util.Codification.Psd.AditionalLayers;
+namespace ScreenToGif.Util.Codification.Psd.AdditionalLayers;
 
-internal class Metadata : IAditionalLayerInfo
+internal class Metadata : IAdditionalLayerInfo
 {
     public string Key { get; } = "shmd";
 
@@ -17,7 +17,7 @@ internal class Metadata : IAditionalLayerInfo
         {
             using (var stream = new MemoryStream())
             {
-                stream.WriteBytes(Encoding.ASCII.GetBytes(Key)); //Aditional layer info key, 4 bytes.
+                stream.WriteBytes(Encoding.ASCII.GetBytes(Key)); //Additional layer info key, 4 bytes.
 
                 foreach (var metadata in MetadataContentList)
                     stream.WriteBytes(metadata.Content);
