@@ -280,8 +280,8 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Die Einzelbilder (Frames) werden auf der Grundlage „pro Stunde”&#10;(Zeitraffer) erfasst, wobei der auf dem Rekorderbildschirm&#10;eingestellte Nennwert der Bildwiederholrate zugrunde gelegt wird.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">Wiedergabeverzögerung:</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(Alle erfasste Einzelbilder werden auf diese Verzögerung (in ms) festgelegt)</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Playback">Wiedergabeverzögerung:</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">([ms] Jedes aufgenommene Einzelbild (Frame) wird auf diese Verzögerung festgelegt)</s:String>
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Trigger">Trigger delay:</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">(In ms, each frame capture will wait this amount of time before starting)</s:String>-->
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">Jedes Einzelbild (Frame) wird in einem Intervall von {0} aufgenommen.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">Aufnahmemodus</s:String>
