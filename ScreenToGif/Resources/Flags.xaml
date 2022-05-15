@@ -301,4 +301,9 @@
         <Path Fill="#ff23923b" Data="F1 M 40.000,26.667 L 0.000,26.667 L 0.000,17.778 L 40.000,17.778 L 40.000,26.667 Z"/>
         <Path Fill="#ffffffff" Data="F1 M 40.000,17.778 L 0.000,17.778 L 0.000,8.889 L 40.000,8.889 L 40.000,17.778 Z"/>
     </Canvas>
+
+    <Canvas x:Shared="False" x:Key="Flag.Finland" HorizontalAlignment="Center" UseLayoutRounding="False" VerticalAlignment="Center" Width="40" Height="24.4">
+        <Path Fill="#ffffffff" Data="F1 M 40.000,24.4 L 40.000,0.000 L 0.000,0.000 L 0.000,24.4 L 40.000,24.4 Z"/>
+        <Path Fill="#ff005a9b" Data="F1 M 11.105,0.000 L 11.105,8.883 L 0.000,8.883 L 0.000,15.548 L 11.105,15.548 L 11.105,24.436 L 17.769,24.436 L 17.769,15.548 L 40.000,15.548 L 40.000,8.883 L 17.769,8.883 L 17.769,0.000 L 11.105,0.000 Z"/>
+    </Canvas>
 </ResourceDictionary>
