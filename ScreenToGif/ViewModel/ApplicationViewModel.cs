@@ -1316,7 +1316,7 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
                 FileName = "msiexec",
                 Arguments = $" {(isInstaller ? "/i" : "/a")} \"{nonRoot}\"" +
                             $" {(isInstaller ? "INSTALLDIR" : "TARGETDIR")}=\"{AppDomain.CurrentDomain.BaseDirectory}\" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE={(isInstaller ? "no" : "yes")}" +
-                            $" ADDLOCAL=Binary{(isInstaller ? ",Auxiliary" : "")}{(hasGifski ? ",Gifski" : "")}" +
+                            $" ADDLOCAL=Binary{(isInstaller ? ",Auxiliar" : "")}{(hasGifski ? ",Gifski" : "")}" +
                             $" {(wasPromptedManually && runAfterwards ? "RUNAFTER=yes" : "")}" +
                             (isInstaller ? $" INSTALLDESKTOPSHORTCUT={(hasDesktopShortcut ? "yes" : "no")} INSTALLSHORTCUT={(hasMenuShortcut ? "yes" : "no")}" : ""),
                 Verb = UserSettings.All.ForceUpdateAsAdmin ? "runas" : ""
