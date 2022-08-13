@@ -916,7 +916,7 @@ internal class EncodingManager
 
                         foreach (var frame in project.FramesFiles)
                         {
-                            var path = Path.Combine(preset.OutputFolder, $"{preset.ResolvedFilename} {frame.Index.ToString().PadLeft(padLength, '0')}{preset.Extension ?? preset.DefaultExtension}");
+                            var path = Path.Combine(preset.OutputFolder, $"{preset.ResolvedFilename}-{frame.Index.ToString().PadLeft(padLength, '0')}{preset.Extension ?? preset.DefaultExtension}");
 
                             if (File.Exists(path))
                                 File.Delete(path);
