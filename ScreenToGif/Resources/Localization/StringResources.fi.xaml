@@ -1,0 +1,2000 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xml:space="preserve">
+    
+    <!--To use a new line: &#x0d; or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--You can use the zero-width-divider to suggest where the word should be divided when there's no space &#8203;-->
+    <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
+    
+    <!--General-->
+    <s:String x:Key="S.Ok">Ok</s:String>
+    <s:String x:Key="S.Back">Takaisin</s:String>
+    <s:String x:Key="S.Cancel">Peruuta</s:String>
+    <s:String x:Key="S.Yes">Kyllä</s:String>
+    <s:String x:Key="S.No">Ei</s:String>
+    <s:String x:Key="S.Add">Lisää</s:String>
+    <s:String x:Key="S.Edit">Muokkaa</s:String>
+    <s:String x:Key="S.Id">Id</s:String>
+    <s:String x:Key="S.Title">Otsikko</s:String>
+    <s:String x:Key="S.Description">Kuvaus</s:String>
+    <s:String x:Key="S.SelectColor">Click here to select the color.</s:String>
+    <s:String x:Key="S.Documentation">Siirry dokumentaatioon napsauttamalla tätä.</s:String>
+    <s:String x:Key="S.Suppress">Suppress</s:String>
+    <s:String x:Key="S.Preview">Esikatselu</s:String>
+    <s:String x:Key="S.Size">Size</s:String>
+    <s:String x:Key="S.Background">Tausta</s:String>
+    <s:String x:Key="S.Color">Väri:</s:String>
+    <s:String x:Key="S.Delay">Viive</s:String>
+    <s:String x:Key="S.DelayMs">Viive:</s:String>
+    <s:String x:Key="S.ValueMs">Arvo -+:</s:String>
+    <s:String x:Key="S.ScaleValue">Scale Value:</s:String>
+    <s:String x:Key="S.Margin">Marginaali:</s:String>
+    <s:String x:Key="S.Padding">Täyte:</s:String>
+    <s:String x:Key="S.MinHeight">Vähimmäiskorkeus:</s:String>
+    <s:String x:Key="S.AndOr">ja/tai</s:String>
+    
+    <!--Warnings-->
+    <s:String x:Key="S.Crash">Voi ei, sovellus kaatui :(</s:String>
+    <s:String x:Key="S.Required">Pakollinen kenttä</s:String>
+    <s:String x:Key="S.Warning.Net.Title">Puuttuva riippuvuustekijä</s:String>
+    <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 ei ole käytössä</s:String>
+    <s:String x:Key="S.Warning.Net.Message">Jotta voit käyttää tätä sovellusta kunnolla, sinun on ladattava oikea versio .Net Frameworkista.&#10;Haluatko avata verkkosivun ladataksesi sen?</s:String>
+    <s:String x:Key="S.Warning.Single.Title">Vain yksi instanssi sallittu</s:String>
+    <s:String x:Key="S.Warning.Single.Header">Sovellus on jo käynnissä</s:String>
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGif on jo käynnissä, mutta ilmeisesti ikkuna ei ole avoinna. Tarkista, että ScreenToGif-kuvake on ilmoitusalueella.</s:String>
+    
+    <s:String x:Key="S.SavingSettings.Title">Saving the settings</s:String>
+    <s:String x:Key="S.SavingSettings.Instruction">Would you like to try to save it again?</s:String>
+    <s:String x:Key="S.SavingSettings.Message">Looks like ScreenToGif does not have enough privileges to save the settings to the disk.&#10;&#10;Would you like to try again, but this time using administrative privileges?</s:String>
+    
+    <s:String x:Key="S.Exiting.Title">Poistu ScreenToGif:stä</s:String>
+    <s:String x:Key="S.Exiting.Instruction">Haluatko varmasti poistua?</s:String>
+    <s:String x:Key="S.Exiting.Message">Kaikki ikkunat suljetaan ja ilmoitusalueen kuvake poistetaan.</s:String>
+
+    <!--Warnings • Graphics engine-->
+    <s:String x:Key="S.Warning.Graphics.Title">Vaihda grafiikkasovitin</s:String>
+    <s:String x:Key="S.Warning.Graphics.Instruction">Vaihda oikeaan grafiikkasovittimeen valitun näytön kaappaamiseksi.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Message">DirectX:n rajoituksen vuoksi ScreenToGif-ohjelman on oltava käynnissä samalla grafiikkasovittimella kuin kaapattavan näytön.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action">Vaihda näytönohjain ScreenToGifiä varten avaamalla Windows-asetukset > Järjestelmä > Näyttö > Grafiikka-asetukset tai napsauttamalla alla olevaa linkkiä.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action.Legacy">Vaihda näytönohjain ScreenToGifiä varten avaamalla näytönohjaimesi grafiikka-asetukset.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Switch">Avaa Windowsin asetukset</s:String>
+    
+    <!--Keys-->
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>
+    <s:String x:Key="S.Keys.Space">Välilyönti</s:String>
+
+    <!--Mouse-->
+    <s:String x:Key="S.Mouse.Right">Oikea klikkaus</s:String>
+    
+    <!--Tray icon-->
+    <s:String x:Key="S.NewRecording">Uusi näytön tallennus</s:String>
+    <s:String x:Key="S.NewWebcamRecording">Uusi Verkkokameratallennus</s:String>
+    <s:String x:Key="S.NewBoardRecording">Uusi Piirustustaulun tallennus</s:String>
+    <s:String x:Key="S.Exit">Poistu</s:String>
+    
+    <!--Commands-->
+    <s:String x:Key="S.Command.NewRecording">Uusi näytön tallennus</s:String>
+    <s:String x:Key="S.Command.NewWebcamRecording">Uusi Verkkokameratallennus</s:String>
+    <s:String x:Key="S.Command.NewBoardRecording">Uusi Piirustustaulun tallennus</s:String>
+    <s:String x:Key="S.Command.NewAnimation">Uusi animaatio</s:String>
+    <s:String x:Key="S.Command.InsertRecording">Lisää näytön tallennus</s:String>
+    <s:String x:Key="S.Command.InsertWebcamRecording">Lisää Verkkokameratallenne</s:String>
+    <s:String x:Key="S.Command.InsertBoardRecording">Aseta Piirustustaulun tallennus</s:String>
+    <s:String x:Key="S.Command.InsertFromMedia">Lisää mediasta (kuvat ja videot)</s:String>
+    <s:String x:Key="S.Command.SaveAs">Tallenna nimellä...</s:String>
+    <s:String x:Key="S.Command.Load">Lataa tiedostoja (kuvia, videoita ja projekteja)</s:String>
+    <s:String x:Key="S.Command.LoadRecent">Lataa viimeisimpiä projekteja</s:String>
+    <s:String x:Key="S.Command.DiscardProject">Hylkää nykyinen projekti</s:String>
+    <s:String x:Key="S.Command.OverrideDelay">Ohita kehysten viive</s:String>
+    <s:String x:Key="S.Command.IncreaseDecreaseDelay">Lisää/vähennä kehysten viivettä</s:String>
+    <s:String x:Key="S.Command.ScaleDelay">Kehysten viiveen skaalaus</s:String>
+    <s:String x:Key="S.Command.Zoom100">Aseta zoomaus 100%</s:String>
+    <s:String x:Key="S.Command.SizeToContent">Säädä ikkuna kehyksen koon mukaan</s:String>
+    <s:String x:Key="S.Command.FitImage">Sovita kuva käytettävissä olevaan ikkunakokoon</s:String>
+    <s:String x:Key="S.Command.FirstFrame">Valitse ensimmäinen kehys</s:String>
+    <s:String x:Key="S.Command.PreviousFrame">Valitse edellinen kehys</s:String>
+    <s:String x:Key="S.Command.Play">Toista animaatio</s:String>
+    <s:String x:Key="S.Command.NextFrame">Valitse seuraava kehys</s:String>
+    <s:String x:Key="S.Command.LastFrame">Valitse viimeinen kehys</s:String>
+    <s:String x:Key="S.Command.Undo">Kumoa</s:String>
+    <s:String x:Key="S.Command.Redo">Tee uudelleen</s:String>
+    <s:String x:Key="S.Command.Reset">Peruuta kaikki projektin muutokset</s:String>
+    <s:String x:Key="S.Command.Copy">Kopioi valitut kehykset ja tallenna ne leikepöydälle.</s:String>
+    <s:String x:Key="S.Command.Cut">Leikkaa valitut kehykset ja tallenna ne leikepöydälle.</s:String>
+    <s:String x:Key="S.Command.Paste">Liitä kehyksiä leikepöydältä</s:String>
+    <s:String x:Key="S.Command.Delete">Poista kaikki valitut kehykset</s:String>
+    <s:String x:Key="S.Command.DeletePrevious">Poista kaikki edelliset kehykset</s:String>
+    <s:String x:Key="S.Command.DeleteNext">Poista kaikki seuraavat kehykset</s:String>
+    <s:String x:Key="S.Command.RemoveDuplicates">Poista kaksoiskappaleet</s:String>
+    <s:String x:Key="S.Command.Reduce">Vähennä kehysten määrää</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">Luo tasainen silmukka</s:String>
+    <s:String x:Key="S.Command.Reverse">Käänteinen animaatio</s:String>
+    <s:String x:Key="S.Command.Yoyo">Saa animaation kulkemaan eteen- ja taaksepäin.</s:String>
+    <s:String x:Key="S.Command.MoveLeft">Siirrä valittua kehystä vasemmalle</s:String>
+    <s:String x:Key="S.Command.MoveRight">Siirrä valittua kehystä oikealle</s:String>
+    <s:String x:Key="S.Command.Resize">Muuta kaikkien kehysten kokoa</s:String>
+    <s:String x:Key="S.Command.Crop">Rajaa kaikki kehykset</s:String>
+    <s:String x:Key="S.Command.FlipRotate">Käännä tai kierrä kehyksiä</s:String>
+    <s:String x:Key="S.Command.Caption">Lisää kuvateksti</s:String>
+    <s:String x:Key="S.Command.FreeText">Lisää vapaasti leijuva teksti</s:String>
+    <s:String x:Key="S.Command.TitleFrame">Lisää kehys, jossa on otsikko</s:String>
+    <s:String x:Key="S.Command.KeyStrokes">Lisää tallennuksen aikana painetut näppäimet</s:String>
+    <s:String x:Key="S.Command.FreeDrawing">Piirrä vapaita kuvioita</s:String>
+    <s:String x:Key="S.Command.Shapes">Lisää kuvioita</s:String>
+    <s:String x:Key="S.Command.MouseClicks">Hiiren klikkaukset</s:String>
+    <s:String x:Key="S.Command.Watermark">Valitse kuva ja lisää vesileimana</s:String>
+    <s:String x:Key="S.Command.Border">Lisää reunuksia</s:String>
+    <s:String x:Key="S.Command.Shadow">Lisää pudotusvarjo</s:String>
+    <s:String x:Key="S.Command.Obfuscate">Piilota kehysten arkaluonteiset osat</s:String>
+    <s:String x:Key="S.Command.Cinemagraph">Käytä piirtotyökaluja valitaksesi, mitkä kehyksen osat eivät saa pysyä staattisina koko animaation ajan.</s:String>
+    <s:String x:Key="S.Command.Progress">Edistymispalkki tai teksti toiston tiedoista</s:String>
+    <s:String x:Key="S.Command.SelectAll">Valitse kaikki kehykset</s:String>
+    <s:String x:Key="S.Command.GoTo">Siirry kehykseen indeksillä</s:String>
+    <s:String x:Key="S.Command.InverseSelection">Käänteinen kehysten valinta</s:String>
+    <s:String x:Key="S.Command.Unselect">Poista kaikkien kehysten valinta</s:String>
+    <s:String x:Key="S.Command.Fade">Häivytyssiirtymä</s:String>
+    <s:String x:Key="S.Command.Slide">Dian siirtymä</s:String>
+    <s:String x:Key="S.Command.ClearAll">Tyhjennä kaikki valmiit koodaukset</s:String>
+    <s:String x:Key="S.Command.MoveUp">Siirrä ylöspäin</s:String>
+    <s:String x:Key="S.Command.MoveDown">Siirrä alaspäin</s:String>
+    <s:String x:Key="S.Command.Add">Lisää</s:String>
+    <s:String x:Key="S.Command.Open">Avaa</s:String>
+    <s:String x:Key="S.Command.Edit">Muokkaa valittua kohdetta</s:String>
+    <s:String x:Key="S.Command.Save">Tallenna valittu kohde</s:String>
+    <s:String x:Key="S.Command.Remove">Poista valittu kohde</s:String>
+    <s:String x:Key="S.Command.ViewHistory">Näytä historia</s:String>
+    
+    <!--StartUp-->
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - Käynnistys</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Tallennin</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Avaa näytön tallentimen,&#10;jossa voit helposti aloittaa näytön tallentamisen.</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Verkkokamera</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Avaa Verkkokameranauhurin.</s:String>
+    <s:String x:Key="S.StartUp.Board">Piirustustaulu</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Avaa Piirustustaulutallentimen,&#10;jossa voit aloittaa piirustusten tallentamisen.</s:String>
+    <s:String x:Key="S.StartUp.Editor">Editori</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Avaa editori-ikkunan, tämän sovelluksen keskipisteen,&#10;jossa voit aloittaa ja muokata uutta tallennusta.</s:String>
+    <s:String x:Key="S.StartUp.Options">Asetukset</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Uusi versio saatavilla</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Lataa ScreenToGifin uusimman version.</s:String>
+
+    <!--Updater-->
+    <s:String x:Key="S.Updater.Title">ScreenToGif - Päivitysohjelma</s:String>
+    <s:String x:Key="S.Updater.Header">Uusi päivitys on saatavilla</s:String>
+    <s:String x:Key="S.Updater.NewRelease">Uusi julkaisu!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">Uusi versio saatavilla, versio {0}!&#x0d;Klikkaa tästä saadaksesi lisätietoja.</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">Näyttää siltä, että järjestelmääsi ei enää tueta tai että päivitysjärjestelmässä on tapahtunut muutoksia. Yritä ladata se manuaalisesti verkkosivustolta.</s:String>
+    <s:String x:Key="S.Updater.Version">Versio</s:String>
+    <s:String x:Key="S.Updater.Portable">Siirrettävä</s:String>
+    <s:String x:Key="S.Updater.Installer">Asentaja</s:String>
+    <s:String x:Key="S.Updater.Info.WhatsNew">Mitä uutta?</s:String>
+    <s:String x:Key="S.Updater.Info.BugFixes">Virheiden korjaukset:</s:String>
+    <s:String x:Key="S.Updater.Info.NewVersionAvailable">Uusi versio on ladattavissa.&#x0d;Haluatko avata selaimen ladataksesi sen?</s:String>
+    <s:String x:Key="S.Updater.RunAfter">Suorita sovellus päivityksen jälkeen.</s:String>
+    <s:String x:Key="S.Updater.Download">Download</s:String>
+    <s:String x:Key="S.Updater.Install">Asenna</s:String>
+    <s:String x:Key="S.Updater.InstallManually">Asenna manuaalisesti</s:String>
+    <s:String x:Key="S.Updater.Downloading">Downloading...</s:String>
+    <s:String x:Key="S.Updater.Warning.Show">Lataustietojen näyttäminen ei ollut mahdollista.</s:String>
+    <s:String x:Key="S.Updater.Warning.Download">Päivitystä ei voitu ladata.</s:String>
+    <s:String x:Key="S.Updater.Warning.Encoding">Sinun on odotettava, että kaikki koodaukset valmistuvat ennen päivittämistä.</s:String>
+    
+    <!--Downloader-->
+    <s:String x:Key="S.Downloader.Title">ScreenToGif - Lataaja</s:String>
+    <s:String x:Key="S.Downloader.Header">Lataaja</s:String>
+    <s:String x:Key="S.Downloader.Size">{0} / {1}</s:String>
+    
+    <!--Options-->
+    <s:String x:Key="S.Options.Title">ScreenToGif - Asetukset</s:String>
+    <s:String x:Key="S.Options.App">Sovellus</s:String>
+    <s:String x:Key="S.Options.Recorder">Tallennin</s:String>
+    <s:String x:Key="S.Options.Editor">Editori</s:String>
+    <s:String x:Key="S.Options.Tasks">Tehtävät</s:String>
+    <s:String x:Key="S.Options.Shortcuts">Pikakuvakkeet</s:String>
+    <s:String x:Key="S.Options.Language">Kieli</s:String>
+    <s:String x:Key="S.Options.Storage">Tallennus</s:String>
+    <s:String x:Key="S.Options.Extras">Ekstrat</s:String>
+    <s:String x:Key="S.Options.Upload">Pilvi</s:String>
+    <s:String x:Key="S.Options.Donate">Lahjoita</s:String>
+    <s:String x:Key="S.Options.About">Tietoja</s:String>
+    <s:String x:Key="S.Options.Other">Muut</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Header">Puuttuva pikanäppäin kursorin seuraamiselle</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Message">Jos haluat käyttää hiirikursorin seuraamistoimintoa, sinun on määritettävä pikanäppäin, jolla voit vaihtaa sen tarvittaessa.</s:String>
+
+    <!--Options • Application-->
+    <s:String x:Key="S.Options.App.Startup">Käynnistys</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual">Käynnistä&#10;manuaalisesti</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual.Info">Sovellus suoritetaan vain, kun teet sen manuaalisesti.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic">Käynnistä&#10; Windowsin kanssa</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">Sovellus suoritetaan Windowsin käynnistyksen jälkeen.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Warning">Käynnistystilojen vaihtaminen on mahdotonta.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single">Salli vain&#10;yksi instanssi</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">Voit suorittaa sovelluksen kerran käyttäjää ja suoritusohjelmaa kohti, mikä tarkoittaa, että eri käyttäjät tai suoritusohjelmat voivat olla rinnakkain.&#10;Kun sovellusta yritetään suorittaa uudelleen, toinen instanssi yrittää antaa fokuksen ensimmäiselle ja lopettaa itsensä.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple">Salli useita&#10;instansseja</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">Voit käyttää sovellusta samanaikaisesti useampaan kertaan ilman rajoituksia.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray">Käynnistä minimoituna ilmoitusalueelle.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray.Info">(Ilmoitusalueen kuvake on näkyvissä, kun tämä vaihtoehto on aktiivinen.)</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window">Käynnistä:</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Käynnistysikkuna</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Näytön tallennin</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Verkkokameratallennin</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">piirustusPiirustustaulun tallennin</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Editori-ikkuna</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Info">(Ikkuna, joka näkyy ensimmäisenä sovelluksen käynnistyessä)</s:String>
+    <s:String x:Key="S.Options.App.Theme">Teema</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme">Värimaailma:</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">Hyvin vaalea</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Light">Vaalea</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Keskitaso</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Tumma</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Hyvin tumma</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">Seuraa järjestelmää</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Mukautettu</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Example">Esimerkkivärit.</s:String>
+    <s:String x:Key="S.Options.App.Tray">Ilmoitusalueenkuvake</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">Näytä sovellus ilmoitusalueella.</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Pidä sovellus auki, vaikka kaikki ikkunat olisi suljettu.</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">Älä tee mitään</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Open">Avaa ikkuna</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Open.None">Ei ikkunaa</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Toggle">Minimoi/palauta kaikki ikkunat</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Minimize">Minimoi kaikki ikkunat</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Restore">Palauta kaikki ikkunat</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Left">Vasen klikkaus:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">Vasen klikkaus (x2):</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">Keskiklikkaus:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Window">Ikkuna:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Else">Tai muuten avaa:</s:String>
+    <s:String x:Key="S.Options.App.General">Yleiset</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota">Ratkaisu 'Ei tarpeeksi kiintiötä...' -kaatumiseen.</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(Kokeellinen)</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Kysy ennen sovelluksen sulkemista (komennolla 'Poistu').</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Poista laitteistokiihdytys käytöstä.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(Käyttöliittymä renderöidään ohjelmistotilassa)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Tarkista käännöspäivitykset.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Päivitetyt käännökset ladataan ja asennetaan automaattisesti)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Tarkista päivitykset käynnistyksen yhteydessä.</s:String>
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">Asenna päivitykset automaattisesti sovelluksen sulkemisen jälkeen.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate">Pakota kannettavan version lataaminen.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(Vaatii manuaalisen asennuksen purkamalla ja korvaamalla suoritettava tiedosto.)</s:String>
+    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Pakota päivitys suoritettavaksi korotetuilla käyttöoikeuksilla.</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">Kehotus ennen asennuksen aloittamista.</s:String>
+
+    <!--Options • Recorder-->
+    <s:String x:Key="S.Options.Recorder.Interface">Käyttöliittymä</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.Old">Vanha</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.New">Uusi</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.Frequency">Kaappaustaajuus</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Manual">Manuaalinen</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Kaappaat jokaisen ruudun manuaalisesti painamalla kaappauspainiketta tai vastaavaa pikanäppäintä.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction">Käyttäjän vuorovaikutus</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">Ruudut tallennetaan joka kerta, kun napsautat tai kirjoitat jotain.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second">Sekunnissa</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Ruudut tallennetaan sekuntikohtaisesti, &#10;kun otetaan huomioon tallentimen näytöllä asetettu ruutunopeuden nimittäjä.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute">Minuutissa</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">Ruudut tallennetaan minuuttiperustaisesti (timelapse), &#10;kun otetaan huomioon tallentimen näytöllä asetettu kuvataajuuden nimittäjä.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour">Tunnissa</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Ruudut tallennetaan "per tunti" (timelapse), &#10;kun otetaan huomioon tallentimen näytöllä asetettu kuvataajuuden nimittäjä.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Playback">Toiston viive:</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(Millisekunteina, kukin kaapattu ruutu asetetaan tähän viiveeseen)</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger">Käynnistysviive:</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">(Millisekunteina, jokainen kuvankaappaus odottaa tämän ajan ennen aloitusta)</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interval">Jokainen kehys tallennetaan {0}:n välein.</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.Mode">Kaappaustila</s:String>
+    <s:String x:Key="S.Options.Recorder.Bitblt.Info">Käytä vanhempaa kaappausmenetelmää, joka on hitaampi eikä ehkä toimi pelien kaappaamisessa, mutta ei vaadi lisäosia.</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">Käytä Desktop Duplication API -kaappausmenetelmää, joka on nopeampi ja pystyy kaappaamaan kokoruudun pelejä, mutta vaatii Windows 8:n tai uudemman.</s:String>
+    <s:String x:Key="S.Options.Recorder.File">Tallenna&#10;tiedostoon</s:String>
+    <s:String x:Key="S.Options.Recorder.File.Info">Jokainen otettu kehys tallennetaan suoraan kuvana levylle.</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache">Muisti&#10;välimuisti</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache.Info">Jokainen kaapattu kuva tallennetaan ensin pikseliryhmänä muistiin (voidaan pakata ennen sitä).</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression">Pakkaus:</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal">Optimaalinen</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal.Info">(Hitaampi mutta todennäköisesti optimaalisempi pakkaus)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest">Nopein</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">(Nopeampi, mutta todennäköisesti vähemmän optimaalinen pakkaus)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression">Ei pakkausta</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(Pakkausta ei suoriteta kuvien tallentamisen aikana.)</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize">Välimuistin koko:</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize.Info">(MB:ssä. Kun tämä koko on saavutettu, tiedot kirjoitetaan levylle).</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames">Estä täydellisten mustien kehysten ottaminen.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">(Estää muistin välimuistia käyttävää BitBlt:tä tuottamasta virheellisesti kehyksiä, joissa kaikki pikselit ovat mustia.)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Näytä hiiren kursori tallenteessa.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Valitse kursorin väri</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Kiinteä kuvataajuus.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Jatkuva viive, joka ei muutu tallennusviiveen mukaan)</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges">Kaappaa vain silloin, kun jokin muuttuu.</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(Kehys kaapataan vain silloin, kun jokin muuttuu kaappausalueella.)</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement">Paranna kaappauksen suorituskykyä etätyöpöytäyhteydessä.</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Poistaa kerroksittaisen ikkunan kaappauksen käytöstä)</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">Pakota muistin puhdistaminen kaappauksen aikana.</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">(Vähentää muistin käyttöä kaappauksen aikana, mutta heikentää suorituskykyä)</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.Guidelines">Toimintaohjeet</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">Kolmasosasääntö</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">Vaihda kolmanneksen sääntöä koskevan&#10;ohjeen näyttöä.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">Ristikko</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">Vaihda ristikon näyttöä napsauttamalla tätä.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">Ohjeet näkyvät vain, kun tallennin on tauotettu tai pysäytetty.</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.HideTitleBar">Piilota otsikkorivi (minitila).</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Ota näytön suurennuslasi käyttöön.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Ottaa suurennuslasin käyttöön, kun valitaan tallennusaluetta.)</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder">Animoi näyttöalueen reunaa valinnan aikana.</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder.Info">(Animoi käyttäen 'marssivat muurahaiset' -tyyliä)</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning">Ota valinnan panorointi käyttöön.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">(Näyttää valinnan kulman lähellä olevan kuvaajan, joka mahdollistaa tallennusalueen liikuttamisen)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact">Kompaktitila.</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact.Info">(Näyttää pienemmän version tallentimen komentopaneelista)</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard">Näytä Hylkää-painike myös tallennuksen aikana.</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(Normaalisti se on näkyvissä vain tauolla ollessasi).</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement">Paranna näytön valinnan suorituskykyä.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(Vähentää viivettä näytön valinnan aikana näyttämällä staattisen näkymän näytöstä)</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.RememberSize">Muista tallennusalueen aiempi koko.</s:String>
+    <s:String x:Key="S.Options.Recorder.RememberPosition">Muista tallennusalueen edellinen sijainti.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Käytä käynnistyksen lähtölaskentaa.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(Odottaa sekunteina ennen kaappauksen aloittamista)</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing">Ota seuraava kursori käyttöön.</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(Tallennusalue asettuu uudelleen kursorin sijainnin mukaan).</s:String>
+    <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Puskurin marginaali pikseleinä, jossa tallennusaluetta aletaan sijoittaa uudelleen)</s:String>
+    <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Puskurin lisämarginaali pikseleinä, jossa käyttöliittymä alkaa olla piilossa)</s:String>
+    <s:String x:Key="S.Options.Recorder.NotifyRecordingDiscard">Kysy, ennen kuin hylkäät tallenteen.</s:String>
+
+    <!--Options • Editor-->
+    <s:String x:Key="S.Options.Editor.Previewer">Esikatselun tausta</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize">Ruudukon koko:</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.VerySmall">Hyvin pieni</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Small">Pieni</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Medium">Keskikokoinen</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Large">Suuri</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.VeryLarge">Erittäin suuri</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">Pidän isoista neliöistä</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ImBlind">Olen sokea</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">Mukautettu</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">Korkeus:</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">Leveys:</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">Käytä</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Perusväri</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Parillinen väri</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.OddColor">Pariton väri</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Näytä koodaukset erillisessä ikkunassa.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Laajenna otsikkopalkkia (window chrome).</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Säädä ikkunan koko automaattisesti kehyksen koon mukaan heti lataamisen jälkeen.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Säädä kehyksen zoomaus automaattisesti ikkunan koon mukaan heti lataamisen jälkeen.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">Kysy ennen kehysten poistamista.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">Kysy ennen projektin hylkäämistä.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Kysy ennen Editorin sulkemista (jos projekti on avattu).</s:String>
+    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Ota käyttöön kolmoisnapsautus tekstin valitsemiseksi.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Piirrä otsikoiden ääriviivat kirjainten ulkopuolelle.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Pudota kehyksiä tarvittaessa.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(Ohita kehys, jos esikatseluohjelma ei pysty näyttämään sitä ajoissa)</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Ohita kehys, jos esikatseluohjelma ei pysty näyttämään sitä ajoissa.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory">Rajoita peruutus-/palautushistoriaa.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Vanhemmat toimet poistetaan, kun raja on saavutettu.)</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Tallennettujen toimien enimmäismäärä)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">Synkronoi lähtökansio esiasetusten kesken.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder.Info">(Esiasetukset käyttävät samaa ulostulopolkua)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename">Synkronoi myös tiedostonimi.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename.Info">(Myös esiasetukset käyttävät samaa tiedostonimeä)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType">Synkronoi vain saman tiedostotyypin esiasetukset.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType.Info">(Vain saman tiedostotyypin esiasetukset ovat synkassa.)</s:String>
+    
+    <!--Options • Tasks-->
+    <s:String x:Key="S.Options.Tasks.Title">Automatisoitu tehtävä</s:String>
+    <s:String x:Key="S.Options.Tasks.List">Luettelo automaattisista tehtävistä</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Task">Tehtävä</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Details">Yksityiskohdat</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Enabled">Käytössä</s:String>
+    <s:String x:Key="S.Options.Tasks.Enable">Ota tehtävä käyttöön.</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType">Valitse tehtävä</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType.Info">Valitse yllä oleva tehtävä</s:String>
+    <s:String x:Key="S.Options.Tasks.Info">Nämä tehtävät suoritetaan peräkkäin luettelon yläreunasta alareunaan.&#10;Tämä tapahtuu, kun avaat projektin ensimmäistä kertaa editorilla.</s:String>
+  
+    <!--Options • Shortcuts-->
+    <s:String x:Key="S.Options.Shortcuts.Global">Globaali</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder">Näytön tallennin:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder.Info">(Avaa oletusnäyttötallentimen)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder">Verkkokameratallennin:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder.Info">(Avaa Verkkokameratallennin)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder">Piirustustaulun tallennin:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder.Info">(Avaa Piirustustaulutallentimen, jolloin voit tallentaa piirustuksesi)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor">Editori:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor.Info">(Avaa toisen editori-ikkunan)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions">Asetukset:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions.Info">(Avaa valintaikkunan. Voit avata vain yhden kerrallaan)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.Exit">Poistu:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">(Sulkee kaikki ikkunat ja poistaa sovelluksen ilmoitusalueelta)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders">Nauhurit</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Käynnistys/tauko:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(Käynnistää tai keskeyttää tallennuksen. Sitä käytetään tilannekuvien ottamiseen, jos tilannekuvatoiminto on aktivoitu.)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Pysäytys:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(Pysäyttää tallennuksen ja avaa editorin)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">Hylkää:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">(Poistaa aktiivisen nauhoituksen, kun se on pysäytetty.)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">Kursorin seuraaminen:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">(Vaihtaa tallennusalueen säätöä kursorin sijainnin perusteella)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">Poista seuraavat käytöstä:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">(Poistaa tilapäisesti käytöstä tallennusalueen säätämisen kursorin sijainnin perusteella, vain muuntonäppäimet hyväksytään)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Info">Aseta näppäimistön fokus napsauttamalla ja paina sitten haluamiasi näppäimiä ja modifiointimerkkejä.&#10;Jotkin näppäinyhdistelmät eivät ole sallittuja.</s:String>
+    
+    <!--Options • Language-->
+    <s:String x:Key="S.Options.Language.AppLanguage">Sovelluksen kieli</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.AutoDetect">Autom. tunnistus</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.AutoDetect.Author">Nykyisen käyttöjärjestelmän kieli (jos käytettävissä)</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence1.1">Haluaisitko kääntää sovellukseni?</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence1.2">Klikkaa tästä lukeaksesi käännösohjeet ja ladataksesi Translator-sovelluksen.</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.1">Myöhemmin,</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.2">klikkaa tästä tuodaksesi</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.3">ja testaa käännöksesi.</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.1">Lähetä se minulle</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.2">email (nicke@outlook.com.br)</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.3">kun olet saanut sen käännettyä.</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.ResourceLink.Tooltip">Avaa ohjeiden verkkosivu.</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.ImportLink.Tooltip">Avaa tuontisivun</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip">Avaa sähköpostisovelluksesi</s:String>
+    
+    <!--Options • Storage-->
+    <s:String x:Key="S.Options.Storage.Status">Tila</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Volume">Asema:</s:String>
+    <s:String x:Key="S.Options.Storage.Status.FreeSpace">{0} vapaana {1}</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Check">Tarkista uudelleen, kuinka paljon tilaa on jäljellä.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Clear">Tyhjennä välimuistikansio.&#10;Voit päättää, haluatko säilyttää viimeisimmät projektit vai et.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.LowSpace">Nykyisen valitun kiintolevyn tila on vähissä. Puhdista välimuistikansio tai vaihda sijaintia.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Error">Aseman tietojen hakeminen on mahdotonta.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.None">Ei tiedostoja</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Singular">{0:##,##0} tiedosto</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Plural">{0:##,##0} tiedostoa</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.None">Ei kansioita</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Singular">{0:##,##0} kansio</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Plural">{0:##,##0} kansiota</s:String>
+    <s:String x:Key="S.Options.Storage.Status.InUse">{0} käytössä</s:String>
+    <s:String x:Key="S.Options.Storage.Paths">Polut</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache">Välimuisti:</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">Valitse välimuistin ( väliaikaiset tiedostot ) sijainti.</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs">Lokit:</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">Valitse virhelokitiedostojen sijainti.</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Browse">Selaa valittua kansiota.</s:String>
+    <s:String x:Key="S.Options.Storage.Settings">Asetusten sijainti</s:String>
+    <s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>
+    <s:String x:Key="S.Options.Storage.LocalPath">Paikallinen:</s:String>
+    <s:String x:Key="S.Options.Storage.NotExists">Sitä ei ole olemassa</s:String>
+    <s:String x:Key="S.Options.Storage.CreateSettings">Luo tyhjä paikallinen asetustiedosto.</s:String>
+    <s:String x:Key="S.Options.Storage.RemoveSettings">Poista asetustiedosto.</s:String>
+    <s:String x:Key="S.Options.Storage.OpenSettingsFolder">Avaa kansio, jossa asetustiedosto sijaitsee.&#x0d;Pidä Ctrl-näppäintä painettuna napsauttaessasi avataksesi tiedoston.</s:String>
+    <s:String x:Key="S.Options.Storage.SettingsInfo">- Asetusten latausmalli: &#x0d;- Jos Paikallinen-kansiossa ei ole asetustiedostoa, sovellus etsii AppData-kansion sisältä. &#x0d;Oletusta käytetään, jos asetustiedostoa ei ole.- Jos Paikallisia asetuksia ei ole, &#x0d;kaikki asetukset tallennetaan AppData-asetustiedostoon.</s:String>
+    <s:String x:Key="S.Options.Storage.DeleteEverything">Poista kaikki tiedostot välimuistista sovelluksen sulkemisen yhteydessä.</s:String>
+    <s:String x:Key="S.Options.Storage.AskDeleteEverything">Kysy ennen kuin poistat kaikki tiedostot välimuistista.</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval">Poista vanhat projektit automaattisesti.</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">Kun sovellus avataan, taustatehtävä poistaa kaikki suljetut projektit, jotka ovat vanhempia kuin määritetty aika.</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(päivinä, kaikki tätä vanhemmat suljetut projektit poistetaan/hävitetään sovelluksen avaamisen jälkeen).</s:String>
+    
+    <!--Options • Storage > Clear cache-->
+    <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - Välimuistin tyhjennys</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Header">Haluatko tyhjentää välimuistikansion?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Info">Kun luot nauhoituksen tai avaat jotain muokattavaa, luodaan projekti, joka tallennetaan välimuistikansioon.</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Question">Haluatko poistaa nämä projektit välimuistikansiosta?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent">Älä poista viimeaikaisia projekteja.</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.Yes">(Vain projektit, jotka ovat vanhempia kuin {0} päivää ja jotka eivät ole tällä hetkellä käytössä, poistetaan.)</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.No">(Kaikki projektit, jotka eivät ole tällä hetkellä käytössä, poistetaan).</s:String>
+    
+    <!--Options • Upload-->
+    <s:String x:Key="S.Options.Upload.Proxy">Välityspalvelin</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Mode">Tila:</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Mode.Disabled">Ei käytössä</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Mode.Manual">Manuaalinen</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Mode.System">Järjestelmä</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Mode.System.Info">(Käyttää järjestelmän välityspalvelinta)</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Host">Isäntä:</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Port">Portti:</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.User">Käyttäjänimi:</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Password">Salasana:</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Presets">Lataa esiasetukset</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Service">Palvelu</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Title">Otsikko</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Description">Kuvaus</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Enabled">Käytössä</s:String>
+    
+     <!--Options • Upload > Preset-->
+    <s:String x:Key="S.Options.Upload.Preset.Title">Latauspalvelu</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Select">Valitse palvelu</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Select.Info">Valitse latauspalvelu yllä</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Custom">Mukautettu</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Enable">Ota tämä esiasetus käyttöön.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Details">Yksityiskohdat</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Name">Nimi:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Description">Kuvaus:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode">Tila:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode.Anonymous">Nimetön</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode.Authenticated">Todennettu</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorization">Valtuutus</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.GetToken">Hanki tunniste</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Token">Liitä OAuth-tunniste tähän</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Username">Käyttäjänimi:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Password">Salasana:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">Hyväksy</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.NotStored">Käyttäjätunnusta ja salasanaa ei tallenneta.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Options">Vaihtoehdot</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">Käytä suoria linkkejä.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Album">Albumi</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Title">Sinun on annettava tälle esiasetukselle yksilöllinen nimi.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Repeated">Nimi on jo käytössä toisessa latausasetuksessa.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Authenticate">Todennetussa tilassa, sinun on suoritettava todennusprosessi loppuun.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Credentials">Sinun on annettava käyttäjätunnuksesi ja salasanasi, jotta voit käyttää tätä sovellusta.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.GetToken">Valtuutusmerkkiä ei saatu.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Jotta voit valtuuttaa tämän sovelluksen, sinun on annettava valtuutusmerkki.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">Valtuutus epäonnistui. Tarkista, että kaikki on kunnossa ja yritä uudelleen muutaman sekunnin kuluttua.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Albumilistaa ei voitu ladata.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Authorized">Valtuutus suoritettu.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Ei sallittu.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Valtuutuksen voimassaolo päättyi {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Valtuutus voimassa {0} asti.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Hae linkkejä, joissa on Gifv-laajennus Gifin sijasta.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Lataa gif-kuvia valittuun albumiin.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Albumi:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Kysy ennen lähettämistä</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Reload">Lataa albumilista uudelleen.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.Defaults">Oletukset</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.AskMe">Pyydä täyttämään lähetyksen tiedot.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.UrlType">Url-tyyppi:</s:String>
+    
+    <!--Options • Upload > Album-->
+    <s:String x:Key="S.Options.Upload.Pick.Album">Valitse albumi (valinnainen)</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Album.Info">Voit halutessasi valita kohdealbumin:</s:String>
+    
+    <!--Options • Upload > Details-->
+    <s:String x:Key="S.Options.Upload.Pick.Details">Lähetystiedot (valinnainen)</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Info">Lähetystiedot</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Title">Nimi:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Description">Kuvaus:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags">Tagit:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags.Info">Erottele tagit toisistaan puolipisteellä ( ; ).</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Private">Näytetään vain niille, jotka käyttävät suoraa linkkiä.</s:String>
+    
+    <!--Options • Upload > History-->
+    <s:String x:Key="S.Options.Upload.History.Title">Lähetyshistoria</s:String>
+    <s:String x:Key="S.Options.Upload.History.Date">Päiväys</s:String>
+    <s:String x:Key="S.Options.Upload.History.Preset">Esiasetus</s:String>
+    <s:String x:Key="S.Options.Upload.History.Successful">Onnistuiko?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Remove">Poista historiamerkintä.</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.Link">Linkki:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.LowerQuality">Huonompi laatu:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.DeleteLink">Poistolinkki:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Instruction">Oletko varma, että haluat poistaa historiamerkinnän?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Message">Tätä toimintoa ei voi peruuttaa.&#10;&#10;Haluatko poistaa valitun historiamerkinnän?</s:String>
+    
+    <!--Options • Extras-->
+    <s:String x:Key="S.Options.Extras.External">Käytettävissä olevat ulkoiset työkalut</s:String>
+    <s:String x:Key="S.Options.Extras.Download">Lataa tästä&#x0d;{0}</s:String>
+    <s:String x:Key="S.Options.Extras.Downloading">Ladataan...</s:String>
+    <s:String x:Key="S.Options.Extras.Ready">Ladattu&#x0d;{0}</s:String>
+    <s:String x:Key="S.Options.Extras.Ready.Info">Avaa tiedoston ominaisuudet napsauttamalla tätä.</s:String>
+    <s:String x:Key="S.Options.Extras.DownloadRestriction">Microsoft Storen jakamat sovellukset eivät voi ladata muita sovelluksia. Sinun on ladattava se manuaalisesti.</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation">FFmpeg sijainti</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">Valitse FFmpegin suoritettavan tiedoston sijainti.</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.File">FFmpeg suoritettava</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">Suoritettavan FFMpeg-tiedoston polku sisältää yhden tai useamman virheellisen merkin. Valitse kelvollinen sijainti kyseiselle suoritettavalle tiedostolle.</s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation">Gifskin sijainti</s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Valitse Gifski-kirjaston sijainti</s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski-kirjasto</s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski-kirjaston polku sisältää yhden tai useamman virheellisen merkin. Valitse kirjastolle kelvollinen sijainti.</s:String>
+    <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg lisenssi</s:String>
+    <s:String x:Key="S.Options.Extras.License.Gifski">Gifski lisenssi</s:String>
+    <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx lisenssi</s:String>
+    <s:String x:Key="S.Options.Extras.Permission.Header">Puuttuva kirjoitusoikeus kansiossa</s:String>
+    <s:String x:Key="S.Options.Extras.Permission.Observation">Latausta ei ole mahdollista tallentaa kansioon, koska kirjoitusoikeudet puuttuvat.&#10;&#10;Haluaisitko käynnistää latausohjelman järjestelmänvalvojan oikeuksin, jotta lataus saataisiin valmiiksi?</s:String>
+    
+    <!--Options • Donations-->
+    <s:String x:Key="S.Options.Donate.Donate">Lahjoita</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Dollar">Lahjoita US$</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Euro">Lahjoita €</s:String>
+    <s:String x:Key="S.Options.Donate.Paypal.Dollar">Avaa Paypal-sivuston. Valittu valuutta: Dollar</s:String>
+    <s:String x:Key="S.Options.Donate.Paypal.Euro">Avaa Paypal-sivuston. Valittu valuutta: Euro</s:String>
+    <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Avaa Paypal-sivuston. Sinun on valittava valuutta.</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe">Tilaa</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Lahjoita kuukausittain Patreonin kautta.</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe.Flattr">Lahjoita kuukausittain Flattrin kautta.</s:String>
+    <s:String x:Key="S.Options.Donate.Gift">Lahjapelit</s:String>
+    <s:String x:Key="S.Options.Donate.Gift.Steam">Lahjapelejä Steamin kautta.</s:String>
+    <s:String x:Key="S.Options.Donate.Gift.Gog">Lahjapelejä GOG:n kautta.</s:String>
+    <s:String x:Key="S.Options.Donate.Kofi">Maksa kahvit Ko-fi:n kautta.</s:String>
+    <s:String x:Key="S.Options.Donate.Crypto">Kryptovaluutat</s:String>
+    <s:String x:Key="S.Options.Donate.Crypto.BitcoinCash">Kopioi BitcoinCash-osoite.</s:String>
+    <s:String x:Key="S.Options.Donate.Support">Tuki</s:String>
+    <s:String x:Key="S.Options.Donate.Support.Visit">Jos haluat tukea projektia :)</s:String>
+    
+    <!--Options • About-->
+    <s:String x:Key="S.Options.About.Version">Versio:</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">Tarkista päivitykset</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">Sinulla on jo tuorein versio.</s:String>
+    <s:String x:Key="S.Options.About.Author">Tekijä: Nicke Manarin</s:String>
+    <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store -versio. Jotkin ominaisuudet on poistettu käytöstä pakollisten käytäntöjen vuoksi.</s:String>
+    <s:String x:Key="S.Options.About.Contact">Yhteystiedot</s:String>
+    <s:String x:Key="S.Options.About.Contact.Discord">Liity palvelimelle</s:String>
+    <s:String x:Key="S.Options.About.Contact.Facebook">Vieraile sivulla</s:String>
+    <s:String x:Key="S.Options.About.Contact.Gitter">Liity huoneeseen</s:String>
+    <s:String x:Key="S.Options.About.Technical">Tekninen</s:String>
+    <s:String x:Key="S.Options.About.Technical.License">Lisenssi:</s:String>
+    <s:String x:Key="S.Options.About.Technical.Free">(Tämä on täysin ilmainen sovellus)</s:String>
+    <s:String x:Key="S.Options.About.Technical.SourceCode">Lähdekoodi:</s:String>
+    <s:String x:Key="S.Options.About.Technical.Privacy">Tietosuojakäytäntö:</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo">Suuret kiitokset</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">Kaikki tukijani, ihmiset, jotka antoivat palautetta ja/tai lahjoituksia.</s:String>
+    
+    <!--Localization-->
+    <s:String x:Key="S.Localization">Lokalisointi</s:String>
+    <s:String x:Key="S.Localization.GettingCodes">Kielikoodien hankinta...</s:String>
+    <s:String x:Key="S.Localization.Recognized">Tunnistettu -> {0}</s:String>
+    <s:String x:Key="S.Localization.NotRecognized">Ei tunnistettu</s:String>
+    <s:String x:Key="S.Localization.Usage.First">Alimpana oleva resurssi on tällä hetkellä käytössä oleva resurssi.</s:String>
+    <s:String x:Key="S.Localization.Usage.Second">Jos haluat soveltaa mukautettua resurssia, siirrä se luettelon alareunaan.</s:String>
+    <s:String x:Key="S.Localization.Exporting">Resurssien vienti...</s:String>
+    <s:String x:Key="S.Localization.SaveResource">Tallenna resurssisanasto</s:String>
+    <s:String x:Key="S.Localization.OpenResource">Avaa resurssisanasto</s:String>
+    <s:String x:Key="S.Localization.File.Resource">Resurssisanasto</s:String>
+    <s:String x:Key="S.Localization.Importing">Tuodaan resursseja...</s:String>
+    <s:String x:Key="S.Localization.Warning.Name">Tiedostonimi ei noudata kelvollista kaavaa.</s:String>
+    <s:String x:Key="S.Localization.Warning.Name.Info">Yritä nimetä uudelleen kuten: xaml, jossa 'en' on korvattava kielikoodillasi.</s:String>
+    <s:String x:Key="S.Localization.Warning.Repeated">You can't add a resource with the same name</s:String>
+    <s:String x:Key="S.Localization.Warning.Repeated.Info">Yritä poistaa toistuva resurssi tai käytä muuta kielikoodia.</s:String>
+    <s:String x:Key="S.Localization.Warning.Redundant">Tarpeeton kielikoodi</s:String>
+    <s:String x:Key="S.Localization.Warning.Redundant.Info">Koodi "{0}" on tarpeeton. Kokeile sen sijaan käyttää "{1}".</s:String>
+    <s:String x:Key="S.Localization.Warning.Unknown">Tuntematon kieli</s:String>
+    <s:String x:Key="S.Localization.Warning.Unknown.Info">Merkkiä "{0}" ja sen perhettä ei tunnistettu kelvollisiksi kielikoodeiksi.</s:String>
+    <s:String x:Key="S.Localization.Warning.NotPossible">Lokalisointiresurssia ei ollut mahdollista tuoda.</s:String>
+
+    <!--Recorder-->
+    <s:String x:Key="S.Recorder.Record">Nauhoita</s:String>
+    <s:String x:Key="S.Recorder.Pause">Tauko</s:String>
+    <s:String x:Key="S.Recorder.Continue">Jatka</s:String>
+    <s:String x:Key="S.Recorder.Stop">Pysäytä</s:String>
+    <s:String x:Key="S.Recorder.Discard">Hylkää</s:String>
+    <s:String x:Key="S.Recorder.Snap">Nappaa</s:String>
+    <s:String x:Key="S.Recorder.Height">Korkeus</s:String>
+    <s:String x:Key="S.Recorder.Width">Leveys</s:String>
+    <s:String x:Key="S.Recorder.CursorFollowing">Kursorin seuraaminen on käytössä.</s:String>
+
+    <s:String x:Key="S.Recorder.SwitchFrequency">Klikkaa vaihtaaksesi kaappaustaajuustilojen välillä.</s:String>
+    <s:String x:Key="S.Recorder.Manual.Short">manuaalinen</s:String>
+    <s:String x:Key="S.Recorder.Interaction.Short">vuorovaikutukset</s:String>
+    <s:String x:Key="S.Recorder.Fps">Enimmäiskuvat sekuntia kohti</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.Fps.Range">Vaihtelee välillä 1-60 kuvaa sekunnissa, ja korkeammat arvot merkitsevät, että kuvataan enemmän ruutuja.&#10;Jokainen lisäys vastaa 16 millisekunnin eroa.</s:String>
+    <s:String x:Key="S.Recorder.Fpm">Enimmäiskuvamäärä minuutissa</s:String>
+    <s:String x:Key="S.Recorder.Fpm.Short">fpm</s:String>
+    <s:String x:Key="S.Recorder.Fpm.Range">Vaihtelee välillä 1 - 60 fpm, jolloin korkeammat arvot merkitsevät, että kuvia tallennetaan enemmän.&#10;Jokainen lisäys vastaa 1 sekunnin eroa.</s:String>
+    <s:String x:Key="S.Recorder.Fph">Enimmäiskuvat tunnissa</s:String>
+    <s:String x:Key="S.Recorder.Fph.Short">fph</s:String>
+    <s:String x:Key="S.Recorder.Fph.Range">Vaihtelee välillä 1 - 60 fph, jolloin korkeammat arvot tarkoittavat, että kuvia otetaan enemmän.&#10;Jokainen lisäys vastaa 1 minuutin eroa.</s:String>
+    
+    <s:String x:Key="S.Recorder.ClickOrPress">Klikkaa tai paina näppäimiä kaapataksesi</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">Nappaa ikkunaan (Nappaa vetämällä ja vapauttamalla)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Ennen aloitusta:</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (Tauko)</s:String>
+    <s:String x:Key="S.Recorder.Stopping">Pysäytetään...</s:String>
+    <s:String x:Key="S.Recorder.PreStarting">Esialoitus...</s:String>
+    
+    <s:String x:Key="S.Recorder.Timer.Elapsed">Kulunut kaappausaika.</s:String>
+    <s:String x:Key="S.Recorder.Timer.Total">Ruutujen kokonaismäärä:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Manual">Kaapattu manuaalisesti:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Paused">Kaappaus on keskeytetty.</s:String>
+    <s:String x:Key="S.Recorder.Timer.Imprecise">Tietokoneesi ei tue tarkkaa kaappaustilaa,&#10;mikä tarkoittaa, että tavoitekuvanopeutta ei ehkä koskaan saavuteta.</s:String>
+    
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Näytön kaappaaminen ei ollut mahdollista</s:String>
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Näyttöä ei ollut voitu kaapata. Kaappausmenetelmä ei palauttanut yhtään kehystä 5 yrityksen jälkeen.</s:String>
+    <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">Näytön kaappausta ei ollut mahdollista aloittaa/tauottaa.</s:String>
+    <s:String x:Key="S.Recorder.Warning.Windows8">Työpöydän monistusliittymän avulla tapahtuvaan näytön kaappaukseen tarvitaan Windows 8 tai uudempi käyttöjärjestelmä.</s:String>
+
+    <!--New recorder-->
+    <s:String x:Key="S.Recorder.Area">Alue</s:String>
+    <s:String x:Key="S.Recorder.Area.Select">Valitse alue</s:String>
+    <s:String x:Key="S.Recorder.Window">Ikkuna</s:String>
+    <s:String x:Key="S.Recorder.Window.Select">Valitse ikkuna</s:String>
+    <s:String x:Key="S.Recorder.Screen">Näyttö</s:String>
+    <s:String x:Key="S.Recorder.Screen.Select">Valitse näyttö</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Internal">Sisäinen näyttö</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Generic">Yleisnäyttö</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info1">Grafiikkasovitin: {0}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info2">Resoluutio: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info3">Alkuperäinen resoluutio: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info4">DPI: {0} ({1:0.##}%)</s:String>
+    <s:String x:Key="S.Recorder.Move">Siirrä&#10;valintaa vetämällä.</s:String>
+    <s:String x:Key="S.Recorder.Accept">Hyväksy</s:String>
+    <s:String x:Key="S.Recorder.Retry">Uudelleenyritys</s:String>
+    <s:String x:Key="S.Recorder.Retry.Shortcut">Oikea klikkaus</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">Peruuta valinta (Esc)</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">Valitse alue tästä näytöstä napsauttamalla ja vetämällä.</s:String>
+    <s:String x:Key="S.Recorder.SelectArea.Embedded">Valitse alue napsauttamalla ja vetämällä</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">Valitse tämä ikkuna klikkaamalla tästä</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">Valitse tämä näyttö napsauttamalla tätä</s:String>
+    <s:String x:Key="S.Recorder.EscToCancel">Peruuta painamalla Esc</s:String>
+    <s:String x:Key="S.Recorder.Splash.Title">Pysäytä tallennus painamalla {0}</s:String>
+    <s:String x:Key="S.Recorder.Splash.Subtitle">Tallenninikkuna minimoituu,&#10;palauta se tai keskeytä kuvaaminen painamalla {0}.</s:String>
+    
+    <s:String x:Key="S.Recorder.Discard.Title">Hävitä tallennus</s:String>
+    <s:String x:Key="S.Recorder.Discard.Instruction">Oletko varma, että haluat hylätä tallenteen?</s:String>
+    <s:String x:Key="S.Recorder.Discard.Message">Tämä toiminto hylkää tallennuksen ja poistaa kaikki kehykset.&#x0d;Tätä toimintoa ei voi peruuttaa.</s:String>
+    
+    <!--Webcam recorder-->
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Verkkokameratallennin</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">Videolaitetta ei löydy :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">Tarkista videolaitteet.</s:String>
+    <s:String x:Key="S.Webcam.Scale">Skaala: {0:0.##}x</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">Muuta videon skaalaa.</s:String>
+    
+    <!--Board recorder-->
+    <s:String x:Key="S.Board.Title">ScreenToGif - Piirustustaulun tallennin</s:String>
+    <s:String x:Key="S.Board.AutoRecord">Automaattinen tallennus</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">Ottaa tallennuksen käyttöön piirtämisen aikana.</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [Pidä]</s:String>
+    
+    <!--Color selector-->
+    <s:String x:Key="S.ColorSelector.Title">Värinvalitsin</s:String>
+    <s:String x:Key="S.ColorSelector.Select">Valitse väri</s:String>
+    <s:String x:Key="S.ColorSelector.Red">Punainen</s:String>
+    <s:String x:Key="S.ColorSelector.Green">Vihreä</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">Sininen</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Alfa</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hex</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">Alkuperäinen väri</s:String>
+    <s:String x:Key="S.ColorSelector.Current">Nykyinen väri</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">Viimeisin väri</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">Vedä tämä kohteeseen&#x0d;esimerkkivärit</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">Klikkaa ja vedä valitaksesi&#x0d; värit näytöltä.</s:String>
+    
+    <!--Exception/Error viewers-->
+    <s:String x:Key="S.ExceptionViewer.Title">Poikkeusten tarkastelu</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">Avaa sisäinen poikkeus</s:String>
+    <s:String x:Key="S.ExceptionViewer.Type">Poikkeustyyppi</s:String>
+    <s:String x:Key="S.ExceptionViewer.Message">Viesti</s:String>
+    <s:String x:Key="S.ExceptionViewer.Stack">Pino</s:String>
+    <s:String x:Key="S.ExceptionViewer.Source">Lähde</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">Jotain tapahtui väärin.</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">Lähetä raportti</s:String>
+
+    <!--Presets-->
+    <s:String x:Key="S.Preset.Title">Esiasetus</s:String>
+    <s:String x:Key="S.Preset.Encoder">Kooderi</s:String>
+    <s:String x:Key="S.Preset.Name">Nimi</s:String>
+    <s:String x:Key="S.Preset.Description">Kuvaus</s:String>
+    <s:String x:Key="S.Preset.Other">Muu</s:String>
+    <s:String x:Key="S.Preset.AutoSave">Tallenna automaattisesti, kun asetusta muutetaan.</s:String>
+    <s:String x:Key="S.Preset.Info.Manual">Kaikki muutokset näihin esiasetettuihin asetuksiin (koodaus- ja vientiasetukset) on tallennettava manuaalisesti painamalla Tallenna-painiketta.</s:String>
+    <s:String x:Key="S.Preset.Info.Automatic">Kaikki tähän esiasetukseen tehdyt muutokset (koodaus- ja vientiasetukset) tallennetaan automaattisesti.</s:String>
+    <s:String x:Key="S.Preset.Warning.Readonly">Jotkin oletusasetusten ominaisuudet ovat vain luettavissa.</s:String>
+    <s:String x:Key="S.Preset.Warning.Name">Sinun on annettava tälle esiasetukselle nimi.</s:String>
+    <s:String x:Key="S.Preset.Warning.SameName">Samanniminen esiasetus on jo olemassa.</s:String>
+    
+    <!--Presets • Listing-->
+    <s:String x:Key="S.Preset.Autosave">Autom. tallennukset</s:String>
+    <s:String x:Key="S.Preset.Autosave.Info">Tähän esiasetukseen tehdyt muutokset tallennetaan automaattisesti.</s:String>
+    <s:String x:Key="S.Preset.Default.Title">Oletusarvo ({0})</s:String>
+    <s:String x:Key="S.Preset.Default.Description">Enkooderin oletusasetukset.</s:String>
+    <s:String x:Key="S.Preset.Twitter.Title">Twitterille ({0})</s:String>
+    <s:String x:Key="S.Preset.Twitter.Description">Noudattaa Twitterin latausrajoituksia (kokoa ja resoluutiota lukuun ottamatta).</s:String>
+    <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
+    <s:String x:Key="S.Preset.Hevc.Description">Tehokas videokoodaus.</s:String>
+    <s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>
+    <s:String x:Key="S.Preset.Vp8.Description">Vanhempi ja tunnetumpi koodekki.</s:String>
+    <s:String x:Key="S.Preset.Filename.Animation">Animaatio</s:String>
+    <s:String x:Key="S.Preset.Filename.Video">Video</s:String>
+    <s:String x:Key="S.Preset.Filename.Image">Kuva</s:String>
+    <s:String x:Key="S.Preset.Filename.Project">Projekti</s:String>
+
+    <s:String x:Key="S.Preset.Gif.Embedded.High.Title">Korkea laatu</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.High.Description">Sopii paremmin tallenteisiin, joissa on enemmän värejä ja liukuvärejä.</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Title">Korkea laatu - Läpinäkyvä tausta</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Tukee animaation tallentamista läpinäkyvällä taustalla.</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">Korkea laatu - Grafiikka</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Parempi tallenteille, joissa on vähemmän värejä.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT - Tasapainotettu</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Hyvä laatu valokuvan kaltaisille kuville käyttämällä Wun kvantisoijaa ilman ditheringiä.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT - Korkea laatu</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Description">Valokuvan kaltaisten kuvien korkea laatu käyttämällä Wun kvantisoijaa, jossa on korkeampi bittitaso ja Floyd-Steinbergin virhediffuusiodithering.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT - Huono laatu, nopeampi</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">Kaikkien ruutujen kvantisointi samalla ennalta määritellyllä "web-safe"-paletilla ja Bayerin 8x8-järjestetty dithering.</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - Parempi laatu</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">Korkeampi kuvanlaatu, mutta suurempi tiedostokoko.</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - Huonompi laatu</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Description">Huonompi kuvanlaatu, mutta pienempi tiedostokoko.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Title">Gifski - Korkeampi laatu</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Description">Korkeampi kuvanlaatu, mutta suurempi tiedostokoko.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Title">Gifski - Huonompi laatu</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Description">Huonompi kuvanlaatu, mutta pienempi tiedostokoko.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski - Huonompi laatu ja nopeampi koodaus</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Description">Vielä heikompi kuvanlaatu, nopeampi koodaus, mutta pienempi tiedostokoko.</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Title">Järjestelmä - Huono laatu</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Description">Huonolaatuinen mutta nopeampi koodaus.</s:String>
+    
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg - Korkealaatuinen</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">Korkea kuvanlaatu ja pieni tiedostokoko, mutta hitaampi koodaus.</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg - Huonompilaatuinen</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">Huonompi kuvanlaatu, pieni tiedostokoko ja nopeampi koodaus.</s:String>
+    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">Korkea laatu</s:String>
+    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">Korkea kuvanlaatu ja pieni tiedostokoko.</s:String>
+    
+    <!--Insert frames-->
+    <s:String x:Key="S.InsertFrames.Title">Lisää kehyksiä</s:String>
+    <s:String x:Key="S.InsertFrames.Info">Molempien puolien on oltava samankokoisia, ja tämän ikkunan avulla voit sijoittaa ja muuttaa kuvan ja kankaan kokoa. Valitse ja muuta kokoa napsauttamalla.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">Kankaan koko:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Sovita kuva&#10;kankaalle</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Muuttaa kankaan kokoa niin, että molemmat kuvat mahtuvat sisälle (vasemmasta yläkulmasta).</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">Kehyskokojen välillä on eroja. Tämä on ratkaistava ennen kehysten asettamista.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">Uusi kehys</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">Nykyinen kehys</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">Kuvan koko:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">Kuvan sijainti:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Palauta kuvan koko&#x0d;ja sijainti</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Uudet kehykset lisätään nykyiseen kehysluetteloon kyseiseen kohtaan:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">Ennen</s:String>
+    <s:String x:Key="S.InsertFrames.After">Jälkeen</s:String>
+    <s:String x:Key="S.InsertFrames.Frame">Kehys</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">Tuodaan...</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Valitse kankaan täyttöväri</s:String>
+
+    <!--Import frames from video-->
+    <s:String x:Key="S.ImportVideo.Title">Tuo kehyksiä videosta</s:String>
+    <s:String x:Key="S.ImportVideo.Importer">Tuoja:</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Ladataan...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Skaala:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Koko:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Korkeus:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Leveys:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Kuvataajuus:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Alku:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Loppu:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Valinta:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Kehykset:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Kesto:</s:String>
+    <s:String x:Key="S.ImportVideo.Error">Videota ei voitu ladata</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">Esikatseluohjelma ei käynnistynyt. Kokeile toisella tuojalla tai tarkista, ettei video ole vioittunut.&#x0d;Jos käytät MediaPlayeriä, tarkista, että Windowsin ominaisuus " Mediaominaisuudet / Windows Media Player" on käytössä ja varmista, että sinulla on tarvittava videokoodekki.</s:String>
+    <s:String x:Key="S.ImportVideo.Timeout">Aikakatkaisu kehyksen esikatselun saamisessa.</s:String>
+    <s:String x:Key="S.ImportVideo.Nothing">Tuontikehystä ei ole valittu.</s:String>
+    
+    <!--Encoder-->
+    <s:String x:Key="S.Encoder.Title">Kooderi</s:String>
+    <s:String x:Key="S.Encoder.Encoding">Koodataan...</s:String>
+    <s:String x:Key="S.Encoder.Starting">Aloitus</s:String>
+    
+    <s:String x:Key="S.Encoder.Completed">Valmis</s:String>
+    <s:String x:Key="S.Encoder.Completed.Clipboard">Kopioitu leikepöydälle</s:String>
+    <s:String x:Key="S.Encoder.Completed.Clipboard.Fail">Kopiointi epäonnistui</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command">Suoritettu komento</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command.Output">Näytä komentojen tulokset.</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command.Fail">Komennon suorittaminen epäonnistui</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Fail">Lähetys epäonnistui</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + klikkaus avaa sivun kuvan poistamista varten (jos käytettävissä).</s:String>
+    
+    <s:String x:Key="S.Encoder.Completed.Elapsed">Kulunut aika minuutteina:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">Analyysi:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">Koodaus:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Upload">Lähetä:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Copy">Kopioi:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Commands">Komennot:</s:String>
+    
+    <s:String x:Key="S.Encoder.DeletedMoved">Tiedosto poistettu tai siirretty</s:String>
+    <s:String x:Key="S.Encoder.Canceled">Peruutettu</s:String>
+    <s:String x:Key="S.Encoder.Error">Virhe</s:String>
+    <s:String x:Key="S.Encoder.Error.Info">Klikkaa tästä nähdäksesi tämän virheen yksityiskohdat.</s:String>
+    <s:String x:Key="S.Encoder.Uploading">Lähetys</s:String>
+    <s:String x:Key="S.Encoder.Executing">Komentojen suoritus</s:String>
+    <s:String x:Key="S.Encoder.Processing">Käsitellään {0}</s:String>
+    <s:String x:Key="S.Encoder.Analyzing.Second">Toisen läpiviennin valmistelu</s:String>
+    <s:String x:Key="S.Encoder.Processing.Second">Käsitellään {0} - 2. vaihe</s:String>
+    <s:String x:Key="S.Encoder.CreatingFile">Luodaan tiedosto</s:String>
+    <s:String x:Key="S.Encoder.Analyzing">Muuttumattomien pikselien analysointi</s:String>
+    <s:String x:Key="S.Encoder.SavingAnalysis">Tallennetaan analyysitulos</s:String>
+    <s:String x:Key="S.Encoder.OpenFile">Avaa tiedosto</s:String>
+    <s:String x:Key="S.Encoder.ExploreFolder">Tutki kansiota</s:String>
+    <s:String x:Key="S.Encoder.Remove">Poista luettelosta</s:String>
+    <s:String x:Key="S.Encoder.Details">Näytä yksityiskohdat</s:String>
+    <s:String x:Key="S.Encoder.Dismiss">Hylkää kaikki valmiit koodaukset</s:String>
+
+    <s:String x:Key="S.Encoder.Copy.Image">Kopioi kuvana</s:String>
+    <s:String x:Key="S.Encoder.Copy.Filename">Kopioi tiedostonimi</s:String>
+    <s:String x:Key="S.Encoder.Copy.Folder">Kopioi kansion polku</s:String>
+    <s:String x:Key="S.Encoder.Copy.Link">Kopioi linkki</s:String>
+    
+    <!--Command output-->
+    <s:String x:Key="S.Encoder.Command.Title">ScreenToGif - Komennon ulostulo</s:String>
+    <s:String x:Key="S.Encoder.Command.Header">Komentotulos</s:String>
+    
+    <!--Notifications-->
+    <s:String x:Key="S.Notifications">Ilmoitukset</s:String>
+    <s:String x:Key="S.Notifications.Dismiss">Hylkää kaikki ilmoitukset</s:String>
+    
+    <!--Editor-->
+    <s:String x:Key="S.Editor.Title">ScreenToGif - Editori</s:String>
+    <s:String x:Key="S.Editor.File">Tiedosto</s:String>
+    <s:String x:Key="S.Editor.Home">Koti</s:String>
+    <s:String x:Key="S.Editor.Playback">Toisto</s:String>
+    <s:String x:Key="S.Editor.Edit">Muokkaa</s:String>
+    <s:String x:Key="S.Editor.Image">Kuva</s:String>
+    <s:String x:Key="S.Editor.Transitions">Siirtymät</s:String>
+    <s:String x:Key="S.Editor.Statistics">Tilastot</s:String>
+    <s:String x:Key="S.Editor.Options">Asetukset</s:String>
+    <s:String x:Key="S.Editor.Help">Ohje</s:String>
+    <s:String x:Key="S.Editor.Extras">Lisätoiminnot</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable">Uusi päivitys saatavilla!</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable.Info">Lue siitä lisää klikkaamalla tästä.</s:String>
+    <s:String x:Key="S.Editor.FrameNumbersInfo">Kokonaismäärä, valintamäärä, valintaindeksi</s:String>
+    
+    <!--Editor • Loading-->
+    <s:String x:Key="S.Editor.Preparing">Kehysten valmistelu</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingFiles">Virheellinen lataus - Et voi tuoda useita tiedostoja kerralla. Yritä valita vain yksi tiedosto.</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingProjects">Virheellinen lataus - Et voi ladata useita projekteja kerralla. Yritä valita vain yksi projekti.</s:String>
+    
+    <!--Editor • File dialogs (does not work with new line characters)-->
+    <s:String x:Key="S.Editor.File.OpenMedia">Avaa mediatiedosto (kuva tai video)</s:String>
+    <s:String x:Key="S.Editor.File.OpenMediaProject">Avaa mediatiedosto (kuva tai video) tai projektitiedosto.</s:String>
+    <s:String x:Key="S.Editor.File.All">Kaikki tuetut tiedostot</s:String>
+    <s:String x:Key="S.Editor.File.Image">Kuva</s:String>
+    <s:String x:Key="S.Editor.File.Video">Video</s:String>
+
+    <s:String x:Key="S.Editor.File.Apng">Png-animaatio</s:String>
+    <s:String x:Key="S.Editor.File.Gif">Gif-animaatio</s:String>
+    <s:String x:Key="S.Editor.File.Webp">Webp-animaatio</s:String>
+    
+    <s:String x:Key="S.Editor.File.Avi">Avi-video</s:String>
+    <s:String x:Key="S.Editor.File.Mkv">Matroska video</s:String>
+    <s:String x:Key="S.Editor.File.Mov">Mov video</s:String>
+    <s:String x:Key="S.Editor.File.Mp4">Mp4 video</s:String>
+    <s:String x:Key="S.Editor.File.Webm">Webm video</s:String>
+    
+    <s:String x:Key="S.Editor.File.Image.Bmp">Bmp-kuva</s:String>
+    <s:String x:Key="S.Editor.File.Image.Jpeg">Jpeg-kuva</s:String>
+    <s:String x:Key="S.Editor.File.Image.Png">Png-kuva</s:String>
+    <s:String x:Key="S.Editor.File.Image.Zip">Zip-tiedosto, jossa on kuvia</s:String>
+    
+    <s:String x:Key="S.Editor.File.Project">ScreenToGif-projekti</s:String>
+    <s:String x:Key="S.Editor.File.Project.Zip">ScreenToGif-projekti Zip-tiedostona</s:String>
+    <s:String x:Key="S.Editor.File.Psd">Psd-tiedosto</s:String>
+    
+    <!--Editor • Welcome-->
+    <s:String x:Key="S.Editor.Welcome.New">Aloita uusi tallennus valitsemalla "Tiedosto > Uusi".</s:String>
+    <s:String x:Key="S.Editor.Welcome.Import">Tuo kuvia, videoita tai projekteja vetämällä ja pudottamalla.</s:String>
+    <s:String x:Key="S.Editor.Welcome.ThankYou">Kiitos paljon, että käytät sovellustani!</s:String>
+    <s:String x:Key="S.Editor.Welcome.Size">Mitä pienempi ruutunopeus, värimäärä tai ruutujen välisten muutosten määrä on, sitä pienempi koko on.</s:String>
+    <s:String x:Key="S.Editor.Welcome.Contact">Haluatko keskustella? Avaa "Valinnat > Tietoja" yhteydenottomenetelmiä varten</s:String>
+    <s:String x:Key="S.Editor.Welcome.Trouble">Onko ongelmia? Ota minuun yhteyttä palautetyökalun kautta</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">Haluatko kokeilla uutta tallenninta?&#x0d;Ota se käyttöön kohdassa " Asetukset > Tallennin".</s:String>
+    
+    <!--Editor • File tab • New-->
+    <s:String x:Key="S.Editor.File.New.Recording">Tallennus</s:String>
+    <s:String x:Key="S.Editor.File.New.Webcam">Verkkokamera&#x0d;tallennus</s:String>
+    <s:String x:Key="S.Editor.File.New.Board">Piirustustaulun&#x0d;tallennus</s:String>
+    <s:String x:Key="S.Editor.File.Blank">Tyhjä&#x0d;projekti</s:String>
+    <s:String x:Key="S.Editor.File.New">Uusi</s:String>
+    
+    <!--Editor • File tab • Insert-->
+    <s:String x:Key="S.Editor.File.Insert.Recording">Tallennus</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Webcam">Verkkokamera&#x0d;tallennus</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Board">Piirustustaulun&#x0d;tallennus</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Media">Media</s:String>
+    <s:String x:Key="S.Editor.File.Insert">Lisää</s:String>
+    
+    <!--Editor • File tab • Save/Discard-->
+    <s:String x:Key="S.Editor.File.Save">Tallenna nimellä</s:String>
+    <s:String x:Key="S.Editor.File.Load">Lataa</s:String>
+    <s:String x:Key="S.Editor.File.LoadRecent">Viimeisimmät&#x0d;projektit</s:String>
+    <s:String x:Key="S.Editor.File.SaveProject">Tallenna nimellä&#x0d;projekti</s:String>
+    <s:String x:Key="S.Editor.File.Discard">Hylkää&#x0d;projekti</s:String>
+    
+    <!--Editor • Home tab • Action Stack-->
+    <s:String x:Key="S.Editor.Home.ActionStack">Toimintopino</s:String>
+    <s:String x:Key="S.Editor.Home.Undo">Kumoa</s:String>
+    <s:String x:Key="S.Editor.Home.Redo">Tee uudelleen</s:String>
+    <s:String x:Key="S.Editor.Home.Reset">Nollaa</s:String>
+    
+    <!--Editor • Home tab • Clipboard-->
+    <s:String x:Key="S.Editor.Home.Clipboard">Leikepöytä</s:String>
+    <s:String x:Key="S.Editor.Home.Clipboard.Show">Näytä leikepöytä</s:String>
+    <s:String x:Key="S.Editor.Home.Paste">Liitä</s:String>
+    <s:String x:Key="S.Editor.Home.Cut">Leikkaa</s:String>
+    <s:String x:Key="S.Editor.Home.Copy">Kopioi</s:String>
+    
+    <!--Editor • Home tab • Zoom-->
+    <s:String x:Key="S.Editor.Home.Zoom">Zoomaus</s:String>
+    <s:String x:Key="S.Editor.Home.SizeToContent">Säädä&#x0d;sisältöä</s:String>
+    <s:String x:Key="S.Editor.Home.FitImage">Sovita kuva</s:String>
+    
+    <!--Editor • Home tab • Select-->
+    <s:String x:Key="S.Editor.Home.Select">Valitse</s:String>
+    <s:String x:Key="S.Editor.Home.SelectAll">Valitse&#x0d;kaikki</s:String>
+    <s:String x:Key="S.Editor.Home.GoTo">Siirry</s:String>
+    <s:String x:Key="S.Editor.Home.Inverse">Käänteinen</s:String>
+    <s:String x:Key="S.Editor.Home.Deselect">Poista valinta</s:String>
+    
+    <!--Editor • Playback tab • Playback-->
+    <s:String x:Key="S.Editor.Playback.Playback">Toisto</s:String>
+    <s:String x:Key="S.Editor.Playback.First">Ensimmäinen</s:String>
+    <s:String x:Key="S.Editor.Playback.Previous">Edellinen</s:String>
+    <s:String x:Key="S.Editor.Playback.Play">Toista</s:String>
+    <s:String x:Key="S.Editor.Playback.Pause">Tauko</s:String>
+    <s:String x:Key="S.Editor.Playback.Next">Seuraava</s:String>
+    <s:String x:Key="S.Editor.Playback.Last">Viimeinen</s:String>
+    
+    <!--Editor • Playback tab • Playback Options-->
+    <s:String x:Key="S.Editor.PlaybackOptions.Header">Toistoasetukset</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop">Silmukka toistettaessa.</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">Käytetään vain toiston aikana.&#x0d;Jos haluat muuttaa silmukka-asetuksia Gif- ja Apngs-tiedostojen vientiä varten, &#x0d;se on käytettävissä 'Tallenna nimellä' -paneelissa joissakin koodereissa.</s:String>
+    
+    <!--Editor • Edit tab • Frames-->  
+    <s:String x:Key="S.Editor.Edit.Frames">Kehykset</s:String>
+    <s:String x:Key="S.Editor.Edit.Delete">Poista</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Poista&#x0d;kaksoiskappaleet</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.Reduce">Vähennä&#x0d;kehysten määrää</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Tasainen&#x0d;silmukka</s:String>
+    <s:String x:Key="S.Editor.Edit.DeletePrevious">Poista kaikki edelliset</s:String>
+    <s:String x:Key="S.Editor.Edit.DeleteNext">Poista kaikki seuraavat</s:String>
+    
+    <!--Editor • Edit tab • Reordering-->
+    <s:String x:Key="S.Editor.Edit.Reordering">Uudelleenjärjestys</s:String>
+    <s:String x:Key="S.Editor.Edit.Reverse">Käänteinen</s:String>
+    <s:String x:Key="S.Editor.Edit.Yoyo">Yo-yo</s:String>
+    <s:String x:Key="S.Editor.Edit.MoveLeft">Siirrä&#x0d;vasemmalle</s:String>
+    <s:String x:Key="S.Editor.Edit.MoveRight">Siirrä&#x0d;oikealle</s:String>
+    
+    <!--Editor • Edit tab • Delay/Duration-->
+    <s:String x:Key="S.Editor.Edit.Delay">Viive (kesto)</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.Override">Ohita</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.IncreaseDecrease">Lisää tai&#x0d;vähennä</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.Scale">Skaala</s:String>
+    
+    <!--Editor • Image • Size and Rotation-->
+    <s:String x:Key="S.Editor.Image.SizePosition">Koko ja kierto</s:String>
+    <s:String x:Key="S.Editor.Image.Resize">Muuta kokoa</s:String>
+    <s:String x:Key="S.Editor.Image.Crop">Rajaa</s:String>
+    <s:String x:Key="S.Editor.Image.FlipRotate">Käännä/kierrä</s:String>
+    
+    <!--Editor • Image tab • Text-->
+    <s:String x:Key="S.Editor.Image.Text">Teksti</s:String>
+    <s:String x:Key="S.Editor.Image.Caption">Kuvateksti</s:String>
+    <s:String x:Key="S.Editor.Image.FreeText">Vapaa teksti</s:String>
+    <s:String x:Key="S.Editor.Image.TitleFrame">Otsikkokehys</s:String>
+    <s:String x:Key="S.Editor.Image.KeyStrokes">Näppäin&#x0d;painallukset</s:String>
+    
+    <!--Editor • Image tab • Overlay-->
+    <s:String x:Key="S.Editor.Image.Overlay">Peitto</s:String>
+    <s:String x:Key="S.Editor.Image.FreeDrawing">Vapaa&#x0d;piirustus</s:String>
+    <s:String x:Key="S.Editor.Image.Shape">Muodot</s:String>
+    <s:String x:Key="S.Editor.Image.MouseEvents">Hiiri&#x0d;tapahtumat</s:String>
+    <s:String x:Key="S.Editor.Image.Watermark">Vesileima</s:String>
+    <s:String x:Key="S.Editor.Image.Cinemagraph">Cinemagraph</s:String>
+    <s:String x:Key="S.Editor.Image.Border">Reuna</s:String>
+    <s:String x:Key="S.Editor.Image.Shadow">Varjo</s:String>
+    <s:String x:Key="S.Editor.Image.Progress">Edistyminen</s:String>
+    <s:String x:Key="S.Editor.Image.Obfuscate">Hämärrys</s:String>
+
+    <!--Editor • Transitions tab • Styles-->
+    <s:String x:Key="S.Editor.Transitions.Styles">Tyylit</s:String>
+    <s:String x:Key="S.Editor.Transitions.Fade">Häivytys</s:String>
+    <s:String x:Key="S.Editor.Transitions.Slide">Diakuva</s:String>
+    
+    <!--Editor • Statistics tab-->
+    <s:String x:Key="S.Editor.Statistics.General">Yleiset</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameCount">Kehysten määrä</s:String>
+    <s:String x:Key="S.Editor.Statistics.TotalDuration">Kokonaiskesto</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameSize">Kehyksen koko</s:String>
+    <s:String x:Key="S.Editor.Statistics.AverageDuration">Keskimääräinen kesto (viive)</s:String>
+    <s:String x:Key="S.Editor.Statistics.CurrentTime">Nykyinen aika</s:String>
+    <s:String x:Key="S.Editor.Statistics.CurrentTime.Info">Nykyinen aika (kumulatiivinen), joka perustuu näkyvissä olevaan kehykseen.</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameDpi">Kehyksen DPI ja mittakaava</s:String>
+    <s:String x:Key="S.Editor.Statistics.SelectedFrame">Valittu kehys</s:String>
+    
+    <!--Editor • Messages-->
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Title">Leikkaustoiminto</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Instruction">Kaikkia kehyksiä ei voi leikata.</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">Tallenne tarvitsee vähintään yhden kuvan.</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Title">Poista kaikki</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Instruction">Oletko varma, että haluat poistaa kaikki kehykset?</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Message">Tämä toiminto hylkää nykyisen avoimen projektin, eikä sitä voi peruuttaa. Haluatko jatkaa?</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Title">Hylkää projekti</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Instruction">Oletko varma, että haluat hylätä projektin?</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Message">Tämä toiminto hävittää projektin ja poistaa kaikki kehykset.&#x0d;Tätä toimintoa ei voi peruuttaa.</s:String>
+    <s:String x:Key="S.Editor.DiscardPreviousProject.Instruction">Haluatko hylätä edellisen projektin?</s:String>
+    <s:String x:Key="S.Editor.DiscardPreviousProject.Message">Jos et tee niin, edellinen projekti on avattavissa 'Muistissa olevat projektit' -valikosta.</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Title">Poista kehyksiä</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Instruction">Oletko varma, että haluat poistaa?</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Message">Tämä toiminto poistaa {0} kehystä.&#x0d;Voit peruuttaa tämän myöhemmin.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Title">Poistutaan editorista</s:String>
+    <s:String x:Key="S.Editor.Exiting.Instruction">Oletko varma, että haluat poistua?</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message">Nykyisen projektin, jonka parissa työskentelit, voi avata uudelleen "Viimeaikaiset projektit" -kohdasta.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message2">Nykyisen projektin, jonka parissa työskentelit, voit avata uudelleen "Viimeaikaiset projektit" -kohdasta, mutta älä unohda, että muutaman päivän kuluttua se poistetaan automaattisesti.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Title">Virheellinen veto ja pudotus</s:String>
+    <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">Et voi tuoda useita tiedostoja kerralla</s:String>
+    <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">Kokeile valita vain yksi tiedosto.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Instruction">Tiedostoa on mahdotonta ladata</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Message">Tiedostoa ei voitu ladata, koska sen formaatti on virheellinen.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.InvalidProject.Instruction">Et voi tuoda useita projekteja kerralla</s:String>
+    <s:String x:Key="S.Editor.DragDrop.InvalidProject.Message">Kokeile valita vain yksi projekti.</s:String>
+
+    <s:String x:Key="S.Editor.Caption.WarningNoText">Sovellettavaa tekstiä ei ole.</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningSelection">Sinun on valittava vähintään yksi kehys, johon kuvatekstiä sovelletaan.</s:String>
+    <s:String x:Key="S.Editor.FreeText.WarningSelection">Sinun on valittava vähintään yksi kehys, johon tekstiä sovelletaan.</s:String>
+    <s:String x:Key="S.Editor.TitleFrame.WarningSelection">Sinun on valittava vähintään yksi kehys, jolloin voit käyttää sen vieressä olevaa otsikkokehystä.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningThickness">Sinun on valittava reunuksen paksuus, joka on suurempi kuin nolla ainakin yhdellä sivulla.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningSelection">Sinun on valittava vähintään yksi kehys, johon rajaa sovelletaan.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Invisible">Läpinäkymättömyyden on oltava suurempi kuin nolla, jotta se vaikuttaa kehykseen.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Behind">Kun varjon syvyys ja epätarkkuuden säde ovat nolla, sillä ei ole mitään merkitystä, koska se jää piiloon kehyksen taakse.</s:String>
+    <s:String x:Key="S.Editor.Cinemagraph.WarningNoDrawing">Sinun on valittava vähintään yksi pikseli, johon Cinemagraphia sovelletaan. Valitse pikselit piirtämällä niiden päälle.</s:String>
+    <s:String x:Key="S.Editor.Fade.Title">Häivytyssiirtymä</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningSelection">Sinun on valittava vähintään yksi kehys, johon haluat soveltaa häivytyssiirtymää.</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningColor">Täysin läpinäkyvä väri ei vaikuta mitenkään tähän siirtymään.</s:String>
+    <s:String x:Key="S.Editor.Slide.Title">Dia-siirtymä</s:String>
+    <s:String x:Key="S.Editor.Slide.WarningSelection">Sinun on valittava vähintään yksi kehys, johon diasiirtymää sovelletaan.</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames">Ladataan kehyksiä</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Instruction">Projektia ei voi ladata</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Message">Kehyksiä ei ollut mahdollista ladata, koska ne ovat kaikki vioittuneet tai kuvat eivät ole siellä, missä niiden pitäisi olla.</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Instruction">Joitakin kehyksiä ei voitu ladata</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Message">Kehyksiä ei voitu ladata, koska niitä ei löydetty tai ne ovat vioittuneet.</s:String>
+    
+    <!--Editor • Warnings-->
+    <s:String x:Key="S.Editor.Warning.Selection">Sinun on valittava vähintään yksi kehys, johon päällekkäisyyttä sovelletaan.</s:String>
+    <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg ei ole käytettävissä. Lisää se Path-ympäristömuuttujiin tai klikkaa tästä avataksesi Asetukset > Ekstrat asettaaksesi sijainnin.</s:String>
+    <s:String x:Key="S.Editor.Warning.Gifski">Gifski ei käytettävissä. Lisää se Path-ympäristömuuttujiin tai avaa Asetukset > Ekstrat avataksesi sijainnin klikkaamalla tästä.</s:String>
+    <s:String x:Key="S.Editor.Warning.LowSpace">Levyllä, jolle tämä sovellus tallentaa välimuistinsa, ei ole tarpeeksi tilaa ({0} % jäljellä). Klikkaa tästä avataksesi Asetukset > Väliaikaiset tiedostot vapauttaaksesi tilaa.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">Yritit tuoda useita kuvia eri DPI-arvoilla, mikä ei ole sallittua. Jotkut niistä tuotiin, toiset on tuotava erikseen.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentSize">Yritit tuoda useita erikokoisia kuvia, mitä ei ole mahdollista. Jotkut niistä tuotiin, toiset on tuotava erikseen.</s:String>
+    
+    <!--Editor • Status-->
+    <s:String x:Key="S.Editor.RetrievingFromCache">Kehysten hakeminen välimuistista</s:String>
+    <s:String x:Key="S.Editor.UpdatingFrames">Kehysten päivitys</s:String>
+    <s:String x:Key="S.Editor.PreparingImport">Tuonnin valmistelu</s:String>
+    <s:String x:Key="S.Editor.ImportingFrames">Tuodaan kehyksiä</s:String>
+    <s:String x:Key="S.Editor.AnalyzingDuplicates">Kaksoiskappaleiden analysointi</s:String>
+    <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Viiveen säätö</s:String>
+    <s:String x:Key="S.Editor.DiscardingDuplicates">Hylkää kaksoiskappaleet</s:String>
+    <s:String x:Key="S.Editor.DiscardingFrames">Hylätään kehyksiä</s:String>
+    <s:String x:Key="S.Editor.DiscardingFolders">Hylkää kansioita</s:String>
+    <s:String x:Key="S.Editor.ResizingFrames">Kehysten koon muuttaminen</s:String>
+    <s:String x:Key="S.Editor.CroppingFrames">Rajataan kehyksiä</s:String>
+    <s:String x:Key="S.Editor.ApplyingOverlay">Sovelletaan päällekkäisyyttä kehyksiin</s:String>
+    <s:String x:Key="S.Editor.CreatingTitleFrame">Luodaan otsikkokehys</s:String>
+    <s:String x:Key="S.Editor.ApplyingFlipRotate">Sovelletaan kääntöä/kiertoa kehyksiin</s:String>
+    <s:String x:Key="S.Editor.ChangingDelay">Muutetaan viivettä</s:String>
+    <s:String x:Key="S.Editor.ApplyingTransition">Sovelletaan siirtymäefektiä</s:String>
+    <s:String x:Key="S.Editor.PreparingSaving">Tallennuksen valmistelu</s:String>
+    <s:String x:Key="S.Editor.CancelDiscard">Peruuta lataus ja hylkää projekti.</s:String>
+    <s:String x:Key="S.Editor.FindingLoop">Etsitään täydellinen silmukka</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">Hylätään silmukassa käyttämättömät kehykset</s:String>
+
+    <!--Editor • Frame list-->
+    <s:String x:Key="S.Editor.List.Frame">Kehys:</s:String>
+    <s:String x:Key="S.Editor.List.OpenImage">Avaa kuva</s:String>
+    <s:String x:Key="S.Editor.List.ExploreFolder">Tutki kansiota</s:String>
+    
+    <!--Editor • Go to-->
+    <s:String x:Key="S.GoTo.Title">Siirry kehykseen</s:String>
+    <s:String x:Key="S.GoTo.Instruction">Siirry kehykseen (0 - {0})</s:String>
+    
+    <!--Editor • Context menu-->
+    <s:String x:Key="S.Context.SaveAs">Tallenna nimellä...</s:String>
+    <s:String x:Key="S.Context.RemoveFrames">Poista valitut kehykset</s:String>
+    <s:String x:Key="S.Context.NewRecording">Uusi näytön tallennus</s:String>
+    <s:String x:Key="S.Context.NewWebcamRecording">Uusi Verkkokameratallennus</s:String>
+    <s:String x:Key="S.Context.NewBoardRecording">Uusi Piirustustaulun tallennus</s:String>
+    <s:String x:Key="S.Context.NewBlankAnimation">Uusi projekti</s:String>
+    <s:String x:Key="S.Context.NewFromMediaProject">Uusi mediasta tai projektista</s:String>
+   
+    <!--Editor • Hints-->
+    <s:String x:Key="S.Hint.NewRecording">Uusi tallenne luotu</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">Uusi Verkkokameratallenne luotu</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">Uusi Piirustustaulun tallennus luotu</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">Uusi projekti luotu</s:String>
+    <s:String x:Key="S.Hint.Undo">Kumoa suoritettu</s:String>
+    <s:String x:Key="S.Hint.Reset">Nollaus suoritettu</s:String>
+    <s:String x:Key="S.Hint.Redo">Uusinta suoritettu</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} ruutu(a) leikattu</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} ruutu(a) kopioitu</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} ruutu(a) liitetty</s:String>
+    <s:String x:Key="S.Hint.Zoom">Zoomaus asetettu {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">Kaikki kehykset valittu</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">Kehys #{0} valittu</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">Käänteinen valinta</s:String>
+    <s:String x:Key="S.Hint.Deselect">Kaikki kehykset poistettiin valinnasta</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} ruutu(a) poistettu</s:String>
+    <s:String x:Key="S.Hint.Reverse">Kehysluettelo päinvastoin</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Yo-yo efektiä sovellettu</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">Ruutu(a) siirretty vasemmalle</s:String>
+    <s:String x:Key="S.Hint.MoveRight">Ruutu(a) siirretty oikealle</s:String>
+    <s:String x:Key="S.Hint.Resize">Kehysten kokoa muutettu</s:String>
+    <s:String x:Key="S.Hint.Crop">Kehykset rajattu</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">Kehykset käännetty/pyöritetty</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">Käännä-toiminto koskee valittuja kehyksiä ja pyöritä-toiminto koskee kaikkia kehyksiä.</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">Tämä toiminto koskee kaikkia kehyksiä</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">Tämä toiminto koskee valittuja kehyksiä</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">Tämä toiminto koskee kaikkia tai valittuja kehyksiä asetuksista riippuen.</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">Cinemagraph-kuvaus koskee kaikkia ruutuja, jotka perustuvat ensimmäiseen kehykseen.</s:String>
+    <s:String x:Key="S.Hint.Overlay">Peittoa sovellettu</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">Otsikkokehys luotu</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">Otsikkokehys lisätään ennen valittua kehystä.</s:String>
+    <s:String x:Key="S.Hint.Delay">Kesto (viive) muutettu</s:String>
+    <s:String x:Key="S.Hint.Transition">Siirtymä lisätty</s:String>
+    <s:String x:Key="S.Hint.Reduce">Kuvataajuutta vähennetty</s:String>
+    <s:String x:Key="S.Hint.Duplicates">Kaksoiskappaleet poistettu</s:String>
+    
+    <!--Editor • Action panel-->
+    <s:String x:Key="S.Action.Hide">Piilota</s:String>
+    <s:String x:Key="S.Action.Apply">Käytä</s:String>
+    <s:String x:Key="S.Action.Open">Avaa</s:String>
+    <s:String x:Key="S.Action.Save">Tallenna</s:String>
+    <s:String x:Key="S.Action.Cancel">Peruuta</s:String>
+
+    <!--Editor • Recent projects-->
+    <s:String x:Key="S.Recent.Projects">Recent Projects</s:String>
+    <s:String x:Key="S.Recent.Searching">Etsitään viimeaikaisia projekteja...</s:String>
+    <s:String x:Key="S.Recent.Date">Luontipäivä</s:String>
+    <s:String x:Key="S.Recent.Frames">Kehysten määrä</s:String>
+    <s:String x:Key="S.Recent.Warning.NoSelection">Projektia ei ole valittu. Valitse ladattava projekti luettelosta.</s:String>
+    <s:String x:Key="S.Recent.Warning.SameProject">Tämä projekti on jo esillä tässä editorissa.</s:String>
+    <s:String x:Key="S.Recent.Warning.AnotherEditor">Tämä projekti on jo avattu toisessa editorissa. Projektia ei voi avata toista kertaa, jos se on jo avattu toisessa editorissa.</s:String>
+    
+    <!--Editor • Clipboard-->
+    <s:String x:Key="S.Clipboard.Entries">Leikepöytämerkinnät</s:String>
+    <s:String x:Key="S.Clipboard.Entry">Leikepöytämerkintä:</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Image">{0} kuva</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Images">{0} kuvat</s:String>
+    <s:String x:Key="S.Clipboard.Explore">Tutki sisältöä</s:String>
+    <s:String x:Key="S.Clipboard.Remove">Poista</s:String>
+    <s:String x:Key="S.Clipboard.Behavior">Liitä käytös</s:String>
+    <s:String x:Key="S.Clipboard.Before">Ennen valittua kehystä</s:String>
+    <s:String x:Key="S.Clipboard.After">Valitun kehyksen jälkeen</s:String>
+    
+    <!--Editor • Resize-->
+    <s:String x:Key="S.Resize.Difference">Ero</s:String>
+    <s:String x:Key="S.Resize.Dpi">Dpi</s:String>
+    <s:String x:Key="S.Resize.Options">Asetukset</s:String>
+    <s:String x:Key="S.Resize.Pixels">Pikseliä (px)</s:String>
+    <s:String x:Key="S.Resize.Percent">Prosenttia (%)</s:String>
+    <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
+    <s:String x:Key="S.Resize.KeepAspect">Säilytä kuvasuhde.</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">Laatu:</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant - Parempi laatu</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">Lineaarinen - Huonompi laatu</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Lähin naapuri - Huonompi laatu ja nopeampi</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Info">Skaalauslaatu.</s:String>
+    <s:String x:Key="S.Resize.Warning">Sinun on valittava eri arvo, johon Koon mukautus -toimintoa sovelletaan.</s:String>
+    
+    <!--Editor • Crop-->
+    <s:String x:Key="S.Crop.Points">Pisteet</s:String>
+    <s:String x:Key="S.Crop.Top">Ylä:</s:String>
+    <s:String x:Key="S.Crop.Left">Vasen:</s:String>
+    <s:String x:Key="S.Crop.Bottom">Ala:</s:String>
+    <s:String x:Key="S.Crop.Right">Oikea:</s:String>
+    <s:String x:Key="S.Crop.Warning">Rajausvalinnan on oltava pienempi kuin nykyinen kuvakoko.</s:String>
+    <s:String x:Key="S.Crop.Warning.Bigger">Rajausvalinnan on oltava suurempi kuin 10x10 pikseliä.</s:String>
+    
+    <!--Editor • Flip/rotate-->
+    <s:String x:Key="S.FlipRotate.FlipHorizontal">Käännä vaakasuoraan</s:String>
+    <s:String x:Key="S.FlipRotate.FlipVertical">Käännä pystysuoraan</s:String>
+    <s:String x:Key="S.FlipRotate.RotateLeft">Kierrä vasemmalle 90º</s:String>
+    <s:String x:Key="S.FlipRotate.RotateRight">Kierrä oikealle 90º</s:String>
+    
+    <!--Editor • Reduce framerate-->
+    <s:String x:Key="S.Reduce.Header">Vähennä ruutunopeutta</s:String>
+    <s:String x:Key="S.Reduce.Factor">Kerroin:</s:String>
+    <s:String x:Key="S.Reduce.Count">Poistomäärä:</s:String>
+    <s:String x:Key="S.Reduce.Delay">Viiveen säätö:</s:String>
+    <s:String x:Key="S.Reduce.Delay.NoAdjustment">Älä säädä</s:String>
+    <s:String x:Key="S.Reduce.Delay.Previous">Summa edellisen kehyksen kanssa</s:String>
+    <s:String x:Key="S.Reduce.Delay.Evenly">Summaa tasaisesti jäljellä olevien kehysten kanssa</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll">Vähennä koko projektin kuvataajuutta.</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll.Info">Jos vaihtoehto ei ole valittuna, sinun on valittava useita peräkkäisiä kehyksiä,&#10;suurempi kuin poistokerroin.</s:String>
+    <s:String x:Key="S.Reduce.Info">Poistaa {0} kehyksen jokaisen {1} kehyksen jälkeen laskematta poistettuja kehyksiä.</s:String>
+    <s:String x:Key="S.Reduce.Warning.NoSelection">Sinun on valittava kehykset, joihin haluat soveltaa kuvanopeuden vähennystä (tai valittava vaihtoehto, joka koskee koko projektia).</s:String>
+    <s:String x:Key="S.Reduce.Warning.NonConsecutive">Valittujen kehysten luettelon on oltava peräkkäisiä. Et voi jättää joitakin kehyksiä valitsematta valittujen kehysten joukossa.</s:String>
+    <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">Kehysvalikoiman on oltava suurempi kuin poistokerroin, jotta ominaisuus pystyy poistamaan mitään.</s:String>
+    
+    <!--Editor • Remove duplicates-->
+    <s:String x:Key="S.RemoveDuplicates.Header">Poista kaksoiskappaleet</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">Samankaltaisuus (%):</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">Kehyksen poistaminen:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">Poista ensimmäinen kehys</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Poista viimeinen kehys</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">Viiveen säätö:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Älä säädä</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">Käytä keskiarvoa</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Käytä summaa</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">Tämä toiminto analysoi jokaisen kehyksen (pikseli kerrallaan) ja poistaa ne, jotka ovat vähintään {0} % samankaltaisia kuin sen välitön naapuri.&#x0d;Voit valita, haluatko säätää kehysten viiveen ( esittelyn keston).</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">Luo tasainen silmukka</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">Ohita ensimmäinen:</s:String>
+    <s:String x:Key="S.SmoothLoop.From">Vertaa alkaen:</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">Loppu</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">Alku</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">Yritetään löytää kehys, joka on vähintään {0} % samanlainen kuin aloituskehys, ja poistetaan kaikki myöhemmät kehykset.&#x0d;Voit valita, haluatko jättää huomiotta joitakin alkukehyksiä ja aloittaa vertailun alusta (kynnysarvon jälkeen) tai lopusta.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">Ohitettavien kehysten määrän on oltava pienempi kuin kehysten kokonaismäärä.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Tasaisen silmukan luominen ei ollut mahdollista valituilla asetuksilla.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">Sinulla on jo tasainen silmukka, joka perustuu valittuihin asetuksiin.</s:String>
+    
+    <!--Editor • Captions-->
+    <s:String x:Key="S.Caption.Text">Teksti</s:String>
+    <s:String x:Key="S.Caption.Font">Fontti</s:String>
+    <s:String x:Key="S.Caption.Family">Perhe:</s:String>
+    <s:String x:Key="S.Caption.Style">Tyyli:</s:String>
+    <s:String x:Key="S.Caption.Weight">Paino:</s:String>
+    <s:String x:Key="S.Caption.Size">Koko:</s:String>
+    <s:String x:Key="S.Caption.Color">Väri:</s:String>
+    <s:String x:Key="S.Caption.Outline">Hahmotelma</s:String>
+    <s:String x:Key="S.Caption.Thickness">Paksuus:</s:String>
+    <s:String x:Key="S.Caption.Layout">Asettelu</s:String>
+    <s:String x:Key="S.Caption.Vertical">Pystysuora:</s:String>
+    <s:String x:Key="S.Caption.Horizontal">Vaakasuora:</s:String>
+    <s:String x:Key="S.Caption.TextAlignment">Kohdistus:</s:String>
+    <s:String x:Key="S.Caption.TextDecoration">Koristelu:</s:String>
+
+    <!--Editor • Key strokes-->
+    <s:String x:Key="S.KeyStrokes">Painallukset</s:String>
+    <s:String x:Key="S.KeyStrokes.Keys">Näppäimet</s:String>
+    <s:String x:Key="S.KeyStrokes.Separator">Erotin:</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit">Muokkaa näppäinpainalluksia</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers">Jätä Ctrl-, Alt-, Shift- ja Windows-näppäimet huomiotta, jos niitä ei käytetä muokkaimina.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">Jättää huomiotta yksittäiset näppäinpainallukset, kuten "Control", mutta ei jätä huomiotta "Control + C".</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected">Ohita ohjelmiston simuloimat näppäinpainallukset.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Tallenna vain käyttäjän syöttämät näppäinpainallukset.</s:String>
+    <s:String x:Key="S.KeyStrokes.Extend">Pidennä näppäinlyöntien näyttöä.</s:String>
+    <s:String x:Key="S.KeyStrokes.Earlier">Aloita näppäinpainallusten näyttö aikaisemmin.</s:String>
+    <s:String x:Key="S.KeyStrokes.By">(ms):</s:String>
+    <s:String x:Key="S.KeyStrokes.Warning.None">Tallenteessasi ei ole näppäinpainalluksia.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Title">ScreenToGif - Näppäimistöeditori</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Number">Kehyksen numero</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Keys">Havaitut näppäinpainallukset</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Remove">Poista näppäinpainallus</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Add">Lisää näppäinpainallus:</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower">Pienet kirjaimet.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">Sen avulla voit lisätä pieniä yksittäisiä kirjaimia.</s:String>
+
+    <!--Editor • Free drawing-->
+    <s:String x:Key="S.FreeDrawing.Mode">Tila</s:String>
+    <s:String x:Key="S.FreeDrawing.Pen">Kynä</s:String>
+    <s:String x:Key="S.FreeDrawing.Eraser">Pyyhekumi</s:String>
+    <s:String x:Key="S.FreeDrawing.Select">Valitse</s:String>
+    <s:String x:Key="S.FreeDrawing.StrokeEraser">Leikkaava pyyhin</s:String>
+    <s:String x:Key="S.FreeDrawing.Width">Leveys:</s:String>
+    <s:String x:Key="S.FreeDrawing.Height">Korkeus:</s:String>
+    <s:String x:Key="S.FreeDrawing.Tip">Vinkki:</s:String>
+    <s:String x:Key="S.FreeDrawing.Rectangle">Suorakulmio</s:String>
+    <s:String x:Key="S.FreeDrawing.Ellipse">Ellipsi</s:String>
+    <s:String x:Key="S.FreeDrawing.Other">Muu:</s:String>
+    <s:String x:Key="S.FreeDrawing.Highlighter">Korostin.</s:String>
+    <s:String x:Key="S.FreeDrawing.FitToCurve">Sovita käyrälle.</s:String>
+    <s:String x:Key="S.FreeDrawing.Warning.NoDrawing">Valitsemiesi kehysten kohdalla ei ole piirustuksia.</s:String>
+    <s:String x:Key="S.FreeDrawing.WarningSelection">Sinun on valittava vähintään yksi kehys, johon voit soveltaa vapaata piirtämistä.</s:String>
+    
+    <!--Editor • Shapes-->
+    <s:String x:Key="S.Shapes.Mode.Insert">Lisää</s:String>
+    <s:String x:Key="S.Shapes.Shapes">Kuviot</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Radius">Säde:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes">Viivat:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes.Info">Säätelee viivojen kokoa ja välysten kokoa.&#10;Voit asettaa useita kokoja luodaksesi monimutkaisen viivatyylin.&#10;Oletusarvo on "1 0" tai tyhjä, mikä tarkoittaa viivaa, jossa ei ole välyksiä.</s:String>
+    <s:String x:Key="S.Shapes.Shapes.ResetRotatio">Nollaa kierto</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Remove">Poista</s:String>
+    <s:String x:Key="S.Shapes.Fill">Täyttö</s:String>
+
+    <!--Editor • Mouse events-->
+    <s:String x:Key="S.MouseEvents">Hiiritapahtumat</s:String>
+    <s:String x:Key="S.MouseHighlight.Color">Hiiren korostusväri:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Left">Vasen painike:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Middle">Keskipainike:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Right">Oikea painike:</s:String>
+    
+    <!--Editor • Watermark-->
+    <s:String x:Key="S.Watermark.Image">Kuva</s:String>
+    <s:String x:Key="S.Watermark.File">Tiedosto:</s:String>
+    <s:String x:Key="S.Watermark.File.Nothing">Ei valittua</s:String>
+    <s:String x:Key="S.Watermark.Opacity">Peittävyys:</s:String>
+    <s:String x:Key="S.Watermark.Select">Valitse kuva</s:String>
+    <s:String x:Key="S.Watermark.WarningNoImage">Sinun on valittava kuva, jota haluat soveltaa valittuun kehykseen (valittuihin kehyksiin).</s:String>
+    <s:String x:Key="S.Watermark.WarningSelection">Sinun on valittava vähintään yksi kehys, johon vesileima lisätään.</s:String>
+    
+    <!--Editor • Border-->
+    <s:String x:Key="S.Border.Appearance">Ulkonäkö</s:String>
+    <s:String x:Key="S.Border.Info">Käytä negatiivisia arvoja, jos haluat reunuksen laajentavan kuvaa. Tällöin rajaus kohdistuu kaikkiin kehyksiin.&#10;Jos negatiivista arvoa ei käytetä, rajaus kohdistuu vain valittuihin kehyksiin.</s:String>
+
+    <!--Editor • Shadow-->
+    <s:String x:Key="S.Shadow.ShadowColor">Varjon väri:</s:String>
+    <s:String x:Key="S.Shadow.BackgroundColor">Taustan väri:</s:String>
+    <s:String x:Key="S.Shadow.Direction">Suunta:</s:String>
+    <s:String x:Key="S.Shadow.BlurRadius">Sumeussäde:</s:String>
+    <s:String x:Key="S.Shadow.Depth">Syvyys:</s:String>
+    
+    <!--Editor • Obfuscate-->
+    <s:String x:Key="S.Obfuscate.Type.Pixelate">Pikselöi</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Blur">Sumenna</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Darken">Tummenna</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Lighten">Vaalenna</s:String>
+    <s:String x:Key="S.Obfuscate.Options">Hämärtämisasetukset</s:String>
+    <s:String x:Key="S.Obfuscate.PixelSize">Pikselikoko:</s:String>
+    <s:String x:Key="S.Obfuscate.BlurLevel">Sumeustaso:</s:String>
+    <s:String x:Key="S.Obfuscate.DarkenLevel">Tummuusaste:</s:String>
+    <s:String x:Key="S.Obfuscate.LightenLevel">Kirkastustaso:</s:String>
+    <s:String x:Key="S.Obfuscate.UseAverage">Laske kunkin pikselilohkon keskimääräinen väri.</s:String>
+    <s:String x:Key="S.Obfuscate.Invert">Sovella häivytystä käänteiseen valintaan.</s:String>
+    <s:String x:Key="S.Obfuscate.Smoothness">Tasaisuus</s:String>
+    <s:String x:Key="S.Obfuscate.Info">Valitse valintatyökalulla se osa kehyksestä, joka halutaan peittää.</s:String>
+    <s:String x:Key="S.Obfuscate.Info2">Valitse valintatyökalulla se osa kehyksestä, jota ei saa peittää.</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">Et valinnut mitään. Valitse valintatyökalulla suorakulmio, joka on tarkoitus peittää.</s:String>
+    
+    <!--Editor • Progress-->
+    <s:String x:Key="S.Progress.Type">Tyyppi</s:String>
+    <s:String x:Key="S.Progress.Type.Bar">Palkki</s:String>
+    <s:String x:Key="S.Progress.Type.Text">Teksti</s:String>
+    <s:String x:Key="S.Progress.Precision">Tarkkuus:</s:String>
+    <s:String x:Key="S.Progress.Precision.Minutes">Minuuttia</s:String>
+    <s:String x:Key="S.Progress.Precision.Seconds">Sekuntia</s:String>
+    <s:String x:Key="S.Progress.Precision.Milliseconds">Millisekuntia</s:String>
+    <s:String x:Key="S.Progress.Precision.Percentage">Prosenttia</s:String>
+    <s:String x:Key="S.Progress.Precision.Count">Kehyksen numero</s:String>
+    <s:String x:Key="S.Progress.Precision.DateOfRecording">Todellinen päivä/aika</s:String>
+    <s:String x:Key="S.Progress.Precision.Custom">Mukautettu</s:String>
+    <s:String x:Key="S.Progress.Precision.ShowTotal">Näytä kokonaismäärä.</s:String>
+    <s:String x:Key="S.Progress.Format">Formaatti:</s:String>
+    <s:String x:Key="S.Progress.Format.Header">Formaatti</s:String>
+    <s:String x:Key="S.Progress.Format.Milliseconds">$ms = millisekuntia</s:String>
+    <s:String x:Key="S.Progress.Format.Seconds">$s = sekuntia</s:String>
+    <s:String x:Key="S.Progress.Format.Minutes">$m = minuuttia</s:String>
+    <s:String x:Key="S.Progress.Format.Percentage">$p = prosenttia</s:String>
+    <s:String x:Key="S.Progress.Format.FrameNumber">$f = kehyksen numero</s:String>
+    <s:String x:Key="S.Progress.Format.Totals">Yhteensä:</s:String>
+    <s:String x:Key="S.Progress.Format.Examples">Esimerkkejä:</s:String>
+    <s:String x:Key="S.Progress.Format.Date">Voit käyttää .Net Frameworkin päivämäärän ja kellonajan muotoa.&#x0d;Määrittely on saatavilla näistä kahdesta alla olevasta linkistä.</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Standard">Standardiformaatit</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Custom">Mukautetut formaatit</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber">Laske alkaen:</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">Aloittaa kehysnumeron laskemisen tästä valitusta numerosta.</s:String>
+    <s:String x:Key="S.Progress.Orientation">Suuntaus:</s:String>
+    
+    <!--Editor • Delay-->
+    <s:String x:Key="S.Delay.Update">Viiveen päivitys</s:String>
+    <s:String x:Key="S.Delay.Mode">Viivetila:</s:String>
+    <s:String x:Key="S.Delay.Mode.Override">Ohitus (ms)</s:String>
+    <s:String x:Key="S.Delay.Mode.IncreaseDecrease">Lisää tai vähennä (ms)</s:String>
+    <s:String x:Key="S.Delay.Mode.Scale">Skaala (%)</s:String>
+    <s:String x:Key="S.Delay.NewValue">Uusi arvo</s:String>
+    <s:String x:Key="S.Delay.Minimum10Ms">Vähintään 10 ms kehystä kohti.</s:String>
+    <s:String x:Key="S.Delay.DecreaseIncrease">Vähennä/lisää arvoa</s:String>
+    <s:String x:Key="S.Delay.Scale">Skaalan arvo</s:String>
+    <s:String x:Key="S.Delay.Override.Info">Tämä uusi arvo korvaa kaikkien valittujen kehysten keston (viive). Arvo voi olla 10 ms - 25500 ms.</s:String>
+    <s:String x:Key="S.Delay.IncreaseDecrease.Info">Tämä arvo vähentää/lisää kunkin valitun kehyksen kestoa (viive).&#x0d;Voit vähentää/lisätä valitsemalla arvon välillä -10000ms ja 10000ms, mutta kunkin kehyksen lopullinen kesto on rajoitettu välille 10ms ja 25500ms.</s:String>
+    <s:String x:Key="S.Delay.Scale.Info">Voit skaalata kunkin valitun kehyksen keston (viiveen) prosenttiarvolla.&#x0d;Voit skaalata kunkin kehyksen keston valitsemalla arvon 1 %:n ja 1000 %:n väliltä, mutta kunkin kehyksen lopullinen kesto on rajoitettu 10 ms:n ja 25500 ms:n välille.</s:String>
+
+    <!--Editor • Cinemagraph-->
+    <s:String x:Key="S.Cinemagraph.Info">Valitse kynällä pikselit, joiden ei pitäisi pysyä staattisina (joiden pitäisi muuttua kehysten välillä), maalaamalla niiden päälle.</s:String>
+
+    <!--Editor • Transitions-->
+    <s:String x:Key="S.Transitions.Length">Siirtymän pituus</s:String>
+    <s:String x:Key="S.Transitions.Delay">Siirtymäviive</s:String>
+    <s:String x:Key="S.Transitions.FadeTo">Häivytä...</s:String>
+    <s:String x:Key="S.Transitions.FadeTo.Frame">Seuraava kehys</s:String>
+    <s:String x:Key="S.Transitions.FadeTo.Color">Väri</s:String>
+    <s:String x:Key="S.Transitions.Color">Väri</s:String>
+    <s:String x:Key="S.Transitions.Info">Siirtymää sovelletaan valitun kehyksen ja seuraavan kehyksen välillä.</s:String>
+
+    <!--Editor • Save as-->
+    <s:String x:Key="S.SaveAs.Type">Tiedostotyyppi ja esiasetus</s:String>
+    <s:String x:Key="S.SaveAs.Type.Format">Tulostustiedoston muoto.</s:String>
+    <s:String x:Key="S.SaveAs.Type.Preset">Vientiasetus, joka sisältää kaikki tällä hetkellä näkyvissä olevat asetukset.&#10;Hallitse vientiasetuksia alla olevien painikkeiden avulla.</s:String>
+    <s:String x:Key="S.SaveAs.Type.Animated">Animoitu kuva</s:String>
+    <s:String x:Key="S.SaveAs.Type.Video">Video</s:String>
+    <s:String x:Key="S.SaveAs.Type.Frames">Kehykset</s:String>
+    <s:String x:Key="S.SaveAs.Type.Other">Muu</s:String>
+    
+    <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
+    <s:String x:Key="S.SaveAs.Apng.Info">Animoitu Portable Network Graphics</s:String>
+    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Gif.Info">Graphics Interchange Format</s:String>
+    <s:String x:Key="S.SaveAs.Webp">Webp</s:String>
+    <s:String x:Key="S.SaveAs.Webp.Info">Web-kuva</s:String>
+    
+    <s:String x:Key="S.SaveAs.Avi">Avi</s:String>
+    <s:String x:Key="S.SaveAs.Avi.Info">Audio Video Interleave</s:String>
+    <s:String x:Key="S.SaveAs.Mkv">Mkv</s:String>
+    <s:String x:Key="S.SaveAs.Mkv.Info">Matroska</s:String>
+    <s:String x:Key="S.SaveAs.Mov">Mov</s:String>
+    <s:String x:Key="S.SaveAs.Mov.Info">QuickTime-tiedostomuoto</s:String>
+    <s:String x:Key="S.SaveAs.Mp4">Mp4</s:String>
+    <s:String x:Key="S.SaveAs.Mp4.Info">Mpeg-4</s:String>
+    <s:String x:Key="S.SaveAs.Webm">Webm</s:String>
+    <s:String x:Key="S.SaveAs.Webm.Info">Web Movie</s:String>
+    
+    <s:String x:Key="S.SaveAs.Bmp">Bmp</s:String>
+    <s:String x:Key="S.SaveAs.Bmp.Info">Bitmap</s:String>
+    <s:String x:Key="S.SaveAs.Jpeg">Jpeg</s:String>
+    <s:String x:Key="S.SaveAs.Jpeg.Info">Joint Photographic Experts Group</s:String>
+    <s:String x:Key="S.SaveAs.Png">Png</s:String>
+    <s:String x:Key="S.SaveAs.Png.Info">Portable Network Graphics</s:String>
+    
+    <s:String x:Key="S.SaveAs.Project">Projekti</s:String>
+    <s:String x:Key="S.SaveAs.Project.Info">ScreenToGif projekti</s:String>
+    <s:String x:Key="S.SaveAs.Psd">Psd</s:String>
+    <s:String x:Key="S.SaveAs.Psd.Info">Photoshop tiedosto</s:String>
+    
+    <!--Editor • Save as > Presets-->
+    <s:String x:Key="S.SaveAs.Presets">Esiasetukset:</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Default">Oletus</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Add">Lisää uusi esiasetus.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Save">Tallenna nykyiset asetukset tähän vientiasetukseen.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Edit">Muokkaa viennin esiasetusten perusasetuksia.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove">Poista nykyinen valittu esiasetus.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset">Palauta tämän esiasetuksen asetukset oletusasetuksiin.</s:String>
+    
+    <!--Editor • Save as > Presets > Dialogs-->
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Title">Poistetaan esiasetus</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Instruction">Oletko varma, että haluat poistaa esiasetuksen?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Message">Tätä toimintoa ei voi peruuttaa.&#10;&#10;Haluatko poistaa valitun esiasetuksen?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Title">Palautetaan esiasetus </s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Instruction">Oletko varma, että haluat palauttaa esiasetuksen?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Message">Tätä toimintoa ei voi peruuttaa.&#10;&#10;Haluatko palauttaa valitun esiasetuksen oletusasetukset?</s:String>
+    
+    <!--Editor • Save as > Encoder-->
+    <s:String x:Key="S.SaveAs.Encoder">Kooderi</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Quantizer">Kooderi ja kvantisoija</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Info">Kooderi, joka vastaa tulostiedoston luomisesta.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">Sisäänrakennettu kooderi.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft">KGy SOFT</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft.Info">KGy SOFT GIF Encoder.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System">Järjestelmä</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Info">Järjestelmän tarjoama kooderi.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">Ulkoinen kooderi, jonka on tehnyt FFmpeg.org.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">Ulkoinen kooderi, jonka on tehnyt Gif.ski.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Options">Kooderin asetukset</s:String>
+
+    <!--Editor • Save as > FFmpeg-->
+    <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Ota laajennettu tila käyttöön.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Syötä parametrit manuaalisesti kooderin ohjausta varten.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters">Parametrit:</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Info">Luettelo parametreista, jotka välitetään FFmpegille.&#10;&#10;Erikoisparametrit:&#10;{I} on tulopolku (kehykset).&#10;{O} on tulopolku (viety tiedosto).&#10;{W} on kehyksen leveys.&#10;{H} on kehyksen korkeus.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Pass">Jos haluat koodata 2- vaiheessa, lisää yksinkertaisesti '-pass 2'.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Preview">Esikatselu</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Preview.Info">Esikatsele FFmpegille välitettävää parametriluetteloa.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Code">Koodekkien dokumentit</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Format">Formaatin dokumentit</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Filters">Suodattimen dokumentit</s:String>
+    
+    <!--Editor • Save as > Gif options-->
+    <s:String x:Key="S.SaveAs.GifOptions">Gif-asetukset</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Info">Värien vähentämisalgoritmi (kvantisointi).</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural">Neuroverkko</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">Erittäin todenmukainen kvantisointi. Hitaampi, mutta hyvä suuremmalle värimäärälle.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree">Octree</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">Hyvä animaatioille, joissa on vähemmän värejä. Nopeampi, mutta voi tuottaa värikaistoja.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut">Mediaanileikkaus</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut.Info">Huonompi kuin Octree ja hitaampi.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale">Harmaasävy</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale.Info">Käyttää kiinteää harmaasävypalettia, joten se on paljon nopeampi.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">Eniten käytetyt värit</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">Ottaa yksinkertaisesti kehyksissä eniten käytetyt värit.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling">Näytteenotto:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">Näytteenottokerroin:&#10;Arvo 1 tuottaa paremman näköisen gif-kuvan, mutta sen renderöinti on hitaampaa.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quality">Laatu:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors">Värit:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Värien enimmäismäärä (jokaisessa kehyksessä).</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Käytä yleistä väritaulukkoa.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">Saattaa heikentää gif-tiedoston laatua ja/tai kokoa.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Best">Paras</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Fastest">Nopein</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster">Käytä vielä nopeampaa koodausprosessia.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster.Info">Saattaa heikentää gif-kuvan laatua.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">Silmukka:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Silmukoitu gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Toista ikuisesti.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Toista laskenta.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Ota läpinäkyvyys käyttöön.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">Ottaa käyttöön täyden läpinäkyvyystilan, jolloin gif-tiedoston tausta on täysin läpinäkyvä.&#10; Kroma-avaimen korvausprosessi jätetään huomiotta, jos tämä vaihtoehto on käytössä.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">Valitse, mikä väri näytetään läpinäkyvänä.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">Jos väri on valittu, se muunnetaan läpinäkyväksi ja se näkyy läpinäkyvänä luodussa gif-tiedostossa.&#10;Jos väriä ei ole valittu, kaikki läpinäkyvät värit (Alpha = 0 %) näkyvät läpinäkyvinä normaalisti.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Tunnista muuttumattomat pikselit.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">Analysoimalla ja havaitsemalla kehysten välillä muuttumattomat pikselit &#10;on mahdollista tallentaa vain tarvittavat osat gif-tiedostoon.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">Korvaa nämä pikselit kroma-avaimella.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">Toistuvat tai muuttuneet pikselit korvataan tällä kroma-avaimella,&#10;jolloin on mahdollista käyttää vähemmän värejä kehystä kohti.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Kroma-avain:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Dither">Ditheröinti:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Bayerin skaala:</s:String>
+
+    <!--Editor • Save as > KGy SOFT options-->
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer">Kvantisoija</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor">Taustan väri:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor.Info">Pikselit, joilla on alfa (läpinäkyvyys) ja joita valittu kvantisoija pitää läpinäkymättöminä, sekoitetaan tämän värin kanssa ennen kvantisoidun värin saamista.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold">Alfa-kynnys:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold.Info">Määrittää syötetyn alfa-arvon, jolla kvantisoitu väri on läpinäkyvä.&#x0d;&#x0a;Jos 0, tulos ei ole koskaan läpinäkyvä.&#x0d;&#x0a;Jos 255, vain täysin läpinäkyvät pikselit katsotaan läpinäkyviksi.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold">Valkoinen kynnys:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold.Info">Määrittää pienimmän tulovärin kirkkauden, jotta tuloksen väri katsotaan valkoiseksi.&#x0d;&#x0a;Vaikuttaa tuloksen kirkkauteen. Virhediffuusiodithering voi kuitenkin kompensoida tämän parametrin arvon.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping">Suorakartoitus</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping.Info">Kun tämä on valittuna, kvantisoitu väri määritetään suoralla kartoituksella sen sijaan, että etsittäisiin lähin palettimerkintä.&#x0d;&#x0a;Se nopeuttaa kvantisointia, mutta saattaa johtaa korkeamman kontrastin tulokseen. Virhediffuusion dithering voi kuitenkin kompensoida tämän parametrin arvon.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize">Paletin koko:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize.Info">Määrittää paletin enimmäiskoon kehystä kohti.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel">Mukautettu bittitaso.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">Kun valittu, bittitaso voidaan määrittää manuaalisesti.&#x0d;&#x0a;?? Varoitus: Korkein bittitaso saattaa vaatia PALJON muistia!</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BitLevel.Info">Suurempi arvo tarkoittaa suurempaa tarkkuutta, suurempaa kohdeväriavaruutta, hitaampaa käsittelyä ja suurempaa muistinkäyttöä.&#x0d;&#x0a;Jos esimerkiksi arvo on 1, tuloksessa voi olla enintään 8 väriä, tai jos arvo on 2, enintään 64 väriä. &#x0d;&#x0a;Octree- ja Wu-kvantisaattoreiden osalta se vaikuttaa myös monokromaattisten sävyjen enimmäismäärään.&#x0d;&#x0a;Jos esimerkiksi 5 (joka on Wu-kvantisaattorin oletusarvo), vain 32 monokromaattista sävyä voidaan erottaa.&#x0d;&#x0a;?? Varoitus: Wu-kvantisoija kuluttaa suurimmalla arvolla vähintään 650 Mt.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">Musta/valkoinen</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">Korjattu 1 bpp:n paletti mustan ja valkoisen värin kanssa.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">Harmaasävy 4 väriä</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4.Info">Korjattu 2 bpp-paletti, jossa 4 harmaasävymerkintää.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16">Harmaasävy 16 väriä</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16.Info">Korjattu 4 bpp:n paletti, jossa on 16 harmaasävymerkintää.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale">Harmaasävy 256 väriä</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale.Info">Korjattu 8 bpp:n paletti, jossa 256 harmaasävymerkintää.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette">Järjestelmän oletus 4 bpp-paletti</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette.Info">Korjattu 4 bpp-paletti, jossa käytetään 16 sRGB-väriä.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette">Järjestelmän  8 bpp:n oletuspaletti</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette.Info">Korjattu 8 bpp:n paletti, mukaan lukien "web-safe"-värit ja läpinäkyvyys.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332">RGB 332-paletti</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332.Info">Korjattu 8 bpp:n paletti, joka käyttää RGB 332-väriavaruutta.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree">Octree-kvantisoija</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree.Info">Paletin optimointi jokaiselle kehykselle Octree-algoritmilla.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut">Median Cut-kvantisoija</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut.Info">Paletin optimointi kutakin kehystä varten Median Cut -algoritmilla.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu">Wu-kvantisoija</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu.Info">Paletin optimointi jokaiselle kehykselle Xiaolin Wun algoritmilla.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer">Ditherer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength">Vahvuus:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength.Info">Värähtelijän vahvuus tai 0, jos haluat kalibroida vahvuuden automaattisesti.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed">Siemen:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed.Info">Kokonaislukuinen siemen, jota käytetään tietyn satunnaisen värähtelykuvion tuottamiseen.&#x0d;&#x0a;Jätä tyhjäksi, jos haluat käyttää satunnaista siementä jokaiselle kehykselle.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None">Ei mitään</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None.Info">Kehykset kvantisoidaan ilman ditheringiä.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing">Serpentiinikäsittely</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing.Info">Kun tämä on valittuna, virheen etenemissuunta muuttuu riviltä riville.&#x0d;&#x0a;Tämä auttaa vähentämään virhediffuusioditheringin aaltoiluvaikutusta.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2">Bayer 2x2 (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2.Info">2x2 Bayerin matriisikuvio.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3">Bayer 3x3 (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3.Info">3x3 Bayerin matriisikuvio.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4">Bayer 4x4 (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4.Info">4x4 Bayerin matriisikuvio.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8">Bayer 8x8 (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8.Info">8x8 Bayerin matriisikuvio.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone">Dotted Halftone (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone.Info">8x8-matriisi, jossa pistemäinen puolisävykuvio.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise">Blue Noise (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise.Info">64x64-matriisi, jossa sininen kohinakuvio.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson">Atkinson (Virhehajonta)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson.Info">Bill Atkinson 4x3-matriisi, jossa on 6 tehollista arvoa.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes">Burkes (Virhehajonta)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes.Info">D. Burkes 5x2-matriisi.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg">Floyd-Steinberg (Virhehajonta)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg.Info">Floydin ja Steinbergin alkuperäinen 3x2-matriisi.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke">Jarvis-Judice-Ninke (Virhehajonta)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke.Info">Jarvisin, Judicen ja Ninken laatima 5x3-matriisi.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3">Sierra 3 (Virhehajonta)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3.Info">Frankie Sierran 5x3-matriisi.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2">Sierra 2 (Virhehajonta)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2.Info">Frankie Sierran 5x2-matriisi.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite">Sierra Lite (Virhehajonta)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite.Info">Frankie Sierran 3x2-matriisi.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce">Stevenson-Arce (Virhehajonta)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce.Info">Stevensonin ja Arcen 7x4-kuusikulmainen matriisi.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki">Stucki (Virhehajonta)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki.Info">Stuckin 5x3-matriisi.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer">Satunnainen kohina</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer.Info">Satunnainen valkoinen kohina.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer">Lomitettu gradienttikohina (Interleaved Gradient Noise)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer.Info">Kaavalla tuotettu ei-satunnainen gradienttikohina.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Preview">Esikatselu</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame">Näytä nykyinen kehys.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">Kun valittuna, esikatselu näyttää nykyisen kehyksen tavallisen kuvaesimerkin sijasta.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Refresh">Automaattinen esikatselu on poistettu käytöstä, koska nykyiset asetukset vaativat paljon muistia. Napsauta päivittääksesi esikatselu.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Error">Esikatselun luominen epäonnistui: {0}&#x0d;&#x0a;Klikkaa yrittääksesi luoda se uudelleen.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Animation">Animaatioasetukset</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop">Loputon silmukka.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop.Info">Kun tämä valitaan, animaatiota toistetaan loputtomiin.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">Edestakaisin.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">Kun tämä on valittuna, animaatio toistetaan edestakaisin.&#x0d;&#x0a;Tämä saavutetaan monistamalla kehykset, jolloin tiedostokoko kasvaa ja koodausaika pitenee.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">Toistojen määrä:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Määrittää, kuinka monta kertaa animaatio toistetaan.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">Salli delta-kehykset.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">Kun valittuna, muuttumattomat pikselit yritetään havaita koodauksen aikana.&#x0d;&#x0a;Kun käytetään optimoitua kvantisoijaa, tämä asetus mahdollistaa sen, että kehyksessä voi olla enemmän kuin 256 väriä.&#x0d;&#x0a;Tämä asetus jätetään huomioimatta, jos kvantisoija ei käytä läpinäkyvyyttä ja jos Allow Clipped Frames (Salli leikattujen kehysten käyttö) on valittuna.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">Delta-toleranssi:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">Määrittää enimmäistoleranssin, kun havaitaan muuttuneita pikseleitä.&#x0d;&#x0a;Jos 0, mitään eroa ei sallita.&#x0d;&#x0a;Jos 255, voi olla kehyksiä (tai jopa kaikki), jotka lisätään ilman sisältöä.&#x0d;&#x0a;Kohtuullinen vaihteluväli on välillä 0-16 optimoidulle kvantisoijalle. Niitä, joissa on kiinteät värit, voidaan käyttää hieman suuremmilla arvoilla ditheringin avulla.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">Jos Delta-toleranssi on liian suuri, tulos voi olla huonolaatuinen. Napsauta nollataksesi delta-toleranssin.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames">Salli leikatut kehykset.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info">Kun valittuna, kooderin sallitaan lisätä todellista resoluutiota pienempiä kehyksiä.&#x0d;&#x0a;Jos valintaruutu ei ole valittuna, sallitaan vain mahdollisten läpinäkyvien rajojen leikkaaminen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaIgnored">Salli delta-kehykset jätetään huomiotta, koska nykyinen kokoonpano ei käytä alfaa ja Salli leikatut kehykset on poistettu. Ota leikatut kehykset käyttöön napsauttamalla tätä.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedIgnored">Salli leikatut kehykset -valinnalla ei ole vaikutusta, koska nykyinen kokoonpano ei käytä alfaa ja Salli delta-kehykset -valinta on poistettu. Ota delta-kehykset käyttöön napsauttamalla tätä.</s:String>
+
+    <!--Editor • Save as > Apng options-->
+    <s:String x:Key="S.SaveAs.ApngOptions">Apng-vaihtoehdot</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction">Ennuste:</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.None">Ei mitään</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Sub">Alaosio</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Up">Ylös</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Average">Keskimäärin</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Mixed">Sekoitus</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Looped">Silmukoitu apng.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Tunnista muuttumattomat pikselit.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Maalaa kaikki muuttumattomat pikselit läpinäkyvällä värillä.</s:String>
+    
+    <!--Editor • Save as > Webp options-->
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset">Esiasetus:</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.None">Ei mitään</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Default">Oletus</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Picture">Kuva</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Photo">Valokuva</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Drawing">Piirustus</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Icon">Kuvake</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Text">Teksti</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.Lossless">Käytä häviötöntä tilaa.</s:String>
+    
+    <!--Editor • Save as > Video options-->
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode">Tila:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Normal">Normaali</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Advanced">Edistynyt</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Info">Enkooderin parametrien konfigurointitapa:&#10;Normaali: Käytä tavallisia käyttöliittymän ohjaimia.&#10;Edistynyt: Käytä tekstiruutua parametrien kirjoittamiseen.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Codec">Koodekki:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Codec.Info">Videokooderi, joka vastaa&#10;raakapikselien muuntamisesta tulostiedostoksi.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset">Esiasetus:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.None">Ei mitään</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VerySlow">Erittäin hidas</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slower">Hitaampi</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slow">Hidas</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Medium">Keskisuuri</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Fast">Nopea</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Faster">Nopeampi</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VeryFast">Erittäin nopea</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.SuperFast">Supernopea</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.UltraFast">Äärimmäisen nopea</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Quality">Laatu</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Balanced">Tasapainotettu</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Speed">Nopeus</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Default">Oletus</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Lossless">Häviötön</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LosslessHp">Häviötön (korkea suorituskyky)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hp">Korkea suorituskyky</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hq">Korkea laatu</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Bd">Bluray-levy</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatency">Pieni viive</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHp">Pieni viive (korkea suorituskyky)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHq">Pieni viive (korkea laatu)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Info">Koodausnopeus suhteessa pakkaussuhteeseen,&#10;hitaammat esiasetukset voivat antaa paremman pakkauksen&#10;(laatu per tiedostokoko).</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration">Laitteisto Acc.:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Off">Pois</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.On">On</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Auto">Automaattinen valinta</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Info">Ohjaa erityisen laitteiston käyttöä (videografiikka).&#10;Pois: Ei käytä erityistä laitteistoa.&#10;Käytössä: Käyttää erityistä laitteistoa ja antaa sinun valita erityiset kooderit.&#10;Auto: Käyttää erityistä laitteistoa ja valitsee automaattisesti oikean kooderin, kun se on mahdollista.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat">Pikselimuoto:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat.Auto">Automaattinen</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync">Vsync:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Info">Videon synkronointimenetelmä.&#10;Auto: Valitsee 1:n ja 2:n välillä muxerin (formaatin) ominaisuuksien mukaan.&#10; Läpikulku (Passthrough): Jokainen ruutu siirretään aikaleimojensa kanssa kooderiin.&#10; Vakio: Kuvat monistetaan ja pudotetaan, jotta saavutetaan täsmälleen pyydetty vakiokuvanopeus.&#10;Muuttuva: Kuvat ohjataan läpi aikaleimojensa kanssa tai ne jätetään pois, jotta kahdella kehyksellä ei ole samaa aikaleimaa.&#10;Pudotus: Kuten läpikulku, mutta kaikki aikaleimat tuhotaan, jolloin enkooderi luo uudet aikaleimat kehysnopeuden perusteella.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Passthrough">Läpikulku</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Cfr">Vakio ruudunpäivitysnopeus</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Vfr">Vaihteleva kuvanopeus</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Drop">Pudota</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate">Kuvataajuus:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate.Film">Filmi</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate.Custom">Mukautettu</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Pass">Vaihe:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Crf.Info">Vakionopeuskerroin.&#10;Laadun ja nopeuden valvonta-asetus.&#10;Jätä tyhjäksi, jos et halua asettaa tätä ominaisuutta.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel">Laatutaso:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel.Info">Pienemmät arvot tarkoittavat parempaa laatua.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate">Bittinopeus:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Info">Tavoitevideon bittinopeus.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode">Bittinopeustila:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Constant">Jatkuva</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Variable">Muuttuva</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum">Minimitaso:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum.Info">Minimi bittinopeuden toleranssi.&#10;Hyödyllisin, kun käytetään CBR-tilaa.&#10;Jätä se tyhjäksi tai aseta nollaksi &#10;jos et halua asettaa tätä ominaisuutta.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum">Maksimi nopeus:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum.Info">Suurin sallittu bittinopeuden toleranssi.&#10;Edellyttää myös puskurikoon asettamista.&#10;Jätä se tyhjäksi tai aseta nollaksi &#10;jos et halua asettaa tätä ominaisuutta.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer">Puskurin koko:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer.Info">Nopeudensäätöpuskurin koko. &#10; Jätä se tyhjäksi tai aseta nollaan &#10; jos et halua määrittää tätä ominaisuutta.</s:String>
+
+    <!--Editor • Save as > Image options-->
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip">Pakkaa kuvat.</s:String>
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip.Info">Vie kuvat zip-kansion sisällä.</s:String>
+    
+    <!--Editor • Save as > Psd options-->
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress">Pakkaa kuva.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Pakkaa kuvatiedot RLE-algoritmilla.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Tallenna aikajanan tiedot.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Vie kehysten ajoitukset pelkkien kehysten sijasta.</s:String>
+    
+    <!--Editor • Save as > Save options-->
+    <s:String x:Key="S.SaveAs.SaveOptions">Vientiasetukset</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Partial">Vienti osittain.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Tallenna tiedosto haluamaasi kansioon.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">Korvataanko?</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Varoitus</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Varoittaa vain, että on olemassa toinen tiedosto, jolla on sama nimi.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Kehote</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Kysyy, haluaako käyttäjä korvata tiedoston.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Salli</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Yksinkertaisesti korvaa tiedoston.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Tallenna myös projektina (sama kansio, sama tiedostonimi).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Lähetä tiedosto.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Kopioi leikepöydälle.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Tiedosto</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Kopioi tulostiedoston leikepöydälle.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">Kansion polku</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">Kopioi tulostiedoston kansiopolun leikepöydälle.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">Tiedostopolku</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">Kopioi tulostiedostopolun leikepöydälle.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Linkki</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Kopioi latauspalvelun luoman linkin leikepöydälle.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Suorita koodauksen jälkeiset komennot.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Kirjoita koodauksen jälkeen suoritettavat komennot.&#x0d;Jos haluat suorittaa useita komentoja, kirjoita kukin komento erilliselle riville.&#x0d;Makrot:&#x0d;{p} = Tulostustiedoston polku.&#x0d;{f} = Tulostuskansion polku.&#x0d;{u} = Lähetetyn tiedoston URL-osoite.</s:String>
+    
+    <!--Editor • Save As > Partial export-->
+    <s:String x:Key="S.SaveAs.Partial">Osittainen vienti</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode">Tila:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Info">Valitse osittainen vientimenetelmä.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Expression">Lauseke</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Expression.Info">Vie animaation osia yksinkertaisen lausekkeen perusteella.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Frames">Kehysalue</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Frames.Info">Vie vain osan animaatiosta kehysalueella.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Time">Aikaväli</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Time.Info">Vie vain osan animaatiosta aikarajan sisällä.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection">Valinta</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Info">Vie vain aikajanalla valitut kehykset.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.None">Kehystä ei ole valittu.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Singular">1 kehys valittu.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Plural">{0} kehystä valittu.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.From">Alkaen:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.To">Mihin:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Expression">Lauseke:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Expression.Info">Kirjoita kehysnumerot pilkulla erotettuna tai&#10;kehyssekvenssit miinusmerkillä erotettuna:&#10;1, 3, 4, 6 - 9</s:String>
+    
+    <!--Editor • Save as > File-->
+    <s:String x:Key="S.SaveAs.File">Tiedosto</s:String>
+    <s:String x:Key="S.SaveAs.File.Location">Kohdekansio.</s:String>
+    <s:String x:Key="S.SaveAs.File.SelectFolder">Valitse tulostekansio</s:String>
+    <s:String x:Key="S.SaveAs.File.Choose">Valitse sijainti.&#x0d;Paina Shift-näppäintä ja &#x0d;valitse myös tiedostonimi.</s:String>
+    <s:String x:Key="S.SaveAs.File.Format">Tiedostomuoto</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">Tiedoston nimi. Aseta päivämäärä/aika-muoto väliin.</s:String>
+    <s:String x:Key="S.SaveAs.File.Animation">Animaatio</s:String>
+    <s:String x:Key="S.SaveAs.File.Increase">Lisää tiedostonumeroa</s:String>
+    <s:String x:Key="S.SaveAs.File.Decrease">Vähennä tiedostonumeroa</s:String>
+    <s:String x:Key="S.SaveAs.File.Exists">Samanniminen tiedosto on jo olemassa.</s:String>
+    <s:String x:Key="S.SaveAs.File.Clipboard">Tallenna leikepöydälle.</s:String>
+    
+    <!--Editor • Save as > Warnings-->
+    <s:String x:Key="S.SaveAs.Warning.Type">Sinun on valittava, mihin tiedosto tallennetaan (kansioon, leikepöydälle tai ladataan jonnekin muualle).</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Extension">Et valinnut tiedostopäätettä.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Ffmpeg.Empty">Kun valitset laajennetun tilan, sinun on kirjoitettava parametrit parametrit-kenttään.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Ffmpeg.MissingPath">Parametrit-kentästä puuttuvat erikoisparametrit {I} ( tulo) ja/tai {O} ( lähtö).</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Jos haluat suorittaa jälkikoodauskomennon, sinun on kirjoitettava jotain komentojen tekstikenttään.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Partial.NoSelection">Sinun on valittava vähintään yksi kehys, kun haluat viedä vain valitut kehykset.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Partial.InvalidExpression">Projektin osittaista vientiä koskeva lauseke on virheellinen.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">Lähetyspalvelua ei ole valittu. Sinun on valittava kohde.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">Et voi lähettää valittuun palveluun, koska sitä ei ole valtuutettu. Siirry kohtaan Asetukset > Lähetyspalvelut valtuuttamaan tämä sovellus.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">Et voi valita linkin kopiointivaihtoehtoa, koska et ole asettanut tiedoston lataamista.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder">Sinun on valittava tulostuskansio.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">Tulostuskansiota ei ole olemassa.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">Tulostuskansiossa on yksi tai useampi virheellinen merkki. Valitse kelvollinen kansio.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename">Sinun on valittava tiedostonimi.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">Tulostustiedoston nimi sisältää yhden tai useamman virheellisen merkin. Valitse kelvollinen tiedostonimi.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite">Tiedostonimi on jo käytössä. Aseta korvaus tai valitse toinen tiedostonimi tai kansio.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite.Project">Olemassa on jo projekti, jolla on sama tiedostonimi. Aseta korvaus tai valitse toinen tiedostonimi tai kansio.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Canceled">Operaatio peruttiin.</s:String>
+    
+    <!--Editor • Save As > Upload-->
+    <s:String x:Key="S.SaveAs.Upload">Lähetys</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Info">Valitse lähetyksen esiasetus, jossa on tiedot lähetyksessä käytettävästä palvelusta.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Limit">Tämä lähetyspalvelu asettaa rajoituksia.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Add">Lisää uusi lähetyksen esiasetus.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Edit">Muokkaa lähetyksen esiasetuksia.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.History">Näytä tämän esiasetuksen lähetyshistoria.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Remove">Poista tällä hetkellä valittu lähetyksen esiasetus.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Select.Title">Valitse lähetyksen esiasetus</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Select.Description">Valitse yksi tästä luettelosta.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Unavailable.Title">Tälle formaatille ei ole saatavilla lähetyksen esiasetusta</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Unavailable.Description">Lisää esiasetus käyttämällä alla olevaa painiketta.</s:String>
+    
+    <!--Editor • Save as > Upload > Dialogs-->
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Title">Poistetaan lähetyksen esiasetus</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Instruction">Oletko varma, että haluat poistaa lähetysasetukset?</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Message">Tätä toimintoa ei voi peruuttaa.&#10;&#10;Haluatko poistaa valitun lähetysasetuksen?</s:String>
+    
+    <!--Save As • Dialogs-->
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Vie kehyksiä</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Oletko varma, että haluat viedä kehykset?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Tämä toiminto vie {0} kehystä suoraan valittuun kansioon.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">Korvaa</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Haluatko korvata tiedoston?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">Kyseisessä kansiossa on jo olemassa tiedosto nimeltä '{0}'.\r\nTahdotko korvata sen?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">Haluatko korvata tiedostot?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">Yksi tai useampi samanniminen tiedosto on jo olemassa kyseisessä kansiossa.\r\nTahdotko korvata ne?</s:String>
+    
+    <!--Command Preview-->
+    <s:String x:Key="S.CommandPreviewer.Title">Komennon esikatselu</s:String>
+    <s:String x:Key="S.CommandPreviewer.Command">Komento</s:String>
+    <s:String x:Key="S.CommandPreviewer.Input">Tulopolku</s:String>
+    <s:String x:Key="S.CommandPreviewer.Output">Lähtöpolku</s:String>
+    
+    <!--Feedback-->
+    <s:String x:Key="S.Feedback.Feedback">Palaute</s:String>
+    <s:String x:Key="S.Feedback.Send">Lähetä</s:String>
+    <s:String x:Key="S.Feedback.Preview">Esikatselu</s:String>
+    <s:String x:Key="S.Feedback.Header">Lähetä palautetta</s:String>
+    <s:String x:Key="S.Feedback.Title">Otsikko</s:String>
+    <s:String x:Key="S.Feedback.Message">Viesti</s:String>
+    <s:String x:Key="S.Feedback.Message.Info">Jos havaitset bugin, älä unohda selittää minulle, miten se tapahtui, askel askeleelta.</s:String>
+    <s:String x:Key="S.Feedback.Type">Palautteen tyyppi</s:String>
+    <s:String x:Key="S.Feedback.Suggestion">Ehdotus</s:String>
+    <s:String x:Key="S.Feedback.IssueBug">Ongelma/vika</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">Sähköpostiosoitteesi</s:String>
+    <s:String x:Key="S.Feedback.Warning.Title">Sinun on kirjoitettava palautteen otsikko.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Message">Sinun on kirjoitettava viesti palautteeseen.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Email">Sinun on kirjoitettava sähköpostiosoitteesi, jolloin saat vastauksen kehittäjältä.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Lähetetään taustalla. Tämä ikkuna sulkeutuu pian.</s:String>
+    <s:String x:Key="S.Feedback.Attachments">Liitteet (valinnainen, enintään 20 Mt)</s:String>
+    <s:String x:Key="S.Feedback.AddAttachments">Lisää liitteitä</s:String>
+    <s:String x:Key="S.Feedback.RemoveAttachments">Poista kaikki liitteet</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo1">Ymmärrän englantia</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo2">ja portugalia (brasilialaista ja eurooppalaista).</s:String>
+    <s:String x:Key="S.Feedback.Preview.Info">Tämä on se, mitä lähetät, sekä kaikki liitteet.</s:String>
+    
+    <!--Troubleshoot-->
+    <s:String x:Key="S.Troubleshoot.Title">Vianmääritys</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows">Puuttuuko jokin ikkuna?</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">Jos jokin ikkunoista puuttuu (näytön ulkopuolella), &#x0d;käytä alla olevia vaihtoehtoja sen nykyisen ja käynnistysaseman palauttamiseksi.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Current">Kukin ikkuna sijaitsee tällä hetkellä seuraavasti:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Next">Seuraavalla kerralla kukin ikkuna avautuu seuraavasti:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.BringBack">Siirrä kaikki ikkunat päänäyttöön.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Reset">Palauta kaikkien ikkunoiden käynnistysasento.</s:String>
+   
+    <!--FontStyles-->
+    <s:String x:Key="S.FontStyles.Normal">Normaali</s:String>
+    <s:String x:Key="S.FontStyles.Italic">Kursivoitu</s:String>
+    <s:String x:Key="S.FontStyles.Oblique">Viisto</s:String>
+    
+    <!--FontWeight-->
+    <s:String x:Key="S.FontWeights.Black">Musta</s:String>
+    <s:String x:Key="S.FontWeights.Bold">Lihavoitu</s:String>
+    <s:String x:Key="S.FontWeights.DemiBold">Puolilihavoitu</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBlack">Erittäin musta</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBold">Erittäin lihavoitu</s:String>
+    <s:String x:Key="S.FontWeights.ExtraLight">Erittäin vaalea</s:String>
+    <s:String x:Key="S.FontWeights.Heavy">Voimakas</s:String>
+    <s:String x:Key="S.FontWeights.Light">Kevyt</s:String>
+    <s:String x:Key="S.FontWeights.Medium">Keskisuuri</s:String>
+    <s:String x:Key="S.FontWeights.Normal">Normaali</s:String>
+    <s:String x:Key="S.FontWeights.Regular">Tavallinen</s:String>
+    <s:String x:Key="S.FontWeights.SemiBold">Puolilihavoitu</s:String>
+    <s:String x:Key="S.FontWeights.Thin">Ohut</s:String>
+    <s:String x:Key="S.FontWeights.UltraBlack">Erittäin musta</s:String>
+    <s:String x:Key="S.FontWeights.UltraBold">Erittäin lihavoitu</s:String>
+    <s:String x:Key="S.FontWeights.UltraLight">Erittäin kevyt</s:String>
+    
+    <!--VerticalAlignment-->
+    <s:String x:Key="S.VerticalAlignment.Top">Ylä</s:String>
+    <s:String x:Key="S.VerticalAlignment.Center">Keskus</s:String>
+    <s:String x:Key="S.VerticalAlignment.Bottom">Ala</s:String>
+    <s:String x:Key="S.Alignment.Stretch">Venytä</s:String>
+
+    <!--HorizontalAlignment-->
+    <s:String x:Key="S.HorizontalAlignment.Left">Vasen</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Center">Keskus</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Right">Oikea</s:String>
+    
+    <!--Orientation-->
+    <s:String x:Key="S.Orientation.Horizontal">Vaakasuora</s:String>
+    <s:String x:Key="S.Orientation.Vertical">Pystysuora</s:String>
+    
+    <!--TextAlignment-->
+    <s:String x:Key="S.TextAlignment.Left">Vasen</s:String>
+    <s:String x:Key="S.TextAlignment.Right">Oikea</s:String>
+    <s:String x:Key="S.TextAlignment.Center">Keskus</s:String>
+    <s:String x:Key="S.TextAlignment.Justify">Tasaus</s:String>
+    
+    <!--TextDecoration-->
+    <s:String x:Key="S.TextDecorations.None">Ei mitään</s:String>
+    <s:String x:Key="S.TextDecorations.Underline">Alleviivaus</s:String>
+    <s:String x:Key="S.TextDecorations.Strikethrough">Yliviivattu</s:String>
+    <s:String x:Key="S.TextDecorations.OverLine">Yli viivan</s:String>
+    <s:String x:Key="S.TextDecorations.Baseline">Perustaso</s:String>
+</ResourceDictionary>

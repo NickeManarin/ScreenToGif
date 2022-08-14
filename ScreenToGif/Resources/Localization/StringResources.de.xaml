@@ -62,7 +62,7 @@
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Enter">Enter</s:String>  
-    <s:String x:Key="S.Keys.Esc">Esc</s:String>  
+    <s:String x:Key="S.Keys.Esc">ESC</s:String>  
     <s:String x:Key="S.Keys.Space">Leertaste</s:String>  
 
     <!--Mouse-->
@@ -90,7 +90,7 @@
     <s:String x:Key="S.Command.OverrideDelay">Frame-Dauer überschreiben</s:String>
     <s:String x:Key="S.Command.IncreaseDecreaseDelay">Frame-Dauer erhöhen/verringern</s:String>
     <s:String x:Key="S.Command.ScaleDelay">Frame-Dauer skalieren</s:String>
-    <s:String x:Key="S.Command.Zoom100">Zoom auf 100 % setzen</s:String>
+    <s:String x:Key="S.Command.Zoom100">Zoom auf 100% festlegen</s:String>
     <s:String x:Key="S.Command.SizeToContent">Fenstergröße an Framegröße anpassen</s:String>
     <s:String x:Key="S.Command.FitImage">Grafik an vorhandene Fenstergröße anpassen</s:String>
     <s:String x:Key="S.Command.FirstFrame">Ersten Frame auswählen</s:String>
@@ -279,7 +279,9 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Hour">pro Stunde</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Die Einzelbilder (Frames) werden auf der Grundlage „pro Stunde”&#10;(Zeitraffer) erfasst, wobei der auf dem Rekorderbildschirm&#10;eingestellte Nennwert der Bildwiederholrate zugrunde gelegt wird.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">Wiedergabeverzögerung:</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">([ms] Jedes aufgenommene Einzelbild (Frame) wird auf diese Verzögerung festgelegt)</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(Alle erfasste Einzelbilder werden auf diese Verzögerung (in ms) festgelegt)</s:String>
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Trigger">Trigger delay:</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">(In ms, each frame capture will wait this amount of time before starting)</s:String>-->
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">Jedes Einzelbild (Frame) wird in einem Intervall von {0} aufgenommen.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">Aufnahmemodus</s:String>
@@ -689,7 +691,7 @@
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Bildschirmaufnahme fehlgeschlagen. Aufnahmemethode lieferte nach fünf Versuchen keine Frames.</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">Starten/Pausieren der Bildschirmaufnahme fehlgeschlagen</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">Verwendung von Desktop Duplication API für Bildschirmaufnahme setzt Windows 8 oder höher voraus.</s:String>
-    
+
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Bereich</s:String>
     <s:String x:Key="S.Recorder.Area.Select">Bereich wählen</s:String>
@@ -769,7 +771,7 @@
     <s:String x:Key="S.Preset.Warning.Readonly">Einige der Eigenschaften der Standardvoreinstellung sind schreibgeschützt.</s:String>
     <s:String x:Key="S.Preset.Warning.Name">Bitte Namen für diese Voreinstellung eingeben.</s:String>
     <s:String x:Key="S.Preset.Warning.SameName">Eine Voreinstellung mit diesem Namen existiert bereits.</s:String>
-
+    
     <!--Presets • Listing-->
     <s:String x:Key="S.Preset.Autosave">Automatisch speichern</s:String>
     <s:String x:Key="S.Preset.Autosave.Info">Änderungen dieser Voreinstellung werden automatisch gespeichert.</s:String>
@@ -792,6 +794,12 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Unterstützt das Speichern der Animation mit einem transparenten Hintergrund.</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">Hohe Qualität • Grafiken</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Besser für Aufnahmen mit weniger Farben.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • Ausgewogen</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Gute Qualität für fotorealistische Grafiken mit dem Quantisierer ohne Dithering (von Wu).</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • Hohe Qualität</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Description">Hohe Qualität für fotorealistische Grafiken unter Verwendung des Quantisierers von Wu mit höherem Bitniveau und Floyd-Steinberg-Fehlerdiffusionsdithering.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT • Geringe Qualität, schneller</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">Quantisierung aller Bilder mit derselben vordefinierten "websicheren" Farbpalette und geordnetes Bayer 8x8 Dithering.</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg • Höhere Qualität</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">Höhere Bildqualität, aber auch größerer Dateigröße.</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg • Geringere Qualität</s:String>
@@ -969,7 +977,7 @@
     <!--Editor • File tab • Insert-->
     <s:String x:Key="S.Editor.File.Insert.Recording">Bildschirm&#10;Aufnahme</s:String>
     <s:String x:Key="S.Editor.File.Insert.Webcam">Webcam&#10;Aufnahme</s:String>
-    <s:String x:Key="S.Editor.File.Insert.Board">Handzeichnung&#10;Aufnahme</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Board">Handzeichnung&#10;aufnehmen</s:String>
     <s:String x:Key="S.Editor.File.Insert.Media">Mediendatei</s:String>
     <s:String x:Key="S.Editor.File.Insert">Hinzufügen</s:String>
     
@@ -1134,7 +1142,7 @@
     <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg ist nicht verfügbar. Fügen Sie es Umgebungsvariablen hinzu oder wählen Sie den Speicherort in „Einstellungen” ➜ „Extras” aus.</s:String>
     <s:String x:Key="S.Editor.Warning.Gifski">Gifski ist nicht verfügbar. Fügen Sie es Umgebungsvariablen hinzu oder wählen Sie den Speicherort in „Einstellungen” ➜ „Extras” aus.</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">Der vom Programm verwendete Speicherplatz ist fast belegt ({0}% übrig). Gehen Sie zu „Einstellungen” ➜ „Temporäre Dateien”, um Speicherplatz frei zu geben.</s:String>
-    <s:String x:Key="S.Editor.Warning.DifferentDpi">Sie haben versucht, mehrere Bilder mit unterschiedlichen Auflösungen (DPIs) zu importieren, was jedoch nicht unterstützt wird. Einige von diesen wurden importiert, andere müssen separat importiert werden.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">Sie haben versucht, mehrere Grafiken mit unterschiedlichen Auflösungen (DPIs) zu importieren, was jedoch nicht unterstützt wird. Einige von ihnen wurden importiert, die anderen müssen separat importiert werden.</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentSize">Sie haben versucht, mehrere Bilder mit unterschiedlichen Größen zu importieren, was nicht unterstützt wird. Einige von ihnen wurden importiert, andere müssen separat importiert werden.</s:String>
     
     <!--Editor • Status-->
@@ -1188,7 +1196,7 @@
     <s:String x:Key="S.Hint.Cut">{0} Frame(s) ausgeschnitten.</s:String>
     <s:String x:Key="S.Hint.Copy">{0} Frame(s) kopiert.</s:String>
     <s:String x:Key="S.Hint.Paste">{0} Frame(s) eingefügt.</s:String>
-    <s:String x:Key="S.Hint.Zoom">Zoom auf {0} % gesetzt.</s:String>
+    <s:String x:Key="S.Hint.Zoom">Zoom auf {0}% gesetzt.</s:String>
     <s:String x:Key="S.Hint.SelectAll">Alle Frames ausgewählt.</s:String>
     <s:String x:Key="S.Hint.SelectSingle">Frame {0} ausgewählt.</s:String>
     <s:String x:Key="S.Hint.SelectInverse">Auswahl umgekehrt.</s:String>
@@ -1243,11 +1251,11 @@
     
     <!--Editor • Resize-->
     <s:String x:Key="S.Resize.Difference">Unterschied</s:String>
-    <s:String x:Key="S.Resize.Dpi">dpi</s:String>
+    <s:String x:Key="S.Resize.Dpi">DPI</s:String>
     <s:String x:Key="S.Resize.Options">Optionen</s:String>
     <s:String x:Key="S.Resize.Pixels">Pixel (px)</s:String>
     <s:String x:Key="S.Resize.Percent">Prozent (%)</s:String>
-    <s:String x:Key="S.Resize.Dpi2">dpi:</s:String>
+    <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Seitenverhältnis beibehalten</s:String>
     <s:String x:Key="S.Resize.ScalingQuality">Qualität:</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (höhere Qualität)</s:String>
@@ -1307,6 +1315,7 @@
     <s:String x:Key="S.SmoothLoop.Info">Versucht, einen Frame zu finden, der dem Startframe zu mindestens {0} % ähnlich ist, und löscht alle späteren Frames.&#x0d;Sie können wählen, ob Sie einige anfängliche Frames ignorieren und den Vergleich vom Beginn (nach dem Schwellenwert) oder vom Ende aus starten möchten.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.Threshold">Die Anzahl der zu ignorierenden Grafiken muss kleiner sein als die Gesamtzahl der Grafiken.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Mit den gewählten Einstellungen war es nicht möglich, eine glatte Schleife zu erstellen.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">Sie verfügen bereits über eine glatte Schleife auf der Grundlage der gewählten Einstellungen.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Text</s:String>
@@ -1480,7 +1489,7 @@
     <s:String x:Key="S.SaveAs.Type.Frames">Frames</s:String>
     <s:String x:Key="S.SaveAs.Type.Other">Weitere</s:String>
 
-    <s:String x:Key="S.SaveAs.Apng">APNG</s:String>
+    <s:String x:Key="S.SaveAs.Apng">aPNG</s:String>
     <s:String x:Key="S.SaveAs.Apng.Info">Animated Portable Network Graphics</s:String>
     <s:String x:Key="S.SaveAs.Gif">GIF</s:String>
     <s:String x:Key="S.SaveAs.Gif.Info">Graphics Interchange Format</s:String>
@@ -1533,6 +1542,8 @@
     <s:String x:Key="S.SaveAs.Encoder.Info">Umwandlung, die für die Erzeugung der Ausgabedatei verantwortlich ist.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">Integrierte Umwandlung.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft">KGy SOFT</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft.Info">KGy SOFT • GIF-Encoder</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Info">Vom System zur Verfügung gestellte Umwandlung.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
@@ -1593,8 +1604,111 @@
     <s:String x:Key="S.SaveAs.GifOptions.Dither">Farbmischung:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Bayer Scale:</s:String>
 
+    <!--Editor • Save as > KGy SOFT options-->
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer">Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor">Hintergrundfarbe:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor.Info">Pixel mit Alpha (Transparenz), die vom ausgewählten Quantisierer als undurchsichtig angesehen werden, werden mit dieser Farbe gemischt, bevor sie die quantisierte Farbe erhalten.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold">Alpha-Schwellenwert:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold.Info">Bestimmt den eingegebenen Alphawert, unter dem die quantisierte Farbe transparent ist.&#x0d;&#x0a;Wenn 0, dann ist das Ergebnis nie transparent.&#x0d;&#x0a;Wenn 255, dann werden nur vollständig transparente Pixel als transparent angesehen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold">Weißer Schwellenwert:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold.Info">Legt die niedrigste Eingangshelligkeit fest, bei der die Ergebnisfarbe als Weiß angesehen wird.&#x0d;&#x0a;Ein Fehlerdiffusions-Dithering kann den Wert dieses Parameters jedoch kompensieren.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping">Direkte Zuweisung</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping.Info">Wenn diese Option aktiviert ist, wird die quantisierte Farbe durch eine direkte Zuordnung bestimmt, anstatt den nächstgelegenen Paletteneintrag aufzusuchen.&#x0d;&#x0a;Dies beschleunigt die Quantisierung, kann aber zu einem höheren Kontrast führen. Ein Fehlerdiffusions-Dithering kann den Wert dieses Parameters jedoch ausgleichen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize">Größe der Palette:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize.Info">Bestimmt die maximale Größe der Palette je Einzelbild.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel">CustoBenutzerdefinierte Bit-Ebene.m bit level.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">Wenn das Häkchen gesetzt ist, kann die Bitebene manuell konfiguriert werden.&#x0d;&#x0a;⚠️ Achtung: Die höchste Bit-Stufe kann sehr viel Speicherplatz beanspruchen!</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BitLevel.Info">Ein höherer Wert bedeutet eine höhere Genauigkeit, einen größeren Zielfarbraum, eine langsamere Verarbeitung und einen größeren Speicherbedarf.&#x0d;&#x0a; Zum Beispiel, wenn 1, dann kann das Ergebnis nicht mehr als 8 Farben haben, oder wenn 2, nicht mehr als 64 Farben. &#x0d;&#x0a;Bei Octree- und Wu-Quantisierern wirkt sich dies auch auf die maximale Anzahl der monochromen Farbtöne aus.&#x0d;&#x0a;Wenn z.B. 5 (was die Voreinstellung für den Wu-Quantisierer ist), können nur 32 monochrome Farbtöne unterschieden werden.&#x0d;&#x0a;⚠️ Achtung: Der Wu-Quantisierer verbraucht beim höchsten Wert mindestens 650 MB.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">Schwarz und Weiß</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">Feste 1-BPP-Palette mit schwarzen und weißen Farben.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">Graustufen - 4 Farben</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4.Info">Feste 2-BPP-Palette mit 4 Graustufen-Einträgen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16">Graustufen - 16 Farben</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16.Info">Feste 4-BPP-Palette mit 16 Graustufeneinträgen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale">Graustufen - 256 Farben</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale.Info">Feste 8-BPP-Palette mit 256 Graustufeneinträgen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette">Systemvorgabe - 4-BPP-Palette</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette.Info">Feste 4-BPP-Palette unter Verwendung der standardmäßigen 16 sRGB-Farben.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette">Systemvorgabe - 8-BPP-Palette</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette.Info">Feste 8-BPP-Palette einschließlich der "websicheren" Farben und der Transparenz.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332">RGB - 332 Farbpalette</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332.Info">Feste 8-BPP-Palette unter Verwendung des RGB 332-Farbraums.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree">Octree-Quantisierer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree.Info">Optimierung der Palette für jedes Einzelbild mit dem Octree-Algorithmus.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut">Median-Cut-Quantisierer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut.Info">Optimierung der Palette für jedes Einzelbild mit dem Algorithmus „Median Cut”.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu">Wu Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu.Info">Optimierung der Palette für jedes Einzelbild mit dem Algorithmus von Xiaolin Wu.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer">Ditherer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength">Stärke:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength.Info">Die Stärke des Dithers, oder 0, um die Stärke automatisch zu kalibrieren.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed">Seed:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed.Info">Ein ganzzahliger Seed, der verwendet wird, um ein bestimmtes zufälliges Dithering-Muster zu erzeugen.&#x0d;&#x0a;Leer lassen, um einen zufälligen Seed für jedes Einzelbild zu verwenden.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None">Kein</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None.Info">Die Einzelbilder werden ohne Dithering quantisiert.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing">Serpentinen-Verarbeitung</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing.Info">Wenn diese Option aktiviert ist, wird die Fehlerausbreitungsrichtung von Zeile zu Zeile geändert.&#x0d;&#x0a;Dies trägt dazu bei, den Ripple-Effekt des Fehlerdiffusionsdithering zu verringern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2">Bayer 2x2 (Geordnet)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2.Info">Das 2x2-Bayer-Matrix-Muster.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3">Bayer 3x3 (Geordnet)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3.Info">Das 3x3-Bayer-Matrix-Muster.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4">Bayer 4x4 (Geordnet)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4.Info">Das 4x4-Bayer-Matrix-Muster.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8">Bayer 8x8 (Geordnet)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8.Info">Das 8x8-Bayer-Matrix-Muster.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone">Gepunkteter Halbton (Geordnet)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone.Info">Eine 8x8-Matrix mit einem gepunkteten Halbtonmuster.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise">Blaues Rauschen (Geordnet)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise.Info">Eine 64x64-Matrix mit einem blauen Rauschmuster.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson">Atkinson (Fehlerdiffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson.Info">Die 4x3-Matrix von Bill Atkinson mit 6 effektiven Werten.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes">Burkes (Fehlerdiffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes.Info">D. Burkes' 5x2-Matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg">Floyd-Steinberg (Fehlerdiffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg.Info">Die ursprüngliche 3x2-Matrix von Floyd und Steinberg.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke">Jarvis-Judice-Ninke (Fehlerdiffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke.Info">Eine 5x3-Matrix von Jarvis, Judice und Ninke.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3">Sierra 3 (Fehlerdiffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3.Info">Die 5x3-Matrix von Frankie Sierra.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2">Sierra 2 (Fehlerdiffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2.Info">Die 5x2-Matrix von Frankie Sierra.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite">Sierra Lite (Fehlerdiffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite.Info">Die 3x2-Matrix von Frankie Sierra.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce">Stevenson-Arce (Fehlerdiffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce.Info">Eine 7x4 hexagonale Matrix von Stevenson und Arce.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki">Stucki (Fehlerdiffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki.Info">Die 5x3-Matrix von Stucki.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer">Random Rauschen</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer.Info">Zufälliges weißes Rauschen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer">Überlagertes Farbverlauf-Rauschen</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer.Info">Nicht zufälliges Farbverlauf-Rauschen, das durch eine Berechnung erzeugt wird.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Preview">Vorschau</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame">Aktuelles Einzelbild anzeigen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">Wenn diese Option aktiviert ist, zeigt die Vorschau das aktuelle Einzelbild anstelle eines Standardbildes.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Refresh">Die automatische Vorschau wurde aufgrund des hohen Speicherbedarfs der aktuellen Einstellungen deaktiviert. Anklicken, um die Vorschau zu aktualisieren.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Error">Vorschau konnte nicht erstellt werden: {0}&#x0d;&#x0a;Anklicken, um die Vorschau erneut zu erzeugen.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Animation">Animations-Einstellungen</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop">Endlosschleife</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop.Info">Wenn diese Option aktiviert ist, wird die Animation in einer unendlichen Schleife wiederholt.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">Back andVor und zurück forth.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">Wenn diese Option aktiviert ist, wird die Animation vorwärts und rückwärts abgespielt.&#x0d;&#x0a;Dies wird durch die Duplizierung der Bilder erreicht, was eine größere Dateigröße und eine längere Kodierungszeit bedeutet.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">Wiederholungen:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Gibt an, wie oft die Animation wiedergegeben werden soll.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">Delta-Frames zulassen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">Wenn diese Option aktiviert ist, wird versucht, unveränderte Pixel während der Kodierung zu erkennen.&#x0d;&#x0a;Bei Verwendung eines optimierten Quantisierers ermöglicht diese Option, dass ein Bild mehr als 256 Farben hat.&#x0d;&#x0a;Diese Option wird ignoriert, wenn der Quantisierer keine Transparenz verwendet und „Abgeschnittene Einzelbilder zulassen” nicht markiert ist.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">Delta-Toleranz:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">Gibt die maximale Toleranz bei der Erkennung veränderter Pixel an.&#x0d;&#x0a;Wenn 0, dann wird überhaupt kein Unterschied toleriert.&#x0d;&#x0a;Wenn 255, dann gibt es möglicherweise Einzelbilder (oder sogar alle), die ohne Inhalt hinzugefügt werden.&#x0d;&#x0a;Ein sinnvoller Bereich liegt zwischen 0 und 16 für einen optimierten Quantisierer. Diejenigen mit festen Farben können mit etwas größeren Werten mit Dithering verwendet werden.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">Wenn die Delta-Toleranz zu hoch festgelegt ist, kann das Ergebnis von schlechter Qualität sein. Anklicken, um Delta-Toleranz zurückzusetzen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames">Abgeschnittene Rahmen zulassen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info">Wenn diese Option aktiviert ist, darf der Encoder kleinere Einzelbilder als die tatsächliche Auflösung hinzufügen.&#x0d;&#x0a;Wenn „Delta Frames zulassen” nicht angekreuzt ist, wird nur das Beschneiden möglicher transparenter Ränder zugelassen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaIgnored">„Delta Frames zulassen” wird ignoriert, da die aktuelle Konfiguration kein Alpha verwendet und „Abgeschnittene Einzelbilder zulassen” nicht ausgewählt ist. Anklicken, um abgeschnittene Rahmen zu aktivieren.„Delta Frames zulassen” wird ignoriert, da die aktuelle Konfiguration kein Alpha verwendet und „Abgeschnittene Einzelbilder zulassen” nicht ausgewählt ist. Anklicken, um abgeschnittene Rahmen zu aktivieren.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedIgnored">„Abgeschnittene Einzelbilder zulassen” hat keine Auswirkung, da die aktuelle Konfiguration kein Alpha verwendet und „Delta Frames zulassen” nicht ausgewählt ist. Anklicken, um Delta Frames zu aktivieren.</s:String>
+
     <!--Editor • Save as > Apng options-->
-    <s:String x:Key="S.SaveAs.ApngOptions">APNG-Einstellungen</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions">aPNG-Einstellungen</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.Prediction">Vorausberechnung:</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.Prediction.None">Keine</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Sub">Sub</s:String>
@@ -1694,6 +1808,12 @@
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Teilweise exportieren</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Datei in ausgewählten Ordner speichern</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Überschreiben (falls bereits vorhanden)</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Warnen</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Nur warnen, wenn eine Datei mit demselben Namen vorhanden ist.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Bestätigen</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Fragt nach, ob der Benutzer die Datei überschreiben möchte.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Erlauben</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Die Datei wird einfach überschrieben.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Auch als Projekt speichern (gleicher Ordner, gleicher Dateiname)</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Datei hochladen</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">In Zwischenablage kopieren</s:String>
@@ -1769,7 +1889,7 @@
     <s:String x:Key="S.SaveAs.Upload.Edit">Voreinstellung für das Hochladen bearbeiten.</s:String>
     <s:String x:Key="S.SaveAs.Upload.History">Verlauf der hochgeladenen Daten mit dieser Voreinstellung anzeigen.</s:String>
     <s:String x:Key="S.SaveAs.Upload.Remove">Aktuell ausgewählte Upload-Voreinstellung entfernen.</s:String>
-    <s:String x:Key="S.SaveAs.Upload.Select.Title">Upload-Voreinstellung auswählen</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Select.Title">Voreineisllungen für das Hochladen auswählen</s:String>
     <s:String x:Key="S.SaveAs.Upload.Select.Description">Aus dieser Liste auswählen</s:String>
     <s:String x:Key="S.SaveAs.Upload.Unavailable.Title">Keine Voreinstellung für das Hochladen für dieses Format verfügbar</s:String>
     <s:String x:Key="S.SaveAs.Upload.Unavailable.Description">Voreinstellung durch Drücken der nachfolgenden Schaltfläche unten hinzufügen.</s:String>
@@ -1781,8 +1901,13 @@
 
     <!--Save as • Dialogs-->
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Frames exportieren</s:String>
-    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Möchten Sie die Frames wirklich exportieren?</s:String>
-    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Diese Aktion wird {0} Frames direkt in den gewählten Ordner exportieren.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Möchten Sie die Einzelbilder wirklich exportieren?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Mit dieser Aktion werden {0} Einzelbilder direkt in den ausgewählten Ordner exportiert.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">Überschreiben</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Möchten Sie die Datei überschreiben?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">Eine Datei mit dem Namen „{0}” ist bereits in diesem Ordner vorhanden. Soll sie überschrieben werden?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">Möchten Sie die Dateien überschreiben?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">Eine oder mehrere Dateien mit demselben Namen sind bereits in diesem Ordner vorhanden. Sollen sie überschrieben werden?</s:String>
 
     <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">Befehlsvorschau</s:String>

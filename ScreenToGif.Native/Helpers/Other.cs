@@ -40,7 +40,7 @@ public class Other
 
         Gdi32.PatBlt(hdc, rect.Right, rect.Bottom - frameWidth, -(rect.Right - rect.Left), frameWidth, Constants.DstInvert);
     }
-        
+
     internal static string CheckAllFlags(uint style, bool isExtended)
     {
         var values = Enum.GetValues(typeof(WindowStyles)).OfType<WindowStyles>().Distinct().ToList();
@@ -55,7 +55,7 @@ public class Other
 
         return text.TrimEnd(' ').TrimEnd(',');
     }
-        
+
     public static char? GetCharFromKey(Key key, bool ignoreState = true)
     {
         var virtualKey = KeyInterop.VirtualKeyFromKey(key);
@@ -71,7 +71,6 @@ public class Other
 
         switch (result)
         {
-            case -1:
             case 0:
                 break;
             default: //Case 1
@@ -83,32 +82,6 @@ public class Other
 
     public static string GetSelectKeyText(Key key, ModifierKeys modifier = ModifierKeys.None, bool isUppercase = false, bool ignoreNone = false)
     {
-        //Key translation.
-        switch (key)
-        {
-            case Key.Oem1:
-                key = Key.OemSemicolon;
-                break;
-            case Key.Oem2:
-                key = Key.OemQuestion;
-                break;
-            case Key.Oem3:
-                key = Key.OemTilde;
-                break;
-            case Key.Oem4:
-                key = Key.OemOpenBrackets;
-                break;
-            case Key.Oem5:
-                key = Key.OemPipe;
-                break;
-            case Key.Oem6:
-                key = Key.OemCloseBrackets;
-                break;
-            case Key.Oem7:
-                key = Key.OemComma;
-                break;
-        }
-
         if (ignoreNone && key == Key.None)
             return "";
 
@@ -226,7 +199,7 @@ public class Other
 
         return modifiersText;
     }
-        
+
     public static Point GetMousePosition(double scale = 1, double offsetX = 0, double offsetY = 0)
     {
         var point = new PointW();
