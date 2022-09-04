@@ -1,4 +1,4 @@
-name: Publish to WinGet
+name: WinGet • Releases
 on:
   release:
     types: [released]
