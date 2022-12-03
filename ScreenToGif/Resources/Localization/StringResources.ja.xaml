@@ -1293,7 +1293,7 @@
     <s:String x:Key="S.SmoothLoop.From">比較:</s:String>
     <s:String x:Key="S.SmoothLoop.From.Last">最後</s:String>
     <s:String x:Key="S.SmoothLoop.From.First">先頭</s:String>
-    <s:String x:Key="S.SmoothLoop.Info">開始フレームに少なくとも {0} % 似ているフレームを見つけようとし、それ以降のフレームをすべて削除します。一部の初期フレームを無視して、最初 (しきい値の後) から比較を開始するか、最後から比較を開始するかを選択できます。</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">開始フレームに少なくとも {0} % 似ているフレームを見つけようとし、それ以降のフレームをすべて削除。&#x0d;一部の初期フレームを無視して、最初 (しきい値の後) から比較を開始するか、最後から比較を開始するかを選択できます。</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.Threshold">無視するフレームの数は、フレームの総数よりも少なくする必要があります。</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">選択した設定ではスムーズなループを作成できませんでした。</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">選択した設定に基づく滑らかなループが既にあります。</s:String>
