@@ -1109,7 +1109,7 @@
     <s:String x:Key="S.KeyStrokes.Extend">Tuş vuruşlarının görüntülenmesini uzatın.</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">Tuş vuruşlarının görüntülenmesini daha erken başlatın.</s:String>
     <s:String x:Key="S.KeyStrokes.By">(ms) olarak:</s:String>
-    <s:String x:Key="S.KeyStrokes.Warning.None"Kaydınızda tuş vuruşu yok.</s:String>
+    <s:String x:Key="S.KeyStrokes.Warning.None">Kaydınızda tuş vuruşu yok.</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Title">ScreenToGif - Tuş Vuruşları Editörü</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Number">Kare numarası</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Keys">Algılanan tuş vuruşları</s:String>
