@@ -1192,7 +1192,7 @@
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Portugal}" Tag="pt-PT" Content="Portuguese (Portugal) / Português (Portugal)" Author="Duarte Ramos" 
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish / Türkçe" Author="Volkan Dağdelen, seferciogluecce, Omer Mollamehmetoglu, Bekir"
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish / Türkçe" Author="g-u-r-k-a-n, Volkan Dağdelen, seferciogluecce, Omer Mollamehmetoglu, Bekir"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina) / Español (Argentina)" Author="KNTRO (kntro@msn.com)"
