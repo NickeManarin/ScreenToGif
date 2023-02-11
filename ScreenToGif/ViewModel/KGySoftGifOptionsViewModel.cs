@@ -15,9 +15,10 @@ using System.Threading.Tasks;
 using KGySoft.ComponentModel;
 using KGySoft.Drawing;
 using KGySoft.Drawing.Imaging;
+using KGySoft.Drawing.Wpf;
+using KGySoft.Threading;
 
 using ScreenToGif.Util;
-using ScreenToGif.Util.Extensions;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Gif;
 
 #endregion
@@ -293,9 +294,9 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         // Therefore we use a disposable GDI+ Bitmap to create a managed clone of the image as simply as possible
         using (var bmp = ShowCurrentFrame && CurrentFramePath != null ? new Bitmap(CurrentFramePath) : Icons.Shield.ExtractBitmap(new Size(256, 256)))
         using (var nativeBitmapData = bmp.GetReadableBitmapData())
-            _currentFrame = nativeBitmapData.Clone(nativeBitmapData.PixelFormat);
+            _currentFrame = nativeBitmapData.Clone(nativeBitmapData.PixelFormat.ToKnownPixelFormat());
 
-        // Since WritebleBitmap is not disposable we try to re-use it as much as possible.
+        // Since WriteableBitmap is not disposable we try to re-use it as much as possible.
         // It is nullified only when the resolution changes (as frames have the same resolution it happens only when toggling built-in/current frame preview)
         if (_previewBitmap != null && (_previewBitmap.PixelWidth != _currentFrame.Width || _previewBitmap.PixelHeight != _currentFrame.Height))
             _previewBitmap = null;

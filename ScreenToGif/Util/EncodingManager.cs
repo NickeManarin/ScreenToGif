@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 using KGySoft.Drawing.Imaging;
+using KGySoft.Threading;
 
 using ScreenToGif.Cloud;
 using ScreenToGif.Controls;

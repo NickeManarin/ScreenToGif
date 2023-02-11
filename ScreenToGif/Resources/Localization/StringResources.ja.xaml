@@ -104,6 +104,7 @@
     <s:String x:Key="S.Command.DeleteNext">以後のフレームをすべて削除</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">重複フレームを削除</s:String>
     <s:String x:Key="S.Command.Reduce">フレーム数を削減</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">スムーズループを作成</s:String>
     <s:String x:Key="S.Command.Reverse">アニメーションをリバース</s:String>
     <s:String x:Key="S.Command.Yoyo">(ヨーヨーのように)反復するアニメーションを生成</s:String>
     <s:String x:Key="S.Command.MoveLeft">選択フレームを左へ移動</s:String>
@@ -1015,6 +1016,7 @@
     <s:String x:Key="S.Editor.Edit.Delete">削除</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">重複削除</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">フレーム数&#10;削減</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">スムーズループ</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">以前を削除</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">以後を削除</s:String>
     
@@ -1285,6 +1287,17 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">合計を使用</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">このアクションは、各フレーム(ピクセル単位)を分析し、隣接フレームと少なくとも{0}％類似するものを削除します。&#10;フレームの遅延(表示時間)を調整するかどうかを選択できます 。</s:String>
     
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">スムーズループ作成</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">開始しきい値:</s:String>
+    <s:String x:Key="S.SmoothLoop.From">比較:</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">最後</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">先頭</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">開始フレームに少なくとも {0} % 似ているフレームを見つけようとし、それ以降のフレームをすべて削除。&#x0d;一部の初期フレームを無視して、最初 (しきい値の後) から比較を開始するか、最後から比較を開始するかを選択できます。</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">無視するフレームの数は、フレームの総数よりも少なくする必要があります。</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">選択した設定ではスムーズなループを作成できませんでした。</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">選択した設定に基づく滑らかなループが既にあります。</s:String>
+
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">テキスト</s:String>
     <s:String x:Key="S.Caption.Font">フォント</s:String>

@@ -104,7 +104,8 @@
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="KGySoft.Drawing" Version="6.3.2" />
+    <PackageReference Include="KGySoft.Drawing" Version="7.0.0" />
+    <PackageReference Include="KGySoft.Drawing.Wpf" Version="7.0.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.310801">
       <PrivateAssets>all</PrivateAssets>
@@ -140,8 +141,8 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <Company>Nicke Manarin</Company>
     <Authors>Nicke Manarin</Authors>
-    <Version>2.37.1</Version>
-    <Copyright>Copyright© Nicke Manarin 2022</Copyright>
+    <Version>2.37.2</Version>
+    <Copyright>Copyright© Nicke Manarin 2023</Copyright>
     <PackageProjectUrl>https://www.screentogif.com</PackageProjectUrl>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/nickemanarin/screentogif</RepositoryUrl>
