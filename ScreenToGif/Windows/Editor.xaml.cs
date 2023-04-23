@@ -1451,13 +1451,13 @@ namespace ScreenToGif.Windows
             FrameListView.SelectedIndex = 0;
         }
 
-        private void PreviousFrame_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void PreviousFrame_Executed(object sender, EventArgs e)
         {
             Pause();
 
             WasChangingSelection = true;
 
-            if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == 0)
+            if (FrameListView.SelectedIndex is -1 or 0)
             {
                 if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                     return;
@@ -1467,7 +1467,17 @@ namespace ScreenToGif.Windows
             }
 
             //Show previous frame.
-            FrameListView.SelectedIndex--;
+            //Control = 5
+            //Alt = 10
+            //Control + Alt = 20
+            if (e != null && (Keyboard.Modifiers & (ModifierKeys.Alt | ModifierKeys.Control)) == (ModifierKeys.Alt | ModifierKeys.Control))
+                FrameListView.SelectedIndex = Math.Max(0, FrameListView.SelectedIndex - 20);
+            else if (e != null && (Keyboard.Modifiers & ModifierKeys.Control) != 0)
+                FrameListView.SelectedIndex = Math.Max(0, FrameListView.SelectedIndex - 5);
+            else if (e != null && (Keyboard.Modifiers & ModifierKeys.Alt) != 0)
+                FrameListView.SelectedIndex = Math.Max(0, FrameListView.SelectedIndex - 10);
+            else
+                FrameListView.SelectedIndex--;
         }
 
         private void Play_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1475,7 +1485,7 @@ namespace ScreenToGif.Windows
             PlayPause();
         }
 
-        private void NextFrame_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void NextFrame_Executed(object sender, EventArgs e)
         {
             Pause();
 
@@ -1491,7 +1501,17 @@ namespace ScreenToGif.Windows
             }
 
             //Show next frame.
-            FrameListView.SelectedIndex++;
+            //Control = 5
+            //Alt = 10
+            //Control + Alt = 20
+            if (e != null && (Keyboard.Modifiers & (ModifierKeys.Alt | ModifierKeys.Control)) == (ModifierKeys.Alt | ModifierKeys.Control))
+                FrameListView.SelectedIndex = Math.Min(_viewModel.Frames.Count - 1, FrameListView.SelectedIndex + 20);
+            else if (e != null && (Keyboard.Modifiers & ModifierKeys.Control) != 0)
+                FrameListView.SelectedIndex = Math.Min(_viewModel.Frames.Count - 1, FrameListView.SelectedIndex + 5);
+            else if (e != null && (Keyboard.Modifiers & ModifierKeys.Alt) != 0)
+                FrameListView.SelectedIndex = Math.Min(_viewModel.Frames.Count - 1, FrameListView.SelectedIndex + 10);
+            else
+                FrameListView.SelectedIndex++;
         }
 
         private void LastFrame_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -2998,7 +3018,9 @@ namespace ScreenToGif.Windows
 
         private void FrameListView_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.Key)
+            var key = Keyboard.Modifiers == ModifierKeys.Alt ? e.SystemKey : e.Key;
+
+            switch (key)
             {
                 case Key.Space:
                 {
@@ -3011,17 +3033,29 @@ namespace ScreenToGif.Windows
                 }
 
                 case Key.Right:
-                case Key.PageDown:
                 {
                     NextFrame_Executed(sender, null);
                     e.Handled = true;
                     break;
                 }
 
+                case Key.PageDown:
+                {
+                    NextFrame_Executed(sender, EventArgs.Empty);
+                    e.Handled = true;
+                    break;
+                }
+                
                 case Key.Left:
-                case Key.PageUp:
                 {
                     PreviousFrame_Executed(sender, null);
+                    e.Handled = true;
+                    break;
+                }
+
+                case Key.PageUp:
+                {
+                    PreviousFrame_Executed(sender, EventArgs.Empty);
                     e.Handled = true;
                     break;
                 }
@@ -6412,12 +6446,9 @@ namespace ScreenToGif.Windows
 
             #region Images
 
-            //var size = Dispatcher.Invoke(() => FrameSize);
-            var dpi = Dispatcher.Invoke(this.Dpi);
-
             var previousImage = Project.Frames[selected].Path.SourceFrom();
             var nextImage = UserSettings.All.FadeToType == FadeModes.NextFrame ? Project.Frames[Project.Frames.Count - 1 == selected ? 0 : selected + 1].Path.SourceFrom() :
-                ImageMethods.CreateEmtpyBitmapSource(UserSettings.All.FadeToColor, previousImage.PixelWidth, previousImage.PixelHeight, dpi, PixelFormats.Indexed1);
+                ImageMethods.CreateEmtpyBitmapSource(UserSettings.All.FadeToColor, previousImage.PixelWidth, previousImage.PixelHeight, previousImage.DpiX, PixelFormats.Indexed1);
 
             var nextBrush = new ImageBrush
             {
