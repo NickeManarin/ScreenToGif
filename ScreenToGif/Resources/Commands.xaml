@@ -121,7 +121,7 @@
             <KeyGesture>PageUp</KeyGesture>
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
-
+    
     <RoutedUICommand x:Key="Command.Play" Text="S.Command.Play">
         <RoutedUICommand.InputGestures>
             <KeyGesture>Space</KeyGesture>
