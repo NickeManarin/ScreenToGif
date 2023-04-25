@@ -280,6 +280,8 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Frames worden vastgelegd op basis van 'per uur' (timelapse), &#10;gebaseerd op de framerate noemer die op het recorderscherm is ingesteld.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">Terugspeel-vertraging:</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(In ms, elk vastgelegd frame wordt op deze vertraging ingesteld)</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger">Startvertraging:</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">(In ms, de vertragingstijd voor de start van elke frame-opname)</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">Elk frame wordt vastgelegd met een interval van {0}.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">Opnamemodus</s:String>
@@ -792,6 +794,12 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Ondersteunt het opslaan van de animatie met een transparante achtergrond.</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">Hoge kwaliteit • Grafische afbeeldingen</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Beter voor opnames met een kleinere hoeveelheid kleuren.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • Gebalanceerd</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Goede kwaliteit voor afbeeldingen van fotokwaliteit met Wu's kwantisator zonder dithering.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • Hoge kwaliteit</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Description">Hoge kwaliteit voor afbeeldingen van fotokwaliteit met Wu's kwantisator met hoger bitniveau en Floyd-Steinberg foutdiffusie dithering.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT • Lage kwaliteit, sneller</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">Kwantificering van alle frames met hetzelfde vooraf gedefinieerde 'webveilige' palet en Bayer 8x8 geordende dithering.</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - Hogere kwaliteit</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">Hogere beeldkwaliteit, maar met een grotere bestandsgrootte.</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - Lagere kwaliteit</s:String>
@@ -1058,7 +1066,7 @@
     <s:String x:Key="S.Editor.Image.Overlay">Overlay</s:String>
     <s:String x:Key="S.Editor.Image.FreeDrawing">Vrije&#10;tekening</s:String>
     <s:String x:Key="S.Editor.Image.Shape">Vormen</s:String>
-    <s:String x:Key="S.Editor.Image.Clicks">Muis-&#10;klikken</s:String>
+    <s:String x:Key="S.Editor.Image.MouseEvents">Muis&#x0d;Gebeurtenissen</s:String>
     <s:String x:Key="S.Editor.Image.Watermark">Watermerk</s:String>
     <s:String x:Key="S.Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="S.Editor.Image.Border">Rand</s:String>
@@ -1373,12 +1381,12 @@
     <s:String x:Key="S.Shapes.Shapes.Remove">Verwijderen</s:String>
     <s:String x:Key="S.Shapes.Fill">Vulling</s:String>
 
-    <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">Muisklikken</s:String>
+    <!--Editor • Mouse events-->
+    <s:String x:Key="S.MouseEvents">Muisgebeurtenissen</s:String>
+    <s:String x:Key="S.MouseHighlight.Color">Highlightkleur van de muis:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Left">Kleur middenknop</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">Kleur rechterknop</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">Kleur linkerknop</s:String>
-    <s:String x:Key="S.MouseClicks.Warning.None">Er zijn geen muisklikken gedetecteerd in dit project.</s:String>
     
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">Afbeelding</s:String>
@@ -1534,6 +1542,8 @@
     <s:String x:Key="S.SaveAs.Encoder.Info">Encoder die verantwoordelijk is voor het genereren van het uitvoerbestand.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">Ingebouwde encoder</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft">KGy SOFT</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft.Info">KGy SOFT GIF Encoder.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">Systeem</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Info">Encoder ter beschikking gesteld door het systeem.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
@@ -1541,7 +1551,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">Externe encoder, gemaakt door Gif.ski.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Options">Encoderopties</s:String>
-    
+
     <!--Editor • Save as > FFmpeg-->
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Schakel de geavanceerde modus in.</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Voer handmatig de parameters in om de encoder te besturen.</s:String>
@@ -1593,7 +1603,110 @@
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Chroma sleutel:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither">Dither:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Bayer-schaal:</s:String>
-    
+
+    <!--Editor • Save as > KGy SOFT options-->
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer">Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor">Achtergrondkleur:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor.Info">Pixels met alfa (transparantie) die door de geselecteerde kwantificator als ondoorzichtig worden beschouwd, worden met deze kleur gemengd voordat de gekwantificeerde kleur wordt verkregen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold">Alfa-drempelwaarde:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold.Info">Bepaalt de invoer alfawaarde waaronder de gekwantificeerde kleur transparant zal zijn.&#x0d;&#x0a; Bij waarde 0 zal het resultaat nooit transparant zijn.&#x0d;&#x0a; Bij waarde 255 worden alleen volledig transparante pixels als transparant beschouwd.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold">Wit-drempelwaarde:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold.Info">Bepaalt de laagste ingangshelderheid om de resultaatkleur wit vast te stellen.&#x0d;&#x0a; Het beïnvloedt de helderheid van het resultaat. Een foutdiffusie dithering kan de waarde van deze parameter echter compenseren.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping">Direct mapping</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping.Info">Indien aangevinkt, wordt de gekwantificeerde kleur bepaald door een directe mapping in plaats van de dichtstbijzijnde paletinvoer op te zoeken.&#x0d;&#x0a; Het versnelt de kwantisering, maar kan leiden tot een verhoogd contrast. Een foutdiffusie dithering kan de waarde van deze parameter echter compenseren.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize">Paletgrootte:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize.Info">Bepaalt de maximale grootte van het palet per frame.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel">Aangepast bitniveau.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">Indien aangevinkt, kan het bitniveau handmatig worden geconfigureerd.&#x0d;&#x0a; ⚠️ Waarschuwing: het hoogste bitniveau vereist mogelijk VEEL geheugen!</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BitLevel.Info">Pixels met alfa (transparantie) die door de geselecteerde kwantificator als ondoorzichtig worden beschouwd, worden met deze kleur gemengd voordat de gekwantificeerde kleur wordt verkregen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">Zwart-wit</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">1 bpp palet met de kleuren zwart en wit.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">4 Grijstinten</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4.Info">2 bpp palet met 4 grijstinten.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16">16 Grijstinten</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16.Info">4 bpp palet met 16 grijstinten.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale">256 Grijstinten</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale.Info">8 bpp palet met 256 grijstinten.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette">Systeemstandaard 4 bpp palet</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette.Info">4 bpp palet dat gebruik maakt van de standaard 16 sRGB kleuren.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette">Systeemstandaard 8 bpp palet</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette.Info">8 bpp palet dat gebruik maakt van de 'web-safe' kleuren plus transparantie.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332">RGB 332 palet</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332.Info">8 bpp palet dat gebruikt maakt van de RGB 332 kleurruimte</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree">Octree Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree.Info">Palet optimaliseren voor elk frame met het Octree-algoritme.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut">Median Cut Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut.Info">Een geoptimaliseerd palet voor elk frame met het Median Cut-algoritme.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu">Wu Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu.Info">Palet optimaliseren voor elk frame met het algoritme van Xiaolin Wu.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer">Ditherer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength">Sterkte:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength.Info">De sterkte van de ditherer, of 0 om de sterkte automatisch te kalibreren.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed">Startwaarde:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed.Info">Een geheel getal dat moet worden gebruikt om een specifiek willekeurig ditheringpatroon te produceren.&#x0d;&#x0a; Laat leeg om voor elk frame een willekeurige startwaarde te gebruiken.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None">Geen</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None.Info">Frames worden gekwantificeerd zonder mengkleuren.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing">Serpentine Processing</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing.Info">Indien aangevinkt, wordt de opeenvolgende lijnen heen en weer gecodeerd.&#x0d;&#x0a; Dit helpt het rimpeleffect van de foutdiffusie te verminderen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2">Bayer 2x2 (Geordend)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2.Info">Het Bayer 2x2 matrixpatroon.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3">Het Bayer 2x2 matrixpatroon.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3.Info">Het Bayer 2x2 matrixpatroon.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4">Bayer 4x4 (Geordend)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4.Info">Het Bayer 4x4 matrixpatroon.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8">Bayer 8x8 (Geordend)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8.Info">Het Bayer 8x8 matrixpatroon.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone">Gestippelde halftonen (Geordend)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone.Info">Een 8x8 matrix met een gestippeld halftoonpatroon.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise">Blauwe ruis (Geordend)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise.Info">Een 64x64 matrixpatroon met blauwe ruis.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson">Atkinson (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson.Info">Bill Atkinson's 4x3 matrix met 6 effectieve waarden.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes">Burkes (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes.Info">D. Burkes' 5x2 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg">Floyd-Steinberg (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg.Info">De originele 3x2 matrix van Floyd and Steinberg.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke">Jarvis-Judice-Ninke (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke.Info">Een 5x3 matrix van Jarvis, Judice en Ninke.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3">Sierra 3 (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3.Info">Frankie Sierra's 5x3 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2">Sierra 2 (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2.Info">Frankie Sierra's 5x2 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite">Sierra Lite (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite.Info">Frankie Sierra's 3x2 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce">Stevenson-Arce (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce.Info">Een 7x4 hexagonmatrix van Stevenson en Arce.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki">Stucki (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki.Info">Stucki's 5x3 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer">Willekeurige ruis</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer.Info">Willekeurige witte ruis.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer">Interleaved Gradient Noise</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer.Info">Niet-willekeurige verloopruis door een formule gegenereerd.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Preview">Voorbeeldweergave</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame">Huidig frame weergeven.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">Indien aangevinkt, toont het voorbeeld het huidige frame in plaats van een standaard beeldvoorbeeld.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Refresh">Automatische weergave is uitgeschakeld vanwege de hoge geheugenvereiste van de huidige instellingen. Klik om het voorbeeld te vernieuwen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Error">Kan geen voorbeeld genereren: {0}&#x0d;&#x0a; Klik om het opnieuw te proberen.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Animation">Animatie-instellingen</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop">Eindeloze lus.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop.Info">Indien aangevinkt, wordt de animatie oneindig herhaald.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">Heen-en-weer.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">Indien aangevinkt, wordt de animatie heen en weer afgespeeld.&#x0d;&#x0a; Dit wordt bereikt door de frames te dupliceren. Dit gaat gepaard met een groter bestand en een langere coderingstijd.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">Aantal herhalingen:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Geeft aan hoe vaak de animatie wordt afgespeeld.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">Delta-frames toestaan</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">Indien aangevinkt wordt geprobeerd om tijdens de codering ongewijzigde pixels te detecteren.&#x0d; &#x0a; Bij gebruik met een geoptimaliseerde kwantificator maakt deze optie het mogelijk dat een frame meer dan 256 kleuren heeft.&#x0d;&#x0a; Deze optie wordt genegeerd als de kwantificator geen transparantie gebruikt en als Bijsnijden van frames is uitgeschakeld.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">Delta-tolerantie:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">Specificeert de maximale tolerantie bij het detecteren van gewijzigde pixels.&#x0d;&#x0a; Bij waarde 0 wordt helemaal geen verschil getolereerd.&#x0d;&#x0a; Bij waarde 255 kunnen er frames zijn (of zelfs allemaal) die zonder inhoud worden toegevoegd.&#x0d;&#x0a; Redelijk bereik ligt tussen 0 en 16 voor een geoptimaliseerde kwantificator. Bij frames met vaste kleuren kunnen wat hogere waarden worden gebruikt met dithering.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">Bij een te hoge Delta-tolerantie kan het resultaat een slechte kwaliteit krijgen. Klik om de tolerantie van de delta opnieuw in te stellen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames">Bijsnijden van frames toestaan.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info">Indien aangevinkt, mag de encoder kleinere frames toevoegen dan de werkelijke resolutie.&#x0d;&#x0a; Als de optie Delta Frames is uitgeschakeld, is het alleen mogelijk om eventuele transparante randen bij te snijden.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaIgnored">Delta-frames toestaan wordt genegeerd omdat de huidige configuratie geen alpha gebruikt en Bijsnijden van frames toestaan niet is aangevinkt. Klik om Bijsnijden van frames in te schakelen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedIgnored">Toestaan van geknipte frames heeft geen effect omdat de huidige configuratie geen alpha gebruikt en Delta-frames niet is aangevinkt. Klik om deltaframes in te schakelen.</s:String>
+
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Apng-opties</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.Prediction">Voorspelling:</s:String>
