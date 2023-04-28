@@ -280,8 +280,8 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">基于录像机屏幕上设置的帧速率分母，&#10;将以“每小时”为基础（延时）捕获帧。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">播放延迟：</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">（以毫秒为单位，每个捕获的帧将设置为此延迟）</s:String>
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Trigger">Trigger delay:</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">(In ms, each frame capture will wait this amount of time before starting)</s:String>-->
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger">触发延迟：</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">（以毫秒为单位，每个帧捕获将在开始之前等待这么长时间）</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">每帧将以 {0} 的间隔进行捕获。</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">捕获模式</s:String>
@@ -1066,7 +1066,7 @@
     <s:String x:Key="S.Editor.Image.Overlay">叠加层</s:String>
     <s:String x:Key="S.Editor.Image.FreeDrawing">自由绘制</s:String>
     <s:String x:Key="S.Editor.Image.Shape">形状</s:String>
-    <!--<s:String x:Key="S.Editor.Image.MouseEvents">Mouse&#x0d;Events</s:String>-->
+    <s:String x:Key="S.Editor.Image.MouseEvents">鼠标&#x0d;事件</s:String>
     <s:String x:Key="S.Editor.Image.Watermark">水印</s:String>
     <s:String x:Key="S.Editor.Image.Cinemagraph">微动</s:String>
     <s:String x:Key="S.Editor.Image.Border">边框</s:String>
@@ -1811,9 +1811,9 @@
     <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">警告</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">仅当存在另一个同名文件时警告。</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">提示</s:String>
-    <!--<s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Asks if the user wants to overwrite the file.</s:String>-->
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">询问用户是否要覆盖此文件。</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">允许</s:String>
-    <!--<s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Simply overwrites the file.</s:String>-->
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">简单地覆盖文件。</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">同时另存为项目（相同文件夹与文件名）</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">上传文件</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">复制到剪贴板</s:String>
