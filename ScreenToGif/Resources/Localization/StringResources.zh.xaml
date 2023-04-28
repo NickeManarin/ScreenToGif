@@ -586,7 +586,7 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski 库</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski 可执行文件的路径中包含一个或多个无效字符。请为该可执行文件选择一个有效位置。</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg 许可证</s:String>
-    <!--<s:String x:Key="S.Options.Extras.License.Gifski">Gifski license</s:String>-->
+    <s:String x:Key="S.Options.Extras.License.Gifski">Gifski 许可证</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx 许可证</s:String>
     <s:String x:Key="S.Options.Extras.Permission.Header">文件夹中缺少写入权限</s:String>
     <s:String x:Key="S.Options.Extras.Permission.Observation">由于缺少写入权限，无法将下载内容保存在文件夹中。&#10;&#10;您是否要以管理员权限启动下载程序以完成下载？</s:String>
@@ -794,11 +794,11 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">支持以透明背景保存动画。</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">高质量 • 图形</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">更适合于使用较少数量的颜色进行录制。</s:String>
-    <!--<s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • Balanced</s:String>-->
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT - 均衡</s:String>
     <!--<s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Good quality for photo-like images using Wu's quantizer without dithering.</s:String>-->
-    <!--<s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • High quality</s:String>-->
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT - 高质量</s:String>
     <!--<s:String x:Key="S.Preset.Gif.KGySoft.High.Description">High quality for photo-like images using Wu's quantizer with higher bit level and Floyd-Steinberg error diffusion dithering.</s:String>-->
-    <!--<s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT • Low quality, faster</s:String>-->
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT - 低质量，速度更快</s:String>
     <!--<s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">Quantizing all frames with the same predefined 'web-safe' palette and Bayer 8x8 ordered dithering.</s:String>-->
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - 高质量</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">图像质量较高，但文件较大。</s:String>
@@ -1690,7 +1690,7 @@
     <!--<s:String x:Key="S.SaveAs.KGySoft.Preview.Refresh">Auto preview is disabled due to the high memory requirement of the current settings. Click to refresh the preview.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.KGySoft.Preview.Error">Failed to generate preview: {0}&#x0d;&#x0a;Click to try to generate it again.</s:String>-->
 
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation">Animation Settings</s:String>-->
+    <s:String x:Key="S.SaveAs.KGySoft.Animation">动画设置</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop">无限循环。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop.Info">选中后，动画将无限循环。</s:String>
     <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">Back and forth.</s:String>-->
@@ -1702,7 +1702,7 @@
     <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">Delta Tolerance:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">Specifies the maximum tolerance when detecting changed pixels.&#x0d;&#x0a;If 0, then no difference is tolerated at all.&#x0d;&#x0a;If 255, then there might be frames (or even all of them) that are added with no content.&#x0d;&#x0a;Reasonable range is between 0 and 16 for an optimized quantizer. The ones with fixed colors can be used with somewhat larger values with dithering.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">If Delta Tolerance is too high the result might have poor quality. Click to reset delta tolerance.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames">Allow clipped frames.</s:String>-->
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames">允许剪辑帧。</s:String>
     <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info">When checked, the encoder is allowed to add smaller frames than the actual resolution.&#x0d;&#x0a;If Allow Delta Frames is unchecked, then allows only clipping possible transparent borders.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaIgnored">Allow Delta Frames is ignored because the current configuration does not use alpha and Allow Clipped Frames is unchecked. Click to enable clipped frames.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedIgnored">Allow Clipped Frames has no effect because the current configuration does not use alpha and Allow Delta Frames is unchecked. Click to enable delta frames.</s:String>-->
