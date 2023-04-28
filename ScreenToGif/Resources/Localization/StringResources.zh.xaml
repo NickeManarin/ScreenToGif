@@ -794,28 +794,28 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">支持以透明背景保存动画。</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">高质量 • 图形</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">更适合于使用较少数量的颜色进行录制。</s:String>
-    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT - 均衡</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • 均衡</s:String>
     <!--<s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Good quality for photo-like images using Wu's quantizer without dithering.</s:String>-->
-    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT - 高质量</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • 高质量</s:String>
     <!--<s:String x:Key="S.Preset.Gif.KGySoft.High.Description">High quality for photo-like images using Wu's quantizer with higher bit level and Floyd-Steinberg error diffusion dithering.</s:String>-->
-    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT - 低质量，速度更快</s:String>
-    <!--<s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">Quantizing all frames with the same predefined 'web-safe' palette and Bayer 8x8 ordered dithering.</s:String>-->
-    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - 高质量</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT • 低质量，速度更快</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">使用相同的预设‘网页安全’调色板和拜尔 8x8 有序抖动量化所有帧。</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg • 高质量</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">图像质量较高，但文件较大。</s:String>
-    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - 低质量</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg • 低质量</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Description">图像质量较低，但文件较小。</s:String>
-    <s:String x:Key="S.Preset.Gif.Gifski.High.Title">Gifski - 高质量</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Title">Gifski • 高质量</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.High.Description">图像质量较高，但文件较大。</s:String>
-    <s:String x:Key="S.Preset.Gif.Gifski.Low.Title">Gifski - 质量较低</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Title">Gifski • 质量较低</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.Low.Description">图像质量较低，但文件较小。</s:String>
-    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski - 较低的质量和更快的编码</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski • 较低的质量和更快的编码</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.Fast.Description">图像质量更低，编码速度更快，但文件尺寸更小。</s:String>
-    <s:String x:Key="S.Preset.Gif.System.Low.Title">系统 - 低质量</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Title">系统 • 低质量</s:String>
     <s:String x:Key="S.Preset.Gif.System.Low.Description">质量低下但编码速度更快。</s:String>
     
-    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg - 高质量</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg • 高质量</s:String>
     <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">图像质量较高，文件尺寸较小，但编码速度较慢。</s:String>
-    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg - 低质量</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg • 低质量</s:String>
     <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">图像质量较低，文件尺寸较小，但编码速度较快。</s:String>
     <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">高质量</s:String>
     <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">图像质量高，文件尺寸小。</s:String>
@@ -1904,10 +1904,10 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">您确定要导出这些帧吗？</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">此操作将直接导出 {0} 帧到所选文件夹中。</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">覆盖</s:String>
-    <!--<s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Would you like to overwrite the file?</s:String>-->
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">你想要覆盖此文件吗？</s:String>
     <!--<s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">A file with the name '{0}' already exists in that folder.\r\nWould you like to overwrite it?</s:String>-->
-    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">你想要要覆盖文件吗？</s:String>
-    <!--<s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">One or more files with the same name already exist in that folder.\r\nWould you like to overwrite them?</s:String>-->
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">你想要覆盖此文件吗？</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">此文件夹中已存在一个或多个同名文件。\r\n你想要覆盖他们吗？</s:String>
     
     <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">命令预览器</s:String>
