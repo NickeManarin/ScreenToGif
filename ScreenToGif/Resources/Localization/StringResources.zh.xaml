@@ -528,7 +528,7 @@
     <s:String x:Key="S.Options.Upload.Preset.Warning.Credentials">您必须提供您的用户名和密码才能授权此应用。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.GetToken">无法获得授权令牌。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.Token">为了授权此应用程序，您需要提供授权令牌凭证。</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">授权失败。 检查一切是否正确，然后在几秒钟后重试。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">授权失败。检查一切是否正确，然后在几秒钟后重试。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">无法加载相册列表。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Info.Authorized">授权完成。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">未授权。</s:String>
@@ -576,7 +576,7 @@
     <s:String x:Key="S.Options.Extras.Downloading">下载中...</s:String>
     <s:String x:Key="S.Options.Extras.Ready">已下载&#x0d;{0}</s:String>
     <s:String x:Key="S.Options.Extras.Ready.Info">点击这里打开文件的属性。</s:String>
-    <s:String x:Key="S.Options.Extras.DownloadRestriction">Microsoft Store 分发的应用程序无法下载其他应用程序。 您必须手动下载它。</s:String>
+    <s:String x:Key="S.Options.Extras.DownloadRestriction">Microsoft Store 分发的应用程序无法下载其他应用程序。您必须手动下载它。</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation">FFmpeg 位置</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">选择 FFmpeg 可执行文件的位置</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.File">FFmpeg 可执行文件</s:String>
@@ -615,7 +615,7 @@
     <s:String x:Key="S.Options.About.UpdateCheck">检查更新</s:String>
     <s:String x:Key="S.Options.About.UpdateCheck.Nothing">您已经更新到最新版本，无需更新。</s:String>
     <s:String x:Key="S.Options.About.Author">作者：Nicke Manarin</s:String>
-    <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store 版本。 某些功能由于强制策略而被禁用。</s:String>
+    <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store 版本。某些功能由于强制策略而被禁用。</s:String>
     <s:String x:Key="S.Options.About.Contact">联系</s:String>
     <s:String x:Key="S.Options.About.Contact.Discord">加入服务器</s:String>
     <s:String x:Key="S.Options.About.Contact.Facebook">访问页面</s:String>
@@ -645,7 +645,7 @@
     <s:String x:Key="S.Localization.Warning.Repeated">您不能添加相同名称的资源</s:String>
     <s:String x:Key="S.Localization.Warning.Repeated.Info">尝试删除重复的资源或使用其他语言代码。</s:String>
     <s:String x:Key="S.Localization.Warning.Redundant">冗余语言代码</s:String>
-    <s:String x:Key="S.Localization.Warning.Redundant.Info">“{0}” 代码是多余的。 尝试改用 “{1}”。</s:String>
+    <s:String x:Key="S.Localization.Warning.Redundant.Info">“{0}” 代码是多余的。尝试改用 “{1}”。</s:String>
     <s:String x:Key="S.Localization.Warning.Unknown">未知语言</s:String>
     <s:String x:Key="S.Localization.Warning.Unknown.Info">无法将 “{0}” 及其家族识别为有效的语言代码。</s:String>
     <s:String x:Key="S.Localization.Warning.NotPossible">无法导入本地化资源。</s:String>
@@ -1236,7 +1236,7 @@
     <s:String x:Key="S.Recent.Frames">总帧数</s:String>
     <s:String x:Key="S.Recent.Warning.NoSelection">未选择任何项目。请从列表中选择并载入。</s:String>
     <s:String x:Key="S.Recent.Warning.SameProject">该编辑器实例已经在显示该项目。</s:String>
-    <s:String x:Key="S.Recent.Warning.AnotherEditor">该项目已由另一个编辑器实例打开。 如果项目已在另一个编辑器上打开，则无法再次打开该项目。</s:String>
+    <s:String x:Key="S.Recent.Warning.AnotherEditor">该项目已由另一个编辑器实例打开。如果项目已在另一个编辑器上打开，则无法再次打开该项目。</s:String>
     
     <!--Editor • Clipboard-->
     <s:String x:Key="S.Clipboard.Entries">剪贴板条目</s:String>
@@ -1291,7 +1291,7 @@
     <s:String x:Key="S.Reduce.ApplyToAll.Info">如果未选中该选项，则必须选择多个连续帧，且大于去除因子。</s:String>
     <s:String x:Key="S.Reduce.Info">每隔 {1} 帧删除 {0} 帧。（不计算删除的帧）</s:String>
     <s:String x:Key="S.Reduce.Warning.NoSelection">您必须选择要应用帧率降低的帧（或选中要应用于整个项目的选项）。</s:String>
-    <s:String x:Key="S.Reduce.Warning.NonConsecutive">选择的帧列表必须是连续的。 您不能在选定的帧中保留一些未选择的帧。</s:String>
+    <s:String x:Key="S.Reduce.Warning.NonConsecutive">选择的帧列表必须是连续的。您不能在选定的帧中保留一些未选择的帧。</s:String>
     <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">为了使功能可以删除任何东西，帧的选择必须比除去因子越大。</s:String>
     
     <!--Editor • Remove duplicates-->
@@ -1483,7 +1483,7 @@
     <!--Editor • Save as-->
     <s:String x:Key="S.SaveAs.Type">文件类型</s:String>
     <s:String x:Key="S.SaveAs.Type.Format">输出文件的格式。</s:String>
-    <s:String x:Key="S.SaveAs.Type.Preset">导出预设包含所有当前显示的设置。&#10;通过下面的按钮管理您的导出预设。 </s:String>
+    <s:String x:Key="S.SaveAs.Type.Preset">导出预设包含所有当前显示的设置。&#10;通过下面的按钮管理您的导出预设。</s:String>
     <s:String x:Key="S.SaveAs.Type.Animated">动画图像</s:String>
     <s:String x:Key="S.SaveAs.Type.Video">视频</s:String>
     <s:String x:Key="S.SaveAs.Type.Frames">帧</s:String>
@@ -1568,9 +1568,9 @@
     <s:String x:Key="S.SaveAs.GifOptions">Gif 选项</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Info">色彩还原算法（量化）</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural">神经网络</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">高保真量化。 速度较慢，但适合较高数量的颜色。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">高保真量化。速度较慢，但适合较高数量的颜色。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree">八位</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">适用于色彩较少的动画。 速度更快，但可能会产生色带。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">适用于色彩较少的动画。速度更快，但可能会产生色带。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut">中位数</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut.Info">不如八位好，但速度较慢。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale">灰度</s:String>
@@ -1693,15 +1693,15 @@
     <s:String x:Key="S.SaveAs.KGySoft.Animation">动画设置</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop">无限循环。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop.Info">选中后，动画将无限循环。</s:String>
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">Back and forth.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">When checked, the animation will be played back and forth.&#x0d;&#x0a;This is achieved by duplicating the frames meaning larger file size and longer encoding time.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">Repeat Count:</s:String>-->
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">来回。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">选中后，动画将来回播放。&#x0d;&#x0a;这是通过复制帧来实现的，这意味着更大的文件大小和更长的编码时间。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">重复计数：</s:String>
     <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Specifies how many times the animation will be played.</s:String>-->
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">允许增量帧。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">选中后，在编码过程中将尝试检测未更改的像素。&#x0d;&#x0a;与优化的量化器一起使用时，此选项可使一个帧具有的颜色超过 256 种。&#x0d;&#x0a;如果量化器不使用透明度并且未选中“允许剪辑帧”，则忽略此选项。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">增量容差：</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">指定检测更改像素时的最大容差。&#x0d;&#x0a;如果为 0，则不允许任何差异。&#x0d;&#x0a;如果为 255，则可能会添加一些没有内容的帧（甚至所有帧）。&#x0d;&#x0a;优化的量化器的合理范围处于 0 到 16 之间。具有固定颜色的量化器可以用稍大的值进行抖动。</s:String>
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">If Delta Tolerance is too high the result might have poor quality. Click to reset delta tolerance.</s:String>-->
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">如果增量容差太高，可能会导致质量较差。单击以重置增量容差。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames">允许剪辑帧。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info">选中后，允许编码器添加比实际分辨率小的帧。&#x0d;&#x0a;如果未选中“允许增量帧”，则仅允许剪切可能的透明边框。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaIgnored">“允许增量帧”将被忽略，因为当前配置未使用 Alpha并且未选中“允许剪辑帧”。单击以启用“允许剪辑帧”。</s:String>
@@ -1778,7 +1778,7 @@
     <s:String x:Key="S.SaveAs.VideoOptions.Framerate.Film">电影</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Framerate.Custom">自定义</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Pass">通过：</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Crf.Info">恒定速率因子。&#10;质量和速率控制设置。&#10;如果您不想设置此属性，请将其保留为空。 </s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Crf.Info">恒定速率因子。&#10;质量和速率控制设置。&#10;如果您不想设置此属性，请将其保留为空。</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel">质量级别：</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel.Info">较小的值表示更好的质量。</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Bitrate">比特率：</s:String>
@@ -1787,11 +1787,11 @@
     <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Constant">不变</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Variable">可变</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum">最小速率：</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum.Info">最小比特率容限。&#10;在使用 CBR 模式时最有用。&#10;如果不希望设置此属性，请将其留空或设置为零。 </s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum.Info">最小比特率容限。&#10;在使用 CBR 模式时最有用。&#10;如果不希望设置此属性，请将其留空或设置为零。</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum">最大速率：</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum.Info">最大比特率容限。&#10;也需要设置缓冲区大小。&#10;如果您不想设置此属性，则将其保留为空或设置为零。</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer">缓冲区大小：</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer.Info">为速率控制缓冲区的大小设置速率。&#10;如果您不希望设置此属性，请将其保留为空白或设置为零。 </s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer.Info">为速率控制缓冲区的大小设置速率。&#10;如果您不希望设置此属性，请将其保留为空白或设置为零。</s:String>
 
     <!--Editor • Save as > Image options-->
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">压缩图片</s:String>
@@ -1870,7 +1870,7 @@
     <s:String x:Key="S.SaveAs.Warning.Partial.NoSelection">如果可以选择仅导出选定的帧，则必须至少选择一帧。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Partial.InvalidExpression">部分导出项目的表达式无效。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">没有选择上传服务。您需要选择一个服务。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">您无法上传到选定的服务，因为它没有被授权。 转到 选项 > 上传服务 授权此应用程序。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">您无法上传到选定的服务，因为它没有被授权。转到 选项 > 上传服务 授权此应用程序。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">您不能选择复制链接的选项，因为您没有设置上传文件。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">您需要选择输出文件夹。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">输出目录不存在。</s:String>
@@ -1878,7 +1878,7 @@
     <s:String x:Key="S.SaveAs.Warning.Filename">您需要选择一个文件名。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">输出文件名包含一个或多个无效字符。请选择有效的文件名。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">文件名已被使用。请设置“覆盖”或选择另外的文件名。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Overwrite.Project">已经有一个具有相同文件名的项目。 设置为覆盖或选择另一个文件名或文件夹。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite.Project">已经有一个具有相同文件名的项目。设置为覆盖或选择另一个文件名或文件夹。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Canceled">该操作被取消。</s:String>
     
     <!--Editor • Save As > Upload-->
