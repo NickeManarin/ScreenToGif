@@ -1693,10 +1693,10 @@
     <s:String x:Key="S.SaveAs.KGySoft.Animation">动画设置</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop">无限循环。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop.Info">选中后，动画将无限循环。</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">来回。</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">选中后，动画将来回播放。&#x0d;&#x0a;这是通过复制帧来实现的，这意味着更大的文件大小和更长的编码时间。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">重复。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">选中后，动画将重复播放。&#x0d;&#x0a;这是通过复制帧来实现的，这意味着更大的文件大小和更长的编码时间。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">重复计数：</s:String>
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Specifies how many times the animation will be played.</s:String>-->
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">指定动画将播放多少次。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">允许增量帧。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">选中后，在编码过程中将尝试检测未更改的像素。&#x0d;&#x0a;与优化的量化器一起使用时，此选项可使一个帧具有的颜色超过 256 种。&#x0d;&#x0a;如果量化器不使用透明度并且未选中“允许剪辑帧”，则忽略此选项。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">增量容差：</s:String>
