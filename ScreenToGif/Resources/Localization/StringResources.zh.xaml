@@ -1697,15 +1697,15 @@
     <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">When checked, the animation will be played back and forth.&#x0d;&#x0a;This is achieved by duplicating the frames meaning larger file size and longer encoding time.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">Repeat Count:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Specifies how many times the animation will be played.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">Allow delta frames.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">When checked, unchanged pixels are attempted to be detected during the encoding.&#x0d;&#x0a;When using with an optimized quantizer, this option makes possible for a frame to have more than 256 colors.&#x0d;&#x0a;This option is ignored if the quantizer does not use transparency and Allow Clipped Frames is unchecked.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">Delta Tolerance:</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">Specifies the maximum tolerance when detecting changed pixels.&#x0d;&#x0a;If 0, then no difference is tolerated at all.&#x0d;&#x0a;If 255, then there might be frames (or even all of them) that are added with no content.&#x0d;&#x0a;Reasonable range is between 0 and 16 for an optimized quantizer. The ones with fixed colors can be used with somewhat larger values with dithering.</s:String>-->
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">允许增量帧。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">选中后，在编码过程中将尝试检测未更改的像素。&#x0d;&#x0a;与优化的量化器一起使用时，此选项可使一个帧具有的颜色超过 256 种。&#x0d;&#x0a;如果量化器不使用透明度并且未选中“允许剪辑帧”，则忽略此选项。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">增量容差：</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">指定检测更改像素时的最大容差。&#x0d;&#x0a;如果为 0，则不允许任何差异。&#x0d;&#x0a;如果为 255，则可能会添加一些没有内容的帧（甚至所有帧）。&#x0d;&#x0a;优化的量化器的合理范围处于 0 到 16 之间。具有固定颜色的量化器可以用稍大的值进行抖动。</s:String>
     <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">If Delta Tolerance is too high the result might have poor quality. Click to reset delta tolerance.</s:String>-->
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames">允许剪辑帧。</s:String>
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info">When checked, the encoder is allowed to add smaller frames than the actual resolution.&#x0d;&#x0a;If Allow Delta Frames is unchecked, then allows only clipping possible transparent borders.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaIgnored">Allow Delta Frames is ignored because the current configuration does not use alpha and Allow Clipped Frames is unchecked. Click to enable clipped frames.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedIgnored">Allow Clipped Frames has no effect because the current configuration does not use alpha and Allow Delta Frames is unchecked. Click to enable delta frames.</s:String>-->
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info">选中后，允许编码器添加比实际分辨率小的帧。&#x0d;&#x0a;如果未选中“允许增量帧”，则仅允许剪切可能的透明边框。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaIgnored">“允许增量帧”将被忽略，因为当前配置未使用 Alpha并且未选中“允许剪辑帧”。单击以启用“允许剪辑帧”。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedIgnored">允许剪辑帧无效，因为当前配置未使用 Alpha 并且未选中“允许增量帧”。</s:String>
 
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Apng 选项</s:String>
