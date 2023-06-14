@@ -123,7 +123,7 @@
     <s:String x:Key="S.Command.KeyStrokes">Voegt toetsen in die tijdens de opname zijn ingedrukt</s:String>
     <s:String x:Key="S.Command.FreeDrawing">Teken vrije vormen</s:String>
     <s:String x:Key="S.Command.Shapes">Vormen toevoegen</s:String>
-    <s:String x:Key="S.Command.MouseClicks">Muisklikken</s:String>
+    <s:String x:Key="S.Command.MouseEvents">Muisklikken</s:String>
     <s:String x:Key="S.Command.Watermark">Selecteer een afbeelding en voeg toe als watermerk</s:String>
     <s:String x:Key="S.Command.Border">Randen toevoegen</s:String>
     <s:String x:Key="S.Command.Shadow">Slagschaduw toevoegen</s:String>

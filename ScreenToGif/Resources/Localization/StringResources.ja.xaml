@@ -118,7 +118,7 @@
     <s:String x:Key="S.Command.KeyStrokes">録画中に押下したキーを表示</s:String>
     <s:String x:Key="S.Command.FreeDrawing">図形を自由に描く</s:String>
     <s:String x:Key="S.Command.Shapes">シェイプを追加</s:String>
-    <s:String x:Key="S.Command.MouseClicks">マウスクリック</s:String>
+    <s:String x:Key="S.Command.MouseEvents">マウスクリック</s:String>
     <s:String x:Key="S.Command.Watermark">選択画像を透かしとして追加</s:String>
     <s:String x:Key="S.Command.Border">帯を追加</s:String>
     <s:String x:Key="S.Command.Shadow">ドロップシャドウ(落し影)を追加</s:String>
@@ -1363,7 +1363,7 @@
     <s:String x:Key="S.Shapes.Fill">塗りつぶし</s:String>
 
     <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">マウスクリック</s:String>
+    <s:String x:Key="S.MouseEvents">マウスクリック</s:String>
     <s:String x:Key="S.MouseClicks.Color.Left">左クリックの色：</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">中クリックの色：</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">右クリックの色：</s:String>

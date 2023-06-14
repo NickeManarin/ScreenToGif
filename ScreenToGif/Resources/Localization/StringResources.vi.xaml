@@ -99,7 +99,7 @@
     <!--<s:String x:Key="S.Command.KeyStrokes">Inserts keys pressed during the recording</s:String>-->
     <!--<s:String x:Key="S.Command.FreeDrawing">Draw free forms</s:String>-->
     <!--<s:String x:Key="S.Command.Shapes">Add shapes</s:String>-->
-    <!--<s:String x:Key="S.Command.MouseClicks">Mouse clicks</s:String>-->
+    <!--<s:String x:Key="S.Command.MouseEvents">Mouse clicks</s:String>-->
     <!--<s:String x:Key="S.Command.Watermark">Select an image and add as watermark</s:String>-->
     <!--<s:String x:Key="S.Command.Border">Add borders</s:String>-->
     <!--<s:String x:Key="S.Command.Shadow">Add drop shadow</s:String>-->
@@ -1145,7 +1145,7 @@
     <s:String x:Key="S.Shapes.Fill">Làm đầy</s:String>
 
     <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">Các click chuột</s:String>
+    <s:String x:Key="S.MouseEvents">Các click chuột</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Không có phát hiện click chuột trong dự án của bạn.</s:String>
     
     <!--Editor • Watermark-->

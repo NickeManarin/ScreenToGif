@@ -99,7 +99,7 @@
     <s:String x:Key="S.Command.KeyStrokes">Tangenttryckningar: infogar knapptryckningar i inspelningen</s:String>
     <s:String x:Key="S.Command.FreeDrawing">Rita fritt</s:String>
     <s:String x:Key="S.Command.Shapes">Lägg till former</s:String>
-    <s:String x:Key="S.Command.MouseClicks">Musklick</s:String>
+    <s:String x:Key="S.Command.MouseEvents">Musklick</s:String>
     <s:String x:Key="S.Command.Watermark">Välj en bild och lägg till den som vattenstämpel</s:String>
     <s:String x:Key="S.Command.Border">Lägg till kant</s:String>
     <s:String x:Key="S.Command.Shadow">Lägg till skugga</s:String>
@@ -1145,7 +1145,7 @@
     <s:String x:Key="S.Shapes.Fill">Fyll</s:String>
 
     <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">Musklick</s:String>
+    <s:String x:Key="S.MouseEvents">Musklick</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Det finns inga upptäckta musklick i ditt projekt.</s:String>
     
     <!--Editor • Watermark-->

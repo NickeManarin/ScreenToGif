@@ -99,7 +99,7 @@
     <s:String x:Key="S.Command.KeyStrokes">Kayıtta basılan tuşları ekle</s:String>
     <s:String x:Key="S.Command.FreeDrawing">Serbest şekiller çiz</s:String>
     <s:String x:Key="S.Command.Shapes">Şekil ekle</s:String>
-    <s:String x:Key="S.Command.MouseClicks">Fare tıklamaları</s:String>
+    <s:String x:Key="S.Command.MouseEvents">Fare tıklamaları</s:String>
     <s:String x:Key="S.Command.Watermark">Bir resmi filigran olarak ekleyin</s:String>
     <s:String x:Key="S.Command.Border">Çerçeve ekle</s:String>
     <s:String x:Key="S.Command.Shadow">Gölge ekle</s:String>
@@ -1145,7 +1145,7 @@
     <s:String x:Key="S.Shapes.Fill">Doldur</s:String>
 
     <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">Fare Tıklamaları</s:String>
+    <s:String x:Key="S.MouseEvents">Fare Tıklamaları</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Projenizde algılanan fare tıklaması yok.</s:String>
     
     <!--Editor • Watermark-->

@@ -103,7 +103,7 @@
     <s:String x:Key="S.Command.KeyStrokes">Εισάγει τα πλήκτρα που πατήθηκαν κατά την εγγραφή</s:String>
     <s:String x:Key="S.Command.FreeDrawing">Σχεδιάστε ελεύθερες φόρμες</s:String>
     <s:String x:Key="S.Command.Shapes">Προσθήκη σχημάτων</s:String>
-    <s:String x:Key="S.Command.MouseClicks">Κλίκ Ποντικιού</s:String>
+    <s:String x:Key="S.Command.MouseEvents">Κλίκ Ποντικιού</s:String>
     <s:String x:Key="S.Command.Watermark">Επιλέξτε μια εικόνα και προσθέστε ως υδατογράφημα</s:String>
     <s:String x:Key="S.Command.Border">Προσθέστε περιγράμματα</s:String>
     <s:String x:Key="S.Command.Shadow">Προσθήκη σκιάς</s:String>
@@ -1221,7 +1221,7 @@
     <s:String x:Key="S.Shapes.Fill">Γέμισμα</s:String>
 
     <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">Κλικ ποντικιού</s:String>
+    <s:String x:Key="S.MouseEvents">Κλικ ποντικιού</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Δεν υπάρχουν εντοπισμένα κλικ ποντικιού στο έργο σας.</s:String>
     
     <!--Editor • Watermark-->

@@ -123,7 +123,7 @@
     <s:String x:Key="S.Command.KeyStrokes">Pressionamentos de tecla: inserir teclas pressionadas durante a gravação</s:String>
     <s:String x:Key="S.Command.FreeDrawing">Desenhe livremente</s:String>
     <s:String x:Key="S.Command.Shapes">Adicione formas geométricas</s:String>
-    <s:String x:Key="S.Command.MouseClicks">Cliques do mouse</s:String>
+    <s:String x:Key="S.Command.MouseEvents">Cliques do mouse</s:String>
     <s:String x:Key="S.Command.Watermark">Selecione uma imagem e adicione como marca d'água</s:String>
     <s:String x:Key="S.Command.Border">Adicionar bordas</s:String>
     <s:String x:Key="S.Command.Shadow">Adicionar sombra</s:String>
@@ -1382,7 +1382,7 @@
     <s:String x:Key="S.Shapes.Fill">Preenchimento</s:String>
 
     <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">Cliques do Mouse</s:String>
+    <s:String x:Key="S.MouseEvents">Cliques do Mouse</s:String>
     <s:String x:Key="S.MouseClicks.Color.Left">Cor do botão esquerdo:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">Cor do botão do meio:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">Cor do botão direito:</s:String>
