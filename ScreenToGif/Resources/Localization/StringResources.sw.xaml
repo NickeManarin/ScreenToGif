@@ -99,7 +99,7 @@
     <s:String x:Key="S.Command.KeyStrokes">Huingiza vitufe vilivyobonyezwa wakati wa kurekodi</s:String>
     <s:String x:Key="S.Command.FreeDrawing">Chora umbizo huru</s:String>
     <s:String x:Key="S.Command.Shapes">Ongeza maumbo</s:String>
-    <s:String x:Key="S.Command.MouseClicks">Mbofyo wa kipanya:</s:String>
+    <s:String x:Key="S.Command.MouseEvents">Mbofyo wa kipanya:</s:String>
     <s:String x:Key="S.Command.Watermark">Teua picha na ongeza kama taswira fifi</s:String>
     <s:String x:Key="S.Command.Border">Ongeza boda</s:String>
     <s:String x:Key="S.Command.Shadow">Ongeza kivuli kunjuzi</s:String>
@@ -1145,7 +1145,7 @@
     <s:String x:Key="S.Shapes.Fill">Jaza</s:String>
 
     <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">Mibofyo ya kipanya</s:String>
+    <s:String x:Key="S.MouseEvents">Mibofyo ya kipanya</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Hakuna mbofyo wa kipanya uliogunduliwa kwa mradi wako.</s:String>
     
     <!--Editor • Watermark-->

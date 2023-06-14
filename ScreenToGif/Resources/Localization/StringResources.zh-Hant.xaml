@@ -122,7 +122,7 @@
     <s:String x:Key="S.Command.KeyStrokes">插入在錄製過程中按鍵的文字展示</s:String>
     <s:String x:Key="S.Command.FreeDrawing">自由繪製</s:String>
     <s:String x:Key="S.Command.Shapes">加入形狀</s:String>
-    <s:String x:Key="S.Command.MouseClicks">滑鼠點擊</s:String>
+    <s:String x:Key="S.Command.MouseEvents">滑鼠點擊</s:String>
     <s:String x:Key="S.Command.Watermark">選擇圖片並加入為浮水印</s:String>
     <s:String x:Key="S.Command.Border">新增邊框</s:String>
     <s:String x:Key="S.Command.Shadow">加入陰影</s:String>
@@ -1361,7 +1361,7 @@
     <s:String x:Key="S.Shapes.Fill">填充</s:String>
 
     <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">滑鼠點擊</s:String>
+    <s:String x:Key="S.MouseEvents">滑鼠點擊</s:String>
     <s:String x:Key="S.MouseClicks.Color.Left">左鍵顏色：</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">中鍵顏色：</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">右鍵顏色：</s:String>
