@@ -103,7 +103,7 @@
     <s:String x:Key="S.Command.KeyStrokes">녹화 중 입력한 키 삽입하거나 편집하기</s:String>
     <s:String x:Key="S.Command.FreeDrawing">그림 그리기</s:String>
     <s:String x:Key="S.Command.Shapes">도형 추가하기</s:String>
-    <s:String x:Key="S.Command.MouseClicks">마우스 클릭</s:String>
+    <s:String x:Key="S.Command.MouseEvents">마우스 클릭</s:String>
     <s:String x:Key="S.Command.Watermark">워터마크 이미지 추가하기</s:String>
     <s:String x:Key="S.Command.Border">경계선 추가하기</s:String>
     <s:String x:Key="S.Command.Shadow">그림자 추가하기</s:String>
@@ -1204,7 +1204,7 @@
     <s:String x:Key="S.Shapes.Fill">채우기</s:String>
 
     <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">마우스 클릭</s:String>
+    <s:String x:Key="S.MouseEvents">마우스 클릭</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">프로젝트에 인식된 마우스 클릭이 없습니다.</s:String>
     
     <!--Editor • Watermark-->

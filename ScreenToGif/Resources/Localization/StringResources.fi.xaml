@@ -123,7 +123,7 @@
     <s:String x:Key="S.Command.KeyStrokes">Lisää tallennuksen aikana painetut näppäimet</s:String>
     <s:String x:Key="S.Command.FreeDrawing">Piirrä vapaita kuvioita</s:String>
     <s:String x:Key="S.Command.Shapes">Lisää kuvioita</s:String>
-    <s:String x:Key="S.Command.MouseClicks">Hiiren klikkaukset</s:String>
+    <s:String x:Key="S.Command.MouseEvents">Hiiren klikkaukset</s:String>
     <s:String x:Key="S.Command.Watermark">Valitse kuva ja lisää vesileimana</s:String>
     <s:String x:Key="S.Command.Border">Lisää reunuksia</s:String>
     <s:String x:Key="S.Command.Shadow">Lisää pudotusvarjo</s:String>

@@ -122,7 +122,7 @@
     <s:String x:Key="S.Command.KeyStrokes">מוסיף מקשים שנלחצו במהלך ההקלטה</s:String>
     <s:String x:Key="S.Command.FreeDrawing">צייר טפסים בחינם</s:String>
     <s:String x:Key="S.Command.Shapes">הוסף צורות</s:String>
-    <s:String x:Key="S.Command.MouseClicks">לחיצות עכבר</s:String>
+    <s:String x:Key="S.Command.MouseEvents">לחיצות עכבר</s:String>
     <s:String x:Key="S.Command.Watermark">בחר תמונה והוסף כסימן מים</s:String>
     <s:String x:Key="S.Command.Border">הוסף גבולות</s:String>
     <s:String x:Key="S.Command.Shadow">הוסף צל טיפה</s:String>
@@ -1363,7 +1363,7 @@
     <s:String x:Key="S.Shapes.Fill">מילוי</s:String>
 
     <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">לחיצות עכבר</s:String>
+    <s:String x:Key="S.MouseEvents">לחיצות עכבר</s:String>
     <s:String x:Key="S.MouseClicks.Color.Left">צבע הלחצן השמאלי:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">צבע הכפתור האמצעי:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">צבע הלחצן הימני:</s:String>

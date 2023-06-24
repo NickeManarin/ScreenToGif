@@ -1306,8 +1306,12 @@ public partial class Options : Window, INotification
             return;
         }
 
+        var url = Environment.Is64BitProcess ? "https://www.screentogif.com/downloads/FFmpeg-4.4.1-x64.zip" :
+            "https://www.screentogif.com/downloads/FFmpeg-4.3.1-x86.zip";
+
 #if FULL_MULTI_MSIX_STORE
             StatusBand.Warning(LocalizationHelper.Get("S.Options.Extras.DownloadRestriction"));
+            ProcessHelper.StartWithShell(url);            
             return;
 #else
         #region Save as
@@ -1363,9 +1367,6 @@ public partial class Options : Window, INotification
         {
             //Save to a temp folder.
             var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
-
-            var url = Environment.Is64BitProcess ? "https://www.screentogif.com/downloads/FFmpeg-4.4.1-x64.zip" :
-                    "https://www.screentogif.com/downloads/FFmpeg-4.3.1-x86.zip";
 
             using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
                 await client.DownloadFileTaskAsync(new Uri(url), temp);

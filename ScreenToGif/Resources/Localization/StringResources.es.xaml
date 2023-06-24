@@ -99,7 +99,7 @@
     <s:String x:Key="S.Command.KeyStrokes">Inserta las teclas pulsadas durante la grabación</s:String>
     <s:String x:Key="S.Command.FreeDrawing">Dibujar formas libres</s:String>
     <s:String x:Key="S.Command.Shapes">Añadir formas</s:String>
-    <s:String x:Key="S.Command.MouseClicks">Clicks de raton</s:String>
+    <s:String x:Key="S.Command.MouseEvents">Clicks de raton</s:String>
     <s:String x:Key="S.Command.Watermark">Seleccione una imagen y añada como marca de agua</s:String>
     <s:String x:Key="S.Command.Border">Añadir bordes</s:String>
     <s:String x:Key="S.Command.Shadow">Añadir sombra paralela</s:String>
@@ -1145,7 +1145,7 @@
     <s:String x:Key="S.Shapes.Fill">Relleno</s:String>
 
     <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">Clicks de Raton</s:String>
+    <s:String x:Key="S.MouseEvents">Clicks de Raton</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">No se detectan clics con el ratón en el proyecto.</s:String>
     
     <!--Editor • Watermark-->

@@ -123,7 +123,7 @@
     <s:String x:Key="S.Command.KeyStrokes">Inserisci tasti premuti durante la registrazione</s:String>
     <s:String x:Key="S.Command.FreeDrawing">Disegna forme libere</s:String>
     <s:String x:Key="S.Command.Shapes">Aggiungi forme</s:String>
-    <s:String x:Key="S.Command.MouseClicks">Clic del mouse</s:String>
+    <s:String x:Key="S.Command.MouseEvents">Clic del mouse</s:String>
     <s:String x:Key="S.Command.Watermark">Seleziona un'immagine da aggiungere come filigrana</s:String>
     <s:String x:Key="S.Command.Border">Aggiungi bordi</s:String>
     <s:String x:Key="S.Command.Shadow">Aggiungi ombreggiatura</s:String>

@@ -123,7 +123,7 @@
     <s:String x:Key="S.Command.KeyStrokes">按键：插入在录制过程中按下的按键</s:String>
     <s:String x:Key="S.Command.FreeDrawing">绘制自由形式</s:String>
     <s:String x:Key="S.Command.Shapes">添加形状</s:String>
-    <s:String x:Key="S.Command.MouseClicks">鼠标点击</s:String>
+    <s:String x:Key="S.Command.MouseEvents">鼠标点击</s:String>
     <s:String x:Key="S.Command.Watermark">选择图像并添加为水印</s:String>
     <s:String x:Key="S.Command.Border">添加边框</s:String>
     <s:String x:Key="S.Command.Shadow">添加阴影</s:String>

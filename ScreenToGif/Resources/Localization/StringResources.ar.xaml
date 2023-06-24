@@ -99,7 +99,7 @@
     <s:String x:Key="S.Command.KeyStrokes">ادراج المفاتيح التي تم الضغط عليها اثناء التسجيل</s:String>
     <s:String x:Key="S.Command.FreeDrawing">رسم اشكال حره</s:String>
     <s:String x:Key="S.Command.Shapes">اضافه اشكال</s:String>
-    <s:String x:Key="S.Command.MouseClicks">نقرات الماوس</s:String>
+    <s:String x:Key="S.Command.MouseEvents">نقرات الماوس</s:String>
     <s:String x:Key="S.Command.Watermark">تحديد صوره واضافها باسم علامة مائية</s:String>
     <s:String x:Key="S.Command.Border">اضافه حدود</s:String>
     <s:String x:Key="S.Command.Shadow">اضافه ظل مسقط</s:String>
@@ -1145,7 +1145,7 @@
     <s:String x:Key="S.Shapes.Fill">ملء</s:String>
 
     <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">نقرات الماوس</s:String>
+    <s:String x:Key="S.MouseEvents">نقرات الماوس</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">لا يوجد نقرات الماوس الكشف عن مشروعك.</s:String>
     
     <!--Editor • Watermark-->

@@ -3034,8 +3034,12 @@ namespace ScreenToGif.Windows
 
                 case Key.Right:
                 {
-                    NextFrame_Executed(sender, null);
-                    e.Handled = true;
+                    if ((Keyboard.Modifiers & ModifierKeys.Alt) == 0 || (Keyboard.Modifiers & (ModifierKeys.Alt | ModifierKeys.Control)) == (ModifierKeys.Alt | ModifierKeys.Control))
+                    {
+                        NextFrame_Executed(sender, null);
+                        e.Handled = true;
+                    }
+
                     break;
                 }
 
@@ -3048,8 +3052,12 @@ namespace ScreenToGif.Windows
                 
                 case Key.Left:
                 {
-                    PreviousFrame_Executed(sender, null);
-                    e.Handled = true;
+                    if ((Keyboard.Modifiers & ModifierKeys.Alt) == 0 || (Keyboard.Modifiers & (ModifierKeys.Alt | ModifierKeys.Control)) == (ModifierKeys.Alt | ModifierKeys.Control))
+                    {
+                        PreviousFrame_Executed(sender, null);
+                        e.Handled = true;
+                    }
+                    
                     break;
                 }
 
