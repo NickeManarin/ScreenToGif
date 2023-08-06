@@ -580,7 +580,6 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             }
             case ExportFormats.Mov:
-            case ExportFormats.Mp4:
             {
                 if (videoPreset.HardwareAcceleration == HardwareAccelerationModes.On)
                 {
@@ -602,6 +601,39 @@ public partial class ExportPanel : UserControl, IPanel
                     {
                         new X264(),
                         new X265()
+                    };
+                }
+
+                break;
+            }
+            case ExportFormats.Mp4:
+            {
+                if (videoPreset.HardwareAcceleration == HardwareAccelerationModes.On)
+                {
+                    FfmpegCodecComboBox.ItemsSource = new List<VideoCodec>
+                    {
+                        new X264(),
+                        new H264Amf(),
+                        new H264Nvenc(),
+                        new H264Qsv(),
+                        new X265(),
+                        new HevcAmf(),
+                        new HevcNvenc(),
+                        new HevcQsv(),
+                        new LibAom(),
+                        new SvtAv1(),
+                        new Rav1E()
+                    };
+                }
+                else
+                {
+                    FfmpegCodecComboBox.ItemsSource = new List<VideoCodec>
+                    {
+                        new X264(),
+                        new X265(),
+                        new LibAom(),
+                        new SvtAv1(),
+                        new Rav1E()
                     };
                 }
 
