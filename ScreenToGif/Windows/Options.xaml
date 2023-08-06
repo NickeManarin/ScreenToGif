@@ -1189,7 +1189,7 @@
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Brazil}" Tag="pt" Content="Portuguese / Português" Author="Nicke Manarin" 
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Portugal}" Tag="pt-PT" Content="Portuguese (Portugal) / Português (Portugal)" Author="Duarte Ramos" 
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Portugal}" Tag="pt-PT" Content="Portuguese (Portugal) / Português (Portugal)" Author="Eduardo Godinho, Duarte Ramos"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish / Türkçe" Author="g-u-r-k-a-n, Volkan Dağdelen, seferciogluecce, Omer Mollamehmetoglu, Bekir"
