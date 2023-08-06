@@ -19,7 +19,7 @@
     <s:String x:Key="S.Title">標題</s:String>
     <s:String x:Key="S.Description">描述</s:String>
     <s:String x:Key="S.SelectColor">單擊此處選擇顏色</s:String>
-    <s:String x:Key="S.Documentation">點擊以導向至文件</s:String>
+    <s:String x:Key="S.Documentation">點擊以導向至檔案</s:String>
     <s:String x:Key="S.Suppress">隱藏</s:String>
     <s:String x:Key="S.Preview">預覽</s:String>
     <s:String x:Key="S.Size">大小</s:String>
@@ -49,7 +49,7 @@
     <s:String x:Key="S.SavingSettings.Message">ScreenToGif 似乎沒有足夠的權限來儲存至磁碟。&#10;&#10;您想以管理員權限再試一次嗎？</s:String>
 
     <s:String x:Key="S.Exiting.Title">正在離開 ScreenToGif</s:String>
-    <s:String x:Key="S.Exiting.Instruction">你確定要離開嗎？</s:String>
+    <s:String x:Key="S.Exiting.Instruction">您確定要離開嗎？</s:String>
     <s:String x:Key="S.Exiting.Message">所有視窗及通知區域圖示將被關閉</s:String>
 
     <!--Warnings • Graphics engine-->
@@ -109,7 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">刪除之後的所有影格</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">刪除重複項</s:String>
     <s:String x:Key="S.Command.Reduce">減少影格數</s:String>
-    <s:String x:Key="S.Command.SmoothLoop">Create a smooth loop</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">建立平滑循環</s:String>
     <s:String x:Key="S.Command.Reverse">反向動畫</s:String>
     <s:String x:Key="S.Command.Yoyo">使動畫前進和後退</s:String>
     <s:String x:Key="S.Command.MoveLeft">移動所選擇影格到左側</s:String>
@@ -129,7 +129,7 @@
     <s:String x:Key="S.Command.Shadow">加入陰影</s:String>
     <s:String x:Key="S.Command.Obfuscate">套用效果在影格上敏感部分</s:String>
     <s:String x:Key="S.Command.Cinemagraph">使用繪圖工具選擇影格的哪些部分在整個動畫中不應保持靜態</s:String>
-    <s:String x:Key="S.Command.Progress">進度條或帶有播放詳細訊息的文字</s:String>
+    <s:String x:Key="S.Command.Progress">進度條或帶有播放詳細資訊的文字</s:String>
     <s:String x:Key="S.Command.SelectAll">選擇所有影格</s:String>
     <s:String x:Key="S.Command.GoTo">切換到指定索引的影格</s:String>
     <s:String x:Key="S.Command.InverseSelection">反向選擇影格</s:String>
@@ -165,7 +165,7 @@
     <s:String x:Key="S.Updater.Header">一個新的更新可用</s:String>
     <s:String x:Key="S.Updater.NewRelease">新版本!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">有新版本可用，版本 {0}!按一下這裡了解更多詳情。</s:String>
-    <s:String x:Key="S.Updater.NoNewRelease.Info">It appears that your system is no longer supported or something changed in the update system. Try downloading it manually from the website.</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">您的系統似乎不再受到支援，或更新系統發生變更。請嘗試從網站手動下載。</s:String>
     <s:String x:Key="S.Updater.Version">版本</s:String>
     <s:String x:Key="S.Updater.Portable">可攜式</s:String>
     <s:String x:Key="S.Updater.Installer">安裝程式</s:String>
@@ -177,7 +177,7 @@
     <s:String x:Key="S.Updater.Install">安裝</s:String>
     <s:String x:Key="S.Updater.InstallManually">手動安裝</s:String>
     <s:String x:Key="S.Updater.Downloading">正在下載...</s:String>
-    <s:String x:Key="S.Updater.Warning.Show">無法顯示下載詳細訊息</s:String>
+    <s:String x:Key="S.Updater.Warning.Show">無法顯示下載詳細資訊</s:String>
     <s:String x:Key="S.Updater.Warning.Download">無法下載更新</s:String>
     <s:String x:Key="S.Updater.Warning.Encoding">您需要等所有編碼完成之後才能更新</s:String>
 
@@ -200,8 +200,8 @@
     <s:String x:Key="S.Options.Donate">捐贈</s:String>
     <s:String x:Key="S.Options.About">關於</s:String>
     <s:String x:Key="S.Options.Other">其它</s:String>
-    <s:String x:Key="S.Options.Warning.Follow.Header">鼠標跟隨缺少快捷鍵</s:String>
-    <s:String x:Key="S.Options.Warning.Follow.Message">為了使用鼠標跟隨功能，必須設定快捷鍵以在需要時將其啟停用。</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Header">游標跟隨缺少快捷鍵</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Message">為了使用游標跟隨功能，必須設定快捷鍵以在需要時將其啟停用。</s:String>
 
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">啟動</s:String>
@@ -278,15 +278,15 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">會以設定的影格率，以每分鐘為基礎擷取畫面。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Hour">每小時</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">會以設定的影格率，以每小時為基礎擷取畫面。</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Playback">播放延遲</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Playback">播放延遲：</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">（每張擷取的畫面會設定此延遲毫秒數）</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Trigger">Trigger delay:</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">(In ms, each frame capture will wait this amount of time before starting)</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Interval">每間隔 {0} 擷取畫面</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger">觸發延遲：</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">（每次影格擷取在開始前的等待毫秒數）</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interval">每間隔 {0} 擷取畫面。</s:String>
 
     <s:String x:Key="S.Options.Recorder.Mode">擷取模式</s:String>
     <s:String x:Key="S.Options.Recorder.Bitblt.Info">使用較舊的擷取方法，該方法比較慢，可能無法擷取遊戲，但不需要其他外掛。</s:String>
-    <s:String x:Key="S.Options.Recorder.DirectX.Info">使用 Desktop Duplication API 擷取方法，該方法更快並且可以擷取全畫面遊戲，但是需要 SharpDx 元件和 Windows 8 或更高版本。</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">使用 Desktop Duplication API 擷取方法，該方法更快並且可以擷取全螢幕遊戲，但是需要 Windows 8 或更高版本。</s:String>
     <s:String x:Key="S.Options.Recorder.File">保存到檔案</s:String>
     <s:String x:Key="S.Options.Recorder.File.Info">擷取到的每一影格將直接作為圖片儲存在磁碟上。</s:String>
     <s:String x:Key="S.Options.Recorder.Cache">記憶體&#10;快取</s:String>
@@ -299,11 +299,11 @@
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression">無壓縮</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">（擷取影格時不執行壓縮）</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize">快取大小：</s:String>
-    <s:String x:Key="S.Options.Recorder.CacheSize.Info">（以MB為單位。達到此大小後，數據將被寫入到磁碟上）</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize.Info">（以 MB 為單位。達到此大小後，資料將被寫入到磁碟上）</s:String>
     <s:String x:Key="S.Options.Recorder.PreventBlackFrames">防止擷取全黑畫面</s:String>
     <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">（防止具有記憶體快取的 BitBlt 錯誤地擷取到全黑的畫面）</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">錄影時顯示滑鼠游標</s:String>
-    <s:String x:Key="S.Options.Recorder.SelectCursorColor">選擇鼠標顏色</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">選擇游標顏色</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">固定影格率</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">（固定延遲，不會導致錄影時間延長）</s:String>
     <s:String x:Key="S.Options.Recorder.CaptureChanges">只在有異動時擷取</s:String>
@@ -320,7 +320,7 @@
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">點擊以切換顯示此十字輔助線</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Info">輔助線只會在錄製暫停或停止時顯示。</s:String>
 
-    <s:String x:Key="S.Options.Recorder.HideTitleBar">隱藏標題列(精簡模式)</s:String>
+    <s:String x:Key="S.Options.Recorder.HideTitleBar">隱藏標題列 (精簡模式)</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">啟用螢幕放大鏡</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">（在選擇錄製區域時啟用放大鏡）</s:String>
     <s:String x:Key="S.Options.Recorder.AnimateBorder">選擇螢幕區域時的邊框動畫效果</s:String>
@@ -338,8 +338,8 @@
     <s:String x:Key="S.Options.Recorder.RememberPosition">記住前次錄製區域的位置</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">使用開始前倒數計時</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart.Info">（以秒為單位，在開始擷取之前等待時間）</s:String>
-    <s:String x:Key="S.Options.Recorder.CursorFollowing">啟用鼠標跟隨</s:String>
-    <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">（錄製區域將根據鼠標的位置重新定位）</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing">啟用游標跟隨</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">（錄製區域將根據游標的位置重新定位）</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">（邊界緩衝，移動像素超過此值時才會改變錄影位置）</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">（錄製區域開始重新定位緩衝區邊距）</s:String>
     <s:String x:Key="S.Options.Recorder.NotifyRecordingDiscard">在捨棄錄影前請詢問我</s:String>
@@ -387,7 +387,7 @@
     <s:String x:Key="S.Options.Tasks.Title">自動化任務</s:String>
     <s:String x:Key="S.Options.Tasks.List">自動化任務列表</s:String>
     <s:String x:Key="S.Options.Tasks.List.Task">任務</s:String>
-    <s:String x:Key="S.Options.Tasks.List.Details">詳細訊息</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Details">詳細資訊</s:String>
     <s:String x:Key="S.Options.Tasks.List.Enabled">啟用</s:String>
     <s:String x:Key="S.Options.Tasks.Enable">啟用此任務</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">（選擇一個任務）</s:String>
@@ -415,10 +415,10 @@
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">（它會停止錄製並打開編輯器）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">捨棄：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">（暫停時捨棄已錄製畫面）</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">鼠標跟隨：</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">（根據鼠標的位置調整錄製區域）</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">游標跟隨：</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">（根據游標的位置調整錄製區域）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">停用以下內容：</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">（暫時停用基於鼠標位置的錄製區域調整，僅接受修飾鍵）</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">（暫時停用基於游標位置的錄製區域調整，僅接受修飾鍵）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Info">點擊並輸入所需的按鍵和修飾鍵。&#10;部分按鍵組合無法使用。</s:String>
 
     <!--Options • Language-->
@@ -430,7 +430,7 @@
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.1">之後，</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.2">點擊這裡匯入</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.3">並測試您的翻譯。</s:String>
-    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.1">在您翻譯完成以後，請將語言文件發送到</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.1">在您翻譯完成以後，請將語言檔案寄送到</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.2">Email (nicke@outlook.com.br)</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.3">。謝謝！</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.ResourceLink.Tooltip">點擊以打開說明的網頁。</s:String>
@@ -506,7 +506,7 @@
     <s:String x:Key="S.Options.Upload.Preset.Custom">自定</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Enable">使用此預置參數</s:String>
 
-    <s:String x:Key="S.Options.Upload.Preset.Details">詳細訊息</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Details">詳細資訊</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Name">名稱</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Description">描述：</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Mode">模式：</s:String>
@@ -515,17 +515,17 @@
     <s:String x:Key="S.Options.Upload.Preset.Authorization">授權</s:String>
     <s:String x:Key="S.Options.Upload.Preset.GetToken">取得授權憑證</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Token">在此處貼上 OAuth 憑證</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Username">用戶名稱</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Username">使用者名稱</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Password">密碼：</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Authorize">授權</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.NotStored">用戶名稱及密碼將不會被儲存</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.NotStored">使用者名稱及密碼將不會被儲存</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Options">選項</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Direct">使用直接連結</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Album">相簿</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.Title">您必須給此預置設定一個唯一的名稱。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.Repeated">名稱已被其他預置設定使用。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.Authenticate">在身份驗證模式上，您必須完成身份驗證過程。</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.Credentials">您必須提供您的用戶名稱及密碼才能授權此程式。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Credentials">您必須提供您的使用者名稱及密碼才能授權此程式。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.GetToken">無法取得授權憑證。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.Token">為了授權此應用程式，您需要提供授權憑證。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">授權失敗。檢查一切是否正確，然後在幾秒後重試。</s:String>
@@ -542,7 +542,7 @@
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Reload">重新讀取相簿列表</s:String>
 
     <s:String x:Key="S.Options.Upload.Preset.Gfycat.Defaults">預設</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Gfycat.AskMe">詢問填寫上傳的詳細訊息</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.AskMe">詢問填寫上傳的詳細資訊</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Gfycat.UrlType">URL 類型：</s:String>
 
     <!--Options • Upload > Album-->
@@ -550,20 +550,20 @@
     <s:String x:Key="S.Options.Upload.Pick.Album.Info">如果您願意，可以選擇目標相簿：</s:String>
 
     <!--Options • Upload > Details-->
-    <s:String x:Key="S.Options.Upload.Pick.Details">上傳詳細訊息（可選）</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Details.Info">上傳詳細訊息</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details">上傳詳細資訊（可選）</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Info">上傳詳細資訊</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Details.Title">標題：</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Details.Description">描述：</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Details.Tags">標籤：</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Details.Tags.Info">使用分號（;）分隔標籤</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Details.Private">僅對使用直接連結訪問的用戶顯示</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Private">僅對使用直接連結造訪的使用者顯示</s:String>
 
     <!--Options • Upload > History-->
     <s:String x:Key="S.Options.Upload.History.Title">上傳記錄</s:String>
     <s:String x:Key="S.Options.Upload.History.Date">日期</s:String>
     <s:String x:Key="S.Options.Upload.History.Preset">預置參數</s:String>
     <s:String x:Key="S.Options.Upload.History.Successful">成功？</s:String>
-    <s:String x:Key="S.Options.Upload.History.Remove">刪除歴蚔記錄項目</s:String>
+    <s:String x:Key="S.Options.Upload.History.Remove">刪除歴史記錄項目</s:String>
     <s:String x:Key="S.Options.Upload.History.Detail.Link">連結：</s:String>
     <s:String x:Key="S.Options.Upload.History.Detail.LowerQuality">較低品質：</s:String>
     <s:String x:Key="S.Options.Upload.History.Detail.DeleteLink">刪除連結：</s:String>
@@ -612,13 +612,13 @@
 
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">版本：</s:String>
-    <s:String x:Key="S.Options.About.UpdateCheck">Check for Updates</s:String>
-    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">You already have the latest version.</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">檢查更新</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">您正在使用最新版本。</s:String>
     <s:String x:Key="S.Options.About.Author">作者: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store 版本。某些功能由於強制策略而被禁用</s:String>
     <s:String x:Key="S.Options.About.Contact">聯繫</s:String>
     <s:String x:Key="S.Options.About.Contact.Discord">加入伺服器</s:String>
-    <s:String x:Key="S.Options.About.Contact.Facebook">訪問頁面</s:String>
+    <s:String x:Key="S.Options.About.Contact.Facebook">造訪頁面</s:String>
     <s:String x:Key="S.Options.About.Contact.Gitter">加入房間</s:String>
     <s:String x:Key="S.Options.About.Technical">技術</s:String>
     <s:String x:Key="S.Options.About.Technical.License">授權：</s:String>
@@ -634,7 +634,7 @@
     <s:String x:Key="S.Localization.Recognized">識別為 {0}</s:String>
     <s:String x:Key="S.Localization.NotRecognized">未知</s:String>
     <s:String x:Key="S.Localization.Usage.First">現在使用的是最底部的資源。</s:String>
-    <s:String x:Key="S.Localization.Usage.Second">要應用您的自定義資源，請將其移動到列表的最底部。</s:String>
+    <s:String x:Key="S.Localization.Usage.Second">要應用您的自訂資源，請將其移動到列表的最底部。</s:String>
     <s:String x:Key="S.Localization.Exporting">匯出語系資源</s:String>
     <s:String x:Key="S.Localization.SaveResource">儲存語系字典檔</s:String>
     <s:String x:Key="S.Localization.OpenResource">開啟語系字典檔</s:String>
@@ -642,7 +642,7 @@
     <s:String x:Key="S.Localization.Importing">匯入語系資源</s:String>
     <s:String x:Key="S.Localization.Warning.Name">檔案名稱未依規範</s:String>
     <s:String x:Key="S.Localization.Warning.Name.Info">請嘗試重新命名，如: StringResources.en.xaml，"en" 應該要改成您的語系代碼。</s:String>
-    <s:String x:Key="S.Localization.Warning.Repeated">你不能加入相同的語系資源</s:String>
+    <s:String x:Key="S.Localization.Warning.Repeated">您不能加入相同的語系資源</s:String>
     <s:String x:Key="S.Localization.Warning.Repeated.Info">請移除重複的語系資源或使用其他語系代碼。</s:String>
     <s:String x:Key="S.Localization.Warning.Redundant">重複的語系代碼</s:String>
     <s:String x:Key="S.Localization.Warning.Redundant.Info">"{0}" 已被使用，請嘗試用 "{1}" 取代。</s:String>
@@ -659,7 +659,7 @@
     <s:String x:Key="S.Recorder.Snap">貼齊</s:String>
     <s:String x:Key="S.Recorder.Height">高度</s:String>
     <s:String x:Key="S.Recorder.Width">寬度</s:String>
-    <s:String x:Key="S.Recorder.CursorFollowing">已啟用鼠標跟隨</s:String>
+    <s:String x:Key="S.Recorder.CursorFollowing">已啟用游標跟隨</s:String>
 
     <s:String x:Key="S.Recorder.SwitchFrequency">點擊以在擷取頻率模式之間切換。</s:String>
     <s:String x:Key="S.Recorder.Manual.Short">手動</s:String>
@@ -794,12 +794,12 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">支援儲存透明背景的動畫。</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">高品質 • 圖形</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">適合用於較少顏色數量的錄製。</s:String>
-    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • Balanced</s:String>
-    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Good quality for photo-like images using Wu's quantizer without dithering.</s:String>
-    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • High quality</s:String>
-    <s:String x:Key="S.Preset.Gif.KGySoft.High.Description">High quality for photo-like images using Wu's quantizer with higher bit level and Floyd-Steinberg error diffusion dithering.</s:String>
-    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT • Low quality, faster</s:String>
-    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">Quantizing all frames with the same predefined 'web-safe' palette and Bayer 8x8 ordered dithering.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • 平衡</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">使用 Wu 的量化器 (不抖動)，適合照片。</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • 高品質</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Description">使用 Floyd-Steinberg 誤差擴散抖動及較高的位元層級，，適合照片。</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT • 低品質，較快</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">使用預設的 'web-safe' 調色盤和拜耳 8x8 有序抖動來量化所有影格。</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - 高品質</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">圖片品質較高，但檔案容量較大。</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - 低品質</s:String>
@@ -883,7 +883,7 @@
     <s:String x:Key="S.Encoder.DeletedMoved">檔案已刪除或已移動</s:String>
     <s:String x:Key="S.Encoder.Canceled">已取消</s:String>
     <s:String x:Key="S.Encoder.Error">錯誤</s:String>
-    <s:String x:Key="S.Encoder.Error.Info">點擊此處顯示此錯誤的詳細訊息</s:String>
+    <s:String x:Key="S.Encoder.Error.Info">點擊此處顯示此錯誤的詳細資訊</s:String>
     <s:String x:Key="S.Encoder.Uploading">上傳中</s:String>
     <s:String x:Key="S.Encoder.Executing">執行指令</s:String>
     <s:String x:Key="S.Encoder.Processing">正在處理 {0}</s:String>
@@ -961,11 +961,11 @@
     <!--Editor • Welcome-->
     <s:String x:Key="S.Editor.Welcome.New">從 [檔案 > 新增] 開始新的錄影</s:String>
     <s:String x:Key="S.Editor.Welcome.Import">拖放要匯入的圖片、影片或專案</s:String>
-    <s:String x:Key="S.Editor.Welcome.ThankYou">非常感謝您使用我的應用程式!</s:String>
+    <s:String x:Key="S.Editor.Welcome.ThankYou">非常感謝您使用我的應用程式！</s:String>
     <s:String x:Key="S.Editor.Welcome.Size">影格率越低，色彩計數或影格之間的變化量越小，則大小越小</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">您想談談嗎？連絡方式請打開 [選項 > 關於]</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">遇到麻煩？請透過意見反應工具與我聯繫</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">你想試試新版錄製界面嗎？可以從 [選項 > 錄製] 來啟用</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">您想試試新版錄製界面嗎？可以從 [選項 > 錄製] 來啟用</s:String>
 
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">錄製</s:String>
@@ -1138,12 +1138,12 @@
     <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Message">無法載入這些影格，因其無法被找到或已損壞。</s:String>
 
     <!--Editor • Warnings-->
-    <s:String x:Key="S.Editor.Warning.Selection">你必須選擇至少一個影格來執行覆蓋。</s:String>
+    <s:String x:Key="S.Editor.Warning.Selection">您必須選擇至少一個影格來執行覆蓋。</s:String>
     <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg 不存在。將其加入至 Path 環境變數或在選項中設定好路徑。</s:String>
     <s:String x:Key="S.Editor.Warning.Gifski">Gifski 不存在。將其加入至 Path 環境變數或在選項中設定好路徑。</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">磁碟機上沒有足夠的空間供應用程式儲存快取（剩餘 {0}% ）。點擊此處打開 [選項 > 暫存檔]，以釋放一些空間。</s:String>
-    <s:String x:Key="S.Editor.Warning.DifferentDpi">您嘗試使用不支持的 DPI 匯入多個圖片。部分已匯入成功，其他則需要單獨匯入。</s:String>
-    <s:String x:Key="S.Editor.Warning.DifferentSize">You tried to import multiple images with different sizes, which is not supported. Some of them got imported, others need to be imported separately.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">不支援匯入多張不同 DPI 的圖片。部分已匯入成功，其他則需分別匯入。</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentSize">不支援匯入多張不同尺寸的圖片。某些圖片已被匯入，其他則須分別匯入。</s:String>
 
     <!--Editor • Status-->
     <s:String x:Key="S.Editor.RetrievingFromCache">正在從快取中取得影格</s:String>
@@ -1164,8 +1164,8 @@
     <s:String x:Key="S.Editor.ApplyingTransition">正在套用轉場效果</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">正在準備儲存</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">取消讀取並捨棄專案</s:String>
-    <s:String x:Key="S.Editor.FindingLoop">Finding perfect loop</s:String>
-    <s:String x:Key="S.Editor.DiscardingLoop">Discarding frames not used in loop</s:String>
+    <s:String x:Key="S.Editor.FindingLoop">正在尋找完美循環</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">正在丟棄循環未使用的影格</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">影格：</s:String>
@@ -1259,8 +1259,8 @@
     <s:String x:Key="S.Resize.KeepAspect">保持長寬比</s:String>
     <s:String x:Key="S.Resize.ScalingQuality">縮放品質：</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant（高品質）</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.Linear">Linear（低品質）</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Nearest neighbor（低品質且較快）</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">線性（低品質）</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">最鄰近（低品質且較快）</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Info">縮放品質</s:String>
     <s:String x:Key="S.Resize.Warning">您必須選擇不同的值來套用調整大小動作。</s:String>
 
@@ -1307,15 +1307,15 @@
     <s:String x:Key="S.RemoveDuplicates.Info">此操作會分析每個影格（逐像素），並刪除至少為 {0}% 的類似於其最近鄰的影格。 &#10;您可以選擇是否要調整影格的延遲（顯示持續時間）。</s:String>
 
     <!--Editor • Smooth Loop-->
-    <s:String x:Key="S.SmoothLoop.Header">Create smooth loop</s:String>
-    <s:String x:Key="S.SmoothLoop.StartThreshold">Ignore first:</s:String>
-    <s:String x:Key="S.SmoothLoop.From">Compare from:</s:String>
-    <s:String x:Key="S.SmoothLoop.From.Last">End</s:String>
-    <s:String x:Key="S.SmoothLoop.From.First">Start</s:String>
-    <s:String x:Key="S.SmoothLoop.Info">Tries to find a frame at least {0} % similar to the start frame and deletes all later frames.&#x0d;You can choose if you want to ignore some initial frames and initiate the comparison from the start (after the threshold) or the end.</s:String>
-    <s:String x:Key="S.SmoothLoop.Warning.Threshold">The number of frames to ignore needs to be smaller than the total number of frames.</s:String>
-    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">It was not possible to create a smooth loop with the selected settings.</s:String>
-    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">You already have a smooth loop based on selected settings.</s:String>
+    <s:String x:Key="S.SmoothLoop.Header">建立平滑循環</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">忽略首個：</s:String>
+    <s:String x:Key="S.SmoothLoop.From">比對對象：</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">結束</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">開始</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">嘗試尋找至少與開頭影格 {0} % 相似的影格，並刪除後續影格。&#x0d;您可以選擇是否要忽略開頭的部分影格並從開頭 (在臨界值之後) 或結尾開始比對。</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">要忽略的影格數必須小於總影格數。</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">無法以所選設定建立平滑循環。</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">您已以所選設定建立平滑循環。</s:String>
 
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">文字</s:String>
@@ -1348,7 +1348,7 @@
     <s:String x:Key="S.KeyStrokes.Warning.None">您的錄影上沒有按鍵動作</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Title">ScreenToGif - 按鍵展示編輯器</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Number">影格數</s:String>
-    <s:String x:Key="S.KeyStrokes.Edit.Keys">檢測到按鍵展示</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Keys">偵測到按鍵展示</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Remove">移除按鍵展示</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Add">加入一個按鍵展示</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Lower">小寫字母</s:String>
@@ -1386,7 +1386,7 @@
     <s:String x:Key="S.MouseClicks.Color.Left">左鍵顏色：</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">中鍵顏色：</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">右鍵顏色：</s:String>
-    <s:String x:Key="S.MouseClicks.Warning.None">你的專案沒有檢測到滑鼠點擊。</s:String>
+    <s:String x:Key="S.MouseClicks.Warning.None">您的專案沒有偵測到滑鼠點擊。</s:String>
 
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">圖片</s:String>
@@ -1449,7 +1449,7 @@
     <s:String x:Key="S.Progress.Format.Examples">範例：</s:String>
     <s:String x:Key="S.Progress.Format.Date">您可以使用 .Net Framework 中的日期和時間格式。 &#10;該規範可在下面的兩個連結中找到。</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">標準格式</s:String>
-    <s:String x:Key="S.Progress.Format.Date.Custom">自定義格式</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Custom">自訂格式</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber">從字數：</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">從該所選編號開始計數影格編號</s:String>
     <s:String x:Key="S.Progress.Orientation">方向：</s:String>
@@ -1483,7 +1483,7 @@
     <!--Editor • Save as-->
     <s:String x:Key="S.SaveAs.Type">檔案類型</s:String>
     <s:String x:Key="S.SaveAs.Type.Format">輸出檔案格式。</s:String>
-    <s:String x:Key="S.SaveAs.Type.Preset">輸出預置設定包含所有目前顯示的設定。&#10;通過下面的按鈕管理你的輸出預置設定。</s:String>
+    <s:String x:Key="S.SaveAs.Type.Preset">輸出預置設定包含所有目前顯示的設定。&#10;通過下面的按鈕管理您的輸出預置設定。</s:String>
     <s:String x:Key="S.SaveAs.Type.Animated">動畫圖片</s:String>
     <s:String x:Key="S.SaveAs.Type.Video">影片</s:String>
     <s:String x:Key="S.SaveAs.Type.Frames">影格</s:String>
@@ -1501,7 +1501,7 @@
     <s:String x:Key="S.SaveAs.Mkv">Mkv</s:String>
     <s:String x:Key="S.SaveAs.Mkv.Info">Matroska</s:String>
     <s:String x:Key="S.SaveAs.Mov">Mov</s:String>
-    <s:String x:Key="S.SaveAs.Mov.Info">QuickTime 文件格式</s:String>
+    <s:String x:Key="S.SaveAs.Mov.Info">QuickTime 檔案格式</s:String>
     <s:String x:Key="S.SaveAs.Mp4">Mp4</s:String>
     <s:String x:Key="S.SaveAs.Mp4.Info">Mpeg-4</s:String>
     <s:String x:Key="S.SaveAs.Webm">WebM</s:String>
@@ -1516,7 +1516,7 @@
 
     <s:String x:Key="S.SaveAs.Project">專案</s:String>
     <s:String x:Key="S.SaveAs.Project.Info">ScreenToGif 專案</s:String>
-    <s:String x:Key="S.SaveAs.Psd">PSD 文件</s:String>
+    <s:String x:Key="S.SaveAs.Psd">PSD 檔案</s:String>
     <s:String x:Key="S.SaveAs.Psd.Info">Photoshop 檔案</s:String>
 
     <!--Editor • Save as > Presets-->
@@ -1560,9 +1560,9 @@
     <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Pass">要使用 2-pass 編碼，只需加入 "-pass 2" 參數即可。</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.Preview">預覽</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.Preview.Info">預覽將傳送給 FFmpeg 的參數列表。</s:String>
-    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Code">編解碼器文件</s:String>
-    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Format">格式文件</s:String>
-    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Filters">濾鏡文件</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Code">編解碼器檔案</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Format">格式檔案</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Filters">濾鏡檔案</s:String>
 
     <!--Editor • Save as > Gif options-->
     <s:String x:Key="S.SaveAs.GifOptions">Gif 選項</s:String>
@@ -1597,115 +1597,115 @@
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">選擇要顯示為透明的顏色</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">如果選擇了一種顏色，則它將被轉換為透明色，產生的 gif 將顯示為透明。&#10;如果未選擇顯色，所有透明顏色（不透明度 = 0%）將正常顯示為透明。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">偵測未變化的像素</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">通過分析和檢測影格之間未變化的像素，可以只保留必要的部分到 gif 中。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">通過分析和偵測影格之間未變化的像素，可以只保留必要的部分到 gif 中。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">使用色鍵取代像素</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">重複/不變的像素將被此色鍵取代，進而減少每影格使用的顏色數量。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">色鍵：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither">抖動：</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Bayer 縮放：</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">拜耳縮放：</s:String>
 
 <!--Editor • Save as > KGy SOFT options-->
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer">Quantizer</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor">Background Color:</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor.Info">Pixels with alpha (transparency) that are considered opaque by the selected quantizer will be blended with this color before getting the quantized color.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold">Alpha Threshold:</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold.Info">Determines the input alpha value under which the quantized color will be transparent.&#x0d;&#x0a;If 0, then the result will never have transparency.&#x0d;&#x0a;If 255, then only fully transparent pixels are considered transparent.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold">White Threshold:</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold.Info">Determines the lowest input brightness to consider the result color white.&#x0d;&#x0a;It affects the brightness of the result. An error diffusion dithering may compensate for the value of this parameter though.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping">Direct Mapping</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping.Info">When checked, the quantized color is determined by a direct mapping rather than looking up the nearest palette entry.&#x0d;&#x0a;It speeds up quantization but may end up in a higher contrast result. An error diffusion dithering may compensate for the value of this parameter though.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize">Palette Size:</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize.Info">Determines the maximum size of the palette per frame.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel">Custom bit level.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">When checked, the bit level can be configured manually.&#x0d;&#x0a;⚠️ Warning: The highest bit level might require a LOT of memory!</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BitLevel.Info">Higher value means more accuracy, larger target color space, slower processing and larger memory usage.&#x0d;&#x0a;For example, if 1, then the result can have no more than 8 colors, or when 2, no more than 64 colors.&#x0d;&#x0a;For Octree and Wu quantizers it affects also maximum number of monochromatic shades.&#x0d;&#x0a;For example, if 5 (which is the default for Wu quantizer), only 32 monochromatic shades can be differentiated.&#x0d;&#x0a;⚠️ Caution: The Wu quantizer consumes at least 650 MB with the highest value.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">Black and White</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">Fixed 1 bpp palette with the black and white colors.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">Grayscale 4 colors</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4.Info">Fixed 2 bpp palette with 4 grayscale entries.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16">Grayscale 16 colors</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16.Info">Fixed 4 bpp palette with 16 grayscale entries.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale">Grayscale 256 colors</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale.Info">Fixed 8 bpp palette with 256 grayscale entries.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette">System default 4 bpp palette</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette.Info">Fixed 4 bpp palette using the standard 16 sRGB colors.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette">System default 8 bpp palette</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette.Info">Fixed 8 bpp palette including the 'web-safe' colors and transparency.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332">RGB 332 palette</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332.Info">Fixed 8 bpp palette using the RGB 332 color space.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree">Octree Quantizer</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree.Info">Optimizing palette for each frame with the Octree algorithm.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut">Median Cut Quantizer</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut.Info">Optimizing palette for each frame with the Median Cut algorithm.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu">Wu Quantizer</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu.Info">Optimizing palette for each frame with Xiaolin Wu's algorithm.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer">量化器</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor">背景顏色：</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor.Info">被所選量化器視為不透明的具透明度的像素將在獲得量化色彩前與此顏色混合。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold">透明度臨界值：</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold.Info">決定輸入的透明度值，小於該值在量化後將變成透明。&#x0d;&#x0a;若設為 0，結果將不會有透明度。&#x0d;&#x0a;若設為 255，則只有完全透明的像素會被視為透明。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold">白色臨界值：</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold.Info">決定將結果顏色視為白色的最大輸入亮度。&#x0d;&#x0a;此選項將影響亮度。但誤差擴散抖動可能可以補償此參數的數值。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping">直接對應</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping.Info">勾選後，量化後的色彩將由直接對應決定，而非查詢鄰近的調色盤色階。&#x0d;&#x0a;此選項將加快量化速度，但可能會使對比度提高。但誤差擴散抖動可能可以補償此參數的數值。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize">調色盤大小：</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize.Info">決定每一影格調色盤的最大大小。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel">自訂位元層級。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">勾選後可手動設定位元層級。&#x0d;&#x0a;⚠️ 警告：最高級的位元層級將需要大量記憶體！</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BitLevel.Info">數值越高表示精確度越高，目標色彩空間越大，處理速度越慢，且記憶體用量越大。&#x0d;&#x0a;以 1 為例，則結果的色彩數量不得超過 8，若為 2，則不得超過 64。&#x0d;&#x0a;對於 Octree 和 Wu 量化器，此數值還會影響單色色階的最大數量。&#x0d;&#x0a;以 5 為例 (Wu 量化器的預設值)，則只能區分 32 種單色色階。&#x0d;&#x0a;⚠️ 警告：Wu 量化器的最大值至少需要 650 MB 的記憶體。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">黑白</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">帶有黑白兩色的固定 1 bpp 調色盤。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">灰階 4 色</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4.Info">帶有 4 個灰階色階的固定 2 bpp 調色盤。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16">灰階 16 色</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16.Info">帶有 16 個灰階色階的固定 2 bpp 調色盤。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale">灰階 256 色</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale.Info">帶有 256 個灰階色階的固定 8 bpp 調色盤。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette">系統預設 4 bpp 調色盤</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette.Info">使用標準 16 sRGB 色彩的固定 4 bpp 調色盤。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette">系統預設 8 bpp 調色盤</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette.Info">固定的 8 bpp 調色盤，包含 'web-safe' 色彩與透明度。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332">RGB 332 調色盤</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332.Info">使用 RGB 332 色彩空間的固定 8 bpp 調色盤。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree">Octree 量化器</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree.Info">使用 Octree 演算法來最佳化每一影格的調色盤。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut">中位切割量化器</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut.Info">使用中位切割演算法來最佳化每一影格的調色盤。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu">Wu 量化器</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu.Info">使用 Xiaolin Wu 的演算法來最佳化每一影格的調色盤。</s:String>
 
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer">Ditherer</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength">Strength:</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength.Info">The strength of the ditherer, or 0 to auto calibrate strength.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed">Seed:</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed.Info">An integer seed to be used to produce a specific random dithering pattern.&#x0d;&#x0a;Leave empty to use a random seed for every frame.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None">None</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None.Info">Frames are quantized without dithering.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing">Serpentine Processing</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing.Info">When checked, the error propagation direction is altered from line to line.&#x0d;&#x0a;This helps to reduce the ripple effect of the error diffusion dithering.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2">Bayer 2x2 (Ordered)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2.Info">The 2x2 Bayer matrix pattern.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3">Bayer 3x3 (Ordered)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3.Info">The 3x3 Bayer matrix pattern.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4">Bayer 4x4 (Ordered)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4.Info">The 4x4 Bayer matrix pattern.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8">Bayer 8x8 (Ordered)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8.Info">The 8x8 Bayer matrix pattern.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone">Dotted Halftone (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer">抖動器</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength">強度：</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength.Info">抖動器的強度，設為 0 將自動校正強度。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed">種子：</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed.Info">用於產生指定隨機抖動樣式的整數種子。&#x0d;&#x0a;留空則每一影格會使用隨機種子。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None">無</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None.Info">影格將不經抖動處理，直接量化。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing">蛇行處理</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing.Info">When checked, the error propagation direction is altered from line to line.&#x0d;&#x0a;此選項將有助於減少誤差擴散抖動造成的漣漪效果。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2">拜耳 2x2 (有序)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2.Info">2x2 拜耳陣列圖案。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3">拜耳 3x3 (有序)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3.Info">3x3 拜耳陣列圖案。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4">拜耳 4x4 (有序)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4.Info">4x4 拜耳陣列圖案。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8">拜耳 8x8 (有序)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8.Info">8x8 拜耳陣列圖案。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone">Dotted Halftone (有序)</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone.Info">A 8x8 matrix with a dotted halftone pattern.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise">Blue Noise (Ordered)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise.Info">A 64x64 matrix with a blue noise pattern.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson">Atkinson (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise">藍噪音 (有序)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise.Info">帶有藍噪音樣式的 64x64 陣列。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson">Atkinson (誤差擴散)</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson.Info">Bill Atkinson's 4x3 matrix with 6 effective values.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes">Burkes (Error Diffusion)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes.Info">D. Burkes' 5x2 matrix.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg">Floyd-Steinberg (Error Diffusion)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg.Info">The original 3x2 matrix by Floyd and Steinberg.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke">Jarvis-Judice-Ninke (Error Diffusion)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke.Info">An 5x3 matrix by Jarvis, Judice and Ninke.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3">Sierra 3 (Error Diffusion)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3.Info">Frankie Sierra's 5x3 matrix.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2">Sierra 2 (Error Diffusion)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2.Info">Frankie Sierra's 5x2 matrix.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite">Sierra Lite (Error Diffusion)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite.Info">Frankie Sierra's 3x2 matrix.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce">Stevenson-Arce (Error Diffusion)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce.Info">A 7x4 hexagonal matrix by Stevenson and Arce.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki">Stucki (Error Diffusion)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki.Info">Stucki's 5x3 matrix.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer">Random Noise</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer.Info">Random white noise.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer">Interleaved Gradient Noise</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer.Info">Nonrandom gradient noise generated by a formula.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes">Burkes (誤差擴散)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes.Info">D. Burkes 的 5x2 陣列。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg">Floyd-Steinberg (誤差擴散)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg.Info">由 Floyd 和 Steinberg 發明的原始 3x2 陣列。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke">Jarvis-Judice-Ninke (誤差擴散)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke.Info">Jarvis、Judice 和 Ninke 發明的 5x3 陣列。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3">Sierra 3 (誤差擴散)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3.Info">Frankie Sierra 的 5x3 陣列。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2">Sierra 2 (誤差擴散)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2.Info">Frankie Sierra 的 5x2 陣列。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite">Sierra Lite (誤差擴散)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite.Info">Frankie Sierra 的 3x2 陣列。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce">Stevenson-Arce (誤差擴散)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce.Info">Stevenson 和 Arce 發明的 7x4 六邊形陣列。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki">Stucki (誤差擴散)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki.Info">Stucki 的 5x3 陣列。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer">隨機噪音</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer.Info">隨機白噪音。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer">交錯式梯度噪音</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer.Info">由公式產生的非隨機梯度噪音。</s:String>
 
-    <s:String x:Key="S.SaveAs.KGySoft.Preview">Preview</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame">Show current frame.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">When checked, the preview shows the current frame instead of a standard image example.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Preview.Refresh">Auto preview is disabled due to the high memory requirement of the current settings. Click to refresh the preview.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Preview.Error">Failed to generate preview: {0}&#x0d;&#x0a;Click to try to generate it again.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview">預覽</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame">顯示目前影格。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">勾選後，預覽將顯示目前影格，而非標準圖片範例。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Refresh">由於目前設定所需的記憶體過高，自動預覽已被停用。點擊以重新整理預覽。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Error">無法產生預覽：{0}&#x0d;&#x0a;點擊以重試。</s:String>
 
-    <s:String x:Key="S.SaveAs.KGySoft.Animation">Animation Settings</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop">Endless loop.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop.Info">When checked, the animation will be looped indefinitely.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">Back and forth.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation">動畫設定</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop">無限循環。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop.Info">勾選後，動畫將無限循環。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">往返。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">When checked, the animation will be played back and forth.&#x0d;&#x0a;This is achieved by duplicating the frames meaning larger file size and longer encoding time.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">Repeat Count:</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Specifies how many times the animation will be played.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">Allow delta frames.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">When checked, unchanged pixels are attempted to be detected during the encoding.&#x0d;&#x0a;When using with an optimized quantizer, this option makes possible for a frame to have more than 256 colors.&#x0d;&#x0a;This option is ignored if the quantizer does not use transparency and Allow Clipped Frames is unchecked.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">Delta Tolerance:</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">Specifies the maximum tolerance when detecting changed pixels.&#x0d;&#x0a;If 0, then no difference is tolerated at all.&#x0d;&#x0a;If 255, then there might be frames (or even all of them) that are added with no content.&#x0d;&#x0a;Reasonable range is between 0 and 16 for an optimized quantizer. The ones with fixed colors can be used with somewhat larger values with dithering.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">If Delta Tolerance is too high the result might have poor quality. Click to reset delta tolerance.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames">Allow clipped frames.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">重複次數：</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">指定動畫的播放次數。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">允許變化影格。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">勾選後，將嘗試在編碼時偵測無變化的像素。&#x0d;&#x0a;與最佳化量化器搭配使用時，此選項可使影格色彩數超過 256。&#x0d;&#x0a;若量化器未使用透明度，且允許被裁剪的影格未啟用，此選項將被忽略。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">變化量容許度：</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">指定偵測像素變化的最大容許度。&#x0d;&#x0a;若設為 0，將不會容許任何變化。&#x0d;&#x0a;若設為 255，則可能會有無內容的影格 (甚至所有影格) 被加入。&#x0d;&#x0a;搭配最佳化的量化器時，合理範圍為 0 至 16。有固定顏色的則可以透過抖動使用較大的數值。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">若變化量容許度過高，結果的品質可能會較差。點擊以重設變化量容許度。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames">允許被裁剪的影格。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info">When checked, the encoder is allowed to add smaller frames than the actual resolution.&#x0d;&#x0a;If Allow Delta Frames is unchecked, then allows only clipping possible transparent borders.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaIgnored">Allow Delta Frames is ignored because the current configuration does not use alpha and Allow Clipped Frames is unchecked. Click to enable clipped frames.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedIgnored">Allow Clipped Frames has no effect because the current configuration does not use alpha and Allow Delta Frames is unchecked. Click to enable delta frames.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaIgnored">由於目前設定未使用透明度，且允許被裁剪的影格未啟用，故允許變化影格已被忽略。點擊以啟用被裁剪的影格。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedIgnored">由於目前設定未使用透明度，且允許變化影格未啟用，故允許被裁剪的影格無效。點擊以啟用變化影格。</s:String>
 
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Apng 選項</s:String>
@@ -1716,7 +1716,7 @@
     <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Average">平均</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Mixed">混合</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.Looped">循環 Apng</s:String>
-    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">檢測不變的像素</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">偵測不變的像素</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">將所有未變化的像素畫為透明色</s:String>
 
     <!--Editor • Save as > Webp options-->
@@ -1800,20 +1800,20 @@
     <!--Editor • Save as > Psd options-->
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">壓縮圖片</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">使用 RLE 算法壓縮圖片資料。</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline">保存時間軸數據</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline">保存時間軸資料</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">輸出影格的時間，而不僅僅是影格。</s:String>
 
     <!--Editor • Save as > Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">儲存選項</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">部分輸出。</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">將檔案儲存到你選擇的資料夾</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">Overwrite?</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Warn</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Only warns that another file exists with the same name.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Prompt</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Asks if the user wants to overwrite the file.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Allow</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Simply overwrites the file.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">將檔案儲存到您選擇的資料夾</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">要覆蓋嗎？</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">警告</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">僅在有相同名稱的檔案時警告。</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">提示</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">詢問使用者是否要覆蓋檔案。</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">允許</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">直接覆蓋檔案。</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">同時另存為專案（相同資料夾與檔案名）</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">上傳檔案</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">複製到剪貼簿</s:String>
@@ -1841,8 +1841,8 @@
     <s:String x:Key="S.SaveAs.Partial.Mode.Selection">選擇</s:String>
     <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Info">僅輸出時間軸中所選擇的影格。</s:String>
     <s:String x:Key="S.SaveAs.Partial.Mode.Selection.None">未選擇影格。</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Singular">已選擇 1 影格</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Plural">已選擇 {0} 影格</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Singular">已選擇 1 個影格。</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Plural">已選擇 {0} 個影格。</s:String>
     <s:String x:Key="S.SaveAs.Partial.From">從：</s:String>
     <s:String x:Key="S.SaveAs.Partial.To">至：</s:String>
     <s:String x:Key="S.SaveAs.Partial.Expression">表達式：</s:String>
@@ -1853,8 +1853,8 @@
     <s:String x:Key="S.SaveAs.File.Location">目的資料夾</s:String>
     <s:String x:Key="S.SaveAs.File.SelectFolder">選擇輸出資料夾</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">選擇位置</s:String>
-    <s:String x:Key="S.SaveAs.File.Format">格式.</s:String>
-    <s:String x:Key="S.SaveAs.File.Name">檔案的名稱</s:String>
+    <s:String x:Key="S.SaveAs.File.Format">格式</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">檔案名稱。在 '?' 間插入時間/日期格式</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">動畫</s:String>
     <s:String x:Key="S.SaveAs.File.Increase">增加檔案數量</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">減少檔案數量</s:String>
@@ -1869,7 +1869,7 @@
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">您需要在指令框中輸入編碼後置指令才能執行他們</s:String>
     <s:String x:Key="S.SaveAs.Warning.Partial.NoSelection">當設定為輸出選擇中的影格時，您必需至少選擇一個影格。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Partial.InvalidExpression">部分輸出的表達式無效。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Upload.None">沒有選擇上傳服務。你需要選擇一個目的地</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">沒有選擇上傳服務。您需要選擇一個目的地</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">您無法上傳到選定的服務，因為它沒有被授權。轉到選項>雲端服務授權此應用程式</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">您不能選擇複製連結的選項，因為您沒有設定上傳檔案</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">您必須選擇輸出資料夾</s:String>
@@ -1883,7 +1883,7 @@
 
     <!--Editor • Save As > Upload-->
     <s:String x:Key="S.SaveAs.Upload">上傳</s:String>
-    <s:String x:Key="S.SaveAs.Upload.Info">選擇上傳預置設定，其中包含有關用於上傳的服務的詳細訊息。</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Info">選擇上傳預置設定，其中包含有關用於上傳的服務的詳細資訊。</s:String>
     <s:String x:Key="S.SaveAs.Upload.Limit">此上傳服務增加限制。</s:String>
     <s:String x:Key="S.SaveAs.Upload.Add">新增上傳預置設定</s:String>
     <s:String x:Key="S.SaveAs.Upload.Edit">編輯上傳預置設定。</s:String>
@@ -1903,11 +1903,11 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">匯出影格</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">您確定要匯出這些影格嗎？</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">此操作將直接匯出 {0} 個影格到所選資料夾中</s:String>
-    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">Overwrite</s:String>
-    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Would you like to overwrite the file?</s:String>
-    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">A file with the name '{0}' already exists in that folder.\r\nWould you like to overwrite it?</s:String>
-    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">Would you like to overwrite the files?</s:String>
-    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">One or more files with the same name already exist in that folder.\r\nWould you like to overwrite them?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">覆蓋</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">您要覆蓋檔案嗎？</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">名稱為 '{0}' 的檔案已存在於該資料夾。\r\n您要覆蓋嗎？</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">您要覆蓋檔案嗎？</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">一個以上有相同名稱的檔案已存在於該資料夾。\r\n您要覆蓋嗎？</s:String>
 
     <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">命令預覽</s:String>
@@ -1920,23 +1920,23 @@
     <s:String x:Key="S.Feedback.Send">傳送</s:String>
     <s:String x:Key="S.Feedback.Preview">預覽</s:String>
     <s:String x:Key="S.Feedback.Header">傳送意見</s:String>
-    <s:String x:Key="S.Feedback.Title">標題 *</s:String>
-    <s:String x:Key="S.Feedback.Message">訊息 *</s:String>
+    <s:String x:Key="S.Feedback.Title">標題</s:String>
+    <s:String x:Key="S.Feedback.Message">訊息</s:String>
     <s:String x:Key="S.Feedback.Message.Info">如果您遇到錯誤，請別忘了一步一步地向我解釋如何出現錯誤的原因。</s:String>
     <s:String x:Key="S.Feedback.Type">意見反應類型</s:String>
     <s:String x:Key="S.Feedback.Suggestion">建議</s:String>
     <s:String x:Key="S.Feedback.IssueBug">問題/錯誤</s:String>
-    <s:String x:Key="S.Feedback.YourEmail">您的電子郵件（選用）</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">您的電子郵件（選填）</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">您需要輸入意見反應標題。</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">您需要在意見反應中輸入訊息。</s:String>
     <s:String x:Key="S.Feedback.Warning.Email">您需要輸入電子郵件，以接收開發人員的回覆。</s:String>
-    <s:String x:Key="S.Feedback.Sending">傳送中...此視窗在完成之後會自動關閉</s:String>
-    <s:String x:Key="S.Feedback.Attachments">附件（選用，最大 20MB）</s:String>
+    <s:String x:Key="S.Feedback.Sending">正在背景傳送。此視窗將自動關閉。</s:String>
+    <s:String x:Key="S.Feedback.Attachments">附件（選填，最大 20MB）</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">加入附件</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">移除所有附件</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo1">我可以理解英語</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo2">和葡萄牙語（巴西和歐洲）。</s:String>
-    <s:String x:Key="S.Feedback.Preview.Info">這是您要發送的內容，以及所有附件。</s:String>
+    <s:String x:Key="S.Feedback.Preview.Info">這是您要寄送的內容，以及所有附件。</s:String>
 
     <!--Troubleshoot-->
     <s:String x:Key="S.Troubleshoot.Title">疑難解答</s:String>
