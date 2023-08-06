@@ -1210,7 +1210,7 @@
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Russia}" Tag="ru" Content="Russian / Русский" Author="wvxwxvw, Zoltanleo, Qwitriy, ralienpp, Nivalis, Yuri Komar, Vadim Velezhenko"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Ukraine}" Tag="uk" Content="Ukrainian / українська" Author="Andrey Ìlečko"
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Ukraine}" Tag="uk" Content="Ukrainian / Українська" Author="Prevter, Andrey Ìlečko"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=uk, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Vietnam}" Tag="vi" Content="Vietnamese / Tiếng Việt" Author="Đỗ Quang Hưng"
