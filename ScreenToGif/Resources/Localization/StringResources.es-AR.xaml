@@ -1093,6 +1093,7 @@
     <s:String x:Key="S.Caption.Weight">Peso:</s:String>
     <s:String x:Key="S.Caption.Size">Tamaño:</s:String>
     <s:String x:Key="S.Caption.Color">Color:</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">Color de fondo:</s:String>
     <s:String x:Key="S.Caption.Outline">Contorno</s:String>
     <s:String x:Key="S.Caption.Thickness">Grosor:</s:String>
     <s:String x:Key="S.Caption.Layout">Diseño</s:String>

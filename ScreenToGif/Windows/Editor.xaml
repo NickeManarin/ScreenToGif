@@ -1435,7 +1435,8 @@
                                    FontStyle="{Binding ElementName=FreeTextFontStyleComboBox, Path=SelectedValue}"
                                    FontWeight="{Binding ElementName=FreeTextFontWeightComboBox, Path=SelectedValue}"
                                    FontSize="{Binding ElementName=FreeTextFontSizeNumericUpDown, Path=Value}"
-                                   Foreground="{Binding ElementName=FreeTextFontColorBox, Path=SelectedBrush}">
+                                   Foreground="{Binding ElementName=FreeTextFontColorBox, Path=SelectedBrush}"
+                                   Background="{Binding ElementName=FreeTextBackgroundColorBox, Path=SelectedBrush}">
                             <TextBlock.Resources>
                                 <c:DoubleToBool x:Key="DoubleToBool"/>
                                 <DropShadowEffect x:Key="DropShadowEffect" 
@@ -2119,6 +2120,7 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -2193,8 +2195,12 @@
                                     <n:ColorBox Grid.Row="4" Grid.Column="1" x:Name="FreeTextFontColorBox" Margin="10,5"
                                                 SelectedColor="{Binding FreeTextFontColor, Source={x:Static t:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.Caption.TextDecoration}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                    <ComboBox Grid.Row="5" Grid.Column="1" x:Name="FreeTextTextDecorationComboBox" Margin="10,5" MinWidth="100"
+                                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.Caption.BackgroundColor}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:ColorBox Grid.Row="5" Grid.Column="1" x:Name="FreeTextBackgroundColorBox" Margin="10,5"
+                                                SelectedColor="{Binding FreeTextBackgroundColor, Source={x:Static t:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                    <TextBlock Grid.Row="6" Grid.Column="0" Text="{DynamicResource S.Caption.TextDecoration}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <ComboBox Grid.Row="6" Grid.Column="1" x:Name="FreeTextTextDecorationComboBox" Margin="10,5" MinWidth="100"
                                               SelectedValuePath="Tag" SelectedValue="{Binding Source={x:Static t:UserSettings.All}, Path=FreeTextTextDecoration, Mode=TwoWay}">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>

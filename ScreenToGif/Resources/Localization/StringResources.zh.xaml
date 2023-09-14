@@ -1325,6 +1325,7 @@
     <s:String x:Key="S.Caption.Weight">字重：</s:String>
     <s:String x:Key="S.Caption.Size">字号：</s:String>
     <s:String x:Key="S.Caption.Color">颜色：</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">背景颜色：</s:String>
     <s:String x:Key="S.Caption.Outline">轮廓</s:String>
     <s:String x:Key="S.Caption.Thickness">粗细：</s:String>
     <s:String x:Key="S.Caption.Layout">布局</s:String>

@@ -1093,6 +1093,7 @@
     <s:String x:Key="S.Caption.Weight">الوزن:</s:String>
     <s:String x:Key="S.Caption.Size">الحجم:</s:String>
     <s:String x:Key="S.Caption.Color">اللون:</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">لون الخلفية:</s:String>
     <s:String x:Key="S.Caption.Outline">خط خارجي</s:String>
     <s:String x:Key="S.Caption.Thickness">سمك:</s:String>
     <s:String x:Key="S.Caption.Layout">تخطيط</s:String>

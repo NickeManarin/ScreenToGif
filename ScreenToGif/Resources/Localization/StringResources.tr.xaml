@@ -1093,6 +1093,7 @@
     <s:String x:Key="S.Caption.Weight">Ağırlık:</s:String>
     <s:String x:Key="S.Caption.Size">Boyut:</s:String>
     <s:String x:Key="S.Caption.Color">Renk:</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">Arka plan rengi:</s:String>
     <s:String x:Key="S.Caption.Outline">Dış çizgi</s:String>
     <s:String x:Key="S.Caption.Thickness">Kalınlık:</s:String>
     <s:String x:Key="S.Caption.Layout">Düzen</s:String>
