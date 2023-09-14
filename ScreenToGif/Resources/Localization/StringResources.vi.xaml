@@ -1093,6 +1093,7 @@
     <s:String x:Key="S.Caption.Weight">Độ đậm nét:</s:String>
     <s:String x:Key="S.Caption.Size">Cỡ chữ:</s:String>
     <s:String x:Key="S.Caption.Color">Màu sắc:</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">Màu nền:</s:String>
     <s:String x:Key="S.Caption.Outline">Đường bao</s:String>
     <s:String x:Key="S.Caption.Thickness">Chiều dày:</s:String>
     <s:String x:Key="S.Caption.Layout">Bố trí</s:String>

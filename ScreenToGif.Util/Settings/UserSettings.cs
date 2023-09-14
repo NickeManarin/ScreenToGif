@@ -2039,6 +2039,12 @@ public class UserSettings : INotifyPropertyChanged
         set => SetValue(value);
     }
 
+    public Color FreeTextBackgroundColor
+    {
+        get => (Color)GetValue();
+        set => SetValue(value);
+    }
+
     public TextAlignment FreeTextTextAlignment
     {
         get => (TextAlignment)GetValue();

@@ -1093,6 +1093,7 @@
     <s:String x:Key="S.Caption.Weight">Uzani:</s:String>
     <s:String x:Key="S.Caption.Size">Ukubwa:</s:String>
     <s:String x:Key="S.Caption.Color">Rangi:</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">Rangi ya Mandharinyuma:</s:String>
     <s:String x:Key="S.Caption.Outline">Kiolezi</s:String>
     <s:String x:Key="S.Caption.Thickness">Unene:</s:String>
     <s:String x:Key="S.Caption.Layout">Mpangilio</s:String>
