@@ -46,6 +46,7 @@ using Color = System.Windows.Media.Color;
 using Encoder = ScreenToGif.Windows.Other.Encoder;
 using LegacyGifEncoder = ScreenToGif.Util.Codification.Gif.LegacyEncoder.GifEncoder;
 using KGySoftGifEncoder = KGySoft.Drawing.Imaging.GifEncoder;
+using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Bpg;
 
 namespace ScreenToGif.Util;
 
@@ -1416,7 +1417,7 @@ internal class EncodingManager
 
         var firstPass = "";
         var secondPass = "";
-
+        //TODO: Adapt the code to support v4 or v6
         switch (preset.Type)
         {
             case ExportFormats.Gif:
@@ -1431,10 +1432,6 @@ internal class EncodingManager
                     firstPass = gifPreset.Parameters.Replace("\n", " ").Replace("\r", "");
                 else
                 {
-                    //Vsync
-                    if (gifPreset.Vsync != Vsyncs.Off)
-                        firstPass += $"-vsync {gifPreset.Vsync.ToString().ToLower()} ";
-
                     //Input and loop.
                     firstPass += "{I} ";
                     firstPass += $"-loop {(gifPreset.Looped ? gifPreset.RepeatForever ? 0 : gifPreset.RepeatCount : -1)} ";
@@ -1454,7 +1451,18 @@ internal class EncodingManager
                         firstPass += $"-r {(gifPreset.Framerate == Framerates.Custom ? gifPreset.CustomFramerate.ToString(CultureInfo.InvariantCulture) : gifPreset.Framerate.GetLowerDescription())} ";
 
                     //Format and output.
-                    firstPass += "-f gif {O}";
+                    firstPass += "-f gif ";
+
+                    //Vsync
+                    if (gifPreset.Vsync != Vsyncs.Off)
+                    {
+                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                            firstPass += "-fps_mode " + gifPreset.Vsync.GetLowerDescription();
+                        else
+                            firstPass += "-vsync " + gifPreset.Vsync.GetLowerDescription();
+                    }
+
+                    firstPass += " {O}";
                 }
 
                 break;
@@ -1473,10 +1481,6 @@ internal class EncodingManager
                     firstPass = apngPreset.Parameters.Replace("\n", " ").Replace("\r", "");
                 else
                 {
-                    //Vsync
-                    if (apngPreset.Vsync != Vsyncs.Off)
-                        firstPass += $"-vsync {apngPreset.Vsync.ToString().ToLower()} ";
-
                     //Input and loop.
                     firstPass += "{I} ";
                     firstPass += $"-plays {(apngPreset.Looped ? apngPreset.RepeatForever ? 0 : apngPreset.RepeatCount : -1)} ";
@@ -1494,7 +1498,18 @@ internal class EncodingManager
                         firstPass += $"-r {(apngPreset.Framerate == Framerates.Custom ? apngPreset.CustomFramerate.ToString(CultureInfo.InvariantCulture) : apngPreset.Framerate.GetLowerDescription())} ";
 
                     //Format and output.
-                    firstPass += "-f apng {O}";
+                    firstPass += "-f apng ";
+
+                    //Vsync
+                    if (apngPreset.Vsync != Vsyncs.Off)
+                    {
+                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                            firstPass += "-fps_mode " + apngPreset.Vsync.GetLowerDescription();
+                        else
+                            firstPass += "-vsync " + apngPreset.Vsync.GetLowerDescription();
+                    }
+                    
+                    firstPass += " {O}";
                 }
 
                 break;
@@ -1540,7 +1555,18 @@ internal class EncodingManager
                         firstPass += $"-r {(webpPreset.Framerate == Framerates.Custom ? webpPreset.CustomFramerate.ToString(CultureInfo.InvariantCulture) : webpPreset.Framerate.GetLowerDescription())} ";
 
                     //Format and output.
-                    firstPass += "-f webp {O}";
+                    firstPass += "-f webp ";
+
+                    //Vsync
+                    if (webpPreset.Vsync != Vsyncs.Off)
+                    {
+                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                            firstPass += "-fps_mode " + webpPreset.Vsync.GetLowerDescription();
+                        else
+                            firstPass += "-vsync " + webpPreset.Vsync.GetLowerDescription();
+                    }
+
+                    firstPass += " {O}";
                 }
 
                 break;
@@ -1571,10 +1597,6 @@ internal class EncodingManager
                 }
                 else
                 {
-                    //Vsync
-                    if (videoPreset.Vsync != Vsyncs.Off)
-                        firstPass += $"-vsync {videoPreset.Vsync.ToString().ToLower()} ";
-
                     //Hardware acceleration.
                     if (videoPreset.HardwareAcceleration != HardwareAccelerationModes.Off)
                         firstPass += "-hwaccel auto ";
@@ -1649,7 +1671,17 @@ internal class EncodingManager
 
                     //Format and output.
                     firstPass += $"-f {preset.Type.ToString().ToLower().Replace("mkv", "matroska")} ";
-                    firstPass += "{O}";
+
+                    //Vsync
+                    if (videoPreset.Vsync != Vsyncs.Off)
+                    {
+                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                            firstPass += "-fps_mode " + videoPreset.Vsync.GetLowerDescription();
+                        else
+                            firstPass += "-vsync " + videoPreset.Vsync.GetLowerDescription();
+                    }
+
+                    firstPass += " {O}";
 
                     //Second pass, using a similar command with some adjustments.
                     if (videoPreset.Pass > 1)

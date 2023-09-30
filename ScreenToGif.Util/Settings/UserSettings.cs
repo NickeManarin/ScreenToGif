@@ -1544,6 +1544,12 @@ public class UserSettings : INotifyPropertyChanged
         set => SetValue(value);
     }
 
+    public SupportedFFmpegVersions FfmpegVersion
+    {
+        get => (SupportedFFmpegVersions)GetValue();
+        set => SetValue(value);
+    }
+
     public string GifskiLocation
     {
         get => (string)GetValue();

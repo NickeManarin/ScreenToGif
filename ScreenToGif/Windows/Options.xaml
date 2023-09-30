@@ -1564,8 +1564,16 @@
                                               ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseFfmpeg}"/>
                         </Grid>
 
-                        <n:LabelSeparator Grid.Row="4" Text="{DynamicResource S.Options.Extras.GifskiLocation}"/>
-                        <Grid Grid.Row="5">
+                        <n:LabelSeparator Grid.Row="4" Text="{DynamicResource S.Options.Extras.FfmpegVersion}"/>
+                        <ComboBox Grid.Row="5" Margin="10,3,0,3" MinWidth="120" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                  SelectedIndex="{Binding Path=FfmpegVersion, Converter={StaticResource EnumToInt}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="v6"/>
+                            <ComboBoxItem Content="v5"/>
+                            <ComboBoxItem Content="v4"/>
+                        </ComboBox>
+
+                        <n:LabelSeparator Grid.Row="6" Text="{DynamicResource S.Options.Extras.GifskiLocation}"/>
+                        <Grid Grid.Row="7">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="30"/>

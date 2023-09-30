@@ -581,6 +581,7 @@
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.File">FFmpeg executable</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">The path of FFMpeg executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegVersion">FFmpeg Version</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation">Gifski location</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Select the location of the Gifski library</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski library</s:String>
