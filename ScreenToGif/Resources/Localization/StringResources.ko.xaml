@@ -1151,6 +1151,7 @@
     <s:String x:Key="S.Caption.Weight">굵기:</s:String>
     <s:String x:Key="S.Caption.Size">크기:</s:String>
     <s:String x:Key="S.Caption.Color">색상:</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">배경색:</s:String>
     <s:String x:Key="S.Caption.Outline">외곽선</s:String>
     <s:String x:Key="S.Caption.Thickness">두께:</s:String>
     <s:String x:Key="S.Caption.Layout">위치 설정</s:String>

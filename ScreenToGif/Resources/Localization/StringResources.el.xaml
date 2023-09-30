@@ -1165,6 +1165,7 @@
     <s:String x:Key="S.Caption.Weight">Βάρος γραμματοσειράς:</s:String>
     <s:String x:Key="S.Caption.Size">Μέγεθος:</s:String>
     <s:String x:Key="S.Caption.Color">Χρώμα</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">Χρώμα του φόντου:</s:String>
     <s:String x:Key="S.Caption.Outline">Περίγραμμα</s:String>
     <s:String x:Key="S.Caption.Thickness">Πάχος:</s:String>
     <s:String x:Key="S.Caption.Layout">Διάταξη</s:String>

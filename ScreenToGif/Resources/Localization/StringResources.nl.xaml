@@ -1325,6 +1325,7 @@
     <s:String x:Key="S.Caption.Weight">Gewicht:</s:String>
     <s:String x:Key="S.Caption.Size">Grootte:</s:String>
     <s:String x:Key="S.Caption.Color">Kleur:</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">Achtergrond kleur:</s:String>
     <s:String x:Key="S.Caption.Outline">Contour</s:String>
     <s:String x:Key="S.Caption.Thickness">Dikte:</s:String>
     <s:String x:Key="S.Caption.Layout">Opmaak</s:String>

@@ -1325,6 +1325,7 @@
     <s:String x:Key="S.Caption.Weight">Начертание:</s:String>
     <s:String x:Key="S.Caption.Size">Размер:</s:String>
     <s:String x:Key="S.Caption.Color">Цвет:</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">Фоновый цвет:</s:String>
     <s:String x:Key="S.Caption.Outline">Обводка</s:String>
     <s:String x:Key="S.Caption.Thickness">Толщина:</s:String>
     <s:String x:Key="S.Caption.Layout">Макет</s:String>
