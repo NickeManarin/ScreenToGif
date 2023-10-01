@@ -1681,7 +1681,7 @@ public partial class Options : Window, INotification
             {
                 #region FFmpeg
 
-                if (Util.Other.IsFfmpegPresent(true, true))
+                if (Util.Other.IsFfmpegPresent(true, false))
                 {
                     var info = new FileInfo(Util.Other.AdjustPath(UserSettings.All.FfmpegLocation));
                     info.Refresh();
@@ -1702,7 +1702,7 @@ public partial class Options : Window, INotification
             {
                 #region Gifski
 
-                if (Util.Other.IsGifskiPresent(true, true))
+                if (Util.Other.IsGifskiPresent(true, false))
                 {
                     var info = new FileInfo(Util.Other.AdjustPath(UserSettings.All.GifskiLocation));
                     info.Refresh();
