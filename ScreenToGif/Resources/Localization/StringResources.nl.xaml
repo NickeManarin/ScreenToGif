@@ -581,6 +581,7 @@
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">Locatie van FFmpeg selecteren</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.File">FFmpeg uitvoerbaar bestand</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">Het pad van FFmpeg bevat een of meer ongeldige tekens. Selecteer de juiste locatie van het bestand.</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegVersion">FFmpeg-versie</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation">Locatie Gifski</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Locatie van Gifski selecteren</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski-bibliotheek</s:String>
