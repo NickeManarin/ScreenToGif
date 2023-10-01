@@ -1093,6 +1093,7 @@
     <s:String x:Key="S.Caption.Weight">Tloušťka:</s:String>
     <s:String x:Key="S.Caption.Size">Velikost:</s:String>
     <s:String x:Key="S.Caption.Color">Barva:</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">Barva pozadí:</s:String>
     <s:String x:Key="S.Caption.Outline">Obrys</s:String>
     <s:String x:Key="S.Caption.Thickness">Tloušťka:</s:String>
     <s:String x:Key="S.Caption.Layout">Uspořádání</s:String>

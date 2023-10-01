@@ -1306,6 +1306,7 @@
     <s:String x:Key="S.Caption.Weight">太さ:</s:String>
     <s:String x:Key="S.Caption.Size">サイズ:</s:String>
     <s:String x:Key="S.Caption.Color">色:</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">背景色:</s:String>
     <s:String x:Key="S.Caption.Outline">アウトライン</s:String>
     <s:String x:Key="S.Caption.Thickness">太さ(厚さ):</s:String>
     <s:String x:Key="S.Caption.Layout">レイアウト</s:String>

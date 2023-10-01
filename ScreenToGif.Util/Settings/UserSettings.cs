@@ -1544,6 +1544,12 @@ public class UserSettings : INotifyPropertyChanged
         set => SetValue(value);
     }
 
+    public SupportedFFmpegVersions FfmpegVersion
+    {
+        get => (SupportedFFmpegVersions)GetValue();
+        set => SetValue(value);
+    }
+
     public string GifskiLocation
     {
         get => (string)GetValue();
@@ -2034,6 +2040,12 @@ public class UserSettings : INotifyPropertyChanged
     }
 
     public Color FreeTextFontColor
+    {
+        get => (Color)GetValue();
+        set => SetValue(value);
+    }
+
+    public Color FreeTextBackgroundColor
     {
         get => (Color)GetValue();
         set => SetValue(value);

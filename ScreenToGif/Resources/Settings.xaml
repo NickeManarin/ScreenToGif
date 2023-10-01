@@ -193,6 +193,7 @@
 
     <!--Options • Extras-->
     <!--<s:String x:Key="FfmpegLocation"></s:String>-->
+    <e:SupportedFFmpegVersions x:Key="FfmpegVersion">Version4</e:SupportedFFmpegVersions>
     <!--<s:String x:Key="GifskiLocation"></s:String>-->
     <!--<s:String x:Key="SharpDxLocationFolder"></s:String>-->
     
@@ -291,6 +292,7 @@
     <FontWeight x:Key="FreeTextFontWeight">Normal</FontWeight>
     <s:Double x:Key="FreeTextFontSize">16.0</s:Double>
     <Color x:Key="FreeTextFontColor">#FF000000</Color>
+    <Color x:Key="FreeTextBackgroundColor">#00000000</Color>
     <TextAlignment x:Key="FreeTextTextAlignment">Left</TextAlignment>
     <s:String x:Key="FreeTextTextDecoration">None</s:String>
     <s:Boolean x:Key="IsFreeTextShadowGroupExpanded">True</s:Boolean>

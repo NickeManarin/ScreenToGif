@@ -581,6 +581,7 @@
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">Selecione a pasta de localização do executável do FFmpeg.</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.File">Executável do FFmpeg</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">O caminho do executável FFMpeg contém um ou mais caracteres inválidos. Por favor, selecione um caminho válido para o executável.</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegVersion">Versão do FFmpeg</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation">Localização do Gifski</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Selecione a localização da biblioteca Gifski</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Biblioteca Gifski</s:String>
@@ -1325,6 +1326,7 @@
     <s:String x:Key="S.Caption.Weight">Peso:</s:String>
     <s:String x:Key="S.Caption.Size">Tamanho:</s:String>
     <s:String x:Key="S.Caption.Color">Cor:</s:String>
+    <s:String x:Key="S.Caption.BackgroundColor">Cor de fundo:</s:String>
     <s:String x:Key="S.Caption.Outline">Borda</s:String>
     <s:String x:Key="S.Caption.Thickness">Espessura:</s:String>
     <s:String x:Key="S.Caption.Layout">Posicionamento</s:String>
