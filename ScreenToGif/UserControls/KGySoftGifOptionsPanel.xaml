@@ -70,9 +70,9 @@
                     <!--Bit Level-->
                     <c:ExtendedCheckBox Grid.Row="5" Grid.Column="0" Margin="3,8,5,8" Text="{DynamicResource S.SaveAs.KGySoft.Quantizer.CustomBitLevel}"
                                         ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info}" IsChecked="{Binding IsCustomBitLevel}"
-                                        Visibility="{Binding ElementName=QuantizersComboBox, Path=SelectedItem.(vm:QuantizerDescriptor.HasBitLevel), Converter={StaticResource Bool2Visibility}}"/>
+                                        Visibility="{Binding ElementName=QuantizersComboBox, Path=SelectedItem.(vm:QuantizerDescriptor.HasBitLevel), Converter={StaticResource Bool2Visibility}, FallbackValue={x:Static Visibility.Collapsed}}"/>
                     <Slider Grid.Row="5" Grid.Column="1" Margin="0,3" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft"
-                            Minimum="1" Maximum="8" TickFrequency="1" Value="{Binding BitLevel}" SmallChange="1" LargeChange="32"
+                            Minimum="1" Maximum="8" TickFrequency="1" Value="{Binding BitLevel, FallbackValue=0}" SmallChange="1" LargeChange="32"
                             ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.BitLevel.Info}">
                         <Slider.Visibility>
                             <MultiBinding Converter="{StaticResource BoolAndToVisibility}">

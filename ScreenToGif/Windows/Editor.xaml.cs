@@ -333,7 +333,8 @@ namespace ScreenToGif.Windows
 
             ZoomBoxControl.RefreshImage();
 
-            Cancel_Executed(sender, null);
+            if (e.OriginalSource is not Image)
+                Cancel_Executed(sender, null);
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
