@@ -581,6 +581,7 @@
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">选择 FFmpeg 可执行文件的位置</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.File">FFmpeg 可执行文件</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">FFMpeg 可执行文件的路径中包含一个或多个无效字符。请为该可执行文件选择一个有效位置。</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegVersion">FFmpeg 版本</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation">Gifski 位置</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">选择 Gifski 可执行文件的位置</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski 库</s:String>
