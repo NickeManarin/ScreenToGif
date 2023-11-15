@@ -985,7 +985,8 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
                 Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate));
 
             //Download update to be installed when the app closes.
-            if (UserSettings.All.InstallUpdates && Global.UpdateAvailable.HasDownloadLink)
+            if (UserSettings.All.InstallUpdates && Global.UpdateAvailable.HasDownloadLink
+                && (UserSettings.All.DownloadWithMeteredNetwork || !Util.Other.IsMeteredNetwork()))
                 await DownloadUpdate();
 
             return true;
