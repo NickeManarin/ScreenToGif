@@ -14,6 +14,7 @@ using ScreenToGif.Model;
 using ScreenToGif.Native.External;
 using ScreenToGif.Native.Structs;
 using ScreenToGif.Util.Settings;
+using Windows.Networking.Connectivity;
 
 namespace ScreenToGif.Util;
 
@@ -229,6 +230,27 @@ public static class Other
             if (p.CanWrite)
                 p.SetValue(dest, sourceProp.GetValue(source, null), null);
         }
+    }
+
+    public static bool IsMeteredNetwork()
+    {
+        ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
+
+        if (internetConnectionProfile != null)
+        {
+            NetworkCostType networkCostType = internetConnectionProfile.GetConnectionCost().NetworkCostType;
+
+            if (networkCostType == NetworkCostType.Unrestricted)
+            {
+                return false;
+            }
+            else if (networkCostType == NetworkCostType.Fixed || networkCostType == NetworkCostType.Variable)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     #region List
