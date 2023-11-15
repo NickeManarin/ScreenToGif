@@ -392,6 +392,8 @@
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.UpdateOnClose}" Margin="30,3,5,3" IsChecked="{Binding Path=InstallUpdates, Mode=TwoWay}"/>
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.PromptToInstall}" Margin="45,3,5,3" IsChecked="{Binding Path=PromptToInstall, Mode=TwoWay}"
                                                         Visibility="{Binding InstallUpdates, Converter={StaticResource Bool2Visibility}}"/>
+                                    <n:ExtendedCheckBox x:Name="DownloadWithMeteredNetworkCheckBox" Text="{DynamicResource S.Options.App.General.DownloadWithMeteredNetwork}"
+                                                        Info="{DynamicResource S.Options.App.General.DownloadWithMeteredNetwork.Info}" Margin="30,3,5,3" IsChecked="{Binding Path=DownloadWithMeteredNetwork, Mode=TwoWay}"/>
                                 </StackPanel>
                             </StackPanel>
                         </Expander>
@@ -507,7 +509,7 @@
                                     <n:IntegerUpDown Minimum="10" Maximum="25000" Value="{Binding Path=PlaybackDelayHour, Mode=TwoWay}" MinWidth="80" Visibility="{Binding ElementName=PerHourRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Playback.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
-                                
+
                                 <WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Margin="0,5,0,0"
                                            Visibility="{Binding ElementName=InteractionRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}">
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Trigger}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0" VerticalAlignment="Center"/>
@@ -523,7 +525,7 @@
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Trigger.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center"
                                                TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
-                                
+
                                 <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Options.Recorder.FixedFramerate}" 
                                                     Info="{DynamicResource S.Options.Recorder.FixedFramerate.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"
                                                     Visibility="{Binding ElementName=PerSecondRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}"/>
@@ -1158,7 +1160,7 @@
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Finland}" Tag="fi" Content="Finnish / Suomi" Author="VeikkoM"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=fi, Converter={StaticResource TagToSelection}}"/>
-                            
+
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.France}" Tag="fr" Content="French / Français" Author="Largo, Sébastien 'Tr4ncer' Villemain, Adrick"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
 

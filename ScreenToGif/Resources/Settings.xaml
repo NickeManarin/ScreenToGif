@@ -57,6 +57,7 @@
     <s:Boolean x:Key="DisableHardwareAcceleration">False</s:Boolean>
     <s:Boolean x:Key="CheckForTranslationUpdates">True</s:Boolean>
     <s:Boolean x:Key="CheckForUpdates">True</s:Boolean>
+    <s:Boolean x:Key="DownloadWithMeteredNetwork">True</s:Boolean>
     <s:Boolean x:Key="PortableUpdate">False</s:Boolean>
     <s:Boolean x:Key="ForceUpdateAsAdmin">False</s:Boolean>
     <s:Boolean x:Key="InstallUpdates">True</s:Boolean>

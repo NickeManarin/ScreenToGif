@@ -261,6 +261,8 @@
     <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(Requires a manual installation by unzipping and replacing the executable)</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Force the update to run with elevated privileges.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Prompt me before the installation starts.</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork">Download updates with metered network.</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork.Info">(Set your connection type in system settings)</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">Interface</s:String>

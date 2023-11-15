@@ -261,6 +261,8 @@
     <s:String x:Key="S.Options.App.General.PortableUpdate.Info">（需要通过解压缩和替换可执行文件来进行手动安装）</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">强制更新时提升特权</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">在安装开始之前提示我</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork">使用按流量计费的连接下载更新</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork.Info">（在系统设置中设置您的连接类型）</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">界面</s:String>
