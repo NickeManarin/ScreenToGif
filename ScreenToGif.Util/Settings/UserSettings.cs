@@ -759,6 +759,12 @@ public class UserSettings : INotifyPropertyChanged
         set => SetValue(value);
     }
 
+    public bool DownloadWithMeteredNetwork
+    {
+        get => (bool)GetValue();
+        set => SetValue(value);
+    }
+
     public bool PortableUpdate
     {
         get => (bool)GetValue();
