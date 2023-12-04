@@ -56,7 +56,7 @@ using ScreenToGif.ViewModel.ExportPresets.Other;
 
 namespace ScreenToGif.Windows
 {
-    public partial class Editor : Window, INotification, IEncoding
+    public partial class Editor : INotification, IEncoding
     {
         #region Properties
 

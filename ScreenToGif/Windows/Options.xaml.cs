@@ -33,7 +33,7 @@ using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace ScreenToGif.Windows;
 
-public partial class Options : Window, INotification
+public partial class Options : INotification
 {
     #region Constants and variables
 
