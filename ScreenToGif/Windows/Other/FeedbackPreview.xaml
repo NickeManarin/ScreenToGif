@@ -1,9 +1,9 @@
-﻿<Window x:Class="ScreenToGif.Windows.Other.FeedbackPreview"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:n="clr-namespace:ScreenToGif.Controls"
-        Title="Feedback Preview" Height="600" Width="700" MinHeight="450" MinWidth="700" WindowStartupLocation="CenterScreen"
-        Background="{DynamicResource Panel.Background}" Loaded="FeedbackPreview_Loaded">
+<n:ExWindow x:Class="ScreenToGif.Windows.Other.FeedbackPreview"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:n="clr-namespace:ScreenToGif.Controls"
+            Title="Feedback Preview" Height="600" Width="700" MinHeight="450" MinWidth="700" WindowStartupLocation="CenterScreen"
+            Icon="/ScreenToGif;component/Resources/Logo.ico" Loaded="FeedbackPreview_Loaded">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -25,4 +25,4 @@
                               ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="OkButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>
-</Window>
+</n:ExWindow>

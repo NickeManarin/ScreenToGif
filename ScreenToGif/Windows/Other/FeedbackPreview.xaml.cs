@@ -4,7 +4,7 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class FeedbackPreview : Window
+public partial class FeedbackPreview
 {
     public string Html { get; set; }
 

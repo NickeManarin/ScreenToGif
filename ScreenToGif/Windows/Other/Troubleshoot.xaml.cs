@@ -13,7 +13,7 @@ using ScreenToGif.Util.Settings;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class Troubleshoot : Window
+public partial class Troubleshoot
 {
     private double _minLeft = SystemParameters.VirtualScreenLeft;
     private double _minTop = SystemParameters.VirtualScreenTop;

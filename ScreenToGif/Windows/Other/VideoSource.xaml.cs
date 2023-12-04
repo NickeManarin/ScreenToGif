@@ -17,7 +17,7 @@ using ScreenToGif.Util.Settings;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class VideoSource : Window
+public partial class VideoSource
 {
     #region Variables
 

@@ -7,7 +7,7 @@ using ScreenToGif.ViewModel.UploadPresets.History;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class UploadHistory : Window
+public partial class UploadHistory
 {
     public UploadPreset CurrentPreset { get; set; }
 
@@ -16,8 +16,7 @@ public partial class UploadHistory : Window
     {
         InitializeComponent();
     }
-
-
+    
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         DataGrid.ItemsSource = CurrentPreset?.History;
@@ -30,7 +29,7 @@ public partial class UploadHistory : Window
     {
         if (e.Key == Key.Delete)
         {
-            if (!(DataGrid.SelectedItem is History selected))
+            if (DataGrid.SelectedItem is not History selected)
                 return;
 
             Delete(selected);

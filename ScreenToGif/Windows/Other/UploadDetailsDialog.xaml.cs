@@ -7,7 +7,7 @@ using ScreenToGif.ViewModel.UploadPresets.Gfycat;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class UploadDetailsDialog : Window
+public partial class UploadDetailsDialog
 {
     public UploadDetailsDialog()
     {

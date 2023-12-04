@@ -7,7 +7,7 @@ using ScreenToGif.ViewModel.UploadPresets.Imgur;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class PickAlbumDialog : Window
+public partial class PickAlbumDialog
 {
     private List<ImgurAlbum> AlbumList { get; set; }
 

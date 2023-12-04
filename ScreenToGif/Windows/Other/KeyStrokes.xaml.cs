@@ -8,7 +8,7 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class KeyStrokes : Window
+public partial class KeyStrokes
 {
     public ObservableCollection<FrameInfo> InternalList { get; set; }
 

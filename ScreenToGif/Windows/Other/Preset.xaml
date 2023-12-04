@@ -1,15 +1,15 @@
-<Window x:Class="ScreenToGif.Windows.Other.Preset"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:i="clr-namespace:ScreenToGif.Controls.Items"
-        xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
-        Title="{DynamicResource S.Preset.Title}" Width="400" Height="390" MinWidth="300" MinHeight="390" SizeToContent="Height"
-        WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
+<n:ExWindow x:Class="ScreenToGif.Windows.Other.Preset"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:n="clr-namespace:ScreenToGif.Controls"
+            xmlns:i="clr-namespace:ScreenToGif.Controls.Items"
+            xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
+            Title="{DynamicResource S.Preset.Title}" Width="400" Height="390" MinWidth="300" MinHeight="390" SizeToContent="Height"
+            WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Icon="/ScreenToGif;component/Resources/Logo.ico" Loaded="Window_Loaded">
 
-    <Window.CommandBindings>
+    <n:ExWindow.CommandBindings>
         <CommandBinding Command="{StaticResource Command.Ok}" CanExecute="Ok_CanExecute" Executed="Ok_Executed"/>
-    </Window.CommandBindings>
+    </n:ExWindow.CommandBindings>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -114,4 +114,4 @@
                               ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>
-</Window>
+</n:ExWindow>

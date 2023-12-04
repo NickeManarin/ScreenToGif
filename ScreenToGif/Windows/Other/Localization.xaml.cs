@@ -19,7 +19,7 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class Localization : Window
+public partial class Localization
 {
     private IEnumerable<string> _cultures;
 

@@ -6,8 +6,7 @@
             xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
             xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
             Title="{DynamicResource S.Options.Title}" Height="610" Width="800" MinWidth="680" MinHeight="460" 
-            Background="{DynamicResource Panel.Background}" Icon="/Resources/Logo.ico"
-            ShowCustomCaptionButtons="True" ExtendIntoTitleBar="False"
+             Icon="/Resources/Logo.ico" ShowCustomCaptionButtons="True" ExtendIntoTitleBar="False"
             SizeToContent="Width" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
             Loaded="Window_Loaded" Closing="Window_Closing">
 

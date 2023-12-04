@@ -22,7 +22,7 @@ using ScreenToGif.Util.Settings;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class Feedback : Window
+public partial class Feedback
 {
     private ObservableCollection<AttachmentListBoxItem> _fileList = new();
 

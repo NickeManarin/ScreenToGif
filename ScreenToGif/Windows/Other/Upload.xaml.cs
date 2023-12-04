@@ -12,7 +12,7 @@ using ScreenToGif.ViewModel.UploadPresets.Yandex;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class Upload : Window
+public partial class Upload
 {
     public UploadPreset CurrentPreset { get; set; }
 

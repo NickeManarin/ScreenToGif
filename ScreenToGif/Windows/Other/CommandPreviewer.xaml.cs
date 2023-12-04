@@ -4,7 +4,7 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class CommandPreviewer : Window
+public partial class CommandPreviewer
 {
     public string Parameters { get; set; }
         

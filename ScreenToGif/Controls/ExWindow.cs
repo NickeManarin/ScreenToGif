@@ -31,8 +31,8 @@ public class ExWindow : Window
     private Button _restoreButton;
     private Button _closeButton;
 
-    public static readonly DependencyProperty ExtendIntoTitleBarProperty = DependencyProperty.Register(nameof(ExtendIntoTitleBar), typeof(bool), typeof(ExWindow), new PropertyMetadata(true));
-    public static readonly DependencyProperty ShowCustomCaptionButtonsProperty = DependencyProperty.Register(nameof(ShowCustomCaptionButtons), typeof(bool), typeof(ExWindow), new PropertyMetadata(false, ShowCustomCaptionButtons_PropertyChanged));
+    public static readonly DependencyProperty ExtendIntoTitleBarProperty = DependencyProperty.Register(nameof(ExtendIntoTitleBar), typeof(bool), typeof(ExWindow), new PropertyMetadata(false));
+    public static readonly DependencyProperty ShowCustomCaptionButtonsProperty = DependencyProperty.Register(nameof(ShowCustomCaptionButtons), typeof(bool), typeof(ExWindow), new PropertyMetadata(true, ShowCustomCaptionButtons_PropertyChanged));
     public static readonly DependencyPropertyKey WillRenderCustomCaptionButtonsProperty = DependencyProperty.RegisterReadOnly(nameof(WillRenderCustomCaptionButtons), typeof(bool), typeof(ExWindow), new PropertyMetadata(false));
     public static readonly DependencyProperty ShowMinimizeButtonProperty = DependencyProperty.Register(nameof(ShowMinimizeButton), typeof(bool), typeof(ExWindow), new PropertyMetadata(true, ShowMinimizeButton_PropertyChanged));
     public static readonly DependencyProperty ShowMaximizeButtonProperty = DependencyProperty.Register(nameof(ShowMaximizeButton), typeof(bool), typeof(ExWindow), new PropertyMetadata(true, ShowMaximizeButton_PropertyChanged));
@@ -81,7 +81,7 @@ public class ExWindow : Window
             CaptionHeight = 32,
             ResizeBorderThickness = SystemParameters.WindowResizeBorderThickness,
             UseAeroCaptionButtons = !WillRenderCustomCaptionButtons,
-            GlassFrameThickness = new Thickness(0),
+            GlassFrameThickness = new Thickness(-1),
             NonClientFrameEdges = !WillRenderCustomCaptionButtons || ResizeMode == ResizeMode.NoResize ? NonClientFrameEdges.Right | NonClientFrameEdges.Left : NonClientFrameEdges.None
         };
 
@@ -127,7 +127,7 @@ public class ExWindow : Window
                 try
                 {
                     //Works around a Logitech mouse driver bug, code from https://developercommunity.visualstudio.com/content/problem/167357/overflow-exception-in-windowchrome.html
-                    var _ = (int)lparam; //.ToInt32();
+                    var _ = lparam.ToInt32();
                 }
                 catch (OverflowException)
                 {
@@ -135,10 +135,10 @@ public class ExWindow : Window
                 }
 
                 if (!ShowCustomCaptionButtons || !ExtendIntoTitleBar || !OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000) || !ShowMaximizeButton || ResizeMode is ResizeMode.NoResize or ResizeMode.CanMinimize)
-                    return (nint)0;//.Zero;
+                    return nint.Zero;
 
-                var x = ((int)lparam)/*.ToInt32()*/ & 0xffff;
-                var y = ((int)lparam)/*.ToInt32()*/ >> 16;
+                var x = lparam.ToInt32() & 0xffff;
+                var y = lparam.ToInt32() >> 16;
 
                 var button = WindowState == WindowState.Maximized ? _restoreButton : _maximizeButton;
 
@@ -158,11 +158,11 @@ public class ExWindow : Window
             case WindowsMessages.NonClientLeftButtonDown:
             {
                 if (!ShowCustomCaptionButtons || !ExtendIntoTitleBar || !OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000) || !ShowMaximizeButton || ResizeMode is ResizeMode.NoResize or ResizeMode.CanMinimize)
-                    return (nint)0;//.Zero;
+                    return nint.Zero;
 
                 //This is necessary in order to change the background color for the maximize/restore button, since the HitTest is handled above.
-                var x = ((int)lparam)/*.ToInt32()*/ & 0xffff;
-                var y = ((int)lparam)/*.ToInt32()*/ >> 16;
+                var x = lparam.ToInt32() & 0xffff;
+                var y = lparam.ToInt32() >> 16;
 
                 var button = WindowState == WindowState.Maximized ? _restoreButton : _maximizeButton;
 
@@ -182,11 +182,11 @@ public class ExWindow : Window
             case WindowsMessages.NonClientLeftButtonUp:
             {
                 if (!ShowCustomCaptionButtons || !ExtendIntoTitleBar || !OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000) || !ShowMaximizeButton || ResizeMode is ResizeMode.NoResize or ResizeMode.CanMinimize)
-                    return (nint)0;//.Zero;
+                    return nint.Zero;
 
                 //This is necessary in order to change the background color for the maximize/restore button, since the HitTest is handled above.
-                var x = ((int)lparam)/*.ToInt32()*/ & 0xffff;
-                var y = ((int)lparam)/*.ToInt32()*/ >> 16;
+                var x = lparam.ToInt32() & 0xffff;
+                var y = lparam.ToInt32() >> 16;
 
                 var button = WindowState == WindowState.Maximized ? _restoreButton : _maximizeButton;
 
@@ -209,7 +209,7 @@ public class ExWindow : Window
                 var info = (MinMaxInfo)Marshal.PtrToStructure(lparam, typeof(MinMaxInfo))!;
                 var monitor = WindowHelper.NearestMonitorForWindow(hwnd);
 
-                if (monitor != (nint)0)
+                if (monitor != nint.Zero)
                 {
                     var monitorInfo = new MonitorInfoEx();
                     User32.GetMonitorInfo(new HandleRef(this, monitor), monitorInfo);
@@ -236,7 +236,7 @@ public class ExWindow : Window
             //}
         }
 
-        return (nint)0;//.Zero;
+        return nint.Zero;
     }
 
     private static void ShowCustomCaptionButtons_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
