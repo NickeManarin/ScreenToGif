@@ -1711,20 +1711,20 @@
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextWrapping="Wrap"/>
                         </Grid>
 
-                        <n:LabelSeparator Grid.Row="2" Grid.Column="1" Text="Flattr" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                        <n:LabelSeparator Grid.Row="2" Grid.Column="1" Text="Stripe" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
                         <Grid Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="FlattrButton" Text="{DynamicResource S.Options.Donate.Subscribe}" Margin="5" Icon="{StaticResource Vector.Flattr}" 
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="StripeButton" Text="{DynamicResource S.Options.Donate.Donate.Dollar}" Margin="5" Icon="{StaticResource Vector.Flattr}" 
                                               ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
                                               Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                              Click="FlattrButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                              ToolTipService.ToolTip="https://flattr.com/@NickeManarin/domain/screentogif.com" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                              Click="StripeButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                              ToolTipService.ToolTip="https://donate.stripe.com/cN23dfaz9dJW1wc000" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Subscribe.Flattr}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Stripe}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextWrapping="Wrap"/>
                         </Grid>
 

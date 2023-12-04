@@ -598,7 +598,7 @@
     <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Åbner Paypals hjemmeside. Vælg selv valuta.</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe">Abonnér</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Donér månedligt via Patreon.</s:String>
-    <s:String x:Key="S.Options.Donate.Subscribe.Flattr">Donér månedligt via Flattr.</s:String>
+    <s:String x:Key="S.Options.Donate.Stripe">Donér via Stripe.</s:String>
     <s:String x:Key="S.Options.Donate.Gift">Spilgaver</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Steam">Spilgaver via Steam.</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Gog">Spilgaver via GOG.</s:String>

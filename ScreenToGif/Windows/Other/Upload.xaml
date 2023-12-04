@@ -5,7 +5,6 @@
             xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
             xmlns:u="clr-namespace:ScreenToGif.Util"
             xmlns:p="clr-namespace:ScreenToGif.ViewModel.UploadPresets;assembly=ScreenToGif.ViewModel"
-            xmlns:g="clr-namespace:ScreenToGif.ViewModel.UploadPresets.Gfycat;assembly=ScreenToGif.ViewModel"
             xmlns:i="clr-namespace:ScreenToGif.ViewModel.UploadPresets.Imgur;assembly=ScreenToGif.ViewModel"
             xmlns:y="clr-namespace:ScreenToGif.ViewModel.UploadPresets.Yandex;assembly=ScreenToGif.ViewModel"
             Title="{DynamicResource S.Options.Upload.Preset.Title}" Width="400" Height="500" MinWidth="380" MinHeight="300"
@@ -89,7 +88,6 @@
 
                 <p:UploadPreset ImageId="Vector.Info"/>
                 <i:ImgurPreset x:Name="ImgurPresetItem" ImageId="Vector.Imgur"/>
-                <g:GfycatPreset x:Name="GfycatPresetItem"  ImageId="Vector.Gfycat"/>
                 <y:YandexPreset x:Name="YandexPresetItem" ImageId="Vector.YandexDisk"/>
             </ComboBox>
         </Grid>
