@@ -5,7 +5,7 @@
     <Nullable>disable</Nullable>
     <DebugType>embedded</DebugType>
     <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
-    <Version>2.38.1</Version>
+    <Version>2.40.0</Version>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
