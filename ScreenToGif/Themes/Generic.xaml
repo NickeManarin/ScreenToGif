@@ -42,7 +42,7 @@
         <Setter Property="Background" Value="{DynamicResource Panel.Background}"/>
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Weak}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Light}"/>
         <Setter Property="MinHeight" Value="100"/>
         <Setter Property="MinWidth" Value="180"/>
         <Setter Property="Title" Value="ScreenToGif"/>
