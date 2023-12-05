@@ -853,6 +853,9 @@ public partial class VideoSource
             
             await _process.WaitForExitAsync();
 
+            if (_process == null)
+                return;
+
             var error = await _process?.StandardError?.ReadToEndAsync();
 
             if (!string.IsNullOrWhiteSpace(error))

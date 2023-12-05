@@ -1390,6 +1390,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
+            FrameListView.UnselectAll();
             FrameListView.SelectAll();
 
             ShowHint("S.Hint.SelectAll");
