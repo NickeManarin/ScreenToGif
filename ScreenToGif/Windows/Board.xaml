@@ -177,7 +177,7 @@
         </Grid>
 
         <!--Background="{StaticResource Checker.DrawingBrush}"-->
-        <Border Grid.Row="1" BorderThickness="1" BorderBrush="{DynamicResource Element.Border.Weak}">
+        <Border Grid.Row="1" BorderThickness="1" BorderBrush="{DynamicResource Element.Border.Light}">
             <Border x:Name="MainBorder">
                 <!--Background="{StaticResource Background.Lines}"-->
                 <n:InkCanvasExtended x:Name="MainInkCanvas" PreviewMouseDown="MainInkCanvas_OnPreviewMouseDown" PreviewMouseUp="MainInkCanvas_OnPreviewMouseUp">

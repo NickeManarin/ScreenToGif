@@ -67,8 +67,8 @@
             </TaskbarItemInfo.ThumbButtonInfos>
         </TaskbarItemInfo>
     </n:BaseRecorder.TaskbarItemInfo>
-    
-    <Border Background="{DynamicResource Panel.Background}" BorderThickness="1" BorderBrush="{DynamicResource Element.Border.Weak}">
+
+    <Border Background="{DynamicResource Panel.Background}" BorderThickness="1" BorderBrush="{DynamicResource Element.Border.Light}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>

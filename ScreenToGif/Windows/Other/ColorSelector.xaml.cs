@@ -13,7 +13,7 @@ using ScreenToGif.Util.Codification;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class ColorSelector : Window
+public partial class ColorSelector
 {
     #region Properties and variables
 

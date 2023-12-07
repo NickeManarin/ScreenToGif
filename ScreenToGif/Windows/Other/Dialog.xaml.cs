@@ -6,7 +6,7 @@ using ScreenToGif.Domain.Enums;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class Dialog : Window
+public partial class Dialog
 {
     public Dialog()
     {

@@ -17,7 +17,7 @@ using ScreenToGif.Util.Settings;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class VideoSource : Window
+public partial class VideoSource
 {
     #region Variables
 
@@ -852,6 +852,9 @@ public partial class VideoSource : Window
             _process.BeginOutputReadLine();
             
             await _process.WaitForExitAsync();
+
+            if (_process == null)
+                return;
 
             var error = await _process?.StandardError?.ReadToEndAsync();
 

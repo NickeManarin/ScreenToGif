@@ -1,25 +1,25 @@
-<Window x:Class="ScreenToGif.Windows.Other.Upload"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
-        xmlns:u="clr-namespace:ScreenToGif.Util"
-        xmlns:p="clr-namespace:ScreenToGif.ViewModel.UploadPresets;assembly=ScreenToGif.ViewModel"
-        xmlns:g="clr-namespace:ScreenToGif.ViewModel.UploadPresets.Gfycat;assembly=ScreenToGif.ViewModel"
-        xmlns:i="clr-namespace:ScreenToGif.ViewModel.UploadPresets.Imgur;assembly=ScreenToGif.ViewModel"
-        xmlns:y="clr-namespace:ScreenToGif.ViewModel.UploadPresets.Yandex;assembly=ScreenToGif.ViewModel"
-        Title="{DynamicResource S.Options.Upload.Preset.Title}" Width="400" Height="500" MinWidth="380" MinHeight="300" 
-        WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
+<n:ExWindow x:Class="ScreenToGif.Windows.Other.Upload"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:n="clr-namespace:ScreenToGif.Controls"
+            xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
+            xmlns:u="clr-namespace:ScreenToGif.Util"
+            xmlns:p="clr-namespace:ScreenToGif.ViewModel.UploadPresets;assembly=ScreenToGif.ViewModel"
+            xmlns:i="clr-namespace:ScreenToGif.ViewModel.UploadPresets.Imgur;assembly=ScreenToGif.ViewModel"
+            xmlns:y="clr-namespace:ScreenToGif.ViewModel.UploadPresets.Yandex;assembly=ScreenToGif.ViewModel"
+            Title="{DynamicResource S.Options.Upload.Preset.Title}" Width="400" Height="500" MinWidth="380" MinHeight="300"
+            WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Icon="/ScreenToGif;component/Resources/Logo.ico"
+            Loaded="Window_Loaded">
 
-    <Window.CommandBindings>
+    <n:ExWindow.CommandBindings>
         <CommandBinding Command="{StaticResource Command.Ok}" CanExecute="Ok_CanExecute" Executed="Ok_Executed"/>
-    </Window.CommandBindings>
-    
-    <Window.Resources>
+    </n:ExWindow.CommandBindings>
+
+    <n:ExWindow.Resources>
         <c:StringToStaticResource x:Key="StringToStaticResource"/>
         <c:NullToVisibility x:Key="NullToVisibility"/>
         <u:ComboBoxItemTemplateSelector x:Key="ItemSelector"/>
-    </Window.Resources>
+    </n:ExWindow.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
@@ -88,7 +88,6 @@
 
                 <p:UploadPreset ImageId="Vector.Info"/>
                 <i:ImgurPreset x:Name="ImgurPresetItem" ImageId="Vector.Imgur"/>
-                <g:GfycatPreset x:Name="GfycatPresetItem"  ImageId="Vector.Gfycat"/>
                 <y:YandexPreset x:Name="YandexPresetItem" ImageId="Vector.YandexDisk"/>
             </ComboBox>
         </Grid>
@@ -122,4 +121,4 @@
                               Padding="4,0" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>
-</Window>
+</n:ExWindow>

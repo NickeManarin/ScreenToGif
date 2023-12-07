@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
@@ -10,6 +11,22 @@ namespace ScreenToGif.Util;
 public static class VisualHelper
 {
     public static readonly object LockObject = new();
+
+    public static IntPtr GetHandle(this Window window) => new WindowInteropHelper(window).EnsureHandle();
+
+    public static HwndSource GetHwndSource(this Window window) => HwndSource.FromHwnd(window.GetHandle());
+
+    /// <summary>
+    /// Gets the scale of the current window.
+    /// </summary>
+    /// <param name="window">The Window.</param>
+    /// <returns>The scale of the given Window.</returns>
+    public static double GetVisualScale(this Visual window)
+    {
+        var source = PresentationSource.FromVisual(window);
+
+        return source?.CompositionTarget != null ? source.CompositionTarget.TransformToDevice.M11 : 1d;
+    }
 
     public static TP GetParent<TP>(DependencyObject child, int i) where TP : DependencyObject
     {
@@ -31,6 +48,18 @@ public static class VisualHelper
             child = VisualTreeHelper.GetParent(child);
 
         return child as T;
+    }
+
+    /// <summary>
+    /// Checks whether the given coordinates are within given element bounds.
+    /// </summary>
+    /// <returns>True if the coordinates are within element bounds.</returns>
+    public static bool HitTestElement(this FrameworkElement element, int x, int y)
+    {
+        var scale = element.GetVisualScale();
+        var rect = new Rect(element.PointToScreen(new Point()), new Size(element.Width * scale, element.Height * scale));
+
+        return rect.Contains(x, y);
     }
 
     public static TP GetParent<TP>(DependencyObject child, Type stopWhen) where TP : Visual

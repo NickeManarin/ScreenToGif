@@ -2,7 +2,7 @@ using System.Windows;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class TextDialog : Window
+public partial class TextDialog
 {
     public string Command { get; set; }
     public string Output { get; set; }

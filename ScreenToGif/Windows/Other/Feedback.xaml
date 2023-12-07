@@ -1,11 +1,11 @@
-<Window x:Class="ScreenToGif.Windows.Other.Feedback"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
-        Title="{DynamicResource S.Feedback.Feedback}" MinHeight="500" MinWidth="700" Height="500" Width="750"
-        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" 
-        Background="{DynamicResource Panel.Background}" Loaded="Feedback_Loaded">
+<n:ExWindow x:Class="ScreenToGif.Windows.Other.Feedback"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:n="clr-namespace:ScreenToGif.Controls"
+            xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
+            Title="{DynamicResource S.Feedback.Feedback}" MinHeight="500" MinWidth="700" Height="500" Width="750"
+            Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" 
+            Loaded="Feedback_Loaded">
 
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
@@ -183,4 +183,4 @@
                               ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" IsCancel="True" Click="CancelButton_Click"/>
         </Grid>
     </Grid>
-</Window>
+</n:ExWindow>

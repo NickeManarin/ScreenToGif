@@ -12,8 +12,6 @@ public class CloudFactory
         {
             case UploadDestinations.Imgur:
                 return new Imgur();
-            case UploadDestinations.Gfycat:
-                return new Gfycat();
             case UploadDestinations.Yandex:
                 return new YandexDisk();
         }

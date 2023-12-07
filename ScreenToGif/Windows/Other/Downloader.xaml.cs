@@ -9,7 +9,7 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class Downloader : Window
+public partial class Downloader
 {
     #region Properties
 

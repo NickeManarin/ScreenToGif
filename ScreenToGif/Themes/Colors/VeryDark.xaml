@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib">
 
@@ -47,7 +47,6 @@
     <SolidColorBrush x:Key="Element.Border" Color="#FF474747"/>
     <SolidColorBrush x:Key="Element.Border.Medium" Color="#FF142742"/>
     <SolidColorBrush x:Key="Element.Border.Light" Color="#FF393F47"/>
-    <SolidColorBrush x:Key="Element.Border.Weak" Color="#30FFFFFF"/>
     <SolidColorBrush x:Key="Element.Border.Hover" Color="#FF292E32"/>
     <SolidColorBrush x:Key="Element.Border.Pressed" Color="#FF0d3054"/>
     <SolidColorBrush x:Key="Element.Border.Required" Color="#FF00004D"/>

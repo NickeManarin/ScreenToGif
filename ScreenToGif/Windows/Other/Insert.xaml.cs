@@ -18,7 +18,7 @@ using ScreenToGif.Util.Settings;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class Insert : Window
+public partial class Insert
 {
     #region Variables
 

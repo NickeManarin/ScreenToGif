@@ -104,8 +104,6 @@ public class UploadPreset : BindableBase, IUploadPreset
             {
                 case UploadDestinations.Imgur:
                     return "Imgur";
-                case UploadDestinations.Gfycat:
-                    return "Gfycat";
                 case UploadDestinations.Yandex:
                     return "Yandex";
                 case UploadDestinations.Custom:

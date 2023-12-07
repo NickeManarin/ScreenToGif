@@ -17,7 +17,7 @@ public static class Arguments
     /// The path of the files passed as arguments to this executable.
     /// Only files that exists are not ignored.
     /// </summary>
-    public static List<string> FileNames { get; set; } = new List<string>();
+    public static List<string> FileNames { get; set; } = new();
 
     /// <summary>
     /// True if this instance should not try to display anything, besides the download window.

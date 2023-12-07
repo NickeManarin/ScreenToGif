@@ -1,10 +1,11 @@
-<Window x:Class="ScreenToGif.Windows.Other.Startup"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:n="clr-namespace:ScreenToGif.Controls"
-        x:Name="StartupWindow" Title="{DynamicResource S.StartUp.Title}" Height="220" Width="500" Icon="/Resources/Logo.ico" 
-        MinWidth="500" MinHeight="220" DataContext="{StaticResource AppViewModel}" UseLayoutRounding="True" 
-        Background="{DynamicResource Panel.Background}" Initialized="Startup_Initialized" Loaded="Startup_Loaded" Closing="Startup_Closing">
+<n:ExWindow x:Class="ScreenToGif.Windows.Other.Startup"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:n="clr-namespace:ScreenToGif.Controls"
+            x:Name="StartupWindow" Title="{DynamicResource S.StartUp.Title}" Height="220" Width="500"
+            MinWidth="500" MinHeight="220" DataContext="{StaticResource AppViewModel}" UseLayoutRounding="True"
+            Icon="/ScreenToGif;component/Resources/Logo.ico" Initialized="Startup_Initialized"
+            Loaded="Startup_Loaded" Closing="Startup_Closing">
 
     <Window.InputBindings>
         <KeyBinding Command="{Binding OpenRecorder}" CommandParameter="{Binding ElementName=StartupWindow}" Modifiers="Control" Key="N"/>
@@ -76,4 +77,4 @@
                               ToolTip="{DynamicResource S.StartUp.Editor.Tooltip}" ToolTipService.Placement="Bottom"/>
         </Grid>
     </Grid>
-</Window>
+</n:ExWindow>

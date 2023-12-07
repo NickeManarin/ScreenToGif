@@ -7,8 +7,7 @@ public enum UploadDestinations
 {
     NotDefined = 0,
     Imgur,
-    Gfycat,
-    Yandex,
+    Yandex = 3,
     YouTrack,
     Custom
 }

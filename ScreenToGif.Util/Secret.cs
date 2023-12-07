@@ -17,9 +17,5 @@ public static class Secret
 
     public static string ImgurSecret => "";
 
-    public static string GfycatId => "";
-
-    public static string GfycatSecret => "";
-
     public static string YandexId => "";
 }

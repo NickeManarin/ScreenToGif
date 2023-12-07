@@ -1,16 +1,16 @@
-<Window x:Class="ScreenToGif.Windows.Options"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
-        xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
-        xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
-        Title="{DynamicResource S.Options.Title}" Height="610" Width="800" MinWidth="680" MinHeight="460" 
-        Background="{DynamicResource Panel.Background}" Icon="/Resources/Logo.ico" 
-        SizeToContent="Width" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
-        Loaded="Window_Loaded" Closing="Window_Closing">
+<n:ExWindow x:Class="ScreenToGif.Windows.Options"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:n="clr-namespace:ScreenToGif.Controls"
+            xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
+            xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
+            xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
+            Title="{DynamicResource S.Options.Title}" Height="610" Width="800" MinWidth="680" MinHeight="460" 
+             Icon="/Resources/Logo.ico" ShowCustomCaptionButtons="True" ExtendIntoTitleBar="False"
+            SizeToContent="Width" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
+            Loaded="Window_Loaded" Closing="Window_Closing">
 
-    <Window.CommandBindings>
+    <n:ExWindow.CommandBindings>
         <CommandBinding Command="{StaticResource Command.CheckCache}" CanExecute="Cache_CanExecute" Executed="CheckCache_Execute"/>
         <CommandBinding Command="{StaticResource Command.ClearCache}" CanExecute="Cache_CanExecute" Executed="ClearCache_Execute"/>
         <CommandBinding Command="{StaticResource Command.BrowseCache}" CanExecute="BrowseCache_CanExecute" Executed="BrowseCache_Execute"/>
@@ -25,13 +25,13 @@
 
         <CommandBinding Command="{StaticResource Command.BrowseFfmpeg}" CanExecute="BrowseFfmpeg_CanExecute" Executed="BrowseFfmpeg_Execute"/>
         <CommandBinding Command="{StaticResource Command.BrowseGifski}" CanExecute="BrowseGifski_CanExecute" Executed="BrowseGifski_Execute"/>
-    </Window.CommandBindings>
+    </n:ExWindow.CommandBindings>
 
-    <Window.Resources>
+    <n:ExWindow.Resources>
         <c:InvertedVisibility x:Key="InvertedVisibility"/>
         <c:BoolAndToVisibility x:Key="BoolAndToVisibility"/>
         <c:BoolOrToVisibility x:Key="BoolOrToVisibility"/>
-    </Window.Resources>
+    </n:ExWindow.Resources>
 
     <Grid DataContext="{x:Static t:UserSettings.All}">
         <Grid.RowDefinitions>
@@ -1711,20 +1711,20 @@
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextWrapping="Wrap"/>
                         </Grid>
 
-                        <n:LabelSeparator Grid.Row="2" Grid.Column="1" Text="Flattr" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                        <n:LabelSeparator Grid.Row="2" Grid.Column="1" Text="Stripe" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
                         <Grid Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="FlattrButton" Text="{DynamicResource S.Options.Donate.Subscribe}" Margin="5" Icon="{StaticResource Vector.Flattr}" 
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="StripeButton" Text="{DynamicResource S.Options.Donate.Donate.Dollar}" Margin="5" Icon="{StaticResource Vector.Flattr}" 
                                               ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
                                               Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                              Click="FlattrButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                              ToolTipService.ToolTip="https://flattr.com/@NickeManarin/domain/screentogif.com" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                              Click="StripeButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                              ToolTipService.ToolTip="https://donate.stripe.com/cN23dfaz9dJW1wc000" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Subscribe.Flattr}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Stripe}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextWrapping="Wrap"/>
                         </Grid>
 
@@ -2020,4 +2020,4 @@
                               ContentHeight="18" ContentWidth="18" Icon="{StaticResource Vector.Ok}" Click="OkButton_Click"/>
         </Grid>
     </Grid>
-</Window>
+</n:ExWindow>

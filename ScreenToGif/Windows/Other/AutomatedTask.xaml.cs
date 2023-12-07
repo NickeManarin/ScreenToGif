@@ -8,7 +8,7 @@ using ScreenToGif.ViewModel.Tasks;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class AutomatedTask : Window
+public partial class AutomatedTask
 {
     public BaseTaskViewModel CurrentTask { get; set; }
 

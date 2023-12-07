@@ -517,7 +517,6 @@
     <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Ανοίγει τον ιστότοπο Paypal. Πρέπει να επιλέξετε το νόμισμα.</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe">Εγγραφείτε</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Μηνιαία Δωρεά μέσω Patreon.</s:String>
-    <s:String x:Key="S.Options.Donate.Subscribe.Flattr">Μηνιαία Δωρεά μέσω Flattr.</s:String>
     <s:String x:Key="S.Options.Donate.Gift">Δωρίστε παιχνίδια </s:String>
     <s:String x:Key="S.Options.Donate.Gift.Steam">Δωρίστε παιχνίδια μέσω του Steam.</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Gog">Δωρίστε παιχνίδια μέσω του GOG.</s:String>
