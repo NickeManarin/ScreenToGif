@@ -21,7 +21,7 @@ using ScreenToGif.ViewModel.ExportPresets.Video.Webm;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class Preset : Window
+public partial class Preset
 {
     public ExportPreset Current { get; set; }
         

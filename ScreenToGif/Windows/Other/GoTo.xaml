@@ -1,18 +1,19 @@
-﻿<Window x:Class="ScreenToGif.Windows.Other.GoTo"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:n="clr-namespace:ScreenToGif.Controls"
-        Title="{DynamicResource S.GoTo.Title}" SizeToContent="WidthAndHeight" MinHeight="130" MinWidth="300" ResizeMode="CanMinimize"
-        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
+<n:ExWindow x:Class="ScreenToGif.Windows.Other.GoTo"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:n="clr-namespace:ScreenToGif.Controls"
+            Title="{DynamicResource S.GoTo.Title}" MinHeight="180" Height="180" MinWidth="340" Width="340" ResizeMode="CanMinimize"
+            Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded">
 
-    <Window.CommandBindings>
+    <n:ExWindow.CommandBindings>
         <CommandBinding Command="{StaticResource Command.Cancel}" CanExecute="Cancel_CanExecute" Executed="Cancel_Executed"/>
-    </Window.CommandBindings>
+    </n:ExWindow.CommandBindings>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
@@ -21,7 +22,7 @@
         <n:IntegerUpDown Grid.Row="1" x:Name="NumberIntegerUpDown" Margin="5" Padding="3" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Left" 
                          Height="26" Minimum="0" Maximum="100" KeyDown="IntegerUpDown_OnKeyDown"/>
 
-        <Grid Grid.Row="2" Background="{DynamicResource Panel.Background.Level3}" Height="40">
+        <Grid Grid.Row="3" Background="{DynamicResource Panel.Background.Level3}" Height="40">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
@@ -35,4 +36,4 @@
                               ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Command="{StaticResource Command.Cancel}"/>
         </Grid>
     </Grid>
-</Window>
+</n:ExWindow>

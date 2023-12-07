@@ -1,9 +1,9 @@
-﻿<Window x:Class="ScreenToGif.Windows.Other.ErrorDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:n="clr-namespace:ScreenToGif.Controls"
-        Title="Dialog" Height="230" Width="500" MinHeight="230" MinWidth="400" SizeToContent="Height" Topmost="True" WindowStartupLocation="CenterScreen" 
-        Icon="/ScreenToGif;component/Resources/Logo.ico" Background="{DynamicResource Panel.Background}">
+<n:ExWindow x:Class="ScreenToGif.Windows.Other.ErrorDialog"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:n="clr-namespace:ScreenToGif.Controls"
+            Title="Dialog" Height="230" Width="500" MinHeight="230" MinWidth="400" SizeToContent="Height"
+            Topmost="True" WindowStartupLocation="CenterScreen" Icon="/ScreenToGif;component/Resources/Logo.ico">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -57,4 +57,4 @@
                               ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="SendButton_Click"/>
         </Grid>
     </Grid>
-</Window>
+</n:ExWindow>

@@ -14,7 +14,7 @@ using ScreenToGif.ViewModel;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class DownloadDialog : Window
+public partial class DownloadDialog
 {
     #region Properties
 

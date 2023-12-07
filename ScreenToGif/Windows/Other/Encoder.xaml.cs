@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class Encoder : Window, IEncoding
+public partial class Encoder : IEncoding
 {
     #region Variables
 

@@ -6,13 +6,12 @@ using ScreenToGif.Domain.Interfaces;
 using ScreenToGif.UserControls;
 using ScreenToGif.Util;
 using ScreenToGif.ViewModel.UploadPresets;
-using ScreenToGif.ViewModel.UploadPresets.Gfycat;
 using ScreenToGif.ViewModel.UploadPresets.Imgur;
 using ScreenToGif.ViewModel.UploadPresets.Yandex;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class Upload : Window
+public partial class Upload
 {
     public UploadPreset CurrentPreset { get; set; }
 
@@ -46,9 +45,6 @@ public partial class Upload : Window
 
                 if (!ImgurPresetItem.AllowedTypes.Contains(Type.Value))
                     TypeComboBox.Items.Remove(ImgurPresetItem);
-
-                if (!GfycatPresetItem.AllowedTypes.Contains(Type.Value))
-                    TypeComboBox.Items.Remove(GfycatPresetItem);
             }
 
             TypeComboBox.Focus();
@@ -74,9 +70,6 @@ public partial class Upload : Window
                 case UploadDestinations.Imgur:
                     CurrentPreset = new ImgurPreset();
                     break;
-                case UploadDestinations.Gfycat:
-                    CurrentPreset = new GfycatPreset();
-                    break;
                 case UploadDestinations.Yandex:
                     CurrentPreset = new YandexPreset();
                     break;
@@ -87,9 +80,6 @@ public partial class Upload : Window
         {
             case UploadDestinations.Imgur:
                 MainPresenter.Content = new ImgurPanel { DataContext = CurrentPreset };
-                break;
-            case UploadDestinations.Gfycat:
-                MainPresenter.Content = new GfycatPanel { DataContext = CurrentPreset };
                 break;
             case UploadDestinations.Yandex:
                 MainPresenter.Content = new YandexPanel { DataContext = CurrentPreset };

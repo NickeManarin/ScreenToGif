@@ -16,23 +16,23 @@ public static class MonitorHelper
         var info = new MonitorInfoEx(); //TODO: MonitorInfo not getting filled with data.
         var a = User32.GetMonitorInfo(new HandleRef(null, monitorHandle), info);
 
-        var name = new string(info.szDevice).TrimEnd((char)0);
+        var name = new string(info.Device).TrimEnd((char)0);
 
         var monitor = new Monitor
         {
             Handle = monitorHandle,
             Name = name,
             FriendlyName = name,
-            NativeBounds = new Rect(info.rcMonitor.Left, info.rcMonitor.Top,
-                info.rcMonitor.Right - info.rcMonitor.Left,
-                info.rcMonitor.Bottom - info.rcMonitor.Top),
-            Bounds = new Rect(info.rcMonitor.Left, info.rcMonitor.Top,
-                info.rcMonitor.Right - info.rcMonitor.Left,
-                info.rcMonitor.Bottom - info.rcMonitor.Top),
-            WorkingArea = new Rect(info.rcWork.Left, info.rcWork.Top,
-                info.rcWork.Right - info.rcWork.Left,
-                info.rcWork.Bottom - info.rcWork.Top),
-            IsPrimary = (info.dwFlags & Constants.MonitorinfoPrimary) != 0
+            NativeBounds = new Rect(info.Monitor.Left, info.Monitor.Top,
+                info.Monitor.Right - info.Monitor.Left,
+                info.Monitor.Bottom - info.Monitor.Top),
+            Bounds = new Rect(info.Monitor.Left, info.Monitor.Top,
+                info.Monitor.Right - info.Monitor.Left,
+                info.Monitor.Bottom - info.Monitor.Top),
+            WorkingArea = new Rect(info.Work.Left, info.Work.Top,
+                info.Work.Right - info.Work.Left,
+                info.Work.Bottom - info.Work.Top),
+            IsPrimary = (info.Flags & Constants.MonitorinfoPrimary) != 0
         };
 
         #region Extra details

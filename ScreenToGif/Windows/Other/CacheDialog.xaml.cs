@@ -5,7 +5,7 @@ using ScreenToGif.Util.Settings;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class CacheDialog : Window
+public partial class CacheDialog
 {
     #region Properties
 

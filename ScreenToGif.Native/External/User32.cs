@@ -108,7 +108,7 @@ namespace ScreenToGif.Native.External
 
         [DllImport(Constants.User32, CharSet = CharSet.Auto)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool GetMonitorInfo(HandleRef hmonitor, [In, Out] MonitorInfoEx info);
+        public static extern bool GetMonitorInfo(HandleRef hmonitor, [In, Out] MonitorInfoEx info);
 
         [DllImport(Constants.User32, ExactSpelling = true)]
         [ResourceExposure(ResourceScope.None)]
@@ -290,6 +290,12 @@ namespace ScreenToGif.Native.External
 
         [DllImport(Constants.User32, EntryPoint = "GetWindowLongPtr")]
         internal static extern IntPtr GetWindowLongPtr64(IntPtr hWnd, int nIndex);
+
+        [DllImport(Constants.User32)]
+        internal static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport(Constants.User32)]
+        internal static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
         /// <summary>
         /// Retrieves the handle to the ancestor of the specified window. 
@@ -531,5 +537,11 @@ namespace ScreenToGif.Native.External
 
         [DllImport(Constants.User32, SetLastError = true)]
         internal static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        [DllImport(Constants.User32, SetLastError = true)]
+        public static extern bool EnableMenuItem(IntPtr hMenu, SysCommands uIdEnableItem, uint uEnable);
+
+        [DllImport(Constants.User32)]
+        public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
     }
 }

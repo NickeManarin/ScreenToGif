@@ -600,7 +600,6 @@
     <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Öffnet PayPal-Webseite. Sie müssen eine Währung auswählen.</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe">Abonnieren</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Monatlich via Patreon spenden</s:String>
-    <s:String x:Key="S.Options.Donate.Subscribe.Flattr">Monatlich via Flattr spenden</s:String>
     <s:String x:Key="S.Options.Donate.Gift">Spiele als Geschenk</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Steam">Spiele als Geschenk via Steam</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Gog">Spiele als Geschenk via GOG</s:String>

@@ -1,4 +1,4 @@
-﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         x:Class="ScreenToGif.Windows.Other.TestField" x:Name="ThisWindow"
@@ -6,7 +6,7 @@
         SnapsToDevicePixels="True" Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged" Closed="Window_Closed">
 
     <!--Background="{DynamicResource Panel.Background}"-->
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

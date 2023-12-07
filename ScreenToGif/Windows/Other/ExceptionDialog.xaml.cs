@@ -6,7 +6,7 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class ExceptionDialog : Window
+public partial class ExceptionDialog
 {
     #region Properties
 

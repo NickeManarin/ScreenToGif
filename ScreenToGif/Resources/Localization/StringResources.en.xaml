@@ -601,7 +601,7 @@
     <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Opens the Paypal website. You must select the currency.</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe">Subscribe</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Donate monthly via Patreon.</s:String>
-    <s:String x:Key="S.Options.Donate.Subscribe.Flattr">Donate monthly via Flattr.</s:String>
+    <s:String x:Key="S.Options.Donate.Stripe">Donate via Stripe.</s:String>
     <s:String x:Key="S.Options.Donate.Gift">Gift games</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Steam">Gift games via Steam.</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Gog">Gift games via GOG.</s:String>

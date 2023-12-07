@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -106,11 +106,11 @@
   <ItemGroup>
     <PackageReference Include="KGySoft.Drawing" Version="7.2.0" />
     <PackageReference Include="KGySoft.Drawing.Wpf" Version="7.2.0" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.7" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
@@ -141,7 +141,7 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <Company>Nicke Manarin</Company>
     <Authors>Nicke Manarin</Authors>
-    <Version>2.39.0</Version>
+    <Version>2.40.0</Version>
     <Copyright>Copyright© Nicke Manarin 2023</Copyright>
     <PackageProjectUrl>https://www.screentogif.com</PackageProjectUrl>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>

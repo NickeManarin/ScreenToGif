@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class ErrorDialog : Window
+public partial class ErrorDialog
 {
     public Exception Exception { get; set; }
 

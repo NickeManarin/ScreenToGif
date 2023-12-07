@@ -5,7 +5,6 @@ using ScreenToGif.Cloud;
 using ScreenToGif.Domain.Enums;
 using ScreenToGif.Util.Settings;
 using ScreenToGif.ViewModel.UploadPresets;
-using ScreenToGif.ViewModel.UploadPresets.Gfycat;
 using ScreenToGif.ViewModel.UploadPresets.Imgur;
 using ScreenToGif.ViewModel.UploadPresets.Yandex;
 using ScreenToGif.Windows;
@@ -29,23 +28,12 @@ internal static class PresetExtensions
     {
         switch (preset)
         {
-            case GfycatPreset gfycat:
-                return await IsValid(gfycat);
-
             case ImgurPreset imgur:
                 return await IsValid(imgur);
 
             case YandexPreset yandex:
                 return await IsValid(yandex);
         }
-
-        return await preset.IsValid();
-    }
-
-    public static async Task<ValidatedEventArgs> IsValid(GfycatPreset preset)
-    {
-        if (!preset.IsAnonymous && !await Gfycat.IsAuthorized(preset))
-            return new ValidatedEventArgs("S.SaveAs.Warning.Upload.NotAuthorized", StatusReasons.UploadServiceUnauthorized, () => App.MainViewModel.OpenOptions.Execute(Options.UploadIndex));
 
         return await preset.IsValid();
     }

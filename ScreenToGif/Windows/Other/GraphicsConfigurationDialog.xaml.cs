@@ -13,7 +13,7 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other;
 
-public partial class GraphicsConfigurationDialog : Window
+public partial class GraphicsConfigurationDialog
 {
     #region Properties
 

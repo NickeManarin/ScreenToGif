@@ -42,7 +42,7 @@
         <Setter Property="Background" Value="{DynamicResource Panel.Background}"/>
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Weak}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Light}"/>
         <Setter Property="MinHeight" Value="100"/>
         <Setter Property="MinWidth" Value="180"/>
         <Setter Property="Title" Value="ScreenToGif"/>
@@ -3076,6 +3076,195 @@
                             <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Pressed}"/>
                             <Setter Property="Background" TargetName="border" Value="{DynamicResource Element.Background.Focused}"/>
                             <Setter Property="Fill" TargetName="InnerPath" Value="{DynamicResource Element.Border.Pressed}"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Buttons-->
+    <Style x:Key="Style.Button.TitleBar" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+        <Setter Property="RenderOptions.EdgeMode" Value="Aliased"/>
+        <Setter Property="IsTabStop" Value="False"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="0" SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Focusable="False" RecognizesAccessKey="True" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource Element.Background.Hover}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource Element.Background.Pressed}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Medium}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Gray150}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Style.Button.TitleBar.Close" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+        <Setter Property="RenderOptions.EdgeMode" Value="Aliased"/>
+        <Setter Property="IsTabStop" Value="False"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="Transparent" BorderThickness="0" SnapsToDevicePixels="true">
+                        <Path Width="46" Height="32" Data="M 18,11 27,20 M 18,20 27,11" Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                              StrokeThickness="1" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#C42B1C"/>
+                            <Setter Property="Foreground" Value="#FFFFFF" />
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#E6C42B1C"/>
+                            <Setter Property="Foreground" Value="#B3FFFFFF" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Gray150}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Window-->
+    <Style TargetType="{x:Type n:ExWindow}">
+        <Setter Property="Background" Value="{DynamicResource Panel.Background}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ExWindow}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="1" x:Name="NonClientAreaElement" Height="32" VerticalAlignment="Top" ZIndex="999">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" x:Name="IconImage" Width="18" Height="18" Source="{TemplateBinding Icon}" Margin="10,4,5,4"/>
+
+                            <TextBlock Grid.Column="1" x:Name="TitleTextBlock" Margin="5,0,0,0" FontSize="12" Foreground="{DynamicResource Element.Foreground}"
+                                       VerticalAlignment="Center" Text="{TemplateBinding Title}"/>
+
+                            <Grid Grid.Column="2" x:Name="CaptionButtonsGrid" Visibility="Collapsed">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0" x:Name="MinimizeButton" Style="{StaticResource Style.Button.TitleBar}"
+                                        Width="46" Height="32" Margin="0,1,0,0" Command="SystemCommands.MinimizeWindowCommand">
+                                    <Path Width="46" Height="32" Data="M 18,15 H 28" Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" StrokeThickness="1"/>
+                                </Button>
+
+                                <Button Grid.Column="1" x:Name="MaximizeButton" Style="{StaticResource Style.Button.TitleBar}"
+                                        Width="46" Height="32" Margin="0,1,0,0" Command="SystemCommands.MaximizeWindowCommand">
+                                    <Path Width="46" Height="32" Data="M 18.5,10.5 H 27.5 V 19.5 H 18.5 Z" Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" StrokeThickness="1"/>
+                                </Button>
+
+                                <Button Grid.Column="1" x:Name="RestoreButton" Style="{StaticResource Style.Button.TitleBar}" Visibility="Collapsed"
+                                        Width="46" Height="32" Margin="0,1,0,0" Command="SystemCommands.RestoreWindowCommand">
+                                    <Path Width="46" Height="32" Data="M 18.5,12.5 H 25.5 V 19.5 H 18.5 Z M 20.5,12.5 V 10.5 H 27.5 V 17.5 H 25.5"
+                                          Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" StrokeThickness="1"/>
+                                </Button>
+
+                                <Button Grid.Column="2" x:Name="CloseButton" Style="{StaticResource Style.Button.TitleBar.Close}"
+                                        Width="46" Height="32" Margin="0,1,1,0" Command="SystemCommands.CloseWindowCommand"/>
+                            </Grid>
+                        </Grid>
+
+                        <Border Grid.Row="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                            <AdornerDecorator>
+                                <ContentPresenter/>
+                            </AdornerDecorator>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter TargetName="TitleTextBlock" Property="Foreground" Value="{DynamicResource Element.Foreground.Medium}"/>
+                        </Trigger>
+
+                        <Trigger Property="ExtendIntoTitleBar" Value="True">
+                            <Setter TargetName="IconImage" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="TitleTextBlock" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+
+                        <Trigger Property="ExtendIntoTitleBar" Value="False">
+                            <Setter TargetName="NonClientAreaElement" Property="Grid.Row" Value="0"/>
+                            <Setter Property="Padding" Value="4,2"/>
+                        </Trigger>
+
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="NonClientAreaElement" Property="Margin" Value="8,8,8,0"/>
+                        </Trigger>
+
+                        <Trigger Property="WillRenderCustomCaptionButtons" Value="True">
+                            <Setter TargetName="CaptionButtonsGrid" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+
+                        <Trigger Property="ShowMinimizeButton" Value="False">
+                            <Setter TargetName="MinimizeButton" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+
+                        <Trigger Property="ShowMaximizeButton" Value="False">
+                            <Setter TargetName="MaximizeButton" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="RestoreButton" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ShowMaximizeButton" Value="True"/>
+                                <Condition Property="WindowState" Value="Maximized"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="MaximizeButton" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="RestoreButton" Property="Visibility" Value="Visible"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ShowMaximizeButton" Value="True"/>
+                                <Condition Property="WindowState" Value="Normal"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="MaximizeButton" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="RestoreButton" Property="Visibility" Value="Collapsed"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
