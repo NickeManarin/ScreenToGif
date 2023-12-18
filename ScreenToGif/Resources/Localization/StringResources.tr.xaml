@@ -274,8 +274,6 @@
     <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">(Hafıza önbelleğine sahip BitBlt görüntülerin, yanlışlıkla tüm piksellerinin tamamen siyah olduğu karelerle sonuçlanmasını önler)</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">Fare imlecini kayıtta göster.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">Fare İmleci Rengini Seç</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart">Başlama için geri-sayım kullan.</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">(Saniye cinsinden, yakalamaya başlamadan önce beklenecek süre)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Sabit kare hızı.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Sabit gecikme, kayıt gecikmesini değiştirmez)</s:String>
     <s:String x:Key="S.Options.Recorder.CaptureChanges">Yalnız bir şeyler değiştiğinde kaydet.</s:String>
@@ -289,9 +287,9 @@
 
     <s:String x:Key="S.Options.Recorder.Guidelines">Kılavuz</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">Üçte bir kuralı</s:String>
-    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">Üçte bir kuralı&#10 kılavuzunun görünümünü değiştirmek için tıklayın.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">Üçte bir kuralı&#10;kılavuzunun görünümünü değiştirmek için tıklayın.</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">Artı işareti</s:String>
-    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">Artı işareti kılavuzunun&#10 görünümünü değiştirmek için tıklayın.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">Artı işareti kılavuzunun&#10;görünümünü değiştirmek için tıklayın.</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Info">Kılavuzlar sadece kaydedici duraklatıldığında veya durdurulduğunda görüntülenir.</s:String>
     
     <s:String x:Key="S.Options.Recorder.HideTitleBar">Başlık çubuğunu gizle (ince mod).</s:String>
