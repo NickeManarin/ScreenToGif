@@ -601,7 +601,7 @@
     <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Opent Paypal website. U kunt zelf de munteenheid selecteren.</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe">Abonneren</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Doneer maandelijks via Patreon.</s:String>
-    <s:String x:Key="S.Options.Donate.Subscribe.Flattr">Doneer maandelijks via Flattr.</s:String>
+    <s:String x:Key="S.Options.Donate.Stripe">Doneer via Stripe.</s:String>
     <s:String x:Key="S.Options.Donate.Gift">Cadeauspellen</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Steam">Cadeauspellen via Steam.</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Gog">Cadeauspellen via GOG.</s:String>

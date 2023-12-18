@@ -31,6 +31,7 @@
     <s:String x:Key="S.Margin">Kenar:</s:String>
     <s:String x:Key="S.Padding">Dolgulama:</s:String>
     <s:String x:Key="S.MinHeight">Minimum yükseklik:</s:String>
+    <s:String x:Key="S.AndOr">ve/veya</s:String>
     
     <!--Warning messages-->
     <s:String x:Key="S.Crash">Hayır olamaz, uygulama çöktü :(</s:String>
@@ -199,6 +200,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Orta</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Koyu</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Çok Koyu</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">Sistem ile aynı</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Özel</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">Örnek renkler.</s:String>
     <s:String x:Key="S.Options.App.Tray">Sistem tepsisi ikonu</s:String>
@@ -216,7 +218,7 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">Pencere:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">Değilse bunu aç:</s:String>
     <s:String x:Key="S.Options.App.General">Genel</s:String>
-    <s:String x:Key="S.Options.App.General.WorkaroundQuota">'Yeterli kota yok...' hatası için geçici çözüm.</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota">'Yeterli alan yok...' hatası için geçici çözüm.</s:String>
     <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(Deneysel)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Uygulama kapatılmadan önce bana sor ('Çıkış' komutu aracılığıyla).</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Donanım ivmelenmesini devre dışı bırak.</s:String>
@@ -225,6 +227,8 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Güncellenmiş çeviriler otomatik olarak indirilecek ve yüklenecek)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Güncellemeleri kontrol et.</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Uygulamayı kapatınca güncellemeleri otomatik olarak yükle.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate">Taşınabilir sürüm indirilmesini zorla.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(Sıkıştırılmış dosyaları açarak çalıştırılabilir olanlarla değiştirmeyi gerektiren manuel kurulum)</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Güncellemeyi yüksek ayrıcalıklarla çalışmaya zorlayın.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Kurulum başlatılmadan önce bana sor.</s:String>
 
@@ -235,15 +239,19 @@
     
     <s:String x:Key="S.Options.Recorder.Frequency">Yakalama sıklığı</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual">Elle</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Her kare, yakalama düğmesine veya karşılık gelen klavye kısayoluna basarak sizin tarafınızdan elle yakalanacaktır.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Her kare, yakalama düğmesine veya karşılık gelen klavye kısayoluna basarak sizin tarafınızdan elle yakalanır.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction">Kullanıcı etkileşimi</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">Her tıkladığınızda veya bir şeyler yazdığınızda kareler yakalanır.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second">Saniye başına</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Kareler, kayıt erkanında ayarlanan kare hızının&#10; paydasına göre 'saniye başına' olarak yakalanacaktır.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Kareler, kayıt ekranında ayarlanan kare hızının&#10; paydasına göre 'saniye başına' olarak yakalanır.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Minute">Dakika başına</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">Kareler, kayıt erkanında ayarlanan kare hızının&#10; paydasına göre 'dakika başına' olarak(hızlandırılmış) yakalanacaktır.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">Kareler, kayıt ekranında ayarlanan kare hızının&#10; paydasına göre 'dakika başına' olarak(hızlandırılmış) yakalanır.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Hour">Saat başı</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Kareler, kayıt erkanında ayarlanan kare hızının&#10; paydasına göre 'saat başına' olarak(hızlandırılmış) yakalanacaktır.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Kareler, kayıt ekranında ayarlanan kare hızının&#10; paydasına göre 'saat başına' olarak(hızlandırılmış) yakalanır.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">Oynatma gecikmesi:</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(Ms cinsinden yakalanan her kare bu gecikmeye göre ayarlanacaktır)</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger">Tetikleme gecikmesi:</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">(Kayda başlamadan önce ms cinsinden beklenecek süre)</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">Her kare {0} aralığında yakalanacak.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">Yakalama modu</s:String>
@@ -262,23 +270,51 @@
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(Kareler yakalanırken sıkıştırma yapılmaz)</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize">Önbellek boyutu:</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize.Info">(MB cinsinden, bu boyuta ulaşıldığında veriler diske yazılarak temizlenir)</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames">Tamamen siyah çerçevelerin yakalanmasını önle.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">(Hafıza önbelleğine sahip BitBlt görüntülerin, yanlışlıkla tüm piksellerinin tamamen siyah olduğu karelerle sonuçlanmasını önler)</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">Fare imlecini kayıtta göster.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">Fare İmleci Rengini Seç</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart">Başlama için geri-sayım kullan.</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">(Saniye cinsinden, yakalamaya başlamadan önce beklenecek süre)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Sabit kare hızı.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Sabit gecikme, kayıt gecikmesini değiştirmez)</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges">Yalnız bir şeyler değiştiğinde kaydet.</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(Sadece yakalama bölgesinde bir şey değiştiğinde kaydedilir)</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">Uzak masaüstü bağlantısında yakalama performansını iyileştirir.</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Üst üste pencere yakalamayı devre dışı bırakır)</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">Kayıt sırasında hafıza temizlemeyi zorla.</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">(Kayıt sırasında hafıza kullanımını azaltır ancak performansı düşürür)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Asenkron kaydı aktif et.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Kayıt sırasındaki arayüz gecikmesini azaltmaya yardımcı olur)</s:String>
+
+    <s:String x:Key="S.Options.Recorder.Guidelines">Kılavuz</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">Üçte bir kuralı</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">Üçte bir kuralı&#10;kılavuzunun görünümünü değiştirmek için tıklayın.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">Artı işareti</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">Artı işareti kılavuzunun&#10;görünümünü değiştirmek için tıklayın.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">Kılavuzlar sadece kaydedici duraklatıldığında veya durdurulduğunda görüntülenir.</s:String>
+    
     <s:String x:Key="S.Options.Recorder.HideTitleBar">Başlık çubuğunu gizle (ince mod).</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">Ekran büyütecini aktif et.</s:String>
-    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Kayıt alanı seçildiği sürece büyütmeyi aktif eder.)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Kayıt alanı seçildiği sürece büyütmeyi aktif eder)</s:String>    
+    <s:String x:Key="S.Options.Recorder.AnimateBorder">Seçildiğinde ekran sınırını belirginleştiren animasyon.</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder.Info">("Kayar noktalı çerçeve" stilini kullanan animasyon)</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning">Seçim kaydırmayı etkinleştir.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">(Seçilen bölgenin köşesine yakın bir süs göstererek kayıt alanının hareket etmesine olanak tanır)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact">Kompakt mod.</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact.Info">(Kaydedici komut panelinin daha küçük bir versiyonunu gösterir)</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard">Kayıt sırasında "İptal et" butonunu göster.</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(Normalde sadece duraklatıldığında gösterilir)</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement">Ekran seçim performansını iyileştir.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(Ekranın durağan bir halini görüntüleyerek ekran seçimi sırasındaki gecikmeyi azaltır)</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.RememberSize">Kayıt alanının önceki boyutunu hatırla.</s:String>
+    <s:String x:Key="S.Options.Recorder.RememberPosition">Kayıt alanının önceki konumunu hatırla.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Başlamadan önce geri sayım kullan.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(Kayda başlamadan önce birkaç saniye beklenir)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">İmleç takibini aktif et.</s:String>
-    <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(Kayıt alanı imlecin konumuna göre kendisini yeniden konumlandırır)</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(Kayıt alanı, imlecin bulunduğu yere göre kendisini yeniden konumlandırır)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Piksel olarak, kayıt alanı yeniden konumlandırılmaya başladığında ayarlanacak boşluk)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Piksel olarak, kullanıcı arayüzü gizlendiğinde ayarlanacak ek boşluk)</s:String>
+    <s:String x:Key="S.Options.Recorder.NotifyRecordingDiscard">Kaydı silmeden önce bana sor.</s:String>
 
     <!--Options • Editor-->
     <s:String x:Key="S.Options.Editor.Previewer">Editör Arkaplanı</s:String>
@@ -288,7 +324,7 @@
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Medium">Orta</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Large">Büyük</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.VeryLarge">Çok Büyük</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">Büyük Kareleri Severim.</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">Büyük Kareler Severim.</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.ImBlind">Ben Körüm</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">Özel</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">Yükseklik</s:String>
@@ -297,18 +333,27 @@
     <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Temel Renk</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Çift Renk</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.OddColor">Tek Renk</s:String>
-    <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Kodlamaları ayrı bir pencerede görüntüleyin.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Kodlamaları ayrı bir pencerede görüntüle.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Başlık Çubuğunu Uzat/Chrome.</s:String>
-    <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Yüklemeden hemen sonra kare boyutuna göre pencere boyutunu otomatik olarak ayarlayın.</s:String>
-    <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Yüklemeden hemen sonra kare yakınlaştırmasını pencere boyutuna göre otomatik olarak ayarlayın.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Yüklemeden hemen sonra kare boyutuna göre pencere boyutunu otomatik olarak ayarla.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Yüklemeden hemen sonra kare yakınlaştırmasını pencere boyutuna göre otomatik olarak ayarla.</s:String>
     <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">Kareleri silmeden önce bana sor.</s:String>
     <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">Projeyi yok saymadan önce bana sor.</s:String>
     <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Editörü kapamadan önce bana sor (Eğer açık bir proje varsa).</s:String>
     <s:String x:Key="S.Options.Editor.General.TripleClickSelection"> Metin seçmek için üçlü tıklamayı aç.</s:String>
     <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Başlıkların ana hatlarını harflerin dışına çizin.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Gerek duyulmayan kareler kaldırılsın.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(Önizleme anında gösterilmeyen kareyi geç)</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Önizleme anında gösterilmeyen kareyi geç.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory">Geri alma/tekrarlama geçmişine bir sınır koyun.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Sınıra ulaşıldığında eski işlemler kaldırılacak)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Saklanan en fazla eylem sayısı)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">Çıkış klasörünü ön ayarlara göre senkronize et.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder.Info">(Ön ayarlar aynı çıktı yolunu kullanacak)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename">Dosya adını da senkronize et.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename.Info">(Ön ayarlar da aynı dosya adını kullanacak)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType">Yalnızca aynı dosya türündeki ön ayarlara göre senkronize et.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType.Info">(Yalnız aynı dosya türündeki ön ayarlar senkronize edilir)</s:String>
     
     <!--Options • Tasks-->
     <s:String x:Key="S.Options.Tasks.Title">Otomatikleştirilmiş Görev</s:String>
@@ -340,7 +385,7 @@
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Durdur:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(Kaydı durdurur ve editörü açar)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">Yok say:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">(Durdurulduğunda aktif kaydı yok sayar.)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">(Durdurulduğunda aktif kaydı yok sayar)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">İmleç takibi:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">(İmlecin konumuna göre kayıt alanının ayarını açar/kapatır)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">Takibi pasif duruma getir:</s:String>
@@ -392,9 +437,11 @@
     <s:String x:Key="S.Options.Storage.RemoveSettings">Ayarlar dosyasını kaldır.</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">Ayarlar dosyasının bulunduğu klasörü açın.&#x0d;Mümkünse dosyayı açmak için tıklarken Ctrl tuşuna da basılı tutun.</s:String>
     <s:String x:Key="S.Options.Storage.SettingsInfo">• Ayarlar yükleme dizini: Default ◄ AppData ◄ Local.&#x0d;• Local klasörde herhangi bir ayar dosyası yoksa uygulama AppData klasörü içinde arama yapar, yine bir ayar dosyası yoksa Default kullanılır&#x0d;• Local ayar yoksa, tüm ayarlar AppData ayarlar dosyasına kaydedilir.</s:String>
+    <s:String x:Key="S.Options.Storage.DeleteEverything">Uygulamayı kapatırken tüm dosyaları önbellekten sil.</s:String>
+    <s:String x:Key="S.Options.Storage.AskDeleteEverything">Önbellekten tüm dosyaları silmeden önce sor.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">Eski projeleri otomatik olarak kaldır.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">Uygulamayı açılırken bir arka plan görevi, ayarlanan süreden daha eski tüm kapalı projeleri siler.</s:String>
-    <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(bundan daha eski tüm kapalı projeler uygulamayı açtıktan sonra, gün içinde silinecek/çıkartılacak).</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(Bundan daha eski tüm kapalı projeler uygulamayı açtıktan sonra, gün içinde silinecek/çıkartılacak).</s:String>
     
     <!--Options • Storage > Clear cache-->
     <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - Önbelleği temizle</s:String>
@@ -476,6 +523,7 @@
     <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Paypal web sitesini açar. Para birimi seçimi zorunludur.</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe">Abone ol</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Patreon aracılığıyla aylık bağış yapın.</s:String>
+    <s:String x:Key="S.Options.Donate.Stripe">Stripe aracılığıyla bağış yapın.</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Flattr">Flattr aracılığıyla aylık bağış yapın.</s:String>
     <s:String x:Key="S.Options.Donate.Gift">Oyun hediye et</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Steam">Steam aracılığıyla oyun hediye edin.</s:String>
@@ -668,7 +716,7 @@
     <s:String x:Key="S.Encoder.Completed.Command.Output">Komut(lar)ın çıktısını göster.</s:String>
     <s:String x:Key="S.Encoder.Completed.Command.Fail">Komut yürütülürken hata</s:String>
     <s:String x:Key="S.Encoder.Completed.Upload.Fail">Yüklenirken hata</s:String>
-    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + CResmi silecek sayfayı açmak için tıklayın (varsa).</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + Resmi silmek için sayfaya tıklayın(varsa).</s:String>
     
     <s:String x:Key="S.Encoder.Completed.Elapsed">Dakika cinsinden geçen süre:</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">Analiz:</s:String>

@@ -3232,6 +3232,7 @@
 
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="NonClientAreaElement" Property="Margin" Value="8,8,8,0"/>
+                            <Setter Property="Padding" Value="8,0,8,8"/>
                         </Trigger>
 
                         <Trigger Property="WillRenderCustomCaptionButtons" Value="True">
