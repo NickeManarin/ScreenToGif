@@ -261,6 +261,8 @@
     <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(Requirer a instalação manual, descompactando e trocando o executável)</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Force a atualização para executar com privilégios de administrador.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Avisar-me antes do início da instalação.</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork">Baixe atualizações em redes limitadas.</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork.Info">(Permite baixar atualizações em redes com download limitado)</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">Interface</s:String>
