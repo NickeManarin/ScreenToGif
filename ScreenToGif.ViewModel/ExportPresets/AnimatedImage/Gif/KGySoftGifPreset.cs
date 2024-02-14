@@ -31,6 +31,7 @@ public class KGySoftGifPreset : GifPreset
     private bool _allowDeltaFrames = true;
     private bool _allowClippedFrames = true;
     private byte _deltaTolerance;
+    private bool _linearColorSpace;
 
     #endregion
 
@@ -74,6 +75,7 @@ public class KGySoftGifPreset : GifPreset
             QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}",
             DithererId = $"{nameof(ErrorDiffusionDitherer)}.{nameof(ErrorDiffusionDitherer.FloydSteinberg)}",
             BitLevel = 7,
+            LinearColorSpace = true
         },
         new KGySoftGifPreset
         {
@@ -159,6 +161,15 @@ public class KGySoftGifPreset : GifPreset
     {
         get => _bitLevel;
         set => SetProperty(ref _bitLevel, value);
+    }
+
+    /// <summary>
+    /// Gets or sets whether the quantizing is processed in the linear color space (as opposed to sRGB).
+    /// </summary>
+    public bool LinearColorSpace
+    {
+        get => _linearColorSpace;
+        set => SetProperty(ref _linearColorSpace, value);
     }
 
     #endregion
