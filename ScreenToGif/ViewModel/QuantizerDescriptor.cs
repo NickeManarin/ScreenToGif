@@ -129,9 +129,15 @@ public class QuantizerDescriptor
         }
 
         var result = (IQuantizer)descriptor._method.Invoke(null, args);
-
         if (result is OptimizedPaletteQuantizer opt && preset.BitLevel != 0)
             result = opt.ConfigureBitLevel(preset.BitLevel);
+        if (preset.LinearColorSpace)
+            result = result switch
+            {
+                OptimizedPaletteQuantizer o => o.ConfigureColorSpace(WorkingColorSpace.Linear),
+                PredefinedColorsQuantizer p => p.ConfigureColorSpace(WorkingColorSpace.Linear),
+                _ => throw new InvalidOperationException($"Unexpected quantizer: {result.GetType()}")
+            };
 
         return result;
     }

@@ -52,6 +52,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         nameof(DirectMapping),
         nameof(PaletteSize),
         nameof(BitLevel),
+        nameof(LinearColorSpace),
 
         // ditherer settings
         nameof(DithererId),
@@ -102,6 +103,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     public int PaletteSize { get => Get(_preset.PaletteSize); set => Set(_preset.PaletteSize = value); }
     public byte? BitLevel { get => Get(_preset.BitLevel); set => Set(_preset.BitLevel = value); }
     public bool IsCustomBitLevel { get => Get(_preset.BitLevel.HasValue); set => Set(value); }
+    public bool LinearColorSpace { get => Get(_preset.LinearColorSpace); set => Set(_preset.LinearColorSpace = value); }
 
     // Ditherer
     public bool UseDitherer { get => Get(_preset.DithererId != null); set => Set(value); }
@@ -320,7 +322,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         await WaitForPendingGenerate();
 
         // Workaround: The awaits make this method reentrant, and a continuation can be spawn after any await at any time.
-        // Therefore it is possible that despite of the line above _generatePreviewTask is not null here.
+        // Therefore, it is possible that despite the line above _generatePreviewTask is not null here.
         // It could not happen after a synchronous Wait but that could cause a slight lagging (only for a short time because the task is already canceled here)
         while (_generatePreviewTask != null)
         {
@@ -337,7 +339,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         // The instance is created only for the first time or when resolution changes (eg. when toggling built-in/current frame preview)
         _previewBitmap ??= new WriteableBitmap(_currentFrame.Width, _currentFrame.Height, 96, 96, PixelFormats.Pbgra32, null);
 
-        // Storing the task and cancellation source to a field so it can be canceled/awaited on reentering, disposing, etc.
+        // Storing the task and cancellation source to a field, so it can be canceled/awaited on reentering, disposing, etc.
         var tokenSource = _cancelGeneratingPreview = new CancellationTokenSource();
         var token = tokenSource.Token;
 
