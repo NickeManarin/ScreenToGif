@@ -797,6 +797,8 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Supports saving the animation with a transparent background.</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">High quality • Graphics</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Better for recordings with a lower quantity of colors.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Default.Title">KGy SOFT • Default</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Default.Description">Recommended for screen recording of regular UI. Uses Median Cut quantizer without dithering.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • Balanced</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Good quality for photo-like images using Wu's quantizer without dithering.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • High quality</s:String>
