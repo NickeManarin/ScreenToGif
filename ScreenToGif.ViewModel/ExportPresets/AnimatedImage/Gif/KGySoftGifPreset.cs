@@ -45,23 +45,31 @@ public class KGySoftGifPreset : GifPreset
     {
         new KGySoftGifPreset
         {
-            TitleKey = "S.Preset.Gif.KGySoft.Balanced.Title",
-            DescriptionKey = "S.Preset.Gif.KGySoft.Balanced.Description",
+            TitleKey = "S.Preset.Gif.KGySoft.Default.Title",
+            DescriptionKey = "S.Preset.Gif.KGySoft.Default.Description",
             HasAutoSave = true,
             IsSelected = true,
             IsDefault = true,
             IsSelectedForEncoder = true,
-            CreationDate = new DateTime(2021, 12, 15),
-            QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}",
+            CreationDate = new DateTime(2024, 1, 25),
+            QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.MedianCut)}",
         },
+        // Leaving here for reference because if someone already has a saved config with it, then it's still relevant.
+        //new KGySoftGifPreset
+        //{
+        //    TitleKey = "S.Preset.Gif.KGySoft.Balanced.Title",
+        //    DescriptionKey = "S.Preset.Gif.KGySoft.Balanced.Description",
+        //    HasAutoSave = true,
+        //    IsDefault = true,
+        //    CreationDate = new DateTime(2021, 12, 15),
+        //    QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}",
+        //},
         new KGySoftGifPreset
         {
             TitleKey = "S.Preset.Gif.KGySoft.High.Title",
             DescriptionKey = "S.Preset.Gif.KGySoft.High.Description",
             HasAutoSave = true,
-            IsSelected = true,
             IsDefault = true,
-            IsSelectedForEncoder = true,
             CreationDate = new DateTime(2021, 12, 15),
             QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}",
             DithererId = $"{nameof(ErrorDiffusionDitherer)}.{nameof(ErrorDiffusionDitherer.FloydSteinberg)}",
@@ -72,9 +80,7 @@ public class KGySoftGifPreset : GifPreset
             TitleKey = "S.Preset.Gif.KGySoft.Fast.Title",
             DescriptionKey = "S.Preset.Gif.KGySoft.Fast.Description",
             HasAutoSave = true,
-            IsSelected = true,
             IsDefault = true,
-            IsSelectedForEncoder = true,
             CreationDate = new DateTime(2021, 12, 15),
             QuantizerId = $"{nameof(PredefinedColorsQuantizer)}.{nameof(PredefinedColorsQuantizer.SystemDefault8BppPalette)}",
             DithererId = $"{nameof(OrderedDitherer)}.{nameof(OrderedDitherer.Bayer8x8)}",
