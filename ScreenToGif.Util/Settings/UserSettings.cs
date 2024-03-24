@@ -2406,6 +2406,18 @@ public class UserSettings : INotifyPropertyChanged
         set => SetValue(value);
     }
 
+    public Color FirstExtraMouseButtonClicksColor
+    {
+        get => (Color)GetValue();
+        set => SetValue(value);
+    }
+
+    public Color SecondExtraMouseButtonClicksColor
+    {
+        get => (Color)GetValue();
+        set => SetValue(value);
+    }
+
     public double MouseEventsWidth
     {
         get => (double)GetValue();

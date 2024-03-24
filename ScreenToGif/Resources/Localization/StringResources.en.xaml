@@ -1393,6 +1393,8 @@
     <s:String x:Key="S.MouseClicks.Color.Left">Left button color:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">Middle button color:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">Right button color:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.FirstExtra">1st extra button color:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.SecondExtra">2nd extra button color:</s:String>
     
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">Image</s:String>

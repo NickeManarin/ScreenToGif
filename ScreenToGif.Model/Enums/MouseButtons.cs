@@ -5,5 +5,7 @@ public enum MouseButtons
     None,
     Left,
     Middle,
-    Right
+    Right,
+    FirstExtra,
+    SecondExtra,
 }

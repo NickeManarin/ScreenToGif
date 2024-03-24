@@ -468,7 +468,7 @@ public partial class NewRecorder
 
     private static void IsFollowing_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (!(d is NewRecorder rec))
+        if (d is not NewRecorder rec)
             return;
 
         rec.Follow();
@@ -611,6 +611,10 @@ public partial class NewRecorder
                 RecordClicked = MouseButtons.Right;
             else if (args.MiddleButton == MouseButtonState.Pressed)
                 RecordClicked = MouseButtons.Middle;
+            else if (args.FirstExtraButton == MouseButtonState.Pressed)
+                RecordClicked = MouseButtons.FirstExtra;
+            else if (args.SecondExtraButton == MouseButtonState.Pressed)
+                RecordClicked = MouseButtons.SecondExtra;
             else
                 RecordClicked = MouseButtons.None;
 

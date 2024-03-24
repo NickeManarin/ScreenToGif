@@ -529,6 +529,10 @@ public partial class Recorder
                 RecordClicked = MouseButtons.Right;
             else if (args.MiddleButton == MouseButtonState.Pressed)
                 RecordClicked = MouseButtons.Middle;
+            else if (args.FirstExtraButton == MouseButtonState.Pressed)
+                RecordClicked = MouseButtons.FirstExtra;
+            else if (args.SecondExtraButton == MouseButtonState.Pressed)
+                RecordClicked = MouseButtons.SecondExtra;
             else
                 RecordClicked = MouseButtons.None;
 

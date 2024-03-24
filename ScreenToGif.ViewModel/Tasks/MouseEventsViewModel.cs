@@ -7,10 +7,12 @@ namespace ScreenToGif.ViewModel.Tasks;
 
 public class MouseEventsViewModel : BaseTaskViewModel
 {
+    private Color _highlightForegroundColor;
     private Color _leftButtonForegroundColor;
     private Color _rightButtonForegroundColor;
     private Color _middleButtonForegroundColor;
-    private Color _highlightForegroundColor;
+    private Color _firstExtraButtonForegroundColor;
+    private Color _secondExtraButtonForegroundColor;
     private double _width;
     private double _height;
 
@@ -43,6 +45,18 @@ public class MouseEventsViewModel : BaseTaskViewModel
         set => SetProperty(ref _middleButtonForegroundColor, value);
     }
 
+    public Color FirstExtraButtonForegroundColor
+    {
+        get => _firstExtraButtonForegroundColor;
+        set => SetProperty(ref _firstExtraButtonForegroundColor, value);
+    }
+
+    public Color SecondExtraButtonForegroundColor
+    {
+        get => _secondExtraButtonForegroundColor;
+        set => SetProperty(ref _secondExtraButtonForegroundColor, value);
+    }
+
     public double Width
     {
         get => _width;
@@ -58,9 +72,11 @@ public class MouseEventsViewModel : BaseTaskViewModel
     public override string ToString()
     {
         return $"{LocalizationHelper.Get("S.MouseHighlight.Color")} #{HighlightForegroundColor.A:X2}{HighlightForegroundColor.R:X2}{HighlightForegroundColor.G:X2}{HighlightForegroundColor.B:X2}, " +
-            $"{LocalizationHelper.Get("S.MouseClicks.Color.Left")} #{LeftButtonForegroundColor.A:X2}{LeftButtonForegroundColor.R:X2}{LeftButtonForegroundColor.G:X2}{LeftButtonForegroundColor.B:X2}, " +
-               $"{LocalizationHelper.Get("S.MouseClicks.Color.Middle")} #{MiddleButtonForegroundColor.A:X2}{MiddleButtonForegroundColor.R:X2}{MiddleButtonForegroundColor.G:X2}{MiddleButtonForegroundColor.B:X2}, " +
+               $"{LocalizationHelper.Get("S.MouseClicks.Color.Left")} #{LeftButtonForegroundColor.A:X2}{LeftButtonForegroundColor.R:X2}{LeftButtonForegroundColor.G:X2}{LeftButtonForegroundColor.B:X2}, " +
                $"{LocalizationHelper.Get("S.MouseClicks.Color.Right")} #{RightButtonForegroundColor.A:X2}{RightButtonForegroundColor.R:X2}{RightButtonForegroundColor.G:X2}{RightButtonForegroundColor.B:X2}, " +
+               $"{LocalizationHelper.Get("S.MouseClicks.Color.Middle")} #{MiddleButtonForegroundColor.A:X2}{MiddleButtonForegroundColor.R:X2}{MiddleButtonForegroundColor.G:X2}{MiddleButtonForegroundColor.B:X2}, " +
+               $"{LocalizationHelper.Get("S.MouseClicks.Color.FirstExtra")} #{FirstExtraButtonForegroundColor.A:X2}{FirstExtraButtonForegroundColor.R:X2}{FirstExtraButtonForegroundColor.G:X2}{FirstExtraButtonForegroundColor.B:X2}, " +
+               $"{LocalizationHelper.Get("S.MouseClicks.Color.SecondExtra")} #{SecondExtraButtonForegroundColor.A:X2}{SecondExtraButtonForegroundColor.R:X2}{SecondExtraButtonForegroundColor.G:X2}{SecondExtraButtonForegroundColor.B:X2}, " +
                $"{LocalizationHelper.Get("S.FreeDrawing.Width")} {Width}, {LocalizationHelper.Get("S.FreeDrawing.Height")} {Height}";
     }
 
@@ -72,6 +88,8 @@ public class MouseEventsViewModel : BaseTaskViewModel
             LeftButtonForegroundColor = Color.FromArgb(120, 255, 255, 0),
             RightButtonForegroundColor = Color.FromArgb(120, 255, 0, 0),
             MiddleButtonForegroundColor = Color.FromArgb(120, 0, 255, 255),
+            FirstExtraButtonForegroundColor = Color.FromArgb(120, 255, 0, 128),
+            SecondExtraButtonForegroundColor = Color.FromArgb(120, 255, 128, 0),
             Height = 12,
             Width = 12
         };
@@ -83,8 +101,10 @@ public class MouseEventsViewModel : BaseTaskViewModel
         {
             HighlightForegroundColor = UserSettings.All.MouseHighlightColor,
             LeftButtonForegroundColor = UserSettings.All.LeftMouseButtonClicksColor,
-            MiddleButtonForegroundColor = UserSettings.All.MiddleMouseButtonClicksColor,
             RightButtonForegroundColor = UserSettings.All.RightMouseButtonClicksColor,
+            MiddleButtonForegroundColor = UserSettings.All.MiddleMouseButtonClicksColor,
+            FirstExtraButtonForegroundColor = UserSettings.All.FirstExtraMouseButtonClicksColor,
+            SecondExtraButtonForegroundColor = UserSettings.All.SecondExtraMouseButtonClicksColor,
             Height = UserSettings.All.MouseEventsHeight,
             Width = UserSettings.All.MouseEventsWidth
         };

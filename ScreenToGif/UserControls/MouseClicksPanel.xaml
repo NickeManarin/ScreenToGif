@@ -21,6 +21,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -40,12 +42,18 @@
             <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Right}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             <n:ColorBox Grid.Row="3" Grid.Column="1" SelectedColor="{Binding RightButtonForegroundColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
 
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-            <n:DoubleUpDown Grid.Row="4" Grid.Column="1" x:Name="ClickWidthDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.FirstExtra}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:ColorBox Grid.Row="4" Grid.Column="1" SelectedColor="{Binding FirstExtraMouseButtonClicksColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
+
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.SecondExtra}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:ColorBox Grid.Row="5" Grid.Column="1" SelectedColor="{Binding SecondExtraMouseButtonClicksColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
+
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:DoubleUpDown Grid.Row="6" Grid.Column="1" x:Name="ClickWidthDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
                             Value="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-            <n:DoubleUpDown Grid.Row="5" Grid.Column="1" x:Name="ClickHeightDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:DoubleUpDown Grid.Row="7" Grid.Column="1" x:Name="ClickHeightDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
                             Value="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
     </Grid>
