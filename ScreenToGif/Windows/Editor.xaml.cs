@@ -3042,6 +3042,11 @@ namespace ScreenToGif.Windows
                         NextFrame_Executed(sender, null);
                         e.Handled = true;
                     }
+                    else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Alt))
+                    {
+                        DeleteAfterButton.Command.Execute(null);
+                        e.Handled = true;
+                    }
 
                     break;
                 }
@@ -3060,7 +3065,12 @@ namespace ScreenToGif.Windows
                         PreviousFrame_Executed(sender, null);
                         e.Handled = true;
                     }
-                    
+                    else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Alt))
+                    {
+                        DeleteBeforeButton.Command.Execute(null);
+                        e.Handled = true;
+                    }
+
                     break;
                 }
 
