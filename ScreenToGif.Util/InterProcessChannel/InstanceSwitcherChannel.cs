@@ -18,8 +18,7 @@ public static class InstanceSwitcherChannel
 
     private static PipeServer<InstanceSwitcherMessage> _server;
     private static Action<object, InstanceSwitcherMessage> _receivedAction;
-
-
+    
     public static void RegisterServer(Action<object, InstanceSwitcherMessage> receivedAction)
     {
         try

@@ -261,6 +261,8 @@
     <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(Requirer a instalação manual, descompactando e trocando o executável)</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Force a atualização para executar com privilégios de administrador.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Avisar-me antes do início da instalação.</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork">Baixe atualizações em redes limitadas.</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork.Info">(Permite baixar atualizações em redes com download limitado)</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">Interface</s:String>
@@ -795,6 +797,8 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Suporta salvar a animação com um fundo transparente.</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">Alta qualidade • Gráficos</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Melhor para gravações com menor quantidade de cores.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Default.Title">KGy SOFT • Padrão</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Default.Description">Recomendado para gravações de tela normais. Usa quantizador Median Cut sem pontilhamento.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • Balanceado</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Boa qualidade para imagens semelhantes a fotos usando o quantizador de Wu sem pontilhamento.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • Alta qualidade</s:String>
@@ -1388,6 +1392,8 @@
     <s:String x:Key="S.MouseClicks.Color.Left">Cor do botão esquerdo:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">Cor do botão do meio:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">Cor do botão direito:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.FirstExtra">Cor do 1º botão extra:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.SecondExtra">Cor do 2º botão extra:</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Não há cliques de mouse detectados no seu projeto.</s:String>
     
     <!--Editor • Watermark-->
@@ -1606,7 +1612,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.Dither">Pontilhado:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Escala Bayer:</s:String>
 
-<!--Editor • Save as > KGy SOFT options-->
+    <!--Editor • Save as > KGy SOFT options-->
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer">Quantizador</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor">Cor de Fundo:</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor.Info">Pixels com alfa (transparência) que são considerados opacos pelo quantizador selecionado serão misturados com esta cor antes de obter a cor quantizada.</s:String>
@@ -1621,6 +1627,8 @@
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel">Nível de bits personalizado.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">Quando marcado, o nível de bits pode ser configurado manualmente.&#x0d;&#x0a;⚠️ Aviso: O nível de bit mais alto pode exigir MUITA memória!</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BitLevel.Info">Um valor mais alto significa mais precisão, maior espaço de cores de destino, processamento mais lento e maior uso de memória.&#x0d;&#x0a;Por exemplo, se 1, então o resultado não pode ter mais de 8 cores, ou quando 2, não mais de 64 cores.&#x0d;&#x0a;Para os quantizadores Octree e Wu, afeta também o número máximo de tons monocromáticos.&#x0d;&#x0a;Por exemplo, se 5 (que é o padrão para o quantizador Wu), apenas 32 tons monocromáticos podem ser diferenciados.&#x0d;&#x0a;⚠️ Cuidado: O quantizador Wu consome pelo menos 650 MB com o valor mais alto.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.LinearColorSpace">Espaço de cor linear</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.LinearColorSpace.Info">Quando marcado, algumas operações (mistura de alfa com plano de fundo, quantização, pontilhamento, procurar cores próximas na palete) são feitas no espaço de cor linear ao invés de no sRGB.&#x0d;&#x0a;Trabalhar no espaço de cores linear é mais lento, mas proporciona um resultado de melhor qualidade, especialmente quando o quantizador usa apenas algumas cores.&#x0d;&#x0a;&#x0d;&#x0a;⚠️ Observação: Ao usar apenas algumas cores, o brilho de uma visualização possivelmente redimensionada pode estar incorreto porque o WPF realiza o redimensionamento no espaço de cores sRGB.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">Preto e Branco</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">Paleta fixa de 1 bpp com as cores preto e branco.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">Tons de cinza com 4 cores</s:String>
@@ -1700,7 +1708,7 @@
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">Repetições:</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Especifica quantas vezes a animação será reproduzida.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">Permitir quadros delta.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">Quando marcado, os pixels inalterados tentam ser detectados durante a codificação.&#x0d;&#x0a;Ao usar com um quantizador otimizado, esta opção possibilita que um quadro tenha mais de 256 cores.&#x0d;&#x0a;Esta opção é ignorada se o quantizador não usar transparência e a opção Permitir Quadros Recortados estiver desmarcada.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">Quando marcado, os pixels inalterados tentam ser detectados durante a codificação.&#x0d;&#x0a;Ao usar com um quantizador otimizado, esta opção possibilita que um quadro tenha mais de 256 cores.&#x0d;&#x0a;Esta opção é ignorada se o quantizador não usar transparência e a opção Permitir Quadros Recortados estiver desmarcada.&#x0d;&#x0a;&#x0d;&#x0a;⚠️ Observação: Esta opção pode causar artefatos visíveis nas cores ou no padrão de pontilhamento.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">Tolerância Delta:</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">Especifica a tolerância máxima ao detectar pixels alterados.&#x0d;&#x0a;Se 0, então nenhuma diferença é tolerada.&#x0d;&#x0a;Se 255, então pode haver quadros (ou mesmo todos eles) que são adicionados sem conteúdo.&#x0d;&#x0a;O intervalo razoável está entre 0 e 16 para um quantizador otimizado. Aqueles com cores fixas podem ser usados com valores um pouco maiores com dithering.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">Se a tolerância Delta for muito alta, o resultado pode ter baixa qualidade. Clique para redefinir a tolerância delta.</s:String>

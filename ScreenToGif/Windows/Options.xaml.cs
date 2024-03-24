@@ -104,6 +104,7 @@ public partial class Options : INotification
         UpdatesCheckBox.Visibility = Visibility.Collapsed;
         CheckForUpdatesLabel.Visibility = Visibility.Collapsed;
         StoreTextBlock.Visibility = Visibility.Visible;
+        DownloadWithMeteredNetworkCheckBox.Visibility = Visibility.Collapsed;
 #elif FULL_MULTI_MSIX
         PortableUpdateCheckBox.Visibility = Visibility.Collapsed;
         AdminUpdateCheckBox.Visibility = Visibility.Collapsed;
@@ -763,7 +764,7 @@ public partial class Options : INotification
         var items = App.NotifyIcon.ContextMenu.Items.OfType<ExtendedMenuItem>();
 
         foreach (var item in items)
-            item.Header = LocalizationHelper.Get((string) item.Tag);
+            item.Header = LocalizationHelper.Get((string)item.Tag);
     }
 
     #endregion

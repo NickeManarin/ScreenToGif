@@ -759,6 +759,12 @@ public class UserSettings : INotifyPropertyChanged
         set => SetValue(value);
     }
 
+    public bool DownloadWithMeteredNetwork
+    {
+        get => (bool)GetValue();
+        set => SetValue(value);
+    }
+
     public bool PortableUpdate
     {
         get => (bool)GetValue();
@@ -2395,6 +2401,18 @@ public class UserSettings : INotifyPropertyChanged
     }
 
     public Color MiddleMouseButtonClicksColor
+    {
+        get => (Color)GetValue();
+        set => SetValue(value);
+    }
+
+    public Color FirstExtraMouseButtonClicksColor
+    {
+        get => (Color)GetValue();
+        set => SetValue(value);
+    }
+
+    public Color SecondExtraMouseButtonClicksColor
     {
         get => (Color)GetValue();
         set => SetValue(value);

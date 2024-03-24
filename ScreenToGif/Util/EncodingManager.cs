@@ -1,4 +1,3 @@
-using KGySoft.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -17,6 +16,8 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
+using KGySoft.CoreLibraries;
+using KGySoft.Drawing;
 using KGySoft.Drawing.Imaging;
 using KGySoft.Threading;
 
@@ -46,7 +47,6 @@ using Color = System.Windows.Media.Color;
 using Encoder = ScreenToGif.Windows.Other.Encoder;
 using LegacyGifEncoder = ScreenToGif.Util.Codification.Gif.LegacyEncoder.GifEncoder;
 using KGySoftGifEncoder = KGySoft.Drawing.Imaging.GifEncoder;
-using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Bpg;
 
 namespace ScreenToGif.Util;
 
@@ -1401,7 +1401,7 @@ internal class EncodingManager
             concat.AppendLine("file '" + listFrames.LastOrDefault()?.Path + "'");
             concat.AppendLine("duration 0");
         }
-        
+
         var concatPath = Path.GetDirectoryName(listFrames[0].Path) ?? Path.GetTempPath();
         var concatFile = Path.Combine(concatPath, "concat.txt");
 
@@ -1508,7 +1508,7 @@ internal class EncodingManager
                         else
                             firstPass += "-vsync " + apngPreset.Vsync.GetLowerDescription();
                     }
-                    
+
                     firstPass += " {O}";
                 }
 
@@ -1729,6 +1729,7 @@ internal class EncodingManager
                 log += Environment.NewLine + line;
 
                 var split = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var containsDuplicatedFrames = line.Contains("dup=");
 
                 for (var block = 0; block < split.Length; block++)
                 {
@@ -1738,6 +1739,16 @@ internal class EncodingManager
 
                     if (int.TryParse(split[block + 1], out var frame))
                     {
+                        if (containsDuplicatedFrames)
+                        {
+                            var dupFramesPosition = split.IndexOf(x => x.Contains("dup="));
+                            var dupFramesValue = split[dupFramesPosition][4..]; //skip dup=
+                            if (int.TryParse(dupFramesValue, out var duplicatedFrames))
+                            {
+                                // if we've managed to read number of duplicated frames - adjust the frame number
+                                frame -= duplicatedFrames;
+                            }
+                        }
                         if (frame > 0)
                         {
                             if (indeterminate)

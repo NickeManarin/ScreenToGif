@@ -5,12 +5,12 @@
     <UseWPF>True</UseWPF>
     <DebugType>embedded</DebugType>
     <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
-    <Version>2.40.1</Version>
+    <Version>2.41.0</Version>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <!--<UseWindowsForms>True</UseWindowsForms>-->
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="KGySoft.CoreLibraries" Version="7.0.0" />
+    <PackageReference Include="KGySoft.CoreLibraries" Version="8.1.0" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

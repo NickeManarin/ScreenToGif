@@ -3042,6 +3042,11 @@ namespace ScreenToGif.Windows
                         NextFrame_Executed(sender, null);
                         e.Handled = true;
                     }
+                    else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Alt))
+                    {
+                        DeleteAfterButton.Command.Execute(null);
+                        e.Handled = true;
+                    }
 
                     break;
                 }
@@ -3060,7 +3065,12 @@ namespace ScreenToGif.Windows
                         PreviousFrame_Executed(sender, null);
                         e.Handled = true;
                     }
-                    
+                    else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Alt))
+                    {
+                        DeleteBeforeButton.Command.Execute(null);
+                        e.Handled = true;
+                    }
+
                     break;
                 }
 
@@ -6692,6 +6702,20 @@ namespace ScreenToGif.Windows
                 brushesByMouseButton.Add(MouseButtons.Middle, middleClickSolidColorBrush);
             }
 
+            if (model.FirstExtraButtonForegroundColor.A != 0)
+            {
+                var brush = new SolidColorBrush(model.FirstExtraButtonForegroundColor);
+                brush.Freeze();
+                brushesByMouseButton.Add(MouseButtons.FirstExtra, brush);
+            }
+
+            if (model.MiddleButtonForegroundColor.A != 0)
+            {
+                var brush = new SolidColorBrush(model.MiddleButtonForegroundColor);
+                brush.Freeze();
+                brushesByMouseButton.Add(MouseButtons.SecondExtra, brush);
+            }
+
             var count = 0;
             foreach (var frame in auxList)
             {
@@ -6703,8 +6727,7 @@ namespace ScreenToGif.Windows
                     UpdateProgress(count++);
                 }
 
-                SolidColorBrush brush = null;
-                if (!brushesByMouseButton.TryGetValue(frame.ButtonClicked, out brush))
+                if (!brushesByMouseButton.TryGetValue(frame.ButtonClicked, out var brush))
                 {
                     continue;
                 }

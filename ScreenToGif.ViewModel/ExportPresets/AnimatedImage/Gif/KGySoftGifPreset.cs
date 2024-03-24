@@ -31,6 +31,7 @@ public class KGySoftGifPreset : GifPreset
     private bool _allowDeltaFrames = true;
     private bool _allowClippedFrames = true;
     private byte _deltaTolerance;
+    private bool _linearColorSpace;
 
     #endregion
 
@@ -45,36 +46,43 @@ public class KGySoftGifPreset : GifPreset
     {
         new KGySoftGifPreset
         {
-            TitleKey = "S.Preset.Gif.KGySoft.Balanced.Title",
-            DescriptionKey = "S.Preset.Gif.KGySoft.Balanced.Description",
+            TitleKey = "S.Preset.Gif.KGySoft.Default.Title",
+            DescriptionKey = "S.Preset.Gif.KGySoft.Default.Description",
             HasAutoSave = true,
             IsSelected = true,
             IsDefault = true,
             IsSelectedForEncoder = true,
-            CreationDate = new DateTime(2021, 12, 15),
-            QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}",
+            CreationDate = new DateTime(2024, 1, 25),
+            QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.MedianCut)}",
         },
+        // Leaving here for reference because if someone already has a saved config with it, then it's still relevant.
+        //new KGySoftGifPreset
+        //{
+        //    TitleKey = "S.Preset.Gif.KGySoft.Balanced.Title",
+        //    DescriptionKey = "S.Preset.Gif.KGySoft.Balanced.Description",
+        //    HasAutoSave = true,
+        //    IsDefault = true,
+        //    CreationDate = new DateTime(2021, 12, 15),
+        //    QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}",
+        //},
         new KGySoftGifPreset
         {
             TitleKey = "S.Preset.Gif.KGySoft.High.Title",
             DescriptionKey = "S.Preset.Gif.KGySoft.High.Description",
             HasAutoSave = true,
-            IsSelected = true,
             IsDefault = true,
-            IsSelectedForEncoder = true,
             CreationDate = new DateTime(2021, 12, 15),
             QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}",
             DithererId = $"{nameof(ErrorDiffusionDitherer)}.{nameof(ErrorDiffusionDitherer.FloydSteinberg)}",
             BitLevel = 7,
+            LinearColorSpace = true
         },
         new KGySoftGifPreset
         {
             TitleKey = "S.Preset.Gif.KGySoft.Fast.Title",
             DescriptionKey = "S.Preset.Gif.KGySoft.Fast.Description",
             HasAutoSave = true,
-            IsSelected = true,
             IsDefault = true,
-            IsSelectedForEncoder = true,
             CreationDate = new DateTime(2021, 12, 15),
             QuantizerId = $"{nameof(PredefinedColorsQuantizer)}.{nameof(PredefinedColorsQuantizer.SystemDefault8BppPalette)}",
             DithererId = $"{nameof(OrderedDitherer)}.{nameof(OrderedDitherer.Bayer8x8)}",
@@ -153,6 +161,15 @@ public class KGySoftGifPreset : GifPreset
     {
         get => _bitLevel;
         set => SetProperty(ref _bitLevel, value);
+    }
+
+    /// <summary>
+    /// Gets or sets whether the quantizing is processed in the linear color space (as opposed to sRGB).
+    /// </summary>
+    public bool LinearColorSpace
+    {
+        get => _linearColorSpace;
+        set => SetProperty(ref _linearColorSpace, value);
     }
 
     #endregion

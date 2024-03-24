@@ -35,16 +35,23 @@ public class PipeServer<TMessage> : IDisposable
 
     private async void ServerLoop()
     {
-        while (true)
+        while (!_source.IsCancellationRequested)
         {
-            await _pipe.WaitForConnectionAsync(_source.Token);
+            try
+            {
+                await _pipe.WaitForConnectionAsync(_source.Token);
 
-            var message = await JsonSerializer.DeserializeAsync<TMessage>(_pipe, (JsonSerializerOptions) null, _source.Token);
+                var message = await JsonSerializer.DeserializeAsync<TMessage>(_pipe, (JsonSerializerOptions)null, _source.Token);
 
-            _pipe.Disconnect();
+                _pipe.Disconnect();
 
-            if (message != null)
-                _synchronizationContext.Post(OnMessageReceived, message);
+                if (message != null)
+                    _synchronizationContext.Post(OnMessageReceived, message);
+            }
+            catch (Exception)
+            {
+                //Ignore.   
+            }
         }
     }
 

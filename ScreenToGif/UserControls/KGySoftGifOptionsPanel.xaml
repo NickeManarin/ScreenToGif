@@ -26,6 +26,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -81,6 +82,13 @@
                             </MultiBinding>
                         </Slider.Visibility>
                     </Slider>
+
+                    <!--Linear Color Space-->
+                    <c:ExtendedCheckBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="3"
+                                        Text="{DynamicResource S.SaveAs.KGySoft.Quantizer.LinearColorSpace}"
+                                        ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.LinearColorSpace.Info}"
+                                        IsChecked="{Binding LinearColorSpace}"/>
+
                 </Grid>
             </StackPanel>
         </GroupBox>
@@ -180,11 +188,11 @@
                 <!--Repeat Count-->
                 <c:ExtendedCheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="3" Text="{DynamicResource S.SaveAs.KGySoft.Animation.EndlessLoop}"
                                     ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.EndlessLoop.Info}" IsChecked="{Binding EndlessLoop}"/>
-                <c:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Margin="15,3,5,3"
+                <c:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Margin="15,7,5,7"
                                     Text="{DynamicResource S.SaveAs.KGySoft.Animation.PingPong}" ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.PingPong.Info}"
                                     IsChecked="{Binding PingPong}" Visibility="{Binding EndlessLoop, Converter={StaticResource Bool2Visibility}}"/>
                 
-                <TextBlock Grid.Row="1" Grid.Column="0" Margin="15,5,3,5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="15,6,3,7" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
                            Text="{DynamicResource S.SaveAs.KGySoft.Animation.LoopCount}" ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.LoopCount.Info}"
                            Visibility="{Binding EndlessLoop, Converter={StaticResource InvertedBoolToVisibility}}"/>
                 <c:IntegerUpDown Grid.Row="1" Grid.Column="1" Margin="5,3" TextAlignment="Right" Minimum="1" Maximum="65535" StepValue="1"

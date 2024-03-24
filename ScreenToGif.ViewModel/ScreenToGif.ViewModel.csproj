@@ -5,11 +5,11 @@
     <Nullable>disable</Nullable>
     <DebugType>embedded</DebugType>
     <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
-    <Version>2.40.1</Version>
+    <Version>2.41.0</Version>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="KGySoft.Drawing.Core" Version="7.0.0" />
+    <PackageReference Include="KGySoft.Drawing.Core" Version="8.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ScreenToGif.Model\ScreenToGif.Domain.csproj" />

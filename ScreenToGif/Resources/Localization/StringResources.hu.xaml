@@ -794,6 +794,8 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Támogatja az animáció mentését átlátszó háttérrel.</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">Kiváló minőség • Grafika</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Jobb a kisebb színmennyiségű felvételekhez.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Default.Title">KGy SOFT • Alapértelmezett</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Default.Description">Szokványos felhasználói felület felvételéhez ajánlott. Medián vágás kvantálót használ árnyalás nélkül.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • Kiegyensúlyozott</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Jó minőség fénykép jellegű képekhez Wu kvantáló használatával árnyalás nélkül.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • Magas minőség</s:String>
@@ -1618,8 +1620,10 @@
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize">Palettaméret:</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize.Info">Meghatározza a képkockánkénti maximális palettaméretet.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel">Egyedi bitmélység</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">Ha ki van jelölve, a színtér bitmélysége szabadon állítható&#x0d;&#x0a;⚠️ Vigyázat: A legmagasabb érték NAGYON sok memóriát igényelhet!</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">Ha ki van jelölve, a bitmélység szabadon állítható&#x0d;&#x0a;⚠️ Vigyázat: A legmagasabb érték NAGYON sok memóriát igényelhet!</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BitLevel.Info">A magasabb érték nagyobb pontosságot, nagyobb színteret, lassabb feldolgozást és nagyobb memóriahasználatot jelent.&#x0d;&#x0a;Pl. ha 1, akkor az eredmény legfeljebb 8 színű lehet, vagy 2 esetén legfeljebb 64 színű.&#x0d;&#x0a;Oktális fa és Wu kvantálók esetén meghatározza a maximálisan megkülönböztethető monokróm árnyalatok színét is.&#x0d;&#x0a;Pl. ha 5 (az alapérték Wu kvantáló esetén), akkor legfeljebb 32 monokróm árnyalat különböztethető meg.&#x0d;&#x0a;⚠️ Vigyázat: A Wu kvantáló legalább 650 MB memóriát igényel a legmagasabb érték esetén.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.LinearColorSpace">Lineáris színtér</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.LinearColorSpace.Info">Ha ki van jelölve, egyes műveletek (háttérszínnel való összemosás, kvantálás, árnyalás, legközelebbi szín keresése a palettában) a lineáris szintérben történnek az sRGB színtér helyett.&#x0d;&#x0a;A lineáris színtérben való feldolgozás lassabb, de jobb minőségű eredményt biztosít, különösen, ha a kvantáló kevés színt használ.&#x0d;&#x0a;&#x0d;&#x0a;⚠️ Megjegyzés: Kevés szín használata esetén az esetleg átméretezett előnézet fényessége hibás lehet, mert a WPF az átméretezést az sRGB színtérben végzi.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">Fekete-fehér</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">Fix 1 bites paletta fekete és fehér színekkel.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">Szürkeárnyalatos 4 színű</s:String>
@@ -1699,7 +1703,7 @@
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">Ismétlések száma:</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Meghatározza, hányszor legyen az animáció lejátszva.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">Delta képkockák engedélyezése</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">Ha ki van jelölve, a kódolás során kísérlet történik a változatlan pixelek detektálására.&#x0d;&#x0a;Optimalizált kvantáló esetén ez lehetővé teszi, hogy egy képkocka több mint 256 színt tartalmazzon.&#x0d;&#x0a;Ez a beállítás nincs figyelembe véve, ha a kvantáló nem használ átlátszóságot és nincs kijelölve a Levágott képkockák engedélyezése.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">Ha ki van jelölve, a kódolás során kísérlet történik a változatlan pixelek detektálására.&#x0d;&#x0a;Optimalizált kvantáló esetén ez lehetővé teszi, hogy egy képkocka több mint 256 színt tartalmazzon.&#x0d;&#x0a;Ez a beállítás nincs figyelembe véve, ha a kvantáló nem használ átlátszóságot és nincs kijelölve a Levágott képkockák engedélyezése.&#x0d;&#x0a;&#x0d;&#x0a;⚠️ Megjegyzés: Ez a beállítás szemmel látható zajt okozhat a színekben vagy az árnyalási mintázatokban.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">Delta tűréshatár:</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">Meghatározza a maximális tűréshatárt a változott pixelek detektálása során.&#x0d;&#x0a;Ha 0, akkor semmilyen különbség nincs tolerálva.&#x0d;&#x0a;Ha 255, akkor lehetséges, hogy egyes képkockák (vagy akár az összes) üres lesz.&#x0d;&#x0a;Optimalizált kvantáló esetén az észszerű tartomány 0 és 16 között van, míg a fix színeket alkalmazók használhatók valamivel nagyobb értékekkel, különösen árnyalás esetén.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">A túl magas delta tűréshatár gyenge minőségű eredménnyel járhat. A linkre kattintással visszaállítható a delta tűréshatár.</s:String>

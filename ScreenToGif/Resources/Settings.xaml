@@ -57,6 +57,7 @@
     <s:Boolean x:Key="DisableHardwareAcceleration">False</s:Boolean>
     <s:Boolean x:Key="CheckForTranslationUpdates">True</s:Boolean>
     <s:Boolean x:Key="CheckForUpdates">True</s:Boolean>
+    <s:Boolean x:Key="DownloadWithMeteredNetwork">True</s:Boolean>
     <s:Boolean x:Key="PortableUpdate">False</s:Boolean>
     <s:Boolean x:Key="ForceUpdateAsAdmin">False</s:Boolean>
     <s:Boolean x:Key="InstallUpdates">True</s:Boolean>
@@ -146,7 +147,7 @@
     
     <!--Options • Automated Tasks-->
     <c:ArrayList Capacity="1" x:Key="AutomatedTasksList">
-        <t:MouseEventsViewModel HighlightForegroundColor="#000000FF"  LeftButtonForegroundColor="#78FFFF00" RightButtonForegroundColor="#78FF0000" MiddleButtonForegroundColor="#7800FFFF" Width="12" Height="12" TaskType="MouseEvents"/>
+        <t:MouseEventsViewModel HighlightForegroundColor="#000000FF"  LeftButtonForegroundColor="#78FFFF00" RightButtonForegroundColor="#78FF0000" MiddleButtonForegroundColor="#7800FFFF" FirstExtraButtonForegroundColor="#78FF0080" SecondExtraButtonForegroundColor="#78FF8000" Width="12" Height="12" TaskType="MouseEvents"/>
     </c:ArrayList>
 
     <!--Options • Shortcuts-->
@@ -356,8 +357,10 @@
     <!--Editor • Mouse Events -->
     <Color x:Key="MouseHighlightColor">#00000000</Color>
     <Color x:Key="LeftMouseButtonClicksColor">#78FFFF00</Color>
-    <Color x:Key="MiddleMouseButtonClicksColor">#7800FFFF</Color>
     <Color x:Key="RightMouseButtonClicksColor">#78FF0000</Color>
+    <Color x:Key="MiddleMouseButtonClicksColor">#7800FFFF</Color>
+    <Color x:Key="FirstExtraMouseButtonClicksColor">#78FF0080</Color>
+    <Color x:Key="SecondExtraMouseButtonClicksColor">#78FF8000</Color>
     <s:Double x:Key="MouseEventsWidth">12</s:Double>
     <s:Double x:Key="MouseEventsHeight">12</s:Double>
     
