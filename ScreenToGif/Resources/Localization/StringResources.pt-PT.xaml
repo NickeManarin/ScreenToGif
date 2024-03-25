@@ -715,7 +715,7 @@
     <s:String x:Key="S.Recorder.SelectWindow">Clique aqui para selecionar esta janela</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Clique aqui para selecionar este ecrã</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">Pressione Esc para cancelar</s:String>
-    <s:String x:Key="S.Recorder.Splash.Title">Pressione {0} para parar a grvação</s:String>
+    <s:String x:Key="S.Recorder.Splash.Title">Pressione {0} para parar a gravação</s:String>
     <s:String x:Key="S.Recorder.Splash.Subtitle">A janela do gravador será minimizada,&#10;restaure ou pressione {0} para pausar a captura</s:String>
 
     <s:String x:Key="S.Recorder.Discard.Title">Descartar gravação</s:String>
