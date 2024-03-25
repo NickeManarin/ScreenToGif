@@ -6709,9 +6709,9 @@ namespace ScreenToGif.Windows
                 brushesByMouseButton.Add(MouseButtons.FirstExtra, brush);
             }
 
-            if (model.MiddleButtonForegroundColor.A != 0)
+            if (model.SecondExtraButtonForegroundColor.A != 0)
             {
-                var brush = new SolidColorBrush(model.MiddleButtonForegroundColor);
+                var brush = new SolidColorBrush(model.SecondExtraButtonForegroundColor);
                 brush.Freeze();
                 brushesByMouseButton.Add(MouseButtons.SecondExtra, brush);
             }
