@@ -463,34 +463,99 @@
     <s:String x:Key="S.Options.Upload.Proxy.Port">Port:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.User">Kullanıcı adı:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Password">Şifre:</s:String>
-    <s:String x:Key="S.Options.Upload.Get">OAuth token al</s:String>
-    <s:String x:Key="S.Options.Upload.PasteToken">Yetkilendirme 'token'ını buraya yapıştırın.</s:String>   
+
+    <s:String x:Key="S.Options.Upload.Presets">Ön ayarları yükle</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Service">Hizmet</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Title">Başlık</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Description">Açıklama</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Enabled">Aktif edildi</s:String>
+    
+     <!--Options • Upload > Preset-->
+    <s:String x:Key="S.Options.Upload.Preset.Title">Hizmeti yükle</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Select">Bir hizmet seçin</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Select.Info">Yukarıdan bir yükleme hizmeti seçin</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Custom">Özel</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Enable">Bu ayarı kullan.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Details">Ayrıntılar</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Name">İsim:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Description">Açıklama:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode">Mod:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode.Anonymous">Anonim</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode.Authenticated">Kmlik doğrulandı</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorization">Yetkilendirme</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.GetToken">Token al</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Token">OAuth token'ı buraya yapıştırın</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Username">Kullanıcı adı:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Password">Şifre:</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Authorize">Yetkilendirme</s:String>
-    <s:String x:Key="S.Options.Upload.Refresh">Yenile</s:String>
-    <s:String x:Key="S.Options.Upload.Clear">Temizle</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (Anonim)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.NotStored">Kullanıcı adı ve şifre saklanmayacak.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Options">Ayarlar</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Direct">Direk linkleri kullan.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Album">Albüm</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Title">Bu ön ayara benzersiz bir isim vermelisiniz.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Repeated">Bu isim zaten başka bir yükleme ön ayarı tarafından kullanılıyor.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Authenticate">Kimlik doğrulama modundayken doğrulama işlemini tamamlamanız gerekir.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Credentials">Bu uygulamayı yetkilendirmek için kullanıcı adınızı ve şifrenizi girmelisiniz.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.GetToken">Yetkilendirme için token almak mümkün değil.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Bu uygulamayı yetkilendirmek için yetkilendirme 'token'ını belirtmeniz gerekir.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">Yetkilendirme başarısız oldu. Her şeyin doğru olduğunu kontrol edin ve birkaç saniye sonra tekrar deneyin.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Albüm listesi yüklenemedi.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Authorized">Yetkilendirme tamamlandı.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Yetkisiz</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Yetkilendirme süresi {0} tarihinde doldu</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">{0} tarihine kadar yetkilendirme geçerlidir</s:String>
+    
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Gif yerine Gifv uzantılı linkleri al.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Seçilen albüme gif yükleyin.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Albüm:</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Yüklemeden önce bana sor</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Reload">Albüm listesini yeniden yükle.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.Defaults">Varsayılanlar</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.AskMe">Yüklemenin ayrıntılarını doldurmamı iste.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.UrlType">Url türü:</s:String>
+    
+    <!--Options • Upload > Album-->
+    <s:String x:Key="S.Options.Upload.Pick.Album">Albüm seçin (isteğe bağlı)</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Album.Info">Dilerseniz hedef albümü seçebilirsiniz:</s:String>
+    
+    <!--Options • Upload > Details-->
+    <s:String x:Key="S.Options.Upload.Pick.Details">Ayrıntıları yükle (İsteğe bağlı)</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Info">Ayrıntıları yükle</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Title">Başlık:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Description">Açıklama:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags">Etiketler:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags.Info">Etiketleri noktalı virgül kullanarak ayırın ( ; )</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Private">Yalnızca doğrudan bağlantı yoluyla erişenler için görüntülenir.</s:String>
+    
+    <!--Options • Upload > History-->
+    <s:String x:Key="S.Options.Upload.History.Title">Geçmişi yükle</s:String>
+    <s:String x:Key="S.Options.Upload.History.Date">Tarih</s:String>
+    <s:String x:Key="S.Options.Upload.History.Preset">Önceki</s:String>
+    <s:String x:Key="S.Options.Upload.History.Successful">Başarılı?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Remove">Geçmiş girdileri sil.</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.Link">Link:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.LowerQuality">Düşük kalite:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.DeleteLink">Silme linki:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Instruction">Geçmiş girdisini silmek istediğinizden emin misiniz??</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Message">Bu işlem geri alınamaz.&#10;&#10;Seçili geçmiş girdisini silmek istiyor musunuz?</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Get">OAuth token al</s:String>
+    <s:String x:Key="S.Options.Upload.PasteToken">Yetkilendirme 'token'ını buraya yapıştırın.</s:String>   
+    <s:String x:Key="S.Options.Upload.Refresh">Yenile</s:String>
+    <s:String x:Key="S.Options.Upload.Clear">Temizle</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (Anonim)</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Imgur yetkilendirme 'token'ını almak için sayfa açılamadı.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Bu uygulamayı yetkilendirmek için yetkilendirme 'token'ını belirtmeniz gerekir.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Imgur yetkilendirme tamamlandı.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Imgur yetkilendirme başarısız oldu. Birkaç saniye sonra tekrar deneyin veya yeni bir token alın.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">Uygulamayı yetkilendirilemedi.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Doğru 'token'ı sağladığınızı ve internet bağlantınızı kontrol edin.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Bu uygulamanın yetkilendirmesini yenilemek için önce yetkilendirme işlemini tamamlamanız gerekir.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Yetkisiz</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Yetkilendirme süresi {0} tarihinde doldu</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">{0} tarihine kadar yetkilendirme geçerlidir</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgur yetkilendirme kaldırıldı.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Albüm listesi yüklenemedi.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (Anonim)</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth token:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">Hedef seçin</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Album">Albüm seçin (isteğe bağlı)</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Album.Info">Dilerseniz hedef albümü seçebilirsiniz:</s:String>
     
     <!--Options • Extras-->
     <s:String x:Key="S.Options.Extras.External">Kullanılabilir dış araçlar</s:String>
@@ -536,6 +601,7 @@
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Sürüm:</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">Güncellemeleri kontrol et</s:String>
     <s:String x:Key="S.Options.About.Author">Yazar: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft mağaza versiyonu. Zorunlu politikalar nedeniyle bazı özellikler devre dışı bırakıldı.</s:String>
     <s:String x:Key="S.Options.About.Contact">İletişim</s:String>
@@ -593,7 +659,8 @@
     <s:String x:Key="S.Recorder.Fph">Saat başına en fazla kare</s:String>
     <s:String x:Key="S.Recorder.Fph.Short">fph</s:String>
     <s:String x:Key="S.Recorder.Fph.Range">1 ile 60 fph arasında değişmek üzere, daha yüksek değerler daha fazla karenin yakalanacağı anlamına gelir.&#10;Her artış 1 dakika farkı ifade eder.</s:String>
-    
+
+    <s:String x:Key="S.Recorder.ClickOrPress">Yakalamak için tıklayın veya tuşlara basın</s:String>
     <s:String x:Key="S.Recorder.SnapToWindow">Pencereye Tuttur(Tutturmak için sürükleyip bırakın)</s:String>
     <s:String x:Key="S.Recorder.PreStart">Ön Başlangıç</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (Duraklatıldı)</s:String>
@@ -607,17 +674,33 @@
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Alan</s:String>
+    <s:String x:Key="S.Recorder.Area.Select">Bir alan seçin</s:String>
     <s:String x:Key="S.Recorder.Window">Pencere</s:String>
+    <s:String x:Key="S.Recorder.Window.Select">Bir pencere seçin</s:String>
     <s:String x:Key="S.Recorder.Screen">Ekran</s:String>
+    <s:String x:Key="S.Recorder.Screen.Select">Bir ekran seçin</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Internal">Dahili ekran</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Generic">Genel ekran</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info1">Ekran kartı: {0}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info2">Çözünürlük: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info3">Gerçek çözünürlük: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info4">DPI: {0} ({1:0.##}%)</s:String>
+    <s:String x:Key="S.Recorder.Move">Seçimi taşımak için&#10;sürükleyin.</s:String>
     <s:String x:Key="S.Recorder.Accept">Kabul et</s:String>
     <s:String x:Key="S.Recorder.Retry">Tekrar dene</s:String>
     <s:String x:Key="S.Recorder.Retry.Shortcut">Sağ tıkla</s:String>
-    <s:String x:Key="S.Recorder.CancelSelection">Seçimi iptaş et(Esc)</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">Seçimi iptal et(Esc)</s:String>
     <s:String x:Key="S.Recorder.SelectArea">Bu ekranın bir alanını seçmek için tıklayıp sürükleyin.</s:String>
     <s:String x:Key="S.Recorder.SelectArea.Embedded">Bir alan seçmek için tıklayıp sürükleyin.</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">Bu pencereyi seçmek için buraya tıklayın.</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Bu ekranı seçmek için buraya tıklayın.</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">İptal etmek için Esc'ye basın.</s:String>
+    <s:String x:Key="S.Recorder.Splash.Title">Kaydı durdurmak için {0} tuşuna basın</s:String>
+    <s:String x:Key="S.Recorder.Splash.Subtitle">Kaydedici penceresi küçültülecek,&#10;geri yüklemek veya yakalamayı duraklatmak için {0} tuşuna basın</s:String>
+     
+    <s:String x:Key="S.Recorder.Discard.Title">Kaydı at</s:String>
+    <s:String x:Key="S.Recorder.Discard.Instruction">Kaydı atmak istediğinizden emin misiniz?</s:String>
+    <s:String x:Key="S.Recorder.Discard.Message">Bu işlem, tüm kareleri kaldırarak kaydı atacaktır.&#x0d;Bu işlemi geri alamazsınız.</s:String>
     
     <!--Webcam recorder-->
     <s:String x:Key="S.Webcam.Title">ScreenToGif - Web kamerası Kaydedicisi</s:String>
@@ -1486,5 +1569,18 @@
     
     <!--Orientation-->
     <s:String x:Key="S.Orientation.Horizontal">Yatay</s:String>
-    <s:String x:Key="S.Orientation.Vertical">Düşey</s:String>
+    <s:String x:Key="S.Orientation.Vertical">Dikey</s:String>
+
+    <!--TextAlignment-->
+    <s:String x:Key="S.TextAlignment.Left">Sol</s:String>
+    <s:String x:Key="S.TextAlignment.Right">Sağ</s:String>
+    <s:String x:Key="S.TextAlignment.Center">Ortala</s:String>
+    <s:String x:Key="S.TextAlignment.Justify">İk yana yasla</s:String>
+    
+    <!--TextDecoration-->
+    <s:String x:Key="S.TextDecorations.None">Hiçbiri</s:String>
+    <s:String x:Key="S.TextDecorations.Underline">Altı çizili</s:String>
+    <s:String x:Key="S.TextDecorations.Strikethrough">Üstü çizgili</s:String>
+    <s:String x:Key="S.TextDecorations.OverLine">Üstü çizgili</s:String>
+    <s:String x:Key="S.TextDecorations.Baseline">Kenar çizgisi</s:String>
 </ResourceDictionary>
