@@ -232,13 +232,13 @@
 
     <RoutedUICommand x:Key="Command.MoveLeft" Text="S.Command.MoveLeft">
         <RoutedUICommand.InputGestures>
-            <KeyGesture>Ctrl + Shift + Left</KeyGesture>
+            <KeyGesture>Ctrl + Alt + Left</KeyGesture>
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 
     <RoutedUICommand x:Key="Command.MoveRight" Text="S.Command.MoveRight">
         <RoutedUICommand.InputGestures>
-            <KeyGesture>Ctrl + Shift + Right</KeyGesture>
+            <KeyGesture>Ctrl + Alt + Right</KeyGesture>
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 

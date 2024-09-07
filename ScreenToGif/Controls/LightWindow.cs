@@ -131,7 +131,10 @@ public class LightWindow : BaseScreenRecorder
         if (GetTemplateChild("MainGrid") is Grid resizeGrid)
         {
             foreach (var element in resizeGrid.Children.OfType<Rectangle>())
+            {
                 element.PreviewMouseDown += ResizeRectangle_PreviewMouseDown;
+                element.PreviewStylusButtonDown += ResizeRectangle_PreviewStylusButtonDown;
+            }
         }
 
         base.OnApplyTemplate();
@@ -216,7 +219,41 @@ public class LightWindow : BaseScreenRecorder
         if (e.ChangedButton != MouseButton.Left)
             return;
 
-        if (!(sender is Rectangle rectangle))
+        if (sender is not Rectangle rectangle)
+            return;
+
+        switch (rectangle.Name)
+        {
+            case "TopRectangle":
+                ResizeWindow(ResizeDirection.Top);
+                break;
+            case "BottomRectangle":
+                ResizeWindow(ResizeDirection.Bottom);
+                break;
+            case "LeftRectangle":
+                ResizeWindow(ResizeDirection.Left);
+                break;
+            case "RightRectangle":
+                ResizeWindow(ResizeDirection.Right);
+                break;
+            case "TopLeftRectangle":
+                ResizeWindow(ResizeDirection.TopLeft);
+                break;
+            case "TopRightRectangle":
+                ResizeWindow(ResizeDirection.TopRight);
+                break;
+            case "BottomLeftRectangle":
+                ResizeWindow(ResizeDirection.BottomLeft);
+                break;
+            case "BottomRightRectangle":
+                ResizeWindow(ResizeDirection.BottomRight);
+                break;
+        }
+    }
+
+    private void ResizeRectangle_PreviewStylusButtonDown(object sender, StylusButtonEventArgs e)
+    {
+        if (sender is not Rectangle rectangle)
             return;
 
         switch (rectangle.Name)
@@ -250,7 +287,7 @@ public class LightWindow : BaseScreenRecorder
 
     private static void IsFollowing_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (!(d is LightWindow win))
+        if (d is not LightWindow win)
             return;
 
         win.OnFollowingChanged();

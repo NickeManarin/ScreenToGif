@@ -1569,6 +1569,7 @@
                         <n:LabelSeparator Grid.Row="4" Text="{DynamicResource S.Options.Extras.FfmpegVersion}"/>
                         <ComboBox Grid.Row="5" Margin="10,3,0,3" MinWidth="120" VerticalAlignment="Center" HorizontalAlignment="Left"
                                   SelectedIndex="{Binding Path=FfmpegVersion, Converter={StaticResource EnumToInt}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="v7"/>
                             <ComboBoxItem Content="v6"/>
                             <ComboBoxItem Content="v5"/>
                             <ComboBoxItem Content="v4"/>

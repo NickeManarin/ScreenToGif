@@ -262,7 +262,7 @@
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">强制更新时提升特权</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">在安装开始之前提示我</s:String>
     <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork">使用按流量计费的连接下载更新</s:String>
-    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork.Info">（在系统设置中设置您的连接类型）</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork.Info">（允许在按流量计费的网络上下载更新）</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">界面</s:String>
@@ -797,6 +797,8 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">支持以透明背景保存动画。</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">高质量 • 图形</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">更适合于使用较少数量的颜色进行录制。</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Default.Title">KGy SOFT • 默认</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Default.Description">建议用于常规UI的屏幕录制。使用中值剪切量化器，无抖动。</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • 均衡</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">使用吴氏的量化器，在没有抖动的情况下，照片般的图像质量很好。</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • 高质量</s:String>
@@ -1391,6 +1393,8 @@
     <s:String x:Key="S.MouseClicks.Color.Left">左键颜色：</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">中键颜色：</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">右键颜色：</s:String>
+    <s:String x:Key="S.MouseClicks.Color.FirstExtra">第1个额外按钮颜色：</s:String>
+    <s:String x:Key="S.MouseClicks.Color.SecondExtra">第2个额外按钮颜色：</s:String>
     
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">图像</s:String>
@@ -1623,6 +1627,8 @@
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel">自定义位等级。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">选中后，可以手动配置位等级。&#x0d;&#x0a;⚠️警告：最高位等级可能需要大量内存！</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BitLevel.Info">更高的值意味着更高的精度，更大的目标色彩空间，更慢的处理速度和更大的内存占用。&#x0d;&#x0a;例如，如果为 1，则结果不能超过 8 种颜色，如果为 2，则不能超过 64 种颜色。&#x0d;&#x0a;对于八叉树和吴氏量化器，它还会影响单色阴影的最大数量。&#x0d;&#x0a;例如，如果为5（这是吴氏量化器的默认值），就只能区分出32种单色调。&#x0d;&#x0a;⚠️注意：吴氏量化器的最大值至少要消耗650MB内存。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.LinearColorSpace">线性颜色空间</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.LinearColorSpace.Info">选中时，一些操作（与背景色的alpha混合、量化、抖动、查找调色板中最近的颜色）是在线性颜色空间而不是sRGB空间中执行的。&#x0d;&#x0a;在线性颜色空间中工作较慢，但提供了更好的质量结果，尤其是当量化器仅使用几种颜色时。&#x0d;&#x0a;&#x0d;&#x0a;⚠️ 备注：当只使用几种颜色时，调整大小的预览亮度可能不正确，因为WPF在sRGB颜色空间中执行调整大小。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">黑白</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">被修复的黑白 1 位调色板。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">灰度 4 色</s:String>
@@ -1702,7 +1708,7 @@
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">重复计数：</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">指定动画将播放多少次。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">允许增量帧。</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">选中后，在编码过程中将尝试检测未更改的像素。&#x0d;&#x0a;与优化的量化器一起使用时，此选项可使一个帧具有的颜色超过 256 种。&#x0d;&#x0a;如果量化器不使用透明度并且未选中“允许剪辑帧”，则忽略此选项。</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">选中后，在编码过程中将尝试检测未更改的像素。&#x0d;&#x0a;与优化的量化器一起使用时，此选项可使一个帧具有的颜色超过 256 种。&#x0d;&#x0a;如果量化器不使用透明度并且未选中“允许剪辑帧”，则忽略此选项。&#x0d;&#x0a;&#x0d;&#x0a;⚠️ 备注：此选项可能会在颜色或抖动模式中造成明显的伪影。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">增量容差：</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">指定检测更改像素时的最大容差。&#x0d;&#x0a;如果为 0，则不允许任何差异。&#x0d;&#x0a;如果为 255，则可能会添加一些没有内容的帧（甚至所有帧）。&#x0d;&#x0a;优化的量化器的合理范围处于 0 到 16 之间。具有固定颜色的量化器可以用稍大的值进行抖动。</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">如果增量容差太高，可能会导致质量较差。单击以重置增量容差。</s:String>
