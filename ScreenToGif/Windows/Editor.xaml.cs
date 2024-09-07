@@ -3037,9 +3037,14 @@ namespace ScreenToGif.Windows
 
                 case Key.Right:
                 {
-                    if ((Keyboard.Modifiers & ModifierKeys.Alt) == 0 || (Keyboard.Modifiers & (ModifierKeys.Alt | ModifierKeys.Control)) == (ModifierKeys.Alt | ModifierKeys.Control))
+                    if ((Keyboard.Modifiers & ModifierKeys.Alt) == 0 && (Keyboard.Modifiers & (ModifierKeys.Alt | ModifierKeys.Control)) == 0)
                     {
                         NextFrame_Executed(sender, null);
+                        e.Handled = true;
+                    }
+                    else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Alt | ModifierKeys.Control))
+                    {
+                        MoveRightButton.Command.Execute(null);
                         e.Handled = true;
                     }
                     else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Alt))
@@ -3060,9 +3065,14 @@ namespace ScreenToGif.Windows
                 
                 case Key.Left:
                 {
-                    if ((Keyboard.Modifiers & ModifierKeys.Alt) == 0 || (Keyboard.Modifiers & (ModifierKeys.Alt | ModifierKeys.Control)) == (ModifierKeys.Alt | ModifierKeys.Control))
+                    if ((Keyboard.Modifiers & ModifierKeys.Alt) == 0 && (Keyboard.Modifiers & (ModifierKeys.Alt | ModifierKeys.Control)) == 0)
                     {
                         PreviousFrame_Executed(sender, null);
+                        e.Handled = true;
+                    }
+                    else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Alt | ModifierKeys.Control))
+                    {
+                        MoveLeftButton.Command.Execute(null);
                         e.Handled = true;
                     }
                     else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Alt))

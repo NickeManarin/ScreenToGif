@@ -112,8 +112,8 @@
     <s:String x:Key="S.Command.SmoothLoop">Create a smooth loop</s:String>
     <s:String x:Key="S.Command.Reverse">Reverse animation</s:String>
     <s:String x:Key="S.Command.Yoyo">Makes the animation go forward and backwards</s:String>
-    <s:String x:Key="S.Command.MoveLeft">Move the selected frame to the left</s:String>
-    <s:String x:Key="S.Command.MoveRight">Move the selected frame to the right</s:String>
+    <s:String x:Key="S.Command.MoveLeft">Move the selected frames to the left</s:String>
+    <s:String x:Key="S.Command.MoveRight">Move the selected frames to the right</s:String>
     <s:String x:Key="S.Command.Resize">Resize all frames</s:String>
     <s:String x:Key="S.Command.Crop">Crop all frames</s:String>
     <s:String x:Key="S.Command.FlipRotate">Flip or rotate the frames</s:String>

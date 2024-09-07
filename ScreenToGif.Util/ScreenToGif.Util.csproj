@@ -5,7 +5,7 @@
     <UseWPF>True</UseWPF>
     <DebugType>embedded</DebugType>
     <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
-    <Version>2.41.0</Version>
+    <Version>2.41.1</Version>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <!--<UseWindowsForms>True</UseWindowsForms>-->
   </PropertyGroup>

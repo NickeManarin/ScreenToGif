@@ -54,7 +54,7 @@ public class FfmpegMovPreset : MovPreset, IFfmpegPreset
             Pass = 2,
             ConstantRateFactor = null,
             PixelFormat = VideoPixelFormats.Yuv420p,
-            Vsync = Vsyncs.Vfr,
+            Vsync = Vsyncs.Cfr,
             Framerate = Framerates.Custom,
             CustomFramerate = 40,
             BitRate = 15,

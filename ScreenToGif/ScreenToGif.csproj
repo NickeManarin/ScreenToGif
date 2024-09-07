@@ -141,7 +141,7 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <Company>Nicke Manarin</Company>
     <Authors>Nicke Manarin</Authors>
-    <Version>2.41.0</Version>
+    <Version>2.41.1</Version>
     <Copyright>Copyright© Nicke Manarin 2023</Copyright>
     <PackageProjectUrl>https://www.screentogif.com</PackageProjectUrl>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
