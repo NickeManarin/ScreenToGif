@@ -104,9 +104,9 @@
     <s:String x:Key="S.Command.Copy">Kopieer de geselecteerde frames en sla ze op het klembord op</s:String>
     <s:String x:Key="S.Command.Cut">Knip de geselecteerde frames en bewaar ze op het klembord</s:String>
     <s:String x:Key="S.Command.Paste">Plak de frames van het klembord</s:String>
-    <s:String x:Key="S.Command.Delete">Verwijder alle geselecteerde frames</s:String>
-    <s:String x:Key="S.Command.DeletePrevious">Verwijder alle voorgaande frames</s:String>
-    <s:String x:Key="S.Command.DeleteNext">Verwijder alle volgende frames</s:String>
+    <s:String x:Key="S.Command.Delete">Alle geselecteerde frames verwijderen</s:String>
+    <s:String x:Key="S.Command.DeletePrevious">Alle voorgaande frames verwijderen</s:String>
+    <s:String x:Key="S.Command.DeleteNext">Alle volgende frames verwijderen</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Duplicaten verwijderen</s:String>
     <s:String x:Key="S.Command.Reduce">Verminder het aantal frames</s:String>
     <s:String x:Key="S.Command.SmoothLoop">Een vloeiende lus aanmaken</s:String>
@@ -133,10 +133,10 @@
     <s:String x:Key="S.Command.SelectAll">Alle frames selecteren</s:String>
     <s:String x:Key="S.Command.GoTo">Navigeer naar frame per index</s:String>
     <s:String x:Key="S.Command.InverseSelection">Selectie van frames omkeren</s:String>
-    <s:String x:Key="S.Command.Unselect">Alle frames deselecteren</s:String>
+    <s:String x:Key="S.Command.Unselect">Selectie van alle frames opheffen</s:String>
     <s:String x:Key="S.Command.Fade">Overgang vervagen</s:String>
     <s:String x:Key="S.Command.Slide">Dia-overgang</s:String>
-    <s:String x:Key="S.Command.ClearAll">Wis alle voltooide coderingen</s:String>
+    <s:String x:Key="S.Command.ClearAll">Alle voltooide coderingen wissen</s:String>
     <s:String x:Key="S.Command.MoveUp">Omhoog verplaatsen</s:String>
     <s:String x:Key="S.Command.MoveDown">Omlaag verplaatsen</s:String>
     <s:String x:Key="S.Command.Add">Toevoegen</s:String>
@@ -210,7 +210,7 @@
     <s:String x:Key="S.Options.App.Startup.Mode.Automatic">Opstarten met&#10;Windows</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">De app wordt uitgevoerd na het opstarten van Windows.</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Warning">Onmogelijk om af te wisselen tussen opstartmodi.</s:String>
-    <s:String x:Key="S.Options.App.Startup.Instance.Single">Sta slechts een&#10;enkele instantie toe</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single">Maar één&#10;enkele instantie toestaan</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">Je kunt de app één keer per gebruiker en uitvoerbaar programma uitvoeren, wat betekent dat verschillende gebruikers- of uitvoerbare instanties naast elkaar kunnen bestaan. Wanneer u de app opnieuw probeert uit te voeren, zal de tweede instantie proberen de eerste focus te geven en zichzelf te beëindigen.</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple">Meerdere instanties&#10;toestaan</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">Je kunt de app meerdere keren tegelijkertijd uitvoeren, zonder beperking.</s:String>
@@ -235,7 +235,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">Voorbeeldkleuren.</s:String>
     <s:String x:Key="S.Options.App.Tray">Systeemvakpictogram</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Pictogram in het systeemvak van de taakbalk (meldingencentrum) weergeven.</s:String>
-    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Houd de toepassing open, zelfs als alle vensters gesloten zijn.</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">De toepassing openhouden, zelfs als alle vensters gesloten zijn.</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">Doe niets</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Open">Open een venster</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Open.None">Geen venster</s:String>
@@ -308,7 +308,7 @@
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Constante framerate die niet verandert bij opnamevertraging)</s:String>
     <s:String x:Key="S.Options.Recorder.CaptureChanges">Leg alleen vast als er iets verandert.</s:String>
     <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(Er wordt alleen een frame vastgelegd als er iets is gewijzigd binnen het opnamegebied)</s:String>
-    <s:String x:Key="S.Options.Recorder.RemoteImprovement">Verbeter de opnameprestaties bij een externe desktopverbinding.</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement">Opnameprestaties bij een externe desktopverbinding verbeteren.</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Schakelt gelaagde vensteropname uit)</s:String>
     <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">Geheugenopruiming forceren tijdens de opname.</s:String>
     <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">(Vermindert geheugengebruik tijdens de opname, maar verlaagt de prestaties)</s:String>
@@ -329,13 +329,13 @@
     <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">(Geeft een handle weer in de buurt van de hoek van de selectie, waarmee het opnamegebied kan worden verplaatst)</s:String>
     <s:String x:Key="S.Options.Recorder.Compact">Compacte weergave.</s:String>
     <s:String x:Key="S.Options.Recorder.Compact.Info">(Toont een kleinere versie van het opdrachtpaneel van de recorder)</s:String>
-    <s:String x:Key="S.Options.Recorder.DisplayDiscard">De knop Annuleren ook weergeven tijdens de opname.</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard">De knop Annuleren ook tijdens de opname weergeven.</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(Normaal gesproken alleen zichtbaar wanneer de opname is gepauzeerd)</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionImprovement">Prestaties van de schermselectie verbeteren.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(Vermindert de vertraging tijdens schermselectie door een statische weergave van het scherm weer te geven)</s:String>
     
-    <s:String x:Key="S.Options.Recorder.RememberSize">Onthoud de vorige grootte van het opnamegebied.</s:String>
-    <s:String x:Key="S.Options.Recorder.RememberPosition">Onthoud de vorige locatie van het opnamegebied.</s:String>
+    <s:String x:Key="S.Options.Recorder.RememberSize">Afmetingen van opnamegebied onthouden.</s:String>
+    <s:String x:Key="S.Options.Recorder.RememberPosition">Locatie van opnamegebied onthouden.</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">Aftellen voor opname.</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart.Info">(de wachttijd [sec] voordat de opname wordt gestart)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">Cursor volgen inschakelen.</s:String>
@@ -361,7 +361,7 @@
     <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Basiskleur</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Even-kleur</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.OddColor">Oneven-kleur</s:String>
-    <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Geef de coderingen weer in een apart venster.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Coderingen in een apart venster weergeven.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Titelbalk uitbreiden (window chrome).</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Bij het laden de venstergrootte automatisch aanpassen aan de framegrootte.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Bij het laden het frame-zoomniveau automatisch aanpassen aan de schermgrootte.</s:String>
@@ -370,10 +370,10 @@
     <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Bevestiging vragen bij het afsluiten van de editor (als er een project geopend is).</s:String>
     <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Driedubbel-klik gebruiken om tekst te selecteren.</s:String>
     <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Contouren van tekstkaders tekenen.</s:String>
-    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Verminder frames als dat nodig is.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Frames zo nodig verminderen.</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(Sla een frame over als de voorbeeldweergave het niet op tijd kan weergeven)</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Sla een frame over als de voorbeeldweergave het niet op tijd kan weergeven.</s:String>
-    <s:String x:Key="S.Options.Editor.General.LimitHistory">Leg een limiet op aan de geschiedenis van ongedaan maken/opnieuw uitvoeren.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory">Limiet op de geschiedenis van ongedaan maken/opnieuw uitvoeren.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Oudere acties worden verwijderd wanneer de limiet is bereikt)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Maximaal aantal opgeslagen acties)</s:String>
     <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">De uitvoermap met de voorinstellingen synchroniseren.</s:String>
@@ -466,7 +466,7 @@
     <s:String x:Key="S.Options.Storage.RemoveSettings">Instellingenbestand verwijderen.</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">Open de map waar het instellngenbestand is opgeslagen. &#10;Houd Ctrl ingedrukt bij het openen van het bestand bestand.</s:String>
     <s:String x:Key="S.Options.Storage.SettingsInfo">• Instellingen laden: Standaard ◄ AppData ◄ Lokaal. &#10;• Als de lokale map geen instellingenbestand bevat dan zoekt de applicatie in de AppData map. Indien geen instellingenbestand gevonden wordt, komen de standaardinstellingen van kracht&#10;• Als er geen lokale instellingenbestand gevonden wordt, worden alle instellingen in AppData opgeslagen.</s:String>
-    <s:String x:Key="S.Options.Storage.DeleteEverything">Verwijder alle bestanden uit de cache bij het sluiten van de app.</s:String>
+    <s:String x:Key="S.Options.Storage.DeleteEverything">Bij het sluiten van de app alle bestanden uit de cache verwijderen.</s:String>
     <s:String x:Key="S.Options.Storage.AskDeleteEverything">Vraag het me voordat je alle bestanden uit de cache verwijdert.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">Oude projecten automatisch verwijderen.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">Bij de start zal een achtergrondtaak van het programma alle gesloten projecten wissen die ouder zijn dan een ingestelde tijd.</s:String>
@@ -1067,7 +1067,7 @@
     <s:String x:Key="S.Editor.Image.Overlay">Overlay</s:String>
     <s:String x:Key="S.Editor.Image.FreeDrawing">Vrije&#10;tekening</s:String>
     <s:String x:Key="S.Editor.Image.Shape">Vormen</s:String>
-    <s:String x:Key="S.Editor.Image.MouseEvents">Muis&#x0d;Gebeurtenissen</s:String>
+    <s:String x:Key="S.Editor.Image.MouseEvents">Muis&#x0d;gebeurtenissen</s:String>
     <s:String x:Key="S.Editor.Image.Watermark">Watermerk</s:String>
     <s:String x:Key="S.Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="S.Editor.Image.Border">Rand</s:String>
@@ -1837,9 +1837,9 @@
     <s:String x:Key="S.SaveAs.Partial.Mode.Expression">Expressie</s:String>
     <s:String x:Key="S.SaveAs.Partial.Mode.Expression.Info">Exporteert delen van de animatie op basis van een eenvoudige uitdrukking.</s:String>
     <s:String x:Key="S.SaveAs.Partial.Mode.Frames">Frame bereik</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode.Frames.Info">Exporteert slechts een deel van de animatie binnen het framebereik.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Frames.Info">Exporteert maar een deel van de animatie binnen het framebereik.</s:String>
     <s:String x:Key="S.SaveAs.Partial.Mode.Time">Tijdspanne</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode.Time.Info">Exporteert slechts een deel van de animatie binnen het tijdsbestek.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Time.Info">Exporteert maar een deel van de animatie binnen het tijdsbestek.</s:String>
     <s:String x:Key="S.SaveAs.Partial.Mode.Selection">Selectie</s:String>
     <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Info">Exporteert alleen de frames die in de tijdlijn zijn geselecteerd.</s:String>
     <s:String x:Key="S.SaveAs.Partial.Mode.Selection.None">Geen frame geselecteerd.</s:String>
