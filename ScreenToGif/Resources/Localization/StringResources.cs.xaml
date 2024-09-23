@@ -1494,6 +1494,8 @@
     <s:String x:Key="S.SaveAs.Gif.Info">Graphics Interchange Format</s:String>
     <s:String x:Key="S.SaveAs.Webp">Webp</s:String>
     <s:String x:Key="S.SaveAs.Webp.Info">Web Picture</s:String>
+    <s:String x:Key="S.SaveAs.Avif">Avif</s:String>
+    <s:String x:Key="S.SaveAs.Avif.Info">AV1 Image File Format</s:String>
     
     <s:String x:Key="S.SaveAs.Avi">AVI</s:String>
     <s:String x:Key="S.SaveAs.Avi.Info">Audio Video Interleave</s:String>
