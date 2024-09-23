@@ -947,6 +947,7 @@
     <s:String x:Key="S.Editor.File.Apng">Png animation</s:String>
     <s:String x:Key="S.Editor.File.Gif">Gif animation</s:String>
     <s:String x:Key="S.Editor.File.Webp">Webp animation</s:String>
+    <s:String x:Key="S.Editor.File.Avif">Avif animation</s:String>
     
     <s:String x:Key="S.Editor.File.Avi">Avi video</s:String>
     <s:String x:Key="S.Editor.File.Mkv">Matroska video</s:String>

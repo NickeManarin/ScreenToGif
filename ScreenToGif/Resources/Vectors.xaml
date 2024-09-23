@@ -87,7 +87,19 @@
             <GeometryDrawing Brush="#ff407cb8" Geometry="M 0,10 L 17,10 L 8.500,0 L 0,10 Z"/>
         </DrawingBrush.Drawing>
     </DrawingBrush>
-    
+
+    <DrawingBrush x:Key="Vector.Avif" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="#ffb2b2b2" Geometry="F1 M 0.000,0.000 L 40.000,0.000 L 40.000,32.857 L 0.000,32.857 L 0.000,0.000 Z"/>
+                <GeometryDrawing Brush="#ffffffff" Geometry="F1 M 0.714,0.714 L 39.286,0.714 L 39.286,32.143 L 0.714,32.143 L 0.714,0.714 Z"/>
+                <GeometryDrawing Brush="#ff4c81b7" Geometry="F1 M 1.429,1.429 L 1.429,10.728 C 3.685,8.977 6.763,7.895 10.163,7.895 C 12.207,7.895 14.136,8.286 15.839,8.978 C 16.913,7.438 18.694,6.429 20.714,6.429 C 22.206,6.429 23.565,6.982 24.609,7.889 C 25.725,6.158 27.719,5.000 30.000,5.000 C 33.455,5.000 36.259,7.648 36.332,10.941 C 37.146,11.325 37.896,11.803 38.571,12.357 L 38.571,1.429 L 1.429,1.429 Z"/>
+                <GeometryDrawing Brush="#ff75a696" Geometry="F1 M 31.068,24.609 C 29.397,23.292 27.293,22.500 25.000,22.500 C 22.125,22.500 19.546,23.743 17.750,25.712 C 14.361,23.472 10.338,21.792 5.916,20.853 C 5.433,19.843 4.409,19.139 3.214,19.139 C 2.542,19.139 1.927,19.367 1.429,19.742 L 1.429,31.429 L 38.571,31.429 L 38.571,27.711 C 36.387,26.197 33.840,25.112 31.068,24.609 Z"/>
+            </DrawingGroup>
+            <!-- TODO: AVIF logo: https://aomedia.org/assets/images/avif-logo-rgb.svg (BSD-3) -->
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
     <DrawingBrush x:Key="Vector.Backward" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
         <DrawingBrush.Drawing>
             <GeometryDrawing Brush="#ff3d7cb5" Geometry="M 15.056,17.041 L 40,17.041 L 40,9.612 L 15.056,9.612 L 24.128,0 L 13.944,0 L 0,13.333 L 13.648,26.667 L 23.870,26.667 L 15.056,17.041 Z"/>
