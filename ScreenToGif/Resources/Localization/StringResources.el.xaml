@@ -28,7 +28,7 @@
     <s:String x:Key="S.Delay">Καθυστέρηση</s:String>
     <s:String x:Key="S.DelayMs">Καθυστέρηση:</s:String>
     <s:String x:Key="S.ValueMs">Τιμή -+:</s:String>
-    <s:String x:Key="S.ScaleValue">Scale Value:</s:String>
+    <s:String x:Key="S.ScaleValue">Τιμή κλίμακας:</s:String>
     <s:String x:Key="S.Margin">Περιθώριο:</s:String>
     <s:String x:Key="S.Padding">Padding:</s:String>
     <s:String x:Key="S.MinHeight">Ελάχ. ύψος:</s:String>
@@ -152,13 +152,13 @@
     <s:String x:Key="S.StartUp.Recorder.Tooltip">Opens the screen recorder,&#10;where you can easily start recording your screen.</s:String>
     <s:String x:Key="S.StartUp.Webcam">Κάμερα web</s:String>
     <s:String x:Key="S.StartUp.Webcam.Tooltip">Opens the webcam recorder.</s:String>
-    <s:String x:Key="S.StartUp.Board">Board</s:String>
+    <s:String x:Key="S.StartUp.Board">Πίνακας</s:String>
     <s:String x:Key="S.StartUp.Board.Tooltip">Opens the board recorder,&#10;where you can start recording your drawings.</s:String>
     <s:String x:Key="S.StartUp.Editor">Επεξεργαστής</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Opens the editor window, the central point of this app,&#10;where you can start and edit a new recording.</s:String>
     <s:String x:Key="S.StartUp.Options">Επιλογές</s:String>
     <s:String x:Key="S.StartUp.NewRelease">Νέα έκδοση διαθέσιμη</s:String>
-    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Downloads the latest version of ScreenToGif.</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Λαμβάνει την πιο πρόσφατη έκδοση του ScreenToGif.</s:String>
 
     <!--Updater-->
     <s:String x:Key="S.Updater.Title">ScreenToGif - Ενημέρωση</s:String>
@@ -729,8 +729,8 @@
     <s:String x:Key="S.Webcam.Title">ScreenToGif - Webcam Recorder</s:String>
     <s:String x:Key="S.Webcam.NoVideo">No video device detected :(</s:String>
     <s:String x:Key="S.Webcam.CheckVideoDevices">Έλεγχος για συσκευές βίντεο.</s:String>
-    <s:String x:Key="S.Webcam.Scale">Scale: {0:0.##}x</s:String>
-    <s:String x:Key="S.Webcam.ChangeScale">Change the scale of the video.</s:String>
+    <s:String x:Key="S.Webcam.Scale">Κλίμακα: {0:0.##}x</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">Αλλαγή της κλίμακας του βίντεο.</s:String>
     
     <!--Board recorder-->
     <s:String x:Key="S.Board.Title">ScreenToGif - Board Recorder</s:String>
@@ -1036,7 +1036,7 @@
     <s:String x:Key="S.Editor.Edit.Frames">Καρέ</s:String>
     <s:String x:Key="S.Editor.Edit.Delete">Διαγραφή</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Αφαίρεση&#x0d;διπλότυπων</s:String>
-    <s:String x:Key="S.Editor.Edit.Frames.Reduce">Reduce&#x0d;Frame Count</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.Reduce">Μείωση&#x0d;πλήθους καρέ</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Smooth&#x0d;Loop</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Διαγραφή όλων των προηγούμενων</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Διαγραφή όλων των επόμενων</s:String>
@@ -1068,7 +1068,7 @@
     <s:String x:Key="S.Editor.Image.KeyStrokes">Key&#x0d;Strokes</s:String>
     
     <!--Editor • Image tab • Overlay-->
-    <s:String x:Key="S.Editor.Image.Overlay">Overlay</s:String>
+    <s:String x:Key="S.Editor.Image.Overlay">Επικάλυψη</s:String>
     <s:String x:Key="S.Editor.Image.FreeDrawing">Ελεύθερη&#x0d;σχεδίαση</s:String>
     <s:String x:Key="S.Editor.Image.Shape">Σχήματα</s:String>
     <s:String x:Key="S.Editor.Image.MouseEvents">Συμβάντα&#x0d;ποντικιού</s:String>
@@ -1096,7 +1096,7 @@
     <s:String x:Key="S.Editor.Statistics.SelectedFrame">Επιλεγμένο καρέ</s:String>
     
     <!--Editor • Messages-->
-    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Title">Cut Action</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Title">Ενέργεια αποκοπής</s:String>
     <s:String x:Key="S.Editor.Clipboard.InvalidCut.Instruction">You can't cut all frames.</s:String>
     <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">The recording needs at least one frame.</s:String>
     <s:String x:Key="S.Editor.DeleteAll.Title">Αφαίρεση όλων</s:String>
@@ -1334,8 +1334,8 @@
     <s:String x:Key="S.Caption.Outline">Outline</s:String>
     <s:String x:Key="S.Caption.Thickness">Πάχος:</s:String>
     <s:String x:Key="S.Caption.Layout">Διάταξη</s:String>
-    <s:String x:Key="S.Caption.Vertical">Vertical:</s:String>
-    <s:String x:Key="S.Caption.Horizontal">Horizontal:</s:String>
+    <s:String x:Key="S.Caption.Vertical">Κατακόρυφα:</s:String>
+    <s:String x:Key="S.Caption.Horizontal">Οριζόντια:</s:String>
     <s:String x:Key="S.Caption.TextAlignment">Στοίχιση:</s:String>
     <s:String x:Key="S.Caption.TextDecoration">Διακόσμηση:</s:String>
 
@@ -1495,7 +1495,7 @@
     <s:String x:Key="S.SaveAs.Type.Animated">Κινούμενη εικόνα</s:String>
     <s:String x:Key="S.SaveAs.Type.Video">Βίντεο</s:String>
     <s:String x:Key="S.SaveAs.Type.Frames">Καρέ</s:String>
-    <s:String x:Key="S.SaveAs.Type.Other">Other</s:String>
+    <s:String x:Key="S.SaveAs.Type.Other">Άλλο</s:String>
     
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Apng.Info">Animated Portable Network Graphics</s:String>
@@ -1585,8 +1585,8 @@
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale.Info">Uses a fixed grayscale palette, so it's way faster.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">Most used colors</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">Simply takes the most used colors in the frames.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Sampling">Sampling:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">Sampling factor:&#10;A value of 1 will result in better looking gif, but it will be slower to render.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling">Δειγματοληψία:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">Συντελεστής δειγματοληψίας:&#10;A value of 1 will result in better looking gif, but it will be slower to render.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quality">Ποιότητα:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Χρώματα:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Μέγιστος αριθμός χρωμάτων (για κάθε καρέ).</s:String>
@@ -1599,7 +1599,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Loop:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Looped">Looped gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Repeat forever.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Repeat count.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Πλήθος επανάληψης.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Ενεργοποίηση διαφάνειας.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">Enables the full transparency mode, which makes the background of the gif to be fully transparent.&#10;The chroma key replacement process will be ignored if this option is enabled.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">Select which color to display as transparent.</s:String>
@@ -1735,7 +1735,7 @@
     <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Default">Προεπιλογή</s:String>
     <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Picture">Εικόνα</s:String>
     <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Photo">Φωτογραφία</s:String>
-    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Drawing">Drawing</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Drawing">Σχεδίαση</s:String>
     <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Icon">Εικονίδιο</s:String>
     <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Text">Κείμενο</s:String>
     <s:String x:Key="S.SaveAs.WebpOptions.Lossless">Use lossless mode.</s:String>
@@ -1745,9 +1745,9 @@
     <s:String x:Key="S.SaveAs.VideoOptions.Mode.Normal">Normal</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Mode.Advanced">Για προχωρημένους</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Mode.Info">Method of configuring the encoder parameters:&#10;Normal: Use standard UI controls.&#10;Advanced: Use a text box to type the parameters.</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Codec">Codec:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Codec">Κωδικοποίηση:</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Codec.Info">The video encoder, responsible for&#10;converting the raw pixels to the output file.</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset">Preset:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset">Προρύθμιση:</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.None">None</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VerySlow">Very Slow</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slower">Slower</s:String>
@@ -1792,7 +1792,7 @@
     <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel">Επίπεδο ποιότητας:</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel.Info">Μικρότερες τιμές σημαίνει καλύτερη ποιότητα.</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Bitrate">Ρυθμός bit:</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Info">Target video bit rate.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Info">Ρυθμός bit βίντεο προορισμού.</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode">Λειτουργία ρυθμού bit:</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Constant">Constant</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Variable">Variable</s:String>
@@ -1818,21 +1818,21 @@
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Export partially.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Save the file to a folder of your choice.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">Αντικατάσταση;</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Warn</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Προειδοποίηση</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Only warns that another file exists with the same name.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Prompt</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Ερώτηση</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Asks if the user wants to overwrite the file.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Allow</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Simply overwrites the file.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Επιτρέπεται</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Απλώς αντιγράφει το αρχείο.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Save as project too (same folder, same filename).</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Upload the file.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Μεταφόρτωση του αρχείου.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Αντιγραφή στο πρόχειρο.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Αρχείο</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Copies the output file into the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Αντιγράφει το αρχείο εξόδου στο πρόχειρο.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">Διαδρομή φακέλου</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">Copies the folder path of the output file into the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">Αντιγράφει τη διαδρομή αρχείου του αρχείου εξόδου στο πρόχειρο.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">Διαδρομή αρχείου</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">Copies the path of the output file into the clipboard.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">Αντιγράφει τη διαδρομή του αρχείου εξόδου στο πρόχειρο.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Σύνδεσμος</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Copies the link generated by the upload service into the clipboard.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Execute post encoding commands.</s:String>
@@ -1866,9 +1866,9 @@
     <s:String x:Key="S.SaveAs.File.Format">Μορφή αρχείου</s:String>
     <s:String x:Key="S.SaveAs.File.Name">Όνομα του αρχείου. Insert Date/Time format between '?'</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">Κίνηση</s:String>
-    <s:String x:Key="S.SaveAs.File.Increase">Increase the file number</s:String>
-    <s:String x:Key="S.SaveAs.File.Decrease">Decrease the file number</s:String>
-    <s:String x:Key="S.SaveAs.File.Exists">A file with the same name already exists.</s:String>
+    <s:String x:Key="S.SaveAs.File.Increase">Αύξηση του αριθμού αρχείων</s:String>
+    <s:String x:Key="S.SaveAs.File.Decrease">Μείωση του αριθμού αρχείων</s:String>
+    <s:String x:Key="S.SaveAs.File.Exists">Υπάρχει ήδη ένα αρχείο με το ίδιο όνομα.</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Αποθήκευση στο πρόχειρο.</s:String>
     
     <!--Editor • Save as > Warnings-->
@@ -1892,20 +1892,20 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">Η λειτουργία ακυρώθηκε.</s:String>
     
     <!--Editor • Save As > Upload-->
-    <s:String x:Key="S.SaveAs.Upload">Upload</s:String>
+    <s:String x:Key="S.SaveAs.Upload">Μεταφόρτωση</s:String>
     <s:String x:Key="S.SaveAs.Upload.Info">Select the upload preset, which has details about the service in use for upload.</s:String>
     <s:String x:Key="S.SaveAs.Upload.Limit">This upload service imposes limits.</s:String>
-    <s:String x:Key="S.SaveAs.Upload.Add">Add a new upload preset.</s:String>
-    <s:String x:Key="S.SaveAs.Upload.Edit">Edit upload preset settings.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Add">Προσθέστε μια νέα προρύθμιση μεταφόρτωσης.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Edit">Επεξεργασία ρυθμίσεων προρύθμισης μεταφόρτωσης.</s:String>
     <s:String x:Key="S.SaveAs.Upload.History">View the upload history of this preset.</s:String>
     <s:String x:Key="S.SaveAs.Upload.Remove">Remove the currently selected upload preset.</s:String>
-    <s:String x:Key="S.SaveAs.Upload.Select.Title">Select an upload preset</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Select.Title">Επιλέξτε μια προσρύθμιση μεταφόρτωσης</s:String>
     <s:String x:Key="S.SaveAs.Upload.Select.Description">Pick one from this list.</s:String>
     <s:String x:Key="S.SaveAs.Upload.Unavailable.Title">No upload preset available for this format</s:String>
-    <s:String x:Key="S.SaveAs.Upload.Unavailable.Description">Add a preset by using the button below.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Unavailable.Description">Προσθέστε μια προρύθμιση χρησιμοποιώντας το κουμπί παρακάτω.</s:String>
     
     <!--Editor • Save as > Upload > Dialogs-->
-    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Title">Deleting the Upload Preset</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Title">Διαγραφή της προρύθμισης μεταφόρτωσης</s:String>
     <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Instruction">Are you sure that you want to delete the upload preset?</s:String>
     <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Message">This action cannot be undone.&#10;&#10;Would you like to delete the selected upload preset?</s:String>
     
@@ -1984,7 +1984,7 @@
     <s:String x:Key="S.VerticalAlignment.Top">Επάνω</s:String>
     <s:String x:Key="S.VerticalAlignment.Center">Κέντρο</s:String>
     <s:String x:Key="S.VerticalAlignment.Bottom">Κάτω</s:String>
-    <s:String x:Key="S.Alignment.Stretch">Stretch</s:String>
+    <s:String x:Key="S.Alignment.Stretch">Παραμόρφωση</s:String>
 
     <!--HorizontalAlignment-->
     <s:String x:Key="S.HorizontalAlignment.Left">Αριστερά</s:String>
