@@ -15,7 +15,7 @@
     <s:String x:Key="S.No">No</s:String>
     <s:String x:Key="S.Add">Προσθήκη</s:String>
     <s:String x:Key="S.Edit">Επεξεργασία</s:String>
-    <s:String x:Key="S.Id">Id</s:String>
+    <s:String x:Key="S.Id">Αναγνωριστικό</s:String>
     <s:String x:Key="S.Title">Τίτλος</s:String>
     <s:String x:Key="S.Description">Περιγραφή</s:String>
     <s:String x:Key="S.SelectColor">Click here to select the color.</s:String>
@@ -225,13 +225,13 @@
     <s:String x:Key="S.Options.App.Startup.Window.Info">(Window which shows up first when the app starts)</s:String>
     <s:String x:Key="S.Options.App.Theme">Θέμα</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme">Σχήμα χρωμάτων:</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">Very Light</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Light">Light</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Medium</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Dark</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Very Dark</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">Πολύ ανοιχτό</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Light">Ανοιχτό</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Μεσαίο</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Σκούρο</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Πολύ σκούρο</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">Follow system</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Custom</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Προσαρμοσμένο</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">Παράδειγμα χρωμάτων.</s:String>
     <s:String x:Key="S.Options.App.Tray">System tray icon</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Εμφάνιση της εφαρμογής στη γραμμή συστήματος (περιοχή ειδοποιήσεων).</s:String>
@@ -253,8 +253,8 @@
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Ask me before closing the app (via the 'Exit' command).</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Απενεργοποίηση επιτάχυνσης υλικού.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(The user interface will be rendered via software mode)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Check for translation updates.</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Updated translations will be downloaded and installed automatically)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Έλεγχος για ενημερώσεις μεταφράσεων.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Οι ενημερωμένες μεταφράσεις θα ληφθούν και θα εγκατασταθούν αυτόματα)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Έλεγχος για ενημερώσεις κατά την εκκίνηση.</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Αυτόματη εγκατάσταση ενημερώσεων μετά το κλείσιμο της εφαρμογής.</s:String>
     <s:String x:Key="S.Options.App.General.PortableUpdate">Force the download of the portable version.</s:String>
@@ -611,7 +611,7 @@
     <s:String x:Key="S.Options.Donate.Crypto">Crypto νομίσματα</s:String>
     <s:String x:Key="S.Options.Donate.Crypto.BitcoinCash">Αντιγραφή της διεύθυνσης BitcoinCash.</s:String>
     <s:String x:Key="S.Options.Donate.Support">Υποστήριξη</s:String>
-    <s:String x:Key="S.Options.Donate.Support.Visit">If you wish to support the project :)</s:String>
+    <s:String x:Key="S.Options.Donate.Support.Visit">Εάν θέλετε να υποστηρίξετε το έργο :)</s:String>
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Έκδοση:</s:String>
@@ -626,7 +626,7 @@
     <s:String x:Key="S.Options.About.Technical">Technical</s:String>
     <s:String x:Key="S.Options.About.Technical.License">Άδεια χρήσης:</s:String>
     <s:String x:Key="S.Options.About.Technical.Free">(This is a completely free app)</s:String>
-    <s:String x:Key="S.Options.About.Technical.SourceCode">Source code:</s:String>
+    <s:String x:Key="S.Options.About.Technical.SourceCode">Πηγαίος κώδικας:</s:String>
     <s:String x:Key="S.Options.About.Technical.Privacy">Πολτική απορρήτου:</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">A big thanks to</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>
@@ -828,21 +828,21 @@
     <!--Insert frames-->
     <s:String x:Key="S.InsertFrames.Title">Εισαγωγή καρέ</s:String>
     <s:String x:Key="S.InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>
-    <s:String x:Key="S.InsertFrames.CanvasSize">Canvas size:</s:String>
-    <s:String x:Key="S.InsertFrames.FitCanvas">Fit Image&#10;on Canvas</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">Μέγεθος καμβά:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Προσαρμογή εικόνας&#10;σοτν καμβά</s:String>
     <s:String x:Key="S.InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>
     <s:String x:Key="S.InsertFrames.DifferentSizes">There is a difference between frame sizes. You need to solve this before inserting the frames.</s:String>
     <s:String x:Key="S.InsertFrames.InsertedFrames">Νέο(α) καρέ</s:String>
     <s:String x:Key="S.InsertFrames.CurrentFrames">Τρέχον(τα) καρέ</s:String>
     <s:String x:Key="S.InsertFrames.ImageSize">Μέγεθος εικόνας:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Θέση εικόνας:</s:String>
-    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Επαναφορά μεγέθους &#x0d;και θέσης εικόνας</s:String>
     <s:String x:Key="S.InsertFrames.Info2">New frames will be inserted into the&#10;current list of frames at the position:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Πριν</s:String>
     <s:String x:Key="S.InsertFrames.After">Μετά</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Καρέ</s:String>
     <s:String x:Key="S.InsertFrames.Importing">Εισαγωγή...</s:String>
-    <s:String x:Key="S.InsertFrames.SelectColorFill">Select the canvas fill color</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Επιλέξτε το χρώμα γεμίσματος καμβά</s:String>
 
     <!--Import frames from video-->
     <s:String x:Key="S.ImportVideo.Title">Εισαγωγή καρέ από βίντεο</s:String>
@@ -1179,7 +1179,7 @@
     
     <!--Editor • Go to-->
     <s:String x:Key="S.GoTo.Title">Μετάβαση στο καρέ</s:String>
-    <s:String x:Key="S.GoTo.Instruction">Go to frame (0 to {0})</s:String>
+    <s:String x:Key="S.GoTo.Instruction">Μετάβαση στο καρέ (0 έως {0})</s:String>
     
     <!--Editor • Context menu-->
     <s:String x:Key="S.Context.SaveAs">Αποθήκευση ως...</s:String>
@@ -1198,14 +1198,14 @@
     <s:String x:Key="S.Hint.Undo">Undo executed</s:String>
     <s:String x:Key="S.Hint.Reset">Reset executed</s:String>
     <s:String x:Key="S.Hint.Redo">Redo executed</s:String>
-    <s:String x:Key="S.Hint.Cut">{0} καρέ απόκόπηκε(αν)</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} καρέ αποκόπηκε(αν)</s:String>
     <s:String x:Key="S.Hint.Copy">{0} καρέ αντιγράφηκε(αν)</s:String>
     <s:String x:Key="S.Hint.Paste">{0} καρέ επικολλήθηκε(αν)</s:String>
     <s:String x:Key="S.Hint.Zoom">Zoom set to {0}%</s:String>
-    <s:String x:Key="S.Hint.SelectAll">All frames were selected</s:String>
+    <s:String x:Key="S.Hint.SelectAll">Όλα τα καρέ επιλέχθηκαν</s:String>
     <s:String x:Key="S.Hint.SelectSingle">Frame #{0} selected</s:String>
     <s:String x:Key="S.Hint.SelectInverse">Selection inversed</s:String>
-    <s:String x:Key="S.Hint.Deselect">All frames were deselected</s:String>
+    <s:String x:Key="S.Hint.Deselect">Όλα τα καρέ αποεπιλέχθηκαν</s:String>
     <s:String x:Key="S.Hint.DeleteFrames">{0} καρέ διαγράφηκε(αν)</s:String>
     <s:String x:Key="S.Hint.Reverse">Frame list reversed</s:String>
     <s:String x:Key="S.Hint.Yoyo">Yo-yo effect applied</s:String>
@@ -1357,12 +1357,12 @@
     <s:String x:Key="S.KeyStrokes.Edit.Keys">Detected key strokes</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Remove">Remove key stroke</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Add">Add a key stroke:</s:String>
-    <s:String x:Key="S.KeyStrokes.Edit.Lower">Lowercase lettering.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower">Πεζά γράμματα.</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">It lets you insert lower case single letters.</s:String>
 
     <!--Editor • Free drawing-->
     <s:String x:Key="S.FreeDrawing.Mode">Λειτουργία</s:String>
-    <s:String x:Key="S.FreeDrawing.Pen">Pen</s:String>
+    <s:String x:Key="S.FreeDrawing.Pen">Πένα</s:String>
     <s:String x:Key="S.FreeDrawing.Eraser">Γόμα</s:String>
     <s:String x:Key="S.FreeDrawing.Select">Επιλογή</s:String>
     <s:String x:Key="S.FreeDrawing.StrokeEraser">Stroke Eraser</s:String>
@@ -1371,7 +1371,7 @@
     <s:String x:Key="S.FreeDrawing.Tip">Συμβουλή:</s:String>
     <s:String x:Key="S.FreeDrawing.Rectangle">Ορθογώνιο</s:String>
     <s:String x:Key="S.FreeDrawing.Ellipse">Ellipse</s:String>
-    <s:String x:Key="S.FreeDrawing.Other">Other:</s:String>
+    <s:String x:Key="S.FreeDrawing.Other">Άλλο:</s:String>
     <s:String x:Key="S.FreeDrawing.Highlighter">Highlighter.</s:String>
     <s:String x:Key="S.FreeDrawing.FitToCurve">Fit To Curve.</s:String>
     <s:String x:Key="S.FreeDrawing.Warning.NoDrawing">There are no drawings to be applied to the frames you selected.</s:String>
