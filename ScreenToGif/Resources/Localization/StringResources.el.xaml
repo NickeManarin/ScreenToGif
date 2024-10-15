@@ -873,15 +873,15 @@
     <s:String x:Key="S.Encoder.Completed.Clipboard">Αντιφράφηκε στο πρόχειρο</s:String>
     <s:String x:Key="S.Encoder.Completed.Clipboard.Fail">Απέτυχε η αντιγραφή</s:String>
     <s:String x:Key="S.Encoder.Completed.Command">Command executed</s:String>
-    <s:String x:Key="S.Encoder.Completed.Command.Output">Show the output of the command(s).</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command.Output">Εμφάνιση της εξόδου της εντολής(ών).</s:String>
     <s:String x:Key="S.Encoder.Completed.Command.Fail">Απέτυχε η εκτέλεση της εντολής</s:String>
-    <s:String x:Key="S.Encoder.Completed.Upload.Fail">Failed to upload</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Fail">Απέτυχε η μεταφόρτωση</s:String>
     <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + Click to open the page to delete the image (if available).</s:String>
     
     <s:String x:Key="S.Encoder.Completed.Elapsed">Χρόνος που παρήλθε, σε λεπτά:</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">Ανάλυση:</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">Κωδικοποίηση:</s:String>
-    <s:String x:Key="S.Encoder.Completed.Elapsed.Upload">Upload:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Upload">Μεταφόρτωση:</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Copy">Αντιγραφή:</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Commands">Εντολές:</s:String>
     
@@ -889,7 +889,7 @@
     <s:String x:Key="S.Encoder.Canceled">Ακυρώθηκε</s:String>
     <s:String x:Key="S.Encoder.Error">Σφάλμα</s:String>
     <s:String x:Key="S.Encoder.Error.Info">Click here to show the details of this error.</s:String>
-    <s:String x:Key="S.Encoder.Uploading">Uploading</s:String>
+    <s:String x:Key="S.Encoder.Uploading">Μεταφόρτωση</s:String>
     <s:String x:Key="S.Encoder.Executing">Εκτέλεση εντολών</s:String>
     <s:String x:Key="S.Encoder.Processing">Επεξεργασία {0}</s:String>
     <s:String x:Key="S.Encoder.Analyzing.Second">Προετοιμασία για δεύτερο πέρασμα</s:String>
@@ -909,8 +909,8 @@
     <s:String x:Key="S.Encoder.Copy.Link">Αντιγραφή συνδέσμου</s:String>
     
     <!--Command output-->
-    <s:String x:Key="S.Encoder.Command.Title">ScreenToGif - Command Output</s:String>
-    <s:String x:Key="S.Encoder.Command.Header">Command output</s:String>
+    <s:String x:Key="S.Encoder.Command.Title">ScreenToGif - Έξοδος εντολών</s:String>
+    <s:String x:Key="S.Encoder.Command.Header">Έξοδος εντολών</s:String>
     
     <!--Notifications-->
     <s:String x:Key="S.Notifications">Ειδοποιήσεις</s:String>
@@ -1086,7 +1086,7 @@
     
     <!--Editor • Statistics tab-->
     <s:String x:Key="S.Editor.Statistics.General">Γενικά</s:String>
-    <s:String x:Key="S.Editor.Statistics.FrameCount">Frame count</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameCount">Πλήθος καρέ</s:String>
     <s:String x:Key="S.Editor.Statistics.TotalDuration">Συνολική διάρκεια</s:String>
     <s:String x:Key="S.Editor.Statistics.FrameSize">Μέγεθος καρέ</s:String>
     <s:String x:Key="S.Editor.Statistics.AverageDuration">Μέση διάρκεια (καθυστέρηση)</s:String>
@@ -1937,8 +1937,8 @@
     <s:String x:Key="S.Feedback.Suggestion">Πρόταση</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Issue/Bug</s:String>
     <s:String x:Key="S.Feedback.YourEmail">Το email σας</s:String>
-    <s:String x:Key="S.Feedback.Warning.Title">You need to type a title for the feedback.</s:String>
-    <s:String x:Key="S.Feedback.Warning.Message">You need to type a message in the feedback.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Title">Πρέπει να πληκτρολογήσετε έναν τίτλο για ατα σχόλια.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Message">Πρέπει να πληκτρολογήσετε ενα μήνυμα στα σχόλια.</s:String>
     <s:String x:Key="S.Feedback.Warning.Email">You need to type your email, to receive a reply from the developer.</s:String>
     <s:String x:Key="S.Feedback.Sending">Αποστολή στο παρασκήνιο. Αυτό το παράθυρο θα κλείσει σύντομα.</s:String>
     <s:String x:Key="S.Feedback.Attachments">Συνημμένα (Optional, 20MB Maximum)</s:String>
