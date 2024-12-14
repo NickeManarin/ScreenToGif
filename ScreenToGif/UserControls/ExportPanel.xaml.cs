@@ -10,6 +10,7 @@ using ScreenToGif.Util.Settings;
 using ScreenToGif.ViewModel;
 using ScreenToGif.ViewModel.ExportPresets;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Apng;
+using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Avif;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Gif;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Webp;
 using ScreenToGif.ViewModel.ExportPresets.Image;
@@ -222,6 +223,14 @@ public partial class ExportPanel : UserControl, IPanel
                 EncoderSystemItem.IsEnabled = false;
                 ExtensionComboBox.ItemsSource = new List<string> { ".webp" };
                 break;
+            case ExportFormats.Avif:
+                EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
+                EncoderFfmpegItem.IsEnabled = true;
+                EncoderGifskiItem.IsEnabled = false;
+                EncoderSystemItem.IsEnabled = false;
+                ExtensionComboBox.ItemsSource = new List<string> { ".avif" };
+                break;
 
 
             case ExportFormats.Avi:
@@ -412,6 +421,11 @@ public partial class ExportPanel : UserControl, IPanel
                 AddDistinct(presets, FfmpegWebpPreset.Defaults);
                 break;
             }
+            case ExportFormats.Avif:
+            {
+                AddDistinct(presets, FfmpegAvifPreset.Defaults);
+                break;
+            }
 
             //Videos.
             case ExportFormats.Avi:
@@ -515,7 +529,7 @@ public partial class ExportPanel : UserControl, IPanel
 
     private static void PersistPresets(IEnumerable<ExportPreset> typeList, ExportFormats type)
     {
-        var list = UserSettings.All.ExportPresets?.OfType<ExportPreset>().Where(w => w.Type != type).ToList() ?? new List<ExportPreset>();
+        var list = UserSettings.All.ExportPresets?.OfType<ExportPreset>().Where(w => w.Type != type).ToList() ?? [];
 
         list.AddRange(typeList);
 
@@ -542,6 +556,7 @@ public partial class ExportPanel : UserControl, IPanel
 
                 break;
             }
+
             case ExportFormats.Mkv:
             {
                 if (videoPreset.HardwareAcceleration == HardwareAccelerationModes.On)
@@ -657,6 +672,28 @@ public partial class ExportPanel : UserControl, IPanel
         videoPreset.VideoCodec = VideoCodecs.NotSelected;
         FfmpegCodecComboBox.SelectionChanged += FfmpegCodecComboBox_SelectionChanged;
         videoPreset.VideoCodec = codec;
+    }
+
+    private void AdjustAvifCodecs(ExportPreset preset)
+    {
+        if (preset is not FfmpegAvifPreset avifPreset)
+            return;
+
+        FfmpegAvifCodecComboBox.SelectionChanged -= FfmpegAvifCodecComboBox_SelectionChanged;
+        var codec = avifPreset.VideoCodec;
+
+        // We have not implemented av1_qsv/nvenc/amf yet
+
+        FfmpegAvifCodecComboBox.ItemsSource = new List<VideoCodec>
+        {
+            new LibAom(),
+            new Rav1E(),
+            new SvtAv1(),
+        };
+
+        avifPreset.VideoCodec = VideoCodecs.NotSelected;
+        FfmpegAvifCodecComboBox.SelectionChanged += FfmpegAvifCodecComboBox_SelectionChanged;
+        avifPreset.VideoCodec = codec;
     }
 
     private void ChangeFileNumber(int change)
@@ -960,6 +997,7 @@ public partial class ExportPanel : UserControl, IPanel
 
         //Load video codecs.
         AdjustCodecs(selected);
+        AdjustAvifCodecs(selected);
 
         //Set the preset to the UI.
         CurrentPreset = selected.HasAutoSave ? selected : selected.ShallowCopy();
@@ -977,7 +1015,7 @@ public partial class ExportPanel : UserControl, IPanel
         if (string.IsNullOrWhiteSpace(selected.Extension))
             selected.Extension = selected.DefaultExtension;
 
-        //Get the selected preset and display it's settings in the next expanders.
+        //Get the selected preset and display its settings in the next expanders.
         switch (selected.Type)
         {
             //Animated images.
@@ -1026,6 +1064,10 @@ public partial class ExportPanel : UserControl, IPanel
             }
             case ExportFormats.Webp:
                 FfmpegWebpOptionsGrid.Visibility = Visibility.Visible;
+                break;
+            case ExportFormats.Avif:
+                FfmpegAvifOptionsGrid.Visibility = Visibility.Visible;
+                FfmpegAvifAccelerationComboBox.SelectionChanged += FfmpegAvifAccelerationComboBox_SelectionChanged;
                 break;
 
             //Videos.
@@ -1124,7 +1166,7 @@ public partial class ExportPanel : UserControl, IPanel
                 LocalizationHelper.Get("S.SaveAs.Presets.Ask.Delete.Message")))
             return;
 
-        //Remove the preset directly from the settings and reaload all presets.
+        //Remove the preset directly from the settings and reload all presets.
         UserSettings.All.ExportPresets.Remove(preset);
         LoadPresets(preset.Type);
     }
@@ -1317,6 +1359,41 @@ public partial class ExportPanel : UserControl, IPanel
         }
     }
 
+    private void FfmpegAvifCodecComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded)
+            return;
+
+        if (FfmpegAvifCodecComboBox.SelectedItem is not VideoCodec selected || CurrentPreset is not FfmpegAvifPreset avifPreset)
+            return;
+
+        //That's a lot of work just to maintain the binding. Sure there must be an easy way, right?
+        var containsPreset = selected.CodecPresets.Any(a => a.Type == avifPreset.CodecPreset);
+        var containsFormat = selected.PixelFormats.Any(a => a.Type == avifPreset.PixelFormat);
+        var codecPreset = avifPreset.CodecPreset;
+        var pixelFormat = avifPreset.PixelFormat;
+
+        //For some reason, if the same enum is being set, the combo does not display the selection.
+        avifPreset.CodecPreset = VideoCodecPresets.NotSelected;
+        avifPreset.PixelFormat = VideoPixelFormats.NotSelected;
+
+        switch(selected.Type)
+        {
+            case VideoCodecs.LibAom:
+                avifPreset.CodecPreset = containsPreset ? codecPreset : VideoCodecPresets.None;
+                avifPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
+                break;
+            case VideoCodecs.SvtAv1:
+                avifPreset.CodecPreset = containsPreset ? codecPreset : VideoCodecPresets.Medium;
+                avifPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
+                break;
+            case VideoCodecs.Rav1E:
+                avifPreset.CodecPreset = containsPreset ? codecPreset : VideoCodecPresets.Medium;
+                avifPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
+                break;
+        }
+    }
+
     private void FfmpegAccelerationComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (!IsLoaded)
@@ -1326,6 +1403,17 @@ public partial class ExportPanel : UserControl, IPanel
 
         if (FfmpegCodecComboBox.SelectedIndex == -1)
             FfmpegCodecComboBox.SelectedIndex = 0;
+    }
+
+    private void FfmpegAvifAccelerationComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded)
+            return;
+
+        AdjustAvifCodecs(CurrentPreset);
+
+        if (FfmpegAvifCodecComboBox.SelectedIndex == -1)
+            FfmpegAvifCodecComboBox.SelectedIndex = 0;
     }
 
     private void ImagesZipCheckBox_CheckedChanged(object sender, RoutedEventArgs e)
@@ -1402,6 +1490,10 @@ public partial class ExportPanel : UserControl, IPanel
                     case ExportFormats.Webp:
                         sfd.Filter = $"{LocalizationHelper.Get("S.Editor.File.Webp")} (.webp)|*.webp";
                         sfd.DefaultExt = ".webp";
+                        break;
+                    case ExportFormats.Avif:
+                        sfd.Filter = $"{LocalizationHelper.Get("S.Editor.File.Avif")} (.avif)|*.avif";
+                        sfd.DefaultExt = ".avif";
                         break;
 
                     //Video.

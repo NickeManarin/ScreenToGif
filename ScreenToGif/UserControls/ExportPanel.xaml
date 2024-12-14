@@ -29,6 +29,8 @@
 
             <i:ExportItem Title="{DynamicResource S.SaveAs.Webp}" Description="{DynamicResource S.SaveAs.Webp.Info}"
                           ExportType="{DynamicResource S.SaveAs.Type.Animated}" FileType="{x:Static e:ExportFormats.Webp}" ImageId="Vector.Webp"/>
+            <i:ExportItem Title="{DynamicResource S.SaveAs.Avif}" Description="{DynamicResource S.SaveAs.Avif.Info}"
+              ExportType="{DynamicResource S.SaveAs.Type.Animated}" FileType="{x:Static e:ExportFormats.Avif}" ImageId="Vector.Jpeg"/>
             
             <!--Video-->
             <i:ExportItem Title="{DynamicResource S.SaveAs.Avi}" Description="{DynamicResource S.SaveAs.Avi.Info}"
@@ -833,7 +835,7 @@
                             <ComboBoxItem Tag="{x:Static e:VideoCodecPresets.Photo}" Content="{DynamicResource S.SaveAs.WebpOptions.CodecPreset.Photo}"/>
                             <ComboBoxItem Tag="{x:Static e:VideoCodecPresets.Text}" Content="{DynamicResource S.SaveAs.WebpOptions.CodecPreset.Text}"/>
                         </ComboBox>
-                        
+
                         <!--Pixel Format-->
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.PixelFormat}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                         <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" x:Name="FfmpegWebpPixelFormatComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Tag" SelectedValue="{Binding PixelFormat}">
@@ -854,7 +856,7 @@
                             <ComboBoxItem Tag="{x:Static e:Vsyncs.Vfr}" Content="{DynamicResource S.SaveAs.VideoOptions.Vsync.Vfr}"/>
                             <ComboBoxItem Tag="{x:Static e:Vsyncs.Drop}" Content="{DynamicResource S.SaveAs.VideoOptions.Vsync.Drop}"/>
                         </ComboBox>
-                        
+
                         <!--Framerate-->
                         <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.Framerate}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                         <ComboBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" x:Name="FfmpegWebpFramerateComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Tag" SelectedValue="{Binding Framerate}">
@@ -901,7 +903,7 @@
                         <!--Lossless-->
                         <n:ExtendedCheckBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" x:Name="FfmpegWebpLosslessCheckBox" Text="{DynamicResource S.SaveAs.WebpOptions.Lossless}" TextWrapping="Wrap"
                                             IsChecked="{Binding Lossless}" Margin="0,3,3,3"/>
-                        
+
                         <!--Loop-->
                         <n:ExtendedCheckBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4" x:Name="FfmpegWebpLoopedCheckBox" Text="{DynamicResource S.SaveAs.GifOptions.Looped}" 
                                             IsChecked="{Binding Looped}" Margin="0,3,3,3"/>
@@ -923,6 +925,180 @@
                                              Value="{Binding RepeatCount, Mode=TwoWay}" MinWidth="45" IsEnabled="{Binding RepeatForever, Converter={StaticResource InvertedBool}}"/>
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource S.SaveAs.GifOptions.RepeatCount}" Margin="0,3" Foreground="{DynamicResource Element.Foreground.Medium}"
                                        IsEnabled="{Binding RepeatForever, Converter={StaticResource InvertedBool}}"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <!-- Avif -->
+                <Grid x:Name="FfmpegAvifOptionsGrid" Margin="10,0,0,0" Visibility="Collapsed" IsSharedSizeScope="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Mode-->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="WebpModeSizeGroup"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.Mode}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" Name="FfmpegAvifModeComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Tag" SelectedValue="{Binding SettingsMode}">
+                            <ComboBoxItem Tag="{x:Static e:VideoSettingsModes.Normal}" Content="{DynamicResource S.SaveAs.VideoOptions.Mode.Normal}"/>
+                            <ComboBoxItem Tag="{x:Static e:VideoSettingsModes.Advanced}" Content="{DynamicResource S.SaveAs.VideoOptions.Mode.Advanced}"/>
+                        </ComboBox>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Visibility="{Binding SettingsMode, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static e:VideoSettingsModes.Advanced}, FallbackValue=Collapsed}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="WebpModeSizeGroup"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.SaveAs.Ffmpeg.Parameters}" VerticalAlignment="Top" Padding="0" Margin="0,6,0,0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                        <n:ExtendedTextBox Grid.Row="0" Grid.Column="1" x:Name="FfmpegAvifParameterTextBox" MinHeight="23" Margin="5,3,3,3" VerticalContentAlignment="Top" TextWrapping="Wrap"
+                           AcceptsReturn="True" Text="{Binding Parameters}" ToolTip="{DynamicResource S.SaveAs.Ffmpeg.Parameters.Info}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center" Margin="3,0">
+            <Hyperlink NavigateUri="http://bing.com" RequestNavigate="PreviewCommand_RequestNavigate" ToolTip="{DynamicResource S.SaveAs.Ffmpeg.Preview.Info}">
+                <Run Text="{DynamicResource S.SaveAs.Ffmpeg.Preview}"/>
+            </Hyperlink>
+            <Run Text="/" Foreground="{DynamicResource Element.Foreground}"/>
+            <Hyperlink NavigateUri="https://ffmpeg.org/ffmpeg-formats.html#avif" RequestNavigate="Hyperlink_RequestNavigate">
+                <Run Text="{DynamicResource S.SaveAs.Ffmpeg.Help.Format}"/>
+            </Hyperlink>
+            <Run Text="/" Foreground="{DynamicResource Element.Foreground}"/>
+            <Hyperlink NavigateUri="http://www.ffmpeg.org/ffmpeg-filters.html" RequestNavigate="Hyperlink_RequestNavigate">
+                <Run Text="{DynamicResource S.SaveAs.Ffmpeg.Help.Filters}"/>
+            </Hyperlink>
+                        </TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Visibility="{Binding SettingsMode, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static e:VideoSettingsModes.Normal}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="WebpModeSizeGroup"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--Codec-->
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.Codec}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FfmpegAvifCodecComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Type"
+              ItemTemplate="{StaticResource Template.ComboBox.Item}" SelectedValue="{Binding VideoCodec, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+              ToolTip="{DynamicResource S.SaveAs.VideoOptions.Codec.Info}"/>
+
+                        <!--Acceleration Engine-->
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FfmpegAvifAccelerationComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Tag"
+              SelectedValue="{Binding HardwareAcceleration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+              ToolTip="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.Info}"
+              IsEnabled="False">
+                            <!-- We have not implemented av1_qsv/nvenc/amf yet, so IsEnabled="False" is necessary here -->
+                            <!-- <ComboBoxItem Tag="{x:Static e:HardwareAccelerationModes.Off}" Content="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.Off}"/>
+                            <ComboBoxItem Tag="{x:Static e:HardwareAccelerationModes.On}" Content="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.On}"/> -->
+                            <ComboBoxItem Tag="{x:Static e:HardwareAccelerationModes.Auto}" Content="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.Auto}"/>
+                        </ComboBox>
+
+                        <!--Pixel Format-->
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.PixelFormat}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                        <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" x:Name="FfmpegAvifPixelFormatComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Type" SelectedValue="{Binding PixelFormat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding ElementName=FfmpegAvifCodecComboBox, Path=SelectedItem.PixelFormats}"  ItemTemplate="{StaticResource Template.ComboBox.Item}"/>
+
+                        <!--Vsync-->
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.Vsync}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                        <ComboBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FfmpegAvifVsyncComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Tag" SelectedValue="{Binding Vsync}"
+                  ToolTip="{DynamicResource S.SaveAs.VideoOptions.Vsync.Info}">
+                            <ComboBoxItem Tag="{x:Static e:Vsyncs.Off}" Content="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.Off}"/>
+                            <ComboBoxItem Tag="{x:Static e:Vsyncs.Auto}" Content="{DynamicResource S.SaveAs.VideoOptions.PixelFormat.Auto}"/>
+                            <ComboBoxItem Tag="{x:Static e:Vsyncs.Passthrough}" Content="{DynamicResource S.SaveAs.VideoOptions.Vsync.Passthrough}"/>
+                            <ComboBoxItem Tag="{x:Static e:Vsyncs.Cfr}" Content="{DynamicResource S.SaveAs.VideoOptions.Vsync.Cfr}"/>
+                            <ComboBoxItem Tag="{x:Static e:Vsyncs.Vfr}" Content="{DynamicResource S.SaveAs.VideoOptions.Vsync.Vfr}"/>
+                            <ComboBoxItem Tag="{x:Static e:Vsyncs.Drop}" Content="{DynamicResource S.SaveAs.VideoOptions.Vsync.Drop}"/>
+                        </ComboBox>
+
+                        <!--Framerate-->
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.Framerate}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                        <ComboBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" x:Name="FfmpegAvifFramerateComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Tag" SelectedValue="{Binding Framerate}">
+                            <ComboBoxItem Tag="{x:Static e:Framerates.Auto}" Content="{DynamicResource S.SaveAs.VideoOptions.PixelFormat.Auto}"/>
+                            <ComboBoxItem Tag="{x:Static e:Framerates.Film}" Content="{DynamicResource S.SaveAs.VideoOptions.Framerate.Film}"/>
+                            <ComboBoxItem Tag="{x:Static e:Framerates.Pal}" Content="PAL"/>
+                            <ComboBoxItem Tag="{x:Static e:Framerates.Ntsc}" Content="NTSC"/>
+                            <ComboBoxItem Tag="{x:Static e:Framerates.Custom}" Content="{DynamicResource S.SaveAs.VideoOptions.Framerate.Custom}"/>
+                        </ComboBox>
+
+                        <!--Framerate-->
+                        <n:DoubleUpDown Grid.Row="5" Grid.Column="1" x:Name="FfmpegAvifFramerateIntegerUpDown" Margin="5,3,3,3" MinWidth="80" StepValue="1" Minimum="1" Maximum="1000" Value="{Binding CustomFramerate, Mode=TwoWay}"
+                        Visibility="{Binding Framerate, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static e:Framerates.Custom}}"/>
+                        <TextBlock Grid.Row="5" Grid.Column="2" Text="{DynamicResource S.Recorder.Fps.Short}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Foreground="{DynamicResource Element.Foreground.Medium}" Visibility="{Binding ElementName=FfmpegGifFramerateIntegerUpDown, Path=Visibility}"/>
+
+                        <!--Quality-->
+                        <TextBlock Grid.Row="6" Grid.Column="0" Text="{DynamicResource S.SaveAs.GifOptions.Quality}" VerticalAlignment="Center" Margin="0,3,3,3" Padding="0" 
+                   Foreground="{DynamicResource Element.Foreground.Medium}"/>
+
+                        <Slider Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" x:Name="AvifQualitySlider" Margin="5,3,3,0" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
+                Minimum="0" Maximum="100" Value="{Binding Quality, Mode=TwoWay}" SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"/>
+
+                        <Grid Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" x:Name="AvifQualityGrid" Margin="0,0,3,3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" FontSize="11">
+            <Run Text="0"/>
+            <Run Text="•"/>
+            <Run Text="{DynamicResource S.SaveAs.GifOptions.Fastest}"/>
+                            </TextBlock>
+
+                            <TextBlock Grid.Column="2" FontSize="11">
+            <Run Text="{DynamicResource S.SaveAs.GifOptions.Best}"/>
+            <Run Text="•"/>
+            <Run Text="100"/>
+                            </TextBlock>
+                        </Grid>
+
+                        <!--Loop-->
+                        <n:ExtendedCheckBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4" x:Name="FfmpegAvifLoopedCheckBox" Text="{DynamicResource S.SaveAs.GifOptions.Looped}" 
+                            IsChecked="{Binding Looped}" Margin="0,3,3,3"/>
+
+                        <Grid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" Visibility="{Binding Looped, Converter={StaticResource Bool2Visibility}, FallbackValue={x:Static Visibility.Collapsed}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <n:ExtendedCheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="FfmpegAvifRepeatForeverCheckBox" Margin="10,3,3,3"
+                                Text="{DynamicResource S.SaveAs.GifOptions.RepeatForever}" IsChecked="{Binding RepeatForever, Mode=TwoWay}"/>
+
+                            <n:IntegerUpDown Grid.Row="1" Grid.Column="0" x:Name="FfmpegRepeatCountAvifIntegerUpDown" Margin="10,3,3,3" StepValue="1" Minimum="1" Maximum="100" 
+                             Value="{Binding RepeatCount, Mode=TwoWay}" MinWidth="45" IsEnabled="{Binding RepeatForever, Converter={StaticResource InvertedBool}}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource S.SaveAs.GifOptions.RepeatCount}" Margin="0,3" Foreground="{DynamicResource Element.Foreground.Medium}"
+                       IsEnabled="{Binding RepeatForever, Converter={StaticResource InvertedBool}}"/>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -1019,14 +1195,14 @@
                         <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FfmpegCodecComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Type"
                                   ItemTemplate="{StaticResource Template.ComboBox.Item}" SelectedValue="{Binding VideoCodec, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                   ToolTip="{DynamicResource S.SaveAs.VideoOptions.Codec.Info}"/>
-                        
+                    
                         <!--Codec Presets-->
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.SaveAs.WebpOptions.CodecPreset}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                         <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FfmpegVideoPresetComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Type"
                                   SelectedValue="{Binding CodecPreset, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                   ItemTemplate="{StaticResource Template.ComboBox.Item}" ItemsSource="{Binding ElementName=FfmpegCodecComboBox, Path=SelectedItem.CodecPresets}" 
                                   ToolTip="{DynamicResource S.SaveAs.VideoOptions.CodecPreset.Info}"/>
-                        
+                    
                         <!--Acceleration Engine-->
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                         <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FfmpegAccelerationComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Tag"

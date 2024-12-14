@@ -9,6 +9,7 @@ using ScreenToGif.Util;
 using ScreenToGif.Util.Settings;
 using ScreenToGif.ViewModel.ExportPresets;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Apng;
+using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Avif;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Gif;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Webp;
 using ScreenToGif.ViewModel.ExportPresets.Image;
@@ -55,6 +56,7 @@ public partial class Preset
                 EncoderKGySoftItem.IsEnabled = false;
                 break;
             case ExportFormats.Webp:
+            case ExportFormats.Avif:
             case ExportFormats.Bpg:
             case ExportFormats.Avi:
             case ExportFormats.Mkv:
@@ -228,6 +230,14 @@ public partial class Preset
 
                     Current.CopyPropertiesTo(ffmpegWebpPreset);
                     Current = ffmpegWebpPreset;
+                    break;
+                }
+                case ExportFormats.Avif:
+                {
+                    var ffmpegAvifPreset = new FfmpegAvifPreset();
+
+                    Current.CopyPropertiesTo(ffmpegAvifPreset);
+                    Current = ffmpegAvifPreset;
                     break;
                 }
                         
