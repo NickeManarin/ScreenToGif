@@ -1245,7 +1245,7 @@ internal class EncodingManager
 
                 try
                 {
-                    foreach (var com in command.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                    foreach (var com in command.Split(['\n'], StringSplitOptions.RemoveEmptyEntries))
                     {
                         var procStartInfo = new ProcessStartInfo("cmd", "/c " + com)
                         {
@@ -1266,11 +1266,11 @@ internal class EncodingManager
                             if (!string.IsNullOrWhiteSpace(message))
                                 output += message + Environment.NewLine;
 
-                            if (!string.IsNullOrWhiteSpace(message))
-                                output += message + Environment.NewLine;
-
                             if (!string.IsNullOrWhiteSpace(error))
-                                throw new Exception(error);
+                            {
+                                output += error + Environment.NewLine;
+                                throw new Exception(output);
+                            }
 
                             process.WaitForExit(1000);
                         }

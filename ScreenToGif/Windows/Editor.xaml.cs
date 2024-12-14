@@ -4119,10 +4119,10 @@ namespace ScreenToGif.Windows
                 }
 
                 //Shows the ProgressBar
-                ShowProgress(LocalizationHelper.Get("S.Editor.ImportingFrames"), list.Count);
+                ShowProgress(LocalizationHelper.Get("S.Editor.ImportingFrames"), list?.Count ?? 0);
 
                 var count = 0;
-                foreach (var frame in list)
+                foreach (var frame in list ?? [])
                 {
                     //Change the file path to the current one.
                     frame.Path = Path.Combine(pathTemp, Path.GetFileName(frame.Path));
@@ -4137,7 +4137,8 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Importing project");
                 Dispatcher.Invoke(() => Dialog.Ok("ScreenToGif", "Impossible to load project", ex.Message));
-                return new List<FrameInfo>();
+
+                return [];
             }
         }
 
@@ -4151,7 +4152,7 @@ namespace ScreenToGif.Windows
 
             ShowProgress(LocalizationHelper.Get("S.Editor.ImportingFrames"), decoder?.Frames?.Count ?? 0);
 
-            if (decoder.Frames.Count <= 0)
+            if (decoder == null || decoder?.Frames.Count <= 0)
                 return listFrames;
 
             var fullSize = ImageMethods.GetFullSize(decoder, gifMetadata);
