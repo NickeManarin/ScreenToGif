@@ -507,7 +507,7 @@ public partial class ExportPanel : UserControl, IPanel
         //Get all presets of given type. It's possible that there's none available.
         var list = UserSettings.All.ExportPresets?.OfType<ExportPreset>().Where(w => w.Type == preset.Type).ToList() ?? new List<ExportPreset>();
 
-        //Set the selected avifPreset as the last selected one.
+        //Set the selected preset as the last selected one.
         foreach (var pre in list)
         {
             pre.IsSelected = (pre.Title ?? "").Equals(preset.Title ?? "");
@@ -529,7 +529,7 @@ public partial class ExportPanel : UserControl, IPanel
 
     private static void PersistPresets(IEnumerable<ExportPreset> typeList, ExportFormats type)
     {
-        var list = UserSettings.All.ExportPresets?.OfType<ExportPreset>().Where(w => w.Type != type).ToList() ?? new List<ExportPreset>();
+        var list = UserSettings.All.ExportPresets?.OfType<ExportPreset>().Where(w => w.Type != type).ToList() ?? [];
 
         list.AddRange(typeList);
 
@@ -556,6 +556,7 @@ public partial class ExportPanel : UserControl, IPanel
 
                 break;
             }
+
             case ExportFormats.Mkv:
             {
                 if (videoPreset.HardwareAcceleration == HardwareAccelerationModes.On)
@@ -677,6 +678,7 @@ public partial class ExportPanel : UserControl, IPanel
     {
         if (preset is not FfmpegAvifPreset avifPreset)
             return;
+
         FfmpegAvifCodecComboBox.SelectionChanged -= FfmpegAvifCodecComboBox_SelectionChanged;
         var codec = avifPreset.VideoCodec;
 
@@ -990,14 +992,14 @@ public partial class ExportPanel : UserControl, IPanel
         QuantizerComboBox.Visibility = UserSettings.All.SaveType == ExportFormats.Gif && selected.Encoder == EncoderTypes.ScreenToGif ? Visibility.Visible : Visibility.Collapsed;
         EncoderExpander.SetResourceReference(HeaderedContentControl.HeaderProperty, QuantizerComboBox.Visibility == Visibility.Visible ? "S.SaveAs.Encoder.Quantizer" : "S.SaveAs.Encoder");
 
-        //Remove events prior to changing avifPreset.
+        //Remove events prior to changing preset.
         FfmpegAccelerationComboBox.SelectionChanged -= FfmpegAccelerationComboBox_SelectionChanged;
 
-        //Load video/AVIF codecs.
+        //Load video codecs.
         AdjustCodecs(selected);
         AdjustAvifCodecs(selected);
 
-        //Set the avifPreset to the UI.
+        //Set the preset to the UI.
         CurrentPreset = selected.HasAutoSave ? selected : selected.ShallowCopy();
 
         //Adjust values for non-persistent properties.
@@ -1007,13 +1009,13 @@ public partial class ExportPanel : UserControl, IPanel
         selected.PartialExportTimeEnd = TotalTime;
         selected.PartialExportFrameExpression = $"0 - {FrameCount - 1}";
 
-        //Select the upload avifPreset.
+        //Select the upload preset.
         LoadUploadPresets(selected);
 
         if (string.IsNullOrWhiteSpace(selected.Extension))
             selected.Extension = selected.DefaultExtension;
 
-        //Get the selected avifPreset and display it's settings in the next expanders.
+        //Get the selected preset and display its settings in the next expanders.
         switch (selected.Type)
         {
             //Animated images.
@@ -1119,7 +1121,7 @@ public partial class ExportPanel : UserControl, IPanel
         if (result != true)
             return;
 
-        //Select the created avifPreset.
+        //Select the created preset.
         LoadPresets(add.Current.Type, add.Current);
     }
 
@@ -1151,7 +1153,7 @@ public partial class ExportPanel : UserControl, IPanel
         if (result != true)
             return;
 
-        //Select the edited avifPreset.
+        //Select the edited preset.
         LoadPresets(edit.Current.Type, edit.Current);
     }
 
@@ -1159,19 +1161,19 @@ public partial class ExportPanel : UserControl, IPanel
     {
         //TODO: Let the user remove default presets (just not the main default for the type). Add a way to restore removed presets.
 
-        //Ask if the user really wants to remove the avifPreset.
+        //Ask if the user really wants to remove the preset.
         if (PresetComboBox.SelectedItem is not ExportPreset preset || !Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Presets.Ask.Delete.Title"), LocalizationHelper.Get("S.SaveAs.Presets.Ask.Delete.Instruction"),
                 LocalizationHelper.Get("S.SaveAs.Presets.Ask.Delete.Message")))
             return;
 
-        //Remove the avifPreset directly from the settings and reaload all presets.
+        //Remove the preset directly from the settings and reload all presets.
         UserSettings.All.ExportPresets.Remove(preset);
         LoadPresets(preset.Type);
     }
 
     private void ResetPreset_Click(object sender, RoutedEventArgs e)
     {
-        //Ask if the user really wants to reset the avifPreset to its default settings.
+        //Ask if the user really wants to reset the preset to its default settings.
         if (PresetComboBox.SelectedItem is not ExportPreset preset || !Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Title"), LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Instruction"),
                 LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Message")))
             return;
@@ -1179,7 +1181,7 @@ public partial class ExportPanel : UserControl, IPanel
         var hasReset = GeneratePresets(preset.Type, new List<ExportPreset>()).FirstOrDefault(f => f.TitleKey == preset.TitleKey);
 
         if (hasReset == null)
-            return; //TODO: What to do? Tell the user that this is an old avifPreset, which is not being used anymore.
+            return; //TODO: What to do? Tell the user that this is an old preset, which is not being used anymore.
 
         UserSettings.All.ExportPresets.Remove(preset);
         UserSettings.All.ExportPresets.Add(hasReset);
@@ -1732,7 +1734,7 @@ public partial class ExportPanel : UserControl, IPanel
         UserSettings.All.UploadPresets.Add(upload.CurrentPreset);
         UserSettings.Save();
 
-        //Update the upload avifPreset in all export presets.
+        //Update the upload preset in all export presets.
         if (selected.Title != upload.CurrentPreset.Title)
         {
             foreach (var exportPreset in UserSettings.All.ExportPresets.OfType<ExportPreset>().Where(w => w.UploadService == selected.Title))
@@ -1759,7 +1761,7 @@ public partial class ExportPanel : UserControl, IPanel
         if (PresetComboBox.SelectedItem is not ExportPreset preset)
             return;
 
-        //Ask if the user really wants to remove the avifPreset.
+        //Ask if the user really wants to remove the preset.
         if (UploadPresetComboBox.SelectedItem is not UploadPreset selected || !Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Upload.Ask.Delete.Title"), LocalizationHelper.Get("S.SaveAs.Upload.Ask.Delete.Instruction"),
                 LocalizationHelper.Get("S.SaveAs.Upload.Ask.Delete.Message")))
             return;
@@ -1767,7 +1769,7 @@ public partial class ExportPanel : UserControl, IPanel
         UserSettings.All.UploadPresets.Remove(selected);
         UserSettings.Save();
 
-        //Remove the upload avifPreset from all export presets.
+        //Remove the upload preset from all export presets.
         foreach (var exportPreset in UserSettings.All.ExportPresets.OfType<ExportPreset>().Where(w => w.UploadService == selected.Title))
             exportPreset.UploadService = null;
 

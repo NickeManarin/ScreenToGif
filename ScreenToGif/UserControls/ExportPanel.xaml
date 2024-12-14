@@ -1190,28 +1190,28 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                            <!--Codec-->
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.Codec}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                            <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FfmpegCodecComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Type"
-                                      ItemTemplate="{StaticResource Template.ComboBox.Item}" SelectedValue="{Binding VideoCodec, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                      ToolTip="{DynamicResource S.SaveAs.VideoOptions.Codec.Info}"/>
-                        
-                            <!--Codec Presets-->
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.SaveAs.WebpOptions.CodecPreset}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                            <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FfmpegVideoPresetComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Type"
-                                      SelectedValue="{Binding CodecPreset, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                      ItemTemplate="{StaticResource Template.ComboBox.Item}" ItemsSource="{Binding ElementName=FfmpegCodecComboBox, Path=SelectedItem.CodecPresets}" 
-                                      ToolTip="{DynamicResource S.SaveAs.VideoOptions.CodecPreset.Info}"/>
-                        
-                            <!--Acceleration Engine-->
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                            <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FfmpegAccelerationComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Tag"
-                                      SelectedValue="{Binding HardwareAcceleration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                      ToolTip="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.Info}">
-                                <ComboBoxItem Tag="{x:Static e:HardwareAccelerationModes.Off}" Content="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.Off}"/>
-                                <ComboBoxItem Tag="{x:Static e:HardwareAccelerationModes.On}" Content="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.On}"/>
-                                <ComboBoxItem Tag="{x:Static e:HardwareAccelerationModes.Auto}" Content="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.Auto}"/>
-                            </ComboBox>
+                        <!--Codec-->
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.Codec}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FfmpegCodecComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Type"
+                                  ItemTemplate="{StaticResource Template.ComboBox.Item}" SelectedValue="{Binding VideoCodec, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  ToolTip="{DynamicResource S.SaveAs.VideoOptions.Codec.Info}"/>
+                    
+                        <!--Codec Presets-->
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.SaveAs.WebpOptions.CodecPreset}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FfmpegVideoPresetComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Type"
+                                  SelectedValue="{Binding CodecPreset, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  ItemTemplate="{StaticResource Template.ComboBox.Item}" ItemsSource="{Binding ElementName=FfmpegCodecComboBox, Path=SelectedItem.CodecPresets}" 
+                                  ToolTip="{DynamicResource S.SaveAs.VideoOptions.CodecPreset.Info}"/>
+                    
+                        <!--Acceleration Engine-->
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                        <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FfmpegAccelerationComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Tag"
+                                  SelectedValue="{Binding HardwareAcceleration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  ToolTip="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.Info}">
+                            <ComboBoxItem Tag="{x:Static e:HardwareAccelerationModes.Off}" Content="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.Off}"/>
+                            <ComboBoxItem Tag="{x:Static e:HardwareAccelerationModes.On}" Content="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.On}"/>
+                            <ComboBoxItem Tag="{x:Static e:HardwareAccelerationModes.Auto}" Content="{DynamicResource S.SaveAs.VideoOptions.HardwareAcceleration.Auto}"/>
+                        </ComboBox>
 
                         <!--Pixel Format-->
                         <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.SaveAs.VideoOptions.PixelFormat}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
