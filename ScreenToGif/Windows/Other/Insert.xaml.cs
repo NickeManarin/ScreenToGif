@@ -300,7 +300,7 @@ public partial class Insert
 
         #endregion
 
-        CanvasSizeTextBlock.Text = $"{right.PixelWidth} × {right.PixelHeight} • {Math.Round(left.DpiX, 0)} {LocalizationHelper.Get("S.Resize.Dpi")}";
+        CanvasSizeTextBlock.Text = $"{right.PixelWidth} × {right.PixelHeight} • {Math.Round(right.DpiX, 0)} {LocalizationHelper.Get("S.Resize.Dpi")}";
         LeftImageSizeTextBlock.Text = $"{left.PixelWidth} × {left.PixelHeight} • {Math.Round(left.DpiX, 0)} {LocalizationHelper.Get("S.Resize.Dpi")}";
         RightImageSizeTextBlock.Text = $"{right.PixelWidth} × {right.PixelHeight} • {Math.Round(right.DpiX, 0)} {LocalizationHelper.Get("S.Resize.Dpi")}";
 

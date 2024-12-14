@@ -302,7 +302,7 @@ internal static class ColorExtensions
     /// <param name="b">Blue</param>
     /// <param name="g">Green</param>
     /// <returns>A HsvColor object.</returns>
-    public static HsvColor ConvertRgbToHsv(int r, int b, int g)
+    public static HsvColor ConvertRgbToHsv(int r, int g, int b)
     {
         double h = 0, s;
 

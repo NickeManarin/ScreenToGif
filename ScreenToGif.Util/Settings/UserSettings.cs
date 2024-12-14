@@ -102,17 +102,14 @@ public class UserSettings : INotifyPropertyChanged
             #region Load settings from disk
 
             var doc = XDocument.Parse(File.ReadAllText(path));
-            var properties = doc.Root?.Elements().Select(GetProperty).ToList();
+            var properties = doc.Root?.Elements().Select(GetProperty).ToList() ?? [];
 
             #endregion
 
-            #region Migrate
-
-            var version = properties?.FirstOrDefault(f => f.Key == "Version")?.Value ?? "0.0";
+            //Migrate
+            var version = properties.FirstOrDefault(f => f.Key == "Version")?.Value ?? "0.0";
 
             Migration.Migrate(properties, version);
-
-            #endregion
 
             #region Parse settings
 

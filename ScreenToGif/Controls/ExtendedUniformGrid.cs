@@ -7,7 +7,7 @@ namespace ScreenToGif.Controls;
 public class ExtendedUniformGrid : UniformGrid
 {
     public static readonly DependencyProperty IsReversedProperty = DependencyProperty.Register(nameof(IsReversed), typeof(bool), typeof(ExtendedUniformGrid),
-        new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsMeasure));
+        new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
     //private static void IsReversed_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
     //{

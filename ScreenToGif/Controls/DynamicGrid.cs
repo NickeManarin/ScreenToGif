@@ -8,17 +8,17 @@ public class DynamicGrid : Grid
 {
     #region Dependency Properties
 
-    public static readonly DependencyProperty FirstColumnProperty = DependencyProperty.Register("FirstColumn", typeof(int), typeof(DynamicGrid),
+    public static readonly DependencyProperty FirstColumnProperty = DependencyProperty.Register(nameof(FirstColumn), typeof(int), typeof(DynamicGrid),
         new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsMeasure), ValidateFirstColumn);
 
-    public static readonly DependencyProperty ColumnsProperty = DependencyProperty.Register("Columns", typeof(int), typeof(DynamicGrid), new
+    public static readonly DependencyProperty ColumnsProperty = DependencyProperty.Register(nameof(Columns), typeof(int), typeof(DynamicGrid), new
         FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsMeasure), ValidateColumns);
 
-    public static readonly DependencyProperty RowsProperty = DependencyProperty.Register("Rows", typeof(int), typeof(DynamicGrid),
+    public static readonly DependencyProperty RowsProperty = DependencyProperty.Register(nameof(Rows), typeof(int), typeof(DynamicGrid),
         new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsMeasure), ValidateRows);
 
-    public static readonly DependencyProperty IsReversedProperty = DependencyProperty.Register("IsReversed", typeof(bool), typeof(DynamicGrid),
-        new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsMeasure));
+    public static readonly DependencyProperty IsReversedProperty = DependencyProperty.Register(nameof(IsReversed), typeof(bool), typeof(DynamicGrid),
+        new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
     #endregion
 
