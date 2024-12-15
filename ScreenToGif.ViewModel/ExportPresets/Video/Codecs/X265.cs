@@ -16,18 +16,16 @@ public class X265 : VideoCodec
         CodecPresets = new List<EnumItem<VideoCodecPresets>>
         {
             new(VideoCodecPresets.None, "S.SaveAs.VideoOptions.CodecPreset.None", ""),
-            new(VideoCodecPresets.Default, "S.SaveAs.VideoOptions.CodecPreset.Default", "default"),
-            new(VideoCodecPresets.Lossless, "S.SaveAs.VideoOptions.CodecPreset.Lossless", "lossless"),
-            new(VideoCodecPresets.LosslessHP, "S.SaveAs.VideoOptions.CodecPreset.LosslessHp", "losslesshp"),
+            new(VideoCodecPresets.Slow, "S.SaveAs.VideoOptions.CodecPreset.Placebo", "placebo"),
+            new(VideoCodecPresets.Slow, "S.SaveAs.VideoOptions.CodecPreset.VerySlow", "veryslow"),
+            new(VideoCodecPresets.Slow, "S.SaveAs.VideoOptions.CodecPreset.Slower", "slower"),
             new(VideoCodecPresets.Slow, "S.SaveAs.VideoOptions.CodecPreset.Slow", "slow"),
             new(VideoCodecPresets.Medium, "S.SaveAs.VideoOptions.CodecPreset.Medium", "medium"),
             new(VideoCodecPresets.Fast, "S.SaveAs.VideoOptions.CodecPreset.Fast", "fast"),
-            new(VideoCodecPresets.HP, "S.SaveAs.VideoOptions.CodecPreset.Hp", "hp"),
-            new(VideoCodecPresets.HQ, "S.SaveAs.VideoOptions.CodecPreset.Hq", "hq"),
-            new(VideoCodecPresets.BD, "S.SaveAs.VideoOptions.CodecPreset.Bd", "bd"),
-            new(VideoCodecPresets.LowLatency, "S.SaveAs.VideoOptions.CodecPreset.LowLatency", "ll"),
-            new(VideoCodecPresets.LowLatencyHP, "S.SaveAs.VideoOptions.CodecPreset.LowLatencyHp", "llhp"),
-            new(VideoCodecPresets.LowLatencyHQ, "S.SaveAs.VideoOptions.CodecPreset.LowLatencyHq", "llhq")
+            new(VideoCodecPresets.Fast, "S.SaveAs.VideoOptions.CodecPreset.Faster", "faster"),
+            new(VideoCodecPresets.Fast, "S.SaveAs.VideoOptions.CodecPreset.VeryFast", "veryfast"),
+            new(VideoCodecPresets.Fast, "S.SaveAs.VideoOptions.CodecPreset.SuperFast", "superfast"),
+            new(VideoCodecPresets.Fast, "S.SaveAs.VideoOptions.CodecPreset.UltraFast", "ultrafast"),
         };
         PixelFormats = new List<EnumItem<VideoPixelFormats>>
         {

@@ -261,6 +261,8 @@
     <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(Vereist een handmatige installatie door het uitvoerbare bestand uit te pakken en te vervangen)</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Afdwingen dat de update met verhoogde rechten wordt uitgevoerd.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Vraag me voordat de installatie begint.</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork">Download updates op netwerken met een datalimiet.</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork.Info">(Maakt het downloaden van updates mogelijk op netwerken met een datalimiet)</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">Interface</s:String>
@@ -795,6 +797,8 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Ondersteunt het opslaan van de animatie met een transparante achtergrond.</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">Hoge kwaliteit • Grafische afbeeldingen</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Beter voor opnames met een kleinere hoeveelheid kleuren.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Default.Title">KGy SOFT • Standaard</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Default.Description">Aanbevolen voor schermopname van de reguliere gebruikersinterface. Gebruikt Mediaan Cut-quantizer zonder dithering.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • Gebalanceerd</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Goede kwaliteit voor afbeeldingen van fotokwaliteit met Wu's kwantisator zonder dithering.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • Hoge kwaliteit</s:String>
@@ -1389,6 +1393,8 @@
     <s:String x:Key="S.MouseClicks.Color.Left">Kleur middenknop</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">Kleur rechterknop</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">Kleur linkerknop</s:String>
+    <s:String x:Key="S.MouseClicks.Color.FirstExtra">Kleur 1e extra knop:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.SecondExtra">Kleur 2e extra knop:</s:String>
     
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">Afbeelding</s:String>
@@ -1621,6 +1627,8 @@
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel">Aangepast bitniveau.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">Indien aangevinkt, kan het bitniveau handmatig worden geconfigureerd.&#x0d;&#x0a; ⚠️ Waarschuwing: het hoogste bitniveau vereist mogelijk VEEL geheugen!</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BitLevel.Info">Pixels met alfa (transparantie) die door de geselecteerde kwantificator als ondoorzichtig worden beschouwd, worden met deze kleur gemengd voordat de gekwantificeerde kleur wordt verkregen.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.LinearColorSpace">Lineaire kleurruimte</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.LinearColorSpace.Info">Als deze optie is ingeschakeld, worden sommige bewerkingen (alfa-menging met achtergrondkleur, kwantiseren, dithering, het opzoeken van de dichtstbijzijnde kleuren in het palet) uitgevoerd in de lineaire kleurruimte in plaats van in de sRGB-kleurruimte. Werken in de lineaire kleurruimte is langzamer, maar levert een resultaat van betere kwaliteit op, vooral wanneer de quantizer slechts een paar kleuren gebruikt. ⚠️ Opmerking:  Als u slechts een paar kleuren gebruikt, kan de helderheid van een mogelijk verkleinde voorvertoning onjuist zijn omdat WPF het formaat in de sRGB-kleurruimte wijzigt.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">Zwart-wit</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">1 bpp palet met de kleuren zwart en wit.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">4 Grijstinten</s:String>

@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using ScreenToGif.Domain.Enums;
+using ScreenToGif.Domain.Enums.Native;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Native.External;
 using ScreenToGif.Native.Helpers;
@@ -275,7 +276,7 @@ internal class NotifyIcon : FrameworkElement, IDisposable
 
     private static void DataContextPropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
     {
-        if (!(o is NotifyIcon control))
+        if (o is not NotifyIcon control)
             return;
 
         control.UpdateDataContext(control.NotifyToolTipElement, e.OldValue, e.NewValue);
@@ -286,7 +287,7 @@ internal class NotifyIcon : FrameworkElement, IDisposable
     {
         var control = o as NotifyIcon;
 
-        if (!(e.NewValue is ContextMenu newValue))
+        if (e.NewValue is not ContextMenu newValue)
             return;
 
         control?.UpdateDataContext(newValue, null, control.DataContext);
@@ -303,7 +304,7 @@ internal class NotifyIcon : FrameworkElement, IDisposable
 
     private static void ToolTipPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (!(d is NotifyIcon owner))
+        if (d is not NotifyIcon owner)
             return;
 
         owner.CreateCustomToolTip();
@@ -312,7 +313,7 @@ internal class NotifyIcon : FrameworkElement, IDisposable
 
     private static void ToolTipTextPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (!(d is NotifyIcon owner))
+        if (d is not NotifyIcon owner)
             return;
 
         if (owner.NotifyToolTip == null)
@@ -359,14 +360,11 @@ internal class NotifyIcon : FrameworkElement, IDisposable
             if (IsTaskbarIconCreated)
                 return;
 
-            //Initial configuration.
-            var status = NotifyIconHelper.WriteIconData(ref _iconData, Domain.Enums.Native.NotifyCommands.Add, Domain.Enums.Native.IconDataMembers.Message | Domain.Enums.Native.IconDataMembers.Icon | Domain.Enums.Native.IconDataMembers.Tip);
+            _iconData.VersionOrTimeout = (uint)NotifyIconVersions.Vista;
+            _iconData.ValidMembers = IconDataMembers.Icon | IconDataMembers.Tip | IconDataMembers.Message;
+            _iconData.ToolTipText = NotifyToolTipText;
 
-            if (!status)
-                return;
-
-            _iconData.VersionOrTimeout = (uint)Domain.Enums.Native.NotifyIconVersions.Vista;
-            status = Shell32.Shell_NotifyIcon(Domain.Enums.Native.NotifyCommands.SetVersion, ref _iconData);
+            var status = Shell32.Shell_NotifyIcon(NotifyCommands.Add, ref _iconData);
 
             if (!status)
                 return;
@@ -452,18 +450,17 @@ internal class NotifyIcon : FrameworkElement, IDisposable
             UpdateDataContext(tt, null, DataContext);
 
         //Store a reference to the used tooltip.
-        SetValue(NotifyToolTipElementPropertyKey, tt);
+        //SetValue(NotifyToolTipElementPropertyKey, tt);
     }
 
     private void WriteToolTipSettings()
     {
-        _iconData.ToolTipText = NotifyToolTipText;
-
-        //To get ToolTip events from the taskbar, set a dummy text.            
-        if (string.IsNullOrEmpty(_iconData.ToolTipText) && NotifyToolTipElement != null)
-            _iconData.ToolTipText = "ToolTip";
-
-        NotifyIconHelper.WriteIconData(ref _iconData, Domain.Enums.Native.NotifyCommands.Modify, Domain.Enums.Native.IconDataMembers.Tip);
+        lock (this)
+        {
+            _iconData.ToolTipText = NotifyToolTipText;
+            
+            Shell32.Shell_NotifyIcon(NotifyCommands.Modify, ref _iconData);
+        }
     }
 
     public void RefreshVisual()

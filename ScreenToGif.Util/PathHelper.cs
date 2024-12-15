@@ -14,7 +14,11 @@ public static class PathHelper
     /// <returns>The name with the date and time.</returns>
     public static string ReplaceRegexInName(string name)
     {
-        const string dateTimeFileNameRegEx = @"[?]([ymdhsfzgkt]+[-_ ]*)+[?]";
+        //Less than 2 question marks? Then it's not valid.
+        if (name.Split('?').Length - 1 < 2)
+            return name;
+
+        const string dateTimeFileNameRegEx = "[?]([ymdhsfzgkt]{1,6}[-_ ]{0,2}){1,10}[?]";
 
         if (!Regex.IsMatch(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase))
             return name;

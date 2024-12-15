@@ -47,6 +47,7 @@ using Color = System.Windows.Media.Color;
 using Encoder = ScreenToGif.Windows.Other.Encoder;
 using LegacyGifEncoder = ScreenToGif.Util.Codification.Gif.LegacyEncoder.GifEncoder;
 using KGySoftGifEncoder = KGySoft.Drawing.Imaging.GifEncoder;
+using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Avif;
 
 namespace ScreenToGif.Util;
 
@@ -1027,6 +1028,7 @@ internal class EncodingManager
                 }
 
                 case ExportFormats.Webp:
+                case ExportFormats.Avif:
                 case ExportFormats.Avi:
                 case ExportFormats.Mov:
                 case ExportFormats.Mp4:
@@ -1243,7 +1245,7 @@ internal class EncodingManager
 
                 try
                 {
-                    foreach (var com in command.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                    foreach (var com in command.Split(['\n'], StringSplitOptions.RemoveEmptyEntries))
                     {
                         var procStartInfo = new ProcessStartInfo("cmd", "/c " + com)
                         {
@@ -1264,11 +1266,11 @@ internal class EncodingManager
                             if (!string.IsNullOrWhiteSpace(message))
                                 output += message + Environment.NewLine;
 
-                            if (!string.IsNullOrWhiteSpace(message))
-                                output += message + Environment.NewLine;
-
                             if (!string.IsNullOrWhiteSpace(error))
-                                throw new Exception(error);
+                            {
+                                output += error + Environment.NewLine;
+                                throw new Exception(output);
+                            }
 
                             process.WaitForExit(1000);
                         }
@@ -1395,7 +1397,7 @@ internal class EncodingManager
             concat.AppendLine("duration " + (frame.Delay / 1000d).ToString(CultureInfo.InvariantCulture));
         }
 
-        if (preset.Type != ExportFormats.Gif && preset.Type != ExportFormats.Apng && preset.Type != ExportFormats.Webp)
+        if (preset.Type is not ExportFormats.Gif or ExportFormats.Apng or ExportFormats.Webp or ExportFormats.Avif)
         {
             //Fix for last frame.
             concat.AppendLine("file '" + listFrames.LastOrDefault()?.Path + "'");
@@ -1564,6 +1566,60 @@ internal class EncodingManager
                             firstPass += "-fps_mode " + webpPreset.Vsync.GetLowerDescription();
                         else
                             firstPass += "-vsync " + webpPreset.Vsync.GetLowerDescription();
+                    }
+
+                    firstPass += " {O}";
+                }
+
+                break;
+
+                #endregion
+            }
+            case ExportFormats.Avif:
+            {
+                #region Avif
+
+                if (preset is not FfmpegAvifPreset avifPreset)
+                    return;
+
+                //ffmpeg -vsync 0 {I} -c:v libwebp_anim -lossless 0 -quality 75 -loop 0 -f webp {O}
+                if (avifPreset.SettingsMode == VideoSettingsModes.Advanced)
+                    firstPass = avifPreset.Parameters.Replace("\n", " ").Replace("\r", "");
+                else
+                {
+                    //Vsync
+                    if (avifPreset.Vsync != Vsyncs.Off)
+                        firstPass += $"-vsync {avifPreset.Vsync.ToString().ToLower()} ";
+
+                    //Input, encoder and loop.
+                    firstPass += $"{{I}} -c:v {avifPreset.VideoCodec.GetLowerDescription()} ";
+                    firstPass += $"-loop {(avifPreset.Looped ? avifPreset.RepeatForever ? 0 : avifPreset.RepeatCount : -1)} ";
+
+                    //Codec preset.
+                    if (avifPreset.CodecPreset != VideoCodecPresets.Default)
+                        firstPass += $"-preset {avifPreset.CodecPreset.GetLowerDescription()} ";
+
+                    //Quality.
+                    firstPass += $"-quality {avifPreset.Quality} ";
+
+                    //Pixel format.
+                    if (avifPreset.PixelFormat != VideoPixelFormats.Auto)
+                        firstPass += $"-pix_fmt {avifPreset.PixelFormat.GetLowerDescription()} ";
+
+                    //Framerate.
+                    if (avifPreset.Framerate != Framerates.Auto)
+                        firstPass += $"-r {(avifPreset.Framerate == Framerates.Custom ? avifPreset.CustomFramerate.ToString(CultureInfo.InvariantCulture) : avifPreset.Framerate.GetLowerDescription())} ";
+
+                    //Format and output.
+                    firstPass += "-f avif ";
+
+                    //Vsync
+                    if (avifPreset.Vsync != Vsyncs.Off)
+                    {
+                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                            firstPass += "-fps_mode " + avifPreset.Vsync.GetLowerDescription();
+                        else
+                            firstPass += "-vsync " + avifPreset.Vsync.GetLowerDescription();
                     }
 
                     firstPass += " {O}";

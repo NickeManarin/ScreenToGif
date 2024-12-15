@@ -82,7 +82,7 @@ public partial class Troubleshoot
             if (monitor.NativeBounds.Top > top)
                 top = monitor.NativeBounds.Top;
 
-            if (monitor.Bounds.Left > left)
+            if (monitor.NativeBounds.Left > left)
                 left = monitor.NativeBounds.Left;
 
             if (monitor.NativeBounds.Bottom < top + height)

@@ -947,6 +947,7 @@
     <s:String x:Key="S.Editor.File.Apng">Png animation</s:String>
     <s:String x:Key="S.Editor.File.Gif">Gif animation</s:String>
     <s:String x:Key="S.Editor.File.Webp">Webp animation</s:String>
+    <s:String x:Key="S.Editor.File.Avif">Avif animation</s:String>
     
     <s:String x:Key="S.Editor.File.Avi">Avi video</s:String>
     <s:String x:Key="S.Editor.File.Mkv">Matroska video</s:String>
@@ -1749,6 +1750,7 @@
     <s:String x:Key="S.SaveAs.VideoOptions.Codec.Info">The video encoder, responsible for&#10;converting the raw pixels to the output file.</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset">Preset:</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.None">None</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Placebo">Placebo</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VerySlow">Very Slow</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slower">Slower</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slow">Slow</s:String>

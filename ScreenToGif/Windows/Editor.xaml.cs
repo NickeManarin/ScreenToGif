@@ -927,8 +927,8 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 CheckFileExists = true,
                 Title = LocalizationHelper.Get("S.Editor.File.OpenMediaProject"),
-                Filter = $"{LocalizationHelper.Get("S.Editor.File.All")} (*.apng, *.avi, *.bmp, *.gif, *.jpg, *.jpeg, *.mkv, *.mp4, *.png, *.stg, *.webp, *.webm, *.wmv, *.zip)|*.apng;*.avi;*.bmp;*.gif;*.jpg;*.jpeg;*.mkv;*.mp4;*.png;*.stg;*.webp;*.webm;*.wmv;*.zip|" +
-                         $"{LocalizationHelper.Get("S.Editor.File.Image")} (*.apng, *.bmp, *.gif, *.jpg, *.jpeg, *.png)|*.apng;*.bmp;*.gif;*.jpg;*.jpeg;*.png|" +
+                Filter = $"{LocalizationHelper.Get("S.Editor.File.All")} (*.apng, *.avi, *.avif, *.bmp, *.gif, *.jpg, *.jpeg, *.mkv, *.mp4, *.png, *.stg, *.webp, *.webm, *.wmv, *.zip)|*.apng;*.avi;*.avif;*.bmp;*.gif;*.jpg;*.jpeg;*.mkv;*.mp4;*.png;*.stg;*.webp;*.webm;*.wmv;*.zip|" +
+                         $"{LocalizationHelper.Get("S.Editor.File.Image")} (*.apng, *.avif, *.bmp, *.gif, *.jpg, *.jpeg, *.png)|*.apng;*.avif;*.bmp;*.gif;*.jpg;*.jpeg;*.png|" +
                          $"{LocalizationHelper.Get("S.Editor.File.Video")} (*.avi, *.mkv, *.mp4, *.webp, *.webm, *.wmv)|*.avi;*.mkv;*.mp4;*.webp;*.webm;*.wmv|" +
                          $"{LocalizationHelper.Get("S.Editor.File.Project")} (*.stg, *.zip) |*.stg;*.zip",
             };
@@ -939,7 +939,7 @@ namespace ScreenToGif.Windows
 
             var extensionList = ofd.FileNames.Select(s => Path.GetExtension(s).ToLowerInvariant()).ToList();
 
-            var media = new[] { "apng", "avi", "bmp", "gif", "jpg", "jpeg", "mkv", "mp4", "png", "webp", "webm", "wmv" };
+            var media = new[] { "apng", "avi", "avif", "bmp", "gif", "jpg", "jpeg", "mkv", "mp4", "png", "webp", "webm", "wmv" };
 
             var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals(".stg") || x.Equals(".zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
@@ -3286,7 +3286,7 @@ namespace ScreenToGif.Windows
 
             var extensionList = Arguments.FileNames.Select(Path.GetExtension).ToList();
 
-            var media = new[] { "jpg", "jpeg", "gif", "bmp", "png", "apng", "avi", "mkv", "mp4", "webp", "webm", "wmv" };
+            var media = new[] { "avif", "jpg", "jpeg", "gif", "bmp", "png", "apng", "avi", "mkv", "mp4", "webp", "webm", "wmv" };
 
             var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
@@ -3862,6 +3862,7 @@ namespace ScreenToGif.Windows
                     }
 
                     case "avi":
+                    case "avif":
                     case "mkv":
                     case "mp4":
                     case "wmv":
@@ -4118,10 +4119,10 @@ namespace ScreenToGif.Windows
                 }
 
                 //Shows the ProgressBar
-                ShowProgress(LocalizationHelper.Get("S.Editor.ImportingFrames"), list.Count);
+                ShowProgress(LocalizationHelper.Get("S.Editor.ImportingFrames"), list?.Count ?? 0);
 
                 var count = 0;
-                foreach (var frame in list)
+                foreach (var frame in list ?? [])
                 {
                     //Change the file path to the current one.
                     frame.Path = Path.Combine(pathTemp, Path.GetFileName(frame.Path));
@@ -4136,7 +4137,8 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Importing project");
                 Dispatcher.Invoke(() => Dialog.Ok("ScreenToGif", "Impossible to load project", ex.Message));
-                return new List<FrameInfo>();
+
+                return [];
             }
         }
 
@@ -4150,7 +4152,7 @@ namespace ScreenToGif.Windows
 
             ShowProgress(LocalizationHelper.Get("S.Editor.ImportingFrames"), decoder?.Frames?.Count ?? 0);
 
-            if (decoder.Frames.Count <= 0)
+            if (decoder == null || decoder?.Frames.Count <= 0)
                 return listFrames;
 
             var fullSize = ImageMethods.GetFullSize(decoder, gifMetadata);

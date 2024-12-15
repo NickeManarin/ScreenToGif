@@ -22,6 +22,10 @@ public enum ExportFormats
     /// </summary>
     Bpg,
 
+    /// <summary>
+    /// AV1 Still Image Format.
+    /// </summary>
+    Avif,
 
     /// <summary>
     /// Audio Video Interleaved.

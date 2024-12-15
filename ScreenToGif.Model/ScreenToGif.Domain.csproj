@@ -6,7 +6,7 @@
     <DebugType>embedded</DebugType>
     <UseWPF>True</UseWPF>
     <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
-    <Version>2.41.1</Version>
+    <Version>2.41.2</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <UseVSHostingProcess>true</UseVSHostingProcess>

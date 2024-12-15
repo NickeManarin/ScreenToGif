@@ -134,7 +134,6 @@ internal class GifskiInterop
 
     private delegate IntPtr NewDelegate(GifskiSettings settings);
     private delegate GifskiError AddPngFrameDelegate(IntPtr handle, uint index, [MarshalAs(UnmanagedType.LPUTF8Str)] string path, ushort delay);
-    //private delegate GifskiError AddRgbaFrameDelegate(IntPtr handle, uint index, uint width, uint height, IntPtr pixels, ushort delay);
     private delegate GifskiError AddRgbFrameDelegate(IntPtr handle, uint index, uint width, uint bytesPerRow, uint height, IntPtr pixels, ushort delay);
     private delegate GifskiError AddRgb2FrameDelegate(IntPtr handle, uint frameNumber, uint width, uint bytesPerRow, uint height, IntPtr pixels, double timestamp);
 
@@ -165,23 +164,24 @@ internal class GifskiInterop
         var info = new FileInfo(UserSettings.All.GifskiLocation);
         info.Refresh();
 
-        //I really need another way to differentiate gifski versions.
-        switch (info.Length)
+        //No better way to differentiate. Perhaps trying to call method and checking if fails?
+        switch (info.LastWriteTimeUtc)
         {
-            case 524_752:
-                Version = new Version(1, 2, 0);
+            //1.12
+            case var d when d > new DateTime(2024, 1, 1):
+                Version = new Version(1, 12, 0);
                 break;
 
-            case 502_720:
-                Version = new Version(0, 10, 2);
+            case var d when d > new DateTime(2023, 5, 1) && d < new DateTime(2023, 12, 31):
+                Version = new Version(1, 11, 0);
                 break;
 
-            case 502_208:
-                Version = new Version(0, 9, 3);
+            case var d when d >= new DateTime(2023, 1, 22) && d < new DateTime(2023, 4, 30):
+                Version = new Version(1, 10, 0);
                 break;
 
             default:
-                Version = new Version(1, 2, 0);
+                Version = new Version(1, 9, 0);
                 break;
         }
 

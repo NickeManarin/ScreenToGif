@@ -1,4 +1,3 @@
-using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -61,7 +60,7 @@ public class ShortcutSelection : IValueConverter
                 return Key.F2;
             case 2:
                 return Key.F3;
-            case 13:
+            case 3:
                 return Key.F4;
             case 4:
                 return Key.F5;
@@ -78,7 +77,7 @@ public class ShortcutSelection : IValueConverter
             case 10:
                 return Key.F11;
             case 11:
-                return Key.F11;
+                return Key.F12;
         }
 
         return Key.F1;
