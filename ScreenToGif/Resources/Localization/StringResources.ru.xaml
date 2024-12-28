@@ -1299,7 +1299,7 @@
     <s:String x:Key="S.RemoveDuplicates.Similarity">Сходство (%):</s:String>
     <s:String x:Key="S.RemoveDuplicates.Removal">Удалить кадры:</s:String>
     <s:String x:Key="S.RemoveDuplicates.Removal.First">Первый кадр</s:String>
-    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Пследний кадр</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Последний кадр</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay">Регулировка времени:</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Не настраивать</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Среднее</s:String>
