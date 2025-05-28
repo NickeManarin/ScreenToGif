@@ -298,7 +298,7 @@
     <s:String x:Key="S.Options.Recorder.Compression.Optimal.Info">(மெதுவாக ஆனால் அதிக உகந்த சுருக்கம்)</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.Fastest">வேகமானது</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">(வேகமானது ஆனால் குறைவான உகந்த சுருக்கம்)</s:String>
-    <s:String x:Key="S.Options.Recorder.Compression.NoCompression"சுருக்கம் இல்லை</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression">சுருக்கம் இல்லை</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(சட்டங்களைப் பிடிக்கும்போது எந்த சுருக்கமும் செய்யப்படக்கூடாது)</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize">தற்காலிக கோப்புகள் அளவு:</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize.Info">(எம்பி இல். இந்த அளவை அடைந்த பிறகு, தரவு வட்டில் எழுதப்படும்/சுத்தப்படுத்தப்படும்)</s:String>
@@ -1227,7 +1227,7 @@
     <s:String x:Key="S.Hint.Delay">கால அளவு (தாமதம்) மாற்றப்பட்டது</s:String>
     <s:String x:Key="S.Hint.Transition">மாற்றம் செருகப்பட்டது</s:String>
     <s:String x:Key="S.Hint.Reduce">சட்டகவிகிதம் குறைக்கப்பட்டது</s:String>
-    <s:String x:Key="S.Hint.Duplicates"நகல்கள் அகற்றப்பட்டன</s:String>
+    <s:String x:Key="S.Hint.Duplicates">நகல்கள் அகற்றப்பட்டன</s:String>
     
     <!--Editor • Action panel-->
     <s:String x:Key="S.Action.Hide">மறை</s:String>
