@@ -51,6 +51,7 @@
                 <ResourceDictionary Source="/Resources/Localization/StringResources.ru.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.sw.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.sv.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.ta.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.tr.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.uk.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.vi.xaml"/>
