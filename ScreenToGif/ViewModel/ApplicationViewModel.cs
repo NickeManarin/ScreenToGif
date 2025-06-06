@@ -888,9 +888,11 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
             return;
 #endif
 
+        NetworkHelper.IsNetworkMetered();
+
         if (!forceCheck && !UserSettings.All.CheckForUpdates)
             return;
-
+        
         //If the app was installed by Chocolatey, avoid updating via normal means.
         if (await IsChocolateyPackage())
             return;
@@ -985,8 +987,7 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
                 Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate));
 
             //Download update to be installed when the app closes.
-            if (UserSettings.All.InstallUpdates && Global.UpdateAvailable.HasDownloadLink
-                && (UserSettings.All.DownloadWithMeteredNetwork || !Util.Other.IsMeteredNetwork()))
+            if (UserSettings.All.InstallUpdates && Global.UpdateAvailable.HasDownloadLink && (UserSettings.All.DownloadWithMeteredNetwork || !NetworkHelper.IsNetworkMetered()))
                 await DownloadUpdate();
 
             return true;
