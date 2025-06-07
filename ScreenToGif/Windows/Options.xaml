@@ -1194,7 +1194,7 @@
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Portugal}" Tag="pt-PT" Content="Portuguese (Portugal) / Português (Portugal)" Author="Eduardo Godinho, Duarte Ramos"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ExtendedListBoxItem Image="{StaticResource Flag.India}" Tag="ta" Content="Tamil / தமிழ்" Author="TamilNeram"
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.India}" Tag="ta" Content="Tamil / தமிழ்" Author="தமிழ்நேரம் (TamilNeram.github.io)"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish / Türkçe" Author="g-u-r-k-a-n, Volkan Dağdelen, seferciogluecce, Omer Mollamehmetoglu, Bekir"
