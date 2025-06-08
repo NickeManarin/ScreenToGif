@@ -286,7 +286,7 @@ namespace ScreenToGif.Windows
             {
                 RibbonTabControl.UpdateVisual();
 
-                //Returns the preview if was playing before the deactivation of the window.
+                //Returns the preview if it was playing before the deactivation of the window.
                 if (WasPreviewing)
                 {
                     WasPreviewing = false;
