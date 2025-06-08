@@ -92,7 +92,7 @@ public class SpectrumSlider : Slider
     {
         base.OnValueChanged(oldValue, newValue);
 
-        SetValue(SelectedColorProperty, ColorExtensions.ConvertHsvToRgb(360 - newValue, 1, 1, 255));
+        SetValue(SelectedColorProperty, ColorExtensions.HsvToRgb(newValue, 1, 1, 255));
     }
 
     #endregion

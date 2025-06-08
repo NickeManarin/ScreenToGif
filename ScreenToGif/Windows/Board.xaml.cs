@@ -22,11 +22,6 @@ namespace ScreenToGif.Windows;
 /// </summary>
 public partial class Board
 {
-    //TODO: The main idea is to create a "record as you draw" feature, 
-    //with the possibility to record keyframes by keyframes (Snapshot)
-    //and show the previous drawn keyframe as a "ghost" to help the drawing
-    //There will be some exceptions to the automatic recording, such as holding the Ctrl key, etc
-
     #region Variables
 
     /// <summary>
@@ -44,8 +39,6 @@ public partial class Board
 
     #endregion
 
-    #region Inicialization
-
     public Board()
     {
         InitializeComponent();
@@ -59,11 +52,9 @@ public partial class Board
 
         WidthIntegerBox.Scale = _dpi / 96d;
         HeightIntegerBox.Scale = _dpi / 96d;
-
+        
         Arguments.ClearAutomationArgs();
     }
-
-    #endregion
 
     #region Record Async
 
@@ -139,8 +130,6 @@ public partial class Board
 
     #endregion
 
-    #region Methods
-
     /// <summary>
     /// Method that starts or pauses the recording
     /// </summary>
@@ -149,9 +138,7 @@ public partial class Board
         switch (Stage)
         {
             case RecorderStages.Stopped:
-
-                #region To Record
-
+            {
                 _capture = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
 
                 Project?.Clear();
@@ -165,45 +152,19 @@ public partial class Board
                 Topmost = true;
 
                 FrameRate.Start(_capture.Interval);
-
-                #region Start
-
-                //if (!Settings.Default.Snapshot)
-                //{
-                #region Normal Recording
-
+                
                 _capture.Tick += Normal_Elapsed;
-                //Normal_Elapsed(null, null);
                 _capture.Start();
 
                 Stage = RecorderStages.Recording;
 
                 AutoFitButtons();
 
-                #endregion
-                //}
-                //else
-                //{
-                //    #region SnapShot Recording
-
-                //    Stage = Stage.Snapping;
-                //    //Title = "Board Recorder - " + Properties.Resources.Con_SnapshotMode;
-
-                //    AutoFitButtons();
-
-                //    #endregion
-                //}
-
                 break;
-
-            #endregion
-
-            #endregion
+            }
 
             case RecorderStages.Recording:
-
-                #region To Pause
-
+            {
                 Stage = RecorderStages.Paused;
                 Title = LocalizationHelper.Get("S.Recorder.Paused");
 
@@ -213,13 +174,10 @@ public partial class Board
 
                 FrameRate.Stop();
                 break;
-
-            #endregion
+            }
 
             case RecorderStages.Paused:
-
-                #region To Record Again
-
+            {
                 Stage = RecorderStages.Recording;
                 Title = LocalizationHelper.Get("S.Board.Title");
 
@@ -229,18 +187,7 @@ public partial class Board
 
                 _capture.Start();
                 break;
-
-            #endregion
-
-            case RecorderStages.Snapping:
-
-                #region Take Screenshot (All possibles types)
-                    
-                Normal_Elapsed(null, null);
-
-                break;
-
-            #endregion
+            }
         }
     }
 
@@ -260,10 +207,8 @@ public partial class Board
             {
                 Close();
             }
-            else if ((Stage == RecorderStages.PreStarting || Stage == RecorderStages.Snapping) && !Project.Any)
+            else if (Stage is RecorderStages.PreStarting && !Project.Any)
             {
-                #region if Pre-Starting or in Snapmode and no Frames, Stops
-
                 Stage = RecorderStages.Stopped;
 
                 //Enables the controls that are disabled while recording;
@@ -277,8 +222,6 @@ public partial class Board
                 Title = LocalizationHelper.Get("S.Board.Title") + " ■";
 
                 AutoFitButtons();
-
-                #endregion
             }
         }
         catch (NullReferenceException nll)
@@ -312,10 +255,6 @@ public partial class Board
         }
     }
 
-    #endregion
-
-    #region Timers
-
     private void Normal_Elapsed(object sender, EventArgs e)
     {
         var fileName = $"{Project.FullPath}{FrameCount}.png";
@@ -331,18 +270,10 @@ public partial class Board
         FrameCount++;
     }
 
-    #endregion
-
-    #region Sizing
-
     private void LightWindow_SizeChanged(object sender, SizeChangedEventArgs e)
     {
         AutoFitButtons();
     }
-
-    #endregion
-
-    #region Buttons
 
     private async void DiscardButton_Click(object sender, RoutedEventArgs e)
     {
@@ -374,16 +305,7 @@ public partial class Board
         //Removes the current drawings.
         MainInkCanvas.Strokes.Clear();
 
-        //if (!Settings.Default.Snapshot)
-        //{
-        //Only display the Record text when not in snapshot mode. 
         Title = LocalizationHelper.Get("S.Board.Title");
-        //}
-        //else
-        //{
-        //    Stage = Stage.Snapping;
-        //    EnableSnapshot_Executed(null, null);
-        //}
 
         AutoFitButtons();
     }
@@ -412,19 +334,13 @@ public partial class Board
     {
         Close();
     }
-
-    #endregion
-
-    #region Other Events
-
+    
     private void Board_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key.ToString().Equals(UserSettings.All.StopShortcut.ToString()))
-        {
             StopButton_Click(null, null);
-        }
 
-        if ((e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl) && !_isCtrlDown)
+        if (e.Key is Key.LeftCtrl or Key.RightCtrl && !_isCtrlDown)
         {
             AutoRecordToggleButton.IsChecked = !(AutoRecordToggleButton.IsChecked ?? true);
             _isCtrlDown = true;
@@ -433,7 +349,7 @@ public partial class Board
 
     private void Board_KeyUp(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
+        if (e.Key is Key.LeftCtrl or Key.RightCtrl)
         {
             AutoRecordToggleButton.IsChecked = !(AutoRecordToggleButton.IsChecked ?? true);
             _isCtrlDown = false;
@@ -442,7 +358,7 @@ public partial class Board
 
     private void MainInkCanvas_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
     {
-        if ((Stage == RecorderStages.Stopped || Stage == RecorderStages.Paused) && AutoRecordToggleButton.IsChecked == true)
+        if (Stage is RecorderStages.Stopped or RecorderStages.Paused && AutoRecordToggleButton.IsChecked == true)
             RecordPause();
 
         if (DiscardButton.Visibility == Visibility.Collapsed)
@@ -455,10 +371,10 @@ public partial class Board
             RecordPause();
     }
 
-    private async void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         if (Mouse.LeftButton == MouseButtonState.Pressed)
-            await Task.Factory.StartNew(() => Dispatcher.Invoke(DragMove));
+            DragMove();
     }
 
     private void Board_Deactivated(object sender, EventArgs e)
@@ -483,6 +399,4 @@ public partial class Board
 
         GC.Collect();
     }
-
-    #endregion
 }

@@ -16,7 +16,7 @@ public partial class App : Application
 
     private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
-        LogWriter.Log(e.Exception, "On Dispacher Unhandled Exception - Unknown");
+        LogWriter.Log(e.Exception, "On Dispatcher Unhandled Exception - Unknown");
 
         try
         {

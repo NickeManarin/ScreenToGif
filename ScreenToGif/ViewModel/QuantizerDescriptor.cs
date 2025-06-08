@@ -1,17 +1,14 @@
-#region Usings
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 using KGySoft.Drawing.Imaging;
+using KGySoft.Drawing.Wpf;
 using KGySoft.Reflection;
 
 using ScreenToGif.Util;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Gif;
-
-#endregion
 
 namespace ScreenToGif.ViewModel;
 
@@ -78,14 +75,14 @@ public class QuantizerDescriptor
 
     #region Constructors
 
-    private QuantizerDescriptor(Type type, string methodName) : this(type.GetMethod(methodName))
-    {}
-
-    private QuantizerDescriptor(MethodInfo method)
+    private QuantizerDescriptor(Type type, string methodName)
     {
+        var method = type.GetMethods().FirstOrDefault(f => f.Name.Equals(methodName) && !f.GetCustomAttributes(typeof(ObsoleteAttribute), true).Any());
+
         _method = MethodAccessor.GetAccessor(method);
         Id = $"{method.DeclaringType.Name}.{method.Name}";
         _parameters = method.GetParameters();
+
         HasAlphaThreshold = _parameters.Any(p => p.Name == "alphaThreshold");
         HasWhiteThreshold = _parameters.Any(p => p.Name == "whiteThreshold");
         HasDirectMapping = _parameters.Any(p => p.Name == "directMapping");
@@ -109,7 +106,7 @@ public class QuantizerDescriptor
             switch (descriptor._parameters[i].Name)
             {
                 case "backColor":
-                    args[i] = preset.BackColor.ToDrawingColor();
+                    args[i] = preset.BackColor.ToColor32();
                     break;
                 case "alphaThreshold":
                     args[i] = preset.AlphaThreshold;
@@ -129,8 +126,10 @@ public class QuantizerDescriptor
         }
 
         var result = (IQuantizer)descriptor._method.Invoke(null, args);
+
         if (result is OptimizedPaletteQuantizer opt && preset.BitLevel != 0)
             result = opt.ConfigureBitLevel(preset.BitLevel);
+
         if (preset.LinearColorSpace)
             result = result switch
             {

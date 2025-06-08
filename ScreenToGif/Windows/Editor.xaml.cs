@@ -225,7 +225,7 @@ namespace ScreenToGif.Windows
         {
             InitializeComponent();
 
-            DataContext = _viewModel = new EditorViewModel();
+            _viewModel = DataContext as EditorViewModel;
         }
 
         #region Main Events
@@ -286,7 +286,7 @@ namespace ScreenToGif.Windows
             {
                 RibbonTabControl.UpdateVisual();
 
-                //Returns the preview if was playing before the deactivation of the window.
+                //Returns the preview if it was playing before the deactivation of the window.
                 if (WasPreviewing)
                 {
                     WasPreviewing = false;
@@ -4320,7 +4320,7 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            return new List<FrameInfo> { new(fileName, 66) };
+            return [new(fileName, 66)];
         }
 
         private List<FrameInfo> ImportFromVideo(string source, string pathTemp)
@@ -5229,14 +5229,14 @@ namespace ScreenToGif.Windows
                 {
                     case PartialExportModes.FrameExpression:
                     {
-                        var blocks = preset.PartialExportFrameExpression.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
+                        var blocks = preset.PartialExportFrameExpression.Split([','], StringSplitOptions.RemoveEmptyEntries);
+                        
                         foreach (var block in blocks)
                         {
                             //Frame range.
-                            if (block.Contains("-"))
+                            if (block.Contains('-'))
                             {
-                                var subs = block.Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+                                var subs = block.Split(['-'], StringSplitOptions.RemoveEmptyEntries);
 
                                 if (!int.TryParse(subs[0], out var start) || !int.TryParse(subs[1], out var end))
                                     continue;
@@ -5244,20 +5244,19 @@ namespace ScreenToGif.Windows
                                 if (start == end)
                                 {
                                     //Single frame.
-                                    indexes.Add(start); //indexes.Add(frames[start]);
+                                    indexes.Add(start);
                                 }
                                 else if (start < end)
                                 {
                                     //Normal range.
                                     for (var i = start; i <= end; i++)
-                                        indexes.Add(i); //indexes.Add(frames[i]);
+                                        indexes.Add(i);
                                 }
                                 else
                                 {
                                     //Reversed range.
-                                    //The CopyToExport() method below has no support for this yet, so it just copies the frames in order anyway.
                                     for (var i = start; i >= end; i--)
-                                        indexes.Add(i); //indexes.Add(frames[i]);
+                                        indexes.Add(i);
                                 }
                             }
                             else
@@ -5272,6 +5271,7 @@ namespace ScreenToGif.Windows
 
                     case PartialExportModes.FrameRange:
                     {
+                        //UI already validates range.
                         indexes = Enumerable.Range(preset.PartialExportFrameStart, preset.PartialExportFrameEnd - preset.PartialExportFrameStart).ToList();
                         break;
                     }
@@ -5298,7 +5298,6 @@ namespace ScreenToGif.Windows
                         else
                         {
                             //Reversed playback.
-                            //The CopyToExport() method below has no support for this yet, so it just copies the frames in order anyway.
                             span = TimeSpan.FromMilliseconds(Project.Frames.Sum(s => s.Delay));
 
                             for (var i = Project.Frames.Count - 1; i >= 0; i--)

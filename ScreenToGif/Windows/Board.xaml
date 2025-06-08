@@ -5,6 +5,7 @@
                xmlns:u2="clr-namespace:ScreenToGif.Util;assembly=ScreenToGif.Util"
                xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
                xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
+               xmlns:v="clr-namespace:ScreenToGif.ViewModel;assembly=ScreenToGif.ViewModel"
                x:Name="BoardLightWindow" Title="{DynamicResource S.Board.Title}" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen" 
                Width="{Binding BoardWidth, Source={x:Static t:UserSettings.All}, Mode=TwoWay}" Height="{Binding BoardHeight, Source={x:Static t:UserSettings.All},  Mode=TwoWay}"
                IsThin="{Binding RecorderThinMode, Source={x:Static t:UserSettings.All}}" Icon="../Resources/Logo.ico" 
@@ -49,16 +50,15 @@
         <c:KeysToString x:Key="KeysToStringConverter"/>
         <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
         <c:IntToString x:Key="IntToStringConverter"/>
-
-        <c:StylusTipToBool x:Key="StylusTipToBoolConverter"/>
-        <c:SelectionToEditingMode x:Key="SelectionToEditingModeConverter"/>
-        <c:SelectionToDrawingAttributes x:Key="SelectionToDrawingAttributesConverter"/>
-        <c:SelectionToStylusShape x:Key="SelectionToStylusShapeConverter"/>
     </n:LightWindow.Resources>
 
     <n:LightWindow.CommandBindings>
         <CommandBinding Command="{StaticResource Command.Options}" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
     </n:LightWindow.CommandBindings>
+
+    <n:LightWindow.DataContext>
+        <v:BoardRecorderViewModel/>
+    </n:LightWindow.DataContext>
 
     <Grid Name="MainGrid" Background="{DynamicResource Panel.Background}">
         <Grid.RowDefinitions>
@@ -85,21 +85,24 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenModeRadioButton" Icon="{StaticResource Vector.Pen}" IsChecked="True"
+                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="0" Icon="{StaticResource Vector.Pen}" IsChecked="{Binding IsInkMode, Mode=TwoWay}"
                                        Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
                                        ToolTip="{DynamicResource S.FreeDrawing.Pen}" ToolTipService.Placement="Top"/>
-                <n:ExtendedRadioButton Grid.Column="1" x:Name="EraserModeRadioButton" Icon="{StaticResource Vector.Eraser}" 
+
+                <n:ExtendedRadioButton Grid.Column="1" Icon="{StaticResource Vector.Eraser}" IsChecked="{Binding IsEraserMode, Mode=TwoWay}"
                                        Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
                                        ToolTip="{DynamicResource S.FreeDrawing.Eraser}" ToolTipService.Placement="Top"/>
-                <n:ExtendedRadioButton Grid.Column="2" x:Name="SelectorModeRadioButton" Icon="{StaticResource Vector.Select}" 
+
+                <n:ExtendedRadioButton Grid.Column="2" Icon="{StaticResource Vector.Select}" IsChecked="{Binding IsSelectionMode, Mode=TwoWay}"
                                        Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
                                        ToolTip="{DynamicResource S.FreeDrawing.Select}" ToolTipService.Placement="Top"/>
-                <n:ExtendedRadioButton Grid.Column="3" x:Name="EraserStrokeModeRadioButton" Icon="{StaticResource Vector.StrokeEraser}" 
+
+                <n:ExtendedRadioButton Grid.Column="3" Icon="{StaticResource Vector.StrokeEraser}" IsChecked="{Binding IsStrokeEraserMode, Mode=TwoWay}"
                                        Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
                                        ToolTip="{DynamicResource S.FreeDrawing.StrokeEraser}" ToolTipService.Placement="Top"/>
             </Grid>
 
-            <Grid Grid.Column="2" Visibility="{Binding IsChecked, ElementName=PenModeRadioButton, Converter={StaticResource Bool2Visibility}}">
+            <Grid Grid.Column="2" Visibility="{Binding BrushSettingsVisibility, Mode=OneWay}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -113,24 +116,23 @@
 
                 <Separator Grid.Column="0" Width="1" Margin="0,1,10,1"/>
 
-                <n:ColorBox Grid.Column="1" x:Name="TipColorBox" Width="40" MinWidth="40" Margin="5,2"
-                            SelectedColor="{Binding BoardColor, Source={x:Static t:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <n:ColorBox Grid.Column="1" Width="40" MinWidth="40" Margin="5,2" SelectedColor="{Binding BrushColor, Mode=TwoWay}"/>
 
-                <n:IntegerUpDown Grid.Column="2" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
-                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=BoardStylusHeight, Mode=TwoWay}"
-                                 ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                <n:IntegerUpDown Grid.Column="2" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
+                                 Value="{Binding BrushWidth, Mode=TwoWay}" ToolTip="{DynamicResource S.Recorder.Width}"
+                                 ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <n:IntegerUpDown Grid.Column="3" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
-                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=BoardStylusWidth, Mode=TwoWay}"
-                                 ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                <n:IntegerUpDown Grid.Column="3" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
+                                 Value="{Binding BrushHeight, Mode=TwoWay}" ToolTip="{DynamicResource S.Recorder.Height}"
+                                 ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <n:ExtendedRadioButton Grid.Column="4" x:Name="EllipseRadioButton" Icon="{StaticResource Vector.Ellipse}" 
+                <n:ExtendedRadioButton Grid.Column="4" Icon="{StaticResource Vector.Ellipse}" 
                                        Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                       IsChecked="{Binding BoardStylusTip, Source={x:Static t:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+                                       IsChecked="{Binding StylusTipEllipse, Mode=TwoWay}"/>
 
-                <n:ExtendedRadioButton Grid.Column="5" x:Name="RectangleRadioButton" Icon="{StaticResource Vector.Rectangle}" 
+                <n:ExtendedRadioButton Grid.Column="5" Icon="{StaticResource Vector.Rectangle}" 
                                        Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                       IsChecked="{Binding BoardStylusTip, Source={x:Static t:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+                                       IsChecked="{Binding StylusTipRectangle, Mode=TwoWay}"/>
 
                 <Grid Grid.Column="6">
                     <Grid.RowDefinitions>
@@ -138,15 +140,15 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <n:ExtendedCheckBox Grid.Row="0" x:Name="FitToCurveRadioButton" Text="{DynamicResource S.FreeDrawing.FitToCurve}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
-                                        IsChecked="{Binding BoardFitToCurve, Source={x:Static t:UserSettings.All}}" FontSize="11"/>
+                    <n:ExtendedCheckBox Grid.Row="0" Text="{DynamicResource S.FreeDrawing.FitToCurve}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
+                                        IsChecked="{Binding FitToCurve, Mode=TwoWay}" FontSize="11"/>
 
-                    <n:ExtendedCheckBox Grid.Row="1" x:Name="IsHighlighterRadioButton" Text="{DynamicResource S.FreeDrawing.Highlighter}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
-                                        IsChecked="{Binding BoardIsHighlighter, Source={x:Static t:UserSettings.All}}" FontSize="11"/>
+                    <n:ExtendedCheckBox Grid.Row="1" Text="{DynamicResource S.FreeDrawing.Highlighter}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
+                                        IsChecked="{Binding IsHighlighter, Mode=TwoWay}" FontSize="11"/>
                 </Grid>
             </Grid>
 
-            <Grid Grid.Column="3" Visibility="{Binding IsChecked, ElementName=EraserModeRadioButton, Converter={StaticResource Bool2Visibility}}">
+            <Grid Grid.Column="3" Visibility="{Binding EraserBrushSettingsVisibility, Mode=OneWay}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -158,57 +160,31 @@
 
                 <Separator Grid.Column="0" Width="1" Margin="0,1,10,1"/>
 
-                <n:IntegerUpDown Grid.Column="2" x:Name="BorderEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
-                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=BoardEraserHeight, Mode=TwoWay}"
-                                 ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                <n:IntegerUpDown Grid.Column="2"  Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
+                                 Value="{Binding EraserBrushWidth, Mode=TwoWay}" ToolTip="{DynamicResource S.Recorder.Width}"
+                                 ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <n:IntegerUpDown Grid.Column="3" x:Name="BorderEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
-                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=BoardEraserWidth, Mode=TwoWay}"
-                                 ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                <n:IntegerUpDown Grid.Column="3" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
+                                 Value="{Binding EraserBrushHeight, Mode=TwoWay}" ToolTip="{DynamicResource S.Recorder.Height}"
+                                 ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <n:ExtendedRadioButton Grid.Column="4" x:Name="EraserEllipseRadioButton" Icon="{StaticResource Vector.Ellipse}" 
+                <n:ExtendedRadioButton Grid.Column="4" Icon="{StaticResource Vector.Ellipse}" 
                                        Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                       IsChecked="{Binding BoardEraserStylusTip, Source={x:Static t:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+                                       IsChecked="{Binding EraserStylusTipEllipse, Mode=TwoWay}"/>
 
-                <n:ExtendedRadioButton Grid.Column="5" x:Name="EraserRectangleRadioButton" Icon="{StaticResource Vector.Rectangle}" 
+                <n:ExtendedRadioButton Grid.Column="5" Icon="{StaticResource Vector.Rectangle}" 
                                        Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                       IsChecked="{Binding BoardEraserStylusTip, Source={x:Static t:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+                                       IsChecked="{Binding EraserStylusTipRectangle, Mode=TwoWay}"/>
             </Grid>
         </Grid>
 
         <!--Background="{StaticResource Checker.DrawingBrush}"-->
+        <!--Background="{StaticResource Background.Lines}"-->
         <Border Grid.Row="1" BorderThickness="1" BorderBrush="{DynamicResource Element.Border.Light}">
             <Border x:Name="MainBorder">
-                <!--Background="{StaticResource Background.Lines}"-->
-                <n:InkCanvasExtended x:Name="MainInkCanvas" PreviewMouseDown="MainInkCanvas_OnPreviewMouseDown" PreviewMouseUp="MainInkCanvas_OnPreviewMouseUp">
-
-                    <n:InkCanvasExtended.EditingMode>
-                        <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
-                            <Binding ElementName="PenModeRadioButton" Path="IsChecked"/>
-                            <Binding ElementName="EraserModeRadioButton" Path="IsChecked"/>
-                            <Binding ElementName="SelectorModeRadioButton" Path="IsChecked"/>
-                        </MultiBinding>
-                    </n:InkCanvasExtended.EditingMode>
-
-                    <n:InkCanvasExtended.DefaultDrawingAttributes>
-                        <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
-                            <Binding Source="{x:Static t:UserSettings.All}" Path="BoardStylusHeight"/>
-                            <Binding Source="{x:Static t:UserSettings.All}" Path="BoardStylusWidth"/>
-                            <Binding ElementName="TipColorBox" Path="SelectedColor"/>
-                            <Binding ElementName="FitToCurveRadioButton" Path="IsChecked"/>
-                            <Binding ElementName="IsHighlighterRadioButton" Path="IsChecked"/>
-                            <Binding ElementName="RectangleRadioButton" Path="IsChecked"/>
-                        </MultiBinding>
-                    </n:InkCanvasExtended.DefaultDrawingAttributes>
-
-                    <n:InkCanvasExtended.EraserShape>
-                        <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}" UpdateSourceTrigger="PropertyChanged">
-                            <Binding Source="{x:Static t:UserSettings.All}" Path="BoardStylusWidth" UpdateSourceTrigger="PropertyChanged"/>
-                            <Binding Source="{x:Static t:UserSettings.All}" Path="BoardStylusHeight" UpdateSourceTrigger="PropertyChanged"/>
-                            <Binding ElementName="EraserRectangleRadioButton" Path="IsChecked" UpdateSourceTrigger="PropertyChanged"/>
-                        </MultiBinding>
-                    </n:InkCanvasExtended.EraserShape>
-                </n:InkCanvasExtended>
+                <n:InkCanvasExtended x:Name="MainInkCanvas" EditingMode="{Binding EditingMode, Mode=TwoWay}" DefaultDrawingAttributes="{Binding DrawingAttributes, Mode=OneWay}"
+                                     EraserShapeDependency="{Binding EraserShape, Mode=OneWay}" Cursor="{Binding Cursor, Mode=OneWay}" ForceCursor="{Binding ForceCursor, Mode=OneWay}"
+                                     PreviewMouseDown="MainInkCanvas_OnPreviewMouseDown" PreviewMouseUp="MainInkCanvas_OnPreviewMouseUp"/>
             </Border>
         </Border>
 

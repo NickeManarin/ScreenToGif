@@ -37,9 +37,6 @@
     <!--Warnings-->
     <s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>
     <s:String x:Key="S.Required">Required field</s:String>
-    <s:String x:Key="S.Warning.Net.Title">Missing Dependency</s:String>
-    <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 is not present</s:String>
-    <s:String x:Key="S.Warning.Net.Message">In order to properly use this app, you need to download the correct version of the .Net Framework.&#10;Would you like to open the web page to download it?</s:String>
     <s:String x:Key="S.Warning.Single.Title">Only one instance permitted</s:String>
     <s:String x:Key="S.Warning.Single.Header">The app is already running</s:String>
     <s:String x:Key="S.Warning.Single.Message">ScreenToGif is already running, but apparently there's no window open. Check you system tray, a ScreenToGif icon must be there.</s:String>

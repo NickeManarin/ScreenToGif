@@ -818,7 +818,7 @@ public partial class VideoSource
 
             var info = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
             {
-                Arguments = $" -i \"{VideoPath}\" -progress pipe:1 -vf scale={VideoWidth}:{VideoHeight} -ss {start:hh\\:mm\\:ss\\.fff} -to {end:hh\\:mm\\:ss\\.fff} -hide_banner -c:v png -r {fps} -vframes {count} \"{path}\"",
+                Arguments = $" -i \"{VideoPath}\" -progress pipe:1 -vf scale={VideoWidth}:{VideoHeight} -ss {start:hh\\:mm\\:ss\\.fff} -to {end:hh\\:mm\\:ss\\.fff} -hide_banner -flush_packets 1 -stats_period 1 -c:v png -r {fps} -vframes {count} \"{path}\"",
                 CreateNoWindow = true,
                 ErrorDialog = false,
                 UseShellExecute = false,
@@ -846,10 +846,28 @@ public partial class VideoSource
                         break;
                 }
             };
+            _process.ErrorDataReceived += (sender, e) =>
+            {
+                if (string.IsNullOrEmpty(e.Data))
+                    return;
+                
+                var match = Regex.Match(e.Data, @"frame=\s*(\d+)");
+
+                if (match.Success)
+                {
+                    var current = Convert.ToDouble(match.Groups[1].Value);
+
+                    Dispatcher?.Invoke(() => { CaptureProgressBar.Value = current; });
+
+                    if (Math.Abs(current - count) < double.Epsilon)
+                        GetFiles(folder);
+                }
+            };
             
             _process.StartInfo = info;
             _process.Start();
             _process.BeginOutputReadLine();
+            _process.BeginErrorReadLine();
             
             await _process.WaitForExitAsync();
 
@@ -880,8 +898,14 @@ public partial class VideoSource
 
     private void GetFiles(string folder)
     {
-        if (Dispatcher?.Invoke<bool>(() => !IsLoaded) ?? false)
+        if (Dispatcher?.Invoke(() => !IsLoaded) ?? false)
             return;
+
+        Dispatcher?.Invoke(() =>
+        {
+            Cursor = Cursors.AppStarting;
+            CaptureProgressBar.Visibility = Visibility.Collapsed;
+        });
 
         foreach (var file in Directory.GetFiles(folder, "*.png"))
         {

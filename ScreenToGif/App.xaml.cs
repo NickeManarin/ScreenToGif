@@ -36,8 +36,8 @@ public partial class App : IDisposable
 
     private Mutex _mutex;
     private bool _accepted;
-    private readonly List<Exception> _exceptionList = new();
-    private readonly object _lock = new();
+    private readonly List<Exception> _exceptionList = [];
+    private readonly Lock _lock = new();
 
     #endregion
 
@@ -52,6 +52,10 @@ public partial class App : IDisposable
 
         //Increases the duration of the tooltip display.
         ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
+
+#if !DEBUG
+        BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Continue;
+#endif
 
         SetSecurityProtocol();
 
@@ -231,7 +235,7 @@ public partial class App : IDisposable
 
     private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
-        LogWriter.Log(e.Exception, "On dispacher unhandled exception - Unknown");
+        LogWriter.Log(e.Exception, "On dispatcher unhandled exception - Unknown");
 
         try
         {

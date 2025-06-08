@@ -144,7 +144,7 @@ public class ExWindow : Window
 
                 if (button.HitTestElement(x, y))
                 {
-                    button.SetCurrentValue(BackgroundProperty, FindResource("Brush.Fill.Subtle.Secondary"));
+                    button.SetCurrentValue(BackgroundProperty, FindResource("Element.Background.Hover"));
 
                     handled = true;
                     return (nint)HitTestTargets.MaximizeButton; //new nint((int)HitTestTargets.MaximizeButton);
@@ -168,7 +168,7 @@ public class ExWindow : Window
 
                 if (button.HitTestElement(x, y))
                 {
-                    button.SetCurrentValue(BackgroundProperty, FindResource("Brush.Fill.Subtle.Tertiary"));
+                    button.SetCurrentValue(BackgroundProperty, FindResource("Element.Background.Pressed"));
 
                     //Without this, the button click near the bottom border would not work and it would display a ghost button nearby.
                     handled = true;
@@ -192,7 +192,7 @@ public class ExWindow : Window
 
                 if (button.HitTestElement(x, y))
                 {
-                    button.SetCurrentValue(BackgroundProperty, FindResource("Brush.Fill.Subtle.Tertiary"));
+                    button.SetCurrentValue(BackgroundProperty, FindResource("Element.Background.Pressed"));
 
                     //Without this, the button click near the bottom border would not work and it would display a ghost button nearby.
                     button.Command.Execute(null);

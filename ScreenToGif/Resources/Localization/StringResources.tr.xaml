@@ -1094,7 +1094,7 @@
     <s:String x:Key="S.GoTo.Instruction">Kareye git (0 to {0})</s:String>
     
     <!--Editor • Context menu-->
-    <s:String x:Key="S.Context.SaveAs">olarak kaydet</s:String>
+    <s:String x:Key="S.Context.SaveAs">Farklı kaydet</s:String>
     <s:String x:Key="S.Context.RemoveFrames">Seçili Kareleri Kaldır</s:String>
     <s:String x:Key="S.Context.NewRecording">Yeni Kayıt</s:String>
     <s:String x:Key="S.Context.NewWebcamRecording">Yeni Webcam Kaydedici</s:String>

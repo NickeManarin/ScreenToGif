@@ -14,7 +14,7 @@ public class InkCanvasExtended : InkCanvas
     /// <summary>
     /// Gets or set the eraser shape
     /// </summary>
-    public new StylusShape EraserShape
+    public new StylusShape EraserShapeDependency
     {
         get => (StylusShape) GetValue(EraserShapeProperty);
         set => SetValue(EraserShapeProperty, value);
@@ -22,7 +22,7 @@ public class InkCanvasExtended : InkCanvas
 
     // Using a DependencyProperty as the backing store for EraserShape.  
     // This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty EraserShapeProperty = DependencyProperty.Register("EraserShape", typeof (StylusShape), typeof (InkCanvasExtended), 
+    public static readonly DependencyProperty EraserShapeProperty = DependencyProperty.Register(nameof(EraserShapeDependency), typeof(StylusShape), typeof(InkCanvasExtended), 
         new UIPropertyMetadata(new RectangleStylusShape(10, 10), OnEraserShapePropertyChanged));
 
     /// <summary>
@@ -32,7 +32,7 @@ public class InkCanvasExtended : InkCanvas
     /// <param name="e">event args</param>
     private static void OnEraserShapePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (!(d is InkCanvasExtended canvas))
+        if (d is not InkCanvasExtended canvas)
             return;
 
         canvas.EraserShape = (StylusShape) e.NewValue;
