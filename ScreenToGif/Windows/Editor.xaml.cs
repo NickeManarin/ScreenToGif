@@ -225,7 +225,7 @@ namespace ScreenToGif.Windows
         {
             InitializeComponent();
 
-            DataContext = _viewModel = new EditorViewModel();
+            _viewModel = DataContext as EditorViewModel;
         }
 
         #region Main Events

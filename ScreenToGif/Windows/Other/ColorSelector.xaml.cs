@@ -156,7 +156,7 @@ public partial class ColorSelector
 
     private void ValueBox_MouseWheel(object sender, MouseWheelEventArgs e)
     {
-        if (!(sender is IntegerUpDown textBox))
+        if (sender is not IntegerUpDown textBox)
             return;
 
         textBox.Value = e.Delta > 0 ? textBox.Value + 1 : textBox.Value - 1;
@@ -244,7 +244,7 @@ public partial class ColorSelector
     {
         _colorPosition = null;
 
-        var hsv = ColorExtensions.ConvertRgbToHsv(theColor.R, theColor.G, theColor.B);
+        var hsv = ColorExtensions.RgbToHsv(theColor.R, theColor.G, theColor.B);
 
         CurrentColor.Background = new SolidColorBrush(theColor);
         ColorSlider.Value = hsv.H;
@@ -264,13 +264,13 @@ public partial class ColorSelector
 
     private void DetermineColor(Point p)
     {
-        var hsv = new HsvColor(360 - ColorSlider.Value, 1, 1)
+        var hsv = new HsvColor(ColorSlider.Value, 1, 1)
         {
             S = p.X,
             V = 1 - p.Y
         };
 
-        SelectedColor = ColorExtensions.ConvertHsvToRgb(hsv.H, hsv.S, hsv.V, AlphaSlider.Value);
+        SelectedColor = ColorExtensions.HsvToRgb(hsv.H, hsv.S, hsv.V, AlphaSlider.Value);
 
         CurrentColor.Background = new SolidColorBrush(SelectedColor);
         AlphaSlider.SpectrumColor = SelectedColor;

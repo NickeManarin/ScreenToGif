@@ -10,6 +10,7 @@
             xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
             xmlns:o="clr-namespace:ScreenToGif.UserControls"
             xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
+            xmlns:v="clr-namespace:ScreenToGif.ViewModel;assembly=ScreenToGif.ViewModel"
             x:Name="EditorWindow" Title="{DynamicResource S.Editor.Title}" MinHeight="500" MinWidth="700"
             Background="{DynamicResource Panel.Background.Level3}" UseLayoutRounding="True" Icon="/Resources/Logo.ico"
             FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
@@ -310,6 +311,10 @@
         <CommandBinding Command="{StaticResource Command.ExploreFolder}" CanExecute="ListFramesSelection_CanExecute" Executed="ExploreFolder_Executed"/>
     </Window.CommandBindings>
 
+    <Window.DataContext>
+        <v:EditorViewModel/>
+    </Window.DataContext>
+
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo Description="{DynamicResource S.Editor.Title}">
             <!--<TaskbarItemInfo.ThumbButtonInfos>
@@ -415,7 +420,7 @@
         </TaskbarItemInfo>
     </Window.TaskbarItemInfo>
 
-    <Grid x:Name="MainGrid" DataContext="{Binding ElementName=FrameListView, Path=SelectedItem}">
+    <Grid x:Name="MainGrid" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -425,7 +430,8 @@
 
         <n:HideableTabControl Grid.Row="0" x:Name="RibbonTabControl" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13" IsTabStop="False" Focusable="False"
                               OptionsCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenOptions}" FeedbackCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenFeedback}"
-                              TroubleshootCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenTroubleshoot}" HelpCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenHelp}">
+                              TroubleshootCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenTroubleshoot}" HelpCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenHelp}"
+                              DataContext="{Binding ElementName=FrameListView, Path=SelectedItem}">
 
             <n:AwareTabItem Header="{DynamicResource S.Editor.File}" Icon="{StaticResource Vector.Save}">
                 <Grid Height="94" Margin="2" Background="{DynamicResource Panel.Background.Level2}" Effect="{StaticResource Shadow.Invariant}">
@@ -1437,6 +1443,7 @@
                                    FontSize="{Binding ElementName=FreeTextFontSizeNumericUpDown, Path=Value}"
                                    Foreground="{Binding ElementName=FreeTextFontColorBox, Path=SelectedBrush}"
                                    Background="{Binding ElementName=FreeTextBackgroundColorBox, Path=SelectedBrush}">
+
                             <TextBlock.Resources>
                                 <c:DoubleToBool x:Key="DoubleToBool"/>
                                 <DropShadowEffect x:Key="DropShadowEffect" 
@@ -1446,6 +1453,7 @@
                                                   Opacity="{Binding Source={x:Static t:UserSettings.All}, Path=FreeTextShadowOpacity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                                   ShadowDepth="{Binding Source={x:Static t:UserSettings.All}, Path=FreeTextShadowDepth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                             </TextBlock.Resources>
+
                             <TextBlock.Style>
                                 <Style>
                                     <Style.Triggers>
@@ -1453,10 +1461,12 @@
                                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
                                             <Setter Property="TextBlock.Width" Value="{Binding ElementName=FreeTextWidthNumericUpDown, Path=Value}"/>
                                         </DataTrigger>
+
                                         <DataTrigger Binding="{Binding Source={x:Static t:UserSettings.All}, Path=FreeTextShadowOpacity, Converter={StaticResource DoubleToBool}, ConverterParameter=0, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="False">
                                             <Setter Property="TextBlock.Effect" Value="{StaticResource DropShadowEffect}"/>
                                         </DataTrigger>
                                     </Style.Triggers>
+
                                     <Style.Setters>
                                         <Setter Property="TextBlock.TextWrapping" Value="NoWrap"/>
                                         <Setter Property="TextBlock.Width" Value="Auto"/>
@@ -1509,35 +1519,9 @@
                                          Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" 
                                          Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
                                          Visibility="{Binding ElementName=FreeDrawingGrid, Path=Visibility}" Background="Transparent"
-                                         PreviewKeyDown="InkCanvas_PreviewKeyDown">
-
-                        <n:InkCanvasExtended.EditingMode>
-                            <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
-                                <Binding ElementName="PenModeRadioButton" Path="IsChecked"/>
-                                <Binding ElementName="EraserModeRadioButton" Path="IsChecked"/>
-                                <Binding ElementName="SelectorModeRadioButton" Path="IsChecked"/>
-                            </MultiBinding>
-                        </n:InkCanvasExtended.EditingMode>
-
-                        <n:InkCanvasExtended.DefaultDrawingAttributes>
-                            <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
-                                <Binding ElementName="FreeDrawingHeightNumericUpDown" Path="Value"/>
-                                <Binding ElementName="FreeDrawingWidthNumericUpDown" Path="Value"/>
-                                <Binding ElementName="FreeDrawingColorBox" Path="SelectedColor"/>
-                                <Binding ElementName="FitToCurveCheckBox" Path="IsChecked"/>
-                                <Binding ElementName="IsHighLighterCheckBox" Path="IsChecked"/>
-                                <Binding ElementName="RectangleRadioButton" Path="IsChecked"/>
-                            </MultiBinding>
-                        </n:InkCanvasExtended.DefaultDrawingAttributes>
-
-                        <n:InkCanvasExtended.EraserShape>
-                            <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}">
-                                <Binding ElementName="FreeDrawingEraserWidthNumericUpDown" Path="Value"/>
-                                <Binding ElementName="FreeDrawingEraserHeightNumericUpDown" Path="Value"/>
-                                <Binding ElementName="RectangleEraserRadioButton" Path="IsChecked"/>
-                            </MultiBinding>
-                        </n:InkCanvasExtended.EraserShape>
-                    </n:InkCanvasExtended>
+                                         EditingMode="{Binding FreeDrawingEditingMode, Mode=TwoWay}" DefaultDrawingAttributes="{Binding FreeDrawingDrawingAttributes, Mode=OneWay}"
+                                         EraserShapeDependency="{Binding FreeDrawingEraserShape, Mode=OneWay}" Cursor="{Binding FreeDrawingCursor, Mode=OneWay}" ForceCursor="{Binding FreeDrawingForceCursor, Mode=OneWay}"
+                                         PreviewKeyDown="InkCanvas_PreviewKeyDown"/>
 
                     <n:DrawingCanvas x:Name="ShapeDrawingCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True" DrawingMode="Shape"
                                      Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" CurrentShape="Arrow"
@@ -1641,13 +1625,13 @@
                             </MultiBinding>
                         </n:InkCanvasExtended.DefaultDrawingAttributes>
 
-                        <n:InkCanvasExtended.EraserShape>
+                        <n:InkCanvasExtended.EraserShapeDependency>
                             <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}">
                                 <Binding ElementName="CinemagraphEraserWidthNumericUpDown" Path="Value"/>
                                 <Binding ElementName="CinemagraphEraserHeightNumericUpDown" Path="Value"/>
                                 <Binding ElementName="RectangleEraser2RadioButton" Path="IsChecked"/>
                             </MultiBinding>
-                        </n:InkCanvasExtended.EraserShape>
+                        </n:InkCanvasExtended.EraserShapeDependency>
                     </n:InkCanvasExtended>
                 </Grid>
             </ScrollViewer>
@@ -2709,19 +2693,19 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenModeRadioButton" Icon="{StaticResource Vector.Pen}" 
-                                                       Text="{DynamicResource S.FreeDrawing.Pen}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="0,2" Padding="2" MinHeight="30" IsChecked="True"/>
-                                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="1" x:Name="EraserModeRadioButton" Icon="{StaticResource Vector.Eraser}" 
+                                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="0" Icon="{StaticResource Vector.Pen}" IsChecked="{Binding FreeDrawingIsInkMode, Mode=TwoWay}"
+                                                       Text="{DynamicResource S.FreeDrawing.Pen}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="0,2" Padding="2" MinHeight="30"/>
+                                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="1" Icon="{StaticResource Vector.Eraser}" IsChecked="{Binding FreeDrawingIsEraserMode, Mode=TwoWay}"
                                                        Text="{DynamicResource S.FreeDrawing.Eraser}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="0,2" Padding="2" MinHeight="30"/>
 
-                                <n:ExtendedRadioButton Grid.Row="1" Grid.Column="0" x:Name="SelectorModeRadioButton" Icon="{StaticResource Vector.Select}" 
+                                <n:ExtendedRadioButton Grid.Row="1" Grid.Column="0" Icon="{StaticResource Vector.Select}" IsChecked="{Binding FreeDrawingIsSelectionMode, Mode=TwoWay}"
                                                        Text="{DynamicResource S.FreeDrawing.Select}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="0,2" Padding="2" MinHeight="30"/>
-                                <n:ExtendedRadioButton Grid.Row="1" Grid.Column="1" x:Name="EraserStrokeModeRadioButton" Icon="{StaticResource Vector.StrokeEraser}" 
+                                <n:ExtendedRadioButton Grid.Row="1" Grid.Column="1" Icon="{StaticResource Vector.StrokeEraser}" IsChecked="{Binding FreeDrawingIsStrokeEraserMode, Mode=TwoWay}"
                                                        Text="{DynamicResource S.FreeDrawing.StrokeEraser}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="0,2" Padding="2" MinHeight="30"/>
                             </Grid>
 
-                            <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.FreeDrawing.Pen}" Visibility="{Binding ElementName=PenModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
-                            <Grid Grid.Row="3" Margin="10,0,0,0" Visibility="{Binding ElementName=PenModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
+                            <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.FreeDrawing.Pen}" Visibility="{Binding FreeDrawingBrushSettingsVisibility, Mode=OneWay}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0" Visibility="{Binding FreeDrawingBrushSettingsVisibility, Mode=OneWay}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -2738,15 +2722,15 @@
 
                                 <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=FreeDrawingPenWidth, Mode=TwoWay}"/>
+                                                 Value="{Binding FreeDrawingBrushWidth, Mode=TwoWay}"/>
 
                                 <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=FreeDrawingPenHeight, Mode=TwoWay}"/>
+                                                 Value="{Binding FreeDrawingBrushHeight, Mode=TwoWay}"/>
 
                                 <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Caption.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:ColorBox Grid.Row="2" Grid.Column="1" x:Name="FreeDrawingColorBox" Margin="10,5"
-                                            SelectedColor="{Binding FreeDrawingColor, Source={x:Static t:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            SelectedColor="{Binding FreeDrawingBrushColor, Mode=TwoWay}" />
 
                                 <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Tip}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
@@ -2755,25 +2739,23 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
-                                    <n:ExtendedRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleRadioButton" Icon="{StaticResource Vector.Rectangle}" 
-                                                           Text="{DynamicResource S.FreeDrawing.Rectangle}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="3,3" Padding="3"
-                                                           IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static t:UserSettings.All},
-                                                           Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
-                                    <n:ExtendedRadioButton Grid.Row="0" Grid.Column="1" x:Name="EllipseRadioButton" Icon="{StaticResource Vector.Ellipse}" 
-                                                           Text="{DynamicResource S.FreeDrawing.Ellipse}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="0,3" Padding="3"
-                                                           IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static t:UserSettings.All},
-                                                           Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+                                    <n:ExtendedRadioButton Grid.Row="0" Grid.Column="0" Icon="{StaticResource Vector.Rectangle}" IsChecked="{Binding FreeDrawingStylusTipRectangle, Mode=TwoWay}"
+                                                           Text="{DynamicResource S.FreeDrawing.Rectangle}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="3,3" Padding="3"/>
+
+                                    <n:ExtendedRadioButton Grid.Row="0" Grid.Column="1" Icon="{StaticResource Vector.Ellipse}" IsChecked="{Binding FreeDrawingStylusTipEllipse, Mode=TwoWay}"
+                                                           Text="{DynamicResource S.FreeDrawing.Ellipse}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="0,3" Padding="3"/>
                                 </Grid>
 
                                 <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Other}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:ExtendedCheckBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" x:Name="IsHighLighterCheckBox" Text="{DynamicResource S.FreeDrawing.Highlighter}" Margin="5"
-                                                    IsChecked="{Binding Source={x:Static t:UserSettings.All}, Path=FreeDrawingIsHighlighter, Mode=TwoWay}"/>
-                                <n:ExtendedCheckBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" x:Name="FitToCurveCheckBox" Text="{DynamicResource S.FreeDrawing.FitToCurve}" Margin="5"
-                                                    IsChecked="{Binding Source={x:Static t:UserSettings.All}, Path=FreeDrawingFitToCurve, Mode=TwoWay}"/>
+                                <n:ExtendedCheckBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Text="{DynamicResource S.FreeDrawing.Highlighter}" Margin="5"
+                                                    IsChecked="{Binding FreeDrawingIsHighlighter, Mode=TwoWay}"/>
+
+                                <n:ExtendedCheckBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Text="{DynamicResource S.FreeDrawing.FitToCurve}" Margin="5"
+                                                    IsChecked="{Binding FreeDrawingFitToCurve, Mode=TwoWay}"/>
                             </Grid>
 
-                            <n:LabelSeparator Grid.Row="4" Text="{DynamicResource S.FreeDrawing.Eraser}" Visibility="{Binding ElementName=EraserModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
-                            <Grid Grid.Row="5" Margin="10,0,0,0" Visibility="{Binding ElementName=EraserModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
+                            <n:LabelSeparator Grid.Row="4" Text="{DynamicResource S.FreeDrawing.Eraser}" Visibility="{Binding FreeDrawingEraserBrushSettingsVisibility, Mode=OneWay}"/>
+                            <Grid Grid.Row="5" Margin="10,0,0,0" Visibility="{Binding FreeDrawingEraserBrushSettingsVisibility, Mode=OneWay}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -2786,12 +2768,12 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FreeDrawingEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=FreeDrawingEraserWidth, Mode=TwoWay}"/>
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                                 Value="{Binding FreeDrawingEraserBrushWidth, Mode=TwoWay}"/>
 
                                 <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeDrawingEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=FreeDrawingEraserHeight, Mode=TwoWay}"/>
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" Minimum="1" Maximum="100" Margin="10,5" MinWidth="70" 
+                                                 Value="{Binding FreeDrawingEraserBrushHeight, Mode=TwoWay}"/>
 
                                 <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Tip}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
@@ -2800,14 +2782,13 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
-                                    <n:ExtendedRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleEraserRadioButton" Icon="{StaticResource Vector.Rectangle}" 
+                                    <n:ExtendedRadioButton Grid.Row="0" Grid.Column="0" Icon="{StaticResource Vector.Rectangle}" 
                                                            Text="{DynamicResource S.FreeDrawing.Rectangle}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="3,3" Padding="3"
-                                                           IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static t:UserSettings.All},
-                                                           Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
-                                    <n:ExtendedRadioButton Grid.Row="0" Grid.Column="1" x:Name="ElipseEraserRadioButton" Icon="{StaticResource Vector.Ellipse}" 
+                                                           IsChecked="{Binding FreeDrawingEraserStylusTipRectangle, Mode=TwoWay}"/>
+
+                                    <n:ExtendedRadioButton Grid.Row="0" Grid.Column="1" Icon="{StaticResource Vector.Ellipse}" 
                                                            Text="{DynamicResource S.FreeDrawing.Ellipse}" Cursor="Hand" ContentWidth="20" ContentHeight="20" Margin="0,3" Padding="3"
-                                                           IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static t:UserSettings.All},
-                                                           Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+                                                           IsChecked="{Binding FreeDrawingEraserStylusTipEllipse, Mode=TwoWay}"/>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -3666,6 +3647,7 @@
                                             <x:Static Member="Orientation.Horizontal"/>
                                         </TextBlock.Tag>
                                     </TextBlock>
+
                                     <TextBlock Text="{DynamicResource S.Orientation.Vertical}">
                                         <TextBlock.Tag>
                                             <x:Static Member="Orientation.Vertical"/>
@@ -3961,7 +3943,7 @@
                                                  Value="{Binding Source={x:Static t:UserSettings.All}, Path=FadeTransitionDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
 
-                            <Grid Grid.Row="8" Margin="5,3">
+                            <Grid Grid.Row="8" Margin="5,3" DataContext="{Binding ElementName=FrameListView, Path=SelectedItem}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -3982,6 +3964,7 @@
                                                     <Setter Property="DataContext" Value="{Binding ElementName=ZoomBoxControl}"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
+
                                             <Style.Setters>
                                                 <Setter Property="DataContext" Value="{x:Null}"/>
                                             </Style.Setters>
@@ -4043,7 +4026,7 @@
                                                  Value="{Binding Source={x:Static t:UserSettings.All}, Path=SlideTransitionDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
 
-                            <Grid Grid.Row="4" Margin="5,3">
+                            <Grid Grid.Row="4" Margin="5,3" DataContext="{Binding ElementName=FrameListView, Path=SelectedItem}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -4064,6 +4047,7 @@
                                                     <Setter Property="DataContext" Value="{Binding ElementName=ZoomBoxControl}"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
+
                                             <Style.Setters>
                                                 <Setter Property="DataContext" Value="{x:Null}"/>
                                             </Style.Setters>

@@ -258,7 +258,7 @@ internal static class ColorExtensions
     /// </summary>
     /// <param name="color">Color</param>
     /// <returns>A HsvColor object.</returns>
-    public static HsvColor ConvertRgbToHsv(this Color color)
+    public static HsvColor RgbToHsv(this Color color)
     {
         double h = 0, s;
 
@@ -302,7 +302,7 @@ internal static class ColorExtensions
     /// <param name="b">Blue</param>
     /// <param name="g">Green</param>
     /// <returns>A HsvColor object.</returns>
-    public static HsvColor ConvertRgbToHsv(int r, int g, int b)
+    public static HsvColor RgbToHsv(int r, int g, int b)
     {
         double h = 0, s;
 
@@ -347,7 +347,7 @@ internal static class ColorExtensions
     /// <param name="v">Value</param>
     /// <param name="alpha">Alpha</param>
     /// <returns></returns>
-    public static Color ConvertHsvToRgb(double h, double s, double v, double alpha)
+    public static Color HsvToRgb(double h, double s, double v, double alpha)
     {
         double r, g, b;
 
@@ -426,15 +426,11 @@ internal static class ColorExtensions
         var isDecimal = stop % 1 > 0;
             
         for (var i = 0; i <= (isDecimal ? count - 1 : count); i++)
-            colorsList.Add(ConvertHsvToRgb(i * stop, 1, 1, 255));
+            colorsList.Add(HsvToRgb(360 - i * stop, 1, 1, 255));
 
         if (isDecimal)
-            colorsList.Add(ConvertHsvToRgb(360, 1, 1, 255));
+            colorsList.Add(HsvToRgb(360, 1, 1, 255));
 
-        //for (var i = 0; i < 29; i++)
-        //    colorsList.Add(ConvertHsvToRgb(i * 12, 1, 1, 255));
-
-        //colorsList.Add(ConvertHsvToRgb(0, 1, 1, 255));
         return colorsList;
     }
 
