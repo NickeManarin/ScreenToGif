@@ -111,19 +111,22 @@ That's not why I'm sharing the source code, at all.
 
 <h2>Mentions</h2>
 
+|Website|
+| --- |
+|<a href="https://www.chip.de/downloads/Screen-To-Gif_65993193.html">Chip</a>|
+|<a href="https://www.softpedia.com/get/Multimedia/Graphic/Graphic-Others/Screen-to-Gif.shtml">Softpedia</a>|
+|<a href="https://www.portablefreeware.com/index.php?id=2895">PortableFreeware</a>|
+
 <table>
 	<tr>
 		<th>Website</th>
 	</tr>
-
 	<tr>
 		<td><a href="https://www.chip.de/downloads/Screen-To-Gif_65993193.html">Chip</a></td>
 	</tr>
-
 	<tr>
 		<td><a href="https://www.softpedia.com/get/Multimedia/Graphic/Graphic-Others/Screen-to-Gif.shtml">Softpedia</a></td>
 	</tr>
-
 	<tr>
 		<td><a href="https://www.portablefreeware.com/index.php?id=2895">PortableFreeware</a></td>
 	</tr>
