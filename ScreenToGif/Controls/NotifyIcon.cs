@@ -468,9 +468,6 @@ internal class NotifyIcon : FrameworkElement, IDisposable
         if (ContextMenu == null)
             return;
 
-        //For some reason, the context menu of the systray icon is not updating its style.
-        NotifyToolTipElement.Background = ContextMenu.Background = TryFindResource("Element.Background") as SolidColorBrush;
-            
         foreach (var menuItem in ContextMenu.Items.OfType<ExtendedMenuItem>())
         {
             menuItem.Foreground = TryFindResource("Element.Foreground.Medium") as SolidColorBrush;
@@ -479,10 +476,13 @@ internal class NotifyIcon : FrameworkElement, IDisposable
                 menuItem.Icon = TryFindResource("Vector.Close") as System.Windows.Media.Brush;
         }
             
-        if (NotifyToolTipElement is ToolTip tooltip)
+        if (NotifyToolTipElement != null)
         {
-            tooltip.SetValue(TextBlock.ForegroundProperty, TryFindResource("Element.Foreground.Medium") as SolidColorBrush);
-            tooltip.InvalidateVisual();
+            //For some reason, the context menu of the systray icon is not updating its style.
+            NotifyToolTipElement.Background = ContextMenu.Background = TryFindResource("Element.Background") as SolidColorBrush;
+
+            NotifyToolTipElement.SetValue(TextBlock.ForegroundProperty, TryFindResource("Element.Foreground.Medium") as SolidColorBrush);
+            NotifyToolTipElement.InvalidateVisual();
         }
     }
 
