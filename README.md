@@ -114,7 +114,7 @@ That's not why I'm sharing the source code, at all.
 <table>
 	<tr>
 		<th>Website</th>
-	<tr>
+	</tr>
 
 	<tr>
 		<td><a href="https://www.chip.de/downloads/Screen-To-Gif_65993193.html">Chip</a></td>
