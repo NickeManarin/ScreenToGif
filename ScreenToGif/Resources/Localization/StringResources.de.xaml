@@ -3,7 +3,7 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
     
-    <!--To use a new line: &#x0d; or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--To use a new line: &#x0d; or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;-->
     <!--You can use the zero-width-divider to suggest where the word should be divided when there's no space &#8203;-->
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
@@ -61,12 +61,12 @@
     <s:String x:Key="S.Warning.Graphics.Switch">Windows-Einstellungen öffnen</s:String>
     
     <!--Keys-->
-    <s:String x:Key="S.Keys.Enter">Enter</s:String>  
-    <s:String x:Key="S.Keys.Esc">Esc</s:String>  
-    <s:String x:Key="S.Keys.Space">Leertaste</s:String>  
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>
+    <s:String x:Key="S.Keys.Space">Leertaste</s:String>
 
     <!--Mouse-->
-    <s:String x:Key="S.Mouse.Right">Rechtsklick</s:String>  
+    <s:String x:Key="S.Mouse.Right">Rechtsklick</s:String>
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Neue Bildschirmaufnahme</s:String>
@@ -112,8 +112,8 @@
     <s:String x:Key="S.Command.SmoothLoop">Eine glatte Schleife erstellen</s:String>
     <s:String x:Key="S.Command.Reverse">Animation rückwärts abspielen</s:String>
     <s:String x:Key="S.Command.Yoyo">Animation vorwärts bis zum Ende und dann rückwärts abspielen</s:String>
-    <s:String x:Key="S.Command.MoveLeft">Ausgewählten Frame nach links verschieben</s:String>
-    <s:String x:Key="S.Command.MoveRight">Ausgewählten Frame nach rechts verschieben</s:String>
+    <s:String x:Key="S.Command.MoveLeft">Ausgewählte Frames nach links verschieben</s:String>
+    <s:String x:Key="S.Command.MoveRight">Ausgewählte Frames nach rechts verschieben</s:String>
     <s:String x:Key="S.Command.Resize">Größe aller Frames ändern</s:String>
     <s:String x:Key="S.Command.Crop">Alle Frames beschneiden</s:String>
     <s:String x:Key="S.Command.FlipRotate">Frames kippen oder drehen</s:String>
@@ -261,6 +261,8 @@
     <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(Erfordert eine manuelle Installation durch&#10;Entpacken und Ersetzen der ausführbaren Datei)</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Erzwingen, dass die Aktualisierung mit erhöhten Privilegien ausgeführt wird</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Benachrichtigen, bevor die Installation beginnt</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork">Aktualisierungen in gebührenpflichtigen Netzen herunterladen.</s:String>
+    <s:String x:Key="S.Options.App.General.DownloadWithMeteredNetwork.Info">(Ermöglicht das Herunterladen von Updates in gebührenpflichtigen Netzen)</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">Benutzeroberfläche</s:String>
@@ -305,7 +307,7 @@
     <s:String x:Key="S.Options.Recorder.RecordMouse">Mauszeiger mit aufnehmen</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">Mauszeigerfarbe auswählen</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Feste Bildwiederholrate</s:String>
-    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Konstante Verzögerung, die sich auch nicht mit der Aufzeichnungsverzögerung ändert)</s:String>    
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Konstante Verzögerung, die sich auch nicht mit der Aufzeichnungsverzögerung ändert)</s:String>
     <s:String x:Key="S.Options.Recorder.CaptureChanges">Nur aufzeichnen, wenn sich etwas ändert</s:String>
     <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(Ein Einzelbild wird nur dann aufgenommen, wenn sich innerhalb des Aufnahmebereichs etwas verändert hat)</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">Verbessert die Erfassungsleistung bei einer Remote-Desktop-Verbindung</s:String>
@@ -328,7 +330,7 @@
     <s:String x:Key="S.Options.Recorder.SelectionPanning">Verschieben der Auswahl ermöglichen</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">(Zeigt ein Griffelement in der Nähe der Ecke der Auswahl an,&#10;das ein Verschieben des Aufnahmebereichs ermöglicht)</s:String>
     <s:String x:Key="S.Options.Recorder.Compact">Kompaktmodus</s:String>
-    <s:String x:Key="S.Options.Recorder.Compact.Info">(Zeigt eine kleinere Version des Rekorder-Befehlsfelds)</s:String>    
+    <s:String x:Key="S.Options.Recorder.Compact.Info">(Zeigt eine kleinere Version des Rekorder-Befehlsfelds)</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard">Schaltfläche „Verwerfen” auch während der Aufnahme anzeigen</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(Normalerweise ist sie nur während einer Pause sichtbar)</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionImprovement">Leistung der Bildschirmauswahl verbessern</s:String>
@@ -600,6 +602,7 @@
     <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Öffnet PayPal-Webseite. Sie müssen eine Währung auswählen.</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe">Abonnieren</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Monatlich via Patreon spenden</s:String>
+    <s:String x:Key="S.Options.Donate.Stripe">Via Stripe spenden</s:String>
     <s:String x:Key="S.Options.Donate.Gift">Spiele als Geschenk</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Steam">Spiele als Geschenk via Steam</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Gog">Spiele als Geschenk via GOG</s:String>
@@ -793,10 +796,12 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Unterstützt das Speichern der Animation mit einem transparenten Hintergrund.</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">Hohe Qualität • Grafiken</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Besser für Aufnahmen mit weniger Farben.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Default.Title">KGy SOFT • Standard</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Default.Description">Empfohlen für die Bildschirmaufzeichnung der normalen Benutzeroberfläche. Verwendet den Median-Cut-Quantisierer ohne Dithering.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • Ausgewogen</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Gute Qualität für fotorealistische Grafiken mit dem Quantisierer ohne Dithering (von Wu).</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • Hohe Qualität</s:String>
-    <s:String x:Key="S.Preset.Gif.KGySoft.High.Description">Hohe Qualität für fotorealistische Grafiken unter Verwendung des Quantisierers von Wu mit höherem Bitniveau und Floyd-Steinberg-Fehlerdiffusionsdithering.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Description">Hohe Qualität für fotorealistische Grafiken unter Verwendung des Quantisierers von Wu mit höherem Bitniveau und Floyd-Steinberg-Fehlerdiffusions-Dithering.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT • Geringe Qualität, schneller</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">Quantisierung aller Bilder mit derselben vordefinierten „websicheren” Farbpalette und geordnetes Bayer-8x8-Dithering.</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg • Höhere Qualität</s:String>
@@ -854,7 +859,7 @@
     <s:String x:Key="S.ImportVideo.Frames">Frames:</s:String>
     <s:String x:Key="S.ImportVideo.Duration">Dauer:</s:String>
     <s:String x:Key="S.ImportVideo.Error">Beim Import der Video-Datei ist ein Fehler aufgetreten.</s:String>
-    <s:String x:Key="S.ImportVideo.Error.Detail">Vorschau fehlgeschlagen. Versuchen Sie andere Multimedia-Anwendung oder schauen Sie nach, ob die Datei nicht beschädigt ist.&#x0d;Falls Sie MediaPlayer verwenden, schauen Sie nach, ob er aktiviert wurde und benötigte Codecs installiert sind.</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">Vorschau fehlgeschlagen. Versuchen Sie andere Multimedia-Anwendung oder schauen Sie nach, ob die Datei nicht beschädigt ist.&#x0d;Wenn Sie MediaPlayer verwenden, schauen Sie nach, ob er aktiviert wurde und benötigte Codecs installiert sind.</s:String>
     <s:String x:Key="S.ImportVideo.Timeout">Zeitüberschreitung beim Abrufen der Frame-Vorschau.</s:String>
     <s:String x:Key="S.ImportVideo.Nothing">Keine Frames ausgewählt.</s:String>
     
@@ -941,6 +946,7 @@
     <s:String x:Key="S.Editor.File.Apng">Animierte PNG-Datei</s:String>
     <s:String x:Key="S.Editor.File.Gif">GIF-Animation</s:String>
     <s:String x:Key="S.Editor.File.Webp">WebP-Animation</s:String>
+    <s:String x:Key="S.Editor.File.Avif">AVIF-Animation</s:String>
 
     <s:String x:Key="S.Editor.File.Avi">AVI-Video</s:String>
     <s:String x:Key="S.Editor.File.Mkv">Matroska-Video</s:String>
@@ -1024,9 +1030,9 @@
     <!--Editor • Playback tab • Playback Options-->
     <s:String x:Key="S.Editor.PlaybackOptions.Header">Option</s:String>
     <s:String x:Key="S.Editor.PlaybackOptions.Loop">Endlosschleife</s:String>
-    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">Wird nur während der Wiedergabe verwendet.&#10;Falls Sie die Einstellungen für Wiederholungen für GIF- und APNG-Export ändern möchten,&#10;beachten Sie bitte die Option „Speichern unter” bei einigen Umwandlungen.</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">Wird nur während der Wiedergabe verwendet.&#10;Wenn Sie die Einstellungen für Wiederholungen für GIF- und APNG-Export ändern möchten,&#10;beachten Sie bitte die Option „Speichern unter” bei einigen Umwandlungen.</s:String>
     
-    <!--Editor • Edit tab • Frames-->  
+    <!--Editor • Edit tab • Frames-->
     <s:String x:Key="S.Editor.Edit.Frames">Frames</s:String>
     <s:String x:Key="S.Editor.Edit.Delete">Frames&#10;entfernen</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Duplikate&#10;entfernen</s:String>
@@ -1123,7 +1129,7 @@
     <s:String x:Key="S.Editor.Border.WarningThickness">Rahmenbreite muss an mindestens einer Stelle größer als Null sein.</s:String>
     <s:String x:Key="S.Editor.Border.WarningSelection">Sie müssen mindestens eine Grafik auswählen, um Rahmen hinzufügen zu können.</s:String>
     <s:String x:Key="S.Editor.Shadow.Warning.Invisible">Deckkraft muss größer sein als Null damit ein Unterschied sichtbar ist.</s:String>
-    <s:String x:Key="S.Editor.Shadow.Warning.Behind">Falls Sie Schattentiefe und Unschärferadius auf Null setzen, wird der Schatten unsichtbar sein.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Behind">Wenn Sie Schattentiefe und Unschärferadius auf Null setzen, wird der Schatten unsichtbar sein.</s:String>
     <s:String x:Key="S.Editor.Cinemagraph.WarningNoDrawing">Sie müssen mindestens ein Pixel auswählen, um Cinemagraph-Effekt anwenden zu können. Wählen Sie einen Bereich aus, indem Sie auf der Grafik malen.</s:String>
     <s:String x:Key="S.Editor.Fade.Title">Überblendung</s:String>
     <s:String x:Key="S.Editor.Fade.WarningSelection">Sie müssen mindestens einen Frame auswählen, um Ausblenden-Effekt anwenden zu können.</s:String>
@@ -1344,7 +1350,7 @@
     <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Nur Tastatureingaben des Benutzers aufzeichnen.</s:String>
     <s:String x:Key="S.KeyStrokes.Extend">Dauer der Anzeige der Tastatureingaben verlängern</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">Anzeige der Tastatureingaben früher beginnen</s:String>
-    <s:String x:Key="S.KeyStrokes.By">Um (ms):</s:String>
+    <s:String x:Key="S.KeyStrokes.By">um (ms):</s:String>
     <s:String x:Key="S.KeyStrokes.Warning.None">Keine Tastatureingaben in Ihrer Aufnahme</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Title">ScreenToGif • Tastatureingaben-Editor</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Number">Frame-Nummer</s:String>
@@ -1385,8 +1391,10 @@
     <s:String x:Key="S.MouseEvents">Maus-Events</s:String>
     <s:String x:Key="S.MouseHighlight.Color">Farbe der Mausmarkierung:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Left">Farbe der linken Maustaste:</s:String>
-    <s:String x:Key="S.MouseClicks.Color.Middle">Farbe der mittleren Maustaste::</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Middle">Farbe der mittleren Maustaste:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">Farbe der rechten Maustaste:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.FirstExtra">1. zusätzliche Buttonfarbe:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.SecondExtra">2. zusätzliche Buttonfarbe:</s:String>
     
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">Grafik-Wasserzeichen</s:String>
@@ -1399,7 +1407,7 @@
     
     <!--Editor • Border-->
     <s:String x:Key="S.Border.Appearance">Aussehen</s:String>
-    <s:String x:Key="S.Border.Info">Verwenden Sie negative Werte, um den Rahmen außerhalb der Grafik zu erzeugen.&#10;Ein so erstellter Rahmen wird auf alle Frames angewendet.&#10;Falls positive Werte eingegeben werden, wird der Rahmen nur dem ausgewählten Frame hinzugefügt.</s:String>
+    <s:String x:Key="S.Border.Info">Verwenden Sie negative Werte, um den Rahmen außerhalb der Grafik zu erzeugen.&#10;Ein so erstellter Rahmen wird auf alle Frames angewendet.&#10;Wenn positive Werte eingegeben werden, wird der Rahmen nur dem ausgewählten Frame hinzugefügt.</s:String>
 
     <!--Editor • Shadow-->
     <s:String x:Key="S.Shadow.ShadowColor">Schattenfarbe:</s:String>
@@ -1499,11 +1507,11 @@
     <s:String x:Key="S.SaveAs.Avi">AVI</s:String>
     <s:String x:Key="S.SaveAs.Avi.Info">Audio Video Interleave</s:String>
     <s:String x:Key="S.SaveAs.Mkv">MKV</s:String>
-    <s:String x:Key="S.SaveAs.Mkv.Info">Matroska</s:String> 
+    <s:String x:Key="S.SaveAs.Mkv.Info">Matroska</s:String>
     <s:String x:Key="S.SaveAs.Mov">MOV</s:String>
     <s:String x:Key="S.SaveAs.Mov.Info">QuickTime-Dateiformat</s:String>
     <s:String x:Key="S.SaveAs.Mp4">MP4</s:String>
-    <s:String x:Key="S.SaveAs.Mp4.Info">Mpeg-4</s:String>
+    <s:String x:Key="S.SaveAs.Mp4.Info">MPEG-4</s:String>
     <s:String x:Key="S.SaveAs.Webm">WebM</s:String>
     <s:String x:Key="S.SaveAs.Webm.Info">Web Movie</s:String>
     
@@ -1550,7 +1558,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">Externe Umwandlung, bereitgestellt von FFmpeg.org.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">Externe Umwandlung, bereitgestellt von Gif.ski.</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Options">Umwandlungs-Optionen</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Options">Umwandlungsoptionen</s:String>
 
     <!--Editor • Save as > FFmpeg-->
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Erweiterten Modus aktivieren.</s:String>
@@ -1619,6 +1627,8 @@
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel">Benutzerdefinierte Bit-Ebene.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">Wenn das Häkchen gesetzt ist, kann die Bitebene manuell konfiguriert werden.&#x0d;&#x0a;⚠️ Achtung: Die höchste Bit-Stufe kann sehr viel Speicherplatz beanspruchen!</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BitLevel.Info">Ein höherer Wert bedeutet eine höhere Genauigkeit, einen größeren Zielfarbraum, eine langsamere Verarbeitung und einen größeren Speicherbedarf.&#x0d;&#x0a;Wenn z. B. 1, dann kann das Ergebnis nicht mehr als 8 Farben haben, oder wenn 2, nicht mehr als 64 Farben. &#x0d;&#x0a;Bei Octree- und Wu-Quantisierern wirkt sich dies auch auf die maximale Anzahl der monochromen Farbtöne aus.&#x0d;&#x0a;Wenn z. B. 5 (was die Voreinstellung für den Wu-Quantisierer ist), können nur 32 monochrome Farbtöne unterschieden werden.&#x0d;&#x0a;⚠️ Achtung: Der Wu-Quantisierer verbraucht beim höchsten Wert mindestens 650 MB.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.LinearColorSpace">Linearer Farbraum</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.LinearColorSpace.Info">Wenn diese Option aktiviert ist, werden einige Operationen (Alpha-Blending mit Hintergrundfarbe, Quantisierung, Dithering, Suche nach den nächstgelegenen Farben in der Palette) im linearen Farbraum statt im sRGB-Farbraum durchgeführt.&#x0d;&#x0a;Die Arbeit im linearen Farbraum ist langsamer, liefert aber ein qualitativ besseres Ergebnis, insbesondere wenn der Quantisierer nur wenige Farben verwendet.&#x0d;&#x0a;&#x0d;&#x0a;⚠️ Hinweis: Bei der Verwendung von nur wenigen Farben kann die Helligkeit einer möglicherweise geänderten Vorschau falsch sein, da WPF die Größenänderung im sRGB-Farbraum durchführt.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">Schwarz und weiß</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">Feste 1-BPP-Palette mit schwarzen und weißen Farben.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">Graustufen - 4 Farben</s:String>
@@ -1648,15 +1658,15 @@
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None">Kein</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None.Info">Die Einzelbilder werden ohne Dithering quantisiert.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing">Serpentinen-Verarbeitung</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing.Info">Wenn diese Option aktiviert ist, wird die Fehlerausbreitungsrichtung von Zeile zu Zeile geändert.&#x0d;&#x0a;Dies trägt dazu bei, den Ripple-Effekt des Fehlerdiffusionsdithering zu verringern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing.Info">Wenn diese Option aktiviert ist, wird die Fehlerausbreitungsrichtung von Zeile zu Zeile geändert.&#x0d;&#x0a;Dies trägt dazu bei, den Ripple-Effekt des Fehlerdiffusions-Ditherings zu verringern.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2">Bayer 2x2 (geordnet)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2.Info">Das 2x2-Bayer-Matrix-Muster.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2.Info">Das 2x2-Bayer-Matrixmuster.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3">Bayer 3x3 (geordnet)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3.Info">Das 3x3-Bayer-Matrix-Muster.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3.Info">Das 3x3-Bayer-Matrixmuster.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4">Bayer 4x4 (geordnet)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4.Info">Das 4x4-Bayer-Matrix-Muster.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4.Info">Das 4x4-Bayer-Matrixmuster.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8">Bayer 8x8 (geordnet)</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8.Info">Das 8x8-Bayer-Matrix-Muster.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8.Info">Das 8x8-Bayer-Matrixmuster.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone">Gepunkteter Halbton (geordnet)</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone.Info">Eine 8x8-Matrix mit einem gepunkteten Halbtonmuster.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise">Blaues Rauschen (geordnet)</s:String>
@@ -1698,7 +1708,7 @@
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">Wiederholungen:</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Gibt an, wie oft die Animation wiedergegeben werden soll.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">Delta-Frames zulassen.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">Wenn diese Option aktiviert ist, wird versucht, unveränderte Pixel während der Umwandlung zu erkennen.&#x0d;&#x0a;Bei Verwendung eines optimierten Quantisierers ermöglicht diese Option, dass ein Bild mehr als 256 Farben hat.&#x0d;&#x0a;Diese Option wird ignoriert, wenn der Quantisierer keine Transparenz verwendet und „Abgeschnittene Frames zulassen” nicht markiert ist.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">Wenn diese Option aktiviert ist, wird versucht, unveränderte Pixel während der Umwandlung zu erkennen.&#x0d;&#x0a;Bei Verwendung eines optimierten Quantisierers ermöglicht diese Option, dass ein Bild mehr als 256 Farben hat.&#x0d;&#x0a;⚠️ Hinweis: Diese Option wird ignoriert, wenn der Quantisierer keine Transparenz verwendet und „Abgeschnittene Frames zulassen” nicht markiert ist.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">Delta-Toleranz:</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">Gibt die maximale Toleranz bei der Erkennung veränderter Pixel an.&#x0d;&#x0a;Wenn 0, dann wird überhaupt kein Unterschied toleriert.&#x0d;&#x0a;Wenn 255, dann gibt es möglicherweise Einzelbilder (oder sogar alle), die ohne Inhalt hinzugefügt werden.&#x0d;&#x0a;Ein sinnvoller Bereich liegt zwischen 0 und 16 für einen optimierten Quantisierer. Diejenigen mit festen Farben können mit etwas größeren Werten mit Dithering verwendet werden.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">Wenn die Delta-Toleranz zu hoch festgelegt ist, kann das Ergebnis von schlechter Qualität sein. Anklicken, um Delta-Toleranz zurückzusetzen.</s:String>
@@ -1756,7 +1766,7 @@
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LosslessHp">Verlustfrei (hohe Leistung)</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hp">Hohe Leistung</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hq">Hohe Qualität</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Bd">Bluray Disk</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Bd">Blu-ray-Disc</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatency">Geringe Latenzzeit</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHp">Geringe Latenzzeit (hohe Leistung)</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHq">Geringe Latenzzeit (hohe Qualität)</s:String>
@@ -1826,7 +1836,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Kopiert den durch Upload-Service erzeugten Link in Zwischenablage</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Weitere Umwandlungsbefehle ausführen</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Befehle eingeben, die nach dem Umwandeln ausgeführt werden sollen.&#x0a;Falls mehrere Befehle ausgeführt werden sollen, bitte einen Befehl pro Zeile eingeben.&#x0a;Makros:&#x0a;{p} = Dateiausgabepfad&#x0a;{f} = Ordnerausgabepfad&#x0d;{u} = URL der hochgeladenen Datei</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Befehle eingeben, die nach dem Umwandeln ausgeführt werden sollen.&#x0a;Wenn mehrere Befehle ausgeführt werden sollen, bitte einen Befehl pro Zeile eingeben.&#x0a;Makros:&#x0a;{p} = Dateiausgabepfad&#x0a;{f} = Ordnerausgabepfad&#x0d;{u} = URL der hochgeladenen Datei</s:String>
     
     <!--Editor • Save as > Partial export-->
     <s:String x:Key="S.SaveAs.Partial">Teilweise exportieren</s:String>
@@ -1922,7 +1932,7 @@
     <s:String x:Key="S.Feedback.Header">Rückmeldung senden</s:String>
     <s:String x:Key="S.Feedback.Title">Titel</s:String>
     <s:String x:Key="S.Feedback.Message">Nachricht</s:String>
-    <s:String x:Key="S.Feedback.Message.Info">Falls Sie einen Fehler finden, vergessen Sie nicht, Schritt für Schritt zu erklären, wie es zu diesem Fehler gekommen ist.</s:String>
+    <s:String x:Key="S.Feedback.Message.Info">Wenn Sie einen Fehler finden, vergessen Sie nicht, Schritt für Schritt zu erklären, wie es zu diesem Fehler gekommen ist.</s:String>
     <s:String x:Key="S.Feedback.Type">Art der Rückmeldung</s:String>
     <s:String x:Key="S.Feedback.Suggestion">Vorschlag</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Problem/Fehler</s:String>
