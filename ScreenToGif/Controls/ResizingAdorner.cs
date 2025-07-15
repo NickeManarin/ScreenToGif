@@ -147,25 +147,36 @@ public class ResizingAdorner : Adorner
     /// </summary>
     private void HandleBottomRight(object sender, DragDeltaEventArgs args)
     {
-        var adornedElement = this.AdornedElement as FrameworkElement;
-        var hitThumb = sender as Thumb;
+        if (AdornedElement is not FrameworkElement adornedElement || sender is not Thumb hitThumb)
+            return;
 
-        if (adornedElement == null || hitThumb == null) return;
-        var parentElement = adornedElement.Parent as FrameworkElement;
+        var zoomFactor = GetCanvasZoom(AdornedElement);
 
         // Ensure that the Width and Height are properly initialized after the resize.
         EnforceSize(adornedElement);
 
         // Change the size by the amount the user drags the mouse, as long as it's larger 
         // than the width or height of an adorner, respectively.
-        adornedElement.Width = Math.Max(adornedElement.Width + args.HorizontalChange, hitThumb.DesiredSize.Width);
-        adornedElement.Height = Math.Max(args.VerticalChange + adornedElement.Height, hitThumb.DesiredSize.Height);
+        adornedElement.Width = Math.Max(adornedElement.Width + args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
+        adornedElement.Height = Math.Max(adornedElement.Height + args.VerticalChange / zoomFactor, hitThumb.DesiredSize.Height);
 
-        if (adornedElement.Width > parentElement.Width)
-            parentElement.Width = adornedElement.Width;
+        //Adjust canvas size.
+        if (adornedElement.Parent is FrameworkElement canvas)
+        {
+            //Right.
+            var elementLeft = Canvas.GetLeft(adornedElement);
+            var elementRight = elementLeft + adornedElement.Width;
 
-        if (adornedElement.Height > parentElement.Height)
-            parentElement.Height = adornedElement.Height;
+            if (elementRight > canvas.Width)
+                canvas.Width = elementRight;
+
+            //Bottom.
+            var elementTop = Canvas.GetTop(adornedElement);
+            var elementBottom = elementTop + adornedElement.Height;
+
+            if (elementBottom > canvas.Height)
+                canvas.Height = elementBottom;
+        }
     }
 
     /// <summary>
@@ -173,26 +184,30 @@ public class ResizingAdorner : Adorner
     /// </summary>
     private void HandleTopRight(object sender, DragDeltaEventArgs args)
     {
-        var adornedElement = this.AdornedElement as FrameworkElement;
-        var hitThumb = sender as Thumb;
-
-        if (adornedElement == null || hitThumb == null) return;
-        var parentElement = adornedElement.Parent as FrameworkElement;
+        if (AdornedElement is not FrameworkElement adornedElement || sender is not Thumb hitThumb)
+            return;
 
         // Ensure that the Width and Height are properly initialized after the resize.
         EnforceSize(adornedElement);
 
-        // Change the size by the amount the user drags the mouse, as long as it's larger 
-        // than the width or height of an adorner, respectively.
-        adornedElement.Width = Math.Max(adornedElement.Width + args.HorizontalChange, hitThumb.DesiredSize.Width);
-        //adornedElement.Height = Math.Max(adornedElement.Height - args.VerticalChange, hitThumb.DesiredSize.Height);
+        var zoomFactor = GetCanvasZoom(AdornedElement);
 
+        //Change the size by the amount the user drags the mouse, as long as it's larger than the width or height of an adorner, respectively.
+        adornedElement.Width = Math.Max(adornedElement.Width + args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
+        
         var heightOld = adornedElement.Height;
         var heightNew = Math.Max(adornedElement.Height - args.VerticalChange, hitThumb.DesiredSize.Height);
         var topOld = Canvas.GetTop(adornedElement);
         adornedElement.Height = heightNew;
 
         Canvas.SetTop(adornedElement, topOld - (heightNew - heightOld));
+
+        //Adjust Canvas Right.
+        var elementLeft = Canvas.GetLeft(adornedElement);
+        var elementRight = elementLeft + adornedElement.Width;
+
+        if (adornedElement.Parent is FrameworkElement canvas && elementRight > canvas.Width)
+            canvas.Width = elementRight;
     }
 
     /// <summary>
@@ -200,18 +215,15 @@ public class ResizingAdorner : Adorner
     /// </summary>
     private void HandleTopLeft(object sender, DragDeltaEventArgs args)
     {
-        var adornedElement = AdornedElement as FrameworkElement;
-        var hitThumb = sender as Thumb;
+        if (AdornedElement is not FrameworkElement adornedElement || sender is not Thumb hitThumb)
+            return;
 
-        if (adornedElement == null || hitThumb == null) return;
-
-        // Ensure that the Width and Height are properly initialized after the resize.
+        //Ensure that the Width and Height are properly initialized after the resize.
         EnforceSize(adornedElement);
 
         var zoomFactor = GetCanvasZoom(AdornedElement);
 
-        // Change the size by the amount the user drags the mouse, as long as it's larger 
-        // than the width or height of an adorner, respectively.
+        //Change the size by the amount the user drags the mouse, as long as it's larger than the width or height of an adorner, respectively.
         var widthOld = adornedElement.Width;
         var widthNew = Math.Max(adornedElement.Width - args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
         var leftOld = Canvas.GetLeft(adornedElement);
@@ -232,20 +244,16 @@ public class ResizingAdorner : Adorner
     /// </summary>
     private void HandleBottomLeft(object sender, DragDeltaEventArgs args)
     {
-        var adornedElement = AdornedElement as FrameworkElement;
-        var hitThumb = sender as Thumb;
+        if (AdornedElement is not FrameworkElement adornedElement || sender is not Thumb hitThumb)
+            return;
 
-        if (adornedElement == null || hitThumb == null) return;
-
-        // Ensure that the Width and Height are properly initialized after the resize.
+        //Ensure that the Width and Height are properly initialized after the resize.
         EnforceSize(adornedElement);
 
         var zoomFactor = GetCanvasZoom(AdornedElement);
 
-        // Change the size by the amount the user drags the mouse, as long as it's larger 
-        // than the width or height of an adorner, respectively.
-        //adornedElement.Width = Math.Max(adornedElement.Width - args.HorizontalChange, hitThumb.DesiredSize.Width);
-        adornedElement.Height = Math.Max(args.VerticalChange + adornedElement.Height/zoomFactor, hitThumb.DesiredSize.Height);
+        //Change the size by the amount the user drags the mouse, as long as it's larger than the width or height of an adorner, respectively.
+        adornedElement.Height = Math.Max(adornedElement.Height + args.VerticalChange /zoomFactor, hitThumb.DesiredSize.Height);
 
         var widthOld = adornedElement.Width;
         var widthNew = Math.Max(adornedElement.Width - args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
@@ -253,6 +261,13 @@ public class ResizingAdorner : Adorner
 
         adornedElement.Width = widthNew;
         Canvas.SetLeft(adornedElement, leftOld - (widthNew - widthOld));
+
+        //Adjust Canvas Bottom.
+        var elementTop = Canvas.GetTop(adornedElement);
+        var elementBottom = elementTop + adornedElement.Height;
+
+        if (adornedElement.Parent is FrameworkElement canvas && elementBottom > canvas.Height)
+            canvas.Height = elementBottom;
     }
 
     /// <summary>
@@ -260,22 +275,23 @@ public class ResizingAdorner : Adorner
     /// </summary>
     private void HandleBottomMiddle(object sender, DragDeltaEventArgs args)
     {
-        var adornedElement = this.AdornedElement as FrameworkElement;
-        var hitThumb = sender as Thumb;
-
-        if (adornedElement == null || hitThumb == null) return;
-        var parentElement = adornedElement.Parent as FrameworkElement;
-
+        if (AdornedElement is not FrameworkElement adornedElement || sender is not Thumb hitThumb)
+            return;
+        
         // Ensure that the Width and Height are properly initialized after the resize.
         EnforceSize(adornedElement);
 
         var zoomFactor = GetCanvasZoom(AdornedElement);
+        
+        //Change the size by the amount the user drags the mouse, as long as it's larger than the height of an adorner.
+        adornedElement.Height = Math.Max(adornedElement.Height + args.VerticalChange / zoomFactor, hitThumb.DesiredSize.Height);
 
-        // Change the size by the amount the user drags the mouse, as long as it's larger than the height of an adorner.
-        adornedElement.Height = Math.Max(args.VerticalChange + adornedElement.Height / zoomFactor, hitThumb.DesiredSize.Height);
+        //Adjust Canvas Bottom.
+        var elementTop = Canvas.GetTop(adornedElement);
+        var elementBottom = elementTop + adornedElement.Height;
 
-        if (adornedElement.Height > parentElement.Height)
-            parentElement.Height = adornedElement.Height;
+        if (adornedElement.Parent is FrameworkElement canvas && elementBottom > canvas.Height)
+            canvas.Height = elementBottom;
     }
 
     /// <summary>
@@ -283,11 +299,8 @@ public class ResizingAdorner : Adorner
     /// </summary>
     private void HandleTopMiddle(object sender, DragDeltaEventArgs args)
     {
-        var adornedElement = this.AdornedElement as FrameworkElement;
-        var hitThumb = sender as Thumb;
-
-        if (adornedElement == null || hitThumb == null) return;
-        var parentElement = adornedElement.Parent as FrameworkElement;
+        if (AdornedElement is not FrameworkElement adornedElement || sender is not Thumb hitThumb)
+            return;
 
         // Ensure that the Width and Height are properly initialized after the resize.
         EnforceSize(adornedElement);
@@ -308,11 +321,8 @@ public class ResizingAdorner : Adorner
     /// </summary>
     private void HandleLeftMiddle(object sender, DragDeltaEventArgs args)
     {
-        var adornedElement = this.AdornedElement as FrameworkElement;
-        var hitThumb = sender as Thumb;
-
-        if (adornedElement == null || hitThumb == null) return;
-        var parentElement = adornedElement.Parent as FrameworkElement;
+        if (AdornedElement is not FrameworkElement adornedElement || sender is not Thumb hitThumb)
+            return;
 
         // Ensure that the Width and Height are properly initialized after the resize.
         EnforceSize(adornedElement);
@@ -333,19 +343,23 @@ public class ResizingAdorner : Adorner
     /// </summary>
     private void HandleRightMiddle(object sender, DragDeltaEventArgs args)
     {
-        var adornedElement = this.AdornedElement as FrameworkElement;
-        var hitThumb = sender as Thumb;
-
-        if (adornedElement == null || hitThumb == null) return;
-        var parentElement = adornedElement.Parent as FrameworkElement;
-
-        // Ensure that the Width and Height are properly initialized after the resize.
+        if (AdornedElement is not FrameworkElement adornedElement || sender is not Thumb hitThumb)
+            return;
+        
+        //Ensure that the Width and Height are properly initialized after the resize.
         EnforceSize(adornedElement);
 
         var zoomFactor = GetCanvasZoom(AdornedElement);
 
-        // Change the size by the amount the user drags the mouse, as long as it's larger than the width of the adorner.
+        //Change the size by the amount the user drags the mouse, as long as it's larger than the width of the adorner.
         adornedElement.Width = Math.Max(adornedElement.Width + args.HorizontalChange / zoomFactor, hitThumb.DesiredSize.Width);
+
+        //Adjust Canvas Right.
+        var elementLeft = Canvas.GetLeft(adornedElement);
+        var elementRight = elementLeft + adornedElement.Width;
+
+        if (adornedElement.Parent is FrameworkElement canvas && elementRight > canvas.Width)
+            canvas.Width = elementRight;
     }
 
     #endregion
@@ -359,28 +373,23 @@ public class ResizingAdorner : Adorner
     /// <returns>The final size</returns>
     protected override Size ArrangeOverride(Size finalSize)
     {
-        // desiredWidth and desiredHeight are the width and height of the element that's being adorned.  
-        // These will be used to place the ResizingAdorner at the corners of the adorned element.  
+        //Width and height of the element that's being adorned. 
         var desiredWidth = AdornedElement.DesiredSize.Width;
         var desiredHeight = AdornedElement.DesiredSize.Height;
 
-        // adornerWidth & adornerHeight are used for placement as well.
-        var adornerWidth = this.DesiredSize.Width;
-        var adornerHeight = this.DesiredSize.Height;
+        _topLeft.Arrange(new Rect(-desiredWidth / 2, -desiredHeight / 2, desiredWidth, desiredHeight));
+        _topRight.Arrange(new Rect(desiredWidth / 2, -desiredHeight / 2, desiredWidth, desiredHeight));
+        _bottomLeft.Arrange(new Rect(-desiredWidth / 2, desiredHeight / 2, desiredWidth, desiredHeight));
+        _bottomRight.Arrange(new Rect(desiredWidth / 2, desiredHeight / 2, desiredWidth, desiredHeight));
 
-        _topLeft.Arrange(new Rect(-adornerWidth / 2, -adornerHeight / 2, adornerWidth, adornerHeight));
-        _topRight.Arrange(new Rect(adornerWidth / 2, -adornerHeight / 2, adornerWidth, adornerHeight));
-        _bottomLeft.Arrange(new Rect(-adornerWidth / 2, adornerHeight / 2, adornerWidth, adornerHeight));
-        _bottomRight.Arrange(new Rect(adornerWidth / 2, adornerHeight / 2, adornerWidth, adornerHeight));
-
-        _middleBottom.Arrange(new Rect(0, adornerHeight / 2, adornerWidth, adornerHeight));
-        _middleTop.Arrange(new Rect(0, -adornerHeight / 2, adornerWidth, adornerHeight));
-        _leftMiddle.Arrange(new Rect(-adornerWidth / 2, 0, adornerWidth, adornerHeight));
-        _rightMiddle.Arrange(new Rect(adornerWidth / 2, 0, adornerWidth, adornerHeight));
+        _middleBottom.Arrange(new Rect(0, desiredHeight / 2, desiredWidth, desiredHeight));
+        _middleTop.Arrange(new Rect(0, -desiredHeight / 2, desiredWidth, desiredHeight));
+        _leftMiddle.Arrange(new Rect(-desiredWidth / 2, 0, desiredWidth, desiredHeight));
+        _rightMiddle.Arrange(new Rect(desiredWidth / 2, 0, desiredWidth, desiredHeight));
 
         var zoomFactor = GetCanvasZoom(AdornedElement);
 
-        _rectangle.Arrange(new Rect(0, 0, adornerWidth * zoomFactor, adornerHeight * zoomFactor));
+        _rectangle.Arrange(new Rect(0, 0, desiredWidth * zoomFactor, desiredHeight * zoomFactor));
 
         return finalSize;
     }
@@ -393,7 +402,8 @@ public class ResizingAdorner : Adorner
     /// <param name="customizedCursor">The custom cursor.</param>
     private void BuildAdornerCorner(ref Thumb cornerThumb, Cursor customizedCursor)
     {
-        if (cornerThumb != null) return;
+        if (cornerThumb != null)
+            return;
 
         cornerThumb = new Thumb { Cursor = customizedCursor };
         cornerThumb.Height = cornerThumb.Width = 10;
@@ -422,16 +432,15 @@ public class ResizingAdorner : Adorner
     {
         if (adornedElement.Width.Equals(Double.NaN))
             adornedElement.Width = adornedElement.DesiredSize.Width;
+
         if (adornedElement.Height.Equals(Double.NaN))
             adornedElement.Height = adornedElement.DesiredSize.Height;
 
-        var parent = adornedElement.Parent as FrameworkElement;
-
-        if (parent != null)
-        {
-            adornedElement.MaxHeight = parent.ActualHeight;
-            adornedElement.MaxWidth = parent.ActualWidth;
-        }
+        //if (adornedElement.Parent is FrameworkElement parent)
+        //{
+        //    adornedElement.MaxHeight = parent.ActualHeight;
+        //    adornedElement.MaxWidth = parent.ActualWidth;
+        //}
     }
 
     // Override the VisualChildrenCount and GetVisualChild properties to interface with 
@@ -452,13 +461,13 @@ public class ResizingAdorner : Adorner
 
     private double GetCanvasZoom(Visual referenceVisual)
     {
-        if (referenceVisual.GetType() == typeof(Canvas))
-            return (referenceVisual as Canvas).LayoutTransform.Value.M11;
+        if (referenceVisual is Canvas canvas1)
+            return canvas1.LayoutTransform.Value.M11;
 
         var parent = VisualTreeHelper.GetParent(referenceVisual) as Visual;
 
-        if (parent.GetType() == typeof(Canvas))
-            return (parent as Canvas).LayoutTransform.Value.M11;
+        if (parent is Canvas canvas2)
+            return canvas2.LayoutTransform.Value.M11;
 
         return 1;
     }
