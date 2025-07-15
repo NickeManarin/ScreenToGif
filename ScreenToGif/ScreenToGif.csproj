@@ -3,7 +3,6 @@
     <TargetFramework>net9.0-windows7.0</TargetFramework>
     <RollForward>major</RollForward>
     <OutputType>WinExe</OutputType>
-    <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -15,8 +14,6 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>2.37.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
@@ -95,11 +92,6 @@
       <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Style.css" />
@@ -136,17 +128,6 @@
     <Nullable>disable</Nullable>
     <DebugType>embedded</DebugType>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Company>Nicke Manarin</Company>
-    <Authors>Nicke Manarin</Authors>
-    <Version>2.41.3</Version>
-    <Copyright>Copyright© Nicke Manarin 2023</Copyright>
-    <PackageProjectUrl>https://www.screentogif.com</PackageProjectUrl>
-    <PackageReadmeFile>Readme.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/nickemanarin/screentogif</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>gif; recorder; editor; screen-recorder; gif-editor</PackageTags>
-    <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
-    <Description>Screen, webcam and sketchboard recorder, with integrated editor!</Description>
     <SignAssembly>False</SignAssembly>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
