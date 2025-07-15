@@ -783,7 +783,7 @@ internal class EncodingManager
                             if (preset is not GifskiGifPreset gifskiGifPreset)
                                 return;
 
-                            if (!Other.IsGifskiPresent())
+                            if (!PathHelper.IsGifskiPresent())
                                 throw new ApplicationException("Gifski not present.");
 
                             if (File.Exists(preset.FullPath))
@@ -1382,7 +1382,7 @@ internal class EncodingManager
     {
         Update(id, EncodingStatus.Processing, null, true);
 
-        if (!Other.IsFfmpegPresent())
+        if (!PathHelper.IsFfmpegPresent())
             throw new ApplicationException("FFmpeg not present.");
 
         if (File.Exists(preset.FullPath))
