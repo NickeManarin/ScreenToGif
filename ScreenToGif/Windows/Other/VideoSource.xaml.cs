@@ -64,6 +64,14 @@ public partial class VideoSource
             }
         };
 
+        _viewModel.ShowWarningRequested += (_, e) =>
+        {
+            if (!IsLoaded)
+                return;
+
+            StatusBand.Warning(e, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
+        };
+
         _viewModel.HideErrorRequested += (_, _) =>
         {
             if (!IsLoaded)

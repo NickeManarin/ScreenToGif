@@ -623,7 +623,7 @@ namespace ScreenToGif.Windows
             {
                 var bitmapSource = ImageMethods.CreateEmtpyBitmapSource(UserSettings.All.NewAnimationColor, UserSettings.All.NewAnimationWidth, UserSettings.All.NewAnimationHeight, this.Dpi(), PixelFormats.Indexed1);
 
-                if (bitmapSource.Format != PixelFormats.Bgra32)
+                if (bitmapSource.Format != PixelFormats.Bgra32 && bitmapSource.Format != PixelFormats.Bgr32)
                     bitmapSource = new FormatConvertedBitmap(bitmapSource, PixelFormats.Bgra32, null, 0);
 
                 var bitmapFrame = BitmapFrame.Create(bitmapSource);
@@ -3891,7 +3891,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Import error");
 
-                return new List<FrameInfo>();
+                return [];
             }
 
             return listFrames;
@@ -3909,7 +3909,7 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            ShowProgress(LocalizationHelper.Get("S.Editor.PreparingImport"), 100, false);
+            ShowProgress(LocalizationHelper.Get("S.Editor.PreparingImport"), fileList.Count, false);
 
             var project = new ProjectInfo().CreateProjectFolder(ProjectByType.Editor);
             var currentDpi = 0D;
@@ -3918,6 +3918,7 @@ namespace ScreenToGif.Windows
             var wasWarnedSized = false;
 
             //Adds each image to a list.
+            var addedSoFar = 0;
             foreach (var file in fileList)
             {
                 if (Dispatcher.HasShutdownStarted)
@@ -3944,6 +3945,8 @@ namespace ScreenToGif.Windows
 
                 if (frame != null)
                     project.Frames.AddRange(frame);
+
+                UpdateProgress(addedSoFar++);
             }
 
             if (project.Frames.Count == 0)
@@ -4213,69 +4216,68 @@ namespace ScreenToGif.Windows
 
         private List<FrameInfo> ImportFromPng(string source, string pathTemp, ref Size previousSize, ref double previousDpi, ref bool warn, ref bool warnSize)
         {
+            using var stream = new FileStream(source, FileMode.Open, FileAccess.Read, FileShare.Read);
+
+            var apng = new Apng(stream);
+            var success = apng.ReadFrames();
+
+            if (!success)
+                return ImportFromImage(source, pathTemp, ref previousSize, ref previousDpi, ref warn, ref warnSize);
+
             ShowProgress(LocalizationHelper.Get("S.Editor.ImportingFrames"), 50, true);
 
-            using (var stream = new FileStream(source, FileMode.Open, FileAccess.Read, FileShare.Read))
+            var fullSize = new System.Drawing.Size((int)apng.Ihdr.Width, (int)apng.Ihdr.Height);
+            var list = new List<FrameInfo>();
+
+            BitmapSource baseFrame = null;
+            for (var index = 0; index < apng.Actl.NumFrames; index++)
             {
-                var apng = new Apng(stream);
-                var success = apng.ReadFrames();
+                var metadata = apng.GetFrame(index);
+                var rawFrame = metadata.ImageData.SourceFrom();
 
-                if (!success)
-                    return ImportFromImage(source, pathTemp, ref previousSize, ref previousDpi, ref warn, ref warnSize);
+                var bitmapSource = Apng.MakeFrame(fullSize, rawFrame, metadata, baseFrame);
 
-                var fullSize = new System.Drawing.Size((int)apng.Ihdr.Width, (int)apng.Ihdr.Height);
-                var list = new List<FrameInfo>();
+                #region Disposal Method
 
-                BitmapSource baseFrame = null;
-                for (var index = 0; index < apng.Actl.NumFrames; index++)
+                switch (metadata.DisposeOp)
                 {
-                    var metadata = apng.GetFrame(index);
-                    var rawFrame = metadata.ImageData.SourceFrom();
-
-                    var bitmapSource = Apng.MakeFrame(fullSize, rawFrame, metadata, baseFrame);
-
-                    #region Disposal Method
-
-                    switch (metadata.DisposeOp)
-                    {
-                        case Apng.DisposeOps.None: //No disposal is done on this frame before rendering the next; the contents of the output buffer are left as is.
-                            baseFrame = bitmapSource;
-                            break;
-                        case Apng.DisposeOps.Background: //The frame's region of the output buffer is to be cleared to fully transparent black before rendering the next frame.
-                            baseFrame = baseFrame == null || Apng.IsFullFrame(metadata, fullSize) ? null : Apng.ClearArea(baseFrame, metadata);
-                            break;
-                        case Apng.DisposeOps.Previous: //The frame's region of the output buffer is to be reverted to the previous contents before rendering the next frame.
-                            //Reuse same base frame.
-                            break;
-                    }
-
-                    #endregion
-
-                    #region Each Frame
-
-                    var fileName = Path.Combine(pathTemp, $"{index} {DateTime.Now:hh-mm-ss-ffff}.png");
-
-                    //TODO: Do I need to verify the DPI of the image?
-
-                    using (var output = new FileStream(fileName, FileMode.Create))
-                    {
-                        var encoder = new PngBitmapEncoder();
-                        encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
-                        encoder.Save(output);
-                        stream.Close();
-                    }
-
-                    list.Add(new FrameInfo(fileName, metadata.Delay));
-
-                    UpdateProgress(index);
-
-                    GC.Collect(1);
-
-                    #endregion
+                    case Apng.DisposeOps.None: //No disposal is done on this frame before rendering the next; the contents of the output buffer are left as is.
+                        baseFrame = bitmapSource;
+                        break;
+                    case Apng.DisposeOps.Background: //The frame's region of the output buffer is to be cleared to fully transparent black before rendering the next frame.
+                        baseFrame = baseFrame == null || Apng.IsFullFrame(metadata, fullSize) ? null : Apng.ClearArea(baseFrame, metadata);
+                        break;
+                    case Apng.DisposeOps.Previous: //The frame's region of the output buffer is to be reverted to the previous contents before rendering the next frame.
+                        //Reuse same base frame.
+                        break;
                 }
 
-                return list;
+                #endregion
+
+                #region Each Frame
+
+                var fileName = Path.Combine(pathTemp, $"{index} {DateTime.Now:hh-mm-ss-ffff}.png");
+
+                //TODO: Do I need to verify the DPI of the image?
+
+                using (var output = new FileStream(fileName, FileMode.Create))
+                {
+                    var encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                    encoder.Save(output);
+                    stream.Close();
+                }
+
+                list.Add(new FrameInfo(fileName, metadata.Delay));
+
+                UpdateProgress(index);
+
+                GC.Collect(1);
+
+                #endregion
             }
+
+            return list;
         }
 
         private List<FrameInfo> ImportFromImage(string source, string pathTemp, ref Size previousSize, ref double previousDpi, ref bool warn, ref bool warnSize)
@@ -4305,17 +4307,22 @@ namespace ScreenToGif.Windows
             if (bitmap.PixelHeight != (int)previousSize.Height || bitmap.PixelWidth != (int)previousSize.Width)
                 previousSize = new Size(bitmap.PixelWidth, bitmap.PixelHeight);
 
-            if (bitmap.Format != PixelFormats.Bgra32)
+            if (bitmap.Format != PixelFormats.Bgr32 && bitmap.Format != PixelFormats.Bgr32 || !source.EndsWith("png"))
+            {
                 bitmap = new FormatConvertedBitmap(bitmap, PixelFormats.Bgra32, null, 0);
 
-            using (var stream = new FileStream(fileName, FileMode.Create))
-            {
+                using var stream = new FileStream(fileName, FileMode.Create);
+
                 var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bitmap));
                 encoder.Save(stream);
                 stream.Close();
             }
-
+            else
+            {
+                File.Copy(source, fileName);
+            }
+            
             GC.Collect();
 
             #endregion
@@ -4896,7 +4903,7 @@ namespace ScreenToGif.Windows
             if (closest == null)
                 return false;
 
-            //To much to the Left.
+            //Too much to the Left.
             if (closest.WorkingArea.Left > left + width - 100)
                 left = closest.WorkingArea.Left;
 

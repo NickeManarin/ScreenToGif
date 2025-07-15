@@ -251,6 +251,7 @@ public class VideoSourceViewModel : BindableBase, IDisposable
 
     //Commands.
     public event EventHandler<object> ShowErrorRequested;
+    public event EventHandler<string> ShowWarningRequested;
     public event EventHandler HideErrorRequested;
     public event EventHandler CloseRequested;
 
@@ -273,7 +274,7 @@ public class VideoSourceViewModel : BindableBase, IDisposable
         {
             if (VideoImporter == 1 && !PathHelper.IsFfmpegPresent())
             {
-                //TODO: Validate.
+                ShowWarningRequested?.Invoke(this, LocalizationHelper.Get("S.Editor.Warning.Ffmpeg"));
                 return;
             }
 
@@ -338,6 +339,7 @@ public class VideoSourceViewModel : BindableBase, IDisposable
         catch (Exception ex)
         {
             LogWriter.Log(ex, "Impossible to load the previewers", "Video source: " + VideoPath);
+            ShowErrorRequested?.Invoke(this, LocalizationHelper.Get("S.ImportVideo.Error"));
         }
     }
 
@@ -777,7 +779,7 @@ public class VideoSourceViewModel : BindableBase, IDisposable
             //Create a unique file name.
             string fileName;
             do
-                fileName = $"{Guid.NewGuid():N}.png";
+                fileName = $"{Frames.Count} {Guid.NewGuid():N}.png";
             while (File.Exists(Path.Combine(RootFolder, fileName)));
 
             //Save the file to disk.
@@ -832,7 +834,7 @@ public class VideoSourceViewModel : BindableBase, IDisposable
             //Create a unique file name.
             string newName;
             do
-                newName = Path.Combine(RootFolder, $"{Guid.NewGuid():N}.png");
+                newName = Path.Combine(RootFolder, $"{Frames.Count} {Guid.NewGuid():N}.png");
             while (File.Exists(newName));
 
             File.Copy(file, newName);
