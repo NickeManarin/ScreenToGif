@@ -5,9 +5,7 @@
     <UseWPF>True</UseWPF>
     <DebugType>embedded</DebugType>
     <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
-    <Version>2.41.3</Version>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <!--<UseWindowsForms>True</UseWindowsForms>-->
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="KGySoft.CoreLibraries" Version="8.1.0" />

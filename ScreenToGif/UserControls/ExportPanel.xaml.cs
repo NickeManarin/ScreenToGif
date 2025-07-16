@@ -879,7 +879,7 @@ public partial class ExportPanel : UserControl, IPanel
 
         if (CurrentPreset.RequiresFfmpeg)
         {
-            if (!Other.IsFfmpegPresent())
+            if (!PathHelper.IsFfmpegPresent())
             {
                 RaiseValidatedEvent("S.Editor.Warning.Ffmpeg", StatusReasons.MissingFfmpeg, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
                 return false;
@@ -918,7 +918,7 @@ public partial class ExportPanel : UserControl, IPanel
 
         if (CurrentPreset.RequiresGifski)
         {
-            if (!Other.IsGifskiPresent())
+            if (!PathHelper.IsGifskiPresent())
             {
                 RaiseValidatedEvent("S.Editor.Warning.Gifski", StatusReasons.MissingGifski, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
                 return false;

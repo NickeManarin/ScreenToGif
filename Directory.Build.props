@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup>
+    <Version>2.41.4</Version>
+    <FileVersion>2.41.4</FileVersion>
+    <AssemblyVersion>2.41.4</AssemblyVersion>
+    <Company>Nicke Manarin</Company>
+    <Authors>Nicke Manarin</Authors>
+    <Copyright>Copyright© Nicke Manarin 2025</Copyright>
+    <PackageProjectUrl>https://www.screentogif.com</PackageProjectUrl>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/nickemanarin/screentogif</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>gif; recorder; editor; screen-recorder; gif-editor</PackageTags>
+    <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
+    <Description>Screen, webcam and sketchboard recorder, with integrated editor!</Description>
+  </PropertyGroup>
+</Project>

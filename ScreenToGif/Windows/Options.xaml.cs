@@ -861,7 +861,7 @@ public partial class Options : INotification
 
         try
         {
-            var parent = Util.Other.AdjustPath(UserSettings.All.TemporaryFolderResolved);
+            var parent = PathHelper.AdjustPath(UserSettings.All.TemporaryFolderResolved);
             var path = Path.Combine(parent, "ScreenToGif", "Recording");
 
             if (!Directory.Exists(path))
@@ -904,7 +904,7 @@ public partial class Options : INotification
         var isRelative = !string.IsNullOrWhiteSpace(path) && !Path.IsPathRooted(path);
         var notAlt = !string.IsNullOrWhiteSpace(path) && UserSettings.All.TemporaryFolderResolved.Contains(Path.DirectorySeparatorChar);
 
-        path = Util.Other.AdjustPath(path);
+        path = PathHelper.AdjustPath(path);
 
         var initial = Directory.Exists(path) ? path : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
@@ -969,7 +969,7 @@ public partial class Options : INotification
         var isRelative = !string.IsNullOrWhiteSpace(path) && !Path.IsPathRooted(path);
         var notAlt = !string.IsNullOrWhiteSpace(path) && UserSettings.All.LogsFolder.Contains(Path.DirectorySeparatorChar);
 
-        path = Util.Other.AdjustPath(path);
+        path = PathHelper.AdjustPath(path);
 
         var initial = Directory.Exists(path) ? path : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
@@ -1104,7 +1104,7 @@ public partial class Options : INotification
 
         #region Status
 
-        var path = Util.Other.AdjustPath(UserSettings.All.TemporaryFolderResolved);
+        var path = PathHelper.AdjustPath(UserSettings.All.TemporaryFolderResolved);
         var drive = DriveInfo.GetDrives().FirstOrDefault(w => w.RootDirectory.FullName == Path.GetPathRoot(path));
 
         if (drive != null)
@@ -1152,7 +1152,7 @@ public partial class Options : INotification
     {
         _folderList = new List<DirectoryInfo>();
 
-        var path = Util.Other.AdjustPath(UserSettings.All.TemporaryFolderResolved);
+        var path = PathHelper.AdjustPath(UserSettings.All.TemporaryFolderResolved);
         var cache = Path.Combine(path, "ScreenToGif", "Recording");
 
         if (!Directory.Exists(cache))
@@ -1299,7 +1299,7 @@ public partial class Options : INotification
     {
         CheckTools(true, false);
 
-        var adjusted = Util.Other.AdjustPath(UserSettings.All.FfmpegLocation);
+        var adjusted = PathHelper.AdjustPath(UserSettings.All.FfmpegLocation);
 
         if (!string.IsNullOrWhiteSpace(adjusted) && File.Exists(adjusted))
         {
@@ -1402,7 +1402,7 @@ public partial class Options : INotification
     {
         CheckTools(false, true);
 
-        var adjusted = Util.Other.AdjustPath(UserSettings.All.GifskiLocation);
+        var adjusted = PathHelper.AdjustPath(UserSettings.All.GifskiLocation);
 
         if (!string.IsNullOrWhiteSpace(adjusted) && File.Exists(adjusted))
         {
@@ -1618,7 +1618,7 @@ public partial class Options : INotification
     {
         try
         {
-            var path = Util.Other.AdjustPath(UserSettings.All.FfmpegLocation);
+            var path = PathHelper.AdjustPath(UserSettings.All.FfmpegLocation);
 
             if (string.IsNullOrWhiteSpace(path))
                 return;
@@ -1640,7 +1640,7 @@ public partial class Options : INotification
     {
         try
         {
-            var path = Util.Other.AdjustPath(UserSettings.All.GifskiLocation);
+            var path = PathHelper.AdjustPath(UserSettings.All.GifskiLocation);
 
             if (string.IsNullOrWhiteSpace(path))
                 return;
@@ -1682,9 +1682,9 @@ public partial class Options : INotification
             {
                 #region FFmpeg
 
-                if (Util.Other.IsFfmpegPresent(true, false))
+                if (PathHelper.IsFfmpegPresent(true, false))
                 {
-                    var info = new FileInfo(Util.Other.AdjustPath(UserSettings.All.FfmpegLocation));
+                    var info = new FileInfo(PathHelper.AdjustPath(UserSettings.All.FfmpegLocation));
                     info.Refresh();
 
                     FfmpegImageCard.Status = ExtrasStatus.Ready;
@@ -1703,9 +1703,9 @@ public partial class Options : INotification
             {
                 #region Gifski
 
-                if (Util.Other.IsGifskiPresent(true, false))
+                if (PathHelper.IsGifskiPresent(true, false))
                 {
-                    var info = new FileInfo(Util.Other.AdjustPath(UserSettings.All.GifskiLocation));
+                    var info = new FileInfo(PathHelper.AdjustPath(UserSettings.All.GifskiLocation));
                     info.Refresh();
 
                     GifskiImageCard.Status = ExtrasStatus.Ready;
