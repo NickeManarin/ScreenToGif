@@ -102,6 +102,37 @@ public static class LocalizationHelper
 
         #endregion
 
+        #region Select Fonts
+
+        var cultureFonts = new Dictionary<string, (string normal, string light, string bold)>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "en", ("Segoe UI", "Segoe UI Semilight", "Segoe UI Semibold") },
+            { "zh", ("Microsoft YaHei UI", "Microsoft YaHei UI Light", "Microsoft YaHei UI Bold") },
+            { "zh-Hant", ("Microsoft JhengHei UI", "Microsoft JhengHei UI Light", "Microsoft JhengHei UI Bold") },
+            { "ja", ("Yu Gothic UI", "Yu Gothic UI Semilight", "Yu Gothic UI Semibold") },
+            { "ko", ("Malgun Gothic", "Malgun Gothic Semilight", "Malgun Gothic Bold") },
+        };
+
+        if (!cultureFonts.TryGetValue(culture, out var fontSet))
+        {
+            try
+            {
+                var parentCulture = CultureInfo.GetCultureInfo(culture).Parent.Name;
+                if (!string.IsNullOrEmpty(parentCulture))
+                    cultureFonts.TryGetValue(parentCulture, out fontSet);
+            }
+            catch { }
+        }
+
+        if (fontSet == default)
+            fontSet = ("Segoe UI", "Segoe UI Semilight", "Segoe UI Semibold");
+
+        SetOrUpdateResource("FontFamilyNormal", fontSet.normal);
+        SetOrUpdateResource("FontFamilyLight", fontSet.light);
+        SetOrUpdateResource("FontFamilyBold", fontSet.bold);
+
+        #endregion
+
         GC.Collect(0);
 
         if (!UserSettings.All.CheckForTranslationUpdates)
@@ -109,6 +140,15 @@ public static class LocalizationHelper
 
         //Async, fire and forget.
         Task.Factory.StartNew(() => CheckForUpdates(culture));
+    }
+
+    private static void SetOrUpdateResource(string key, string fontName)
+    {
+        var fontFamily = new System.Windows.Media.FontFamily(fontName);
+        if (Application.Current.Resources.Contains(key))
+            Application.Current.Resources[key] = fontFamily;
+        else
+            Application.Current.Resources.Add(key, fontFamily);
     }
 
     /// <summary>

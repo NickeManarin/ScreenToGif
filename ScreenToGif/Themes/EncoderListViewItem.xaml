@@ -33,7 +33,7 @@
 
                 <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="PercentageLabel" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Percentage}" ContentStringFormat="{}{0:##0.0} %"
                        Foreground="{DynamicResource Element.Foreground.Gray112}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
-                       FontFamily="Segoe UI Semilight" BorderThickness="0" MinWidth="50"/>
+                       FontFamily="{DynamicResource FontFamilyLight}" BorderThickness="0" MinWidth="50"/>
 
                 <Label Grid.Row="0" Grid.Column="2" Content="{TemplateBinding Text}" HorizontalAlignment="Stretch" Padding="0,1,0,0" Foreground="{DynamicResource Element.Foreground}"/>
 
@@ -421,7 +421,7 @@
 
                 <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="PercentageLabel" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Percentage}" ContentStringFormat="{}{0:##0.0} %" 
                        Foreground="{DynamicResource Element.Foreground.Gray112}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
-                       FontFamily="Segoe UI Semilight" BorderThickness="0" MinWidth="45"/>
+                       FontFamily="{DynamicResource FontFamilyLight}" BorderThickness="0" MinWidth="45"/>
 
                 <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource S.Encoder.Canceled}" Foreground="{DynamicResource Element.Foreground}" HorizontalAlignment="Stretch" Padding="0,1,0,0"/>
 

@@ -38,7 +38,7 @@
             <Border Grid.Column="0" x:Name="MainBorder" Margin="6" Background="{StaticResource Vector.Add}" Width="23" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeTextBlock" Text="{DynamicResource S.Add}" Margin="5" VerticalAlignment="Center" 
-                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                       FontFamily="{DynamicResource FontFamilyLight}" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
             <ComboBox Grid.Column="2" x:Name="TypeComboBox" Margin="5,3" SelectedIndex="0" ItemTemplateSelector="{StaticResource ItemSelector}" SelectionChanged="TypeComboBox_Selected">
                 <ComboBox.ItemContainerStyle>
@@ -97,7 +97,7 @@
         </ScrollViewer>
 
         <TextBlock Grid.Row="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"
-                   Foreground="{DynamicResource Element.Foreground.Gray192}" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Background.Tiny}"
+                   Foreground="{DynamicResource Element.Foreground.Gray192}" FontFamily="{DynamicResource FontFamilyLight}" Effect="{StaticResource Shadow.Background.Tiny}"
                    Visibility="{Binding ElementName=MainPresenter, Path=Content, Converter={StaticResource NullToVisibility}}">
             <Run Text="▲"/>
             <LineBreak/>

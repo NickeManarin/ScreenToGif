@@ -207,11 +207,11 @@
                 <n:ExtendedButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"  x:Name="CloseButton" Icon="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText}"
                                   ContentHeight="10" ContentWidth="10" Padding="4,1" TabIndex="1" Click="CloseButton_Click"/>
 
-                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CaptionText" Text="{Binding Title, ElementName=BoardLightWindow}" FontFamily="Segoe UI" FontSize="12"
+                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CaptionText" Text="{Binding Title, ElementName=BoardLightWindow}" FontFamily="{DynamicResource FontFamilyNormal}" FontSize="12"
                            FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" x:Name="FrameCountTextBlock" Text="{Binding FrameCount, ElementName=BoardLightWindow, Converter={StaticResource IntToStringConverter}}" 
-                           FontFamily="Segoe UI" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                           FontFamily="{DynamicResource FontFamilyNormal}" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}"/>
             </Grid>
 
             <StackPanel Grid.Column="1" x:Name="ControlStackPanel" Orientation="Horizontal" HorizontalAlignment="Right" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
@@ -247,7 +247,7 @@
                     </n:IntegerUpDown.ToolTip>
                 </n:IntegerUpDown>
 
-                <TextBlock Text="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <TextBlock Text="fps" FontSize="12" FontFamily="{DynamicResource FontFamilyNormal}" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
                 <Separator Width="1" Margin="5,3"/>
 
@@ -261,7 +261,7 @@
                               Offset="{x:Static u2:Constants.VerticalBoardOffset}" Minimum="100" Maximum="3000" TabIndex="3" Height="Auto" Padding="4,0" Margin="1,3"
                               ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <TextBlock Text="px" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <TextBlock Text="px" FontSize="12" FontFamily="{DynamicResource FontFamilyNormal}" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
                 <Separator Width="1" Margin="3,2"/>
 

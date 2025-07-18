@@ -132,7 +132,7 @@
                 </n:IntegerUpDown.ToolTip>
             </n:IntegerUpDown>
 
-            <TextBlock Grid.Column="8" Text="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Column="8" Text="fps" FontSize="12" FontFamily="{DynamicResource FontFamilyNormal}" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
             <Separator Grid.Column="9" Width="1" Margin="5,2"/>
 

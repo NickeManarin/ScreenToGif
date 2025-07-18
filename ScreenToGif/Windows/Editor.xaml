@@ -1648,35 +1648,35 @@
                 </Grid.ContextMenu>
 
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock FontSize="28" Foreground="{DynamicResource Element.Foreground.Gray192}" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Background.Tiny}"
+                    <TextBlock FontSize="28" Foreground="{DynamicResource Element.Foreground.Gray192}" FontFamily="{DynamicResource FontFamilyLight}" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Background.Tiny}"
                                Text="{Binding Source={x:Static t:UserSettings.All}, Path=VersionText, StringFormat=ScreenToGif {0}}"/>
 
                     <Separator Height="1"/>
 
-                    <TextBlock x:Name="WelcomeTextBlock" FontSize="16" Foreground="{DynamicResource Element.Foreground.Gray192}" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="WelcomeTextBlock" FontSize="16" Foreground="{DynamicResource Element.Foreground.Gray192}" FontFamily="{DynamicResource FontFamilyLight}" HorizontalAlignment="Center" 
                                TextWrapping="Wrap" Effect="{StaticResource Shadow.Background.Tiny}"/>
 
-                    <!--<TextBlock FontSize="16" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Gray192}" Effect="{StaticResource Shadow.Border.Small}">
+                    <!--<TextBlock FontSize="16" FontFamily="{DynamicResource FontFamilyLight}" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Gray192}" Effect="{StaticResource Shadow.Border.Small}">
                         <Hyperlink Command="{StaticResource Command.LoadRecent}" Cursor="Hand" TextDecorations="{x:Null}">
                             <Run>Open recent projects...</Run>
                         </Hyperlink>
                     </TextBlock>-->
 
-                    <TextBlock x:Name="SymbolTextBlock" Text=":D" Foreground="{DynamicResource Element.Foreground.Gray208}" FontSize="40" FontFamily="Segoe UI Semilight"
+                    <TextBlock x:Name="SymbolTextBlock" Text=":D" Foreground="{DynamicResource Element.Foreground.Gray208}" FontSize="40" FontFamily="{DynamicResource FontFamilyLight}"
                                TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Background.Tiny}"/>
 
                     <!--New update available-->
                     <StackPanel x:Name="UpdateStackPanel" HorizontalAlignment="Center" Margin="0,30,0,0" Visibility="Collapsed">
                         <Separator Height="1"/>
 
-                        <TextBlock FontSize="18" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Gray192}" 
+                        <TextBlock FontSize="18" FontFamily="{DynamicResource FontFamilyLight}" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Gray192}" 
                                    Effect="{StaticResource Shadow.Background.Tiny}" Margin="3" ToolTip="{DynamicResource S.Editor.UpdateAvailable.Info}">
                             <Hyperlink Command="{Binding Source={StaticResource AppViewModel}, Path=PromptUpdate}" Cursor="Hand" TextDecorations="{x:Null}">
                                 <Run Text="{DynamicResource S.Editor.UpdateAvailable}"/>
                             </Hyperlink>
                         </TextBlock>
 
-                        <TextBlock FontSize="14" Foreground="{DynamicResource Element.Foreground.Gray192}" FontFamily="Segoe UI Semilight" 
+                        <TextBlock FontSize="14" Foreground="{DynamicResource Element.Foreground.Gray192}" FontFamily="{DynamicResource FontFamilyLight}" 
                                    Effect="{StaticResource Shadow.Background.Tiny}" HorizontalAlignment="Center" TextAlignment="Center">
                             <Run Text="{DynamicResource S.Updater.Version}" FontSize="18"/>
                             <Run Name="UpdateVersionRun" Text="2.22" FontSize="18"/>

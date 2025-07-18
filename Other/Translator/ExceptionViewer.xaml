@@ -25,19 +25,19 @@
             <Viewbox Grid.Column="0" Margin="4" Child="{StaticResource Vector.Error}"/>
 
             <Label Grid.Column="1" x:Name="TypeLabel" Content="Exception Type" Margin="5" VerticalContentAlignment="Center" 
-                   FontFamily="Segoe UI Semilight" FontSize="16" Foreground="{DynamicResource Element.Foreground.Header}">
+                   FontFamily="{DynamicResource FontFamilyLight}" FontSize="16" Foreground="{DynamicResource Element.Foreground.Header}">
                 <Label.ToolTip>
                     <ToolTip Content="Exception Type" Placement="Top" HorizontalOffset="-5"/>
                 </Label.ToolTip>
             </Label>
 
             <n:ImageButton Grid.Column="2" x:Name="InnerButton" Text="Open Inner Exception" Content="{StaticResource Vector.Synchronize}" MaxSize="20" 
-                           Margin="3" Padding="2" Style="{StaticResource Style.Button.Horizontal}" IsEnabled="False" FontSize="12" FontFamily="Segoe UI Semilight" 
+                           Margin="3" Padding="2" Style="{StaticResource Style.Button.Horizontal}" IsEnabled="False" FontSize="12" FontFamily="{DynamicResource FontFamilyLight}" 
                            Click="InnerButton_Click"/>
         </Grid>
 
         <TextBox x:Name="MessageTextBox" Margin="3" Grid.Row="1" TextWrapping="Wrap" MinHeight="50" FontSize="14" ScrollViewer.CanContentScroll="True" 
-                 VerticalScrollBarVisibility="Auto" FontFamily="Segoe UI Semibold" IsReadOnly="True" MaxHeight="150">
+                 VerticalScrollBarVisibility="Auto" FontFamily="{DynamicResource FontFamilyBold}" IsReadOnly="True" MaxHeight="150">
             <TextBox.ToolTip>
                 <ToolTip Content="Message" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>
             </TextBox.ToolTip>
@@ -49,7 +49,7 @@
             </TextBox.ToolTip>
         </TextBox>
 
-        <TextBox x:Name="SourceTextBox" Margin="3" Grid.Row="3" TextWrapping="Wrap" MinHeight="23" FontSize="12" FontFamily="Segoe UI Semibold" IsReadOnly="True">
+        <TextBox x:Name="SourceTextBox" Margin="3" Grid.Row="3" TextWrapping="Wrap" MinHeight="23" FontSize="12" FontFamily="{DynamicResource FontFamilyBold}" IsReadOnly="True">
             <TextBox.ToolTip>
                 <ToolTip Content="Source" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>
             </TextBox.ToolTip>
