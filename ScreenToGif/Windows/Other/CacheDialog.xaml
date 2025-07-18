@@ -24,7 +24,7 @@
             <Border Margin="5" Background="{StaticResource Vector.Delete.Folder}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label Content="{DynamicResource S.Options.Storage.Cache.Header}" Margin="3" Grid.Column="1" VerticalContentAlignment="Center" 
-                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                   FontFamily="{DynamicResource FontFamilyLight}" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
         </Grid>
 
         <n:StatusBand Grid.Row="1" x:Name="StatusBand"/>

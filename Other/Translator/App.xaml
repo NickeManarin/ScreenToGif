@@ -456,7 +456,7 @@
                 </Setter>
 
                 <!--Default Values-->
-                <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
+                <Setter Property="FontFamily" Value="{DynamicResource FontFamilyLight}"/>
                 <!--<Setter Property="Background" Value="#7FFFFFFF"/>-->
             </Style>
 

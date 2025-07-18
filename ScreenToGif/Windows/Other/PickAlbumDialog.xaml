@@ -22,7 +22,7 @@
 
             <Border Margin="6" Background="{StaticResource Vector.ImageStack}" Opacity="{DynamicResource Element.Opacity}"/>
 
-            <TextBlock x:Name="InstructionLabel" Text="{DynamicResource S.Options.Upload.Pick.Album}" Margin="5" Grid.Column="1" VerticalAlignment="Center" FontFamily="Segoe UI Semilight" 
+            <TextBlock x:Name="InstructionLabel" Text="{DynamicResource S.Options.Upload.Pick.Album}" Margin="5" Grid.Column="1" VerticalAlignment="Center" FontFamily="{DynamicResource FontFamilyLight}" 
                        FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
         </Grid>
 

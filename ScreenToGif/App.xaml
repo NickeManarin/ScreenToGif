@@ -1367,6 +1367,9 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <FontFamily x:Key="FontFamilyNormal">Segoe UI</FontFamily>
+            <FontFamily x:Key="FontFamilyLight">Segoe UI Semilight</FontFamily>
+            <FontFamily x:Key="FontFamilyBold">Segoe UI Semibold</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
