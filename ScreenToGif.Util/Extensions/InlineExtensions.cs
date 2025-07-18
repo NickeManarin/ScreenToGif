@@ -38,7 +38,7 @@ public static class InlineExtensions
     {
         paragraph.KeepTogether = true;
         paragraph.TextAlignment = TextAlignment.Left;
-        paragraph.FontFamily = new FontFamily("Segoe UI");
+        paragraph.FontFamily = (FontFamily)Application.Current.Resources["FontFamilyNormal"];
 
         paragraph.Inlines.Add(isStatic ? new Run(id) : new Run().WithResource(id));
         paragraph.Inlines.Add(new Run(" "));

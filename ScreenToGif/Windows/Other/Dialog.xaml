@@ -21,7 +21,7 @@
             <Border x:Name="IconBorder" Background="{StaticResource Vector.Cancel.Round}" Margin="5" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock x:Name="InstructionLabel" Text="Instruction" Margin="5,1" Grid.Column="1" VerticalAlignment="Center" TextWrapping="Wrap" 
-                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                       FontFamily="{DynamicResource FontFamilyLight}" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">

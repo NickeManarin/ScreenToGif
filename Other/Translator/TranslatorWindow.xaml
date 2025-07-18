@@ -38,13 +38,13 @@
             <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" 
                      Stretch="Uniform" Child="{StaticResource Vector.Translate}" Width="30" Height="30"/>
 
-            <Label Grid.Column="1" x:Name="HeaderLabel" Content="Translator" Margin="5,0,5,0" VerticalAlignment="Center" Padding="2" FontSize="18" FontFamily="Segoe UI Semilight"/>
+            <Label Grid.Column="1" x:Name="HeaderLabel" Content="Translator" Margin="5,0,5,0" VerticalAlignment="Center" Padding="2" FontSize="18" FontFamily="{DynamicResource FontFamilyLight}"/>
 
-            <Label Grid.Column="3" Content="From" VerticalAlignment="Center" Padding="2" FontSize="16" FontFamily="Segoe UI Semilight"/>
+            <Label Grid.Column="3" Content="From" VerticalAlignment="Center" Padding="2" FontSize="16" FontFamily="{DynamicResource FontFamilyLight}"/>
             <ComboBox Grid.Column="4" x:Name="FromComboBox" Margin="5,0" SelectedValuePath="Code" DisplayMemberPath="CodeName" IsEditable="True" IsEnabled="False" 
                       PreviewKeyDown="ComboBox_KeyDown"/>
 
-            <Label Grid.Column="5" Content="into" VerticalAlignment="Center" Padding="2" FontSize="16" FontFamily="Segoe UI Semilight"/>
+            <Label Grid.Column="5" Content="into" VerticalAlignment="Center" Padding="2" FontSize="16" FontFamily="{DynamicResource FontFamilyLight}"/>
             <ComboBox Grid.Column="6" x:Name="ToComboBox" Margin="5,0" SelectedValuePath="Code" DisplayMemberPath="CodeName" IsEditable="True" 
                       PreviewKeyDown="ComboBox_KeyDown"/>
 

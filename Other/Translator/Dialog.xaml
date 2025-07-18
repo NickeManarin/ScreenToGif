@@ -19,7 +19,7 @@
             <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Error}"/>
             
             <Label x:Name="InstructionLabel" Content="Instruction" Margin="5" Grid.Column="1" VerticalContentAlignment="Center" 
-                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+                   FontFamily="{DynamicResource FontFamilyLight}" FontSize="18" Foreground="#FF003399"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">

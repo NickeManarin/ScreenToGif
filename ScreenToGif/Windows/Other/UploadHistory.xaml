@@ -34,7 +34,7 @@
             <Border Grid.Column="0" x:Name="MainBorder" Margin="6" Background="{StaticResource Vector.Clock}" Width="23" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeTextBlock" Text="{DynamicResource S.Options.Upload.History.Title}" Margin="5" VerticalAlignment="Center" 
-                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                       FontFamily="{DynamicResource FontFamilyLight}" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
         </Grid>
 
         <DataGrid Grid.Row="1" Grid.Column="0" x:Name="DataGrid" Margin="5,3" MinHeight="60" SelectionMode="Single" SelectionUnit="FullRow" CanUserSortColumns="False"

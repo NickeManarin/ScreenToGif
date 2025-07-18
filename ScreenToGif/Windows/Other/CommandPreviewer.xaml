@@ -24,7 +24,7 @@
             <Border Grid.Column="0" Margin="6" Background="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" Text="{DynamicResource S.CommandPreviewer.Title}" Margin="5" VerticalAlignment="Center" 
-                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                       FontFamily="{DynamicResource FontFamilyLight}" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
             <TextBlock Grid.Column="2" x:Name="ExtensionTextBlock" Text=".mp4" Margin="5,0" Foreground="{DynamicResource Element.Foreground.Detail}" FontStyle="Italic" 
                        FontSize="12" TextWrapping="WrapWithOverflow" VerticalAlignment="Center"/>

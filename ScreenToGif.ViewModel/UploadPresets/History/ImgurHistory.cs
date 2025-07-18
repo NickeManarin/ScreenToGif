@@ -73,7 +73,7 @@ public class ImgurHistory : History
             var document = new FlowDocument
             {
                 PagePadding = new Thickness(3),
-                FontFamily = new FontFamily("Segoe UI")
+                FontFamily = (FontFamily)Application.Current.Resources["FontFamilyNormal"]
             };
 
             if (!WasSuccessful)

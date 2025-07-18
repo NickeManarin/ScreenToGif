@@ -26,7 +26,7 @@
             <Border Grid.Column="0" Background="{StaticResource Vector.ImageStack}" Margin="5" Height="32" Width="32" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label Grid.Column="1" x:Name="EncoderLabel" Content="{DynamicResource S.Encoder.Title}" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" 
-                   FontSize="24" FontFamily="Segoe UI Semilight" Foreground="{DynamicResource Element.Foreground.Header}">
+                   FontSize="24" FontFamily="{DynamicResource FontFamilyLight}" Foreground="{DynamicResource Element.Foreground.Header}">
                 <Label.Triggers>
                     <EventTrigger RoutedEvent="Label.Loaded">
                         <BeginStoryboard>

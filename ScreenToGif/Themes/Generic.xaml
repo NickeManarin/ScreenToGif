@@ -76,7 +76,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="0" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" VerticalAlignment="Center"
+                                    <TextBlock Grid.Column="0" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="{DynamicResource FontFamilyNormal}" FontSize="16" VerticalAlignment="Center"
                                                FontWeight="Regular" Margin="5,0,0,0" Foreground="{TemplateBinding Foreground}"/>
 
                                     <TextBlock Grid.Column="1" Text="{DynamicResource S.Recorder.ClickOrPress}" VerticalAlignment="Center" TextAlignment="Center" Margin="5" 
@@ -853,7 +853,7 @@
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Medium}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyNormal}"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
@@ -1208,7 +1208,7 @@
 
     <!--AwareTabItem Style-->
     <Style TargetType="{x:Type n:AwareTabItem}">
-        <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyLight}"/>
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
 
         <Setter Property="Template">
