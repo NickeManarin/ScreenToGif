@@ -37,21 +37,21 @@
         <c:BoolAndOrOrToVisibility x:Key="BoolAndOrOrToVisibility"/>
 
         <Storyboard x:Key="ShowPanelStoryboard">
-            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0">
                 <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
             </BooleanAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="280" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="280" Duration="0:0:0.75">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="280" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="280" Duration="0:0:0.75">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=ActionGrid,Path=Opacity}" To="1" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=ActionGrid,Path=Opacity}" To="1" Duration="0:0:0.75">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
@@ -59,21 +59,21 @@
         </Storyboard>
 
         <Storyboard x:Key="ShowExtendedPanelStoryboard">
-            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0">
                 <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
             </BooleanAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="320" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="320" Duration="0:0:0.75">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="320" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="320" Duration="0:0:0.75">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=ActionGrid,Path=Opacity}" To="1" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=ActionGrid,Path=Opacity}" To="1" Duration="0:0:0.75">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
@@ -81,21 +81,21 @@
         </Storyboard>
 
         <Storyboard x:Key="HidePanelStoryboard">
-            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0">
                 <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0"/>
             </BooleanAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="0" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.MinWidth)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="0" Duration="0:0:0.75">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="0" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Width)" From="{Binding ElementName=ActionGrid,Path=ActualWidth}" To="0" Duration="0:0:0.75">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=ActionGrid,Path=Opacity}" To="0" Duration="0:0:1">
+            <DoubleAnimation Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=ActionGrid,Path=Opacity}" To="0" Duration="0:0:0.75">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="8" />
                 </DoubleAnimation.EasingFunction>
