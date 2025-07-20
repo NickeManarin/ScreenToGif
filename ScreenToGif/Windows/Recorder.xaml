@@ -194,11 +194,11 @@
                 <n:ExtendedButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CloseButton" Icon="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText}"
                                   ContentHeight="10" ContentWidth="10" Padding="4,1" Click="CloseButton_Click"/>
 
-                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CaptionText" Text="{Binding Title, ElementName=RecorderLightWindow}" FontFamily="Segoe UI" FontSize="12"
+                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CaptionText" Text="{Binding Title, ElementName=RecorderLightWindow}" FontFamily="{DynamicResource FontFamilyNormal}" FontSize="12"
                            FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" x:Name="FrameCountTextBlock" Text="{Binding FrameCount, ElementName=RecorderLightWindow, Converter={StaticResource IntToStringConverter}}" 
-                           FontFamily="Segoe UI" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                           FontFamily="{DynamicResource FontFamilyNormal}" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}"/>
             </Grid>
 
             <!--Command controls-->
@@ -304,7 +304,7 @@
                                   ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
                                   PropagateWheelEvent="True" MouseWheel="SizeIntegerBox_MouseWheel"/>
 
-                    <TextBlock Grid.Column="3" Text="px" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" 
+                    <TextBlock Grid.Column="3" Text="px" FontSize="12" FontFamily="{DynamicResource FontFamilyNormal}" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" 
                                Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
                 </Grid>
 

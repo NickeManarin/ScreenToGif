@@ -25,22 +25,22 @@
             <Border Grid.Column="0" Margin="6" Background="{StaticResource Vector.Cancel.Round}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeLabel" Text="Exception Type" Margin="5,0" VerticalAlignment="Center" 
-                       FontFamily="Segoe UI Semilight" FontSize="16" Foreground="{DynamicResource Element.Foreground.Header}"
+                       FontFamily="{DynamicResource FontFamilyLight}" FontSize="16" Foreground="{DynamicResource Element.Foreground.Header}"
                        ToolTip="{DynamicResource S.ExceptionViewer.Type}" ToolTipService.Placement="Left" ToolTipService.HorizontalOffset="-5" ToolTipService.VerticalOffset="-5"/>
 
             <n:ExtendedButton Grid.Column="2" x:Name="InnerButton" Text="{DynamicResource S.ExceptionViewer.OpenInner}" Icon="{StaticResource Vector.Synchronize}" 
                               ContentWidth="20" ContentHeight="20" Margin="3" Padding="2" Style="{StaticResource Style.Button.Horizontal}" IsEnabled="False" FontSize="12" 
-                              FontFamily="Segoe UI Semilight" Click="InnerButton_Click"/>
+                              FontFamily="{DynamicResource FontFamilyLight}" Click="InnerButton_Click"/>
         </Grid>
 
         <n:ExtendedTextBox x:Name="MessageTextBox" Margin="3" Grid.Row="1" TextWrapping="Wrap" MinHeight="50" FontSize="14" ScrollViewer.CanContentScroll="True" 
-                           VerticalScrollBarVisibility="Auto" FontFamily="Segoe UI Semibold" IsReadOnly="True" MaxHeight="150"
+                           VerticalScrollBarVisibility="Auto" FontFamily="{DynamicResource FontFamilyBold}" IsReadOnly="True" MaxHeight="150"
                            ToolTip="{DynamicResource S.ExceptionViewer.Message}" ToolTipService.Placement="Left" ToolTipService.HorizontalOffset="-5" ToolTipService.VerticalOffset="-5"/>
 
         <n:ExtendedTextBox x:Name="StackTextBox" Margin="3" Grid.Row="2" TextWrapping="Wrap" MinHeight="23" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
                            ToolTip="{DynamicResource S.ExceptionViewer.Stack}" ToolTipService.Placement="Left" ToolTipService.HorizontalOffset="-5" ToolTipService.VerticalOffset="-5"/>
 
-        <n:ExtendedTextBox x:Name="SourceTextBox" Margin="3" Grid.Row="3" TextWrapping="Wrap" MinHeight="23" FontSize="12" FontFamily="Segoe UI Semibold" IsReadOnly="True"
+        <n:ExtendedTextBox x:Name="SourceTextBox" Margin="3" Grid.Row="3" TextWrapping="Wrap" MinHeight="23" FontSize="12" FontFamily="{DynamicResource FontFamilyBold}" IsReadOnly="True"
                            ToolTip="{DynamicResource S.ExceptionViewer.Source}" ToolTipService.Placement="Left" ToolTipService.HorizontalOffset="-5" ToolTipService.VerticalOffset="-5"/>
 
         <Grid Grid.Row="4" Background="{DynamicResource Panel.Background.Level3}">

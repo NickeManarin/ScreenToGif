@@ -22,7 +22,7 @@
             <Border Margin="6" Background="{StaticResource Vector.Text}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label x:Name="InstructionLabel" Content="{DynamicResource S.Encoder.Command.Header}" Margin="3" Grid.Column="1" VerticalContentAlignment="Center" 
-                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                   FontFamily="{DynamicResource FontFamilyLight}" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
         </Grid>
 
         <n:ExtendedTextBox Grid.Row="1" x:Name="CommandTextBox" Margin="3" FontFamily="Consolas" IsReadOnly="True" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"/>

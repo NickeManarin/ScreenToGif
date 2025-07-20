@@ -25,7 +25,7 @@
             <Border Grid.Column="0" Margin="6" Background="{StaticResource Vector.Warning}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeLabel" Text="{DynamicResource S.Troubleshoot.Windows}" Margin="5" VerticalAlignment="Center" 
-                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                       FontFamily="{DynamicResource FontFamilyLight}" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
             <TextBlock Grid.Column="2" Text="{DynamicResource S.Troubleshoot.Windows.Info}" FontSize="12" Foreground="{DynamicResource Element.Foreground.Header}" 
                        TextAlignment="Center" VerticalAlignment="Center" Margin="3" TextWrapping="Wrap"/>

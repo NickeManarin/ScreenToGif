@@ -164,7 +164,7 @@ namespace ScreenToGif.Windows
         }
 
         /// <summary>
-        /// True if the system can't playback the animation at the correct speed.
+        /// True if the system can't play back the animation at the correct speed.
         /// </summary>
         public bool HasImprecisePlayback
         {
@@ -217,7 +217,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// Lock used to prevent firing multiple times (at the same time) both the Activated/Deactivated events.
         /// </summary>
-        public static readonly object ActivateLock = new object();
+        public static readonly object ActivateLock = new();
 
         #endregion
 

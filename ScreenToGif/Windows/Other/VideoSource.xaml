@@ -32,7 +32,7 @@
             <Border Grid.Column="0" x:Name="IconViewBox" Margin="6" Background="{StaticResource Vector.FramesFromVideo}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" Text="{DynamicResource S.ImportVideo.Title}" Margin="5" VerticalAlignment="Center" Padding="2" FontSize="18" 
-                       FontFamily="Segoe UI Semilight" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                       FontFamily="{DynamicResource FontFamilyLight}" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
             <TextBlock Grid.Column="2" Text="{DynamicResource S.ImportVideo.Importer}" FontSize="13" Foreground="{DynamicResource Element.Foreground.Header}" 
                        TextAlignment="Center" VerticalAlignment="Center" Margin="3"/>
@@ -47,7 +47,7 @@
         <c:StatusBand Grid.Row="1" x:Name="StatusBand"/>
 
         <Label Grid.Row="2" Content="{DynamicResource S.ImportVideo.Loading}" Margin="0" VerticalContentAlignment="Center" 
-               HorizontalContentAlignment="Center" FontSize="24" Foreground="{DynamicResource Element.Foreground.Header}" FontFamily="Segoe UI Semilight"
+               HorizontalContentAlignment="Center" FontSize="24" Foreground="{DynamicResource Element.Foreground.Header}" FontFamily="{DynamicResource FontFamilyLight}"
                Visibility="{Binding LoadingVisibility, Mode=OneWay}"/>
 
         <Grid Grid.Row="2" x:Name="PreviewerGrid" Margin="5">

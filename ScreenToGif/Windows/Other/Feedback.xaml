@@ -26,7 +26,7 @@
             <Border Grid.Column="0" Margin="6" Background="{StaticResource Vector.Application}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeLabel" Text="{DynamicResource S.Feedback.Header}" Margin="5" VerticalAlignment="Center" 
-                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                       FontFamily="{DynamicResource FontFamilyLight}" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
             <TextBlock Grid.Column="2" FontSize="13" Foreground="{DynamicResource Element.Foreground.Header}" TextAlignment="Center" VerticalAlignment="Center" Margin="3">
                 <TextBlock Text="{DynamicResource S.Feedback.LanguageInfo1}"/>

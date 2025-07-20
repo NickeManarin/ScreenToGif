@@ -23,14 +23,14 @@
             <Border Margin="5" Width="32" Height="32" Background="{StaticResource Vector.Synchronize}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label x:Name="InstructionLabel" Content="{DynamicResource S.Updater.Header}" Margin="3" Grid.Column="1" VerticalContentAlignment="Center" 
-                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                   FontFamily="{DynamicResource FontFamilyLight}" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
         </Grid>
 
         <n:StatusBand Grid.Row="1" x:Name="StatusBand"/>
 
         <Grid Grid.Row="2">
             <FlowDocumentScrollViewer x:Name="DocumentViewer" VerticalScrollBarVisibility="Auto">
-                <FlowDocument x:Name="MainFlowDocument" FontFamily="Segoe UI" TextAlignment="Left">
+                <FlowDocument x:Name="MainFlowDocument" FontFamily="{DynamicResource FontFamilyNormal}" TextAlignment="Left">
                     <Paragraph TextAlignment="Center" FontWeight="Light">
                         <Run Text="{DynamicResource S.Updater.NewRelease}" FontSize="30" Foreground="{DynamicResource Element.Foreground}"/>
                         <Run Name="VersionRun" Text="Version 2.22" FontSize="20" Foreground="{DynamicResource Element.Foreground}"/>

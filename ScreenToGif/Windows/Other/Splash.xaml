@@ -13,7 +13,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
-                <TextBlock Text="{Binding ElementName=SplashWindow, Path=Title, FallbackValue=Title}" FontSize="22" FontFamily="Segoe UI Semilight" TextWrapping="Wrap"
+                <TextBlock Text="{Binding ElementName=SplashWindow, Path=Title, FallbackValue=Title}" FontSize="22" FontFamily="{DynamicResource FontFamilyLight}" TextWrapping="Wrap"
                        Foreground="{DynamicResource Element.Foreground.Header}" Margin="10" HorizontalAlignment="Stretch" TextAlignment="Center"/>
             </Grid>
 

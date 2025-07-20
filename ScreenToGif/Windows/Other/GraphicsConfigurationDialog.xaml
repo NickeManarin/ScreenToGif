@@ -23,11 +23,11 @@
             <Border x:Name="IconBorder" Margin="6" Background="{DynamicResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeTextBlock" Text="{DynamicResource S.Warning.Graphics.Title}" Margin="5,0" VerticalAlignment="Center" 
-                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
+                       FontFamily="{DynamicResource FontFamilyLight}" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
             <n:ExtendedButton Grid.Column="2" x:Name="DetailsButton" Text="{DynamicResource S.Encoder.Details}" Icon="{DynamicResource Vector.Table}" 
                               ContentWidth="20" ContentHeight="20" Margin="3" Padding="2" Style="{StaticResource Style.Button.Horizontal}" TextWrapping="NoWrap"
-                              Click="DetailsButton_Click" FontSize="14" FontFamily="Segoe UI Semilight"/>
+                              Click="DetailsButton_Click" FontSize="14" FontFamily="{DynamicResource FontFamilyLight}"/>
         </Grid>
 
         <Grid Grid.Row="1" Margin="0,0,0,15">

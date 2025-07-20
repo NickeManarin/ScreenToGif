@@ -10,6 +10,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using ScreenToGif.Util.Settings;
+using System.Net.Http;
 using Application = System.Windows.Application;
 
 namespace ScreenToGif.Util;
@@ -102,13 +103,55 @@ public static class LocalizationHelper
 
         #endregion
 
+        #region Select Fonts
+
+        var cultureFonts = new Dictionary<string, (string normal, string light, string bold)>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "en", ("Segoe UI", "Segoe UI Semilight", "Segoe UI Semibold") },
+            { "zh", ("Microsoft YaHei UI", "Microsoft YaHei UI Light", "Microsoft YaHei UI Bold") },
+            { "zh-Hant", ("Microsoft JhengHei UI", "Microsoft JhengHei UI Light", "Microsoft JhengHei UI Bold") },
+            { "ja", ("Yu Gothic UI", "Yu Gothic UI Semilight", "Yu Gothic UI Semibold") },
+            { "ko", ("Malgun Gothic", "Malgun Gothic Semilight", "Malgun Gothic Bold") },
+        };
+
+        if (!cultureFonts.TryGetValue(culture, out var fontSet))
+        {
+            try
+            {
+                var parentCulture = CultureInfo.GetCultureInfo(culture).Parent.Name;
+
+                if (!string.IsNullOrEmpty(parentCulture))
+                    cultureFonts.TryGetValue(parentCulture, out fontSet);
+            }
+            catch { }
+        }
+
+        if (fontSet == default)
+            fontSet = ("Segoe UI", "Segoe UI Semilight", "Segoe UI Semibold");
+
+        SetOrUpdateResource("FontFamilyNormal", fontSet.normal);
+        SetOrUpdateResource("FontFamilyLight", fontSet.light);
+        SetOrUpdateResource("FontFamilyBold", fontSet.bold);
+
+        #endregion
+
         GC.Collect(0);
 
         if (!UserSettings.All.CheckForTranslationUpdates)
             return;
 
         //Async, fire and forget.
-        Task.Factory.StartNew(() => CheckForUpdates(culture));
+        _ = CheckForUpdates(culture);
+    }
+
+    private static void SetOrUpdateResource(string key, string fontName)
+    {
+        var fontFamily = new System.Windows.Media.FontFamily(fontName);
+
+        if (Application.Current.Resources.Contains(key))
+            Application.Current.Resources[key] = fontFamily;
+        else
+            Application.Current.Resources.Add(key, fontFamily);
     }
 
     /// <summary>
@@ -121,13 +164,13 @@ public static class LocalizationHelper
     ///              Download latest, overwriting current
     ///          if current translation is newer
     ///              Don't download
-    ///      if there no translation downloaded already
+    ///      if there's no translation downloaded already
     ///          Download latest
     ///  if resource available is older than assembly
     ///      Don't download, erase current translation
     /// </summary>
     /// <param name="culture">The culture that should be searched for updates.</param>
-    internal static void CheckForUpdates(string culture)
+    internal static async Task CheckForUpdates(string culture)
     {
         try
         {
@@ -140,7 +183,7 @@ public static class LocalizationHelper
             Directory.CreateDirectory(folder);
 
             //Get when the available resource was updated.
-            var updated = GetWhenResourceWasUpdated(culture);
+            var updated = await GetWhenResourceWasUpdatedAsync(culture);
 
             //If resource available is older than assembly.
             if (!updated.HasValue || updated <= File.GetLastWriteTime(ProcessHelper.GetEntryAssemblyPath()))
@@ -151,18 +194,10 @@ public static class LocalizationHelper
                 return;
             }
 
-            //If a translation was previously downloaded.
-            if (File.Exists(file))
-            {
-                //If current translation is older than the available one.
-                if (new FileInfo(file).LastWriteTimeUtc < updated.Value.ToUniversalTime())
-                    DownloadLatest(file, culture);
-            }
-            else
-            {
-                DownloadLatest(file, culture);
-            }
-
+            //If a translation wasn't previously downloaded or if it's older than the available one.
+            if (!File.Exists(file) || new FileInfo(file).LastWriteTimeUtc < updated.Value.ToUniversalTime())
+                await DownloadLatestAsync(file, culture);
+            
             //If a new translation was not downloaded (now or previously), ignore the following code.
             if (!File.Exists(file))
                 return;
@@ -174,12 +209,12 @@ public static class LocalizationHelper
                 Application.Current.Resources.MergedDictionaries.Remove(rem);
 
             //Load the resource from the file, not replacing the current resource, but putting right after it.
-            using var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read);
+            await using var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read);
 
             if (fs.Length == 0)
                 throw new InvalidDataException("File is empty");
 
-            //Reads the ResourceDictionary file
+            //Reads the ResourceDictionary file.
             var dictionary = (ResourceDictionary)XamlReader.Load(fs);
             dictionary.Source = new Uri(Path.Combine(file));
 
@@ -201,27 +236,37 @@ public static class LocalizationHelper
     /// </summary>
     /// <param name="culture">The culture of the resource to be checked.</param>
     /// <returns>The date when the resource file was last updated.</returns>
-    private static DateTime? GetWhenResourceWasUpdated(string culture)
+    private static async Task<DateTime?> GetWhenResourceWasUpdatedAsync(string culture)
     {
         //Gets the latest commit that changed the translation resource.
-        var req = (HttpWebRequest)WebRequest.Create($"https://api.github.com/repos/NickeManarin/ScreenToGif/commits?path=ScreenToGif/Resources/Localization/StringResources.{culture}.xaml&page=1&per_page=1");
-        req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
-        req.Proxy = WebHelper.GetProxy();
+        var url = $"https://api.github.com/repos/NickeManarin/ScreenToGif/commits?path=ScreenToGif/Resources/Localization/StringResources.{culture}.xaml&page=1&per_page=1";
 
-        var res = (HttpWebResponse)req.GetResponse();
+        var proxy = WebHelper.GetProxy();
 
-        using var resultStream = res.GetResponseStream();
-        using var reader = new StreamReader(resultStream);
+        using var handler = new HttpClientHandler();
+        handler.Proxy = proxy;
+        handler.UseProxy = proxy != null;
 
-        var result = reader.ReadToEnd();
-        var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new XmlDictionaryReaderQuotas());
+        using var client = new HttpClient(handler);
+
+        //GitHub API requires a User-Agent header.
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+
+        var response = await client.GetAsync(url);
+
+        if (!response.IsSuccessStatusCode)
+            return null;
+
+        var json = await response.Content.ReadAsStringAsync();
+
+        var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(json), new XmlDictionaryReaderQuotas());
         var release = XElement.Load(jsonReader);
 
-        //Gets the date of of the last commit that changed the translation file.
-        var dateText = release.FirstNode.XPathSelectElement("commit")?.XPathSelectElement("committer")?.XPathSelectElement("date")?.Value;
+        //Gets the date of the last commit that changed the translation file.
+        var dateText = release.FirstNode?.XPathSelectElement("commit")?.XPathSelectElement("committer")?.XPathSelectElement("date")?.Value;
 
         //If was not possible to convert the time, keep using the current resource.
-        if (!DateTime.TryParse(dateText, out DateTime modificationDate))
+        if (!DateTime.TryParse(dateText, out var modificationDate))
             return null;
 
         //If the current resource is newer then the available one, keep using the current.
@@ -233,19 +278,29 @@ public static class LocalizationHelper
     /// </summary>
     /// <param name="file">The destination path of the resource.</param>
     /// <param name="culture">The culture of the resource to be downloaded.</param>
-    private static void DownloadLatest(string file, string culture)
+    private static async Task DownloadLatestAsync(string file, string culture)
     {
-        var request = (HttpWebRequest)WebRequest.Create($"https://api.github.com/repos/NickeManarin/ScreenToGif/contents/ScreenToGif/Resources/Localization/StringResources.{culture}.xaml");
-        request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
-        request.Proxy = WebHelper.GetProxy();
+        var url = $"https://api.github.com/repos/NickeManarin/ScreenToGif/contents/ScreenToGif/Resources/Localization/StringResources.{culture}.xaml";
+        var proxy = WebHelper.GetProxy();
 
-        var response = (HttpWebResponse)request.GetResponse();
+        using var handler = new HttpClientHandler();
 
-        using var resultStream = response.GetResponseStream();
-        using var reader = new StreamReader(resultStream);
+        if (proxy != null)
+        {
+            handler.Proxy = proxy;
+            handler.UseProxy = true;
+        }
 
-        var result = reader.ReadToEnd();
-        var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new XmlDictionaryReaderQuotas());
+        using var client = new HttpClient(handler);
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+
+        var response = await client.GetAsync(url);
+
+        if (!response.IsSuccessStatusCode)
+            return;
+
+        var json = await response.Content.ReadAsStringAsync();
+        var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(json), new XmlDictionaryReaderQuotas());
         var release = XElement.Load(jsonReader);
 
         //When creating a GET request with a direct path, the 'content' element is available as a base64 string.
@@ -257,12 +312,14 @@ public static class LocalizationHelper
         if (File.Exists(file))
             File.Delete(file);
 
-        File.WriteAllText(file, Encoding.UTF8.GetString(Convert.FromBase64String(contentBase64)).Replace("&#x0d;", "\r"));
+        var decoded = Encoding.UTF8.GetString(Convert.FromBase64String(contentBase64)).Replace("&#x0d;", "\r");
+
+        await File.WriteAllTextAsync(file, decoded);
     }
 
     public static void SaveDefaultResource(string path)
     {
-        //Copy all MergedDictionaries into a auxiliary list.
+        //Copy all MergedDictionaries into an auxiliary list.
         var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
 
         try
@@ -278,8 +335,9 @@ public static class LocalizationHelper
 
             var settings = new XmlWriterSettings { Indent = true };
 
-            using (var writer = XmlWriter.Create(path, settings))
-                XamlWriter.Save(resourceDictionary, writer);
+            using var writer = XmlWriter.Create(path, settings);
+
+            XamlWriter.Save(resourceDictionary, writer);
         }
         catch (Exception ex)
         {
@@ -325,7 +383,7 @@ public static class LocalizationHelper
 
     public static List<ResourceDictionary> GetLocalizations()
     {
-        //Copy all MergedDictionaries into a auxiliary list.
+        //Copy all MergedDictionaries into an auxiliary list.
         var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
 
         return dictionaryList.Where(x => x.Source.OriginalString.Contains("StringResource")).ToList();
