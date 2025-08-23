@@ -7,6 +7,7 @@ using ScreenToGif.Native.External;
 using ScreenToGif.Native.Structs;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Settings;
+using SharpDX.Direct3D11;
 using Image = System.Drawing.Image;
 
 namespace ScreenToGif.Capture;
@@ -21,11 +22,15 @@ internal class ImageCapture : BaseCapture
     protected IntPtr CompatibleBitmap;
     private IntPtr _oldBitmap;
 
+    private readonly object _projectLock = new object();
+
     protected int CursorStep { get; set; }
 
     private CopyPixelOperations PixelOperations { get; set; }
 
     #endregion
+
+    protected override bool SupportsParallelSaving => true;
 
     public override void Start(int delay, int left, int top, int width, int height, double scale, ProjectInfo project)
     {
@@ -63,6 +68,7 @@ internal class ImageCapture : BaseCapture
                 return FrameCount;
 
             //Set frame details.
+            frame.Index = FrameCount;
             FrameCount++;
             frame.Path = $"{Project.FullPath}{FrameCount}.png";
             frame.Delay = FrameRate.GetMilliseconds();
@@ -146,6 +152,7 @@ internal class ImageCapture : BaseCapture
             #endregion
 
             //Set frame details.
+            frame.Index = FrameCount;
             FrameCount++;
             frame.Path = $"{Project.FullPath}{FrameCount}.png";
             frame.Delay = FrameRate.GetMilliseconds();
@@ -174,7 +181,10 @@ internal class ImageCapture : BaseCapture
         frame.Image.Dispose();
         frame.Image = null;
 
-        Project.Frames.Add(frame);
+        lock(_projectLock)
+        {
+            Project.Frames.Add(frame);
+        }
     }
 
     public override async Task Stop()
@@ -195,5 +205,8 @@ internal class ImageCapture : BaseCapture
         {
             LogWriter.Log(e, "Impossible to stop and clean resources used by the recording.");
         }
+
+        // If frames were saved in parallel, they may have been stored out of order, so we sort them here
+        Project.Frames.Sort((a, b) => a.Index.CompareTo(b.Index));
     }
 }
