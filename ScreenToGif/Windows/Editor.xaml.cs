@@ -3321,7 +3321,7 @@ namespace ScreenToGif.Windows
         /// </summary>
         /// <param name="newProject">The project to load.</param>
         /// <param name="isNew">True if this is a new project.</param>
-        /// <param name="clear">True if should clear the current list of frames.</param>
+        /// <param name="clear">True if it should clear the current list of frames.</param>
         /// <param name="createFlag">True if it should create a flag for single use, a mutex.</param>
         internal async void LoadProject(ProjectInfo newProject, bool isNew = true, bool clear = true, bool createFlag = false)
         {

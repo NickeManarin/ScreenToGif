@@ -128,7 +128,7 @@ internal class EncodingManager
         catch (Exception ex)
         {
             ErrorDialog.Ok("Task Error", "Unable to start the encoding task", "A generic error occurred while trying to start the encoding task.", ex);
-            LogWriter.Log(ex, "Errow while starting the task.");
+            LogWriter.Log(ex, "Error while starting the task.");
         }
 
         //Application.Current.Dispatcher.Invoke(() => Refresh(taskId));

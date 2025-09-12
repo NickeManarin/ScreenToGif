@@ -80,49 +80,50 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="WidthResizeIntegerUpDown" Minimum="1" Maximum="5000" Margin="5,3" Height="25" MinWidth="70"
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Width}" Margin="0,5,0,0" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <n:IntegerUpDown Grid.Row="1" Grid.Column="0" x:Name="WidthResizeIntegerUpDown" Minimum="1" Maximum="5000" Margin="15,5,5,5" Height="25" MinWidth="70"
                                  Value="{Binding Width, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Visibility="{Binding DisplayInPixels}"/>
-                <n:DecimalUpDown Grid.Row="0" Grid.Column="1" x:Name="WidthResizeDecimalUpDown" Minimum="1" Maximum="5000" Margin="5,3" Height="25" MinWidth="70"
+                <n:DecimalUpDown Grid.Row="1" Grid.Column="0" x:Name="WidthResizeDecimalUpDown" Minimum="1" Maximum="5000" Margin="15,5,5,5" Height="25" MinWidth="70"
                                  Value="{Binding WidthInPercent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Visibility="{Binding DisplayInPercents, FallbackValue={x:Static Visibility.Collapsed}}"/>
 
-                <ComboBox Grid.Row="0" Grid.Column="2" Margin="0,3,5,3" SelectedValuePath="Tag" MinWidth="80" SelectedValue="{Binding SizeUnit}">
-                    <ComboBoxItem Tag="{x:Static e:SizeUnits.Pixels}" Content="{DynamicResource S.Resize.Pixels}"/>
-                    <ComboBoxItem Tag="{x:Static e:SizeUnits.Percent}" Content="{DynamicResource S.Resize.Percent}"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,3,5,3" SelectedValuePath="Tag" MinWidth="80" SelectedValue="{Binding SizeUnit}">
+                    <ComboBoxItem Tag="{x:Static e:SizeUnits.Pixels}" Content="px"/>
+                    <ComboBoxItem Tag="{x:Static e:SizeUnits.Percent}" Content="%"/>
                 </ComboBox>
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="HeightResizeIntegerUpDown" Minimum="1" Maximum="5000" Margin="5,3" Height="25" MinWidth="70"
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Height}" Margin="0,5,0,0" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <n:IntegerUpDown Grid.Row="3" Grid.Column="0" x:Name="HeightResizeIntegerUpDown" Minimum="1" Maximum="5000" Margin="15,5,5,5" Height="25" MinWidth="70"
                                  Value="{Binding Height, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Visibility="{Binding DisplayInPixels}"/>
-                <n:DecimalUpDown Grid.Row="1" Grid.Column="1" x:Name="HeightResizeDecimalUpDown" Minimum="1" Maximum="5000" Margin="5,3" Height="25" MinWidth="70"
+                <n:DecimalUpDown Grid.Row="3" Grid.Column="0" x:Name="HeightResizeDecimalUpDown" Minimum="1" Maximum="5000" Margin="15,5,5,5" Height="25" MinWidth="70"
                                  Value="{Binding HeightInPercent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  Visibility="{Binding DisplayInPercents, FallbackValue={x:Static Visibility.Collapsed}}"/>
 
-                <ComboBox Grid.Row="1" Grid.Column="2" Margin="0,3,5,3" SelectedValuePath="Tag" MinWidth="80" SelectedValue="{Binding SizeUnit}">
-                    <ComboBoxItem Tag="{x:Static e:SizeUnits.Pixels}" Content="{DynamicResource S.Resize.Pixels}"/>
-                    <ComboBoxItem Tag="{x:Static e:SizeUnits.Percent}" Content="{DynamicResource S.Resize.Percent}"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" Margin="0,5,5,5" SelectedValuePath="Tag" MinWidth="80" SelectedValue="{Binding SizeUnit}">
+                    <ComboBoxItem Tag="{x:Static e:SizeUnits.Pixels}" Content="px"/>
+                    <ComboBoxItem Tag="{x:Static e:SizeUnits.Percent}" Content="%"/>
                 </ComboBox>
 
-                <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="KeepAspectCheckBox" Text="{DynamicResource S.Resize.KeepAspect}"
+                <n:ExtendedCheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" x:Name="KeepAspectCheckBox" Text="{DynamicResource S.Resize.KeepAspect}"
                                     Margin="5,5" IsChecked="{Binding KeepAspectRatio}"/>
 
-                <Border Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Background="{StaticResource Vector.Lock}" Height="15" Width="15" Margin="0,0,3,0"
-                        Visibility="{Binding ElementName=KeepAspectCheckBox, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
-
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.Resize.Dpi2}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="DpiNumericUpDown" Minimum="1" Maximum="1000" Margin="5,3" Width="80" HorizontalAlignment="Left"
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.Resize.Dpi2}" Margin="0,5,0,0" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <n:IntegerUpDown Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="1" x:Name="DpiNumericUpDown" Minimum="1" Maximum="1000" Margin="15,5,5,5" Width="80" HorizontalAlignment="Left"
                                  Value="{Binding Dpi, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.Resize.ScalingQuality}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                <ComboBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" x:Name="ResizeScalingQualityComboBox" Margin="5,3" SelectedValuePath="Tag"
+                <TextBlock Grid.Row="7" Grid.Column="0" Text="{DynamicResource S.Resize.ScalingQuality}" Margin="0,5,0,0" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <ComboBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" x:Name="ResizeScalingQualityComboBox" Margin="15,5,5,5" SelectedValuePath="Tag"
                           SelectedValue="{Binding ScalingMode}">
                     <ComboBoxItem Tag="{x:Static BitmapScalingMode.Fant}" Content="{DynamicResource S.Resize.ScalingQuality.Fant}"/>
                     <ComboBoxItem Tag="{x:Static BitmapScalingMode.Linear}" Content="{DynamicResource S.Resize.ScalingQuality.Linear}"/>

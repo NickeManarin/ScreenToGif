@@ -266,7 +266,7 @@ public class ProjectInfo
             {
                 foreach (var info in items)
                 {
-                    var filename = Path.Combine(export.Path, export.FramesFiles.Count + ".png"); //Path.GetFileName(info.Path)
+                    var filename = Path.Combine(export.Path, export.FramesFiles.Count + ".png");
 
                     //Copy the image to the folder.
                     File.Copy(info.Path, filename, true);
@@ -280,18 +280,11 @@ public class ProjectInfo
                     });
                 }
 
-                //Improve this.
-                if (indexes.Count > 0)
-                {
-                    var projectAux = ShallowCopy();
-                    projectAux.RelativePath = encodePath;
-                    projectAux.Frames = export.FramesFiles.OfType<FrameInfo>().ToList();
-                    projectAux.Persist(Path.Combine(export.Path, "Project.json"));
-                }
-                else
-                {
-                    File.Copy(ProjectPath, Path.Combine(export.Path, "Project.json"), true);
-                }
+                //Create new project.json file with the updated file names.
+                var projectAux = ShallowCopy();
+                projectAux.RelativePath = encodePath;
+                projectAux.Frames = export.FramesFiles.OfType<FrameInfo>().ToList();
+                projectAux.Persist(Path.Combine(export.Path, "Project.json"));
 
                 return export;
             }
