@@ -43,7 +43,7 @@
 
 <p align="center">
   <g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji>
-  Attention, it requires <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0/runtime">.NET 9 Desktop Runtime</a> (or above). 
+  Attention, it requires <a href="https://dotnet.microsoft.com/en-us/download/dotnet/9.0/runtime">.NET 9 Desktop Runtime</a> (or above). 
   <g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji>
 </p>
 
