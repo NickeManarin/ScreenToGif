@@ -3,7 +3,6 @@ using System.Runtime.Serialization;
 using System.Windows;
 using System.Windows.Media;
 using ScreenToGif.Domain.Enums;
-using ScreenToGif.Util;
 using ScreenToGif.Util.Extensions;
 using ScreenToGif.Util.Settings;
 
@@ -34,8 +33,7 @@ public class ResizeViewModel : BaseTaskViewModel
     {
         TaskType = TaskTypes.Resize;
     }
-
-
+    
     public int OriginalWidth
     {
         get => _originalWidth;
@@ -53,8 +51,7 @@ public class ResizeViewModel : BaseTaskViewModel
         get => _originalDpi;
         set => SetProperty(ref _originalDpi, value);
     }
-
-
+    
     public int Width
     {
         get => _width;
@@ -68,7 +65,7 @@ public class ResizeViewModel : BaseTaskViewModel
             OnPropertyChanged(nameof(WidthDiff));
             OnPropertyChanged(nameof(SizeDiff));
 
-            if (KeepAspectRatio != true)
+            if (!KeepAspectRatio)
                 return;
 
             Height = (int)Math.Round(_heightRatio * value / _widthRatio);
@@ -88,7 +85,7 @@ public class ResizeViewModel : BaseTaskViewModel
             OnPropertyChanged(nameof(HeightDiff));
             OnPropertyChanged(nameof(SizeDiff));
 
-            if (KeepAspectRatio != true)
+            if (!KeepAspectRatio)
                 return;
 
             Width = (int)Math.Round(_widthRatio * value / _heightRatio);
@@ -105,7 +102,7 @@ public class ResizeViewModel : BaseTaskViewModel
 
             Width = (int)Math.Round(MathExtensions.CrossMultiplication(OriginalWidth, null, WidthInPercent));
 
-            if (KeepAspectRatio != true)
+            if (!KeepAspectRatio)
                 return;
 
             Height = (int)Math.Round(_heightRatio * Width / _widthRatio);
@@ -122,7 +119,7 @@ public class ResizeViewModel : BaseTaskViewModel
 
             Height = (int)Math.Round(MathExtensions.CrossMultiplication(OriginalHeight, null, HeightInPercent));
 
-            if (KeepAspectRatio != true)
+            if (!KeepAspectRatio)
                 return;
 
             Width = (int)Math.Round(_widthRatio * Height / _heightRatio);

@@ -4312,6 +4312,54 @@
                 <Style TargetType="ListBoxItem">
                     <EventSetter Event="PreviewMouseLeftButtonDown" Handler="Item_PreviewMouseLeftButtonDown"/>
                     <Setter Property="ContextMenu" Value="{StaticResource FrameListContextMenu}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4" SnapsToDevicePixels="True">
+                                    <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="1"/>
+                                </Border>
+
+                                <ControlTemplate.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsMouseOver" Value="True"/>
+                                        </MultiTrigger.Conditions>
+
+                                        <Setter Property="Background" TargetName="Border" Value="{DynamicResource Item.MouseOver.Background}"/>
+                                        <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource Item.MouseOver.Border}"/>
+                                    </MultiTrigger>
+
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                            <Condition Property="IsSelected" Value="True"/>
+                                        </MultiTrigger.Conditions>
+
+                                        <Setter Property="Background" TargetName="Border" Value="{DynamicResource Item.SelectedInactive.Background}"/>
+                                        <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource Item.SelectedInactive.Border}"/>
+                                    </MultiTrigger>
+
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                            <Condition Property="IsSelected" Value="True"/>
+                                        </MultiTrigger.Conditions>
+
+                                        <Setter Property="Background" TargetName="Border" Value="{DynamicResource Item.SelectedActive.Background}"/>
+                                        <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource Item.SelectedActive.Border}"/>
+                                    </MultiTrigger>
+
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Opacity" Value="0.7"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>

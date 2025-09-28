@@ -141,10 +141,10 @@
                     </Grid.RowDefinitions>
 
                     <n:ExtendedCheckBox Grid.Row="0" Text="{DynamicResource S.FreeDrawing.FitToCurve}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
-                                        IsChecked="{Binding FitToCurve, Mode=TwoWay}" FontSize="11"/>
+                                        IsChecked="{Binding FitToCurve, Mode=TwoWay}" FontSize="11" IsSmall="True"/>
 
                     <n:ExtendedCheckBox Grid.Row="1" Text="{DynamicResource S.FreeDrawing.Highlighter}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
-                                        IsChecked="{Binding IsHighlighter, Mode=TwoWay}" FontSize="11"/>
+                                        IsChecked="{Binding IsHighlighter, Mode=TwoWay}" FontSize="11" IsSmall="True"/>
                 </Grid>
             </Grid>
 

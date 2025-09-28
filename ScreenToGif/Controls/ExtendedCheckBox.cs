@@ -19,6 +19,9 @@ public class ExtendedCheckBox : CheckBox
     public static readonly DependencyProperty UncheckOnDisableProperty = DependencyProperty.Register(nameof(UncheckOnDisable), typeof(bool),
         typeof(ExtendedCheckBox), new PropertyMetadata(false));
 
+    public static readonly DependencyProperty IsSmallProperty = DependencyProperty.Register(nameof(IsSmall), typeof(bool),
+        typeof(ExtendedCheckBox), new PropertyMetadata(false));
+
     #endregion
 
     #region Properties
@@ -45,6 +48,12 @@ public class ExtendedCheckBox : CheckBox
     {
         get => (bool)GetValue(UncheckOnDisableProperty);
         set => SetValue(UncheckOnDisableProperty, value);
+    }
+
+    public bool IsSmall
+    {
+        get => (bool)GetValue(IsSmallProperty);
+        set => SetValue(IsSmallProperty, value);
     }
 
     #endregion

@@ -23,6 +23,8 @@ internal class NotifyIcon : FrameworkElement, IDisposable
 {
     #region Variables
 
+    private Icon _icon;
+
     /// <summary>
     /// Represents the current icon data.
     /// </summary>
@@ -32,6 +34,58 @@ internal class NotifyIcon : FrameworkElement, IDisposable
     /// Receives messages from the taskbar icon.
     /// </summary>
     private readonly WindowMessageSink _messageSink;
+
+    #endregion
+
+    #region Dependencies
+
+    public static readonly DependencyProperty IconSourceProperty = DependencyProperty.Register(nameof(IconSource), typeof(ImageSource), typeof(NotifyIcon), new FrameworkPropertyMetadata(null, IconSourcePropertyChanged));
+
+    public static readonly DependencyProperty NotifyToolTipProperty = DependencyProperty.Register(nameof(NotifyToolTip), typeof(UIElement), typeof(NotifyIcon), new FrameworkPropertyMetadata(null, ToolTipPropertyChanged));
+
+    public static readonly DependencyProperty NotifyToolTipTextProperty = DependencyProperty.Register(nameof(NotifyToolTipText), typeof(string), typeof(NotifyIcon), new FrameworkPropertyMetadata(string.Empty, ToolTipTextPropertyChanged));
+
+    private static readonly DependencyPropertyKey NotifyToolTipElementPropertyKey = DependencyProperty.RegisterReadOnly(nameof(NotifyToolTipElement), typeof(ToolTip), typeof(NotifyIcon), new FrameworkPropertyMetadata(null));
+
+    public static readonly DependencyProperty NotifyToolTipElementProperty = NotifyToolTipElementPropertyKey.DependencyProperty;
+
+    private static readonly DependencyProperty LeftClickCommandProperty = DependencyProperty.Register(nameof(LeftClickCommand), typeof(ICommand), typeof(NotifyIcon), new FrameworkPropertyMetadata(null));
+
+    private static readonly DependencyProperty LeftDoubleClickCommandProperty = DependencyProperty.Register(nameof(LeftDoubleClickCommand), typeof(ICommand), typeof(NotifyIcon), new FrameworkPropertyMetadata(null));
+
+    private static readonly DependencyProperty MiddleClickCommandProperty = DependencyProperty.Register(nameof(MiddleClickCommand), typeof(ICommand), typeof(NotifyIcon), new FrameworkPropertyMetadata(null));
+
+    public static readonly RoutedEvent TrayMouseMoveEvent = EventManager.RegisterRoutedEvent(nameof(TrayMouseMove), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent TrayLeftMouseDownEvent = EventManager.RegisterRoutedEvent(nameof(TrayLeftMouseDown), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent TrayRightMouseDownEvent = EventManager.RegisterRoutedEvent(nameof(TrayRightMouseDown), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent TrayMiddleMouseDownEvent = EventManager.RegisterRoutedEvent(nameof(TrayMiddleMouseDown), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent TrayLeftMouseUpEvent = EventManager.RegisterRoutedEvent(nameof(TrayLeftMouseUp), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent TrayRightMouseUpEvent = EventManager.RegisterRoutedEvent(nameof(TrayRightMouseUp), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent TrayMiddleMouseUpEvent = EventManager.RegisterRoutedEvent(nameof(TrayMiddleMouseUp), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent TrayMouseDoubleClickEvent = EventManager.RegisterRoutedEvent(nameof(TrayMouseDoubleClick), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent PreviewTrayContextMenuOpenEvent = EventManager.RegisterRoutedEvent(nameof(PreviewTrayContextMenuOpen), RoutingStrategy.Tunnel, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent TrayContextMenuOpenEvent = EventManager.RegisterRoutedEvent(nameof(TrayContextMenuOpen), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent PreviewToolTipOpenEvent = EventManager.RegisterRoutedEvent(nameof(PreviewToolTipOpen), RoutingStrategy.Tunnel, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent ToolTipOpenEvent = EventManager.RegisterRoutedEvent(nameof(ToolTipOpen), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent PreviewToolTipCloseEvent = EventManager.RegisterRoutedEvent(nameof(PreviewToolTipClose), RoutingStrategy.Tunnel, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    public static readonly RoutedEvent ToolTipCloseEvent = EventManager.RegisterRoutedEvent(nameof(ToolTipClose), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
+
+    #endregion
+
+    #region Properties
 
     /// <summary>
     /// Indicates whether the taskbar icon has been created or not.
@@ -45,81 +99,6 @@ internal class NotifyIcon : FrameworkElement, IDisposable
 
     public bool IsDisposed { get; private set; }
 
-    #endregion
-
-    #region Dependencies
-
-    public static readonly DependencyProperty IconSourceProperty = DependencyProperty.Register("IconSource", typeof(ImageSource), typeof(NotifyIcon),
-        new FrameworkPropertyMetadata(null, IconSourcePropertyChanged));
-
-    public static readonly DependencyProperty NotifyToolTipProperty = DependencyProperty.Register("NotifyToolTip", typeof(UIElement), typeof(NotifyIcon),
-        new FrameworkPropertyMetadata(null, ToolTipPropertyChanged));
-
-    public static readonly DependencyProperty NotifyToolTipTextProperty = DependencyProperty.Register("NotifyToolTipText", typeof(string), typeof(NotifyIcon),
-        new FrameworkPropertyMetadata(string.Empty, ToolTipTextPropertyChanged));
-
-    private static readonly DependencyPropertyKey NotifyToolTipElementPropertyKey = DependencyProperty.RegisterReadOnly("NotifyToolTipElement", typeof(ToolTip), typeof(NotifyIcon),
-        new FrameworkPropertyMetadata(null));
-
-    public static readonly DependencyProperty NotifyToolTipElementProperty = NotifyToolTipElementPropertyKey.DependencyProperty;
-
-    private static readonly DependencyProperty LeftClickCommandProperty = DependencyProperty.Register("LeftClickCommand", typeof(ICommand), typeof(NotifyIcon),
-        new FrameworkPropertyMetadata(null));
-
-    private static readonly DependencyProperty DoubleLeftClickCommandProperty = DependencyProperty.Register("DoubleLeftClickCommand", typeof(ICommand), typeof(NotifyIcon),
-        new FrameworkPropertyMetadata(null));
-
-    private static readonly DependencyProperty MiddleClickCommandProperty = DependencyProperty.Register("MiddleClickCommand", typeof(ICommand), typeof(NotifyIcon),
-        new FrameworkPropertyMetadata(null));
-
-    public static readonly RoutedEvent TrayMouseMoveEvent = EventManager.RegisterRoutedEvent("TrayMouseMove",
-        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent TrayLeftMouseDownEvent = EventManager.RegisterRoutedEvent("TrayLeftMouseDown",
-        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent TrayRightMouseDownEvent = EventManager.RegisterRoutedEvent("TrayRightMouseDown",
-        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent TrayMiddleMouseDownEvent = EventManager.RegisterRoutedEvent("TrayMiddleMouseDown",
-        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent TrayLeftMouseUpEvent = EventManager.RegisterRoutedEvent("TrayLeftMouseUp",
-        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent TrayRightMouseUpEvent = EventManager.RegisterRoutedEvent("TrayRightMouseUp",
-        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent TrayMiddleMouseUpEvent = EventManager.RegisterRoutedEvent("TrayMiddleMouseUp",
-        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent TrayMouseDoubleClickEvent = EventManager.RegisterRoutedEvent("TrayMouseDoubleClick",
-        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent PreviewTrayContextMenuOpenEvent = EventManager.RegisterRoutedEvent("PreviewTrayContextMenuOpen",
-        RoutingStrategy.Tunnel, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent TrayContextMenuOpenEvent = EventManager.RegisterRoutedEvent("TrayContextMenuOpen",
-        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent PreviewToolTipOpenEvent = EventManager.RegisterRoutedEvent("PreviewToolTipOpen",
-        RoutingStrategy.Tunnel, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent ToolTipOpenEvent = EventManager.RegisterRoutedEvent("ToolTipOpen",
-        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent PreviewToolTipCloseEvent = EventManager.RegisterRoutedEvent("PreviewToolTipClose",
-        RoutingStrategy.Tunnel, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    public static readonly RoutedEvent ToolTipCloseEvent = EventManager.RegisterRoutedEvent("ToolTipClose",
-        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NotifyIcon));
-
-    #endregion
-
-    #region Properties
-
-    private Icon _icon;
-
     [Browsable(false)]
     public Icon Icon
     {
@@ -127,9 +106,9 @@ internal class NotifyIcon : FrameworkElement, IDisposable
         set
         {
             _icon = value;
-            _iconData.IconHandle = value == null ? IntPtr.Zero : _icon.Handle;
+            _iconData.IconHandle = value == null ? IntPtr.Zero : (_icon?.Handle ?? IntPtr.Zero);
 
-            NotifyIconHelper.WriteIconData(ref _iconData, Domain.Enums.Native.NotifyCommands.Modify, Domain.Enums.Native.IconDataMembers.Icon);
+            NotifyIconHelper.WriteIconData(ref _iconData, NotifyCommands.Modify, IconDataMembers.Icon);
         }
     }
 
@@ -145,14 +124,14 @@ internal class NotifyIcon : FrameworkElement, IDisposable
         set => SetValue(NotifyToolTipTextProperty, value);
     }
 
-    public UIElement NotifyToolTip
+    public UIElement? NotifyToolTip
     {
         get => (UIElement)GetValue(NotifyToolTipProperty);
         set => SetValue(NotifyToolTipProperty, value);
     }
 
     [Bindable(true)]
-    public ToolTip NotifyToolTipElement => (ToolTip)GetValue(NotifyToolTipElementProperty);
+    public ToolTip? NotifyToolTipElement => (ToolTip)GetValue(NotifyToolTipElementProperty);
 
     public ICommand LeftClickCommand
     {
@@ -160,12 +139,12 @@ internal class NotifyIcon : FrameworkElement, IDisposable
         set => SetValue(LeftClickCommandProperty, value);
     }
 
-    public ICommand DoubleLeftClickCommand
+    public ICommand LeftDoubleClickCommand
     {
-        get => (ICommand)GetValue(DoubleLeftClickCommandProperty);
-        set => SetValue(DoubleLeftClickCommandProperty, value);
+        get => (ICommand)GetValue(LeftDoubleClickCommandProperty);
+        set => SetValue(LeftDoubleClickCommandProperty, value);
     }
-                
+
     public ICommand MiddleClickCommand
     {
         get => (ICommand)GetValue(MiddleClickCommandProperty);
@@ -307,7 +286,7 @@ internal class NotifyIcon : FrameworkElement, IDisposable
         if (d is not NotifyIcon owner)
             return;
 
-        owner.CreateCustomToolTip();
+        //owner.CreateCustomToolTip();
         owner.WriteToolTipSettings();
     }
 
@@ -316,14 +295,14 @@ internal class NotifyIcon : FrameworkElement, IDisposable
         if (d is not NotifyIcon owner)
             return;
 
-        if (owner.NotifyToolTip == null)
-        {
-            //Create or just update the tooltip.
-            if (owner.NotifyToolTipElement == null)
-                owner.CreateCustomToolTip();
-            else
-                owner.NotifyToolTipElement.Content = e.NewValue;
-        }
+        //if (owner.NotifyToolTip == null)
+        //{
+        //    //Create or just update the tooltip.
+        //    if (owner.NotifyToolTipElement == null)
+        //        owner.CreateCustomToolTip();
+        //    else
+        //        owner.NotifyToolTipElement.Content = e.NewValue;
+        //}
 
         owner.WriteToolTipSettings();
     }
@@ -353,6 +332,13 @@ internal class NotifyIcon : FrameworkElement, IDisposable
 
     #region Methods
 
+    public override void OnApplyTemplate()
+    {
+        base.OnApplyTemplate();
+
+        RefreshVisual();
+    }
+
     private void CreateTaskbarIcon()
     {
         lock (this)
@@ -380,7 +366,7 @@ internal class NotifyIcon : FrameworkElement, IDisposable
             if (!IsTaskbarIconCreated)
                 return;
 
-            NotifyIconHelper.WriteIconData(ref _iconData, Domain.Enums.Native.NotifyCommands.Delete, Domain.Enums.Native.IconDataMembers.Message);
+            NotifyIconHelper.WriteIconData(ref _iconData, NotifyCommands.Delete, IconDataMembers.Message);
             IsTaskbarIconCreated = false;
         }
     }
@@ -530,7 +516,7 @@ internal class NotifyIcon : FrameworkElement, IDisposable
                 break;
             case MouseEventType.IconLeftDoubleClick:
                 RaiseEvent(new RoutedEventArgs { RoutedEvent = TrayMouseDoubleClickEvent });
-                DoubleLeftClickCommand?.Execute(this);
+                LeftDoubleClickCommand?.Execute(this);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), "Missing handler for mouse event flag: " + type);
@@ -548,6 +534,7 @@ internal class NotifyIcon : FrameworkElement, IDisposable
     private void OnTaskbarCreated()
     {
         IsTaskbarIconCreated = false;
+
         CreateTaskbarIcon();
     }
 
@@ -563,13 +550,21 @@ internal class NotifyIcon : FrameworkElement, IDisposable
 
             var args = new RoutedEventArgs { RoutedEvent = PreviewToolTipOpenEvent };
             RaiseEvent(args);
-            if (args.Handled) return;
 
-            //TODO: test this.
-            NotifyToolTipElement.IsOpen = true;
+            if (args.Handled)
+                return;
 
-            NotifyToolTip?.RaiseEvent(new RoutedEventArgs { RoutedEvent = ToolTipOpenEvent });
-            RaiseEvent(new RoutedEventArgs { RoutedEvent = ToolTipOpenEvent });
+            try
+            {
+                NotifyToolTipElement.IsOpen = true;
+
+                NotifyToolTip?.RaiseEvent(new RoutedEventArgs { RoutedEvent = ToolTipOpenEvent });
+                RaiseEvent(new RoutedEventArgs { RoutedEvent = ToolTipOpenEvent });
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Trying to open system tray popup");
+            }
         }
         else
         {

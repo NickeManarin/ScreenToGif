@@ -13,7 +13,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
                     <Border x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                            Margin="0" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            Margin="0" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" CornerRadius="4">
                         <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"
                                           ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
@@ -43,7 +43,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="Template.Slider.Thumb.Horizontal" TargetType="{x:Type Thumb}">
-        <Border Background="{DynamicResource Element.Background}" Margin="{TemplateBinding Padding}" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" />
+        <Border Background="{DynamicResource Element.Background}" Margin="{TemplateBinding Padding}" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" CornerRadius="4"/>
 
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">

@@ -8,7 +8,7 @@
     <c:BytesToSize x:Key="BytesToSizeConverter"/>
 
     <ControlTemplate x:Key="Template.Encoding" TargetType="{x:Type n:EncoderListViewItem}">
-        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="4">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -21,7 +21,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="InternalBorder" Background="{TemplateBinding Icon}" 
-                        Margin="1" Visibility="Visible" Effect="{x:Null}" Opacity="{DynamicResource Element.Opacity}"/>
+                        Margin="3" Visibility="Visible" Effect="{x:Null}" Opacity="{DynamicResource Element.Opacity}"/>
 
                 <n:ExtendedButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CancelButton" Padding="2" Icon="{DynamicResource Vector.Close}" ContentWidth="15" ContentHeight="15"
                                   VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
@@ -104,7 +104,7 @@
 
     <ControlTemplate x:Key="Template.Completed" TargetType="{x:Type n:EncoderListViewItem}">
         <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
-                Padding="{TemplateBinding Padding}">
+                Padding="{TemplateBinding Padding}" CornerRadius="4">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
@@ -116,7 +116,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Border Grid.Row="0" Grid.Column="0" x:Name="InternalBorder" Background="{DynamicResource Vector.Ok.Round}"
-                        Margin="1" Visibility="Visible" Effect="{x:Null}" Opacity="{DynamicResource Element.Opacity}"/>
+                        Margin="3" Visibility="Visible" Effect="{x:Null}" Opacity="{DynamicResource Element.Opacity}"/>
                 
                 <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Icon="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15"
                                   VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
@@ -353,7 +353,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="Template.Error" TargetType="{x:Type n:EncoderListViewItem}">
-        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="4">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
@@ -363,7 +363,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Border Grid.Row="0" Grid.Column="0" x:Name="InternalBorder" Background="{DynamicResource Vector.Cancel.Round}" 
-                        Margin="2" Visibility="Visible" Effect="{x:Null}" Opacity="{DynamicResource Element.Opacity}"/>
+                        Margin="3" Visibility="Visible" Effect="{x:Null}" Opacity="{DynamicResource Element.Opacity}"/>
 
                 <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Icon="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15" 
                                   VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
@@ -399,7 +399,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="Template.Canceled" TargetType="{x:Type n:EncoderListViewItem}">
-        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="4">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -431,7 +431,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="Template.File" TargetType="{x:Type n:EncoderListViewItem}">
-        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="4">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
@@ -439,7 +439,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Row="0" Grid.Column="0" x:Name="InternalBorder" Background="{DynamicResource Vector.FilePermission}" Margin="1" 
+                <Border Grid.Row="0" Grid.Column="0" x:Name="InternalBorder" Background="{DynamicResource Vector.FilePermission}" Margin="3" 
                         Visibility="Visible" Effect="{x:Null}" Opacity="{DynamicResource Element.Opacity}"/>
                 
                 <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Icon="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15" 

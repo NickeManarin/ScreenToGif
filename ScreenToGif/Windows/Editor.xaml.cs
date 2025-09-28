@@ -1,5 +1,27 @@
+using Microsoft.Win32;
+using ScreenToGif.Controls;
+using ScreenToGif.Domain.Enums;
+using ScreenToGif.Domain.Interfaces;
+using ScreenToGif.Domain.Models.Project;
+using ScreenToGif.ImageUtil;
+using ScreenToGif.Model;
+using ScreenToGif.Native.Helpers;
+using ScreenToGif.UserControls;
+using ScreenToGif.Util;
+using ScreenToGif.Util.Codification.Apng;
+using ScreenToGif.Util.Codification.Gif.Decoder;
+using ScreenToGif.Util.Extensions;
+using ScreenToGif.Util.Settings;
+using ScreenToGif.ViewModel;
+using ScreenToGif.ViewModel.ExportPresets;
+using ScreenToGif.ViewModel.ExportPresets.Image;
+using ScreenToGif.ViewModel.ExportPresets.Other;
+using ScreenToGif.ViewModel.Tasks;
+using ScreenToGif.Windows.Other;
+using SharpCompress.Compressors.LZMA;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -13,19 +35,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shell;
 using System.Windows.Threading;
-using Microsoft.Win32;
-using ScreenToGif.Controls;
-using ScreenToGif.ImageUtil;
-using ScreenToGif.Model;
-using ScreenToGif.Util;
-using ScreenToGif.Windows.Other;
 using ButtonBase = System.Windows.Controls.Primitives.ButtonBase;
 using Color = System.Windows.Media.Color;
 using Cursors = System.Windows.Input.Cursors;
@@ -37,23 +55,7 @@ using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using ListViewItem = System.Windows.Controls.ListViewItem;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Size = System.Windows.Size;
-using System.Windows.Data;
-using System.Windows.Media.Effects;
-using ScreenToGif.Domain.Enums;
-using ScreenToGif.Domain.Interfaces;
-using ScreenToGif.UserControls;
-using ScreenToGif.ViewModel;
-using ScreenToGif.ViewModel.Tasks;
 using VideoSource = ScreenToGif.Windows.Other.VideoSource;
-using ScreenToGif.Native.Helpers;
-using ScreenToGif.Util.Codification.Apng;
-using ScreenToGif.Util.Codification.Gif.Decoder;
-using ScreenToGif.Util.Extensions;
-using ScreenToGif.Util.Settings;
-using ScreenToGif.ViewModel.ExportPresets;
-using ScreenToGif.ViewModel.ExportPresets.Image;
-using ScreenToGif.ViewModel.ExportPresets.Other;
-using System.Collections.Immutable;
 
 namespace ScreenToGif.Windows
 {
@@ -682,40 +684,36 @@ namespace ScreenToGif.Windows
             WindowState = WindowState.Minimized;
             Encoder.Minimize();
 
-            ProjectInfo project = null;
-
             if (UserSettings.All.NewRecorder)
             {
                 var recorder = new NewRecorder();
-                recorder.ShowDialog();
-                project = recorder.Project;
-
-                if (recorder.Project?.Frames == null || !recorder.Project.Any)
+                recorder.Closed += async (o, args) =>
                 {
-                    GC.Collect();
-
-                    Encoder.Restore();
-                    WindowState = WindowState.Normal;
-                    return;
-                }
+                    await InsertAfterRecording(recorder);
+                };
+                recorder.ShowDialog();
             }
             else
             {
                 var recorder = new Recorder();
                 recorder.ShowDialog();
-                project = recorder.Project;
 
-                if (recorder.Project?.Frames == null || !recorder.Project.Any)
-                {
-                    GC.Collect();
-
-                    Encoder.Restore();
-                    WindowState = WindowState.Normal;
-                    return;
-                }
+                await InsertAfterRecording(recorder);
             }
+        }
 
-            #region Insert
+        private async Task InsertAfterRecording(BaseScreenRecorder recorder)
+        {
+            var project = recorder.Project;
+
+            if (project == null || recorder.Project?.Frames == null || !recorder.Project.Any)
+            {
+                GC.Collect();
+
+                Encoder.Restore();
+                WindowState = WindowState.Normal;
+                return;
+            }
 
             var insert = new Insert(Project.Frames.CopyList(), project.Frames, FrameListView.SelectedIndex) { Owner = this };
             var result = insert.ShowDialog();
@@ -725,8 +723,6 @@ namespace ScreenToGif.Windows
                 Project.Frames = insert.CurrentList;
                 await LoadSelectedStarter(0);
             }
-
-            #endregion
 
             Encoder.Restore();
             WindowState = WindowState.Normal;
@@ -3321,7 +3317,7 @@ namespace ScreenToGif.Windows
         /// </summary>
         /// <param name="newProject">The project to load.</param>
         /// <param name="isNew">True if this is a new project.</param>
-        /// <param name="clear">True if should clear the current list of frames.</param>
+        /// <param name="clear">True if it should clear the current list of frames.</param>
         /// <param name="createFlag">True if it should create a flag for single use, a mutex.</param>
         internal async void LoadProject(ProjectInfo newProject, bool isNew = true, bool clear = true, bool createFlag = false)
         {

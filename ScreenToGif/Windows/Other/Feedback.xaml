@@ -98,7 +98,7 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type n:AttachmentListBoxItem}">
-                                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4"
                                             Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" ToolTip="{TemplateBinding Attachment}">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
