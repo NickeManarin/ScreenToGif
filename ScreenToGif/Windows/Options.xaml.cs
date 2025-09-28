@@ -1,8 +1,21 @@
+using Microsoft.Win32;
+using ScreenToGif.Controls;
+using ScreenToGif.Domain.Enums;
+using ScreenToGif.Native.Helpers;
+using ScreenToGif.Util;
+using ScreenToGif.Util.InterProcessChannel;
+using ScreenToGif.Util.Settings;
+using ScreenToGif.ViewModel.ExportPresets;
+using ScreenToGif.ViewModel.Tasks;
+using ScreenToGif.ViewModel.UploadPresets;
+using ScreenToGif.Windows.Other;
+using SharpCompress.Compressors.Xz;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Formats.Tar;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -15,17 +28,6 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
-using Microsoft.Win32;
-using ScreenToGif.Controls;
-using ScreenToGif.Domain.Enums;
-using ScreenToGif.Native.Helpers;
-using ScreenToGif.Util;
-using ScreenToGif.Util.InterProcessChannel;
-using ScreenToGif.Util.Settings;
-using ScreenToGif.ViewModel.ExportPresets;
-using ScreenToGif.ViewModel.Tasks;
-using ScreenToGif.ViewModel.UploadPresets;
-using ScreenToGif.Windows.Other;
 using Localization = ScreenToGif.Windows.Other.Localization;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Path = System.IO.Path;
@@ -1412,47 +1414,48 @@ public partial class Options : INotification
 
 #if FULL_MULTI_MSIX_STORE
             StatusBand.Warning(LocalizationHelper.Get("S.Options.Extras.DownloadRestriction"));
+            ProcessHelper.StartWithShell("https://github.com/ImageOptim/gifski/releases");
             return;
 #else
         #region Save as
 
-        var output = UserSettings.All.GifskiLocation ?? "";
+        //var output = UserSettings.All.GifskiLocation ?? "";
 
-        if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
-            output = "";
+        //if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+        //    output = "";
 
-        //It's only a relative path if not null/empty and there's no root folder declared.
-        var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
-        var notAlt = !string.IsNullOrWhiteSpace(output) && output.Contains(Path.DirectorySeparatorChar);
+        ////It's only a relative path if not null/empty and there's no root folder declared.
+        //var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
+        //var notAlt = !string.IsNullOrWhiteSpace(output) && output.Contains(Path.DirectorySeparatorChar);
 
-        var name = Path.GetFileNameWithoutExtension(output) ?? "";
-        var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
-        var initial = Directory.Exists(directory) ? directory : AppDomain.CurrentDomain.BaseDirectory;
+        //var name = Path.GetFileNameWithoutExtension(output) ?? "";
+        //var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
+        //var initial = Directory.Exists(directory) ? directory : AppDomain.CurrentDomain.BaseDirectory;
 
-        var sfd = new SaveFileDialog
-        {
-            FileName = string.IsNullOrWhiteSpace(name) ? "gifski" : name,
-            InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
-            Filter = $"{LocalizationHelper.Get("S.Options.Extras.GifskiLocation.File")} (.dll)|*.dll",
-            DefaultExt = ".dll"
-        };
+        //var sfd = new SaveFileDialog
+        //{
+        //    FileName = string.IsNullOrWhiteSpace(name) ? "gifski" : name,
+        //    InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
+        //    Filter = $"{LocalizationHelper.Get("S.Options.Extras.GifskiLocation.File")} (.dll)|*.dll",
+        //    DefaultExt = ".dll"
+        //};
 
-        var result = sfd.ShowDialog();
+        //var result = sfd.ShowDialog();
 
-        if (!result.HasValue || !result.Value) return;
+        //if (!result.HasValue || !result.Value) return;
 
-        UserSettings.All.GifskiLocation = sfd.FileName;
+        //UserSettings.All.GifskiLocation = sfd.FileName;
 
-        //Converts to a relative path again.
-        if (isRelative && !string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation))
-        {
-            var selected = new Uri(UserSettings.All.GifskiLocation);
-            var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
-            var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
+        ////Converts to a relative path again.
+        //if (isRelative && !string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation))
+        //{
+        //    var selected = new Uri(UserSettings.All.GifskiLocation);
+        //    var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
+        //    var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
 
-            //This app even returns you the correct slashes/backslashes.
-            UserSettings.All.GifskiLocation = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-        }
+        //    //This app even returns you the correct slashes/backslashes.
+        //    UserSettings.All.GifskiLocation = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        //}
 
         #endregion
 
@@ -1465,21 +1468,29 @@ public partial class Options : INotification
 
         try
         {
-            //Save to a temp folder.
-            var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
+            var release = await GitHubHelper.GetLatestRelease("ImageOptim/gifski");
+            var asset = release.GetAsset(".tar.xz");
 
-            using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
-                await client.DownloadFileTaskAsync(new Uri("https://www.screentogif.com/downloads/Gifski.zip", UriKind.Absolute), temp);
+            if (asset == null)
+                throw new Exception("No .tar.xz asset found in the latest release.");
 
-            using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
+            var packedFolder = Path.Combine(UserSettings.All.TemporaryFolderResolved, "Downloads");
+            var packedPath = Path.Combine(packedFolder, asset.Name);
+
+            Directory.CreateDirectory(packedFolder);
+
+            if (File.Exists(packedPath))
+                File.Delete(packedPath);
+
+            await using (var fileStream = new FileStream(packedPath, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 4096, true))
             {
-                var entry = zip.Entries.FirstOrDefault(x => x.Name.Contains("gifski.dll"));
-
-                if (File.Exists(UserSettings.All.GifskiLocation))
-                    File.Delete(UserSettings.All.GifskiLocation);
-
-                entry?.ExtractToFile(UserSettings.All.GifskiLocation, true);
+                await using (var stream = await WebHelper.GetStream(asset.BrowserDownloadUrl))
+                    await stream.CopyToAsync(fileStream);
             }
+
+            UserSettings.All.GifskiLocation = await UnpackGifski(packedPath);
+
+            File.Delete(packedPath);
         }
         catch (Exception ex)
         {
@@ -1725,6 +1736,32 @@ public partial class Options : INotification
             LogWriter.Log(ex, "Checking the existence of external tools.");
             StatusBand.Error("It was not possible to check the existence of the external tools.");
         }
+    }
+
+    public async Task<string?> UnpackGifski(string path)
+    {
+        await using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+        await using XZStream xzStream = new(fileStream);
+        await using var tarReader = new TarReader(xzStream);
+
+        var destinationPath = Environment.ExpandEnvironmentVariables("%appdata%\\ScreenToGif\\Plugins");
+        var destination = Path.Combine(destinationPath, "gifski.dll");
+
+        Directory.CreateDirectory(destinationPath);
+
+        if (File.Exists(destination))
+            File.Delete(destination);
+
+        while (await tarReader.GetNextEntryAsync() is { } entry)
+        {
+            if (entry.EntryType is TarEntryType.SymbolicLink or TarEntryType.HardLink or TarEntryType.GlobalExtendedAttributes || !entry.Name.EndsWith("gifski.dll"))
+                continue;
+
+            await entry.ExtractToFileAsync(destination, true);
+            return destination;
+        }
+
+        return null;
     }
 
     #endregion

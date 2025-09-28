@@ -21,6 +21,10 @@ namespace ScreenToGif.Native.External
         [DllImport(Constants.Kernel32)]
         internal static extern IntPtr LoadLibrary(string path);
 
+        [DllImport(Constants.Kernel32, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool FreeLibrary(IntPtr hModule);
+
         [DllImport(Constants.Kernel32)]
         internal static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
     }

@@ -769,13 +769,13 @@ internal class EncodingManager
                             #endregion
 
                             break;
+
                         case EncoderTypes.FFmpeg:
-
                             EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
-
                             break;
-                        case EncoderTypes.Gifski:
 
+                        case EncoderTypes.Gifski:
+                        {
                             #region Gifski encoding
 
                             Update(id, EncodingStatus.Processing, null, true);
@@ -791,10 +791,10 @@ internal class EncodingManager
 
                             var size = project.FramesFiles[0].Path.ScaledSize();
 
-                            var gifski = new GifskiInterop();
+                            using var gifski = new GifskiInterop();
                             var handle = gifski.Start((uint)size.Width, (uint)size.Height, gifskiGifPreset.Quality, gifskiGifPreset.Looped, gifskiGifPreset.Fast);
 
-                            if (gifski.Version.Major == 0 && gifski.Version.Minor < 9)
+                            if (gifski.IsOlderThan0Dot9)
                             {
                                 #region Older
 
@@ -807,7 +807,7 @@ internal class EncodingManager
 
                                     Update(id, EncodingStatus.Processing, null, false);
 
-                                    GifskiInterop.GifskiError res;
+                                    GifskiErrorCodes res;
 
                                     for (var i = 0; i < project.FramesFiles.Count; i++)
                                     {
@@ -825,13 +825,13 @@ internal class EncodingManager
 
                                         res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay);
 
-                                        if (res != GifskiInterop.GifskiError.Ok)
+                                        if (res != GifskiErrorCodes.Ok)
                                             throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
                                     }
 
                                     res = gifski.EndAdding(handle);
 
-                                    if (res != GifskiInterop.GifskiError.Ok)
+                                    if (res != GifskiErrorCodes.Ok)
                                         throw new Exception("Error while finishing adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
                                 }, null);
 
@@ -845,7 +845,7 @@ internal class EncodingManager
 
                                 var res = gifski.SetOutput(handle, gifskiGifPreset.FullPath);
 
-                                if (res != GifskiInterop.GifskiError.Ok)
+                                if (res != GifskiErrorCodes.Ok)
                                     throw new Exception("Error while setting output with Gifski. " + res, new Win32Exception()) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
 
                                 Thread.Sleep(500);
@@ -873,7 +873,7 @@ internal class EncodingManager
 
                                     res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay, lastTimestamp, i + 1 == project.FramesFiles.Count);
 
-                                    if (res != GifskiInterop.GifskiError.Ok)
+                                    if (res != GifskiErrorCodes.Ok)
                                         throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
                                 }
 
@@ -892,6 +892,8 @@ internal class EncodingManager
                             #endregion
 
                             break;
+                        }
+
                         default:
                             throw new Exception("Undefined Gif encoder type");
                     }
@@ -1348,9 +1350,11 @@ internal class EncodingManager
         // A little cheating for PingPong mode: though the encoder could handle it, we convert it explicitly to a simple forward loop so
         // we can update the progress in FramesIterator and don't need to pass a DrawingProgress implementation to TaskConfig.Progress
         var animationMode = (AnimationMode)preset.RepeatCount;
+
         if (animationMode == AnimationMode.PingPong)
         {
             animationMode = AnimationMode.Repeat;
+
             for (int i = frames.Count - 2; i > 0; i--)
                 frames.Add(frames[i]);
         }

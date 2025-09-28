@@ -239,6 +239,17 @@ public static class WebHelper
         return null;
     }
 
+    public static async Task<Stream> GetStream(string url, NameValueCollection headers = null)
+    {
+        using var client = GetHttpClient(headers);
+        var response = await client.GetAsync(url);
+
+        if (!response.IsSuccessStatusCode)
+            throw new Exception("Unsuccessful download of stream.");
+
+        return await response.Content.ReadAsStreamAsync();
+    }
+
 
     private static HttpWebRequest GetWebRequest(HttpMethod method, string url, NameValueCollection headers = null, string contentType = null, long contentLength = 0)
     {
@@ -268,6 +279,17 @@ public static class WebHelper
         return request;
     }
 
+    internal static HttpClient GetHttpClient(NameValueCollection headers = null)
+    {
+        var clientHandler = new HttpClientHandler { Proxy = GetProxy() };
+        var client = new HttpClient(clientHandler);
+
+        if (headers != null)
+            foreach (string key in headers)
+                client.DefaultRequestHeaders.Add(key, headers[key]);
+        
+        return client;
+    }
 
     public static IWebProxy GetProxy()
     {
