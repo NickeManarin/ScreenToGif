@@ -853,7 +853,7 @@
                                     <n:ColorBox Grid.Column="1" x:Name="OddColorBox" Height="40" SelectedColor="{Binding GridColor2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Editor"
                                                 ToolTip="{DynamicResource S.Options.Editor.Previewer.OddColor}" ToolTipService.Placement="Bottom" BorderThickness="0,1" ColorChanged="ColorBox_ColorChanged"/>
 
-                                    <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="{DynamicResource Element.Border}"
+                                    <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="{DynamicResource Element.Border}" CornerRadius="4"
                                             Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown"
                                             ToolTip="{DynamicResource S.Options.Editor.Previewer.GridSize}" ToolTipService.Placement="Bottom"/>
                                 </Grid>
@@ -954,7 +954,7 @@
                         </Grid.CommandBindings>
 
                         <n:LabelSeparator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Tasks.List}"/>
-                        <DataGrid Grid.Row="1" Grid.Column="0" Grid.RowSpan="6" x:Name="TasksDataGrid" Margin="10,5,5,5" MinHeight="60" SelectionMode="Single" SelectionUnit="FullRow" CanUserSortColumns="False"
+                        <DataGrid Grid.Row="1" Grid.Column="0" Grid.RowSpan="6" x:Name="TasksDataGrid" Margin="10,5,5,5" MinHeight="60" RowHeight="23" SelectionMode="Single" SelectionUnit="FullRow" CanUserSortColumns="False"
                                   MouseDoubleClick="TasksDataGrid_MouseDoubleClick" PreviewKeyDown="TasksDataGrid_PreviewKeyDown">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="{DynamicResource S.Options.Tasks.List.Enabled}" Width="Auto" MinWidth="50">

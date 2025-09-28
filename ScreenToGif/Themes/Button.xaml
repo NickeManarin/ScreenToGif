@@ -24,7 +24,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
-                    <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <Border x:Name="InnerBorder" Background="Transparent">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -96,7 +96,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
-                    <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <Border x:Name="InnerBorder" Background="Transparent">
                             <StackPanel Orientation="Vertical" SnapsToDevicePixels="True" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Border Background="{TemplateBinding Icon}" Margin="2,0" Opacity="{DynamicResource Element.Opacity}"
@@ -149,7 +149,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <StackPanel Orientation="Horizontal" SnapsToDevicePixels="True" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Border Background="{TemplateBinding Icon}" Margin="2,0" Opacity="{DynamicResource Element.Opacity}"
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -193,7 +193,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" BorderThickness="0">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" BorderThickness="0" CornerRadius="4">
                         <Grid x:Name="InnerGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -253,7 +253,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <Grid x:Name="InnerGrid" Margin="{TemplateBinding Padding}">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -305,7 +305,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <StackPanel x:Name="InnerStackPanel" Orientation="Horizontal" Background="Transparent">
                             <Border Background="{TemplateBinding Icon}" Margin="2" Opacity="{DynamicResource Element.Opacity}"
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -364,7 +364,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <StackPanel x:Name="InnerStackPanel" Orientation="Horizontal" Background="Transparent">
                             <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="{TemplateBinding Icon}" Margin="2" Opacity="{DynamicResource Element.Opacity}"
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -441,7 +441,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" MinWidth="{TemplateBinding MinWidth}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" MinWidth="{TemplateBinding MinWidth}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <Grid x:Name="InnerGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition MinHeight="{TemplateBinding ContentHeight}"/>
@@ -494,7 +494,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <Grid x:Name="InnerGrid">
                             <Border Background="{TemplateBinding Icon}" Margin="{TemplateBinding Padding}" Opacity="{DynamicResource Element.Opacity}"
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -532,7 +532,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="4">
                         <Grid x:Name="InnerGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <Border Background="{TemplateBinding Icon}" Margin="{TemplateBinding Padding}" Opacity="{DynamicResource Element.Opacity}"
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -574,7 +574,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
-                    <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                            MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <Border x:Name="InnerBorder" Background="Transparent">
                             <Border Background="{TemplateBinding Icon}" Margin="2,0" Opacity="{DynamicResource Element.Opacity}"
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -621,7 +622,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <Grid x:Name="InnerGrid">
                             <Border Background="{TemplateBinding Icon}" Margin="{TemplateBinding Padding}" Opacity="{DynamicResource Element.Opacity}"
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -680,7 +681,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedToggleButton}">
-                    <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                            MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <Border x:Name="InnerBorder">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Border Background="{TemplateBinding Icon}" Margin="5,3,0,3" Opacity="{DynamicResource Element.Opacity}"
@@ -750,7 +752,7 @@
                     <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Border x:Name="InnerBorder">
                             <StackPanel Orientation="Horizontal">
-                                <Border Background="{TemplateBinding Icon}" Margin="2" Opacity="{DynamicResource Element.Opacity}"
+                                <Border Background="{TemplateBinding Icon}" Margin="2" Opacity="{DynamicResource Element.Opacity}" CornerRadius="4"
                                         Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                                 <!--<Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -851,7 +853,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedToggleButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <Grid x:Name="InnerGrid">
                             <Border Background="{TemplateBinding Icon}" Margin="{TemplateBinding Padding}" Opacity="{DynamicResource Element.Opacity}"
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -906,7 +908,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedRepeatButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <Grid x:Name="InnerGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="{TemplateBinding ContentHeight}"/>
@@ -953,7 +955,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedRepeatButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
                         <Grid x:Name="InnerGrid">
                             <Border Background="{TemplateBinding Icon}" Margin="{TemplateBinding Padding}" Opacity="{DynamicResource Element.Opacity}"
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -995,7 +997,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedRadioButton}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" BorderThickness="1" Padding="{TemplateBinding Padding}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" BorderThickness="1" Padding="{TemplateBinding Padding}" CornerRadius="4">
                         <Grid MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1050,7 +1052,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedRadioButton}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="4">
                         <Grid MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
                             <Border Background="{TemplateBinding Icon}" Margin="2,0" Opacity="{DynamicResource Element.Opacity}"
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -1102,7 +1104,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:SplitButton}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="4"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -1211,7 +1213,7 @@
                         <Popup x:Name="Popup" Placement="Bottom" IsOpen="{Binding ElementName=ExpanderButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=False}" 
                                AllowsTransparency="True" StaysOpen="False" PopupAnimation="Fade" HorizontalOffset="-2">
                             <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="{DynamicResource Element.Background}" BorderBrush="{DynamicResource Element.Border}" 
-                                    BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2">
+                                    BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2" CornerRadius="4">
                                 <StackPanel x:Name="InnerStackPanel" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
                             </Border>
                         </Popup>
@@ -1294,7 +1296,7 @@
                         <Popup x:Name="Popup" Placement="Bottom" IsOpen="{Binding ElementName=ExpanderButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                AllowsTransparency="True" StaysOpen="False" PopupAnimation="Fade" HorizontalOffset="-2">
                             <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="{DynamicResource Element.Background}" BorderBrush="{DynamicResource Element.Border}" 
-                                    BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2">
+                                    BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2" CornerRadius="4">
                                 <StackPanel x:Name="InnerStackPanel" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
                             </Border>
                         </Popup>
@@ -1360,7 +1362,7 @@
                         <Setter.Value>
                             <ControlTemplate>
                                 <Rectangle Margin="1" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
-                                           StrokeThickness="1" StrokeDashArray="1 2"/>
+                                           StrokeThickness="1" StrokeDashArray="1 2" RadiusX="4" RadiusY="4"/>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -1371,7 +1373,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:SplitButton}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="4"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
                         <Grid>
@@ -1393,7 +1395,7 @@
 
                             <Popup Name="Popup" Placement="Bottom" IsOpen="{Binding ElementName=ExpanderButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                    AllowsTransparency="True" StaysOpen="False" PopupAnimation="Fade" HorizontalOffset="-2">
-                                <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="White" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2">
+                                <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="White" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2" CornerRadius="4">
                                     <StackPanel x:Name="InnerStackPanel" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
                                 </Border>
                             </Popup>

@@ -15,7 +15,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border x:Name="templateRoot" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}">
+                    <Border x:Name="templateRoot" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}" CornerRadius="4">
                         <Border x:Name="splitBorder" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Right" Margin="0" 
                                 SnapsToDevicePixels="True" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}">
                             <Path x:Name="arrow" Data="F1 M 0,0 L 2.667,2.66665 L 5.3334,0 L 5.3334,-1.78168 L 2.6667,0.88501 L0,-1.78168 L0,0 Z" 
@@ -133,7 +133,7 @@
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
 
                 <Border x:Name="DropDownBorder" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}" Effect="{DynamicResource Shadow.Border}"
-                        MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
+                        MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}" CornerRadius="4">
                     <ScrollViewer x:Name="DropDownScrollViewer">
                         <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     </ScrollViewer>
@@ -177,7 +177,7 @@
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
 
                 <Border x:Name="DropDownBorder" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}" Effect="{DynamicResource Shadow.Border}"
-                        MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
+                        MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}" CornerRadius="4">
                     <ScrollViewer x:Name="DropDownScrollViewer">
                         <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     </ScrollViewer>
@@ -285,7 +285,7 @@
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
 
                 <Border x:Name="DropDownBorder" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}" Effect="{DynamicResource Shadow.Border}"
-                        MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
+                        MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}" CornerRadius="4">
                     <ScrollViewer x:Name="DropDownScrollViewer">
                         <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     </ScrollViewer>
@@ -334,7 +334,7 @@
             <Popup x:Name="PART_Popup" AllowsTransparency="True" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
                 <Grid x:Name="shadow" Background="Transparent" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
-                    <Border x:Name="DropDownBorder" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}" Effect="{DynamicResource Shadow.Border}" Margin="0,0,0,5">
+                    <Border x:Name="DropDownBorder" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}" Effect="{DynamicResource Shadow.Border}" Margin="0,0,0,5" CornerRadius="4">
                         <ScrollViewer x:Name="DropDownScrollViewer">
                             <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
                                 <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">

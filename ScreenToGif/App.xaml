@@ -88,7 +88,6 @@
             <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Logo.ico" DataContext="{StaticResource AppViewModel}" NotifyToolTipText="ScreenToGif" Visibility="Collapsed" 
                           LeftClickCommand="{Binding TrayLeftClick}" DoubleLeftClickCommand="{Binding TrayDoubleLeftClick}" MiddleClickCommand="{Binding TrayMiddleClick}">
                 <n:NotifyIcon.ContextMenu>
-                    
                     <ContextMenu>
                         <n:ExtendedMenuItem Header ="{StaticResource S.NewRecording}" Icon="{StaticResource Vector.Record.New}" Command="{Binding OpenRecorder}" InputGestureText="{Binding RecorderGesture, UpdateSourceTrigger=PropertyChanged}" Tag="S.NewRecording"/>
                         <n:ExtendedMenuItem Header ="{StaticResource S.NewWebcamRecording}" Icon="{StaticResource Vector.Camera.New}" Command="{Binding OpenWebcamRecorder}" InputGestureText="{Binding WebcamRecorderGesture, UpdateSourceTrigger=PropertyChanged}" Tag="S.NewWebcamRecording"/>
@@ -109,7 +108,7 @@
                     <Setter.Value>
                         <ControlTemplate>
                             <Border>
-                                <Rectangle Margin="0" SnapsToDevicePixels="True" Stroke="{DynamicResource Element.Foreground}" StrokeThickness="1" StrokeDashArray="1,2"/>
+                                <Rectangle Margin="0" SnapsToDevicePixels="True" Stroke="{DynamicResource Element.Foreground}" StrokeThickness="1" StrokeDashArray="1,2" RadiusX="4" RadiusY="4"/>
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
@@ -189,7 +188,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ToolTip}">
-                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Margin="2" Background="{TemplateBinding Background}" Padding="5" TextBlock.Foreground="{TemplateBinding Foreground}">
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Margin="2" Background="{TemplateBinding Background}" Padding="5" TextBlock.Foreground="{TemplateBinding Foreground}" CornerRadius="4">
                                 <ContentPresenter Content="{TemplateBinding Content}" Width="Auto" HorizontalAlignment="Center" TextBlock.Foreground="{TemplateBinding Foreground}"/>
                             </Border>
                         </ControlTemplate>
@@ -212,7 +211,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ContextMenu}">
-                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Margin="2" Background="{TemplateBinding Background}">
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Margin="2" Background="{TemplateBinding Background}" CornerRadius="4">
                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
                             </Border>
                         </ControlTemplate>
@@ -273,7 +272,8 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type RepeatButton}">
                             <Grid x:Name="Root" Margin="0">
-                                <Border x:Name="BackgroundBorder" Background="{DynamicResource Brush.ScrollBar.Background}" BorderBrush="{DynamicResource Brush.ScrollBar.Border}" BorderThickness="1"/>
+                                <Border x:Name="BackgroundBorder" Background="{DynamicResource Brush.ScrollBar.Background}" BorderBrush="{DynamicResource Brush.ScrollBar.Border}" BorderThickness="1" CornerRadius="4"/>
+
                                 <Path x:Name="Arrow" Stretch="None" Data="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Fill="{DynamicResource Element.Glyph}" 
                                       HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
                             </Grid>
@@ -307,7 +307,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Thumb}">
                             <Grid Background="Transparent">
-                                <Border Background="{TemplateBinding Background}" Margin="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1"/>
+                                <Border Background="{TemplateBinding Background}" Margin="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="4"/>
                             </Grid>
 
                             <ControlTemplate.Triggers>
@@ -749,7 +749,7 @@
                                     <TickBar x:Name="TopTick" Grid.Row="0" Fill="{TemplateBinding BorderBrush}" TickFrequency="1" Height="4" Margin="0,0,0,2" Placement="Top" Visibility="Collapsed"/>
                                     <TickBar x:Name="BottomTick" Grid.Row="2" Fill="{TemplateBinding BorderBrush}" TickFrequency="1" Height="4" Margin="0,1,0,0" Placement="Bottom" Visibility="Collapsed"/>
 
-                                    <Border x:Name="TrackBorder" Grid.Row="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Height="3" VerticalAlignment="Center" Margin="4,0">
+                                    <Border x:Name="TrackBorder" Grid.Row="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Height="3" VerticalAlignment="Center" Margin="4,0" CornerRadius="2">
                                         <Canvas Margin="-6,-1">
                                             <Rectangle x:Name="PART_SelectionRange" Fill="{DynamicResource Brush.ProgressBar.Info}" Height="4.0" Visibility="Hidden"/>
                                         </Canvas>
@@ -892,7 +892,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListBox}">
-                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True" CornerRadius="4">
                                 <ScrollViewer Focusable="False" Padding="{TemplateBinding Padding}">
                                     <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                 </ScrollViewer>
@@ -933,7 +933,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListView}">
-                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True" CornerRadius="4">
                                 <ScrollViewer Focusable="False" Padding="{TemplateBinding Padding}">
                                     <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                 </ScrollViewer>
@@ -974,7 +974,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                             <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
-                                    Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                                    Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="4">
                                 <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Border>
@@ -1074,7 +1074,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type PasswordBox}">
                             <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
-                                    VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True"
+                                    VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True" CornerRadius="4"
                                     Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" MinWidth="{TemplateBinding MinWidth}" MinHeight="{TemplateBinding MinHeight}">
                                 <Grid x:Name="InnerGrid">
                                     <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -1136,6 +1136,17 @@
                             <Setter Property="BorderThickness" Value="1"/>
                             <Setter Property="FocusVisualStyle" Value="{DynamicResource Style.FocusVisual.NoMargin}"/>
 
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="1" CornerRadius="4" SnapsToDevicePixels="True">
+                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="4"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
                             <Style.Triggers>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
@@ -1178,7 +1189,7 @@
                     <Setter.Value>
                         <DataTemplate>
                             <Border x:Name="Bd" BorderBrush="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=BorderBrush}"
-                                    BorderThickness="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=BorderThickness}"
+                                    BorderThickness="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=BorderThickness}" CornerRadius="4"
                                     Background="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Background}" MinWidth="80"
                                     Padding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Padding}" SnapsToDevicePixels="True">
                                 <Grid>
@@ -1212,7 +1223,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListView}">
-                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="2" SnapsToDevicePixels="True">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="2" SnapsToDevicePixels="True" CornerRadius="4">
                                 <ScrollViewer Focusable="False" Padding="{TemplateBinding Padding}" CanContentScroll="True">
                                     <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                 </ScrollViewer>
@@ -1250,7 +1261,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type n:IntegerUpDown}">
                             <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}"
-                                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="4">
                                 <Grid Background="{TemplateBinding Background}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
@@ -1367,6 +1378,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
             <FontFamily x:Key="FontFamilyNormal">Segoe UI</FontFamily>
             <FontFamily x:Key="FontFamilyLight">Segoe UI Semilight</FontFamily>
             <FontFamily x:Key="FontFamilyBold">Segoe UI Semibold</FontFamily>
