@@ -1,8 +1,8 @@
 <Project>
   <PropertyGroup>
-    <Version>2.42.0</Version>
-    <FileVersion>2.42.0</FileVersion>
-    <AssemblyVersion>2.42.0</AssemblyVersion>
+    <Version>2.42.1</Version>
+    <FileVersion>2.42.1</FileVersion>
+    <AssemblyVersion>2.42.1</AssemblyVersion>
     <Company>Nicke Manarin</Company>
     <Authors>Nicke Manarin</Authors>
     <Copyright>Copyright© Nicke Manarin 2025</Copyright>
