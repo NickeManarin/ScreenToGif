@@ -855,7 +855,7 @@ internal class EncodingManager
 
                                 Update(id, EncodingStatus.Processing, null, false);
 
-                                var lastTimestamp = project.FramesFiles.Sum(s => s.Delay / 1000D); //project.FramesFiles[project.FramesFiles.Count - 1].Delay / 1000d;
+                                var lastDelay = project.FramesFiles[project.FramesFiles.Count - 1].Delay / 1000d;
 
                                 for (var i = 0; i < project.FramesFiles.Count; i++)
                                 {
@@ -871,7 +871,7 @@ internal class EncodingManager
 
                                     Update(id, i, string.Format(processing, i));
 
-                                    res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay, lastTimestamp, i + 1 == project.FramesFiles.Count);
+                                    res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay, lastDelay, i + 1 == project.FramesFiles.Count);
 
                                     if (res != GifskiErrorCodes.Ok)
                                         throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
