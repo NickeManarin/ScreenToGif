@@ -5,13 +5,13 @@ namespace ScreenToGif.Domain.Structs;
 [StructLayout(LayoutKind.Sequential)]
 public struct GifskiSettings
 {
-    public GifskiSettings(uint width, uint height, byte quality, bool looped, bool fast)
+    public GifskiSettings(uint width, uint height, byte quality, bool fast, short repeat)
     {
         Width = width;
         Height = height;
         Quality = quality;
-        Once = !looped;
         Fast = fast;
+        Repeat = repeat;
     }
 
     /// <summary>
@@ -30,9 +30,9 @@ public struct GifskiSettings
     internal byte Quality;
 
     /// <summary>
-    /// If true, looping is disabled.
+    /// If negative, looping is disabled. The number of times the sequence is repeated. 0 to loop forever.
     /// </summary>
-    internal bool Once;
+    internal short Repeat;
 
     /// <summary>
     /// Lower quality, but faster encode.
