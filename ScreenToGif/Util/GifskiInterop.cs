@@ -66,7 +66,8 @@ internal class GifskiInterop : IDisposable
 
     internal IntPtr Start(uint width, uint height, int quality, bool looped = true, bool fast = false)
     {
-        return _new(new GifskiSettings(width, height, (byte)quality, looped, fast));
+        short repeat = looped ? (short)0 : (short)-1;
+        return _new(new GifskiSettings(width, height, (byte)quality, fast, repeat));
     }
 
     internal GifskiErrorCodes AddFrame(IntPtr handle, uint index, string path, int delay, double lastDelay = 0, bool isLast = false)
