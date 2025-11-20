@@ -40,7 +40,7 @@ public class GifskiGifPreset : GifPreset
             IsDefault = true,
             CreationDate = new DateTime(2021, 02, 20),
 
-            Quality = 1,
+            Quality = 80,
             Fast = false
         },
 
