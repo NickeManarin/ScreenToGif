@@ -6,7 +6,7 @@
       <img alt="Warp sponsorship" width="400" src="https://github.com/warpdotdev/brand-assets/blob/640dffd347439bbcb535321ab36b7281cf4446c0/Github/Sponsor/Warp-Github-LG-03.png">
    </a>
 
-### [Warp, the intelligent terminal for developers](https://www.warp.dev/ScreenToGif)
+### [Warp, built for coding with multiple AI agents](https://www.warp.dev/ScreenToGif)
 [Available for MacOS, Linux, & Windows](https://www.warp.dev/ScreenToGif)<br>
 
 </div>
