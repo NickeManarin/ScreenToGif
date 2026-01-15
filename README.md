@@ -1,3 +1,17 @@
+<div align="center" markdown="1">
+   <sup>Special thanks to:</sup>
+   <br>
+   <br>
+   <a href="https://www.warp.dev/ScreenToGif">
+      <img alt="Warp sponsorship" width="400" src="https://github.com/warpdotdev/brand-assets/blob/640dffd347439bbcb535321ab36b7281cf4446c0/Github/Sponsor/Warp-Github-LG-03.png">
+   </a>
+
+### [Warp, the intelligent terminal for developers](https://www.warp.dev/ScreenToGif)
+[Available for MacOS, Linux, & Windows](https://www.warp.dev/ScreenToGif)<br>
+
+</div>
+<hr>
+
 <p align="center">
   <a href="https://github.com/NickeManarin/ScreenToGif" target="_blank">
     <img align="center" alt="screen recorder" src="https://www.screentogif.com/logos/ms-icon-144x144.png" />
