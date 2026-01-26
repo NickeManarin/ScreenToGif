@@ -97,8 +97,8 @@
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="KGySoft.Drawing" Version="9.2.0" />
-    <PackageReference Include="KGySoft.Drawing.Wpf" Version="9.0.0" />
+    <PackageReference Include="KGySoft.Drawing" Version="10.0.1" />
+    <PackageReference Include="KGySoft.Drawing.Wpf" Version="10.0.1" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
