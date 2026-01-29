@@ -492,7 +492,10 @@ namespace ScreenToGif.Windows
             #endregion
 
             if (LastSelected == -1 || _previewToken != null || WasChangingSelection || LastSelected >= _viewModel.Frames.Count || (e.AddedItems.Count > 0 && e.RemovedItems.Count > 0))
+            {
                 LastSelected = FrameListView.SelectedIndex;
+                _viewModel.CurrentIndex = FrameListView.SelectedIndex;
+            }
 
             FrameViewModel current;
 
@@ -4616,7 +4619,7 @@ namespace ScreenToGif.Windows
 
                     var currentFrameBinding = new Binding
                     {
-                        //Path = new PropertyPath("Frames[CurrentIndex]"), // I don't really get why data context is already a FrameViewModel here instead of the EditorViewModel but it means we need no Path
+                        Path = new PropertyPath(nameof(EditorViewModel.CurrentFrame)),
                         Mode = BindingMode.OneWay,
                         UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
                     };
