@@ -42,9 +42,8 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
     #region Static Fields
 
-    private static readonly HashSet<string> _affectsPreview = new()
-    {
-        // quantizer settings
+    private static readonly HashSet<string> _affectsPreview =
+    [
         nameof(QuantizerId),
         nameof(BackColor),
         nameof(AlphaThreshold),
@@ -62,18 +61,18 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
         // preview settings
         nameof(ShowCurrentFrame)
-    };
+    ];
 
-    private static readonly HashSet<string> _affectsNotifications = new()
-    {
+    private static readonly HashSet<string> _affectsNotifications =
+    [
         nameof(QuantizerId),
         nameof(AlphaThreshold),
         nameof(AllowDeltaFrames),
         nameof(AllowClippedFrames),
-        nameof(DeltaTolerance),
-    };
+        nameof(DeltaTolerance)
+    ];
     
-    private static bool _lastShowCurrentFrame;
+    private static bool _lastShowCurrentFrame = true;
     private static string _lastDitherer;
 
     #endregion
