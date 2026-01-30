@@ -1694,7 +1694,7 @@
 
     <s:String x:Key="S.SaveAs.KGySoft.Preview">Preview</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame">Show current frame.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">When checked, the preview shows the current frame instead of a standard image example.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">When checked, the preview demonstrates the settings on the current frame instead of a standard image example.&#x0d;&#x0a;⚠️ Note: The actually generated final frame may have a better quality if delta frames are allowed, and the selected quantizer optimizes the palette for each frame.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Preview.Refresh">Auto preview is disabled due to the high memory requirement of the current settings. Click to refresh the preview.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Preview.Error">Failed to generate preview: {0}&#x0d;&#x0a;Click to try to generate it again.</s:String>
 
