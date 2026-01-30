@@ -1691,7 +1691,7 @@
 
     <s:String x:Key="S.SaveAs.KGySoft.Preview">Előnézet</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame">Aktuális képkocka</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">Ka ki van jelölve, az előnézet az aktuális képkockát mutatja egy állandó példa helyett.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">Ka ki van jelölve, az előnézet az aktuális képkockán illusztrálja a beállításokat egy standard kép helyett. &#x0d;&#x0a;⚠️ Megjegyzés: A ténylegesen generált végső képkocka jobb minőségű lehet, ha a delta képkockák engedélyezve vannak, és a kiválasztott kvantáló képkockánként optimalizálja a színeket.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Preview.Refresh">A jelen beállítások magas memóriaigénye miatt az automatikus előnézet kikapcsolva. A linkre kattintással frissíthető az előnézet.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Preview.Error">Az előnézet generálása során hiba történt: {0}&#x0d;&#x0a;A linkre kattintással megkísérelhető az előnézet újbóli generálása.</s:String>
 
