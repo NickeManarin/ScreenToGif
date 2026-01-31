@@ -374,8 +374,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
         if (CurrentFramePath == null || !Path.Exists(CurrentFramePath))
         {
-            _previewBitmap = null;
-            PreviewImage = _previewBitmap;
+            PreviewImage = null;
             return;
         }
 
