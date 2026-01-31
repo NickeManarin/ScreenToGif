@@ -372,6 +372,13 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
                 return;
         }
 
+        if (CurrentFramePath == null || !Path.Exists(CurrentFramePath))
+        {
+            _previewBitmap = null;
+            PreviewImage = _previewBitmap;
+            return;
+        }
+
         // Note: we could use WPF images to open current frame: new WriteableBitmap(new BitmapImage(new Uri(CurrentFramePath))).GetReadWriteBitmapData();
         // but it has serious drawbacks:
         // - It copies the pixels one more time (BitmapImage->WriteableBitmap because WriteableBitmap cannot be created from an image file directly)
@@ -379,7 +386,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         // Therefore, we use a disposable GDI+ Bitmap to create a managed clone of the image as simply as possible
         try
         {
-            using var bmp = ShowCurrentFrame && CurrentFramePath != null && Path.Exists(CurrentFramePath) ? new Bitmap(CurrentFramePath) : Icons.Shield.ExtractBitmap(new Size(256, 256))!;
+            using var bmp = ShowCurrentFrame ? new Bitmap(CurrentFramePath) : Icons.Shield.ExtractBitmap(new Size(256, 256))!;
             using var nativeBitmapData = bmp.GetReadableBitmapData();
             _currentFrame = (await nativeBitmapData.CloneAsync(nativeBitmapData.PixelFormat.ToKnownPixelFormat()))!; // will not be null, because it is never canceled
         }
