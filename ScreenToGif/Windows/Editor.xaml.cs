@@ -492,10 +492,7 @@ namespace ScreenToGif.Windows
             #endregion
 
             if (LastSelected == -1 || _previewToken != null || WasChangingSelection || LastSelected >= _viewModel.Frames.Count || (e.AddedItems.Count > 0 && e.RemovedItems.Count > 0))
-            {
                 LastSelected = FrameListView.SelectedIndex;
-                _viewModel.CurrentIndex = FrameListView.SelectedIndex;
-            }
 
             FrameViewModel current;
 
