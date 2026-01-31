@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:ScreenToGif.ViewModel"
              xmlns:c="clr-namespace:ScreenToGif.Controls"
+             xmlns:uc="clr-namespace:ScreenToGif.UserControls"
              mc:Ignorable="d"
              Name="This" d:DataContext="{d:DesignInstance vm:KGySoftGifOptionsViewModel, IsDesignTimeCreatable=False}"
              Unloaded="KGySoftGifOptionsPanel_OnUnloaded" DataContextChanged="KGySoftGifOptionsPanel_OnDataContextChanged">
@@ -154,8 +155,12 @@
                 <c:ExtendedCheckBox Grid.Row="0" Margin="3" Text="{DynamicResource S.SaveAs.KGySoft.Preview.ShowCurrentFrame}"
                                     ToolTip="{DynamicResource S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info}" IsChecked="{Binding ShowCurrentFrame}"/>
 
-                <!--Tried to use ZoomBox and FrameViewer, none of them worked well. Some zoomable solution would be preferable-->
-                <Image Grid.Row="1" Source="{Binding PreviewImage, Mode=OneWay}" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <!--Tried to use ZoomBox, but it requires the image as a path (converted to bitmap twice: in LoadFromPath, and in Generic.xaml by template)
+                    FrameViewer seemed another option, but it looks quite incomplete.
+                    When needed in multiple places, this could be extracted as an ImageViewer control -->
+                <!--<Image Grid.Row="1" Source="{Binding PreviewImage, Mode=OneWay}" RenderOptions.BitmapScalingMode="HighQuality"/>-->
+                <uc:ImageViewer Grid.Row="1" Source="{Binding PreviewImage, Mode=OneWay}" MaxHeight="300"/>
+
                 <DockPanel Grid.Row="1" LastChildFill="False">
                     <ProgressBar DockPanel.Dock="Bottom" Height="4" Margin="10,0" IsIndeterminate="True"
                                  Visibility="{Binding IsGenerating, Converter={StaticResource Bool2Visibility}}"/>
