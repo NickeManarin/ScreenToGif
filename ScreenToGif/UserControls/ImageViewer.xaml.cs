@@ -162,6 +162,13 @@ public partial class ImageViewer : UserControl
     {
         var scale = new ScaleTransform(zoom, zoom);
         DisplayImage.LayoutTransform = scale;
+        var quality = zoom switch
+        {
+            1d or >= 2d => BitmapScalingMode.NearestNeighbor, // intended, so magnified pixels are not blurred
+            > 1d => BitmapScalingMode.Linear, // (1..2) - nearest neighbor is just too ugly in this range
+            _ => BitmapScalingMode.HighQuality // < 1
+        };
+        RenderOptions.SetBitmapScalingMode(DisplayImage, quality);
         _zoom = zoom;
     }
 
