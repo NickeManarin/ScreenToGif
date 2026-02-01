@@ -179,15 +179,18 @@ public partial class ImageViewer : UserControl
 
     private void ScrollContainer_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
     {
-        // If Control is pressed while scrolling, or the vertical scrollbar is visible, letting the event reach the display image
-        if (Keyboard.Modifiers == ModifierKeys.Control || ScrollContainer.ComputedVerticalScrollBarVisibility == Visibility.Visible)
-            return;
+        // If Control is not pressed while scrolling, and the vertical scrollbar is not visible, forwarding the scroll to the self user control.
+        // Without this, scrolling the parent would not work when the mouse is over ImageViewer, whereas it works over other controls, which feels strange.
+        if (Keyboard.Modifiers != ModifierKeys.Control && ScrollContainer.ComputedVerticalScrollBarVisibility != Visibility.Visible)
+        {
+            e.Handled = true;
+            var forwardedArgs = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta) { RoutedEvent = MouseWheelEvent };
+            RaiseEvent(forwardedArgs);
+        }
 
-        // Otherwise, forwarding the scroll to the self user control.
-        // Without this, regular scrolling would be swallowed for the ImageViewer, while it works for other controls, which feels strange.
-        e.Handled = true;
-        var forwardedArgs = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta) { RoutedEvent = MouseWheelEvent };
-        RaiseEvent(forwardedArgs);
+        // Otherwise, letting the event reach the display image, unless when maximum zoom is reached and still zooming in
+        if (Keyboard.Modifiers == ModifierKeys.Control && e.Delta > 0 && _zoom >= _maxZoom)
+            e.Handled = true;
     }
 
     private void DisplayImage_OnMouseWheel(object sender, MouseWheelEventArgs e)
