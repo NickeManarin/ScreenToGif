@@ -157,9 +157,10 @@
 
                 <!--Tried to use ZoomBox, but it requires the image as a path (converted to bitmap twice: in LoadFromPath, and in Generic.xaml by template)
                     FrameViewer seemed another option, but it looks quite incomplete.
-                    When needed in multiple places, this could be extracted as an ImageViewer control -->
+                    In the end, I implemented an ImageViewer control with zooming and panning -->
                 <!--<Image Grid.Row="1" Source="{Binding PreviewImage, Mode=OneWay}" RenderOptions.BitmapScalingMode="HighQuality"/>-->
-                <uc:ImageViewer Grid.Row="1" Source="{Binding PreviewImage, Mode=OneWay}" MaxHeight="300"/>
+                <uc:ImageViewer Grid.Row="1" Source="{Binding PreviewImage, Mode=OneWay}" MaxHeight="300"
+                                ToolTip="{DynamicResource S.SaveAs.KGySoft.Preview.Info}"/>
 
                 <DockPanel Grid.Row="1" LastChildFill="False">
                     <ProgressBar DockPanel.Dock="Bottom" Height="4" Margin="10,0" IsIndeterminate="True"
