@@ -32,6 +32,12 @@ namespace ScreenToGif.UserControls;
 /// </summary>
 public partial class ImageViewer : UserControl
 {
+    #region Constants
+
+    private const double _maxZoom = 16d;
+
+    #endregion
+
     #region Fields
 
     #region Static Fields
@@ -97,7 +103,7 @@ public partial class ImageViewer : UserControl
     {
         var image = Source;
         if (image == null)
-            return Double.NaN;
+            return 0d;
 
         var width = MaxWidth < Double.PositiveInfinity ? MaxWidth : ScrollContainer.ActualWidth;
         var height = MaxHeight < Double.PositiveInfinity ? MaxHeight : ScrollContainer.ActualHeight;
@@ -139,7 +145,7 @@ public partial class ImageViewer : UserControl
         if (autoZoom <= 0)
             return;
 
-        ApplyZoom(autoZoom);
+        SetZoom(autoZoom);
         ScrollContainer.UpdateLayout();
     }
 
@@ -148,17 +154,10 @@ public partial class ImageViewer : UserControl
         if (delta.Equals(0d))
             return;
         delta += 1;
-        SetZoom(_zoom * delta);
+        SetZoom(Math.Clamp(_zoom * delta, GetAutoZoom(), _maxZoom));
     }
 
     private void SetZoom(double zoom)
-    {
-        var min = GetAutoZoom();
-        var max = Math.Max(10d, min * 2d);
-        ApplyZoom(Math.Clamp(zoom, min, max));
-    }
-
-    private void ApplyZoom(double zoom)
     {
         var scale = new ScaleTransform(zoom, zoom);
         DisplayImage.LayoutTransform = scale;
@@ -180,12 +179,12 @@ public partial class ImageViewer : UserControl
 
     private void ScrollContainer_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
     {
-        // If Control is pressed while scrolling, letting the event reach the display image
-        if (Keyboard.Modifiers == ModifierKeys.Control)
+        // If Control is pressed while scrolling, or the vertical scrollbar is visible, letting the event reach the display image
+        if (Keyboard.Modifiers == ModifierKeys.Control || ScrollContainer.ComputedVerticalScrollBarVisibility == Visibility.Visible)
             return;
 
         // Otherwise, forwarding the scroll to the self user control.
-        // Without this regular scrolling would be swallowed for the ImageViewer, even when it works for every other control.
+        // Without this, regular scrolling would be swallowed for the ImageViewer, while it works for other controls, which feels strange.
         e.Handled = true;
         var forwardedArgs = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta) { RoutedEvent = MouseWheelEvent };
         RaiseEvent(forwardedArgs);
@@ -193,9 +192,11 @@ public partial class ImageViewer : UserControl
 
     private void DisplayImage_OnMouseWheel(object sender, MouseWheelEventArgs e)
     {
-        Debug.Assert(Keyboard.Modifiers == ModifierKeys.Control, "Wheel events without Control should have been forwarded to the parent");
+        // Normal scrolling
+        if (Keyboard.Modifiers != ModifierKeys.Control)
+            return;
 
-        // Ctrl+Scroll: zooming
+        // Ctrl + MouseWheel: zooming
         var p = Mouse.GetPosition(DisplayImage);
         _zoomingOrigin = p;
         var delta = (double)e.Delta / SystemInformation.MouseWheelScrollDelta / 5d;
