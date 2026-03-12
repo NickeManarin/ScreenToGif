@@ -97,7 +97,7 @@
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="KGySoft.Drawing" Version="10.0.1" />
+    <PackageReference Include="KGySoft.Drawing" Version="10.0.2" />
     <PackageReference Include="KGySoft.Drawing.Wpf" Version="10.0.1" />
   </ItemGroup>
   <ItemGroup>
