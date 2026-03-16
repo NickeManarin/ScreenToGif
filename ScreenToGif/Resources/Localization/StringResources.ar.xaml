@@ -1702,16 +1702,16 @@
     <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop">حلقة لا نهاية لها.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop.Info">عند التحقق ، سيتم تكرار الرسوم المتحركة إلى أجل غير مسمى.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">ذهابًا وإيابًا</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">عند التفعيل، سيتم تشغيل الرسوم المتحركة ذهابًا وإيابًا.\r\nيتم تحقيق ذلك عن طريق تكرار الإطارات، مما يعني حجم ملف أكبر ووقت ترميز أطول.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">عند التفعيل، سيتم تشغيل الرسوم المتحركة ذهابًا وإيابًا.&#10;يتم تحقيق ذلك عن طريق تكرار الإطارات، مما يعني حجم ملف أكبر ووقت ترميز أطول.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">تكرار العد:</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">يحدد عدد المرات التي سيتم فيها تشغيل الرسوم المتحركة.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">السماح بإطارات دلتا.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">عند التفعيل، يتم محاولة اكتشاف البكسلات غير المتغيرة أثناء الترميز.\r\nعند استخدامه مع مكمم محسّن، يتيح هذا الخيار أن يحتوي الإطار على أكثر من 256 لونًا.\r\nيتم تجاهل هذا الخيار إذا لم يستخدم المكمم الشفافية ولم يتم تفعيل خيار "السماح بالإطارات المقصوصة".\r\n\r\n⚠️ ملاحظة: قد يسبب هذا الخيار آثارًا ملحوظة في الألوان أو نمط التشتت.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">عند التفعيل، يتم محاولة اكتشاف البكسلات غير المتغيرة أثناء الترميز.&#10;عند استخدامه مع مكمم محسّن، يتيح هذا الخيار أن يحتوي الإطار على أكثر من 256 لونًا.&#10;يتم تجاهل هذا الخيار إذا لم يستخدم المكمم الشفافية ولم يتم تفعيل خيار "السماح بالإطارات المقصوصة".&#10;&#10;⚠️ ملاحظة: قد يسبب هذا الخيار آثارًا ملحوظة في الألوان أو نمط التشتت.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">دلتا التسامح:</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">يحدد الحد الأقصى للتفاوت عند اكتشاف وحدات البكسل المتغيرة. &#10; ؛ إذا كان 0 ، فلا يمكن التغاضي عن أي اختلاف على الإطلاق. &#10; ؛ إذا كان 255 ، فقد يكون هناك إطارات (أو حتى جميعها ) التي تمت إضافتها بدون محتوى.&#x0d;&#x0a; ؛ يتراوح النطاق المعقول بين 0 و 16 لمقياس مُحسَّن. يمكن استخدام تلك ذات الألوان الثابتة بقيم أكبر إلى حد ما مع التدرج.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">إذا كان تفاوت دلتا مرتفعا جدا ، فقد تكون النتيجة ذات جودة رديئة. انقر لإعادة تعيين تفاوت دلتا.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames">السماح بالإطارات المقطوعة.</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info">عند التفعيل، يُسمح للمرمز بإضافة إطارات أصغر من الدقة الفعلية.\r\nإذا لم يتم تفعيل خيار "السماح بالإطارات المتغيرة"، فسيسمح فقط بقص الحواف الشفافة الممكنة.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info">عند التفعيل، يُسمح للمرمز بإضافة إطارات أصغر من الدقة الفعلية.&#10;إذا لم يتم تفعيل خيار "السماح بالإطارات المتغيرة"، فسيسمح فقط بقص الحواف الشفافة الممكنة.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaIgnored">يتم تجاهل خيار "السماح بالإطارات المتغيرة" لأن التكوين الحالي لا يستخدم الشفافية ولم يتم تفعيل خيار "السماح بالإطارات المقصوصة". انقر لتمكين الإطارات المقصوصة.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedIgnored">لا يُؤثر خيار "السماح بالإطارات المقصوصة" لأن الإعدادات الحالية لا تستخدم قناة ألفا، كما أن خيار "السماح بإطارات دلتا" غير مُفعّل. انقر لتفعيل إطارات دلتا.</s:String>
 
@@ -1914,7 +1914,7 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">سيقوم هذا الاجراء بتصدير اطارات {0} مباشره الى المجلد المحدد.</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">الكتابه الفوقيه</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">هل ترغب في استبدال الملف؟</s:String>
-    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">يوجد بالفعل ملف بالاسم '{0}' في هذا المجلد.\r\nهل ترغب في استبداله؟</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">يوجد بالفعل ملف بالاسم '{0}' في هذا المجلد.&#10;هل ترغب في استبداله؟</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">هل ترغب في استبدال الملفات؟</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">يوجد ملف واحد أو أكثر بنفس الاسم بالفعل في هذا المجلد.rnهل ترغب في الكتابة فوقها؟</s:String>
 
