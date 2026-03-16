@@ -50,6 +50,8 @@ public partial class App : IDisposable
         //Unhandled Exceptions.
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
+        DllSecurity.HardenDllSearchPath();
+
         //Increases the duration of the tooltip display.
         ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
 
