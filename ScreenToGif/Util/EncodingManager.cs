@@ -792,7 +792,7 @@ internal class EncodingManager
                             var size = project.FramesFiles[0].Path.ScaledSize();
 
                             using var gifski = new GifskiInterop();
-                            var handle = gifski.Start((uint)size.Width, (uint)size.Height, gifskiGifPreset.Quality, gifskiGifPreset.Looped, gifskiGifPreset.Fast);
+                            var handle = gifski.Start((uint)size.Width, (uint)size.Height, gifskiGifPreset.Quality, gifskiGifPreset.RepeatForever, gifskiGifPreset.Fast);
 
                             if (gifski.IsOlderThan0Dot9)
                             {

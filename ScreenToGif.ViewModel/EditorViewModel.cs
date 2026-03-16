@@ -55,7 +55,11 @@ public class EditorViewModel : BaseViewModel
     public int CurrentIndex
     {
         get => _currentIndex;
-        set => SetProperty(ref _currentIndex, value);
+        set
+        {
+            if (SetProperty(ref _currentIndex, value))
+                OnPropertyChanged(nameof(CurrentFrame));
+        }
     }
 
     internal WriteableBitmap RenderedImage
@@ -78,6 +82,11 @@ public class EditorViewModel : BaseViewModel
         get => _frames;
         set => SetProperty(ref _frames, value);
     }
+
+    /// <summary>
+    /// Convenience property used by bindings. Returns the current frame according to CurrentIndex.
+    /// </summary>
+    public FrameViewModel CurrentFrame => (_frames != null && _currentIndex >= 0 && _currentIndex < _frames.Count) ? _frames[_currentIndex] : null;
 
     public DrawingAttributes FreeDrawingDrawingAttributes => new()
     {

@@ -50,19 +50,19 @@ namespace ScreenToGif.UserControls
 
         #region Event Handlers
 
-        private void RefreshPreview_Click(object sender, MouseButtonEventArgs e) => ViewModel.RefreshPreview();
+        private async void RefreshPreview_Click(object sender, MouseButtonEventArgs e) => await ViewModel.RefreshPreview();
         private void AllowDeltaIgnoredLabel_Click(object sender, MouseButtonEventArgs e) => ViewModel.AllowClippedFrames = true;
         private void AllowClippedIgnoredLabel_Click(object sender, MouseButtonEventArgs e) => ViewModel.AllowDeltaFrames = true;
         private void HighDeltaToleranceLabel_Click(object sender, MouseButtonEventArgs e) => ViewModel.DeltaTolerance = 0;
         private void KGySoftGifOptionsPanel_OnUnloaded(object sender, RoutedEventArgs e) => ViewModel?.Dispose();
 
-        private void KGySoftGifOptionsPanel_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private async void KGySoftGifOptionsPanel_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             (e.OldValue as KGySoftGifOptionsViewModel)?.Dispose();
             if (e.NewValue is KGySoftGifOptionsViewModel vm)
             {
                 vm.CurrentFramePath = CurrentFrame?.Image;
-                vm.Apply();
+                await vm.Apply();
             }
         }
 

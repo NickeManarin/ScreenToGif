@@ -4616,7 +4616,7 @@ namespace ScreenToGif.Windows
 
                     var currentFrameBinding = new Binding
                     {
-                        //Path = new PropertyPath("Frames[CurrentIndex]"), // I don't really get why data context is already a FrameViewModel here instead of the EditorViewModel but it means we need no Path
+                        Path = new PropertyPath(nameof(EditorViewModel.CurrentFrame)),
                         Mode = BindingMode.OneWay,
                         UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
                     };

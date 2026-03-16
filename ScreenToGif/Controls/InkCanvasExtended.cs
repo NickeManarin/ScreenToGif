@@ -25,6 +25,11 @@ public class InkCanvasExtended : InkCanvas
     public static readonly DependencyProperty EraserShapeProperty = DependencyProperty.Register(nameof(EraserShapeDependency), typeof(StylusShape), typeof(InkCanvasExtended), 
         new UIPropertyMetadata(new RectangleStylusShape(10, 10), OnEraserShapePropertyChanged));
 
+    public InkCanvasExtended()
+    {
+        SetEnabledGestures([ApplicationGesture.NoGesture]);
+    }
+
     /// <summary>
     /// Event to handle the property change
     /// </summary>

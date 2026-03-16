@@ -8,6 +8,8 @@ using ScreenToGif.Domain.Enums;
 
 #endregion
 
+#nullable enable
+
 namespace ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Gif;
 
 /// <summary>
@@ -17,8 +19,8 @@ public class KGySoftGifPreset : GifPreset
 {
     #region Fields
 
-    private string _quantizerId;
-    private string _dithererId;
+    private string? _quantizerId;
+    private string? _dithererId;
     private Color _backColor = Colors.Silver;
     private byte _alphaThreshold = 128;
     private byte _whiteThreshold = 128;
@@ -98,7 +100,7 @@ public class KGySoftGifPreset : GifPreset
     /// <summary>
     /// Gets or sets the quantizer identifier in {TypeName}.{MethodName} format.
     /// </summary>
-    public string QuantizerId
+    public string? QuantizerId
     {
         get => _quantizerId;
         set => SetProperty(ref _quantizerId, value);
@@ -179,7 +181,7 @@ public class KGySoftGifPreset : GifPreset
     /// <summary>
     /// Gets or sets the ditherer identifier in {TypeName}[.{PropertyName}] format.
     /// </summary>
-    public string DithererId
+    public string? DithererId
     {
         get => _dithererId;
         set => SetProperty(ref _dithererId, value);
