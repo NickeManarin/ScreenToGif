@@ -8,9 +8,9 @@
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="KGySoft.CoreLibraries" Version="10.5.0" />
-    <PackageReference Include="SharpCompress" Version="0.40.0" />
-    <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
+    <PackageReference Include="KGySoft.CoreLibraries" />
+    <PackageReference Include="SharpCompress" />
+    <PackageReference Include="System.Drawing.Common" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <UseVSHostingProcess>true</UseVSHostingProcess>

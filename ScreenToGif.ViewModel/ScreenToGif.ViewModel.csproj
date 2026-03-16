@@ -8,7 +8,7 @@
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="KGySoft.Drawing.Core" Version="10.0.1" />
+    <PackageReference Include="KGySoft.Drawing.Core" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ScreenToGif.Model\ScreenToGif.Domain.csproj" />

@@ -97,12 +97,12 @@
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="KGySoft.Drawing" Version="10.0.2" />
-    <PackageReference Include="KGySoft.Drawing.Wpf" Version="10.0.1" />
+    <PackageReference Include="KGySoft.Drawing" />
+    <PackageReference Include="KGySoft.Drawing.Wpf" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
-    <PackageReference Include="System.Management" Version="9.0.5" />
+    <PackageReference Include="SharpDX.Direct3D11" />
+    <PackageReference Include="System.Management" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Util\Commands.cs" />
