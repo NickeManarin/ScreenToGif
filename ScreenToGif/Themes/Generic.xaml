@@ -3326,7 +3326,13 @@
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                             <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              Margin="{TemplateBinding Padding}" VerticalAlignment="Center"/>
+                                              Margin="{TemplateBinding Padding}" VerticalAlignment="Center">
+                                <ContentPresenter.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap"/>
+                                    </Style>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
                         </Grid>
                     </Border>
                 </ControlTemplate>

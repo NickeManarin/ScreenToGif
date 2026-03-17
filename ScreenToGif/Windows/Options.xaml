@@ -24,7 +24,8 @@
             </Grid.ColumnDefinitions>
 
             <!--Options-->
-            <ListView Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="SectionsListView" Margin="0" MaxWidth="180" MinWidth="130" BorderThickness="0" SelectionChanged="SectionsListView_SelectionChanged">
+            <ListView Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="SectionsListView" Margin="0" MaxWidth="180" MinWidth="130" BorderThickness="0"
+                      Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="SectionsListView_SelectionChanged">
                 <ListView.Resources>
                     <Style BasedOn="{StaticResource {x:Type c:ExListViewItem}}" TargetType="{x:Type c:ExListViewItem}">
                         <Setter Property="Padding" Value="2,2,2,2"/>

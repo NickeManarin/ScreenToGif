@@ -161,9 +161,9 @@
     <s:String x:Key="S.Options.Tasks">Tareas automatizadas</s:String>
     <s:String x:Key="S.Options.Shortcuts">Atajos</s:String>
     <s:String x:Key="S.Options.Language">Idioma</s:String>
-    <s:String x:Key="S.Options.Storage">Archivos\ntemporales</s:String>
+    <s:String x:Key="S.Options.Storage">Archivos&#10;temporales</s:String>
     <s:String x:Key="S.Options.Extras">Extras</s:String>
-    <s:String x:Key="S.Options.Upload">Servicios de subida</s:String>
+    <s:String x:Key="S.Options.Upload">Servicios&#10;de subida</s:String>
     <s:String x:Key="S.Options.Donate">Donar</s:String>
     <s:String x:Key="S.Options.About">Acerca de ScreenToGif</s:String>
     <s:String x:Key="S.Options.Other">Otros</s:String>
@@ -888,12 +888,12 @@
     <s:String x:Key="S.Editor.DeleteAll.Message">Esta acción descartará el proyecto actualmente abierto y no se puede deshacer. ¿Estás seguro que querés continuar?</s:String>
     <s:String x:Key="S.Editor.DiscardProject.Title">Quitar todo</s:String>
     <s:String x:Key="S.Editor.DiscardProject.Instruction">¿Querés quitar todos los fotogramas?</s:String>
-    <s:String x:Key="S.Editor.DiscardProject.Message">Estás intentando quitar todos los fotogramas.\n\rNo podés deshacer esta acción.</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Message">Estás intentando quitar todos los fotogramas.&#10;No podés deshacer esta acción.</s:String>
     <s:String x:Key="S.Editor.DiscardPreviousProject.Instruction">¿Querés descartar el proyecto anterior?</s:String>
     <s:String x:Key="S.Editor.DiscardPreviousProject.Message">Si elegís no hacerlo, el proyecto anterior estará disponible vía Proyectos recientes.</s:String>
     <s:String x:Key="S.Editor.DeleteFrames.Title">Eliminar fotogramas</s:String>
     <s:String x:Key="S.Editor.DeleteFrames.Instruction">¿Estás seguro que querés eliminar?</s:String>
-    <s:String x:Key="S.Editor.DeleteFrames.Message">Esta acción eliminará {0} fotograma/s.\n\rVas a poder deshacer esto luego.</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Message">Esta acción eliminará {0} fotograma/s.&#10;Vas a poder deshacer esto luego.</s:String>
     <s:String x:Key="S.Editor.Exiting.Title">Saliendo del editor</s:String>
     <s:String x:Key="S.Editor.Exiting.Instruction">¿Estás seguro que querés salir?</s:String>
     <s:String x:Key="S.Editor.Exiting.Message">El proyecto actual en el que estabas trabajando puede ser abierto de nuevo vía Proyectos recientes.</s:String>

@@ -30,8 +30,8 @@
             <c:StatusBand Grid.Row="0" x:Name="StatusBand"/>
 
             <c:LabelSeparator Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Extras.FfmpegLocation}"/>
-            <c:ExtendedButton Grid.Row="1" Grid.Column="1" Style="{StaticResource Style.Button.Borderless}" Content="Download" Command="{Binding DownloadFFmpegCommand}" Visibility="{Binding DownloadFFmpegButtonVisibility, Mode=OneWay}"/>
-            <c:ExtendedButton Grid.Row="1" Grid.Column="1" Style="{StaticResource Style.Button.Borderless}" Content="Remove" Command="{Binding RemoveFFmpegCommand}" Visibility="{Binding RemoveFFmpegButtonVisibility, Mode=OneWay}"/>
+            <c:ExtendedButton Grid.Row="1" Grid.Column="1" Style="{StaticResource Style.Button.Borderless}" Content="{DynamicResource S.Updater.Download}" Command="{Binding DownloadFFmpegCommand}" Visibility="{Binding DownloadFFmpegButtonVisibility, Mode=OneWay}"/>
+            <c:ExtendedButton Grid.Row="1" Grid.Column="1" Style="{StaticResource Style.Button.Borderless}" Content="{DynamicResource S.Clipboard.Remove}" Command="{Binding RemoveFFmpegCommand}" Visibility="{Binding RemoveFFmpegButtonVisibility, Mode=OneWay}"/>
 
             <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsEnabled="{Binding AreFFmpegPropertiesEnabled, Mode=OneWay}">
                 <Grid.ColumnDefinitions>
@@ -52,8 +52,8 @@
             <ProgressBar Grid.Row="3" Grid.Column="0" Visibility="{Binding IsProcessingFFmpegVisibility, Mode=OneWay}" Margin="10,3,0,3" Height="6" IsIndeterminate="True"/>
 
             <c:LabelSeparator Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.Options.Extras.GifskiLocation}"/>
-            <c:ExtendedButton Grid.Row="4" Grid.Column="1" Style="{StaticResource Style.Button.Borderless}" Content="Download" Command="{Binding DownloadGifskiCommand}" Visibility="{Binding DownloadGifskiButtonVisibility, Mode=OneWay}"/>
-            <c:ExtendedButton Grid.Row="4" Grid.Column="1" Style="{StaticResource Style.Button.Borderless}" Content="Remove" Command="{Binding RemoveGifskiCommand}" Visibility="{Binding RemoveGifskiButtonVisibility, Mode=OneWay}"/>
+            <c:ExtendedButton Grid.Row="4" Grid.Column="1" Style="{StaticResource Style.Button.Borderless}" Content="{DynamicResource S.Updater.Download}" Command="{Binding DownloadGifskiCommand}" Visibility="{Binding DownloadGifskiButtonVisibility, Mode=OneWay}"/>
+            <c:ExtendedButton Grid.Row="4" Grid.Column="1" Style="{StaticResource Style.Button.Borderless}" Content="{DynamicResource S.Clipboard.Remove}" Command="{Binding RemoveGifskiCommand}" Visibility="{Binding RemoveGifskiButtonVisibility, Mode=OneWay}"/>
 
             <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" IsEnabled="{Binding AreGifskiPropertiesEnabled, Mode=OneWay}">
                 <Grid.ColumnDefinitions>
