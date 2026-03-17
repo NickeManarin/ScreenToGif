@@ -20,6 +20,7 @@ using ScreenToGif.Native.External;
 using ScreenToGif.Native.Helpers;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Extensions;
+using ScreenToGif.Util.Helpers;
 using ScreenToGif.Util.Settings;
 using ScreenToGif.ViewModel;
 using ScreenToGif.Windows.Other;
@@ -891,7 +892,7 @@ public partial class NewRecorder
         {
             #region Center on screen
 
-            var screen = _viewModel.Monitors.FirstOrDefault(x => x.Bounds.Contains(Native.Helpers.Other.GetMousePosition(1, Left, Top))) ?? _viewModel.Monitors.FirstOrDefault(x => x.IsPrimary) ?? _viewModel.Monitors.FirstOrDefault();
+            var screen = _viewModel.Monitors.FirstOrDefault(x => x.Bounds.Contains(CursorHelper.GetMousePosition(1, Left, Top))) ?? _viewModel.Monitors.FirstOrDefault(x => x.IsPrimary) ?? _viewModel.Monitors.FirstOrDefault();
 
             if (screen == null)
                 throw new Exception("It was not possible to get a list of known screens.");
@@ -1051,8 +1052,8 @@ public partial class NewRecorder
                     if (isIntersecting)
                     {
                         Topmost = false;
-                        Splash.Display(LocalizationHelper.GetWithFormat("S.Recorder.Splash.Title", "Press {0} to stop the recording", Native.Helpers.Other.GetSelectKeyText(UserSettings.All.StopShortcut, UserSettings.All.StopModifiers)),
-                            LocalizationHelper.GetWithFormat("S.Recorder.Splash.Subtitle", "The recorder window will be minimized,&#10;restore it or press {0} to pause the capture", Native.Helpers.Other.GetSelectKeyText(UserSettings.All.StartPauseShortcut, UserSettings.All.StartPauseModifiers)));
+                        Splash.Display(LocalizationHelper.GetWithFormat("S.Recorder.Splash.Title", "Press {0} to stop the recording", KeyHelper.GetSelectKeyText(UserSettings.All.StopShortcut, UserSettings.All.StopModifiers)),
+                            LocalizationHelper.GetWithFormat("S.Recorder.Splash.Subtitle", "The recorder window will be minimized,&#10;restore it or press {0} to pause the capture", KeyHelper.GetSelectKeyText(UserSettings.All.StartPauseShortcut, UserSettings.All.StartPauseModifiers)));
                         Splash.SetTime(-UserSettings.All.PreStartValue);
                     }
 

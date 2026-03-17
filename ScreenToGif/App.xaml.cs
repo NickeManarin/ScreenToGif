@@ -19,6 +19,7 @@ using ScreenToGif.Domain.Enums;
 using ScreenToGif.Native.Helpers;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Extensions;
+using ScreenToGif.Util.Helpers;
 using ScreenToGif.Util.InterProcessChannel;
 using ScreenToGif.Util.Settings;
 using ScreenToGif.ViewModel;
@@ -125,7 +126,7 @@ public partial class App : IDisposable
                         {
                             if (process != null)
                             {
-                                var handles = Native.Helpers.Windows.GetWindowHandlesFromProcess(process);
+                                var handles = WindowHelper.GetWindowHandlesFromProcess(process);
 
                                 //Show the window before setting focus.
                                 Native.External.User32.ShowWindow(handles.Count > 0 ? handles[0] : process.Handle, Domain.Enums.Native.ShowWindowCommands.Show);
@@ -412,12 +413,12 @@ public partial class App : IDisposable
             { if (!Global.IgnoreHotKeys && MainViewModel.ExitApplication.CanExecute(null)) MainViewModel.ExitApplication.Execute(null); }, true);
 
         //Updates the input gesture text of each command.
-        MainViewModel.RecorderGesture = screen ? Native.Helpers.Other.GetSelectKeyText(UserSettings.All.RecorderShortcut, UserSettings.All.RecorderModifiers, true, true) : "";
-        MainViewModel.WebcamRecorderGesture = webcam ? Native.Helpers.Other.GetSelectKeyText(UserSettings.All.WebcamRecorderShortcut, UserSettings.All.WebcamRecorderModifiers, true, true) : "";
-        MainViewModel.BoardRecorderGesture = board ? Native.Helpers.Other.GetSelectKeyText(UserSettings.All.BoardRecorderShortcut, UserSettings.All.BoardRecorderModifiers, true, true) : "";
-        MainViewModel.EditorGesture = editor ? Native.Helpers.Other.GetSelectKeyText(UserSettings.All.EditorShortcut, UserSettings.All.EditorModifiers, true, true) : "";
-        MainViewModel.OptionsGesture = options ? Native.Helpers.Other.GetSelectKeyText(UserSettings.All.OptionsShortcut, UserSettings.All.OptionsModifiers, true, true) : "";
-        MainViewModel.ExitGesture = exit ? Native.Helpers.Other.GetSelectKeyText(UserSettings.All.ExitShortcut, UserSettings.All.ExitModifiers, true, true) : "";
+        MainViewModel.RecorderGesture = screen ? KeyHelper.GetSelectKeyText(UserSettings.All.RecorderShortcut, UserSettings.All.RecorderModifiers, true, true) : "";
+        MainViewModel.WebcamRecorderGesture = webcam ? KeyHelper.GetSelectKeyText(UserSettings.All.WebcamRecorderShortcut, UserSettings.All.WebcamRecorderModifiers, true, true) : "";
+        MainViewModel.BoardRecorderGesture = board ? KeyHelper.GetSelectKeyText(UserSettings.All.BoardRecorderShortcut, UserSettings.All.BoardRecorderModifiers, true, true) : "";
+        MainViewModel.EditorGesture = editor ? KeyHelper.GetSelectKeyText(UserSettings.All.EditorShortcut, UserSettings.All.EditorModifiers, true, true) : "";
+        MainViewModel.OptionsGesture = options ? KeyHelper.GetSelectKeyText(UserSettings.All.OptionsShortcut, UserSettings.All.OptionsModifiers, true, true) : "";
+        MainViewModel.ExitGesture = exit ? KeyHelper.GetSelectKeyText(UserSettings.All.ExitShortcut, UserSettings.All.ExitModifiers, true, true) : "";
     }
 
     private void ShowException(Exception exception)

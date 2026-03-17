@@ -41,6 +41,6 @@ namespace ScreenToGif.Native
         /// <remarks>
         /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/callwndproc.asp
         /// </remarks>
-        internal delegate IntPtr HookProc(int nCode, uint wParam, IntPtr lParam);
+        public delegate IntPtr HookProc(int nCode, uint wParam, IntPtr lParam);
     }
 }

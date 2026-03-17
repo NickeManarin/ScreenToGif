@@ -14,7 +14,7 @@ namespace ScreenToGif.Native.External
         /// <param name="dpiY">The value of the DPI along the Y axis. This value always refers to the vertical edge, even when the screen is rotated.</param>
         /// <returns>If OK, 0x00000000 | Else, 0x80070057</returns>
         [DllImport("Shcore.dll")]
-        internal static extern IntPtr GetDpiForMonitor([In] IntPtr hmonitor, [In] DpiTypes dpiType, [Out] out uint dpiX, [Out] out uint dpiY);
+        public static extern IntPtr GetDpiForMonitor([In] IntPtr hmonitor, [In] DpiTypes dpiType, [Out] out uint dpiX, [Out] out uint dpiY);
 
         //[DllImport("SHCore.dll", SetLastError = true)]
         //public static extern bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS awareness);

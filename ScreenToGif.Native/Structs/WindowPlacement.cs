@@ -10,7 +10,7 @@ namespace ScreenToGif.Native.Structs;
 /// </summary>
 [Serializable]
 [StructLayout(LayoutKind.Sequential)]
-internal struct WindowPlacement
+public struct WindowPlacement
 {
     /// <summary>
     /// The length of the structure, in bytes. Before calling the GetWindowPlacement or SetWindowPlacement functions, set this member to sizeof(WINDOWPLACEMENT).

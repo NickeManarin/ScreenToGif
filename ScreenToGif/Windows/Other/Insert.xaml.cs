@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.Controls;
 using ScreenToGif.Model;
+using ScreenToGif.Native.Helpers;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Extensions;
 using ScreenToGif.Util.Settings;
@@ -262,7 +263,7 @@ public partial class Insert
 
         #region Set as Maximized if the window gets big enough
 
-        var size = Native.Helpers.Windows.ScreenSizeFromWindow(this);
+        var size = WindowHelper.ScreenSizeFromWindow(this);
 
         if (size.Height - Height < 200 || size.Width - Width < 200)
             WindowState = WindowState.Maximized;

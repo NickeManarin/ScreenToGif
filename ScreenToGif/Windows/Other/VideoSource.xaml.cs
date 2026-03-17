@@ -69,7 +69,7 @@ public partial class VideoSource
             if (!IsLoaded)
                 return;
 
-            StatusBand.Warning(e, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
+            StatusBand.Warning(e, () => App.MainViewModel.OpenOptions.Execute(Options.PluginsIndex));
         };
 
         _viewModel.HideErrorRequested += (_, _) =>

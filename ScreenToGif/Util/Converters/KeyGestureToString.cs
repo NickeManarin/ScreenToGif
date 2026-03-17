@@ -1,3 +1,4 @@
+using ScreenToGif.Util.Helpers;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -12,7 +13,7 @@ public class KeyGestureToString : IValueConverter
         if (value is not KeyGesture gesture || gesture.Key == Key.None)
             return Binding.DoNothing;
 
-        return $"{Native.Helpers.Other.GetSelectKeyText(gesture.Key, gesture.Modifiers)}";
+        return $"{KeyHelper.GetSelectKeyText(gesture.Key, gesture.Modifiers)}";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,0 +1,99 @@
+<Page x:Class="ScreenToGif.Views.Settings.PluginSettings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:v="clr-namespace:ScreenToGif.ViewModel.Settings;assembly=ScreenToGif.ViewModel"
+      xmlns:c="clr-namespace:ScreenToGif.Controls"
+      Title="Plugin Settings" Loaded="PluginSettings_Loaded">
+
+    <Page.DataContext>
+        <v:PluginSettingsViewModel/>
+    </Page.DataContext>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Focusable="False" IsTabStop="False">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="21"/>
+                <RowDefinition MinHeight="29" Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="21"/>
+                <RowDefinition MinHeight="29" Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <c:StatusBand Grid.Row="0" x:Name="StatusBand"/>
+
+            <c:LabelSeparator Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Extras.FfmpegLocation}"/>
+            <c:ExtendedButton Grid.Row="1" Grid.Column="1" Style="{StaticResource Style.Button.Borderless}" Content="Download" Command="{Binding DownloadFFmpegCommand}" Visibility="{Binding DownloadFFmpegButtonVisibility, Mode=OneWay}"/>
+            <c:ExtendedButton Grid.Row="1" Grid.Column="1" Style="{StaticResource Style.Button.Borderless}" Content="Remove" Command="{Binding RemoveFFmpegCommand}" Visibility="{Binding RemoveFFmpegButtonVisibility, Mode=OneWay}"/>
+
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsEnabled="{Binding AreFFmpegPropertiesEnabled, Mode=OneWay}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+
+                <c:ExtendedTextBox Grid.Column="0" Margin="10,3,0,3" Text="{Binding FFmpegPath, Mode=TwoWay}" IsReadOnly="True"/>
+
+                <c:ExtendedButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
+                                  ToolTip="{DynamicResource S.Options.Extras.FfmpegLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{Binding SelectFFmpegPathCommand}"/>
+
+                <c:ExtendedButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
+                                  ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{Binding BrowseFFmpegCommand}"/>
+            </Grid>
+
+            <ProgressBar Grid.Row="3" Grid.Column="0" Visibility="{Binding IsProcessingFFmpegVisibility, Mode=OneWay}" Margin="10,3,0,3" Height="6" IsIndeterminate="True"/>
+
+            <c:LabelSeparator Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.Options.Extras.GifskiLocation}"/>
+            <c:ExtendedButton Grid.Row="4" Grid.Column="1" Style="{StaticResource Style.Button.Borderless}" Content="Download" Command="{Binding DownloadGifskiCommand}" Visibility="{Binding DownloadGifskiButtonVisibility, Mode=OneWay}"/>
+            <c:ExtendedButton Grid.Row="4" Grid.Column="1" Style="{StaticResource Style.Button.Borderless}" Content="Remove" Command="{Binding RemoveGifskiCommand}" Visibility="{Binding RemoveGifskiButtonVisibility, Mode=OneWay}"/>
+
+            <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" IsEnabled="{Binding AreGifskiPropertiesEnabled, Mode=OneWay}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+
+                <c:ExtendedTextBox Grid.Column="0" Margin="10,3,0,3" Text="{Binding GifskiPath, Mode=TwoWay}" IsReadOnly="True"/>
+
+                <c:ExtendedButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
+                                  ToolTip="{DynamicResource S.Options.Extras.GifskiLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{Binding SelectGifskiPathCommand}"/>
+
+                <c:ExtendedButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
+                                  ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{Binding BrowseGifskiCommand}"/>
+            </Grid>
+
+            <ProgressBar Grid.Row="6" Grid.Column="0" Visibility="{Binding IsProcessingGifskiVisibility, Mode=OneWay}" Margin="10,3,0,3" Height="6" IsIndeterminate="True"/>
+
+            <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                <Border Background="{StaticResource Vector.Info}" Height="16" Width="16" Margin="2" Opacity="{DynamicResource Element.Opacity}"/>
+
+                <TextBlock Margin="2" VerticalAlignment="Center">
+                    <Hyperlink NavigateUri="https://ffmpeg.org/legal.html" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
+                        <Run Text="{DynamicResource S.Options.Extras.License.Ffmpeg}"/>
+                    </Hyperlink>
+                    
+                    <Run Text="/" Foreground="{DynamicResource Element.Foreground}"/>
+
+                    <Hyperlink NavigateUri="https://github.com/ImageOptim/gifski/blob/master/LICENSE" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
+                        <Run Text="{DynamicResource S.Options.Extras.License.Gifski}"/>
+                    </Hyperlink>
+                    
+                    <Run Text="/" Foreground="{DynamicResource Element.Foreground}"/>
+
+                    <Hyperlink NavigateUri="https://github.com/sharpdx/SharpDX/blob/master/LICENSE" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
+                        <Run Text="{DynamicResource S.Options.Extras.License.SharpDx}"/>
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

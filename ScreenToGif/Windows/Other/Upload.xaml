@@ -16,7 +16,7 @@
     </n:ExWindow.CommandBindings>
 
     <n:ExWindow.Resources>
-        <c:StringToStaticResource x:Key="StringToStaticResource"/>
+        <c:KeyToResource x:Key="StringToStaticResource"/>
         <c:NullToVisibility x:Key="NullToVisibility"/>
         <u:ComboBoxItemTemplateSelector x:Key="ItemSelector"/>
     </n:ExWindow.Resources>

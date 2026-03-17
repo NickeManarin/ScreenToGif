@@ -4,7 +4,6 @@ using ScreenToGif.Native.Helpers;
 using ScreenToGif.Util.Codification;
 using ScreenToGif.Util.Extensions;
 using ScreenToGif.Util.Settings;
-using System;
 using System.Runtime.InteropServices;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -15,7 +14,7 @@ namespace ScreenToGif.Util;
 /// Interoperability with the Gifski library.
 /// https://docs.rs/gifski/latest/gifski/
 /// </summary>
-internal class GifskiInterop : IDisposable
+public class GifskiInterop : IDisposable
 {
     private double _timeStamp = 0;
 
@@ -45,9 +44,11 @@ internal class GifskiInterop : IDisposable
 
     public bool IsOlderThan0Dot9 => _endAddingFrames != null;
 
-    public GifskiInterop()
+    public bool IsProperlySetup => _finish != null;
+
+    public GifskiInterop(string path = null)
     {
-        var dllPath = UserSettings.All.GifskiLocation;
+        var dllPath = path ?? UserSettings.All.GifskiLocation;
 
         _new = FunctionLoader.LoadFunction<NewDelegate>(dllPath, "gifski_new");
         _addPngFrame = FunctionLoader.LoadFunction<AddPngFrameDelegate>(dllPath, "gifski_add_frame_png_file");
@@ -64,13 +65,14 @@ internal class GifskiInterop : IDisposable
         _finish = FunctionLoader.TryLoadFunction<FinishDelegate>(dllPath, "gifski_finish");
     }
 
-    internal IntPtr Start(uint width, uint height, int quality, bool looped = true, bool fast = false)
+    public IntPtr Start(uint width, uint height, int quality, bool looped = true, bool fast = false)
     {
-        short repeat = looped ? (short)0 : (short)-1;
+        var repeat = looped ? (short)0 : (short)-1;
+
         return _new(new GifskiSettings(width, height, (byte)quality, fast, repeat));
     }
 
-    internal GifskiErrorCodes AddFrame(IntPtr handle, uint index, string path, int delay, double lastDelay = 0, bool isLast = false)
+    public GifskiErrorCodes AddFrame(IntPtr handle, uint index, string path, int delay, double lastDelay = 0, bool isLast = false)
     {
         if (_addPngFrame != null)
         {
@@ -118,7 +120,7 @@ internal class GifskiInterop : IDisposable
         return _addRgbFrame(handle, frameNumber, width, bytesPerRow, height, pixels, timestamp);
     }
 
-    internal GifskiErrorCodes EndAdding(IntPtr handle)
+    public GifskiErrorCodes EndAdding(IntPtr handle)
     {
         return _endAddingFrames?.Invoke(handle) ?? _finish(handle);
     }
@@ -130,14 +132,14 @@ internal class GifskiInterop : IDisposable
         System.Diagnostics.Debug.WriteLine($"Gifski error: {message}");
     }
 
-    internal GifskiErrorCodes SetOutput(IntPtr handle, string destination)
+    public GifskiErrorCodes SetOutput(IntPtr handle, string destination)
     {
         _setErrorCallback(handle, OnGifskiError, IntPtr.Zero);
 
         return _setFileOutput(handle, destination);
     }
 
-    internal GifskiErrorCodes End(IntPtr handle, string destination)
+    public GifskiErrorCodes End(IntPtr handle, string destination)
     {
         var status = _write(handle, destination);
 

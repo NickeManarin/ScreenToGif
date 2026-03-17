@@ -194,9 +194,9 @@
 
     <!--Options • Extras-->
     <!--<s:String x:Key="FfmpegLocation"></s:String>-->
+    <s:Boolean x:Key="HasOlderFfmpegVersion">False</s:Boolean>
     <e:SupportedFFmpegVersions x:Key="FfmpegVersion">Version4</e:SupportedFFmpegVersions>
     <!--<s:String x:Key="GifskiLocation"></s:String>-->
-    <!--<s:String x:Key="SharpDxLocationFolder"></s:String>-->
     
     <!--Editor-->
     <s:Double x:Key="EditorTop">NaN</s:Double>

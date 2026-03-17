@@ -879,15 +879,15 @@ public partial class ExportPanel : UserControl, IPanel
 
         if (CurrentPreset.RequiresFfmpeg)
         {
-            if (!PathHelper.IsFfmpegPresent())
+            if (!await PathHelper.IsFfmpegPresent())
             {
-                RaiseValidatedEvent("S.Editor.Warning.Ffmpeg", StatusReasons.MissingFfmpeg, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
+                RaiseValidatedEvent("S.Editor.Warning.Ffmpeg", StatusReasons.MissingFfmpeg, () => App.MainViewModel.OpenOptions.Execute(Options.PluginsIndex));
                 return false;
             }
 
             if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
             {
-                RaiseValidatedEvent("S.Options.Extras.FfmpegLocation.Invalid", StatusReasons.MissingFfmpeg, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
+                RaiseValidatedEvent("S.Options.Extras.FfmpegLocation.Invalid", StatusReasons.MissingFfmpeg, () => App.MainViewModel.OpenOptions.Execute(Options.PluginsIndex));
                 return false;
             }
 
@@ -920,13 +920,13 @@ public partial class ExportPanel : UserControl, IPanel
         {
             if (!PathHelper.IsGifskiPresent())
             {
-                RaiseValidatedEvent("S.Editor.Warning.Gifski", StatusReasons.MissingGifski, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
+                RaiseValidatedEvent("S.Editor.Warning.Gifski", StatusReasons.MissingGifski, () => App.MainViewModel.OpenOptions.Execute(Options.PluginsIndex));
                 return false;
             }
 
             if (!string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && UserSettings.All.GifskiLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
             {
-                RaiseValidatedEvent("S.Options.Extras.GifskiLocation.Invalid", StatusReasons.MissingGifski, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
+                RaiseValidatedEvent("S.Options.Extras.GifskiLocation.Invalid", StatusReasons.MissingGifski, () => App.MainViewModel.OpenOptions.Execute(Options.PluginsIndex));
                 return false;
             }
         }

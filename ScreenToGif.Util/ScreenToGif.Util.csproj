@@ -63,5 +63,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ScreenToGif.Model\ScreenToGif.Domain.csproj" />
+    <ProjectReference Include="..\ScreenToGif.Native\ScreenToGif.Native.csproj" />
   </ItemGroup>
 </Project>

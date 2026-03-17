@@ -1,0 +1,170 @@
+<Page x:Class="ScreenToGif.Views.Settings.StorageSettings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:c="clr-namespace:ScreenToGif.Controls"
+      xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
+      Title="StorageSettings" Loaded="StorageSettings_Loaded">
+
+    <Page.CommandBindings>
+        <CommandBinding Command="{StaticResource Command.CheckCache}" CanExecute="Cache_CanExecute" Executed="CheckCache_Execute"/>
+        <CommandBinding Command="{StaticResource Command.ClearCache}" CanExecute="Cache_CanExecute" Executed="ClearCache_Execute"/>
+        <CommandBinding Command="{StaticResource Command.BrowseCache}" CanExecute="BrowseCache_CanExecute" Executed="BrowseCache_Execute"/>
+        <CommandBinding Command="{StaticResource Command.BrowseLogs}" CanExecute="BrowseLogs_CanExecute" Executed="BrowseLogs_Execute"/>
+
+        <CommandBinding Command="{StaticResource Command.RemoveAppDataSettings}" CanExecute="RemoveAppDataSettings_CanExecute" Executed="RemoveAppDataSettings_Executed"/>
+        <CommandBinding Command="{StaticResource Command.OpenAppDataSettings}" CanExecute="RemoveAppDataSettings_CanExecute" Executed="OpenAppDataSettings_Execute"/>
+
+        <CommandBinding Command="{StaticResource Command.CreateLocalSettings}" CanExecute="CreateLocalSettings_CanExecute" Executed="CreateLocalSettings_Execute"/>
+        <CommandBinding Command="{StaticResource Command.OpenLocalSettings}" CanExecute="RemoveLocalSettings_CanExecute" Executed="OpenLocalSettings_Execute"/>
+        <CommandBinding Command="{StaticResource Command.RemoveLocalSettings}" CanExecute="RemoveLocalSettings_CanExecute" Executed="RemoveLocalSettings_Execute"/>
+    </Page.CommandBindings>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid x:Name="TempPanel" DataContext="{x:Static t:UserSettings.All}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Expander Grid.Row="0" Header="{DynamicResource S.Options.Storage.Status}" IsExpanded="True">
+                <Grid Margin="10,0,5,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Storage.Status.Volume}" Padding="0" Margin="5,0" VerticalAlignment="Center" TextWrapping="Wrap" 
+                               Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="VolumeTextBlock" Text="New Volume (C:)" Padding="0" Margin="0,0,5,0" VerticalAlignment="Center" TextWrapping="Wrap" 
+                               Foreground="{DynamicResource Element.Foreground.Gray112}"/>
+
+                    <TextBlock Grid.Row="0" Grid.Column="2" x:Name="FreeSpaceTextBlock" Text="{DynamicResource S.Options.Storage.Status.FreeSpace}" Padding="0" Margin="5,0" VerticalAlignment="Center" HorizontalAlignment="Right"
+                               TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray112}"/>
+
+                    <c:ExtendedProgressBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="StatusProgressBar" Height="20" Value="50" Maximum="100" Margin="3" State="Info" ShowPercentage="True"/>
+
+                    <c:ExtendedButton Grid.Row="1" Grid.Column="3" x:Name="CheckCacheButton" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Repeat}" ContentWidth="20" ContentHeight="20"
+                                      ToolTip="{DynamicResource S.Options.Storage.Status.Check}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.CheckCache}"/>
+                    <c:ExtendedButton Grid.Row="1" Grid.Column="4" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Delete.Folder}" ContentWidth="20" ContentHeight="20"
+                                      ToolTip="{DynamicResource S.Options.Storage.Status.Clear}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.ClearCache}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="LowSpaceTextBlock" Text="{DynamicResource S.Options.Storage.Status.LowSpace}" Padding="0" Margin="5,3" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Brush.ProgressBar.Danger}" Visibility="Collapsed"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" x:Name="FilesTextBlock" Padding="0" Margin="5,3" Visibility="Collapsed"
+                               VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray112}">
+                        <Run x:Name="FoldersRun" Text="100 folders"/>
+                        <Run Text="•"/>
+                        <Run x:Name="FilesRun" Text="300 files"/>
+                        <Run Text="•"/>
+                        <Run x:Name="UsedSpaceRun" Text="10 GB in use"/>
+                    </TextBlock>
+                </Grid>
+            </Expander>
+
+            <Expander Grid.Row="1" Header="{DynamicResource S.Options.Storage.Paths}" IsExpanded="True">
+                <Grid Margin="10,0,5,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Storage.Paths.Cache}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,5,0" VerticalAlignment="Center"/>
+                    <c:ExtendedTextBox Grid.Row="0" Grid.Column="1" x:Name="CacheTextBox" Margin="0,3" Text="{Binding TemporaryFolder, Source={x:Static t:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
+                                       IsEnabled="{Binding ElementName=CheckCacheButton, Path=IsEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LostFocus="CacheTextBox_LostFocus"/>
+
+                    <c:ExtendedButton Grid.Row="0" Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
+                                      ToolTip="{DynamicResource S.Options.Storage.Paths.Cache.Choose}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="ChooseCachePath_Click"/>
+                    <c:ExtendedButton Grid.Row="0" Grid.Column="3" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
+                                      ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseCache}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Storage.Paths.Logs}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,5,0" VerticalAlignment="Center"/>
+                    <c:ExtendedTextBox Grid.Row="1" Grid.Column="1" Margin="0,3" Text="{Binding LogsFolder, Source={x:Static t:UserSettings.All}}"/>
+
+                    <c:ExtendedButton Grid.Row="1" Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
+                                      ToolTip="{DynamicResource S.Options.Storage.Paths.Logs.Choose}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="ChooseLogsPath_Click"/>
+                    <c:ExtendedButton Grid.Row="1" Grid.Column="3" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
+                                      ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseLogs}"/>
+                </Grid>
+            </Expander>
+
+            <Expander Grid.Row="2" Header="{DynamicResource S.Options.Storage.Settings}" IsExpanded="True">
+                <Grid Margin="10,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Storage.AppDataPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="AppDataPathTextBlock" Text="..." Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
+
+                    <c:ExtendedButton Grid.Row="0" Grid.Column="3" x:Name="OpenAppDataButton" ToolTip="{DynamicResource S.Options.Storage.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
+                                      Icon="{StaticResource Vector.Forward}" Padding="3" ContentWidth="18" ContentHeight="14" Command="{StaticResource Command.OpenAppDataSettings}"/>
+
+                    <c:ExtendedButton Grid.Row="0" Grid.Column="4" x:Name="RemoveAppDataButton" ToolTip="{DynamicResource S.Options.Storage.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                                      Icon="{StaticResource Vector.Remove}" Padding="3" ContentWidth="18" ContentHeight="14" Command="{StaticResource Command.RemoveAppDataSettings}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Storage.LocalPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LocalPathTextBlock" Text="..." Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
+
+                    <c:ExtendedButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalButton" ToolTip="{DynamicResource S.Options.Storage.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
+                                      Icon="{StaticResource Vector.Add}" Padding="3" ContentHeight="18" ContentWidth="14" Command="{StaticResource Command.CreateLocalSettings}"/>
+
+                    <c:ExtendedButton Grid.Row="1" Grid.Column="3" x:Name="OpenLocalButton" ToolTip="{DynamicResource S.Options.Storage.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
+                                      Icon="{StaticResource Vector.Forward}" Padding="3" ContentWidth="18" ContentHeight="14" Command="{StaticResource Command.OpenLocalSettings}"/>
+
+                    <c:ExtendedButton Grid.Row="1" Grid.Column="4" x:Name="RemoveLocalButton" ToolTip="{DynamicResource S.Options.Storage.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                                      Icon="{StaticResource Vector.Remove}" Padding="3" ContentWidth="18" ContentHeight="14" Command="{StaticResource Command.RemoveLocalSettings}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Text="{DynamicResource S.Options.Storage.SettingsInfo}" Foreground="{DynamicResource Element.Foreground.Medium}" 
+                               TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
+                </Grid>
+            </Expander>
+
+            <Expander Grid.Row="3" Header="{DynamicResource S.Options.Other}" IsExpanded="True">
+                <StackPanel>
+                    <c:ExtendedCheckBox Text="{DynamicResource S.Options.Storage.DeleteEverything}" Margin="10,3,5,3"
+                                        IsChecked="{Binding Source={x:Static t:UserSettings.All}, Path=DeleteCacheWhenClosing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <c:ExtendedCheckBox Text="{DynamicResource S.Options.Storage.AskDeleteEverything}" Margin="30,3,5,3"
+                                        IsChecked="{Binding Source={x:Static t:UserSettings.All}, Path=AskDeleteCacheWhenClosing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Visibility="{Binding Source={x:Static t:UserSettings.All}, Path=DeleteCacheWhenClosing, Converter={StaticResource Bool2Visibility}}"/>
+
+                    <c:ExtendedCheckBox Text="{DynamicResource S.Options.Storage.AutomaticRemoval}" Margin="10,3,5,3"
+                                        IsChecked="{Binding Source={x:Static t:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        ToolTip="{DynamicResource S.Options.Storage.AutomaticRemoval.Info}"/>
+
+                    <WrapPanel Margin="30,3,5,3" Visibility="{Binding Source={x:Static t:UserSettings.All}, Path=AutomaticCleanUp, Converter={StaticResource Bool2Visibility}}">
+                        <c:IntegerUpDown Minimum="1" Maximum="30" MinWidth="50" Value="{Binding Source={x:Static t:UserSettings.All}, Path=AutomaticCleanUpDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="{DynamicResource S.Options.Storage.AutomaticRemovalDays.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                    </WrapPanel>
+                </StackPanel>
+            </Expander>
+        </Grid>
+    </ScrollViewer>
+</Page>

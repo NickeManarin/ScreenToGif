@@ -1,3 +1,4 @@
+using ScreenToGif.Util.Helpers;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -18,7 +19,7 @@ public class CommandToKeyGesture : IValueConverter
 
         foreach (KeyGesture gesture in command.InputGestures)
             if (gesture.Key != Key.None)
-                return $"{Native.Helpers.Other.GetSelectKeyText(gesture.Key, gesture.Modifiers)}";
+                return $"{KeyHelper.GetSelectKeyText(gesture.Key, gesture.Modifiers)}";
 
         return Binding.DoNothing;
     }
