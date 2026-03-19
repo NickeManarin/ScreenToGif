@@ -791,15 +791,73 @@ internal class EncodingManager
 
                             var size = project.FramesFiles[0].Path.ScaledSize();
 
-                            using var gifski = new GifskiInterop();
-                            var handle = gifski.Start((uint)size.Width, (uint)size.Height, gifskiGifPreset.Quality, gifskiGifPreset.Looped, gifskiGifPreset.Fast);
-
-                            if (gifski.IsOlderThan0Dot9)
+                            try
                             {
-                                #region Older
+                                using var gifski = new GifskiInterop();
+                                var handle = gifski.Start((uint)size.Width, (uint)size.Height, gifskiGifPreset.Quality, gifskiGifPreset.Looped, gifskiGifPreset.Fast);
 
-                                ThreadPool.QueueUserWorkItem(delegate
+                                if (gifski.IsOlderThan0Dot9)
                                 {
+                                    #region Older
+
+                                    ThreadPool.QueueUserWorkItem(delegate
+                                    {
+                                        Thread.Sleep(500);
+
+                                        if (GetStatus(id) == EncodingStatus.Error)
+                                            return;
+
+                                        Update(id, EncodingStatus.Processing, null, false);
+
+                                        GifskiErrorCodes res;
+
+                                        try
+                                        {
+                                            for (var i = 0; i < project.FramesFiles.Count; i++)
+                                            {
+                                                #region Cancellation
+
+                                                if (tokenSource.Token.IsCancellationRequested)
+                                                {
+                                                    Update(id, EncodingStatus.Canceled);
+                                                    break;
+                                                }
+
+                                                #endregion
+
+                                                Update(id, i, string.Format(processing, i));
+
+                                                res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay);
+
+                                                if (res != GifskiErrorCodes.Ok)
+                                                    throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
+                                            }
+
+                                            res = gifski.EndAdding(handle);
+
+                                            if (res != GifskiErrorCodes.Ok)
+                                                throw new Exception("Error while finishing adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
+                                        }
+                                        catch (Exception eee)
+                                        {
+                                            LogWriter.Log(eee, "encode with gifski");
+                                        }
+
+                                    }, null);
+
+                                    gifski.End(handle, gifskiGifPreset.FullPath);
+
+                                    #endregion
+                                }
+                                else
+                                {
+                                    #region Version 0.9.3 and newer
+
+                                    var res = gifski.SetOutput(handle, gifskiGifPreset.FullPath);
+
+                                    if (res != GifskiErrorCodes.Ok)
+                                        throw new Exception("Error while setting output with Gifski. " + res, new Win32Exception()) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
+
                                     Thread.Sleep(500);
 
                                     if (GetStatus(id) == EncodingStatus.Error)
@@ -807,7 +865,7 @@ internal class EncodingManager
 
                                     Update(id, EncodingStatus.Processing, null, false);
 
-                                    GifskiErrorCodes res;
+                                    var lastDelay = project.FramesFiles[project.FramesFiles.Count - 1].Delay / 1000d;
 
                                     for (var i = 0; i < project.FramesFiles.Count; i++)
                                     {
@@ -823,65 +881,26 @@ internal class EncodingManager
 
                                         Update(id, i, string.Format(processing, i));
 
-                                        res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay);
+                                        System.Diagnostics.Debug.WriteLine($"Frame: {i}");
+
+                                        res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay, lastDelay, i + 1 == project.FramesFiles.Count);
+
+                                        System.Diagnostics.Debug.WriteLine($"Ok: {i}");
 
                                         if (res != GifskiErrorCodes.Ok)
                                             throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
                                     }
 
-                                    res = gifski.EndAdding(handle);
+                                    Update(id, EncodingStatus.Processing, null, false);
 
-                                    if (res != GifskiErrorCodes.Ok)
-                                        throw new Exception("Error while finishing adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
-                                }, null);
-
-                                gifski.End(handle, gifskiGifPreset.FullPath);
-
-                                #endregion
-                            }
-                            else
-                            {
-                                #region Version 0.9.3 and newer
-
-                                var res = gifski.SetOutput(handle, gifskiGifPreset.FullPath);
-
-                                if (res != GifskiErrorCodes.Ok)
-                                    throw new Exception("Error while setting output with Gifski. " + res, new Win32Exception()) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
-
-                                Thread.Sleep(500);
-
-                                if (GetStatus(id) == EncodingStatus.Error)
-                                    return;
-
-                                Update(id, EncodingStatus.Processing, null, false);
-
-                                var lastDelay = project.FramesFiles[project.FramesFiles.Count - 1].Delay / 1000d;
-
-                                for (var i = 0; i < project.FramesFiles.Count; i++)
-                                {
-                                    #region Cancellation
-
-                                    if (tokenSource.Token.IsCancellationRequested)
-                                    {
-                                        Update(id, EncodingStatus.Canceled);
-                                        break;
-                                    }
+                                    gifski.EndAdding(handle);
 
                                     #endregion
-
-                                    Update(id, i, string.Format(processing, i));
-
-                                    res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay, lastDelay, i + 1 == project.FramesFiles.Count);
-
-                                    if (res != GifskiErrorCodes.Ok)
-                                        throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
                                 }
-
-                                Update(id, EncodingStatus.Processing, null, false);
-
-                                gifski.EndAdding(handle);
-
-                                #endregion
+                            }
+                            catch (Exception exx)
+                            {
+                                LogWriter.Log(exx, "gifski");
                             }
 
                             var fileInfo2 = new FileInfo(gifskiGifPreset.FullPath);

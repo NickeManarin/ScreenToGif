@@ -113,7 +113,7 @@ public partial class App : IDisposable
 
                     _mutex = new Mutex(true, mutexName, out _accepted);
 
-                    //If the mutext failed to be accepted, it means that another process already opened it.
+                    //If the mutex failed to be accepted, it means that another process already opened it.
                     if (!_accepted)
                     {
                         var warning = true;
