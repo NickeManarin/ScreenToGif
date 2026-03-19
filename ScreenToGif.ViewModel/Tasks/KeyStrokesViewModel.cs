@@ -12,6 +12,7 @@ public class KeyStrokesViewModel : BaseTaskViewModel
 
     private bool _ignoreNonModifiers;
     private bool _ignoreInjected;
+    private bool _translate;
     private bool _earlier;
     private double _earlierBy;
     private string _separator;
@@ -48,6 +49,12 @@ public class KeyStrokesViewModel : BaseTaskViewModel
     {
         get => _ignoreInjected;
         set => SetProperty(ref _ignoreInjected, value);
+    }
+
+    public bool KeyStrokesTranslate
+    {
+        get => _translate;
+        set => SetProperty(ref _translate, value);
     }
 
     public bool KeyStrokesEarlier
@@ -189,6 +196,7 @@ public class KeyStrokesViewModel : BaseTaskViewModel
         {
             KeyStrokesIgnoreNonModifiers = true,
             KeyStrokesIgnoreInjected = false,
+            KeyStrokesTranslate = false,
             KeyStrokesEarlier = false,
             KeyStrokesEarlierBy = 500,
             KeyStrokesExtended = true,
@@ -216,6 +224,7 @@ public class KeyStrokesViewModel : BaseTaskViewModel
         {
             KeyStrokesIgnoreNonModifiers = UserSettings.All.KeyStrokesIgnoreNonModifiers,
             KeyStrokesIgnoreInjected = UserSettings.All.KeyStrokesIgnoreInjected,
+            KeyStrokesTranslate = UserSettings.All.KeyStrokesTranslate,
             KeyStrokesEarlier = UserSettings.All.KeyStrokesEarlier,
             KeyStrokesEarlierBy = UserSettings.All.KeyStrokesEarlierBy,
             KeyStrokesExtended = UserSettings.All.KeyStrokesExtended,
