@@ -1,0 +1,22 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="coverlet.collector" Version="3.1.2" />
+    <PackageVersion Include="KGySoft.CoreLibraries" Version="10.5.0" />
+    <PackageVersion Include="KGySoft.Drawing" Version="10.0.1" />
+    <PackageVersion Include="KGySoft.Drawing.Core" Version="10.0.1" />
+    <PackageVersion Include="KGySoft.Drawing.Wpf" Version="10.0.1" />
+    <PackageVersion Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageVersion Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageVersion Include="Microsoft.Windows.Compatibility" Version="8.0.0" />
+    <PackageVersion Include="SharpCompress" Version="0.40.0" />
+    <PackageVersion Include="SharpDX.Direct3D11" Version="4.2.0" />
+    <PackageVersion Include="System.Drawing.Common" Version="8.0.0" />
+    <PackageVersion Include="System.Management" Version="9.0.5" />
+    <PackageVersion Include="xunit" Version="2.4.1" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.3" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,191 @@
+<Page x:Class="ScreenToGif.Views.Settings.AboutSettings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:c="clr-namespace:ScreenToGif.Controls"
+      xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
+      Title="AboutSettings">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Focusable="False" IsTabStop="False">
+        <StackPanel DataContext="{x:Static t:UserSettings.All}">
+            <c:StatusBand x:Name="StatusBand"/>
+
+            <Grid HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Background="{StaticResource Vector.Logo}" Height="50" Width="60" Margin="10" HorizontalAlignment="Center" 
+                        Opacity="{DynamicResource Element.Opacity}"/>
+
+                <Label Grid.Row="0" Grid.Column="1" Content="ScreenToGif" FontSize="18" Margin="0,0,5,0" 
+                       HorizontalAlignment="Right" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
+
+                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+                    <Label Content="{DynamicResource S.Options.About.Version}" FontSize="18" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
+                    <Label Content="{Binding Source={x:Static t:UserSettings.All}, Path=VersionText}" FontSize="18" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
+                    <Label x:Name="CheckForUpdatesLabel" VerticalContentAlignment="Center">
+                        <Hyperlink Click="CheckForUpdatesLabel_Click">
+                            <Run Text="{DynamicResource S.Options.About.UpdateCheck}"/>
+                        </Hyperlink>
+                    </Label>
+                </StackPanel>
+
+                <Label Grid.Row="1" Grid.Column="1" FontSize="16" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5" VerticalContentAlignment="Center">
+                    <Hyperlink NavigateUri="https://www.screentogif.com/" RequestNavigate="Hyperlink_OnRequestNavigate">
+                        screentogif.com
+                    </Hyperlink>
+                </Label>
+
+                <Label Grid.Row="1" Grid.Column="2" Content="{DynamicResource S.Options.About.Author}" FontSize="16" VerticalContentAlignment="Center" 
+                       Foreground="{DynamicResource Element.Foreground}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="StoreTextBlock" Text="{DynamicResource S.Options.About.StoreVersion}" Foreground="#882200" Margin="5"
+                           VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed"/>
+            </Grid>
+
+            <c:LabelSeparator Text="{DynamicResource S.Options.About.Contact}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Email:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                    <Hyperlink NavigateUri="mailto:nicke@outlook.com.br" RequestNavigate="Hyperlink_OnRequestNavigate">
+                        nicke@outlook.com.br
+                    </Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Discord:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
+                <TextBlock Grid.Row="0" Grid.Column="3" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                    <Hyperlink NavigateUri="https://discord.gg/XgEqDHX" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                        <Run Text="{StaticResource S.Options.About.Contact.Discord}"/>
+                    </Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Reddit:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                    <Hyperlink NavigateUri="https://www.reddit.com/r/screentogif/" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                        /r/ScreenToGif/
+                    </Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="Facebook:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
+                <TextBlock Grid.Row="1" Grid.Column="3" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                    <Hyperlink NavigateUri="https://www.facebook.com/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                        <Run Text="{StaticResource S.Options.About.Contact.Facebook}"/>
+                    </Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Twitter:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                    <Hyperlink NavigateUri="https://twitter.com/NickeManarin" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                        @NickeManarin
+                    </Hyperlink>
+                </TextBlock>
+
+                <!--<TextBlock Grid.Row="2" Grid.Column="2" Text="Gitter:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
+                <TextBlock Grid.Row="2" Grid.Column="3" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                    <Hyperlink NavigateUri="https://gitter.im/ScreenToGif/Lobby" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                        <Run Text="{StaticResource S.Options.About.Contact.Gitter}"/>
+                    </Hyperlink>
+                </TextBlock>-->
+            </Grid>
+
+            <c:LabelSeparator Text="{DynamicResource S.Options.About.Technical}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.Options.About.Technical.License}" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="{DynamicResource FontFamilyLight}" HorizontalAlignment="Left" Padding="3,5">
+                    <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif/blob/master/LICENSE.txt" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                               Cursor="Hand" RequestNavigate="Hyperlink_OnRequestNavigate">
+                        MS-PL
+                    </Hyperlink>
+                    <Run Text="/" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                    <Hyperlink NavigateUri="https://tldrlegal.com/license/microsoft-public-license-(ms-pl)" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                               Cursor="Hand" RequestNavigate="Hyperlink_OnRequestNavigate">
+                        TL;DR Legal
+                    </Hyperlink>
+                    <Run Text="{DynamicResource S.Options.About.Technical.Free}" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                </TextBlock>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.Options.About.Technical.SourceCode}" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                    <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                               RequestNavigate="Hyperlink_OnRequestNavigate">
+                        github.com/NickeManarin/ScreenToGif
+                    </Hyperlink>
+                </TextBlock>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.Options.About.Technical.Privacy}" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                    <Hyperlink NavigateUri="https://www.screentogif.com/privacy-terms" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                               RequestNavigate="Hyperlink_OnRequestNavigate">
+                        screentogif.com/privacy-terms
+                    </Hyperlink>
+                </TextBlock>
+            </Grid>
+
+            <c:LabelSeparator Text="{DynamicResource S.Options.About.ABigThanksTo}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="Visual Studio:" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
+
+                <Label Grid.Row="0" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                    <Hyperlink NavigateUri="https://visualstudio.microsoft.com/" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                               RequestNavigate="Hyperlink_OnRequestNavigate">
+                        visualstudio.microsoft.com
+                    </Hyperlink>
+                </Label>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="ReSharper:" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
+
+                <Label Grid.Row="1" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                    <Hyperlink NavigateUri="https://www.jetbrains.com/resharper" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                               RequestNavigate="Hyperlink_OnRequestNavigate">
+                        jetbrains.com/resharper
+                    </Hyperlink>
+                </Label>
+
+                <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource S.Options.About.ABigThanksTo.Everyone}" 
+                       FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

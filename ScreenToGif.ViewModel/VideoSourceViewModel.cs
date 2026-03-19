@@ -272,7 +272,7 @@ public class VideoSourceViewModel : BindableBase, IDisposable
     {
         try
         {
-            if (VideoImporter == 1 && !PathHelper.IsFfmpegPresent())
+            if (VideoImporter == 1 && !await PathHelper.IsFfmpegPresent())
             {
                 ShowWarningRequested?.Invoke(this, LocalizationHelper.Get("S.Editor.Warning.Ffmpeg"));
                 return;

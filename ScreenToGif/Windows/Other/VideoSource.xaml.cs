@@ -69,7 +69,7 @@ public partial class VideoSource
             if (!IsLoaded)
                 return;
 
-            StatusBand.Warning(e, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
+            StatusBand.Warning(e, () => App.MainViewModel.OpenOptions.Execute(Options.PluginsIndex));
         };
 
         _viewModel.HideErrorRequested += (_, _) =>
@@ -106,9 +106,9 @@ public partial class VideoSource
         await _viewModel.Import();
     }
 
-    private void CancelButton_Click(object sender, RoutedEventArgs e)
+    private async void CancelButton_Click(object sender, RoutedEventArgs e)
     {
-        _viewModel.Cancel();
+        await _viewModel.Cancel();
 
         DialogResult = false;
     }

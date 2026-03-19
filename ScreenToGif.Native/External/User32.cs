@@ -49,7 +49,7 @@ namespace ScreenToGif.Native.External
         internal static extern IntPtr GetCursorFrameInfo(IntPtr hCursor, IntPtr reserved, int step, ref int rate, ref int numSteps);
 
         [DllImport(Constants.User32, SetLastError = false)]
-        internal static extern IntPtr GetDesktopWindow();
+        public static extern IntPtr GetDesktopWindow();
 
         [DllImport(Constants.User32)]
         public static extern IntPtr GetWindowDC(IntPtr ptr);
@@ -92,7 +92,7 @@ namespace ScreenToGif.Native.External
         /// </returns>
         [DllImport(Constants.User32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool GetWindowPlacement(IntPtr hWnd, ref WindowPlacement lpwndpl);
+        public static extern bool GetWindowPlacement(IntPtr hWnd, ref WindowPlacement lpwndpl);
         
         [DllImport(Constants.User32, SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
@@ -101,10 +101,10 @@ namespace ScreenToGif.Native.External
         internal static extern bool OffsetRect(ref NativeRect lprc, int dx, int dy);
         
         [DllImport(Constants.User32)]
-        internal static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
+        public static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
 
         [DllImport(Constants.User32, SetLastError = true)]
-        internal static extern IntPtr MonitorFromPoint(PointW pt, uint dwFlags);
+        public static extern IntPtr MonitorFromPoint(PointW pt, uint dwFlags);
 
         [DllImport(Constants.User32, CharSet = CharSet.Auto)]
         [ResourceExposure(ResourceScope.None)]
@@ -112,7 +112,7 @@ namespace ScreenToGif.Native.External
 
         [DllImport(Constants.User32, ExactSpelling = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool EnumDisplayMonitors(HandleRef hdc, IntPtr rcClip, Delegates.MonitorEnumProc lpfnEnum, IntPtr dwData);
+        public static extern bool EnumDisplayMonitors(HandleRef hdc, IntPtr rcClip, Delegates.MonitorEnumProc lpfnEnum, IntPtr dwData);
         
         [DllImport(Constants.User32, CharSet = CharSet.Auto)]
         public static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
@@ -155,11 +155,11 @@ namespace ScreenToGif.Native.External
         /// </remarks>
         [DllImport(Constants.User32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool EnumWindows(Delegates.EnumWindowsProc lpEnumFunc, IntPtr lParam);
+        public static extern bool EnumWindows(Delegates.EnumWindowsProc lpEnumFunc, IntPtr lParam);
 
         [DllImport(Constants.User32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool EnumDesktopWindows(IntPtr handle, Delegates.EnumWindowsProc lpEnumFunc, IntPtr lParam);
+        public static extern bool EnumDesktopWindows(IntPtr handle, Delegates.EnumWindowsProc lpEnumFunc, IntPtr lParam);
 
         /// <summary>
         ///     Determines the visibility state of the specified window.
@@ -182,7 +182,7 @@ namespace ScreenToGif.Native.External
         /// </remarks>
         [DllImport(Constants.User32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool IsWindowVisible(IntPtr hWnd);
+        public static extern bool IsWindowVisible(IntPtr hWnd);
 
         /// <summary>
         ///     Retrieves a handle to the Shell's desktop window.
@@ -196,13 +196,13 @@ namespace ScreenToGif.Native.External
         ///     present, the return value is NULL.
         /// </returns>
         [DllImport(Constants.User32)]
-        internal static extern IntPtr GetShellWindow();
+        public static extern IntPtr GetShellWindow();
 
         [DllImport(Constants.User32)]
-        internal static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpKeyState, [Out, MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 4)] StringBuilder pwszBuff, int cchBuff, uint wFlags);
+        public static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpKeyState, [Out, MarshalAs(UnmanagedType.LPWStr, SizeParamIndex = 4)] StringBuilder pwszBuff, int cchBuff, uint wFlags);
 
         [DllImport(Constants.User32)]
-        internal static extern uint MapVirtualKey(uint uCode, MapTypes uMapType);
+        public static extern uint MapVirtualKey(uint uCode, MapTypes uMapType);
 
         /// <summary>
         ///     Copies the text of the specified window's title bar (if it has one) into a buffer. If the specified window is a
@@ -246,7 +246,7 @@ namespace ScreenToGif.Native.External
         ///     </see>
         /// </remarks>
         [DllImport(Constants.User32, CharSet = CharSet.Auto, SetLastError = true)]
-        internal static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+        public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
 
         /// <summary>
         ///     Retrieves the length, in characters, of the specified window's title bar text (if the window has a title bar). If
@@ -279,11 +279,11 @@ namespace ScreenToGif.Native.External
         ///     GetWindowText function.
         /// </remarks>
         [DllImport(Constants.User32, SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern int GetWindowTextLength(IntPtr hWnd);
+        public static extern int GetWindowTextLength(IntPtr hWnd);
 
         [DllImport(Constants.User32)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool IsIconic(IntPtr hWnd);
+        public static extern bool IsIconic(IntPtr hWnd);
 
         [DllImport(Constants.User32, EntryPoint = "GetWindowLong")]
         internal static extern IntPtr GetWindowLongPtr32(IntPtr hWnd, int nIndex);
@@ -292,10 +292,10 @@ namespace ScreenToGif.Native.External
         internal static extern IntPtr GetWindowLongPtr64(IntPtr hWnd, int nIndex);
 
         [DllImport(Constants.User32)]
-        internal static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
 
         [DllImport(Constants.User32)]
-        internal static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+        public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
         /// <summary>
         /// Retrieves the handle to the ancestor of the specified window. 
@@ -312,13 +312,13 @@ namespace ScreenToGif.Native.External
 
         [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport(Constants.User32, SetLastError = true)]
-        internal static extern bool GetWindowInfo(IntPtr hwnd, ref WindowInfo pwi);
+        public static extern bool GetWindowInfo(IntPtr hwnd, ref WindowInfo pwi);
 
         [DllImport(Constants.User32, CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
-        internal static extern bool GetTitleBarInfo(IntPtr hwnd, ref TitlebarInfo pti);
+        public static extern bool GetTitleBarInfo(IntPtr hwnd, ref TitlebarInfo pti);
 
         [DllImport(Constants.User32, SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+        public static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
         /// <summary>
         /// Retrieves a handle to a window that has the specified relationship (Z-Order or owner) to the specified window.
@@ -335,7 +335,7 @@ namespace ScreenToGif.Native.External
         /// to the specified window, the return value is NULL. To get extended error information, call GetLastError.
         /// </returns>
         [DllImport(Constants.User32, SetLastError = true)]
-        internal static extern IntPtr GetWindow(IntPtr hWnd, GetWindowType uCmd);
+        public static extern IntPtr GetWindow(IntPtr hWnd, GetWindowType uCmd);
 
 
         [DllImport(Constants.User32, EntryPoint = "CreateWindowExW", SetLastError = true)]
@@ -386,13 +386,13 @@ namespace ScreenToGif.Native.External
         /// elapse between a first click and a second click for the OS to
         /// consider the mouse action a double-click.</returns>
         [DllImport(Constants.User32, CharSet = CharSet.Auto, ExactSpelling = true)]
-        internal static extern int GetDoubleClickTime();
+        public static extern int GetDoubleClickTime();
 
         [DllImport(Constants.User32, CharSet = CharSet.Auto)]
-        internal static extern bool EnumDisplayDevices(string lpDevice, uint iDevNum, ref DisplayDevices lpDisplayDevices, uint dwFlags);
+        public static extern bool EnumDisplayDevices(string lpDevice, uint iDevNum, ref DisplayDevices lpDisplayDevices, uint dwFlags);
 
         [DllImport(Constants.User32, SetLastError = true)]
-        internal static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, SetWindowPosFlags uFlags);
+        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, SetWindowPosFlags uFlags);
 
         /// <summary>
         /// The SetWindowsHookEx function installs an application-defined hook procedure into a hook chain. 
@@ -425,7 +425,7 @@ namespace ScreenToGif.Native.External
         /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
         /// </remarks>
         [DllImport(Constants.User32, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        internal static extern int SetWindowsHookEx(int idHook, Delegates.HookProc lpfn, IntPtr hMod, int dwThreadId);
+        public static extern int SetWindowsHookEx(int idHook, Delegates.HookProc lpfn, IntPtr hMod, int dwThreadId);
 
         /// <summary>
         /// The UnhookWindowsHookEx function removes a hook procedure installed in a hook chain by the SetWindowsHookEx function. 
@@ -441,7 +441,7 @@ namespace ScreenToGif.Native.External
         /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
         /// </remarks>
         [DllImport(Constants.User32, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        internal static extern int UnhookWindowsHookEx(int idHook);
+        public static extern int UnhookWindowsHookEx(int idHook);
 
         /// <summary>
         /// The CallNextHookEx function passes the hook information to the next hook procedure in the current hook chain. 
@@ -469,7 +469,7 @@ namespace ScreenToGif.Native.External
         /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
         /// </remarks>
         [DllImport(Constants.User32, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        internal static extern IntPtr CallNextHookEx(int idHook, int nCode, uint wParam, IntPtr lParam);
+        public static extern IntPtr CallNextHookEx(int idHook, int nCode, uint wParam, IntPtr lParam);
 
         /// <summary>
         /// The ToAscii function translates the specified virtual-key code and keyboard 

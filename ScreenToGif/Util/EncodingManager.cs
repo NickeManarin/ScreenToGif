@@ -598,7 +598,7 @@ internal class EncodingManager
 
                         case EncoderTypes.FFmpeg:
                         {
-                            EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
+                            await EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
                             break;
                         }
                     }
@@ -771,7 +771,7 @@ internal class EncodingManager
                             break;
 
                         case EncoderTypes.FFmpeg:
-                            EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
+                            await EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
                             break;
 
                         case EncoderTypes.Gifski:
@@ -791,15 +791,73 @@ internal class EncodingManager
 
                             var size = project.FramesFiles[0].Path.ScaledSize();
 
-                            using var gifski = new GifskiInterop();
-                            var handle = gifski.Start((uint)size.Width, (uint)size.Height, gifskiGifPreset.Quality, gifskiGifPreset.Looped, gifskiGifPreset.Fast);
-
-                            if (gifski.IsOlderThan0Dot9)
+                            try
                             {
-                                #region Older
+                                using var gifski = new GifskiInterop();
+                                var handle = gifski.Start((uint)size.Width, (uint)size.Height, gifskiGifPreset.Quality, gifskiGifPreset.RepeatForever, gifskiGifPreset.Fast);
 
-                                ThreadPool.QueueUserWorkItem(delegate
+                                if (gifski.IsOlderThan0Dot9)
                                 {
+                                    #region Older
+
+                                    ThreadPool.QueueUserWorkItem(delegate
+                                    {
+                                        Thread.Sleep(500);
+
+                                        if (GetStatus(id) == EncodingStatus.Error)
+                                            return;
+
+                                        Update(id, EncodingStatus.Processing, null, false);
+
+                                        GifskiErrorCodes res;
+
+                                        try
+                                        {
+                                            for (var i = 0; i < project.FramesFiles.Count; i++)
+                                            {
+                                                #region Cancellation
+
+                                                if (tokenSource.Token.IsCancellationRequested)
+                                                {
+                                                    Update(id, EncodingStatus.Canceled);
+                                                    break;
+                                                }
+
+                                                #endregion
+
+                                                Update(id, i, string.Format(processing, i));
+
+                                                res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay);
+
+                                                if (res != GifskiErrorCodes.Ok)
+                                                    throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
+                                            }
+
+                                            res = gifski.EndAdding(handle);
+
+                                            if (res != GifskiErrorCodes.Ok)
+                                                throw new Exception("Error while finishing adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
+                                        }
+                                        catch (Exception eee)
+                                        {
+                                            LogWriter.Log(eee, "encode with gifski");
+                                        }
+
+                                    }, null);
+
+                                    gifski.End(handle, gifskiGifPreset.FullPath);
+
+                                    #endregion
+                                }
+                                else
+                                {
+                                    #region Version 0.9.3 and newer
+
+                                    var res = gifski.SetOutput(handle, gifskiGifPreset.FullPath);
+
+                                    if (res != GifskiErrorCodes.Ok)
+                                        throw new Exception("Error while setting output with Gifski. " + res, new Win32Exception()) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
+
                                     Thread.Sleep(500);
 
                                     if (GetStatus(id) == EncodingStatus.Error)
@@ -807,7 +865,7 @@ internal class EncodingManager
 
                                     Update(id, EncodingStatus.Processing, null, false);
 
-                                    GifskiErrorCodes res;
+                                    var lastDelay = project.FramesFiles[project.FramesFiles.Count - 1].Delay / 1000d;
 
                                     for (var i = 0; i < project.FramesFiles.Count; i++)
                                     {
@@ -823,65 +881,26 @@ internal class EncodingManager
 
                                         Update(id, i, string.Format(processing, i));
 
-                                        res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay);
+                                        System.Diagnostics.Debug.WriteLine($"Frame: {i}");
+
+                                        res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay, lastDelay, i + 1 == project.FramesFiles.Count);
+
+                                        System.Diagnostics.Debug.WriteLine($"Ok: {i}");
 
                                         if (res != GifskiErrorCodes.Ok)
                                             throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
                                     }
 
-                                    res = gifski.EndAdding(handle);
+                                    Update(id, EncodingStatus.Processing, null, false);
 
-                                    if (res != GifskiErrorCodes.Ok)
-                                        throw new Exception("Error while finishing adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
-                                }, null);
-
-                                gifski.End(handle, gifskiGifPreset.FullPath);
-
-                                #endregion
-                            }
-                            else
-                            {
-                                #region Version 0.9.3 and newer
-
-                                var res = gifski.SetOutput(handle, gifskiGifPreset.FullPath);
-
-                                if (res != GifskiErrorCodes.Ok)
-                                    throw new Exception("Error while setting output with Gifski. " + res, new Win32Exception()) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
-
-                                Thread.Sleep(500);
-
-                                if (GetStatus(id) == EncodingStatus.Error)
-                                    return;
-
-                                Update(id, EncodingStatus.Processing, null, false);
-
-                                var lastDelay = project.FramesFiles[project.FramesFiles.Count - 1].Delay / 1000d;
-
-                                for (var i = 0; i < project.FramesFiles.Count; i++)
-                                {
-                                    #region Cancellation
-
-                                    if (tokenSource.Token.IsCancellationRequested)
-                                    {
-                                        Update(id, EncodingStatus.Canceled);
-                                        break;
-                                    }
+                                    gifski.EndAdding(handle);
 
                                     #endregion
-
-                                    Update(id, i, string.Format(processing, i));
-
-                                    res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay, lastDelay, i + 1 == project.FramesFiles.Count);
-
-                                    if (res != GifskiErrorCodes.Ok)
-                                        throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
                                 }
-
-                                Update(id, EncodingStatus.Processing, null, false);
-
-                                gifski.EndAdding(handle);
-
-                                #endregion
+                            }
+                            catch (Exception exx)
+                            {
+                                LogWriter.Log(exx, "gifski");
                             }
 
                             var fileInfo2 = new FileInfo(gifskiGifPreset.FullPath);
@@ -932,23 +951,19 @@ internal class EncodingManager
                             {
                                 case ExportFormats.Bmp:
                                 {
-                                    using (var fileStream = new FileStream(path, FileMode.Create))
-                                    {
-                                        var bmpEncoder = new BmpBitmapEncoder();
-                                        bmpEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
-                                        bmpEncoder.Save(fileStream);
-                                    }
+                                    using var fileStream = new FileStream(path, FileMode.Create);
+                                    var bmpEncoder = new BmpBitmapEncoder();
+                                    bmpEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
+                                    bmpEncoder.Save(fileStream);
 
                                     break;
                                 }
                                 case ExportFormats.Jpeg:
                                 {
-                                    using (var fileStream = new FileStream(path, FileMode.Create))
-                                    {
-                                        var jpgEncoder = new JpegBitmapEncoder { QualityLevel = 100 };
-                                        jpgEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
-                                        jpgEncoder.Save(fileStream);
-                                    }
+                                    using var fileStream = new FileStream(path, FileMode.Create);
+                                    var jpgEncoder = new JpegBitmapEncoder { QualityLevel = 100 };
+                                    jpgEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
+                                    jpgEncoder.Save(fileStream);
 
                                     break;
                                 }
@@ -1039,7 +1054,7 @@ internal class EncodingManager
                 {
                     #region FFmpeg
 
-                    EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
+                    await EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
 
                     Update(id, 1, watch.Elapsed);
                     watch.Restart();
@@ -1382,11 +1397,11 @@ internal class EncodingManager
             await stream.FlushAsync(cancellationToken);
     }
 
-    private static void EncodeWithFfmpeg(ExportPreset preset, List<IFrame> listFrames, int id, CancellationTokenSource tokenSource, string processing)
+    private static async Task EncodeWithFfmpeg(ExportPreset preset, List<IFrame> listFrames, int id, CancellationTokenSource tokenSource, string processing)
     {
         Update(id, EncodingStatus.Processing, null, true);
 
-        if (!PathHelper.IsFfmpegPresent())
+        if (!await PathHelper.IsFfmpegPresent())
             throw new ApplicationException("FFmpeg not present.");
 
         if (File.Exists(preset.FullPath))
@@ -1462,7 +1477,7 @@ internal class EncodingManager
                     //Vsync
                     if (gifPreset.Vsync != Vsyncs.Off)
                     {
-                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                        if (UserSettings.All.HasOlderFfmpegVersion)
                             firstPass += "-fps_mode " + gifPreset.Vsync.GetLowerDescription();
                         else
                             firstPass += "-vsync " + gifPreset.Vsync.GetLowerDescription();
@@ -1509,7 +1524,7 @@ internal class EncodingManager
                     //Vsync
                     if (apngPreset.Vsync != Vsyncs.Off)
                     {
-                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                        if (UserSettings.All.HasOlderFfmpegVersion)
                             firstPass += "-fps_mode " + apngPreset.Vsync.GetLowerDescription();
                         else
                             firstPass += "-vsync " + apngPreset.Vsync.GetLowerDescription();
@@ -1566,7 +1581,7 @@ internal class EncodingManager
                     //Vsync
                     if (webpPreset.Vsync != Vsyncs.Off)
                     {
-                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                        if (UserSettings.All.HasOlderFfmpegVersion)
                             firstPass += "-fps_mode " + webpPreset.Vsync.GetLowerDescription();
                         else
                             firstPass += "-vsync " + webpPreset.Vsync.GetLowerDescription();
@@ -1620,7 +1635,7 @@ internal class EncodingManager
                     //Vsync
                     if (avifPreset.Vsync != Vsyncs.Off)
                     {
-                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                        if (UserSettings.All.HasOlderFfmpegVersion)
                             firstPass += "-fps_mode " + avifPreset.Vsync.GetLowerDescription();
                         else
                             firstPass += "-vsync " + avifPreset.Vsync.GetLowerDescription();
@@ -1735,7 +1750,7 @@ internal class EncodingManager
                     //Vsync
                     if (videoPreset.Vsync != Vsyncs.Off)
                     {
-                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                        if (UserSettings.All.HasOlderFfmpegVersion)
                             firstPass += "-fps_mode " + videoPreset.Vsync.GetLowerDescription();
                         else
                             firstPass += "-vsync " + videoPreset.Vsync.GetLowerDescription();

@@ -9,7 +9,7 @@ namespace ScreenToGif.Native.Structs;
 /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct
 /// </remarks>
 [StructLayout(LayoutKind.Sequential)]
-internal class MouseHook
+public class MouseHook
 {
     /// <summary>
     /// Specifies a POINT structure that contains the X and Y coordinates of the cursor, in screen coordinates. 

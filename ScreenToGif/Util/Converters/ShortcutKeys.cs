@@ -1,3 +1,4 @@
+using ScreenToGif.Util.Helpers;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -14,11 +15,11 @@ public class ShortcutKeys : IValueConverter
         switch (param)
         {
             case "1": //Start/Pause
-                return Native.Helpers.Other.GetSelectKeyText(UserSettings.All.StartPauseShortcut, UserSettings.All.StartPauseModifiers, true, true);
+                return KeyHelper.GetSelectKeyText(UserSettings.All.StartPauseShortcut, UserSettings.All.StartPauseModifiers, true, true);
             case "2": //Stop
-                return Native.Helpers.Other.GetSelectKeyText(UserSettings.All.StopShortcut, UserSettings.All.StopModifiers, true, true);
+                return KeyHelper.GetSelectKeyText(UserSettings.All.StopShortcut, UserSettings.All.StopModifiers, true, true);
             case "3": //Discard
-                return Native.Helpers.Other.GetSelectKeyText(UserSettings.All.DiscardShortcut, UserSettings.All.DiscardModifiers, true, true);
+                return KeyHelper.GetSelectKeyText(UserSettings.All.DiscardShortcut, UserSettings.All.DiscardModifiers, true, true);
         }
 
         return "";

@@ -19,9 +19,9 @@ public class HotKey : IDisposable
 
     #region Properties
 
-    internal ModifierKeys Modifier { get; }
+    public ModifierKeys Modifier { get; }
 
-    internal Key Key { get; }
+    public Key Key { get; }
 
     #endregion
 

@@ -61,9 +61,42 @@
     <s:String x:Key="S.Warning.Graphics.Switch">Abra as Configurações do Windows</s:String>
     
     <!--Keys-->
-    <s:String x:Key="S.Keys.Enter">Enter</s:String>  
-    <s:String x:Key="S.Keys.Esc">Esc</s:String>  
-    <s:String x:Key="S.Keys.Space">Espaço</s:String>  
+    <s:String x:Key="S.Keys.Backspace">Backspace</s:String>
+    <s:String x:Key="S.Keys.Tab">Tab</s:String>
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>
+    <s:String x:Key="S.Keys.PauseBreak">Pause/Break</s:String>
+    <s:String x:Key="S.Keys.CapsLock">Caps Lock</s:String>
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>
+    <s:String x:Key="S.Keys.Space">Espaço</s:String>
+    <s:String x:Key="S.Keys.PageUp">Page Up</s:String>
+    <s:String x:Key="S.Keys.PageDown">Page Down</s:String>
+    <s:String x:Key="S.Keys.Home">Home</s:String>
+    <s:String x:Key="S.Keys.End">End</s:String>
+    <s:String x:Key="S.Keys.Left">Seta Esquerda</s:String>
+    <s:String x:Key="S.Keys.Up">Seta Cima</s:String>
+    <s:String x:Key="S.Keys.Right">Seta Direita</s:String>
+    <s:String x:Key="S.Keys.Down">Seta Baixo</s:String>
+    <s:String x:Key="S.Keys.PrintScreen">Print Screen</s:String>
+    <s:String x:Key="S.Keys.Insert">Insert</s:String>
+    <s:String x:Key="S.Keys.Delete">Excluir</s:String>
+    <s:String x:Key="S.Keys.NumLock">Num Lock</s:String>
+    <s:String x:Key="S.Keys.ScrollLock">Scroll Lock</s:String>
+    <s:String x:Key="S.Keys.Shift">Shift</s:String>
+    <s:String x:Key="S.Keys.LeftShift">Shift Esquerdo</s:String>
+    <s:String x:Key="S.Keys.RightShift">Shift Direito</s:String>
+    <s:String x:Key="S.Keys.Alt">Alt</s:String>
+    <s:String x:Key="S.Keys.LeftAlt">Alt Esquerdo</s:String>
+    <s:String x:Key="S.Keys.RightAlt">Alt Direito</s:String>
+    <s:String x:Key="S.Keys.Ctrl">Control</s:String>
+    <s:String x:Key="S.Keys.LeftCtrl">Ctrl Esquerdo</s:String>
+    <s:String x:Key="S.Keys.RightCtrl">Ctrl Direito</s:String>
+    <s:String x:Key="S.Keys.Windows">Windows</s:String>
+    <s:String x:Key="S.Keys.LeftWindows">Windows Esquerdo</s:String>
+    <s:String x:Key="S.Keys.RightWindows">Windows Direito</s:String>
+    <s:String x:Key="S.Keys.NextTrack">Próxima Faixa</s:String>
+    <s:String x:Key="S.Keys.PreviousTrack">Faixa Anterior</s:String>
+    <s:String x:Key="S.Keys.PlayPause">Play/Pause</s:String>
+    <s:String x:Key="S.Keys.Stop">Parar</s:String>
 
     <!--Mouse-->
     <s:String x:Key="S.Mouse.Right">Botão direito</s:String>  
@@ -1348,6 +1381,8 @@
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">Pressionamentos de teclas modificadoras sem formar nenhum comando serão ignoradas,&#x0d;por exemplo, a tecla "Control" sozinha será ignorada, mas o comando "Control + C" não.</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreInjected">Ignore as teclas simuladas de software.</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Apenas capture os pressionamentos de teclas do usuário.</s:String>
+    <s:String x:Key="S.KeyStrokes.Translate">Traduza as teclas especiais.</s:String>
+    <s:String x:Key="S.KeyStrokes.Translate.Info">Útil se o idioma do aplicativo não é inglês.</s:String>
     <s:String x:Key="S.KeyStrokes.Extend">Extender a exibição do pressionamento de teclas:</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">Exiba o pressionamento de tecla mais cedo:</s:String>
     <s:String x:Key="S.KeyStrokes.By">Por (ms):</s:String>

@@ -21,12 +21,13 @@ public static class ProcessHelper
         }
     }
 
-    public static async Task<string> Start(string arguments, bool runWithPowershell = true)
+    public static async Task<string> Start(string arguments, bool runWithPowershell = true, bool redirectError = false)
     {
         var info = new ProcessStartInfo(runWithPowershell ? "Powershell.exe" : "cmd.exe")
         {
             Arguments = (!runWithPowershell ? "/c " : "") + arguments,
             RedirectStandardOutput = true,
+            RedirectStandardError = redirectError,
             CreateNoWindow = true
         };
 
@@ -36,11 +37,13 @@ public static class ProcessHelper
             process.StartInfo = info;
             process.Start();
 
-            var message = await process.StandardOutput.ReadToEndAsync();
+            var outputTask = process.StandardOutput.ReadToEndAsync();
+            var errorTask = redirectError ? process.StandardError.ReadToEndAsync() : null;
 
+            await Task.WhenAll(outputTask, errorTask ?? Task.CompletedTask);
             await process.WaitForExitAsync();
 
-            return message;
+            return outputTask.Result + errorTask?.Result;
         }
         catch (Exception e)
         {

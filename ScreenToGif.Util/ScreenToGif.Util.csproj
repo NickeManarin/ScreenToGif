@@ -8,9 +8,9 @@
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="KGySoft.CoreLibraries" Version="8.1.0" />
-    <PackageReference Include="SharpCompress" Version="0.40.0" />
-    <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
+    <PackageReference Include="KGySoft.CoreLibraries" />
+    <PackageReference Include="SharpCompress" />
+    <PackageReference Include="System.Drawing.Common" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <UseVSHostingProcess>true</UseVSHostingProcess>
@@ -63,5 +63,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ScreenToGif.Model\ScreenToGif.Domain.csproj" />
+    <ProjectReference Include="..\ScreenToGif.Native\ScreenToGif.Native.csproj" />
   </ItemGroup>
 </Project>

@@ -70,7 +70,7 @@ public partial class RegionSelector : Window
         else if (mode == ModeType.Window)
         {
             //Get only the windows that are located inside the given screen.
-            var win = Native.Helpers.Windows.EnumerateWindowsByMonitor(monitor);
+            var win = WindowHelper.EnumerateWindowsByMonitor(monitor);
 
             //Since each region selector is attached to a single screen, the list of positions must be translated.
             SelectControl.Windows = win.AdjustPosition(monitor.Bounds.Left, monitor.Bounds.Top);

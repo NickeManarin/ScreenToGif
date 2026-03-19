@@ -1,0 +1,18 @@
+<UserControl x:Class="ScreenToGif.UserControls.ImageViewer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             x:Name="Viewer"
+             Unloaded="ImageViewer_OnUnloaded">
+    <ScrollViewer x:Name="ScrollContainer" CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                  PreviewMouseWheel="ScrollContainer_OnPreviewMouseWheel"
+                  PreviewMouseLeftButtonDown="ScrollContainer_OnPreviewMouseLeftButtonDown"
+                  MouseMove="ScrollContainer_OnMouseMove"
+                  MouseLeftButtonUp="ScrollContainer_OnMouseLeftButtonUp"
+                  ScrollChanged="ScrollContainer_OnScrollChanged">
+        <Image x:Name="DisplayImage" Source="{Binding ElementName=Viewer, Path=Source, Mode=OneWay}"
+               Stretch="None" SnapsToDevicePixels="True" HorizontalAlignment="Center" VerticalAlignment="Center" MouseWheel="DisplayImage_OnMouseWheel"/>
+    </ScrollViewer>
+</UserControl>

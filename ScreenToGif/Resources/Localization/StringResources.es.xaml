@@ -50,7 +50,45 @@
     <s:String x:Key="S.NewWebcamRecording">Nueva grabación de webcam</s:String>
     <s:String x:Key="S.NewBoardRecording">Nueva grabación de pizarra</s:String>
     <s:String x:Key="S.Exit">Salir</s:String>
-    
+
+    <!--Keys-->
+    <s:String x:Key="S.Keys.Backspace">Retroceso</s:String>
+    <s:String x:Key="S.Keys.Tab">Tabulador</s:String>
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>
+    <s:String x:Key="S.Keys.PauseBreak">Pausa/Interrupción</s:String>
+    <s:String x:Key="S.Keys.CapsLock">Bloq Mayús</s:String>
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>
+    <s:String x:Key="S.Keys.Space">Espacio</s:String>
+    <s:String x:Key="S.Keys.PageUp">Re Pág</s:String>
+    <s:String x:Key="S.Keys.PageDown">Av Pág</s:String>
+    <s:String x:Key="S.Keys.Home">Inicio</s:String>
+    <s:String x:Key="S.Keys.End">Fin</s:String>
+    <s:String x:Key="S.Keys.Left">Flecha izquierda</s:String>
+    <s:String x:Key="S.Keys.Up">Flecha arriba</s:String>
+    <s:String x:Key="S.Keys.Right">Flecha derecha</s:String>
+    <s:String x:Key="S.Keys.Down">Flecha abajo</s:String>
+    <s:String x:Key="S.Keys.PrintScreen">Impr Pant</s:String>
+    <s:String x:Key="S.Keys.Insert">Insertar</s:String>
+    <s:String x:Key="S.Keys.Delete">Eliminar</s:String>
+    <s:String x:Key="S.Keys.NumLock">Bloq Num</s:String>
+    <s:String x:Key="S.Keys.ScrollLock">Bloq Despl</s:String>
+    <s:String x:Key="S.Keys.Shift">Shift</s:String>
+    <s:String x:Key="S.Keys.LeftShift">Shift izquierdo</s:String>
+    <s:String x:Key="S.Keys.RightShift">Shift derecho</s:String>
+    <s:String x:Key="S.Keys.Alt">Alt</s:String>
+    <s:String x:Key="S.Keys.LeftAlt">Alt izquierdo</s:String>
+    <s:String x:Key="S.Keys.RightAlt">Alt derecho</s:String>
+    <s:String x:Key="S.Keys.Ctrl">Control</s:String>
+    <s:String x:Key="S.Keys.LeftCtrl">Ctrl izquierdo</s:String>
+    <s:String x:Key="S.Keys.RightCtrl">Ctrl derecho</s:String>
+    <s:String x:Key="S.Keys.Windows">Windows</s:String>
+    <s:String x:Key="S.Keys.LeftWindows">Windows izquierdo</s:String>
+    <s:String x:Key="S.Keys.RightWindows">Windows derecho</s:String>
+    <s:String x:Key="S.Keys.NextTrack">Pista siguiente</s:String>
+    <s:String x:Key="S.Keys.PreviousTrack">Pista anterior</s:String>
+    <s:String x:Key="S.Keys.PlayPause">Reproducir/Pausar</s:String>
+    <s:String x:Key="S.Keys.Stop">Detener</s:String>
+
     <!--Commands-->
     <s:String x:Key="S.Command.NewRecording">Nueva grabación de pantalla</s:String>
     <s:String x:Key="S.Command.NewWebcamRecording">Nueva grabación de webcam</s:String>

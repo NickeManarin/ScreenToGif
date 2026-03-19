@@ -13,7 +13,6 @@ using ScreenToGif.Domain.Models;
 using ScreenToGif.Model;
 using ScreenToGif.Native.External;
 using ScreenToGif.Native.Structs;
-using ScreenToGif.Util.Settings;
 
 namespace ScreenToGif.Util;
 
@@ -315,45 +314,6 @@ public static class Other
         list.Insert(newIndex, item);
 
         return list;
-    }
-
-    #endregion
-
-    #region Event Helper
-
-    /// <summary>
-    /// Removes all event handlers subscribed to the specified routed event from the specified element.
-    /// http://stackoverflow.com/a/12618521/1735672
-    /// </summary>
-    /// <param name="element">The UI element on which the routed event is defined.</param>
-    /// <param name="routedEvent">The routed event for which to remove the event handlers.</param>
-    public static void RemoveRoutedEventHandlers(UIElement element, RoutedEvent routedEvent)
-    {
-        try
-        {
-            //Get the EventHandlersStore instance which holds event handlers for the specified element.
-            //The EventHandlersStore class is declared as internal.
-            var eventHandlersStoreProperty = typeof(UIElement).GetProperty("EventHandlersStore", BindingFlags.Instance | BindingFlags.NonPublic);
-
-            var eventHandlersStore = eventHandlersStoreProperty?.GetValue(element, null);
-
-            //If no event handlers are subscribed, eventHandlersStore will be null.
-            if (eventHandlersStore == null)
-                return;
-
-            //Invoke the GetRoutedEventHandlers method on the EventHandlersStore instance for getting an array of the subscribed event handlers.
-            var getRoutedEventHandlers = eventHandlersStore.GetType().GetMethod("GetRoutedEventHandlers", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-
-            var routedEventHandlers = (RoutedEventHandlerInfo[])getRoutedEventHandlers.Invoke(eventHandlersStore, new object[] { routedEvent });
-
-            //Iteratively remove all routed event handlers from the element.
-            foreach (var routedEventHandler in routedEventHandlers)
-                element.RemoveHandler(routedEvent, routedEventHandler.Handler);
-        }
-        catch (Exception ex)
-        {
-            LogWriter.Log(ex, "Removing event handlers");
-        }
     }
 
     #endregion

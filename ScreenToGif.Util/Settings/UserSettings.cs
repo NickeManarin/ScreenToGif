@@ -1547,6 +1547,18 @@ public class UserSettings : INotifyPropertyChanged
         set => SetValue(value);
     }
 
+    public string FfmpegVersionText
+    {
+        get => (string)GetValue();
+        set => SetValue(value);
+    }
+
+    public bool HasOlderFfmpegVersion
+    {
+        get => (bool)GetValue();
+        set => SetValue(value);
+    }
+
     public SupportedFFmpegVersions FfmpegVersion
     {
         get => (SupportedFFmpegVersions)GetValue();
@@ -1871,6 +1883,12 @@ public class UserSettings : INotifyPropertyChanged
     }
 
     public bool KeyStrokesIgnoreInjected
+    {
+        get => (bool)GetValue();
+        set => SetValue(value);
+    }
+
+    public bool KeyStrokesTranslate
     {
         get => (bool)GetValue();
         set => SetValue(value);

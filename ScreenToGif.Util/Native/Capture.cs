@@ -5,6 +5,7 @@ using ScreenToGif.Domain.Enums.Native;
 using ScreenToGif.Native.External;
 using ScreenToGif.Native.Structs;
 using ScreenToGif.Util;
+using System.Drawing;
 
 namespace ScreenToGif.Native.Helpers
 {
@@ -35,7 +36,7 @@ namespace ScreenToGif.Native.Helpers
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Impossible to get screenshot of the screen");
+                //LogWriter.Log(ex, "Impossible to get screenshot of the screen");
             }
             finally
             {
@@ -87,7 +88,7 @@ namespace ScreenToGif.Native.Helpers
 
         public static Image CaptureWindow(IntPtr handle, double scale)
         {
-            var rectangle = Windows.GetWindowRect(handle);
+            var rectangle = WindowHelper.GetWindowRect(handle);
             var posX = (int)((rectangle.X + Util.Constants.LeftOffset) * scale);
             var posY = (int)((rectangle.Y + Util.Constants.TopOffset) * scale);
             var width = (int)((rectangle.Width - Util.Constants.HorizontalOffset) * scale);

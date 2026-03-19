@@ -1,3 +1,4 @@
+using ScreenToGif.Util.Helpers;
 using ScreenToGif.Util.Settings;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -49,7 +50,7 @@ public static class PathHelper
         return path;
     }
 
-    public static bool IsFfmpegPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
+    public static async Task<bool> IsFfmpegPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
     {
         //If the path is relative, File.Exists() was returning C:\\Windows\\System32\ffmpeg.exe when the app was launched from the "Open with" context menu.
         //So, in order to get the correct location, I need to combine the current base directory with the relative path.
@@ -57,7 +58,10 @@ public static class PathHelper
 
         //File location already chosen or detected.
         if (!string.IsNullOrWhiteSpace(realPath) && File.Exists(realPath))
+        {
+            await CheckFfmpegVersion(realPath);
             return true;
+        }
 
         //The path was not selected, it may be located inside a common folder.
         if (!ignoreEmpty && string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation))
@@ -66,6 +70,7 @@ public static class PathHelper
             if (File.Exists(AdjustPath("ffmpeg.exe")))
             {
                 UserSettings.All.FfmpegLocation = "ffmpeg.exe";
+                await CheckFfmpegVersion(UserSettings.All.FfmpegLocation);
                 return true;
             }
 
@@ -75,6 +80,7 @@ public static class PathHelper
             if (File.Exists(expandedPath))
             {
                 UserSettings.All.FfmpegLocation = expandedPath;
+                await CheckFfmpegVersion(UserSettings.All.FfmpegLocation);
                 return true;
             }
         }
@@ -102,12 +108,27 @@ public static class PathHelper
             }
 
             UserSettings.All.FfmpegLocation = Path.Combine(path, "ffmpeg.exe");
+            await CheckFfmpegVersion(UserSettings.All.FfmpegLocation);
             return true;
         }
 
         #endregion
 
         return false;
+    }
+
+    private static async Task CheckFfmpegVersion(string realPath)
+    {
+        //If ffmpeg was detected from elsewhere or was downloaded a long time ago.
+        if (UserSettings.All.FfmpegVersionText is null)
+        {
+            //Call FFmpeg to check its version.
+            var output = await ProcessHelper.Start(realPath + " -version", false, true);
+
+            //Check the output to determine the FFmpeg version.
+            UserSettings.All.FfmpegVersionText = FfmpegHelper.IdentifyVersion(output);
+            UserSettings.All.HasOlderFfmpegVersion = FfmpegHelper.IsOlder(UserSettings.All.FfmpegVersionText);
+        }
     }
 
     public static bool IsGifskiPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
