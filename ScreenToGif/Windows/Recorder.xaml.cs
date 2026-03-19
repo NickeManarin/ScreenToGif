@@ -22,6 +22,7 @@ using ScreenToGif.Native.Helpers;
 using ScreenToGif.Native.Structs;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Extensions;
+using ScreenToGif.Util.Helpers;
 using ScreenToGif.Util.Settings;
 using ScreenToGif.ViewModel;
 using ScreenToGif.Windows.Other;
@@ -569,7 +570,7 @@ public partial class Recorder
             Native.Helpers.Other.DrawFrame(handle, scale);
         }
 
-        var rect = Native.Helpers.Windows.TrueWindowRectangle(handle);
+        var rect = WindowHelper.TrueWindowRectangle(handle);
 
         #endregion
 
@@ -1422,7 +1423,7 @@ public partial class Recorder
 
         //Detect closest screen to the point (previously selected top/left point or current mouse coordinate).
         var point = startup ? (double.IsNaN(UserSettings.All.RecorderTop) || double.IsNaN(UserSettings.All.RecorderLeft) ?
-            Native.Helpers.Other.GetMousePosition(_scale, Left, Top) : new Point((int)UserSettings.All.RecorderLeft, (int)UserSettings.All.RecorderTop)) : new Point((int) Left, (int) Top);
+            CursorHelper.GetMousePosition(_scale, Left, Top) : new Point((int)UserSettings.All.RecorderLeft, (int)UserSettings.All.RecorderTop)) : new Point((int) Left, (int) Top);
         var closest = _viewModel.Monitors.FirstOrDefault(x => x.Bounds.Contains(point)) ?? _viewModel.Monitors.FirstOrDefault(x => x.IsPrimary) ?? _viewModel.Monitors.FirstOrDefault();
 
         if (closest == null)

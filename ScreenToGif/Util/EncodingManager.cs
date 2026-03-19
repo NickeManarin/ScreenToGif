@@ -598,7 +598,7 @@ internal class EncodingManager
 
                         case EncoderTypes.FFmpeg:
                         {
-                            EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
+                            await EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
                             break;
                         }
                     }
@@ -771,7 +771,7 @@ internal class EncodingManager
                             break;
 
                         case EncoderTypes.FFmpeg:
-                            EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
+                            await EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
                             break;
 
                         case EncoderTypes.Gifski:
@@ -794,7 +794,7 @@ internal class EncodingManager
                             try
                             {
                                 using var gifski = new GifskiInterop();
-                                var handle = gifski.Start((uint)size.Width, (uint)size.Height, gifskiGifPreset.Quality, gifskiGifPreset.Looped, gifskiGifPreset.Fast);
+                                var handle = gifski.Start((uint)size.Width, (uint)size.Height, gifskiGifPreset.Quality, gifskiGifPreset.RepeatForever, gifskiGifPreset.Fast);
 
                                 if (gifski.IsOlderThan0Dot9)
                                 {
@@ -951,23 +951,19 @@ internal class EncodingManager
                             {
                                 case ExportFormats.Bmp:
                                 {
-                                    using (var fileStream = new FileStream(path, FileMode.Create))
-                                    {
-                                        var bmpEncoder = new BmpBitmapEncoder();
-                                        bmpEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
-                                        bmpEncoder.Save(fileStream);
-                                    }
+                                    using var fileStream = new FileStream(path, FileMode.Create);
+                                    var bmpEncoder = new BmpBitmapEncoder();
+                                    bmpEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
+                                    bmpEncoder.Save(fileStream);
 
                                     break;
                                 }
                                 case ExportFormats.Jpeg:
                                 {
-                                    using (var fileStream = new FileStream(path, FileMode.Create))
-                                    {
-                                        var jpgEncoder = new JpegBitmapEncoder { QualityLevel = 100 };
-                                        jpgEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
-                                        jpgEncoder.Save(fileStream);
-                                    }
+                                    using var fileStream = new FileStream(path, FileMode.Create);
+                                    var jpgEncoder = new JpegBitmapEncoder { QualityLevel = 100 };
+                                    jpgEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
+                                    jpgEncoder.Save(fileStream);
 
                                     break;
                                 }
@@ -1058,7 +1054,7 @@ internal class EncodingManager
                 {
                     #region FFmpeg
 
-                    EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
+                    await EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
 
                     Update(id, 1, watch.Elapsed);
                     watch.Restart();
@@ -1401,11 +1397,11 @@ internal class EncodingManager
             await stream.FlushAsync(cancellationToken);
     }
 
-    private static void EncodeWithFfmpeg(ExportPreset preset, List<IFrame> listFrames, int id, CancellationTokenSource tokenSource, string processing)
+    private static async Task EncodeWithFfmpeg(ExportPreset preset, List<IFrame> listFrames, int id, CancellationTokenSource tokenSource, string processing)
     {
         Update(id, EncodingStatus.Processing, null, true);
 
-        if (!PathHelper.IsFfmpegPresent())
+        if (!await PathHelper.IsFfmpegPresent())
             throw new ApplicationException("FFmpeg not present.");
 
         if (File.Exists(preset.FullPath))
@@ -1481,7 +1477,7 @@ internal class EncodingManager
                     //Vsync
                     if (gifPreset.Vsync != Vsyncs.Off)
                     {
-                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                        if (UserSettings.All.HasOlderFfmpegVersion)
                             firstPass += "-fps_mode " + gifPreset.Vsync.GetLowerDescription();
                         else
                             firstPass += "-vsync " + gifPreset.Vsync.GetLowerDescription();
@@ -1528,7 +1524,7 @@ internal class EncodingManager
                     //Vsync
                     if (apngPreset.Vsync != Vsyncs.Off)
                     {
-                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                        if (UserSettings.All.HasOlderFfmpegVersion)
                             firstPass += "-fps_mode " + apngPreset.Vsync.GetLowerDescription();
                         else
                             firstPass += "-vsync " + apngPreset.Vsync.GetLowerDescription();
@@ -1585,7 +1581,7 @@ internal class EncodingManager
                     //Vsync
                     if (webpPreset.Vsync != Vsyncs.Off)
                     {
-                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                        if (UserSettings.All.HasOlderFfmpegVersion)
                             firstPass += "-fps_mode " + webpPreset.Vsync.GetLowerDescription();
                         else
                             firstPass += "-vsync " + webpPreset.Vsync.GetLowerDescription();
@@ -1639,7 +1635,7 @@ internal class EncodingManager
                     //Vsync
                     if (avifPreset.Vsync != Vsyncs.Off)
                     {
-                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                        if (UserSettings.All.HasOlderFfmpegVersion)
                             firstPass += "-fps_mode " + avifPreset.Vsync.GetLowerDescription();
                         else
                             firstPass += "-vsync " + avifPreset.Vsync.GetLowerDescription();
@@ -1754,7 +1750,7 @@ internal class EncodingManager
                     //Vsync
                     if (videoPreset.Vsync != Vsyncs.Off)
                     {
-                        if (UserSettings.All.FfmpegVersion == SupportedFFmpegVersions.Version6)
+                        if (UserSettings.All.HasOlderFfmpegVersion)
                             firstPass += "-fps_mode " + videoPreset.Vsync.GetLowerDescription();
                         else
                             firstPass += "-vsync " + videoPreset.Vsync.GetLowerDescription();

@@ -1,11 +1,10 @@
-using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
 namespace ScreenToGif.Util.Converters;
 
-public class StringToStaticResource : IValueConverter
+public class KeyToResource : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

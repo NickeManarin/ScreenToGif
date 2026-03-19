@@ -32,11 +32,11 @@ public partial class Downloader
         switch (DownloadMode)
         {
             case "gifski":
-                return "https://www.screentogif.com/downloads/Gifski.zip";
+                return "https://nickemanarin.github.io/ScreenToGif-Website/downloads/Gifski.zip";
             case "ffmpeg":
             {
-                return Environment.Is64BitProcess ? "https://www.screentogif.com/downloads/FFmpeg-4.4.1-x64.zip" :
-                    "https://www.screentogif.com/downloads/FFmpeg-4.3.1-x86.zip";
+                return Environment.Is64BitProcess ? "https://nickemanarin.github.io/ScreenToGif-Website/downloads/FFmpeg-4.4.1-x64.zip" :
+                    "https://nickemanarin.github.io/ScreenToGif-Website/downloads/FFmpeg-4.3.1-x86.zip";
             }
         }
 

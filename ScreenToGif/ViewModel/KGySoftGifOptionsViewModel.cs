@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
@@ -31,6 +33,8 @@ using Color = System.Windows.Media.Color;
 
 #endregion
 
+#nullable enable
+
 namespace ScreenToGif.ViewModel;
 
 /// <summary>
@@ -38,13 +42,80 @@ namespace ScreenToGif.ViewModel;
 /// </summary>
 public class KGySoftGifOptionsViewModel : ObservableObjectBase
 {
+    #region Nested Types
+
+    private record Configuration // as a record, so equality check compares the properties
+    {
+        #region Properties
+
+        internal IReadableBitmapData? Frame { get; private init; }
+        internal string? QuantizerId { get; private init; }
+        internal string? DithererId { get; private init; }
+        internal Color BackColor { get; private init; }
+        internal byte AlphaThreshold { get; private init; }
+        internal byte WhiteThreshold { get; private init; }
+        internal bool DirectMapping { get; private init; }
+        internal int PaletteSize { get; private init; }
+        internal byte? BitLevel { get; private init; }
+        internal bool LinearColorSpace { get; private init; }
+        internal float Strength { get; private init; }
+        internal int? Seed { get; private init; }
+        internal bool IsSerpentineProcessing { get; private init; }
+
+        #endregion
+
+        #region Methods
+
+        internal static Configuration Capture(KGySoftGifOptionsViewModel viewModel) => new Configuration
+        {
+            Frame = viewModel._currentFrame,
+            QuantizerId = viewModel.QuantizerId,
+            DithererId = viewModel.DithererId,
+            BackColor = viewModel.BackColor,
+            AlphaThreshold = viewModel.AlphaThreshold,
+            WhiteThreshold = viewModel.WhiteThreshold,
+            DirectMapping = viewModel.DirectMapping,
+            PaletteSize = viewModel.PaletteSize,
+            BitLevel = viewModel.BitLevel,
+            LinearColorSpace = viewModel.LinearColorSpace,
+            Strength = viewModel.Strength,
+            Seed = viewModel.Seed,
+            IsSerpentineProcessing = viewModel.IsSerpentineProcessing,
+        };
+
+        #endregion
+
+        #region Methods
+
+        // NOTE: Cannot use KGySoftGifOptionsViewModel._preset because it mutates the same instance,
+        // and the result should not be a cached in a field either, because it would be included in record equality.
+        internal KGySoftGifPreset GetPreset() => new KGySoftGifPreset
+        {
+            QuantizerId = QuantizerId,
+            DithererId = DithererId,
+            BackColor = BackColor,
+            AlphaThreshold = AlphaThreshold,
+            WhiteThreshold = WhiteThreshold,
+            DirectMapping = DirectMapping,
+            PaletteSize = PaletteSize,
+            BitLevel = BitLevel,
+            LinearColorSpace = LinearColorSpace,
+            Strength = Strength,
+            Seed = Seed,
+            IsSerpentineProcessing = IsSerpentineProcessing
+        };
+
+        #endregion
+    }
+
+    #endregion
+
     #region Fields
 
     #region Static Fields
 
-    private static readonly HashSet<string> _affectsPreview = new()
-    {
-        // quantizer settings
+    private static readonly HashSet<string?> _affectsPreview =
+    [
         nameof(QuantizerId),
         nameof(BackColor),
         nameof(AlphaThreshold),
@@ -62,30 +133,31 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
         // preview settings
         nameof(ShowCurrentFrame)
-    };
+    ];
 
-    private static readonly HashSet<string> _affectsNotifications = new()
-    {
+    private static readonly HashSet<string?> _affectsNotifications =
+    [
         nameof(QuantizerId),
         nameof(AlphaThreshold),
         nameof(AllowDeltaFrames),
         nameof(AllowClippedFrames),
-        nameof(DeltaTolerance),
-    };
+        nameof(DeltaTolerance)
+    ];
     
-    private static bool _lastShowCurrentFrame;
-    private static string _lastDitherer;
+    private static bool _lastShowCurrentFrame = true;
+    private static string? _lastDitherer;
 
     #endregion
 
     #region Instance Fields
 
     private readonly KGySoftGifPreset _preset;
+    private readonly SemaphoreSlim _syncRoot = new SemaphoreSlim(1, 1);
 
-    private WriteableBitmap _previewBitmap;
-    private IReadableBitmapData _currentFrame;
-    private CancellationTokenSource _cancelGeneratingPreview;
-    private Task _generatePreviewTask;
+    private WriteableBitmap? _previewBitmap;
+    private IReadableBitmapData? _currentFrame;
+    private CancellationTokenSource? _cancelGeneratingPreview;
+    private Task? _generatePreviewTask;
 
     #endregion
 
@@ -94,6 +166,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     #region Properties
 
     // Quantizer
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Used by WPF binding")]
     public QuantizerDescriptor[] Quantizers => QuantizerDescriptor.Quantizers;
     public string QuantizerId { get => Get(_preset.QuantizerId ?? QuantizerDescriptor.Quantizers[0].Id); set => Set(_preset.QuantizerId = value); }
     public Color BackColor { get => Get(_preset.BackColor); set => Set(_preset.BackColor = value); }
@@ -108,18 +181,18 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     // Ditherer
     public bool UseDitherer { get => Get(_preset.DithererId != null); set => Set(value); }
     public DithererDescriptor[] Ditherers => DithererDescriptor.Ditherers;
-    public string DithererId { get => Get(_preset.DithererId); set => Set(_preset.DithererId = value); }
+    public string? DithererId { get => Get(_preset.DithererId); set => Set(_preset.DithererId = value); }
     public float Strength { get => Get(_preset.Strength); set => Set(_preset.Strength = value); }
     public int? Seed { get => Get(_preset.Seed); set => Set(_preset.Seed = value); }
     public bool IsSerpentineProcessing { get => Get(_preset.IsSerpentineProcessing); set => Set(_preset.IsSerpentineProcessing = value); }
 
     // Preview
     public bool ShowCurrentFrame { get => Get(_lastShowCurrentFrame); set => Set(_lastShowCurrentFrame = value); }
-    public string CurrentFramePath { get => Get<string>(); set => Set(value); }
+    public string? CurrentFramePath { get => Get<string?>(); set => Set(value); }
     public bool IsGenerating { get => Get<bool>(); set => Set(value); }
-    public WriteableBitmap PreviewImage { get => Get<WriteableBitmap>(); set => Set(value); }
+    public WriteableBitmap? PreviewImage { get => Get<WriteableBitmap>(); set => Set(value); }
     public bool ShowRefreshPreview { get => Get<bool>(); set => Set(value); }
-    public string PreviewError { get => Get<string>(); set => Set(value); }
+    public string? PreviewError { get => Get<string?>(); set => Set(value); }
 
     // Animation Settings
     public int RepeatCount { get => Get(_preset.RepeatCount); set => Set(_preset.RepeatCount = value); }
@@ -148,28 +221,34 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
     #region Internal Methods
 
-    internal async void Apply()
+    internal async Task Apply()
     {
         AdjustNotifications();
         if (_previewBitmap != null)
             return;
 
         if (IsExpensivePreview())
+        {
             ShowRefreshPreview = true;
-        else
-            await GeneratePreviewAsync();
+            return;
+        }
+
+        await EnsureCurrentFrame();
+        await GeneratePreviewAsync(Configuration.Capture(this));
     }
 
-    internal async void RefreshPreview()
+    internal async Task RefreshPreview()
     {
         ShowRefreshPreview = false;
-        await GeneratePreviewAsync();
+        await EnsureCurrentFrame();
+        await GeneratePreviewAsync(Configuration.Capture(this));
     }
 
     #endregion
 
     #region Protected Methods
 
+    [SuppressMessage("ReSharper", "AsyncVoidEventHandlerMethod", Justification = "Overridden event handler method.")]
     protected override async void OnPropertyChanged(PropertyChangedExtendedEventArgs e)
     {
         base.OnPropertyChanged(e);
@@ -241,9 +320,11 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
             {
                 PreviewImage = null;
                 ShowRefreshPreview = true;
+                return;
             }
-            else
-                await GeneratePreviewAsync();
+
+            await EnsureCurrentFrame();
+            await GeneratePreviewAsync(Configuration.Capture(this));
         }
     }
 
@@ -251,16 +332,19 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     {
         if (IsDisposed)
             return;
+
+        // Canceling possible pending task but not awaiting it in Dispose, which is intended. GetAwaiter is just to suppress CS4014.
         if (disposing)
-        {
-            // Canceling possible pending task but not awaiting it in Dispose, which is intended. GetAwaiter is just to suppress CS4014.
-            CancelRunningGenerate();
-            WaitForPendingGenerate().GetAwaiter();
-            _previewBitmap = null;
-            _currentFrame?.Dispose();
-        }
+            CancelAndAwaitPendingGenerate().GetAwaiter();
 
         base.Dispose(disposing);
+        if (disposing)
+        {
+            _previewBitmap = null;
+            _currentFrame?.Dispose();
+            _cancelGeneratingPreview?.Dispose();
+            _syncRoot.Dispose();
+        }
     }
 
     #endregion
@@ -280,8 +364,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         while (_currentFrame != null)
         {
             var currentFrame = _currentFrame;
-            CancelRunningGenerate();
-            await WaitForPendingGenerate();
+            await CancelAndAwaitPendingGenerate();
 
             _currentFrame = null;
             currentFrame.Dispose();
@@ -289,14 +372,30 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
                 return;
         }
 
+        if (CurrentFramePath == null || !Path.Exists(CurrentFramePath))
+        {
+            PreviewImage = null;
+            return;
+        }
+
         // Note: we could use WPF images to open current frame: new WriteableBitmap(new BitmapImage(new Uri(CurrentFramePath))).GetReadWriteBitmapData();
         // but it has serious drawbacks:
         // - It copies the pixels one more time (BitmapImage->WriteableBitmap because WriteableBitmap cannot be created from an image file directly)
-        // - In WPF nothing is disposable so we can't get rid of the temporarily allocated memory immediately
-        // Therefore we use a disposable GDI+ Bitmap to create a managed clone of the image as simply as possible
-        using (var bmp = ShowCurrentFrame && CurrentFramePath != null ? new Bitmap(CurrentFramePath) : Icons.Shield.ExtractBitmap(new Size(256, 256)))
-        using (var nativeBitmapData = bmp.GetReadableBitmapData())
-            _currentFrame = nativeBitmapData.Clone(nativeBitmapData.PixelFormat.ToKnownPixelFormat());
+        // - In WPF nothing is disposable (not even bitmaps, which wrap unmanaged handles) so we can't get rid of the temporarily allocated memory immediately
+        // Therefore, we use a disposable GDI+ Bitmap to create a managed clone of the image as simply as possible
+        try
+        {
+            using var bmp = ShowCurrentFrame ? new Bitmap(CurrentFramePath) : Icons.Shield.ExtractBitmap(new Size(256, 256))!;
+            using var nativeBitmapData = bmp.GetReadableBitmapData();
+            _currentFrame = (await nativeBitmapData.CloneAsync(nativeBitmapData.PixelFormat.ToKnownPixelFormat()))!; // will not be null, because it is never canceled
+        }
+        catch (Exception e)
+        {
+            LogWriter.Log(e, "Failed to update current frame.");
+            _currentFrame = null;
+            _previewBitmap = null;
+            return;
+        }
 
         // Since WriteableBitmap is not disposable we try to re-use it as much as possible.
         // It is nullified only when the resolution changes (as frames have the same resolution it happens only when toggling built-in/current frame preview)
@@ -304,117 +403,136 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
             _previewBitmap = null;
     }
 
-    private async Task GeneratePreviewAsync()
+    private async Task EnsureCurrentFrame()
     {
-        // Considering that the caller method is async void this is basically a fire-and-forget operation.
-        // To avoid parallel generating tasks we cancel the lastly launched possibly unfinished process.
-        CancelRunningGenerate();
-        Debug.Assert(_cancelGeneratingPreview == null);
-
         if (_currentFrame == null)
-        {
             await UpdateCurrentFrameAsync();
-            if (_currentFrame == null)
-                return;
-        }
+    }
 
-        // Awaiting the possibly unfinished canceled task. Now it should finish quickly.
-        await WaitForPendingGenerate();
-
-        // Workaround: The awaits make this method reentrant, and a continuation can be spawn after any await at any time.
-        // Therefore, it is possible that despite the line above _generatePreviewTask is not null here.
-        // It could not happen after a synchronous Wait but that could cause a slight lagging (only for a short time because the task is already canceled here)
-        while (_generatePreviewTask != null)
-        {
-            Debug.Assert(_cancelGeneratingPreview != null, "A new task is not expected to be spawned without a new cancellation");
-            CancelRunningGenerate();
-            await WaitForPendingGenerate();
-        }
-
-        Debug.Assert(_generatePreviewTask == null);
-        if (IsDisposed)
+    private async Task GeneratePreviewAsync(Configuration cfg)
+    {
+        if (IsDisposed || cfg.Frame == null)
             return;
 
-        // We don't care about DPI here, the preview is stretched anyway.
-        // The instance is created only for the first time or when resolution changes (eg. when toggling built-in/current frame preview)
-        _previewBitmap ??= new WriteableBitmap(_currentFrame.Width, _currentFrame.Height, 96, 96, PixelFormats.Pbgra32, null);
+        // Using a while instead of an if, because the awaits make this method reentrant, and a continuation can be spawn after any await at any time.
+        // Therefore, it is possible that though we cleared _generatePreviewTask in WaitForPendingGenerate, it is not null upon starting the continuation.
+        while (_generatePreviewTask != null)
+            await CancelAndAwaitPendingGenerate();
 
-        // Storing the task and cancellation source to a field, so it can be canceled/awaited on reentering, disposing, etc.
-        var tokenSource = _cancelGeneratingPreview = new CancellationTokenSource();
-        var token = tokenSource.Token;
+        // Using a manually completable task for the generateResultTask field. If this method had just one awaitable task we could simply assign that to the field.
+        TaskCompletionSource? generateTaskCompletion = null;
 
-        ShowRefreshPreview = false;
-        PreviewError = null;
-        IsGenerating = true;
-        var bitmapData = _previewBitmap.GetReadWriteBitmapData();
+        // This is essentially a lock. Achieved by a SemaphoreSlim, because an actual lock cannot be used with awaits in the code.
+        await _syncRoot.WaitAsync();
         try
         {
-            // Awaiting just because of the UI thread continuation below.
-            // The caller method itself is async void so it cannot be actually awaited but storing the task as a field (see also the comments above)
-            await (_generatePreviewTask = CreateGenerateTask(bitmapData, token));
-        }
-        catch (Exception e)
-        {
-            if (IsDisposed || token.IsCancellationRequested)
+            // lost race: returning if configuration has been changed by the time we entered the lock
+            if (cfg != Configuration.Capture(this) || IsDisposed)
                 return;
 
-            LogWriter.Log(e, "Failed to generate preview.");
-            PreviewImage = null;
-            PreviewError = LocalizationHelper.GetWithFormat("S.SaveAs.KGySoft.Preview.Error", "Failed to generate preview: {0}", e.Message);
-            return;
+            Debug.Assert(_cancelGeneratingPreview == null && _generatePreviewTask == null);
+
+            // We don't care about DPI here, the preview is stretched anyway.
+            // The instance is created only for the first time or when resolution changes (e.g. when toggling built-in/current frame preview)
+            _previewBitmap ??= new WriteableBitmap(cfg.Frame.Width, cfg.Frame.Height, 96, 96, PixelFormats.Pbgra32, null);
+
+            // Storing the task and cancellation source to a field, so it can be canceled/awaited on reentering, disposing, etc.
+            var tokenSource = _cancelGeneratingPreview = new CancellationTokenSource();
+            generateTaskCompletion = new TaskCompletionSource();
+            _generatePreviewTask = generateTaskCompletion.Task;
+            var token = tokenSource.Token;
+
+            ShowRefreshPreview = false;
+            PreviewError = null;
+            IsGenerating = true;
+            var bitmapData = _previewBitmap.GetReadWriteBitmapData();
+            try
+            {
+                var capturedPreset = cfg.GetPreset();
+                await cfg.Frame.CopyToAsync(bitmapData,
+                    new Rectangle(Point.Empty, new Size(cfg.Frame.Width, cfg.Frame.Height)), Point.Empty,
+                    QuantizerDescriptor.Create(cfg.QuantizerId, capturedPreset),
+                    DithererDescriptor.Create(cfg.DithererId, capturedPreset),
+                    new TaskConfig { CancellationToken = token, ThrowIfCanceled = false });
+            }
+            catch (Exception e)
+            {
+                if (IsDisposed || token.IsCancellationRequested)
+                    return;
+
+                LogWriter.Log(e, "Failed to generate preview.");
+                PreviewImage = null;
+                PreviewError = LocalizationHelper.GetWithFormat("S.SaveAs.KGySoft.Preview.Error", "Failed to generate preview: {0}", e.Message);
+                return;
+            }
+            finally
+            {
+                bitmapData.Dispose();
+                if (!IsDisposed)
+                    IsGenerating = false;
+            }
+
+            if (token.IsCancellationRequested || ShowRefreshPreview)
+                return;
+
+            // Triggering preview update. Since we try to reuse always the same WriteableBitmap instance it might need a little trick:
+            if (ReferenceEquals(PreviewImage, _previewBitmap))
+                OnPropertyChanged(new PropertyChangedExtendedEventArgs(null, _previewBitmap, nameof(PreviewImage)));
+            else
+                PreviewImage = _previewBitmap;
         }
         finally
         {
-            bitmapData.Dispose();
-            if (!IsDisposed)
-                IsGenerating = false;
+            generateTaskCompletion?.SetResult();
+            try
+            {
+                if (!IsDisposed)
+                    _syncRoot.Release();
+            }
+            catch (ObjectDisposedException)
+            {
+                // there is still a small chance
+            }
         }
-
-        if (token.IsCancellationRequested || ShowRefreshPreview)
-            return;
-
-        // Triggering preview update. Since we try to reuse always the same WriteableBitmap instance it might need a little trick:
-        if (ReferenceEquals(PreviewImage, _previewBitmap))
-            OnPropertyChanged(new PropertyChangedExtendedEventArgs(null, _previewBitmap, nameof(PreviewImage)));
-        else
-            PreviewImage = _previewBitmap;
     }
 
-    private Task CreateGenerateTask(IReadWriteBitmapData bitmapData, CancellationToken cancellationToken) => _currentFrame.CopyToAsync(
-            bitmapData,
-            new Rectangle(Point.Empty, new Size(_currentFrame.Width, _currentFrame.Height)),
-            Point.Empty,
-            QuantizerDescriptor.Create(QuantizerId, _preset),
-            DithererDescriptor.Create(DithererId, _preset),
-            new TaskConfig { CancellationToken = cancellationToken, ThrowIfCanceled = false });
-
-    private void CancelRunningGenerate()
+    private async Task CancelAndAwaitPendingGenerate()
     {
-        var tokenSource = _cancelGeneratingPreview;
-        if (tokenSource == null)
-            return;
-        tokenSource.Cancel();
-        tokenSource.Dispose();
-        _cancelGeneratingPreview = null;
-    }
+        #region Local Methods
 
-    private async Task WaitForPendingGenerate()
-    {
-        var runningTask = _generatePreviewTask;
-        if (runningTask == null)
-            return;
-
-        Debug.Assert(_cancelGeneratingPreview == null, "Only already canceled tasks are expected to be awaited here");
-        _generatePreviewTask = null;
-
-        try
+        void CancelRunningGenerate()
         {
-            await runningTask;
+            var tokenSource = _cancelGeneratingPreview;
+            if (tokenSource == null)
+                return;
+            tokenSource.Cancel();
+            tokenSource.Dispose();
+            _cancelGeneratingPreview = null;
         }
-        catch (Exception)
+
+        async Task WaitForPendingGenerate()
         {
-            // pending generate is always awaited after cancellation so ignoring everything from here
+            var runningTask = _generatePreviewTask;
+            if (runningTask == null)
+                return;
+
+            Debug.Assert(_cancelGeneratingPreview == null, "Only already canceled tasks are expected to be awaited here");
+            _generatePreviewTask = null;
+
+            try
+            {
+                await runningTask;
+            }
+            catch (Exception)
+            {
+                // pending generate is always awaited after cancellation so ignoring everything from here
+            }
         }
+
+        #endregion
+
+        CancelRunningGenerate();
+        await WaitForPendingGenerate();
     }
 
     private bool IsExpensivePreview() => BitLevel == 8 && QuantizerId == $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}";

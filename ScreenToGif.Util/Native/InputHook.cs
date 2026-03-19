@@ -644,7 +644,7 @@ namespace ScreenToGif.Native.Helpers
                 #endregion
             }
 
-            //If event handled in application do not handoff to other listeners.
+            //If event handled in application do not hand off to other listeners.
             return handled ? new IntPtr(1) : User32.CallNextHookEx(_keyboardHookHandle, code, wParam, lParam);
         }
 

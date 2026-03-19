@@ -27,5 +27,17 @@ namespace ScreenToGif.Native.External
 
         [DllImport(Constants.Kernel32)]
         internal static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
+
+        internal const uint LoadLibrarySearchSystem32 = 0x00000800;
+        internal const uint LoadLibrarySearchDefaultDirs = 0x00001000;
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        internal static extern bool SetDefaultDllDirectories(uint directoryFlags);
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern bool SetDllDirectory(string lpPathName);
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern IntPtr LoadLibraryEx(string lpFileName, IntPtr hFile, uint dwFlags);
     }
 }

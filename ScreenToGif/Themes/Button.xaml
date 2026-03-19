@@ -485,6 +485,46 @@
         </Style.Triggers>
     </Style>
 
+    <!--Button • Borderless-->
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Borderless">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Padding" Value="5,3"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" CornerRadius="4">
+                        <Border x:Name="InnerGrid" CornerRadius="4" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter x:Name="ContentPresenter" Focusable="False" Content="{TemplateBinding Content}" TextElement.Foreground="{TemplateBinding Foreground}"
+                                              RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="InnerGrid" Property="Background" Value="{DynamicResource Brush.Button.Background.Focused}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Brush.Button.Background.Hover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Brush.Button.Background.Pressed}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.7"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!--Button • No Border • No Text-->
     <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText">
         <Setter Property="Background" Value="Transparent"/>

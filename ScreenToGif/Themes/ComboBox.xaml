@@ -409,7 +409,7 @@
     </Style>
 
 
-    <v:StringToStaticResource x:Key="StringToStaticResource"/>
+    <v:KeyToResource x:Key="StringToStaticResource"/>
     
     <!--Common Templates-->
     <DataTemplate x:Key="Template.ComboBox.Simple">

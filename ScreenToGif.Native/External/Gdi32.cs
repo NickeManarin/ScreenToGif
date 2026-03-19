@@ -119,7 +119,7 @@ namespace ScreenToGif.Native.External
         public static extern IntPtr CreateCompatibleBitmap(IntPtr hdc, int nWidth, int nHeight);
         
         [DllImport(Constants.Gdi32)]
-        internal static extern int GetDeviceCaps(IntPtr hdc, int capindex);
+        public static extern int GetDeviceCaps(IntPtr hdc, int capindex);
         
         [DllImport(Constants.Gdi32)]
         internal static extern bool PatBlt(IntPtr hdc, int nXLeft, int nYLeft, int nWidth, int nHeight, uint dwRop);

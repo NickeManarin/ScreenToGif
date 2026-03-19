@@ -52,6 +52,25 @@ public static class Migration
                 Migration2_36_0To2_37_0.Up(properties);
                 goto default;
 
+            case "2.37": //To 2.43
+            case "2.37.1":
+            case "2.37.2":
+            case "2.38":
+            case "2.38.1":
+            case "2.39":
+            case "2.40":
+            case "2.40.1":
+            case "2.41":
+            case "2.41.1":
+            case "2.41.2":
+            case "2.41.3":
+            case "2.41.4":
+            case "2.41.5":
+            case "2.42":
+            case "2.42.1":
+                Migration2_37_0To2_43_0.Up(properties);
+                goto default;
+
             default:
             {
                 properties.RemoveAll(p => p.Key == "Version");

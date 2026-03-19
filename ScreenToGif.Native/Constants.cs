@@ -17,21 +17,21 @@ namespace ScreenToGif.Native
         internal const string Kernel32 = "kernel32.dll";
 
 
-        internal static HandleRef NullHandleRef = new(null, IntPtr.Zero);
+        public static HandleRef NullHandleRef = new(null, IntPtr.Zero);
 
         internal const int MonitorDefaultToNull = 0;
         internal const int MonitorDefaultToPrimary = 1;
-        internal const int MonitorDefaultToNearest = 2;
+        public const int MonitorDefaultToNearest = 2;
 
         public const int CursorShowing = 0x00000001;
         internal const int DstInvert = 0x00550009;
 
         internal const int DiNormal = 0x0003;
 
-        internal const int MonitorinfoPrimary = 0x00000001;
+        public const int MonitorinfoPrimary = 0x00000001;
 
         internal const int StateSystemFocusable = 0x00100000;
-        internal const int StateSystemUnavailable = 0x0001;
+        public const int StateSystemUnavailable = 0x0001;
         internal const int StateSystemInvisible = 0x8000;
         internal const int StateSystemOffscreen = 0x010000;
 

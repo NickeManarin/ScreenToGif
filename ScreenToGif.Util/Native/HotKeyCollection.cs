@@ -1,5 +1,5 @@
-using System.Windows.Input;
 using ScreenToGif.Util;
+using System.Windows.Input;
 
 namespace ScreenToGif.Native.Helpers;
 
@@ -7,7 +7,7 @@ public class HotKeyCollection : IDisposable
 {
     public static readonly HotKeyCollection Default = new();
 
-    internal List<HotKey> HotKeys { get; } = new();
+    internal List<HotKey> HotKeys { get; } = [];
 
     /// <summary>
     /// Registers the given keyboard shortcut with a given callback.

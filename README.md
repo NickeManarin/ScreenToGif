@@ -1,6 +1,20 @@
+<div align="center" markdown="1">
+   <sup>Special thanks to:</sup>
+   <br>
+   <br>
+   <a href="https://www.warp.dev/ScreenToGif">
+      <img alt="Warp sponsorship" width="400" src="https://github.com/warpdotdev/brand-assets/blob/640dffd347439bbcb535321ab36b7281cf4446c0/Github/Sponsor/Warp-Github-LG-03.png">
+   </a>
+
+### [Warp, built for coding with multiple AI agents](https://www.warp.dev/ScreenToGif)
+[Available for MacOS, Linux, & Windows](https://www.warp.dev/ScreenToGif)<br>
+
+</div>
+<hr>
+
 <p align="center">
   <a href="https://github.com/NickeManarin/ScreenToGif" target="_blank">
-    <img align="center" alt="screen recorder" src="https://www.screentogif.com/logos/ms-icon-144x144.png" />
+    <img align="center" alt="screen recorder" src="https://nickemanarin.github.io/ScreenToGif-Website/logos/ms-icon-144x144.png" />
   </a>
 </p>
 
@@ -27,17 +41,17 @@
 
 <p align="center">
   <a href="https://github.com/NickeManarin/ScreenToGif/releases" target="_blank">
-    <img align="center" alt="download" src="https://www.screentogif.com/wiki/download-now.png"/>
+    <img align="center" alt="download" src="https://nickemanarin.github.io/ScreenToGif-Website/wiki/download-now.png"/>
   </a>
 </p>
 
 <p align="center">
   <a href="https://www.microsoft.com/en-us/p/screentogif/9n3sqk8pds8g" target="_blank">
-    <img align="center" alt="download Microsoft Store" src="https://www.screentogif.com/wiki/download-store.png"/>
+    <img align="center" alt="download Microsoft Store" src="https://nickemanarin.github.io/ScreenToGif-Website/wiki/download-store.png"/>
   </a>
 
   <a href="https://chocolatey.org/packages/screentogif" target="_blank">
-    <img align="center" alt="Download from Chocolatey" src="https://www.screentogif.com/wiki/download-chocolatey.png"/>
+    <img align="center" alt="Download from Chocolatey" src="https://nickemanarin.github.io/ScreenToGif-Website/wiki/download-chocolatey.png"/>
   </a>
 </p>
 
@@ -90,23 +104,23 @@ That's not why I'm sharing the source code, at all.
 <h2>Screenshots</h2>
 
 <p align="center">
- <img align="center" alt="start up" src="https://www.screentogif.com/media/Recorder.png" />
+ <img align="center" alt="start up" src="https://nickemanarin.github.io/ScreenToGif-Website/media/Recorder.png" />
 </p>
 
 <p align="center">
- <img align="center" alt="start up" src="https://www.screentogif.com/media/Startup.png" />
+ <img align="center" alt="start up" src="https://nickemanarin.github.io/ScreenToGif-Website/media/Startup.png" />
 </p>
 
 <p align="center">
-  <img align="center" alt="editor" src="https://www.screentogif.com/media/Editor.gif" />
+  <img align="center" alt="editor" src="https://nickemanarin.github.io/ScreenToGif-Website/media/Editor.gif" />
 </p>
 
 <p align="center">
-  <img align="center" alt="option" src="https://www.screentogif.com/media/Options.gif" />
+  <img align="center" alt="option" src="https://nickemanarin.github.io/ScreenToGif-Website/media/Options.gif" />
 </p>
 
 <p align="center">
-  <img align="center" alt="keystrokes" src="https://www.screentogif.com/media/Keys.gif" />
+  <img align="center" alt="keystrokes" src="https://nickemanarin.github.io/ScreenToGif-Website/media/Keys.gif" />
 </p>
 
 <h2>Mentions</h2>

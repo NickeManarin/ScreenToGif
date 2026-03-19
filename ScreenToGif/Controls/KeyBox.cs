@@ -1,3 +1,4 @@
+using ScreenToGif.Util.Helpers;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,28 +21,28 @@ public class KeyBox : ContentControl
 
     #region Dependency Properties
 
-    public static readonly DependencyProperty ModifierKeysProperty = DependencyProperty.Register("ModifierKeys", typeof(ModifierKeys), typeof(KeyBox),
+    public static readonly DependencyProperty ModifierKeysProperty = DependencyProperty.Register(nameof(ModifierKeys), typeof(ModifierKeys), typeof(KeyBox),
         new PropertyMetadata(ModifierKeys.None, Keys_PropertyChanged));
 
-    public static readonly DependencyProperty MainKeyProperty = DependencyProperty.Register("MainKey", typeof(Key?), typeof(KeyBox), new PropertyMetadata(null, Keys_PropertyChanged));
+    public static readonly DependencyProperty MainKeyProperty = DependencyProperty.Register(nameof(MainKey), typeof(Key?), typeof(KeyBox), new PropertyMetadata(null, Keys_PropertyChanged));
 
-    public static readonly DependencyProperty AllowAllKeysProperty = DependencyProperty.Register("AllowAllKeys", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
+    public static readonly DependencyProperty AllowAllKeysProperty = DependencyProperty.Register(nameof(AllowAllKeys), typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
 
-    public static readonly DependencyProperty IsControlDownProperty = DependencyProperty.Register("IsControlDown", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
+    public static readonly DependencyProperty IsControlDownProperty = DependencyProperty.Register(nameof(IsControlDown), typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
 
-    public static readonly DependencyProperty IsShiftDownProperty = DependencyProperty.Register("IsShiftDown", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
+    public static readonly DependencyProperty IsShiftDownProperty = DependencyProperty.Register(nameof(IsShiftDown), typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
 
-    public static readonly DependencyProperty IsAltDownProperty = DependencyProperty.Register("IsAltDown", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
+    public static readonly DependencyProperty IsAltDownProperty = DependencyProperty.Register(nameof(IsAltDown), typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
 
-    public static readonly DependencyProperty IsWindowsDownProperty = DependencyProperty.Register("IsWindowsDown", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
+    public static readonly DependencyProperty IsWindowsDownProperty = DependencyProperty.Register(nameof(IsWindowsDown), typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
 
-    public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(KeyBox), new PropertyMetadata(""));
+    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(KeyBox), new PropertyMetadata(""));
 
-    public static readonly DependencyProperty IsSelectionFinishedProperty = DependencyProperty.Register("IsSelectionFinished", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
+    public static readonly DependencyProperty IsSelectionFinishedProperty = DependencyProperty.Register(nameof(IsSelectionFinished), typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
 
-    public static readonly DependencyProperty CanRemoveProperty = DependencyProperty.Register("CanRemove", typeof(bool), typeof(KeyBox), new PropertyMetadata(true));
+    public static readonly DependencyProperty CanRemoveProperty = DependencyProperty.Register(nameof(CanRemove), typeof(bool), typeof(KeyBox), new PropertyMetadata(true));
 
-    public static readonly DependencyProperty DisplayNoneProperty = DependencyProperty.Register("DisplayNone", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
+    public static readonly DependencyProperty DisplayNoneProperty = DependencyProperty.Register(nameof(DisplayNone), typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
 
     public static readonly DependencyProperty OnlyModifiersProperty = DependencyProperty.Register(nameof(OnlyModifiers), typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
 
@@ -148,7 +149,7 @@ public class KeyBox : ContentControl
 
         if (box.OnlyModifiers && box.ModifierKeys != ModifierKeys.None)
         {
-            box.Text = Native.Helpers.Other.GetSelectKeyText(box.ModifierKeys);
+            box.Text = KeyHelper.GetSelectKeyText(box.ModifierKeys);
             box.IsSelectionFinished = true;
             return;
         }
@@ -156,7 +157,7 @@ public class KeyBox : ContentControl
         if (box.MainKey == null)
             return;
 
-        box.Text = Native.Helpers.Other.GetSelectKeyText(box.MainKey ?? Key.None, box.ModifierKeys, !(box.IsSingleLetterLowerCase && box.ModifierKeys == ModifierKeys.None), !box.DisplayNone);
+        box.Text = KeyHelper.GetSelectKeyText(box.MainKey ?? Key.None, box.ModifierKeys, !(box.IsSingleLetterLowerCase && box.ModifierKeys == ModifierKeys.None), !box.DisplayNone);
         box.IsSelectionFinished = true;
     }
 
@@ -322,7 +323,7 @@ public class KeyBox : ContentControl
 
     protected override void OnPreviewKeyUp(KeyEventArgs e)
     {
-        if ((e.Key == Key.Enter || e.Key == Key.Tab) && !AllowAllKeys)
+        if (e.Key is Key.Enter or Key.Tab && !AllowAllKeys)
             return;
 
         if (e.Key == Key.PrintScreen && !OnlyModifiers)

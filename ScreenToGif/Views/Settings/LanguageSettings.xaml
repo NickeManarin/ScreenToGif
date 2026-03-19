@@ -1,0 +1,150 @@
+<Page x:Class="ScreenToGif.Views.Settings.LanguageSettings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:c="clr-namespace:ScreenToGif.Controls"
+      xmlns:g="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
+      xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
+      Title="LanguageSettings">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Focusable="False" IsTabStop="False">
+        <Grid DataContext="{x:Static t:UserSettings.All}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <c:LabelSeparator Text="{DynamicResource S.Options.Language.AppLanguage}" Margin="0,0,0,5"/>
+
+            <ListBox Grid.Row="1" x:Name="LanguagePanel" VerticalContentAlignment="Center" Margin="10,0,0,5" SelectionChanged="LanguagePanel_SelectionChanged">
+                <ListBox.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="/Resources/Flags.xaml"/>
+                        </ResourceDictionary.MergedDictionaries>
+
+                        <g:TagToSelection x:Key="TagToSelection"/>
+                    </ResourceDictionary>
+                </ListBox.Resources>
+
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <ItemsPresenter/>
+                    </ControlTemplate>
+                </ListBox.Template>
+
+                <c:ExtendedListBoxItem Icon="{StaticResource Vector.Info}" Tag="auto" Content="{DynamicResource S.Options.Language.AppLanguage.AutoDetect}" Author="{DynamicResource S.Options.Language.AppLanguage.AutoDetect.Author}" 
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.SaudiArabia}" Tag="ar" Content="Arabic / العربية" Author="Alan"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.China}" Tag="zh" Content="Chinese (Simplified) / 简体中文" Author="Joel Yang, HiSen, Jeffiy, EMLVIRUS, 王晨旭, Wen Peng"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Taiwan}" Tag="zh-Hant" Content="Chinese (Traditional) / 繁體中文（台灣）" Author="Jerry Lum, Danfong Hsieh, Tse Zinno"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-Hant, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.CzechRepublic}" Tag="cs" Content="Czech / Čeština" Author="PePav"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=cs, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Denmark}" Tag="da" Content="Danish / Dansk" Author="Regmos"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=da, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Netherlands}" Tag="nl" Content="Dutch / Nederlands" Author="Stephan Paternotte, Jasper Verweij"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=nl, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Finland}" Tag="fi" Content="Finnish / Suomi" Author="VeikkoM"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=fi, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.France}" Tag="fr" Content="French / Français" Author="Largo, Sébastien 'Tr4ncer' Villemain, Adrick"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Germany}" Tag="de" Content="German / Deutsch" Author="Mr-Update, Andy Kleinert, PeterK., Christoph Voigt, Michael Reukauff"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Greece}" Tag="el" Content="Greek / Ελληνικά" Author="Χρήστος Μητσιάρης"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Israel}" Tag="he" Content="Hebrew / עברי" Author="Elishy"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=he, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Hungary}" Tag="hu" Content="Hungarian / Magyar" Author="László Földes, György Kőszeg"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=hu, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Italy}" Tag="it" Content="Italian / Italiano" Author="HispidaBytes, Michele Locati, Giovanni Rinaldin"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Japan}" Tag="ja" Content="Japanese / 日本語" Author="Kevin dela Cruz, Tokinori Shimodaira, Seaeees, oxosi, Toshio, Winston, Chihiro Watanabe"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.SouthKorea}" Tag="ko" Content="Korean / 한국어" Author="hoho, Manbok, Lytie"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ko, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Poland}" Tag="pl" Content="Polish / Polski" Author="Michał Stojke, Sebastian Pietras, Jakub Bazgier" 
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=pl, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Brazil}" Tag="pt" Content="Portuguese / Português" Author="Nicke Manarin" 
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Portugal}" Tag="pt-PT" Content="Portuguese (Portugal) / Português (Portugal)" Author="Eduardo Godinho, Duarte Ramos"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.India}" Tag="ta" Content="Tamil / தமிழ்" Author="தமிழ்நேரம் (TamilNeram.github.io)"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish / Türkçe" Author="g-u-r-k-a-n, Volkan Dağdelen, seferciogluecce, Omer Mollamehmetoglu, Bekir"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina) / Español (Argentina)" Author="KNTRO (kntro@msn.com)"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=es-AR, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Spain}" Tag="es" Content="Spanish / Español" Author="codedeep, Zabb"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=es, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.EastAfricanCommunity}" Tag="sw" Content="Swahili / Kiswahili" Author="Mara Gati Lucky"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=sw, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Sweden}" Tag="sv" Content="Swedish / Svenska" Author="Sopor, Andreas Johansson"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Russia}" Tag="ru" Content="Russian / Русский" Author="wvxwxvw, Zoltanleo, Qwitriy, ralienpp, Nivalis, Yuri Komar, Vadim Velezhenko"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Ukraine}" Tag="uk" Content="Ukrainian / Українська" Author="Prevter, Andrey Ìlečko"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=uk, Converter={StaticResource TagToSelection}}"/>
+
+                <c:ExtendedListBoxItem Image="{StaticResource Flag.Vietnam}" Tag="vi" Content="Vietnamese / Tiếng Việt" Author="Đỗ Quang Hưng"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=vi, Converter={StaticResource TagToSelection}}"/>
+
+                <!--<n:ExtendedListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="No Author"
+                                           ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
+
+                <n:ExtendedListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="No Author"
+                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ro, Converter={StaticResource TagToSelection}}"/>-->
+            </ListBox>
+
+            <TextBlock Grid.Row="2" x:Name="TranslateHyperlink" FontSize="12" FontFamily="{DynamicResource FontFamilyLight}" TextWrapping="WrapWithOverflow" Padding="2">
+                <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence1.1}" Foreground="{DynamicResource Element.Foreground}"/>
+                <Hyperlink Click="TranslateHyperlink_OnClick" ToolTip="{DynamicResource S.Options.Language.AppLanguage.Translate.ResourceLink.Tooltip}" Cursor="Hand">
+                    <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence1.2}"/>
+                </Hyperlink>
+                <LineBreak/>
+                <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence2.1}" Foreground="{DynamicResource Element.Foreground}"/>
+                <Hyperlink Click="ImportHyperlink_OnClick" ToolTip="{DynamicResource S.Options.Language.AppLanguage.Translate.ImportLink.Tooltip}" Cursor="Hand">
+                    <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence2.2}"/>
+                </Hyperlink>
+                <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence2.3}" Foreground="{DynamicResource Element.Foreground}"/>
+                <LineBreak/>
+                <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence3.1}" Foreground="{DynamicResource Element.Foreground}"/>
+                <Hyperlink Click="EmailHyperlink_OnClick" ToolTip="{DynamicResource S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip}" Cursor="Hand">
+                    <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence3.2}"/>
+                </Hyperlink>
+                <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence3.3}" Foreground="{DynamicResource Element.Foreground}"/>
+            </TextBlock>
+        </Grid>
+    </ScrollViewer>
+</Page>

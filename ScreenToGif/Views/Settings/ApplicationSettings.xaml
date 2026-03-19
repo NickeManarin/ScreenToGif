@@ -1,0 +1,336 @@
+<Page x:Class="ScreenToGif.Views.Settings.ApplicationSettings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:c="clr-namespace:ScreenToGif.Controls"
+      xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
+      xmlns:g="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
+      Title="ApplicationSettings" Loaded="ApplicationSettings_Loaded">
+
+    <Page.Resources>
+        <g:IntToVisibility x:Key="IntToVisibility"/>
+        <g:InvertedIntToVisibility x:Key="InvertedIntToVisibility"/>
+    </Page.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Focusable="False" IsTabStop="False">
+        <Grid DataContext="{x:Static t:UserSettings.All}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <c:StatusBand Grid.Row="0" x:Name="StatusBand"/>
+
+            <Expander Grid.Row="1" Header="{DynamicResource S.Options.App.Startup}" IsExpanded="True">
+                <StackPanel>
+                    <WrapPanel Margin="0,0,5,5" HorizontalAlignment="Center">
+                        <Grid x:Name="StartupModeGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <c:ExtendedRadioButton Grid.Column="0" x:Name="StartManuallyCheckBox" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Mode.Manual}" Padding="5" IsChecked="True"
+                                                   Icon="{StaticResource Vector.Cursor}" ToolTip="{DynamicResource S.Options.App.Startup.Mode.Manual.Info}"/>
+
+                            <c:ExtendedRadioButton Grid.Column="1" x:Name="StartAutomaticallyCheckBox" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Mode.Automatic}" Padding="5"
+                                                   Icon="{StaticResource Vector.Play}" ToolTip="{DynamicResource S.Options.App.Startup.Mode.Automatic.Info}" 
+                                                   Checked="StartAutomaticallyCheckBox_Checked" Unchecked="StartAutomaticallyCheckBox_Unchecked"/>
+                        </Grid>
+
+                        <Separator Width="1" Margin="3"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <c:ExtendedRadioButton Grid.Column="0" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Instance.Single}" Padding="5" Icon="{StaticResource Vector.View}" 
+                                                   IsChecked="{Binding Path=SingleInstance, Mode=TwoWay}" ToolTip="{DynamicResource S.Options.App.Startup.Instance.Single.Info}"
+                                                   Checked="Instance_Checked"/>
+                            <c:ExtendedRadioButton Grid.Column="1" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Instance.Multiple}" Padding="5" Icon="{StaticResource Vector.Views}" 
+                                                   IsChecked="{Binding Path=SingleInstance, Mode=TwoWay, Converter={StaticResource InvertedBool}}" ToolTip="{DynamicResource S.Options.App.Startup.Instance.Multiple.Info}"
+                                                   Checked="Instance_Checked"/>
+                        </Grid>
+                    </WrapPanel>
+
+                    <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.Startup.Tray}" Info="{DynamicResource S.Options.App.Startup.Tray.Info}"
+                                        Margin="15,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=StartMinimized, Mode=TwoWay}" Checked="StartCheckBox_Checked"/>
+
+                    <Grid Margin="15,0,5,5" Visibility="{Binding StartMinimized, Converter={StaticResource InvertedBoolToVisibility}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" MinWidth="120"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="{DynamicResource S.Options.App.Startup.Window}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,5,0" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Column="1" SelectedIndex="{Binding Path=StartUp, Mode=TwoWay}" MinWidth="120" VerticalAlignment="Center">
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Startup}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Recorder}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Webcam}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Board}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Editor}"/>
+                        </ComboBox>
+
+                        <TextBlock Grid.Column="2" Text="{DynamicResource S.Options.App.Startup.Window.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" 
+                                   Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                    </Grid>
+                </StackPanel>
+            </Expander>
+
+            <Expander Grid.Row="2" Header="{DynamicResource S.Options.App.Theme}" IsExpanded="True">
+                <Grid Margin="15,3,5,3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="{DynamicResource S.Options.App.Theme.Scheme}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox Grid.Column="1" x:Name="AppThemeComboBox" Height="28" VerticalContentAlignment="Center" Padding="5,0" SelectedValuePath="Tag" 
+                              SelectedValue="{Binding Source={x:Static t:UserSettings.All}, Path=MainTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectionChanged="AppThemeComboBox_SelectionChanged">
+
+                        <StackPanel Orientation="Horizontal" Tag="Light">
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFFAFAFA" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFF5F5F5" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFF9F9FF" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFEFEFEF" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Light}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
+                                   Foreground="{DynamicResource Element.Foreground}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Tag="Medium">
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFEDEDED" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFE3E3E3" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFD6D6D6" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFD7D7E4" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFE8E8E8" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFECECEC" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
+                                   Foreground="{DynamicResource Element.Foreground}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Tag="Dark">
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF202020" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF262626" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF2A2A2A" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF323130" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF323232" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF343434" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Dark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
+                                   Foreground="{DynamicResource Element.Foreground}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Tag="VeryDark">
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF101010" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF161616" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF1A1A1A" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222120" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222222" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF242424" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Label Content="{DynamicResource S.Options.App.Theme.Scheme.VeryDark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
+                                   Foreground="{DynamicResource Element.Foreground}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Tag="FollowSystem">
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFFAFAFA" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFF5F5F5" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222120" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222222" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF242424" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                            </Border>
+                            <Label Content="{DynamicResource S.Options.App.Theme.Scheme.FollowSystem}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"
+                                   Foreground="{DynamicResource Element.Foreground}"/>
+                        </StackPanel>
+                    </ComboBox>
+                </Grid>
+            </Expander>
+
+            <Expander Grid.Row="3" Header="{DynamicResource S.Options.App.Tray}" IsExpanded="True">
+                <StackPanel>
+                    <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.Tray.Show}" Margin="15,3,5,3" IsChecked="{Binding Path=ShowNotificationIcon, Mode=TwoWay}"
+                                        CheckedChanged="NotificationIconCheckBox_CheckedChanged"/>
+                    <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.Tray.LeaveOpen}" Margin="30,3,5,3" IsChecked="{Binding Path=KeepOpen, Mode=TwoWay}"
+                                        Visibility="{Binding ShowNotificationIcon, Converter={StaticResource Bool2Visibility}}"/>
+
+                    <Grid Margin="30,0,0,0" Visibility="{Binding ShowNotificationIcon, Converter={StaticResource Bool2Visibility}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--Left-->
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.App.Tray.Interactions.Left}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,3,0" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" SelectedIndex="{Binding Path=LeftClickAction, Mode=TwoWay}" MinWidth="180" VerticalAlignment="Center">
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Nothing}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Open}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Toggle}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Minimize}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Restore}"/>
+                        </ComboBox>
+
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource S.Options.App.Tray.Interactions.Window}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0,3,0" VerticalAlignment="Center"
+                                   Visibility="{Binding Path=LeftClickAction, Converter={StaticResource IntToVisibility}, ConverterParameter=1}"/>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource S.Options.App.Tray.Interactions.Else}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0,3,0" VerticalAlignment="Center"
+                                   Visibility="{Binding Path=LeftClickAction, Converter={StaticResource InvertedIntToVisibility}, ConverterParameter=1}"/>
+
+                        <ComboBox Grid.Row="0" Grid.Column="3" SelectedIndex="{Binding Path=LeftOpenWindow, Mode=TwoWay}" MinWidth="120" VerticalAlignment="Center" Margin="0,3">
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Open.None}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Startup}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Recorder}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Webcam}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Board}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Editor}"/>
+                        </ComboBox>
+
+                        <!--Double left-->
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.App.Tray.Interactions.DoubleLeft}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,3,0" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" SelectedIndex="{Binding Path=DoubleLeftClickAction, Mode=TwoWay}" MinWidth="180" VerticalAlignment="Center" Margin="0,3">
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Nothing}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Open}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Toggle}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Minimize}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Restore}"/>
+                        </ComboBox>
+
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="{DynamicResource S.Options.App.Tray.Interactions.Window}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0,3,0" VerticalAlignment="Center"
+                                   Visibility="{Binding Path=DoubleLeftClickAction, Converter={StaticResource IntToVisibility}, ConverterParameter=1}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="{DynamicResource S.Options.App.Tray.Interactions.Else}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0,3,0" VerticalAlignment="Center"
+                                   Visibility="{Binding Path=DoubleLeftClickAction, Converter={StaticResource InvertedIntToVisibility}, ConverterParameter=1}"/>
+
+                        <ComboBox Grid.Row="1" Grid.Column="3" SelectedIndex="{Binding Path=DoubleLeftOpenWindow, Mode=TwoWay}" MinWidth="120" VerticalAlignment="Center" Margin="0,3">
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Open.None}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Startup}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Recorder}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Webcam}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Board}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Editor}"/>
+                        </ComboBox>
+
+                        <!--Middle-->
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Options.App.Tray.Interactions.Middle}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,3,0" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="2" Grid.Column="1" SelectedIndex="{Binding Path=MiddleClickAction, Mode=TwoWay}" MinWidth="180" VerticalAlignment="Center" Margin="0,3">
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Nothing}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Open}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Toggle}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Minimize}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Restore}"/>
+                        </ComboBox>
+
+                        <TextBlock Grid.Row="2" Grid.Column="2" Text="{DynamicResource S.Options.App.Tray.Interactions.Window}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0,3,0" VerticalAlignment="Center"
+                                   Visibility="{Binding Path=MiddleClickAction, Converter={StaticResource IntToVisibility}, ConverterParameter=1}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="2" Text="{DynamicResource S.Options.App.Tray.Interactions.Else}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0,3,0" VerticalAlignment="Center"
+                                   Visibility="{Binding Path=MiddleClickAction, Converter={StaticResource InvertedIntToVisibility}, ConverterParameter=1}"/>
+
+                        <ComboBox Grid.Row="2" Grid.Column="3" SelectedIndex="{Binding Path=MiddleOpenWindow, Mode=TwoWay}" MinWidth="120" VerticalAlignment="Center" Margin="0,3">
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Tray.Interactions.Open.None}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Startup}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Recorder}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Webcam}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Board}"/>
+                            <ComboBoxItem Content="{DynamicResource S.Options.App.Startup.Window.Editor}"/>
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+            </Expander>
+
+            <Expander Grid.Row="4" Header="{DynamicResource S.Options.App.General}" IsExpanded="True">
+                <StackPanel>
+                    <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.WorkaroundQuota}" Info="{DynamicResource S.Options.App.General.WorkaroundQuota.Info}"
+                                        Margin="15,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=WorkaroundQuota, Mode=TwoWay}"/>
+                    <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.NotifyWhileClosingApp}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyWhileClosingApp, Mode=TwoWay}"/>
+                    <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.DisableHardwareAcceleration}" Info="{DynamicResource S.Options.App.General.DisableHardwareAcceleration.Info}"
+                                        Margin="15,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=DisableHardwareAcceleration, Mode=TwoWay}"/>
+                    <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.CheckForTranslationUpdates}" Info="{DynamicResource S.Options.App.General.CheckForTranslationUpdates.Info}"
+                                        Margin="15,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=CheckForTranslationUpdates, Mode=TwoWay}"/>
+
+                    <c:ExtendedCheckBox x:Name="UpdatesCheckBox" Text="{DynamicResource S.Options.App.General.CheckForUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
+                    <StackPanel Visibility="{Binding CheckForUpdates, Converter={StaticResource Bool2Visibility}}">
+                        <c:ExtendedCheckBox x:Name="PortableUpdateCheckBox" Text="{DynamicResource S.Options.App.General.PortableUpdate}" Info="{DynamicResource S.Options.App.General.PortableUpdate.Info}" 
+                                            Margin="30,3,5,3" IsChecked="{Binding Path=PortableUpdate, Mode=TwoWay}"/>
+                        <c:ExtendedCheckBox x:Name="AdminUpdateCheckBox" Text="{DynamicResource S.Options.App.General.ForceUpdateAsAdmin}" Margin="30,3,5,3" IsChecked="{Binding Path=ForceUpdateAsAdmin, Mode=TwoWay}"/>
+                        <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.UpdateOnClose}" Margin="30,3,5,3" IsChecked="{Binding Path=InstallUpdates, Mode=TwoWay}"/>
+                        <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.PromptToInstall}" Margin="45,3,5,3" IsChecked="{Binding Path=PromptToInstall, Mode=TwoWay}"
+                                            Visibility="{Binding InstallUpdates, Converter={StaticResource Bool2Visibility}}"/>
+                        <c:ExtendedCheckBox x:Name="DownloadWithMeteredNetworkCheckBox" Text="{DynamicResource S.Options.App.General.DownloadWithMeteredNetwork}"
+                                            Info="{DynamicResource S.Options.App.General.DownloadWithMeteredNetwork.Info}" Margin="30,3,5,3" IsChecked="{Binding Path=DownloadWithMeteredNetwork, Mode=TwoWay}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Expander>
+        </Grid>
+    </ScrollViewer>
+</Page>

@@ -29,8 +29,8 @@ public class GifskiGifPreset : GifPreset
     }
         
         
-    public static List<GifskiGifPreset> Defaults => new()
-    {
+    public static List<GifskiGifPreset> Defaults =>
+    [
         new GifskiGifPreset
         {
             TitleKey = "S.Preset.Gif.Gifski.High.Title",
@@ -40,7 +40,7 @@ public class GifskiGifPreset : GifPreset
             IsDefault = true,
             CreationDate = new DateTime(2021, 02, 20),
 
-            Quality = 1,
+            Quality = 80,
             Fast = false
         },
 
@@ -67,5 +67,5 @@ public class GifskiGifPreset : GifPreset
             Quality = 20,
             Fast = true
         }
-    };
+    ];
 }

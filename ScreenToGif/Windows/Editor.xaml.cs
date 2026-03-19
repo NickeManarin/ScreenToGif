@@ -2,7 +2,6 @@ using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.Domain.Enums;
 using ScreenToGif.Domain.Interfaces;
-using ScreenToGif.Domain.Models.Project;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Model;
 using ScreenToGif.Native.Helpers;
@@ -11,6 +10,7 @@ using ScreenToGif.Util;
 using ScreenToGif.Util.Codification.Apng;
 using ScreenToGif.Util.Codification.Gif.Decoder;
 using ScreenToGif.Util.Extensions;
+using ScreenToGif.Util.Helpers;
 using ScreenToGif.Util.Settings;
 using ScreenToGif.ViewModel;
 using ScreenToGif.ViewModel.ExportPresets;
@@ -18,7 +18,6 @@ using ScreenToGif.ViewModel.ExportPresets.Image;
 using ScreenToGif.ViewModel.ExportPresets.Other;
 using ScreenToGif.ViewModel.Tasks;
 using ScreenToGif.Windows.Other;
-using SharpCompress.Compressors.LZMA;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -44,7 +43,6 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shell;
 using System.Windows.Threading;
-using ButtonBase = System.Windows.Controls.Primitives.ButtonBase;
 using Color = System.Windows.Media.Color;
 using Cursors = System.Windows.Input.Cursors;
 using DataFormats = System.Windows.DataFormats;
@@ -642,7 +640,7 @@ namespace ScreenToGif.Windows
 
             ClosePanel();
 
-            project.Frames = new List<FrameInfo> { new FrameInfo(fileName, 66) };
+            project.Frames = [new FrameInfo(fileName, 66)];
 
             LoadProject(project);
             ShowHint("S.Hint.NewAnimation");
@@ -4550,8 +4548,6 @@ namespace ScreenToGif.Windows
             ActionTitleTextBlock.Text = title;
             ActionIconBorder.Background = FindResource(vector) as Brush;
 
-            Util.Other.RemoveRoutedEventHandlers(ApplyButton, ButtonBase.ClickEvent);
-
             if (apply != null)
             {
                 ApplyButton.SetResourceReference(ExtendedButton.TextProperty, "S.Action.Apply");
@@ -4616,7 +4612,7 @@ namespace ScreenToGif.Windows
 
                     var currentFrameBinding = new Binding
                     {
-                        //Path = new PropertyPath("Frames[CurrentIndex]"), // I don't really get why data context is already a FrameViewModel here instead of the EditorViewModel but it means we need no Path
+                        Path = new PropertyPath(nameof(EditorViewModel.CurrentFrame)),
                         Mode = BindingMode.OneWay,
                         UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
                     };
@@ -5819,7 +5815,9 @@ namespace ScreenToGif.Windows
 
                 #region Prepare the text
 
-                var text = keyList.Select(x => "" + Native.Helpers.Other.GetSelectKeyText(x.Key, x.Modifiers, x.IsUppercase)).Aggregate((p, n) => p + model.KeyStrokesSeparator + n);
+                var translateKeys = UserSettings.All.KeyStrokesTranslate;
+
+                var text = keyList.Select(x => "" + KeyHelper.GetSelectKeyText(x.Key, x.Modifiers, x.IsUppercase, false, translateKeys)).Aggregate((p, n) => p + model.KeyStrokesSeparator + n);
 
                 if (string.IsNullOrEmpty(text))
                 {

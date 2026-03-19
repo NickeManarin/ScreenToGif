@@ -831,7 +831,7 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
             //If there's less than 2GB left.
             if (drive.AvailableFreeSpace < 2_000_000_000)
                 Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(LocalizationHelper.GetWithFormat("S.Editor.Warning.LowSpace", Math.Round(Global.AvailableDiskSpacePercentage, 2)),
-                    StatusType.Warning, "disk", () => App.MainViewModel.OpenOptions.Execute(Options.TempFilesIndex)));
+                    StatusType.Warning, "disk", () => App.MainViewModel.OpenOptions.Execute(Options.StorageIndex)));
             else
                 Application.Current.Dispatcher?.Invoke(() => NotificationManager.RemoveNotification(r => r.Tag == "disk"));
         }

@@ -40,7 +40,7 @@ namespace ScreenToGif.Native.Helpers
         /// <summary>
         /// Tries setting a given target timer resolution to the current thread.
         /// If the selected resolution can be set, a nearby value will be set instead.
-        /// This must be disposed afterwards (or call EndPeriod() passing the CurrentResolution)
+        /// This must be disposed afterward (or call EndPeriod() passing the CurrentResolution)
         /// </summary>
         /// <param name="targetResolution">The target resolution in milliseconds.</param>
         public TimerResolution(int targetResolution)
