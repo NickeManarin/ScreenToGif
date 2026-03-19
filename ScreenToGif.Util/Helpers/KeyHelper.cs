@@ -31,7 +31,7 @@ public static class KeyHelper
         return null;
     }
 
-    public static string GetSelectKeyText(Key key, ModifierKeys modifier = ModifierKeys.None, bool isUppercase = false, bool ignoreNone = false)
+    public static string GetSelectKeyText(Key key, ModifierKeys modifier = ModifierKeys.None, bool isUppercase = false, bool ignoreNone = false, bool translate = false)
     {
         if (ignoreNone && key == Key.None)
             return "";
@@ -58,74 +58,123 @@ public static class KeyHelper
             {
                 case Key.LeftCtrl:
                 case Key.RightCtrl:
-                    keyText = "Ctrl";
-                    break;
-                case Key.LeftShift:
-                case Key.RightShift:
-                    keyText = "Shift";
-                    break;
-                case Key.LeftAlt:
-                case Key.RightAlt:
-                    keyText = "Alt";
-                    break;
-                case Key.CapsLock:
-                    keyText = "CapsLock";
-                    break;
-                case Key.LWin:
-                case Key.RWin:
-                    keyText = "Windows";
-                    break;
-                case Key.Return:
-                    keyText = "Enter";
-                    break;
-                case Key.Next:
-                    keyText = "PageDown";
-                    break;
-                case Key.PrintScreen:
-                    keyText = "PrintScreen";
-                    break;
-                case Key.Back:
-                    keyText = "Backspace";
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Ctrl") : "Ctrl";
                     break;
 
-                //Special localization
+                case Key.LeftShift:
+                case Key.RightShift:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Shift") : "Shift";
+                    break;
+
+                case Key.LeftAlt:
+                case Key.RightAlt:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Alt") : "Alt";
+                    break;
+                    
+                case Key.LWin:
+                case Key.RWin:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Windows") : "Windows";
+                    break;
+
+                case Key.Back:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Backspace") : "Backspace";
+                    break;
+
+                case Key.Tab:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Tab") : "Tab";
+                    break;
+
+                case Key.Return:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Enter") : "Enter";
+                    break;
+
+                case Key.Pause:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.PauseBreak") : "Pause/Break";
+                    break;
+
+                case Key.CapsLock:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.CapsLock") : "Caps Lock";
+                    break;
+
+                case Key.Escape:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Esc") : "Esc";
+                    break;
+
                 case Key.Space:
-                    keyText = LocalizationHelper.Get("S.Keys.Space");
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Space") : "Space";
+                    break;
+
+                case Key.Prior:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.PageUp") : "Page Up";
+                    break;
+
+                case Key.Next:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.PageDown") : "Page Down";
+                    break;
+
+                case Key.End:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.End") : "End";
+                    break;
+
+                case Key.Home:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Home") : "Home";
+                    break;
+
+                case Key.Left:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Left") : "Arrow Left";
+                    break;
+
+                case Key.Up:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Up") : "Arrow Up";
+                    break;
+
+                case Key.Right:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Right") : "Arrow Right";
+                    break;
+
+                case Key.Down:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Down") : "Arrow Down";
+                    break;
+
+                case Key.PrintScreen:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.PrintScreen") : "Print Screen";
+                    break;
+
+                case Key.Insert:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Insert") : "Insert";
+                    break;
+
+                case Key.Delete:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Delete") : "Delete";
+                    break;
+
+                case Key.NumLock:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.NumLock") : "Num Lock";
+                    break;
+
+                case Key.Scroll:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.ScrollLock") : "Scroll Lock";
+                    break;
+
+                case Key.MediaNextTrack:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.NextTrack") : "Next Track";
+                    break;
+
+                case Key.MediaPreviousTrack:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.PreviousTrack") : "Previous Track";
+                    break;
+
+                case Key.MediaPlayPause:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.PlayPause") : "Play/Pause";
+                    break;
+
+                case Key.MediaStop:
+                    keyText = translate ? LocalizationHelper.Get("S.Keys.Stop") : "Stop";
                     break;
             }
 
             //Modifiers;
             return modifiersText + keyText;
-
-            #region Try it later
-
-            /*
-                Declare Function ToAscii Lib "user32" (ByVal uVirtKey As Integer, ByVal uScanCode As Integer, ByRef lpbKeyState As Byte, ByRef lpwTransKey As Integer, ByVal fuState As Integer) As Integer
-                Declare Function GetKeyboardState Lib "user32.dll" (ByRef pbKeyState As Byte) As Long
-
-                Private Function GetCharFromKey(ByVal KeyCode As Integer) As String
-                    Dim KeyBoardState(255) As Byte
-                    Dim Out As Long
-                    
-                    If GetKeyboardState(KeyBoardState(0)) <0 Then
-                        If ToAscii(KeyCode, 0, KeyBoardState(0), Out, 0) <0 Then
-                            If Out <= 255 Then
-                                GetCharFromKey = Chr(Out)
-                            Else
-                                'GetCharFromKey = Microsoft.VisualBasic.Left(StrConv(ChrW(Out), vbUnicode), 1)
-                                GetCharFromKey = Microsoft.VisualBasic.Left(StrConv(ChrW(Out), VbStrConv.None), 1)
-                            End If
-                        Else
-                            GetCharFromKey = ""
-                        End If
-                    Else
-                        GetCharFromKey = ""
-                    End If
-                End Function 
-                
-            */
-
-            #endregion
         }
 
         //If there's any modifiers, it means that it's a command. So it should be treated as uppercase.

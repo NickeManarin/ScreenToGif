@@ -106,9 +106,9 @@ public partial class VideoSource
         await _viewModel.Import();
     }
 
-    private void CancelButton_Click(object sender, RoutedEventArgs e)
+    private async void CancelButton_Click(object sender, RoutedEventArgs e)
     {
-        _viewModel.Cancel();
+        await _viewModel.Cancel();
 
         DialogResult = false;
     }

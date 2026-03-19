@@ -56,11 +56,44 @@
     <s:String x:Key="S.Warning.Graphics.Action">Switch the graphics adapter set for ScreenToGif by opening Windows Settings > System > Display > Graphics Settings, or by clicking on the link below.</s:String>
     <s:String x:Key="S.Warning.Graphics.Action.Legacy">Switch the graphics adapter for ScreenToGif by opening the graphics settings of your graphics adapter.</s:String>
     <s:String x:Key="S.Warning.Graphics.Switch">Open Windows Settings</s:String>
-    
+
     <!--Keys-->
+    <s:String x:Key="S.Keys.Backspace">Backspace</s:String>
+    <s:String x:Key="S.Keys.Tab">Tab</s:String>
     <s:String x:Key="S.Keys.Enter">Enter</s:String>  
+    <s:String x:Key="S.Keys.PauseBreak">Pause/Break</s:String>
+    <s:String x:Key="S.Keys.CapsLock">Caps Lock</s:String>
     <s:String x:Key="S.Keys.Esc">Esc</s:String>  
-    <s:String x:Key="S.Keys.Space">Space</s:String>  
+    <s:String x:Key="S.Keys.Space">Space</s:String>
+    <s:String x:Key="S.Keys.PageUp">Page Up</s:String>
+    <s:String x:Key="S.Keys.PageDown">Page Down</s:String>
+    <s:String x:Key="S.Keys.Home">Home</s:String>
+    <s:String x:Key="S.Keys.End">End</s:String>
+    <s:String x:Key="S.Keys.Left">Arrow Left</s:String>
+    <s:String x:Key="S.Keys.Up">Arrow Up</s:String>
+    <s:String x:Key="S.Keys.Right">Arrow Right</s:String>
+    <s:String x:Key="S.Keys.Down">Arrow Down</s:String>
+    <s:String x:Key="S.Keys.PrintScreen">Print Screen</s:String>
+    <s:String x:Key="S.Keys.Insert">Insert</s:String>
+    <s:String x:Key="S.Keys.Delete">Delete</s:String>
+    <s:String x:Key="S.Keys.NumLock">Num Lock</s:String>
+    <s:String x:Key="S.Keys.ScrollLock">Scroll Lock</s:String>
+    <s:String x:Key="S.Keys.Shift">Shift</s:String>
+    <s:String x:Key="S.Keys.LeftShift">Left Shift</s:String>
+    <s:String x:Key="S.Keys.RightShift">Right Shift</s:String>
+    <s:String x:Key="S.Keys.Alt">Alt</s:String>
+    <s:String x:Key="S.Keys.LeftAlt">Left Alt</s:String>
+    <s:String x:Key="S.Keys.RightAlt">Right Alt</s:String>
+    <s:String x:Key="S.Keys.Ctrl">Control</s:String>
+    <s:String x:Key="S.Keys.LeftCtrl">Left Ctrl</s:String>
+    <s:String x:Key="S.Keys.RightCtrl">Right Ctrl</s:String>
+    <s:String x:Key="S.Keys.Windows">Windows</s:String>
+    <s:String x:Key="S.Keys.LeftWindows">Left Windows</s:String>
+    <s:String x:Key="S.Keys.RightWindows">Right Windows</s:String>
+    <s:String x:Key="S.Keys.NextTrack">Next Track</s:String>
+    <s:String x:Key="S.Keys.PreviousTrack">Previous Track</s:String>
+    <s:String x:Key="S.Keys.PlayPause">Play/Pause</s:String>
+    <s:String x:Key="S.Keys.Stop">Stop</s:String>
 
     <!--Mouse-->
     <s:String x:Key="S.Mouse.Right">Right-Click</s:String>  
@@ -1346,6 +1379,8 @@
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">It will ignore lone key presses such as "Control", but it will not ignore "Control + C".</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreInjected">Ignore software simulated keystrokes.</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Only record user input keystrokes.</s:String>
+    <s:String x:Key="S.KeyStrokes.Translate">Translate the special keys.</s:String>
+    <s:String x:Key="S.KeyStrokes.Translate.Info">Useful if the language is other than English.</s:String>
     <s:String x:Key="S.KeyStrokes.Extend">Extend the exhibition of the key strokes.</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">Start the exhibition of the key strokes earlier.</s:String>
     <s:String x:Key="S.KeyStrokes.By">By (ms):</s:String>

@@ -1888,6 +1888,12 @@ public class UserSettings : INotifyPropertyChanged
         set => SetValue(value);
     }
 
+    public bool KeyStrokesTranslate
+    {
+        get => (bool)GetValue();
+        set => SetValue(value);
+    }
+
     public bool KeyStrokesEarlier
     {
         get => (bool)GetValue();

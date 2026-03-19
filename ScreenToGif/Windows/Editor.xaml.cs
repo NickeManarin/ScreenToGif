@@ -5815,7 +5815,9 @@ namespace ScreenToGif.Windows
 
                 #region Prepare the text
 
-                var text = keyList.Select(x => "" + KeyHelper.GetSelectKeyText(x.Key, x.Modifiers, x.IsUppercase)).Aggregate((p, n) => p + model.KeyStrokesSeparator + n);
+                var translateKeys = UserSettings.All.KeyStrokesTranslate;
+
+                var text = keyList.Select(x => "" + KeyHelper.GetSelectKeyText(x.Key, x.Modifiers, x.IsUppercase, false, translateKeys)).Aggregate((p, n) => p + model.KeyStrokesSeparator + n);
 
                 if (string.IsNullOrEmpty(text))
                 {
