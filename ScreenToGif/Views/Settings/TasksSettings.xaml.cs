@@ -2,7 +2,6 @@ using ScreenToGif.Util.Settings;
 using ScreenToGif.ViewModel.Tasks;
 using ScreenToGif.Windows.Other;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -23,7 +22,7 @@ public partial class TasksSettings : Page
         InitializeComponent();
     }
 
-    private void TasksPanel_Loaded(object sender, RoutedEventArgs e)
+    private void TasksSettings_Loaded(object sender, RoutedEventArgs e)
     {
         var list = UserSettings.All.AutomatedTasksList?.Cast<BaseTaskViewModel>().ToList() ?? [];
 

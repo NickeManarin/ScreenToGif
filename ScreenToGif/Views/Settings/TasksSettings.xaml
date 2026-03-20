@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:c="clr-namespace:ScreenToGif.Controls"
       xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
-      Title="TasksSettings">
+      Title="TasksSettings" Loaded="TasksSettings_Loaded">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" Focusable="False" IsTabStop="False">
         <Grid x:Name="TasksPanel" DataContext="{x:Static t:UserSettings.All}">
