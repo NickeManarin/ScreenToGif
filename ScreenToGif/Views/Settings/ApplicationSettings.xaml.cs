@@ -21,6 +21,14 @@ public partial class ApplicationSettings : Page
     public ApplicationSettings()
     {
         InitializeComponent();
+
+#if FULL_MULTI_MSIX_STORE
+        UpdatesCheckBox.Visibility = Visibility.Collapsed;
+        DownloadWithMeteredNetworkCheckBox.Visibility = Visibility.Collapsed;
+#elif FULL_MULTI_MSIX
+        PortableUpdateCheckBox.Visibility = Visibility.Collapsed;
+        AdminUpdateCheckBox.Visibility = Visibility.Collapsed;
+#endif
     }
 
     private void ApplicationSettings_Loaded(object sender, RoutedEventArgs e)

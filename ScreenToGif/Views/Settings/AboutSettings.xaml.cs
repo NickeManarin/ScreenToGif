@@ -11,6 +11,11 @@ public partial class AboutSettings : Page
     public AboutSettings()
     {
         InitializeComponent();
+
+#if FULL_MULTI_MSIX_STORE
+        CheckForUpdatesLabel.Visibility = Visibility.Collapsed;
+        StoreTextBlock.Visibility = Visibility.Visible;
+#endif
     }
 
     private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
