@@ -11,9 +11,7 @@ using System.Windows.Controls;
 using Localization = ScreenToGif.Windows.Other.Localization;
 
 namespace ScreenToGif.Views.Settings;
-/// <summary>
-/// Interaction logic for LanguageSettings.xaml
-/// </summary>
+
 public partial class LanguageSettings : Page
 {
     public LanguageSettings()
