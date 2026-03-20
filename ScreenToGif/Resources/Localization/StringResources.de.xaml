@@ -37,9 +37,6 @@
     <!--Warnings-->
     <s:String x:Key="S.Crash">Ach nee, das Programm ist abgestürzt! :(</s:String>
     <s:String x:Key="S.Required">Pflichtfeld</s:String>
-    <s:String x:Key="S.Warning.Net.Title">Fehlende Abhängigkeit</s:String>
-    <s:String x:Key="S.Warning.Net.Header">.NET Framework 4.8 ist nicht verfügbar</s:String>
-    <s:String x:Key="S.Warning.Net.Message">Um dieses Programm zu verwenden, müssen Sie .NET Framework in der Version 4.8 installieren.&#10;Wollen Sie zur Download-Seite gehen?</s:String>
     <s:String x:Key="S.Warning.Single.Title">Nur eine Instanz zulässig</s:String>
     <s:String x:Key="S.Warning.Single.Header">Die App wird bereits ausgeführt</s:String>
     <s:String x:Key="S.Warning.Single.Message">ScreenToGif wird bereits ausgeführt, aber anscheinend ist kein Fenster geöffnet. Bitte überprüfen Sie den Infobereich der Taskleiste, dort muss ein ScreenToGif-Symbol vorhanden sein.</s:String>
@@ -61,9 +58,42 @@
     <s:String x:Key="S.Warning.Graphics.Switch">Windows-Einstellungen öffnen</s:String>
     
     <!--Keys-->
-    <s:String x:Key="S.Keys.Enter">Enter</s:String>
-    <s:String x:Key="S.Keys.Esc">Esc</s:String>
+    <s:String x:Key="S.Keys.Backspace">Rücktaste</s:String>
+    <s:String x:Key="S.Keys.Tab">Tab</s:String>
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>  
+    <s:String x:Key="S.Keys.PauseBreak">Pause/Untbr</s:String>
+    <s:String x:Key="S.Keys.CapsLock">Feststelltaste</s:String>
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>  
     <s:String x:Key="S.Keys.Space">Leertaste</s:String>
+    <s:String x:Key="S.Keys.PageUp">Seite nach oben</s:String>
+    <s:String x:Key="S.Keys.PageDown">Seite nach unten</s:String>
+    <s:String x:Key="S.Keys.Home">Pos 1</s:String>
+    <s:String x:Key="S.Keys.End">Ende</s:String>
+    <s:String x:Key="S.Keys.Left">Pfeil nach links</s:String>
+    <s:String x:Key="S.Keys.Up">Pfeil nach oben</s:String>
+    <s:String x:Key="S.Keys.Right">Pfeil nach rechts</s:String>
+    <s:String x:Key="S.Keys.Down">Pfeil nach unten</s:String>
+    <s:String x:Key="S.Keys.PrintScreen">Druck</s:String>
+    <s:String x:Key="S.Keys.Insert">Einfg</s:String>
+    <s:String x:Key="S.Keys.Delete">Entf</s:String>
+    <s:String x:Key="S.Keys.NumLock">Num-Taste</s:String>
+    <s:String x:Key="S.Keys.ScrollLock">Rollen</s:String>
+    <s:String x:Key="S.Keys.Shift">Umschalt</s:String>
+    <s:String x:Key="S.Keys.LeftShift">Umschalt links</s:String>
+    <s:String x:Key="S.Keys.RightShift">Umschalt rechts</s:String>
+    <s:String x:Key="S.Keys.Alt">Alt</s:String>
+    <s:String x:Key="S.Keys.LeftAlt">Alt links</s:String>
+    <s:String x:Key="S.Keys.RightAlt">Alt rechts</s:String>
+    <s:String x:Key="S.Keys.Ctrl">Strg</s:String>
+    <s:String x:Key="S.Keys.LeftCtrl">Strg links</s:String>
+    <s:String x:Key="S.Keys.RightCtrl">Strg rechts</s:String>
+    <s:String x:Key="S.Keys.Windows">Windows</s:String>
+    <s:String x:Key="S.Keys.LeftWindows">Windows links </s:String>
+    <s:String x:Key="S.Keys.RightWindows">Windows rechts</s:String>
+    <s:String x:Key="S.Keys.NextTrack">Nächster Titel</s:String>
+    <s:String x:Key="S.Keys.PreviousTrack">Vorheriger Titel</s:String>
+    <s:String x:Key="S.Keys.PlayPause">Abspielen/Pause</s:String>
+    <s:String x:Key="S.Keys.Stop">Stopp</s:String>
 
     <!--Mouse-->
     <s:String x:Key="S.Mouse.Right">Rechtsklick</s:String>
@@ -583,6 +613,7 @@
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">FFmpeg-Programmpfad öffnen</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.File">FFmpeg ausführbar</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">Programmpfad beinhaltet mindestens ein ungültiges Zeichen. Bitte wählen Sie korrekte Adresse aus.</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegVersion">FFmpeg-Version</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation">Speicherort für Gifski</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Gifski-Programmpfad öffnen</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski-Bibliothek</s:String>
@@ -1348,6 +1379,8 @@
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">Zusätzliche Tastenkombinationen außer Strg+C werden ignoriert.</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreInjected">Von der Software simulierte Tastenanschläge ignorieren</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Nur Tastatureingaben des Benutzers aufzeichnen.</s:String>
+    <s:String x:Key="S.KeyStrokes.Translate">Spezialtasten übersetzen.</s:String>
+    <s:String x:Key="S.KeyStrokes.Translate.Info">Nützlich, wenn die Sprache nicht Englisch ist.</s:String>
     <s:String x:Key="S.KeyStrokes.Extend">Dauer der Anzeige der Tastatureingaben verlängern</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">Anzeige der Tastatureingaben früher beginnen</s:String>
     <s:String x:Key="S.KeyStrokes.By">um (ms):</s:String>
@@ -1695,6 +1728,7 @@
     <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer.Info">Nicht zufälliges Farbverlauf-Rauschen, das durch eine Berechnung erzeugt wird.</s:String>
 
     <s:String x:Key="S.SaveAs.KGySoft.Preview">Vorschau</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Info">Verwenden Sie die Strg + Mausrad, um das Vorschaubild zu vergrößern.&#x0d;&#x0a;&#x0d;&#x0a;⚠️ Hinweis: Das tatsächlich erzeugte finale Bild kann eine bessere Qualität aufweisen,&#x0d;&#x0a;wenn Delta-Bilder zugelassen werden und der ausgewählte Quantisierer die Farbpalette für jedes Bild optimiert.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame">Aktuelles Einzelbild anzeigen.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">Wenn diese Option aktiviert ist, zeigt die Vorschau das aktuelle Einzelbild anstelle eines Standardbildes.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Preview.Refresh">Die automatische Vorschau wurde aufgrund des hohen Speicherbedarfs der aktuellen Einstellungen deaktiviert. Anklicken, um die Vorschau zu aktualisieren.</s:String>
@@ -1749,6 +1783,7 @@
     <s:String x:Key="S.SaveAs.VideoOptions.Codec.Info">Die Video-Umwandlung, die für&#10;die Umwandlung der unbearbeiteten Pixel in die Ausgabedatei verantwortlich ist.</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset">Voreinstellung:</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.None">Keine</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Placebo">Placebo</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VerySlow">Sehr langsam</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slower">Langsamer</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slow">Langsam</s:String>
