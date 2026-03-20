@@ -28,16 +28,6 @@ public partial class Options : INotification
     public Options()
     {
         InitializeComponent();
-
-#if FULL_MULTI_MSIX_STORE
-        UpdatesCheckBox.Visibility = Visibility.Collapsed;
-        CheckForUpdatesLabel.Visibility = Visibility.Collapsed;
-        StoreTextBlock.Visibility = Visibility.Visible;
-        DownloadWithMeteredNetworkCheckBox.Visibility = Visibility.Collapsed;
-#elif FULL_MULTI_MSIX
-        PortableUpdateCheckBox.Visibility = Visibility.Collapsed;
-        AdminUpdateCheckBox.Visibility = Visibility.Collapsed;
-#endif
     }
 
     public Options(int index) : this()
