@@ -13,7 +13,7 @@ using System.Windows.Threading;
 
 namespace ScreenToGif.ViewModel.Settings;
 
-public partial class PluginSettingsViewModel: BaseViewModel
+public class PluginSettingsViewModel: BaseViewModel
 {
     private bool _isProcessingFFmpeg;
     private Exception _ffmpegError;
@@ -194,7 +194,6 @@ public partial class PluginSettingsViewModel: BaseViewModel
             IsProcessingFFmpeg = true;
 
 #if FULL_MULTI_MSIX_STORE
-            StatusBand.Warning(LocalizationHelper.Get("S.Options.Extras.DownloadRestriction"));
             ProcessHelper.StartWithShell("https://github.com/GyanD/codexffmpeg/releases");
             return;
 #else
@@ -247,7 +246,6 @@ public partial class PluginSettingsViewModel: BaseViewModel
             IsProcessingGifski = true;
 
 #if FULL_MULTI_MSIX_STORE
-            StatusBand.Warning(LocalizationHelper.Get("S.Options.Extras.DownloadRestriction"));
             ProcessHelper.StartWithShell("https://github.com/ImageOptim/gifski/releases");
             return;
 #else
