@@ -6,6 +6,7 @@
     <DebugType>embedded</DebugType>
     <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <Configurations>Debug;Release;Debug (Store)</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
