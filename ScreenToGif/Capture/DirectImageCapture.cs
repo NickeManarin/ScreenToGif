@@ -103,6 +103,10 @@ internal class DirectImageCapture : BaseCapture
     /// </summary>
     protected internal bool MajorCrashHappened = false;
 
+    protected override bool SupportsParallelSaving => true;
+
+    private readonly object _projectLock = new object();
+
     #endregion
 
     public override void Start(int delay, int left, int top, int width, int height, double dpi, ProjectInfo project)
@@ -374,6 +378,7 @@ internal class DirectImageCapture : BaseCapture
             bitmap.UnlockBits(mapDest);
 
             //Set frame details.
+            frame.Index = FrameCount;
             FrameCount++;
             frame.Path = $"{Project.FullPath}{FrameCount}.png";
             frame.Delay = FrameRate.GetMilliseconds();
@@ -562,6 +567,7 @@ internal class DirectImageCapture : BaseCapture
             bitmap.UnlockBits(mapDest);
 
             //Set frame details.
+            frame.Index = FrameCount;
             FrameCount++;
             frame.Path = $"{Project.FullPath}{FrameCount}.png";
             frame.Delay = FrameRate.GetMilliseconds();
@@ -709,6 +715,7 @@ internal class DirectImageCapture : BaseCapture
             bitmap.UnlockBits(mapDest);
 
             //Set frame details.
+            frame.Index = FrameCount;
             FrameCount++;
             frame.Path = $"{Project.FullPath}{FrameCount}.png";
             frame.Delay = FrameRate.GetMilliseconds();
@@ -995,7 +1002,10 @@ internal class DirectImageCapture : BaseCapture
         frame.Image?.Dispose();
         frame.Image = null;
 
-        Project.Frames.Add(frame);
+        lock (_projectLock)
+        {
+            Project.Frames.Add(frame);
+        }
     }
 
     public override async Task Stop()
@@ -1006,6 +1016,9 @@ internal class DirectImageCapture : BaseCapture
         DisposeInternal();
 
         await base.Stop();
+
+        // If frames were saved in parallel, they may have been stored out of order, so we sort them here
+        Project.Frames.Sort((a, b) => a.Index.CompareTo(b.Index));
     }
 
     internal void DisposeInternal()
