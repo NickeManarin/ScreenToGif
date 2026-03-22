@@ -1559,6 +1559,12 @@ public class UserSettings : INotifyPropertyChanged
         set => SetValue(value);
     }
 
+    public long FfmpegBinarySize
+    {
+        get => (long)GetValue(nameof(FfmpegBinarySize), -1L);
+        set => SetValue(value);
+    }
+
     public SupportedFFmpegVersions FfmpegVersion
     {
         get => (SupportedFFmpegVersions)GetValue();

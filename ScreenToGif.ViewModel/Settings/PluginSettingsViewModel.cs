@@ -206,7 +206,7 @@ public class PluginSettingsViewModel: BaseViewModel
                 return;
             }
 
-            var packedFolder = Path.Combine(UserSettings.All.TemporaryFolderResolved, "Downloads");
+            var packedFolder = Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Downloads");
             var packedPath = Path.Combine(packedFolder, asset.Name);
 
             Directory.CreateDirectory(packedFolder);
@@ -258,7 +258,7 @@ public class PluginSettingsViewModel: BaseViewModel
                 return;
             }
 
-            var packedFolder = Path.Combine(UserSettings.All.TemporaryFolderResolved, "Downloads");
+            var packedFolder = Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Downloads");
             var packedPath = Path.Combine(packedFolder, asset.Name);
 
             Directory.CreateDirectory(packedFolder);
@@ -376,6 +376,8 @@ public class PluginSettingsViewModel: BaseViewModel
             //Check the output to determine the FFmpeg version.
             DetectedFFmpegVersion = FfmpegHelper.IdentifyVersion(output);
             HasOlderFfmpegVersion = FfmpegHelper.IsOlder(output);
+
+            UserSettings.All.FfmpegBinarySize = new FileInfo(FFmpegPath).Length;
         }
         catch (Exception e)
         {
