@@ -198,7 +198,7 @@ public class PluginSettingsViewModel: BaseViewModel
             return;
 #else
             var release = await GitHubHelper.GetLatestRelease("GyanD/codexffmpeg");
-            var asset = release?.GetAsset(".7z");
+            var asset = release?.GetAsset("essentials_build.7z");
 
             if (asset == null)
             {
