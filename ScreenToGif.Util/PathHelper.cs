@@ -119,8 +119,8 @@ public static class PathHelper
 
     private static async Task CheckFfmpegVersion(string realPath)
     {
-        //If ffmpeg was detected from elsewhere or was downloaded a long time ago.
-        if (UserSettings.All.FfmpegVersionText is null)
+        //If ffmpeg was detected from elsewhere, was downloaded a long time ago or changed.
+        if (string.IsNullOrEmpty(UserSettings.All.FfmpegVersionText) || UserSettings.All.FfmpegBinarySize != new FileInfo(realPath).Length)
         {
             //Call FFmpeg to check its version.
             var output = await ProcessHelper.Start(realPath + " -version", false, true);
@@ -128,6 +128,7 @@ public static class PathHelper
             //Check the output to determine the FFmpeg version.
             UserSettings.All.FfmpegVersionText = FfmpegHelper.IdentifyVersion(output);
             UserSettings.All.HasOlderFfmpegVersion = FfmpegHelper.IsOlder(UserSettings.All.FfmpegVersionText);
+            UserSettings.All.FfmpegBinarySize = new FileInfo(realPath).Length;
         }
     }
 

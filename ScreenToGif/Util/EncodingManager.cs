@@ -1370,7 +1370,7 @@ internal class EncodingManager
         {
             animationMode = AnimationMode.Repeat;
 
-            for (int i = frames.Count - 2; i > 0; i--)
+            for (var i = frames.Count - 2; i > 0; i--)
                 frames.Add(frames[i]);
         }
 
@@ -1478,9 +1478,9 @@ internal class EncodingManager
                     if (gifPreset.Vsync != Vsyncs.Off)
                     {
                         if (UserSettings.All.HasOlderFfmpegVersion)
-                            firstPass += "-fps_mode " + gifPreset.Vsync.GetLowerDescription();
-                        else
                             firstPass += "-vsync " + gifPreset.Vsync.GetLowerDescription();
+                        else
+                            firstPass += "-fps_mode " + gifPreset.Vsync.GetLowerDescription();
                     }
 
                     firstPass += " {O}";
@@ -1525,9 +1525,9 @@ internal class EncodingManager
                     if (apngPreset.Vsync != Vsyncs.Off)
                     {
                         if (UserSettings.All.HasOlderFfmpegVersion)
-                            firstPass += "-fps_mode " + apngPreset.Vsync.GetLowerDescription();
-                        else
                             firstPass += "-vsync " + apngPreset.Vsync.GetLowerDescription();
+                        else
+                            firstPass += "-fps_mode " + apngPreset.Vsync.GetLowerDescription();
                     }
 
                     firstPass += " {O}";
@@ -1582,9 +1582,9 @@ internal class EncodingManager
                     if (webpPreset.Vsync != Vsyncs.Off)
                     {
                         if (UserSettings.All.HasOlderFfmpegVersion)
-                            firstPass += "-fps_mode " + webpPreset.Vsync.GetLowerDescription();
-                        else
                             firstPass += "-vsync " + webpPreset.Vsync.GetLowerDescription();
+                        else
+                            firstPass += "-fps_mode " + webpPreset.Vsync.GetLowerDescription();
                     }
 
                     firstPass += " {O}";
@@ -1636,9 +1636,9 @@ internal class EncodingManager
                     if (avifPreset.Vsync != Vsyncs.Off)
                     {
                         if (UserSettings.All.HasOlderFfmpegVersion)
-                            firstPass += "-fps_mode " + avifPreset.Vsync.GetLowerDescription();
-                        else
                             firstPass += "-vsync " + avifPreset.Vsync.GetLowerDescription();
+                        else
+                            firstPass += "-fps_mode " + avifPreset.Vsync.GetLowerDescription();
                     }
 
                     firstPass += " {O}";
@@ -1751,9 +1751,9 @@ internal class EncodingManager
                     if (videoPreset.Vsync != Vsyncs.Off)
                     {
                         if (UserSettings.All.HasOlderFfmpegVersion)
-                            firstPass += "-fps_mode " + videoPreset.Vsync.GetLowerDescription();
-                        else
                             firstPass += "-vsync " + videoPreset.Vsync.GetLowerDescription();
+                        else
+                            firstPass += "-fps_mode " + videoPreset.Vsync.GetLowerDescription();
                     }
 
                     firstPass += " {O}";
@@ -1803,7 +1803,7 @@ internal class EncodingManager
                 var line = pro.StandardError.ReadLine() ?? "";
                 log += Environment.NewLine + line;
 
-                var split = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var split = line.Split([' '], StringSplitOptions.RemoveEmptyEntries);
                 var containsDuplicatedFrames = line.Contains("dup=");
 
                 for (var block = 0; block < split.Length; block++)
@@ -1818,12 +1818,14 @@ internal class EncodingManager
                         {
                             var dupFramesPosition = split.IndexOf(x => x.Contains("dup="));
                             var dupFramesValue = split[dupFramesPosition][4..]; //skip dup=
+
                             if (int.TryParse(dupFramesValue, out var duplicatedFrames))
                             {
                                 // if we've managed to read number of duplicated frames - adjust the frame number
                                 frame -= duplicatedFrames;
                             }
                         }
+
                         if (frame > 0)
                         {
                             if (indeterminate)
@@ -1890,7 +1892,7 @@ internal class EncodingManager
                 var line = pro.StandardError.ReadLine() ?? "";
                 log += Environment.NewLine + line;
 
-                var split = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var split = line.Split([' '], StringSplitOptions.RemoveEmptyEntries);
 
                 for (var block = 0; block < split.Length; block++)
                 {

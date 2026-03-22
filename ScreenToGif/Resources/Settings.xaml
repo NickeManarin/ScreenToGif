@@ -195,6 +195,7 @@
     <!--Options • Extras-->
     <!--<s:String x:Key="FfmpegLocation"></s:String>-->
     <s:Boolean x:Key="HasOlderFfmpegVersion">False</s:Boolean>
+    <s:Int64 x:Key="FfmpegBinarySize">-1</s:Int64>
     <e:SupportedFFmpegVersions x:Key="FfmpegVersion">Version4</e:SupportedFFmpegVersions>
     <!--<s:String x:Key="GifskiLocation"></s:String>-->
     
