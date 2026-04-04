@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using ScreenToGif.Model;
@@ -65,6 +66,11 @@ public abstract class BaseCapture : ICapture
 
     protected BlockingCollection<FrameInfo> BlockingCollection { get; private set; } = new();
 
+    /// <summary>
+    /// If true, multiple frames can be saved in parallel
+    /// </summary>
+    protected virtual bool SupportsParallelSaving => false;
+
     #endregion
 
     ~BaseCapture()
@@ -94,22 +100,29 @@ public abstract class BaseCapture : ICapture
         BlockingCollection ??= new BlockingCollection<FrameInfo>();
 
         //Spin up a Task to consume the BlockingCollection.
-        _task = Task.Factory.StartNew(() =>
+        int NumConsumers = GetConsumerCount();
+        List<Task> consumers = new(NumConsumers);
+        for (int i = 0; i < NumConsumers; ++i)
         {
-            try
+            consumers.Add(Task.Factory.StartNew(() =>
             {
-                while (true)
-                    Save(BlockingCollection.Take());
-            }
-            catch (InvalidOperationException)
-            {
-                //It means that Take() was called on a completed collection.
-            }
-            catch (Exception e)
-            {
-                Application.Current.Dispatcher.Invoke(() => OnError?.Invoke(e));
-            }
-        });
+                try
+                {
+                    while (true)
+                        Save(BlockingCollection.Take());
+                }
+                catch (InvalidOperationException)
+                {
+                    //It means that Take() was called on a completed collection.
+                }
+                catch (Exception e)
+                {
+                    Application.Current.Dispatcher.Invoke(() => OnError?.Invoke(e));
+                }
+            }, TaskCreationOptions.LongRunning));
+        }
+
+        _task = Task.WhenAll(consumers);
 
         WasStarted = true;
         IsAcceptingFrames = true;
@@ -120,6 +133,25 @@ public abstract class BaseCapture : ICapture
 
     public virtual void Save(FrameInfo info)
     { }
+
+    /// <summary>
+    /// Return the amount of consumers that should be used simultaneously,
+    /// based on system resources.
+    /// </summary>
+    /// <returns>Number of consumer tasks to spawn</returns>
+    protected virtual int GetConsumerCount()
+    {
+        if (!SupportsParallelSaving)
+        {
+            return 1;
+        }
+
+        const int minCpuCount = 1;
+        const int maxCpuUtilizationPercentage = 25;
+
+        int processorCount = Environment.ProcessorCount;
+        return Math.Max(processorCount * maxCpuUtilizationPercentage / 100, minCpuCount);
+    }
 
     public virtual int Capture(FrameInfo frame)
     {
