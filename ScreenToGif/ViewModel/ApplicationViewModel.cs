@@ -1313,17 +1313,33 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
             //msiexec /i PATH INSTALLDIR="" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE=No ADDLOCAL=Binary
             //msiexec /a PATH TARGETDIR="" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE=yes ADDLOCAL=Binary
 
+            var args = $" {(isInstaller ? "/i" : "/a")} \"{nonRoot}\"" +
+                $" {(isInstaller ? "INSTALLDIR" : "TARGETDIR")}=\"{AppDomain.CurrentDomain.BaseDirectory}\" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE={(isInstaller ? "no" : "yes")}" +
+                $" ADDLOCAL=Binary{(isInstaller ? ",Auxiliar" : "")}{(hasGifski ? ",Gifski" : "")}" +
+                $" {(wasPromptedManually && runAfterwards ? "RUNAFTER=yes" : "")}" +
+                (isInstaller ? $" INSTALLDESKTOPSHORTCUT={(hasDesktopShortcut ? "yes" : "no")} INSTALLSHORTCUT={(hasMenuShortcut ? "yes" : "no")}" : "");
+
+            var exeDir = AppDomain.CurrentDomain.BaseDirectory;
+            var msiName = Path.GetFileName(nonRoot);
+            var targetMsi = Path.Combine(exeDir, msiName);
+            var batPath = Path.Combine(Path.GetTempPath(), "ScreenToGif", "stg_update.bat");
+
+            var script = $@"
+            @echo off
+            msiexec {args}
+            if exist ""{targetMsi}"" del /f /q ""{targetMsi}""
+            del ""%~f0""
+            ";
+
+            File.WriteAllText(batPath, script, Encoding.UTF8);
+
             var startInfo = new ProcessStartInfo
             {
-                FileName = "msiexec",
-                Arguments = $" {(isInstaller ? "/i" : "/a")} \"{nonRoot}\"" +
-                            $" {(isInstaller ? "INSTALLDIR" : "TARGETDIR")}=\"{AppDomain.CurrentDomain.BaseDirectory}\" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE={(isInstaller ? "no" : "yes")}" +
-                            $" ADDLOCAL=Binary{(isInstaller ? ",Auxiliar" : "")}{(hasGifski ? ",Gifski" : "")}" +
-                            $" {(wasPromptedManually && runAfterwards ? "RUNAFTER=yes" : "")}" +
-                            (isInstaller ? $" INSTALLDESKTOPSHORTCUT={(hasDesktopShortcut ? "yes" : "no")} INSTALLSHORTCUT={(hasMenuShortcut ? "yes" : "no")}" : ""),
+                FileName = batPath,
+                UseShellExecute = true,
+                WindowStyle = ProcessWindowStyle.Hidden,
                 Verb = UserSettings.All.ForceUpdateAsAdmin ? "runas" : ""
             };
-
             using (var process = new Process { StartInfo = startInfo })
                 process.Start();
 
