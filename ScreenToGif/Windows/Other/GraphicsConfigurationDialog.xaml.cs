@@ -35,6 +35,13 @@ public partial class GraphicsConfigurationDialog
         SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
     }
 
+    protected override void OnClosed(EventArgs e)
+    {
+        SystemEvents.DisplaySettingsChanged -= SystemEvents_DisplaySettingsChanged;
+
+        base.OnClosed(e);
+    }
+
     #region Eventos
 
     private void Window_Loaded(object sender, RoutedEventArgs e)

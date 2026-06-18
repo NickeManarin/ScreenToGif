@@ -27,6 +27,13 @@ public partial class Troubleshoot
         SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
     }
 
+    protected override void OnClosed(EventArgs e)
+    {
+        SystemEvents.DisplaySettingsChanged -= SystemEvents_DisplaySettingsChanged;
+
+        base.OnClosed(e);
+    }
+
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         if (Application.Current.Windows.OfType<Window>().Any(a => a.GetType() != typeof(Troubleshoot)))
