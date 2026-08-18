@@ -1,0 +1,180 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:input="using:Avalonia.Input"
+        xmlns:controls="using:ScreenToGif.Linux.Controls"
+        xmlns:icons="using:ScreenToGif.Linux"
+        x:Class="ScreenToGif.Linux.MainWindow"
+        Title="ScreenToGif - Editor" Width="1320" Height="780" MinWidth="1280" MinHeight="620"
+        Icon="/Resources/Logo.ico" Background="#1E1F22">
+    <Window.Styles>
+        <Style Selector="TextBlock"><Setter Property="Foreground" Value="#E1E4E8" /></Style>
+        <Style Selector="TabControl"><Setter Property="Background" Value="#25272A" /><Setter Property="BorderBrush" Value="#45484E" /></Style>
+        <Style Selector="TabItem"><Setter Property="FontSize" Value="13" /><Setter Property="Padding" Value="8,3" /><Setter Property="Foreground" Value="#B9BEC5" /></Style>
+        <Style Selector="TabItem:selected"><Setter Property="Foreground" Value="#FFFFFF" /></Style>
+        <Style Selector="Border.ribbon-group"><Setter Property="BorderBrush" Value="#45484E" /><Setter Property="BorderThickness" Value="0,0,1,0" /><Setter Property="Padding" Value="4,1,7,0" /></Style>
+        <Style Selector="TextBlock.ribbon-group-label"><Setter Property="FontSize" Value="12" /><Setter Property="Foreground" Value="#9299A2" /><Setter Property="HorizontalAlignment" Value="Center" /><Setter Property="Margin" Value="0,1,0,0" /></Style>
+        <Style Selector="Button.chrome-button"><Setter Property="MinHeight" Value="26" /><Setter Property="Padding" Value="6,2" /><Setter Property="Foreground" Value="#B9BEC5" /><Setter Property="Background" Value="Transparent" /><Setter Property="BorderBrush" Value="Transparent" /></Style>
+        <Style Selector="Button.status-button"><Setter Property="Width" Value="40" /><Setter Property="Height" Value="20" /><Setter Property="Padding" Value="5,2" /><Setter Property="Background" Value="Transparent" /><Setter Property="BorderBrush" Value="Transparent" /></Style>
+        <Style Selector="ListBoxItem"><Setter Property="Padding" Value="0" /><Setter Property="Margin" Value="0,0,4,0" /><Setter Property="Background" Value="Transparent" /></Style>
+        <Style Selector="ListBoxItem:selected"><Setter Property="Background" Value="#315E82" /></Style>
+        <Style Selector="Border.frame-card"><Setter Property="Background" Value="#2B2E32" /><Setter Property="BorderBrush" Value="#4B4F55" /></Style>
+        <Style Selector="ListBoxItem:selected Border.frame-card"><Setter Property="Background" Value="#315E82" /><Setter Property="BorderBrush" Value="#78B8E8" /></Style>
+    </Window.Styles>
+
+    <Grid input:DragDrop.AllowDrop="True" input:DragDrop.DragOver="DragOver" input:DragDrop.Drop="Drop" RowDefinitions="Auto,*,Auto,Auto">
+        <Grid Grid.Row="0" RowDefinitions="Auto,*" Background="#25272A">
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto" Height="28">
+                <TextBlock Text="ScreenToGif" Margin="8,0" VerticalAlignment="Center" Foreground="#9299A2" />
+                <Button Grid.Column="1" Classes="chrome-button" Content="Notifications" IsEnabled="False" ToolTip.Tip="Notifications are not available on Linux yet." />
+                <Button Grid.Column="2" Classes="chrome-button" Content="Extras" IsEnabled="False" ToolTip.Tip="Extras are not available on Linux yet." />
+            </Grid>
+            <TabControl x:Name="RibbonTabControl" Grid.Row="1" BorderThickness="0,1,0,1">
+                <controls:RibbonTabItem Header="File" IconKind="Save">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                        <StackPanel Orientation="Horizontal" Height="94" Margin="2" Background="#2B2E32">
+                            <Border Classes="ribbon-group"><Grid RowDefinitions="*,16"><StackPanel Orientation="Horizontal"><controls:RibbonButton Label="Recording" IconKind="Record" IsEnabled="False" /><controls:RibbonButton Label="Webcam" IconKind="Camera" IsEnabled="False" /><controls:RibbonButton Label="Board" IconKind="Board" IsEnabled="False" /><controls:RibbonButton Label="Blank project" IconKind="NewFile" IsEnabled="False" /></StackPanel><TextBlock Grid.Row="1" Classes="ribbon-group-label" Text="New" /></Grid></Border>
+                            <Border Classes="ribbon-group"><Grid RowDefinitions="*,16"><StackPanel Orientation="Horizontal"><controls:RibbonButton Label="Recording" IconKind="Record" IsEnabled="False" /><controls:RibbonButton Label="Webcam" IconKind="Camera" IsEnabled="False" /><controls:RibbonButton Label="Board" IconKind="Board" IsEnabled="False" /><controls:RibbonButton Label="Media" IconKind="Open" Click="OpenMediaClick" /></StackPanel><TextBlock Grid.Row="1" Classes="ribbon-group-label" Text="Insert" /></Grid></Border>
+                            <Border Classes="ribbon-group"><Grid RowDefinitions="*,16"><StackPanel Orientation="Horizontal"><controls:RibbonButton Label="Save as" IconKind="Save" Click="SaveProjectClick" /><controls:RibbonButton Label="Load" IconKind="Open" Click="OpenProjectClick" /><controls:RibbonButton Label="Recent projects" IconKind="Project" IsEnabled="False" /><controls:RibbonButton Label="Discard project" IconKind="Cancel" IsEnabled="False" /></StackPanel><TextBlock Grid.Row="1" Classes="ribbon-group-label" Text="Project" /></Grid></Border>
+                            <Border Classes="ribbon-group"><Grid RowDefinitions="*,16"><StackPanel Orientation="Horizontal"><controls:RibbonButton Label="GIF" IconKind="Export" Click="ExportGifClick" /><controls:RibbonButton Label="APNG" IconKind="Export" Click="ExportApngClick" /><controls:RibbonButton Label="MP4" IconKind="Export" Click="ExportMp4Click" /><controls:RibbonButton Label="WebM" IconKind="Export" Click="ExportWebmClick" /></StackPanel><TextBlock Grid.Row="1" Classes="ribbon-group-label" Text="Export" /></Grid></Border>
+                        </StackPanel>
+                    </ScrollViewer>
+                </controls:RibbonTabItem>
+                <controls:RibbonTabItem Header="Home" IconKind="Undo" IsSelected="True">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                        <Grid Height="94" Margin="2" Background="#2B2E32" ColumnDefinitions="Auto,7,Auto,7,Auto,7,Auto,*">
+                            <Grid Grid.Column="0" Margin="0,1,0,0" ColumnDefinitions="Auto,Auto" RowDefinitions="*,16">
+                                <controls:RibbonButton Grid.Column="0" Label="Undo" IconKind="Undo" MinWidth="55" Click="UndoDeleteClick" />
+                                <Grid Grid.Column="1" RowDefinitions="*,*">
+                                    <controls:RibbonButton Classes="compact" Label="Reset" IconKind="Repeat" IsEnabled="False" />
+                                    <controls:RibbonButton Grid.Row="1" Classes="compact" Label="Redo" IconKind="Redo" IsEnabled="False" />
+                                </Grid>
+                                <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Classes="ribbon-group-label" Text="Action stack" />
+                            </Grid>
+                            <Border Grid.Column="1" Width="1" Background="#45484E" Margin="3,2" />
+                            <Grid Grid.Column="2" Margin="0,1,0,0" ColumnDefinitions="Auto,Auto" RowDefinitions="*,16">
+                                <controls:RibbonButton Grid.Column="0" Label="Paste" IconKind="Paste" MinWidth="55" IsEnabled="False" />
+                                <Grid Grid.Column="1" RowDefinitions="*,*">
+                                    <controls:RibbonButton Classes="compact" Label="Copy" IconKind="Copy" IsEnabled="False" />
+                                    <controls:RibbonButton Grid.Row="1" Classes="compact" Label="Cut" IconKind="Cut" IsEnabled="False" />
+                                </Grid>
+                                <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Classes="ribbon-group-label" Text="Clipboard" />
+                            </Grid>
+                            <Border Grid.Column="3" Width="1" Background="#45484E" Margin="3,2" />
+                            <Grid Grid.Column="4" Margin="0,1,0,0" ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="*,16">
+                                <controls:RibbonButton Grid.Column="0" Label="100%" IconKind="Fit" MinWidth="55" IsEnabled="False" />
+                                <controls:RibbonButton Grid.Column="1" Label="Size to&#xA;content" IconKind="SizeToContent" MinWidth="55" IsEnabled="False" />
+                                <Grid Grid.Column="2" RowDefinitions="*,*">
+                                    <StackPanel Orientation="Horizontal" Margin="0,5" IsEnabled="False"><icons:WindowsIcon Kind="Zoom" Width="22" Height="22" /><TextBox Width="60" Height="25" Margin="5,0,0,0" Text="100" /><TextBlock Text="%" Margin="3,0" VerticalAlignment="Center" /></StackPanel>
+                                    <controls:RibbonButton Grid.Row="1" Classes="compact" Label="Fit image" IconKind="PictureFit" IsEnabled="False" />
+                                </Grid>
+                                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Classes="ribbon-group-label" Text="Zoom" />
+                            </Grid>
+                            <Border Grid.Column="5" Width="1" Background="#45484E" Margin="3,2" />
+                            <Grid Grid.Column="6" Margin="0,1,0,0" ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="*,16">
+                                <controls:RibbonButton Grid.Column="0" Label="Select all" IconKind="Cursor" MinWidth="55" IsEnabled="False" />
+                                <controls:RibbonButton Grid.Column="1" Label="Go to" IconKind="Forward" MinWidth="55" IsEnabled="False" />
+                                <Grid Grid.Column="2" RowDefinitions="*,*">
+                                    <controls:RibbonButton Classes="compact" Label="Inverse" IconKind="Inverse" IsEnabled="False" />
+                                    <controls:RibbonButton Grid.Row="1" Classes="compact" Label="Deselect" IconKind="Unselect" IsEnabled="False" />
+                                </Grid>
+                                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Classes="ribbon-group-label" Text="Select" />
+                            </Grid>
+                        </Grid>
+                    </ScrollViewer>
+                </controls:RibbonTabItem>
+                <controls:RibbonTabItem Header="Playback" IconKind="Play">
+                    <Grid Height="94" Margin="2" Background="#2B2E32" ColumnDefinitions="Auto,7,Auto,7,*">
+                        <Grid Grid.Column="0" Margin="0,1,0,0" ColumnDefinitions="Auto,Auto,Auto,Auto,Auto" RowDefinitions="*,16">
+                            <controls:RibbonButton Grid.Column="0" Label="First" IconKind="First" IconWidth="38" IsEnabled="False" />
+                            <controls:RibbonButton Grid.Column="1" Label="Previous" IconKind="Previous" IsEnabled="False" />
+                            <controls:RibbonButton Grid.Column="2" Label="Play" IconKind="Play" Click="PlayClick" />
+                            <controls:RibbonButton Grid.Column="3" Label="Next" IconKind="Next" IsEnabled="False" />
+                            <controls:RibbonButton Grid.Column="4" Label="Last" IconKind="Last" IconWidth="38" IsEnabled="False" />
+                            <TextBlock Grid.Row="1" Grid.ColumnSpan="5" Classes="ribbon-group-label" Text="Playback" />
+                        </Grid>
+                        <Border Grid.Column="1" Width="1" Background="#45484E" Margin="3,2" />
+                        <Grid Grid.Column="2" Margin="0,1,0,0" RowDefinitions="*,*,16">
+                            <CheckBox Content="Loop playback" Margin="5,3" IsEnabled="False" />
+                            <CheckBox Grid.Row="1" Content="Drop frames when behind" Margin="5,3" IsEnabled="False" />
+                            <TextBlock Grid.Row="2" Classes="ribbon-group-label" Text="Playback options" />
+                        </Grid>
+                    </Grid>
+                </controls:RibbonTabItem>
+                <controls:RibbonTabItem Header="Edit" IconKind="Cut">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                        <Grid Height="94" Margin="2" Background="#2B2E32" ColumnDefinitions="Auto,7,Auto,7,Auto,*">
+                            <Grid Grid.Column="0" Margin="0,1,0,0" ColumnDefinitions="Auto,Auto,Auto,Auto,Auto" RowDefinitions="*,16">
+                                <controls:RibbonButton Grid.Column="0" Label="Delete" IconKind="Cancel" Click="DeleteFrameClick" />
+                                <controls:RibbonButton Grid.Column="1" Label="Duplicates" IconKind="Cancel" IsEnabled="False" />
+                                <controls:RibbonButton Grid.Column="2" Label="Reduce" IconKind="Cancel" IsEnabled="False" />
+                                <controls:RibbonButton Grid.Column="3" Label="Smooth&#xA;loop" IconKind="Repeat" IsEnabled="False" />
+                                <Grid Grid.Column="4" RowDefinitions="*,*">
+                                    <controls:RibbonButton Classes="compact" Label="Delete before" IconKind="ArrowTop" IsEnabled="False" />
+                                    <controls:RibbonButton Grid.Row="1" Classes="compact" Label="Delete after" IconKind="ArrowBottom" IsEnabled="False" />
+                                </Grid>
+                                <TextBlock Grid.Row="1" Grid.ColumnSpan="5" Classes="ribbon-group-label" Text="Frames" />
+                            </Grid>
+                            <Border Grid.Column="1" Width="1" Background="#45484E" Margin="3,2" />
+                            <Grid Grid.Column="2" Margin="0,1,0,0" ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="*,16">
+                                <Grid Grid.Column="0" RowDefinitions="*,*">
+                                    <controls:RibbonButton Classes="compact" Label="Reverse" IconKind="Inverse" IsEnabled="False" />
+                                    <controls:RibbonButton Grid.Row="1" Classes="compact" Label="Yoyo" IconKind="Repeat" IsEnabled="False" />
+                                </Grid>
+                                <controls:RibbonButton Grid.Column="1" Label="Move left" IconKind="Previous" Click="MoveUpClick" />
+                                <controls:RibbonButton Grid.Column="2" Label="Move right" IconKind="Next" Click="MoveDownClick" />
+                                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Classes="ribbon-group-label" Text="Reorder" />
+                            </Grid>
+                            <Border Grid.Column="3" Width="1" Background="#45484E" Margin="3,2" />
+                            <Grid Grid.Column="4" Margin="0,1,0,0" ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="*,16">
+                                <StackPanel Grid.Column="0" Width="76" Margin="4,5,4,0"><TextBlock Text="Delay (ms)" FontSize="11" Foreground="#9299A2" /><TextBox x:Name="DelayTextBox" Height="28" Text="100" /></StackPanel>
+                                <controls:RibbonButton Grid.Column="1" Label="Apply&#xA;selected" IconKind="OverrideDelay" Click="ApplyDelayClick" />
+                                <controls:RibbonButton Grid.Column="2" Label="Apply all" IconKind="Fit" Click="ApplyDelayAllClick" />
+                                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Classes="ribbon-group-label" Text="Delay" />
+                            </Grid>
+                        </Grid>
+                    </ScrollViewer>
+                </controls:RibbonTabItem>
+                <controls:RibbonTabItem Header="Image" IconKind="PictureFit">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                        <Grid Height="94" Margin="2" Background="#2B2E32" ColumnDefinitions="Auto,7,Auto,7,Auto,*">
+                            <Grid Grid.Column="0" Margin="0,1,0,0" ColumnDefinitions="Auto,Auto" RowDefinitions="*,16">
+                                <controls:RibbonButton Grid.Column="0" Label="Resize" IconKind="PictureFit" IsEnabled="False" />
+                                <Grid Grid.Column="1" RowDefinitions="*,*"><controls:RibbonButton Classes="compact" Label="Crop" IconKind="Fit" IsEnabled="False" /><controls:RibbonButton Grid.Row="1" Classes="compact" Label="Flip / rotate" IconKind="Forward" IsEnabled="False" /></Grid>
+                                <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Classes="ribbon-group-label" Text="Size" />
+                            </Grid>
+                            <Border Grid.Column="1" Width="1" Background="#45484E" Margin="3,2" />
+                            <Grid Grid.Column="2" Margin="0,1,0,0" ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="*,16">
+                                <controls:RibbonButton Grid.Column="0" Label="Caption" IconKind="Caption" IsEnabled="False" /><controls:RibbonButton Grid.Column="1" Label="Key&#xA;strokes" IconKind="Keyboard" IsEnabled="False" />
+                                <Grid Grid.Column="2" RowDefinitions="*,*"><controls:RibbonButton Classes="compact" Label="Free text" IconKind="FreeText" IsEnabled="False" /><controls:RibbonButton Grid.Row="1" Classes="compact" Label="Title frame" IconKind="TitleFrame" IsEnabled="False" /></Grid>
+                                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Classes="ribbon-group-label" Text="Text" />
+                            </Grid>
+                            <Border Grid.Column="3" Width="1" Background="#45484E" Margin="3,2" />
+                            <Grid Grid.Column="4" Margin="0,1,0,0" ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowDefinitions="*,16">
+                                <controls:RibbonButton Grid.Column="0" Label="Free&#xA;drawing" IconKind="FreeDrawing" IsEnabled="False" /><controls:RibbonButton Grid.Column="1" Label="Shapes" IconKind="Shapes" IsEnabled="False" /><controls:RibbonButton Grid.Column="2" Label="Progress" IconKind="Progress" IsEnabled="False" /><controls:RibbonButton Grid.Column="3" Label="Mouse&#xA;events" IconKind="Cursor" IsEnabled="False" /><controls:RibbonButton Grid.Column="4" Label="Border" IconKind="Border" IsEnabled="False" /><controls:RibbonButton Grid.Column="5" Label="Shadow" IconKind="Shadow" IsEnabled="False" /><controls:RibbonButton Grid.Column="6" Label="Obfuscate" IconKind="Obfuscate" IsEnabled="False" />
+                                <Grid Grid.Column="7" RowDefinitions="*,*"><controls:RibbonButton Classes="compact" Label="Watermark" IconKind="Watermark" IsEnabled="False" /><controls:RibbonButton Grid.Row="1" Classes="compact" Label="Cinemagraph" IconKind="Cinemagraph" IsEnabled="False" /></Grid>
+                                <TextBlock Grid.Row="1" Grid.ColumnSpan="8" Classes="ribbon-group-label" Text="Overlays" />
+                            </Grid>
+                        </Grid>
+                    </ScrollViewer>
+                </controls:RibbonTabItem>
+                <controls:RibbonTabItem Header="Transitions" IconKind="Fade">
+                    <StackPanel Orientation="Horizontal" Height="94" Margin="2" Background="#2B2E32"><Border Classes="ribbon-group"><Grid RowDefinitions="*,16"><StackPanel Orientation="Horizontal"><controls:RibbonButton Label="Fade" IconKind="Fade" IsEnabled="False" /><controls:RibbonButton Label="Slide" IconKind="Slide" IsEnabled="False" /></StackPanel><TextBlock Grid.Row="1" Classes="ribbon-group-label" Text="Transitions" /></Grid></Border></StackPanel>
+                </controls:RibbonTabItem>
+                <controls:RibbonTabItem Header="Statistics" IconKind="Zoom">
+                    <Grid Height="94" Margin="2" Background="#2B2E32" ColumnDefinitions="Auto,24,Auto,24,Auto"><StackPanel Margin="12,10"><TextBlock Text="Frames" Foreground="#9299A2" /><TextBlock Text="Current editor statistics" FontSize="16" /></StackPanel><StackPanel Grid.Column="2" Margin="12,10"><TextBlock Text="Selection" Foreground="#9299A2" /><TextBlock Text="See status bar" FontSize="16" /></StackPanel></Grid>
+                </controls:RibbonTabItem>
+            </TabControl>
+        </Grid>
+
+        <Border Grid.Row="1" Margin="8,6,8,5" BorderBrush="#45484E" BorderThickness="1" Background="#2B2E32" Padding="8">
+            <Border Background="#161719" Padding="8"><Grid><Image x:Name="PreviewImage" Stretch="Uniform" /><TextBlock x:Name="EmptyPreviewText" Text="Open an image, GIF, or video to begin editing." Foreground="#B6BBC2" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" /></Grid></Border>
+        </Border>
+        <Border Grid.Row="2" Background="#25272A" BorderBrush="#45484E" BorderThickness="0,1,0,1" Padding="6,5,6,6">
+            <ListBox x:Name="FrameListBox" SelectionMode="Multiple" SelectionChanged="FrameSelectionChanged" KeyDown="FrameListKeyDown" Focusable="True" IsTabStop="True" MinHeight="116" MaxHeight="140" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <ListBox.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ListBox.ItemsPanel>
+                <ListBox.ItemTemplate><DataTemplate><Border Classes="frame-card" Width="116" Height="106" Margin="0,0,4,0" Padding="4" BorderThickness="1" CornerRadius="3"><Grid RowDefinitions="*,Auto,Auto"><Image Width="106" Height="70" Stretch="UniformToFill" Source="{Binding Thumbnail}" /><TextBlock Grid.Row="1" Margin="2,3,2,0" Text="{Binding FrameNumber}" TextTrimming="CharacterEllipsis" Foreground="#D1D6DC" FontSize="11" /><TextBlock Grid.Row="2" Margin="2,1,2,0" Foreground="#72B7E5" Text="{Binding DelayText}" FontSize="11" /></Grid></Border></DataTemplate></ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <Border Grid.Row="3" Height="20" Background="#25272A" Padding="5,0"><Grid ColumnDefinitions="Auto,7,*,5,Auto,5,Auto,5,200"><TextBlock x:Name="StatusText" Text="Ready" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" /><Border Grid.Column="1" Width="1" Background="#45484E" Margin="3,2" /><StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4"><TextBlock x:Name="FrameCountText" Text="0" Foreground="#16803C" /><TextBlock x:Name="SelectedCountText" Text="0" Foreground="#B03030" Margin="8,0,0,0" /><TextBlock x:Name="CurrentFrameText" Text="—" Foreground="#2166A5" Margin="8,0,0,0" /></StackPanel><Border Grid.Column="3" Width="1" Background="#45484E" Margin="1,2" /><Button Grid.Column="4" Classes="status-button" ToolTip.Tip="Play" Click="PlayClick"><icons:WindowsIcon Kind="Play" Width="15" Height="15" /></Button><Button Grid.Column="6" Classes="status-button" ToolTip.Tip="Stop" Click="StopClick"><icons:WindowsIcon Kind="Stop" Width="15" Height="15" /></Button><Button Grid.Column="8" Classes="status-button" HorizontalAlignment="Right" ToolTip.Tip="Close editor" Click="ExitClick"><icons:WindowsIcon Kind="Cancel" Width="15" Height="15" /></Button></Grid></Border>
+    </Grid>
+</Window>

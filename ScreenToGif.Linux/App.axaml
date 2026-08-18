@@ -1,0 +1,11 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:fluent="using:Avalonia.Themes.Fluent"
+             RequestedThemeVariant="Dark"
+             x:Class="ScreenToGif.Linux.App">
+    <Application.Styles>
+        <fluent:FluentTheme />
+        <StyleInclude Source="avares://ScreenToGif.Linux/Themes/RibbonButton.axaml" />
+        <StyleInclude Source="avares://ScreenToGif.Linux/Themes/RibbonTabItem.axaml" />
+    </Application.Styles>
+</Application>
