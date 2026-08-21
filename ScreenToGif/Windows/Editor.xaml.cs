@@ -3101,6 +3101,25 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private ScrollViewer _frameListScrollViewer;
+
+        private ScrollViewer GetFrameListScrollViewer()
+            => _frameListScrollViewer ??= VisualHelper.GetVisualChild<ScrollViewer>(FrameListView);
+
+        private void FrameListView_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var scrollViewer = GetFrameListScrollViewer();
+
+            if (scrollViewer is null)
+                return;
+
+            if (e.Delta > 0)
+                scrollViewer.LineLeft();
+            else
+                scrollViewer.LineRight();
+
+            e.Handled = true;
+        }
         #endregion
 
         private void PreviewLoop(int selectedIndex)
