@@ -4310,6 +4310,7 @@
                   ItemsSource="{Binding Path=DataContext.Frames, ElementName=EditorWindow}" IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"
                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=HasItems, Converter={StaticResource Bool2Visibility}}"
                   SelectionChanged="FrameListView_SelectionChanged" PreviewKeyDown="FrameListView_PreviewKeyDown"
+                  PreviewMouseWheel="FrameListView_PreviewMouseWheel"
                   SelectedIndex="{Binding CurrentIndex, Mode=OneWayToSource}">
 
             <ListView.Resources>
