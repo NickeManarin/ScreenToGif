@@ -1,0 +1,121 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:icons="using:ScreenToGif.Linux"
+        x:Class="ScreenToGif.Linux.StartupWindow"
+        Title="ScreenToGif - StartUp"
+        Width="486"
+        Height="182"
+        MinWidth="486"
+        MinHeight="182"
+        MaxWidth="486"
+        MaxHeight="182"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Resources/Logo.ico"
+        Background="#1E1F22">
+    <Window.Styles>
+        <Style Selector="Button.shortcut">
+            <Setter Property="Margin" Value="5,0,5,5" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="#E1E4E8" />
+            <Setter Property="Background" Value="#232528" />
+            <Setter Property="BorderBrush" Value="#4B4F55" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+        </Style>
+        <Style Selector="Button.shortcut:pointerover">
+            <Setter Property="Background" Value="#353A40" />
+            <Setter Property="BorderBrush" Value="#76A9D4" />
+        </Style>
+        <Style Selector="Button.shortcut:pressed">
+            <Setter Property="Background" Value="#24527A" />
+        </Style>
+        <Style Selector="Button.shortcut:disabled">
+            <Setter Property="Opacity" Value="0.7" />
+        </Style>
+        <Style Selector="Button.options-button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="3,2" />
+            <Setter Property="Foreground" Value="#B9BEC5" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="45,*">
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Background="#202124">
+            <TextBlock Grid.Column="0"
+                       Text="ScreenToGif"
+                       Margin="10"
+                       FontSize="18"
+                       VerticalAlignment="Center"
+                       Foreground="#C7CBD1" />
+            <Button Grid.Column="1"
+                    Classes="options-button"
+                    IsEnabled="False"
+                    ToolTip.Tip="Options are not available on Linux yet.">
+                <StackPanel Orientation="Horizontal" Spacing="2">
+                    <icons:WindowsIcon Kind="Options" Width="25" Height="25" />
+                    <TextBlock Text="Options" VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" Background="#1E1F22">
+            <Button Grid.Column="0" Classes="shortcut" IsEnabled="False" ToolTip.Tip="Screen recording is not available on Linux yet.">
+                <StackPanel Spacing="5">
+                    <Canvas Width="40" Height="40" HorizontalAlignment="Center">
+                        <Path Fill="#A02821" Data="M 40,20.656 C 40,30.673 31.880,38.793 21.863,38.793 C 11.846,38.793 3.725,30.673 3.725,20.656 C 3.725,10.639 11.846,2.518 21.863,2.518 C 31.880,2.518 40,10.639 40,20.656 Z" />
+                        <Path Fill="#FFFFFF" Data="M 11.491,11.247 L 5.596,11.247 L 5.596,5.749 L 11.491,5.749 L 11.491,11.247 Z" />
+                        <Path Fill="#EBC67D" Data="F1 M 1.868,13.501 L 1.868,15.321 L 3.700,15.321 L 6.396,12.641 L 7.294,12.641 L 7.294,16.283 L 8.193,17.175 L 9.091,17.175 L 9.989,16.283 L 9.989,12.641 L 10.889,12.641 L 11.786,13.534 L 12.684,14.426 L 13.584,15.320 L 15.416,15.320 L 15.416,13.501 L 14.516,12.607 L 13.618,11.715 L 12.721,10.823 L 12.721,9.926 L 16.383,9.926 L 17.283,9.035 L 17.283,8.141 L 16.386,7.247 L 12.723,7.247 L 12.723,6.355 L 13.620,5.462 L 14.519,4.569 L 15.418,3.677 L 16.315,0.962 L 13.586,1.857 L 10.891,4.535 L 9.991,4.535 L 9.991,0.895 L 9.092,0 L 8.195,0 L 7.294,0.895 L 7.294,4.535 L 6.396,4.535 L 5.499,3.642 L 4.599,2.749 L 3.700,1.855 L 0.968,0.961 L 1.867,3.676 L 2.767,4.569 L 3.664,5.462 L 4.563,6.355 L 4.563,7.247 L 0.898,7.247 L 0,8.141 L 0,9.035 L 0.898,9.926 L 4.563,9.926 L 4.563,10.820 L 1.868,13.501 Z M 10.822,7.146 L 10.822,9.859 L 9.924,10.753 L 7.193,10.753 L 6.294,9.859 L 6.294,7.146 L 7.191,6.252 L 9.923,6.252 L 10.822,7.146 Z" />
+                    </Canvas>
+                    <TextBlock Text="Recorder" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+            <Button Grid.Column="1" Classes="shortcut" IsEnabled="False" ToolTip.Tip="Webcam recording is not available on Linux yet.">
+                <StackPanel Spacing="5">
+                    <Canvas Width="40" Height="40" HorizontalAlignment="Center">
+                        <Path Fill="#FFFFFF" Data="F1 M 31.721,25.054 L 6.123,25.054 L 6.123,6.576 L 31.721,6.576 L 31.721,25.054 Z" />
+                        <Path Fill="#7F7F7F" Data="F1 M 22.173,24.057 C 17.611,24.057 13.913,20.359 13.913,15.797 C 13.913,11.234 17.611,7.536 22.173,7.536 C 26.737,7.536 30.433,11.234 30.433,15.797 C 30.433,20.359 26.737,24.057 22.173,24.057 Z M 7.848,11.377 L 7.848,8.820 L 11.100,8.820 L 11.100,11.377 L 7.848,11.377 Z M 30.637,5.068 L 27.458,0 L 16.963,0 L 13.564,5.068 L 4.348,5.068 L 4.348,27.826 C 4.348,27.826 4.693,27.826 12.406,27.826 C 18.269,27.826 40,27.826 40,27.826 L 40,5.068 L 30.637,5.068 Z" />
+                        <Path Fill="#7F7F7F" Data="F1 M 28.261,15.870 C 28.261,19.231 25.536,21.957 22.174,21.957 C 18.812,21.957 16.087,19.231 16.087,15.870 C 16.087,12.508 18.812,9.783 22.174,9.783 C 25.536,9.783 28.261,12.508 28.261,15.870 Z" />
+                        <Path Fill="#F9FFF7" Data="F1 M 7.949,7.577 L 3.922,7.577 L 3.909,4.255 L 7.936,4.255 L 7.949,7.577 Z" />
+                        <Path Fill="#EBC67C" Data="F1 M 1.292,9.383 L 1.292,10.649 L 2.559,10.649 L 4.426,8.786 L 5.047,8.786 L 5.047,11.318 L 5.669,11.938 L 6.291,11.938 L 6.912,11.318 L 6.912,8.786 L 7.535,8.786 L 8.156,9.406 L 8.778,10.026 L 9.400,10.647 L 10.667,10.647 L 10.667,9.383 L 10.044,8.762 L 9.423,8.142 L 8.803,7.522 L 8.803,6.899 L 11.336,6.899 L 11.959,6.279 L 11.959,5.658 L 11.338,5.037 L 8.804,5.037 L 8.804,4.417 L 9.425,3.795 L 10.047,3.175 L 10.669,2.555 L 11.290,0.668 L 9.400,1.290 L 7.536,3.152 L 6.913,3.152 L 6.913,0.622 L 6.292,0 L 5.671,0 L 5.047,0.622 L 5.047,3.152 L 4.426,3.152 L 3.803,2.531 L 3.181,1.910 L 2.559,1.289 L 0.669,0.667 L 1.292,2.554 L 1.915,3.175 L 2.535,3.795 L 3.158,4.417 L 3.158,5.037 L 0.622,5.037 L 0,5.658 L 0,6.279 L 0.622,6.899 L 3.158,6.899 L 3.158,7.520 L 1.292,9.383 Z M 7.489,4.967 L 7.489,6.853 L 6.867,7.474 L 4.976,7.474 L 4.355,6.853 L 4.355,4.967 L 4.976,4.346 L 6.867,4.346 L 7.489,4.967 Z" />
+                    </Canvas>
+                    <TextBlock Text="Webcam" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+            <Button Grid.Column="2" Classes="shortcut" IsEnabled="False" ToolTip.Tip="Board recording is not available on Linux yet.">
+                <StackPanel Spacing="5">
+                    <Canvas Width="40" Height="40" HorizontalAlignment="Center">
+                        <Path Fill="#FFFFFF" Data="M 39.934,38 L 6.038,38 L 6.038,7.857 L 39.934,7.857 L 39.934,38 Z" />
+                        <Path Fill="#A4A3A2" Data="F1 M 7.196,36.806 L 38.776,36.806 L 38.776,9.051 L 7.196,9.051 L 7.196,36.806 Z M 40,38 L 5.972,38 L 5.972,7.857 L 40,7.857 L 40,38 Z" />
+                        <Path Fill="#D86543" Data="M 13.372,24 C 15.109,23.136 17.042,14.848 20.468,14.981 C 22.118,20.487 16.476,29.730 17.210,33.790 C 20.717,33.710 24.315,23.720 27.809,24.055 C 28.497,26.858 24.283,28.893 25.197,33.215 C 26.580,33.263 32.432,26.982 32.607,26.041 C 30.143,26.194 29.426,28.725 27.418,29.645 C 27.683,26.629 30.346,25.706 28.233,22.736 C 24.980,22.677 20.371,29.750 18.159,32.337 C 19.120,27.833 23.473,18.062 21.061,14.106 C 17.664,13.559 13.163,20.890 13.372,24 Z M 26.895,30.371 C 27.022,30.095 26.609,30.994 26.895,30.371 L 26.895,30.371 Z" />
+                        <Path Fill="#FAFCF7" Data="F1 M 13.478,13.384 L 6.473,13.384 L 6.472,6.350 L 13.478,6.350 L 13.478,13.384 Z" />
+                        <Path Fill="#EBC67D" Data="F1 M 2.164,15.796 L 2.164,17.926 L 4.283,17.926 L 7.410,14.788 L 8.447,14.788 L 8.447,19.053 L 9.490,20.095 L 10.528,20.095 L 11.570,19.053 L 11.570,14.788 L 12.612,14.788 L 13.649,15.836 L 14.692,16.878 L 15.734,17.924 L 17.853,17.924 L 17.853,15.796 L 16.810,14.748 L 15.772,13.706 L 14.732,12.660 L 14.732,11.615 L 18.974,11.615 L 20.017,10.568 L 20.017,9.525 L 18.976,8.478 L 14.738,8.478 L 14.738,7.437 L 15.775,6.389 L 16.816,5.347 L 17.859,4.300 L 18.896,1.126 L 15.734,2.171 L 12.613,5.307 L 11.570,5.307 L 11.570,1.048 L 10.533,0 L 9.492,0 L 8.447,1.048 L 8.447,5.307 L 7.410,5.307 L 6.368,4.260 L 5.325,3.217 L 4.283,2.170 L 1.121,1.126 L 2.164,4.299 L 3.206,5.347 L 4.243,6.389 L 5.285,7.437 L 5.285,8.478 L 1.042,8.478 L 0,9.525 L 0,10.568 L 1.042,11.615 L 5.285,11.615 L 5.285,12.658 L 2.164,15.796 Z M 12.534,8.361 L 12.534,11.537 L 11.493,12.581 L 8.329,12.581 L 7.289,11.537 L 7.289,8.361 L 8.329,7.317 L 11.492,7.317 L 12.534,8.361 Z" />
+                    </Canvas>
+                    <TextBlock Text="Board" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+            <Button Grid.Column="3" Classes="shortcut" Click="OpenEditorClick">
+                <StackPanel Spacing="5">
+                    <Canvas Width="40" Height="40" HorizontalAlignment="Center">
+                        <Path Fill="#FFFFFF" Data="M 39.273,35.573 L 0.727,35.573 L 0.727,7.260 L 39.273,7.260 L 39.273,35.573 Z" />
+                        <Path Fill="#BDD0E4" Data="M 17.455,19.602 C 17.168,19.379 16.323,19.434 16,19.602 C 13.751,20.772 8.727,26.861 8.727,26.861 L 8.727,30.492 L 27.637,30.492 C 27.637,30.492 20.174,21.709 17.455,19.602 Z" />
+                        <Path Fill="#BDD0E4" Data="M 29.091,30.492 L 31.273,30.492 L 31.273,26.861 C 31.273,26.861 26.865,21.211 24.728,20.328 C 24.392,20.189 23.600,20.169 23.273,20.328 C 22.811,20.554 21.293,21.802 21.653,22.170 C 24.319,24.892 29.091,30.492 29.091,30.492 Z" />
+                        <Path Fill="#F7E9D2" Data="M 25.455,17.424 C 26.126,17.702 27.694,17.707 28.364,17.424 C 28.601,17.324 28.980,16.930 29.091,16.698 C 29.405,16.043 29.332,14.479 29.091,13.794 C 29.006,13.551 28.596,13.179 28.364,13.068 C 27.708,12.754 26.141,12.826 25.455,13.068 C 25.212,13.154 24.840,13.563 24.728,13.794 C 24.408,14.446 24.450,16.027 24.728,16.698 C 24.826,16.936 25.217,17.326 25.455,17.424 Z" />
+                        <Path Fill="#7C7B7C" Data="M 0,36.300 L 40.001,36.300 L 40.001,0 L 0,0 L 0,36.300 Z M 0.727,7.260 L 39.273,7.260 L 39.273,35.573 L 0.727,35.573 L 0.727,7.260 L 0.727,7.260 Z" />
+                        <Path Fill="#CFD0D0" Data="M 6.545,32.669 L 33.455,32.669 L 33.455,10.164 L 6.545,10.164 L 6.545,32.669 Z M 7.273,10.890 L 32.727,10.890 L 32.727,31.944 L 7.273,31.944 L 7.273,10.890 L 7.273,10.890 Z" />
+                    </Canvas>
+                    <TextBlock Text="Editor" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

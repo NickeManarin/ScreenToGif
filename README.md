@@ -68,6 +68,32 @@
     <img src="https://img.shields.io/discord/318260719680356352.svg" alt="Discord" />
   </a>
 </p>
+
+## Linux editor (initial support)
+
+The original `GifRecorder.sln` remains the Windows application. Linux support starts with a separate editor-first application in `ScreenToGif.Linux/`, built with Avalonia and FFmpeg. It keeps the existing Windows/WPF code intact while providing a native Linux timeline editor with a deliberately simple, Windows-like desktop UI.
+
+See [the Linux build and run guide](ScreenToGif.Linux/README.md) for prerequisites, distribution notes, Makefile shortcuts, publishing, and desktop-launcher installation.
+
+Launching the Linux application opens a Windows-like StartUp shortcut window. The Editor shortcut is active; Recorder, Webcam, Board, and Options remain visible disabled placeholders until their Linux implementations exist. Use `--editor` to skip the shortcut window when scripting or debugging the editor directly.
+
+On Ubuntu, install the .NET 9 SDK and FFmpeg (`ffmpeg` and `ffprobe` must be on `PATH`). No additional .NET workload is required.
+
+```bash
+dotnet build ScreenToGif.Linux.sln
+dotnet test ScreenToGif.Linux.Tests/ScreenToGif.Linux.Tests.csproj
+dotnet run --project ScreenToGif.Linux/ScreenToGif.Linux.csproj
+dotnet run --project ScreenToGif.Linux/ScreenToGif.Linux.csproj -- --editor
+```
+
+The Linux editor currently supports:
+
+* importing still images, animated GIF/APNG files, and common video formats through the picker or drag-and-drop;
+* selecting one or more frames, reordering, deleting, and retiming them;
+* saving self-contained `.stg-linux` projects;
+* exporting GIF, APNG, MP4, and WebM.
+
+The following Windows-oriented surfaces are intentionally outside this first Linux slice: live screen recording, webcam capture, sketchboard capture, Windows `.stg` compatibility, and the WPF editor's advanced annotation/effects commands. Wayland/X11 desktop capture and portal integration remain follow-up work; imported media editing does not depend on them.
 	
 <h2>Would you like to help the project?</h2>
 

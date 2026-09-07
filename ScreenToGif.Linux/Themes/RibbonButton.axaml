@@ -1,0 +1,64 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:ScreenToGif.Linux.Controls"
+        xmlns:icons="using:ScreenToGif.Linux">
+    <Style Selector="controls|RibbonButton">
+        <Setter Property="MinWidth" Value="50" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="#E1E4E8" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="4"
+                        Padding="{TemplateBinding Padding}">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RowDefinitions="28,*">
+                        <icons:WindowsIcon Kind="{TemplateBinding IconKind}"
+                                           Width="{TemplateBinding IconWidth}"
+                                           Height="{TemplateBinding IconHeight}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" />
+                        <TextBlock Grid.Row="1" Text="{TemplateBinding Label}"
+                                   FontSize="11"
+                                   Margin="2,0"
+                                   MaxWidth="68"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Top" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="controls|RibbonButton.compact">
+        <Setter Property="MinWidth" Value="60" />
+        <Setter Property="Padding" Value="2,0" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="4"
+                        Padding="{TemplateBinding Padding}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <icons:WindowsIcon Kind="{TemplateBinding IconKind}" Width="25" Height="25" />
+                        <TextBlock Text="{TemplateBinding Label}"
+                                   Margin="2,0"
+                                   FontSize="11"
+                                   VerticalAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="controls|RibbonButton:pointerover"><Setter Property="Background" Value="#41454B" /><Setter Property="BorderBrush" Value="#6E9FC9" /></Style>
+    <Style Selector="controls|RibbonButton:pressed"><Setter Property="Background" Value="#24527A" /><Setter Property="BorderBrush" Value="#24527A" /></Style>
+    <Style Selector="controls|RibbonButton:disabled"><Setter Property="Opacity" Value="0.48" /></Style>
+</Styles>
