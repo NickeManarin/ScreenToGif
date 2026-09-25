@@ -1251,7 +1251,7 @@
 
                         <Border Grid.Row="2" Grid.Column="0" Background="{StaticResource Vector.Clock}" Height="18" Width="18" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
                         <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource S.Editor.Statistics.TotalDuration}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="{DynamicResource Element.Foreground}"/>
-                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=EditorWindow, Path=TotalDuration, StringFormat='{}{0:mm\\:ss\\.fff} m'}" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=EditorWindow, Path=TotalDuration, StringFormat='{}{0:mm\\:ss\\.fff}'}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                    Foreground="{DynamicResource Element.Foreground.Header}"/>
 
                         <Border Grid.Row="0" Grid.Column="3" Background="{StaticResource Vector.WidthHeight}" Height="18" Width="18" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
@@ -1268,7 +1268,7 @@
                         <Border Grid.Row="2" Grid.Column="3" Background="{StaticResource Vector.Clock}" Height="18" Width="18" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
                         <TextBlock Grid.Row="2" Grid.Column="4" Text="{DynamicResource S.Editor.Statistics.CurrentTime}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" 
                                    Foreground="{DynamicResource Element.Foreground}" ToolTip="{DynamicResource S.Editor.Statistics.CurrentTime.Info}"/>
-                        <TextBlock Grid.Row="3" Grid.Column="4" Text="{Binding ElementName=EditorWindow, Path=CurrentTime, StringFormat='{}{0:mm\\:ss\\.fff} m'}" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                        <TextBlock Grid.Row="3" Grid.Column="4" Text="{Binding ElementName=EditorWindow, Path=CurrentTime, StringFormat='{}{0:mm\\:ss\\.fff}'}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                    Foreground="{DynamicResource Element.Foreground.Header}" ToolTip="{DynamicResource S.Editor.Statistics.CurrentTime.Info}"/>
 
                         <Border Grid.Row="0" Grid.Column="6" Background="{StaticResource Vector.Fit}" Height="18" Width="18" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
