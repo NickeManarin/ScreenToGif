@@ -110,7 +110,8 @@ public partial class VideoSource
     {
         await _viewModel.Cancel();
 
-        DialogResult = false;
+        if (IsLoaded)
+            DialogResult = false;
     }
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
