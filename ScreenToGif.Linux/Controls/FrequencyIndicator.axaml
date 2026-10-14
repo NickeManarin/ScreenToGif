@@ -1,0 +1,12 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ScreenToGif.Linux.Controls.FrequencyIndicator"
+             Width="28"
+             Height="28"
+             IsHitTestVisible="False">
+    <Canvas Width="28" Height="28">
+        <Ellipse Canvas.Left="2" Canvas.Top="2" Width="24" Height="24" Fill="#F0F1F1" Stroke="#777B80" StrokeThickness="1" />
+        <Path Fill="#D77A66" Data="M 14,14 L 14,2 A 12,12 0 0 0 2,14 Z" />
+        <Ellipse Canvas.Left="5" Canvas.Top="5" Width="18" Height="18" Fill="Transparent" Stroke="#D77A66" StrokeThickness="2" />
+    </Canvas>
+</UserControl>

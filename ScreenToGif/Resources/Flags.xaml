@@ -8,6 +8,18 @@
         <Path Data="F1M68.177,29.283C50.075,11.873 25.367,3.279 0.089,5.845 0.648,4.101 1.459,2.171 2.366,0.422 26.339,-2.062 52.451,7.938 69.697,23.757 69.335,25.657 68.825,27.502 68.177,29.283z" Fill="White" Height="29.394" Canvas.Left="67.476" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="58" Width="70.016" Stretch="Fill"/>
     </Canvas>
 
+    <Canvas x:Key="Flag.UnitedStates" Width="287" Height="145" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Rectangle Width="287" Height="145" Fill="White"/>
+        <Rectangle Width="287" Height="11.15" Fill="#B22234" Canvas.Top="0"/>
+        <Rectangle Width="287" Height="11.15" Fill="#B22234" Canvas.Top="22.3"/>
+        <Rectangle Width="287" Height="11.15" Fill="#B22234" Canvas.Top="44.6"/>
+        <Rectangle Width="287" Height="11.15" Fill="#B22234" Canvas.Top="66.9"/>
+        <Rectangle Width="287" Height="11.15" Fill="#B22234" Canvas.Top="89.2"/>
+        <Rectangle Width="287" Height="11.15" Fill="#B22234" Canvas.Top="111.5"/>
+        <Rectangle Width="287" Height="11.15" Fill="#B22234" Canvas.Top="133.8"/>
+        <Rectangle Width="115" Height="78" Fill="#3C3B6E" Canvas.Left="0" Canvas.Top="0"/>
+    </Canvas>
+
     <Canvas x:Shared="False" x:Key="Flag.UnitedKingdom" HorizontalAlignment="Center" Height="145" UseLayoutRounding="False" VerticalAlignment="Center" Width="287">
         <Path Data="F1M287.739,144.103L287.739,0.125 0.125,0.125 0.125,144.103z" Fill="#FF163771" Height="144.228" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="2.386" Width="287.864"/>
         <Path Data="F1M0.125,48.104L60.871,48.104 0.125,17.623 0.125,0.125 34.88,0.125 119.856,42.481 119.856,0.125 167.707,0.125 167.707,42.481 252.683,0.125 287.739,0.125 287.739,17.623 226.692,48.104 287.739,48.104 287.739,96.119 226.692,96.119 287.739,126.6 287.739,144.103 252.683,144.103 167.707,101.742 167.707,144.103 119.856,144.103 119.856,101.742 34.88,144.103 0.125,144.103 0.125,126.6 60.871,96.119 0.125,96.119z" Fill="White" Height="144.228" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="2.386" Width="287.864"/>

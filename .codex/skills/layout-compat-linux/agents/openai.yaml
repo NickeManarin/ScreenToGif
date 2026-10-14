@@ -1,0 +1,7 @@
+interface:
+  display_name: "Linux Layout Compatibility"
+  short_description: "Port Windows ScreenToGif layouts to Linux"
+  default_prompt: "Use $layout-compat-linux to port this Windows ScreenToGif surface to Avalonia with layout parity."
+
+policy:
+  allow_implicit_invocation: true

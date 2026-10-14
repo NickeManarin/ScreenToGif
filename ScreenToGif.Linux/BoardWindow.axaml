@@ -1,0 +1,198 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:ScreenToGif.Linux.Controls"
+        xmlns:icons="using:ScreenToGif.Linux"
+        x:Class="ScreenToGif.Linux.BoardWindow"
+        Classes="capture-shell"
+        Title="ScreenToGif - Board Recorder"
+        Width="800"
+        Height="453"
+        MinWidth="800"
+        MinHeight="453"
+        CanResize="True"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Resources/Logo.ico">
+    <Grid RowDefinitions="33,*,31">
+        <Border Grid.Row="0" Background="#25272A" BorderBrush="#555A60" BorderThickness="1,0,1,1">
+            <Grid Height="32" Margin="6,0" ColumnDefinitions="Auto,Auto,Auto,*">
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <ToggleButton x:Name="PenButton" Classes="capture-tool" IsChecked="True"
+                                  Click="PenModeClick"
+                                  ToolTip.Tip="Draw freehand strokes with the pen.">
+                        <icons:WindowsIcon Kind="Pen" Width="20" Height="20" />
+                    </ToggleButton>
+                    <ToggleButton x:Name="EraserButton" Classes="capture-tool"
+                                  Click="PointEraserModeClick"
+                                  ToolTip.Tip="Erase the part of a stroke the eraser passes over.">
+                        <icons:WindowsIcon Kind="Eraser" Width="20" Height="20" />
+                    </ToggleButton>
+                    <ToggleButton x:Name="SelectionButton" Classes="capture-tool" IsEnabled="False"
+                                  ToolTip.Tip="Stroke selection is not available on Linux.">
+                        <icons:WindowsIcon Kind="Select" Width="20" Height="20" />
+                    </ToggleButton>
+                    <ToggleButton x:Name="StrokeEraserButton" Classes="capture-tool"
+                                  Click="StrokeEraserModeClick"
+                                  ToolTip.Tip="Erase whole strokes the eraser touches.">
+                        <icons:WindowsIcon Kind="StrokeEraser" Width="20" Height="20" />
+                    </ToggleButton>
+
+                    <Border Classes="capture-separator" Margin="2,3,8,3" />
+
+                    <StackPanel x:Name="BrushSettingsPanel" Orientation="Horizontal">
+                        <Button x:Name="BrushColorButton" Classes="capture-tool" Width="44"
+                                Click="BrushColorClick"
+                                ToolTip.Tip="Choose the brush color.">
+                            <Border x:Name="BrushColorSwatch" Width="36" Height="23" Background="#000000" BorderBrush="#8A8E93" BorderThickness="1" />
+                        </Button>
+                        <NumericUpDown x:Name="BrushWidthInput" Width="46" Margin="1,3" Minimum="1" Maximum="100" Increment="1" FormatString="0"
+                                       ShowButtonSpinner="False" ClipValueToMinMax="True"
+                                       ValueChanged="BrushWidthChanged"
+                                       ToolTip.Tip="Brush width, in pixels." />
+                        <NumericUpDown x:Name="BrushHeightInput" Width="46" Margin="1,3" Minimum="1" Maximum="100" Increment="1" FormatString="0"
+                                       ShowButtonSpinner="False" ClipValueToMinMax="True"
+                                       ValueChanged="BrushHeightChanged"
+                                       ToolTip.Tip="Brush height, in pixels." />
+                    </StackPanel>
+
+                    <StackPanel x:Name="EraserSettingsPanel" Orientation="Horizontal" IsVisible="False">
+                        <NumericUpDown x:Name="EraserWidthInput" Width="46" Margin="1,3" Minimum="1" Maximum="100" Increment="1" FormatString="0"
+                                       ShowButtonSpinner="False" ClipValueToMinMax="True"
+                                       ValueChanged="EraserWidthChanged"
+                                       ToolTip.Tip="Eraser width, in pixels." />
+                        <NumericUpDown x:Name="EraserHeightInput" Width="46" Margin="1,3" Minimum="1" Maximum="100" Increment="1" FormatString="0"
+                                       ShowButtonSpinner="False" ClipValueToMinMax="True"
+                                       ValueChanged="EraserHeightChanged"
+                                       ToolTip.Tip="Eraser height, in pixels." />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <StackPanel x:Name="BrushTipPanel" Orientation="Horizontal">
+                        <ToggleButton x:Name="EllipseTipButton" Classes="capture-tool" IsChecked="True"
+                                      Click="EllipseTipClick"
+                                      ToolTip.Tip="Use an elliptical brush tip.">
+                            <icons:WindowsIcon Kind="Ellipse" Width="20" Height="20" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="RectangleTipButton" Classes="capture-tool"
+                                      Click="RectangleTipClick"
+                                      ToolTip.Tip="Use a rectangular brush tip.">
+                            <icons:WindowsIcon Kind="Rectangle" Width="20" Height="20" />
+                        </ToggleButton>
+                    </StackPanel>
+
+                    <StackPanel x:Name="EraserTipPanel" Orientation="Horizontal" IsVisible="False">
+                        <ToggleButton x:Name="EraserEllipseTipButton" Classes="capture-tool"
+                                      Click="EraserEllipseTipClick"
+                                      ToolTip.Tip="Use an elliptical eraser tip.">
+                            <icons:WindowsIcon Kind="Ellipse" Width="20" Height="20" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="EraserRectangleTipButton" Classes="capture-tool" IsChecked="True"
+                                      Click="EraserRectangleTipClick"
+                                      ToolTip.Tip="Use a rectangular eraser tip.">
+                            <icons:WindowsIcon Kind="Rectangle" Width="20" Height="20" />
+                        </ToggleButton>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel x:Name="BrushOptionsPanel" Grid.Column="2" Orientation="Vertical" Spacing="0" VerticalAlignment="Center">
+                    <CheckBox x:Name="FitToCurveCheckBox" Padding="0" FontSize="11" Height="15" MinHeight="0"
+                              IsCheckedChanged="FitToCurveChanged"
+                              ToolTip.Tip="Smooth each stroke into a fitted curve.">
+                        <TextBlock Text="Fit to Curve" Margin="3,0,0,0" />
+                    </CheckBox>
+                    <CheckBox x:Name="HighlighterCheckBox" Padding="0" FontSize="11" Height="15" MinHeight="0"
+                              IsCheckedChanged="HighlighterChanged"
+                              ToolTip.Tip="Draw translucent highlighter strokes.">
+                        <TextBlock Text="Highlighter" Margin="3,0,0,0" />
+                    </CheckBox>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Background="#1E1F22" BorderBrush="#8A8E93" BorderThickness="1">
+            <Grid>
+                <controls:BoardCanvas x:Name="BoardSurface"
+                                      ToolTip.Tip="Draw here. With Auto Record on, pressing the pointer starts recording." />
+                <Border x:Name="GuidanceBanner" IsVisible="False" IsHitTestVisible="False"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="12"
+                        Padding="10,8" Background="#303A44" BorderBrush="#76A9D4" BorderThickness="1">
+                    <TextBlock x:Name="GuidanceText" TextWrapping="Wrap" FontSize="12" />
+                </Border>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2" Background="#25272A" BorderBrush="#555A60" BorderThickness="1,1,1,0">
+            <Grid Height="31" Margin="6,0" ColumnDefinitions="Auto,Auto,*,Auto,8,Auto,8,Auto">
+                <Button x:Name="OptionsButton" Grid.Column="0" Classes="capture-tool"
+                        Click="OptionsClick"
+                        ToolTip.Tip="Open the application options.">
+                    <icons:WindowsIcon Kind="Options" Width="20" Height="20" />
+                </Button>
+
+                <TextBlock x:Name="StatusText" Grid.Column="1" Margin="8,0" Width="150" FontSize="11"
+                           VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Foreground="#B9BEC5"
+                           Text="Ready — 0 frames" />
+
+                <StackPanel Grid.Column="3" Orientation="Horizontal">
+                    <Border Classes="capture-separator" />
+                    <Border ToolTip.Tip="Frames are captured at this rate while you draw.">
+                        <controls:FrequencyIndicator Margin="1" />
+                    </Border>
+                    <NumericUpDown x:Name="FrequencyInput" Width="46" Margin="1,3" Minimum="1" Maximum="60" Increment="1" FormatString="0"
+                                   ShowButtonSpinner="False" ClipValueToMinMax="True"
+                                   ValueChanged="FrequencyChanged"
+                                   ToolTip.Tip="Frames captured per second, 1 to 60." />
+                    <TextBlock Text="fps" FontSize="12" Margin="2,0" VerticalAlignment="Center" Foreground="#B9BEC5" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="5" Orientation="Horizontal">
+                    <Border Classes="capture-separator" />
+                    <NumericUpDown x:Name="BoardWidthInput" Width="54" Margin="1,3" Minimum="100" Maximum="3000" Increment="1" FormatString="0"
+                                   ShowButtonSpinner="False" ClipValueToMinMax="True"
+                                   KeyDown="CanvasSizeFieldKeyDown" LostFocus="CanvasSizeFieldLostFocus"
+                                   ToolTip.Tip="Canvas width in pixels, 100 to 3000. Press Enter or leave the field to apply it." />
+                    <TextBlock Text="×" FontSize="15" Margin="2,0" VerticalAlignment="Center" Foreground="#B9BEC5" />
+                    <NumericUpDown x:Name="BoardHeightInput" Width="54" Margin="1,3" Minimum="100" Maximum="3000" Increment="1" FormatString="0"
+                                   ShowButtonSpinner="False" ClipValueToMinMax="True"
+                                   KeyDown="CanvasSizeFieldKeyDown" LostFocus="CanvasSizeFieldLostFocus"
+                                   ToolTip.Tip="Canvas height in pixels, 100 to 3000. Press Enter or leave the field to apply it." />
+                    <TextBlock Text="px" FontSize="12" Margin="2,0" VerticalAlignment="Center" Foreground="#B9BEC5" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="7" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Classes="capture-separator" Margin="3,3" />
+                    <Button x:Name="DiscardButton" Classes="capture-command" IsEnabled="False"
+                            Click="DiscardClick"
+                            ToolTip.Tip="Discard the recorded frames. Available once a recording has frames.">
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                            <icons:WindowsIcon Kind="Cancel" Width="16" Height="16" />
+                            <TextBlock Text="Discard" FontSize="11" VerticalAlignment="Center" TextWrapping="NoWrap" />
+                        </StackPanel>
+                    </Button>
+                    <ToggleButton x:Name="RecordButton" Classes="capture-tool" IsEnabled="False"
+                                  Click="RecordPauseClick"
+                                  ToolTip.Tip="Record or pause manually. Available when Auto Record is off.">
+                        <icons:WindowsIcon Kind="Record" Width="16" Height="16" />
+                    </ToggleButton>
+                    <ToggleButton x:Name="AutoRecordButton" Classes="capture-command" Width="104" IsChecked="True"
+                                  IsCheckedChanged="AutoRecordChanged"
+                                  ToolTip.Tip="Start recording when you press the pointer on the canvas. Hold Ctrl to invert this while held.">
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                            <icons:WindowsIcon Kind="Record" Width="16" Height="16" />
+                            <TextBlock Text="Auto Record" FontSize="11" VerticalAlignment="Center" TextWrapping="NoWrap" />
+                        </StackPanel>
+                    </ToggleButton>
+                    <Button x:Name="StopButton" Classes="capture-command" Width="64"
+                            Click="StopClick"
+                            ToolTip.Tip="Stop recording and hand the frames to the editor (F8).">
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                            <icons:WindowsIcon Kind="Stop" Width="16" Height="16" />
+                            <TextBlock Text="Stop" FontSize="11" VerticalAlignment="Center" TextWrapping="NoWrap" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

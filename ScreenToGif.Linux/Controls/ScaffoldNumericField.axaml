@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ScreenToGif.Linux.Controls.ScaffoldNumericField"
+             x:Name="Root"
+             Height="24"
+             MinWidth="34"
+             Opacity="0.68"
+             ToolTip.ShowOnDisabled="True"
+             IsEnabled="False">
+    <Border Background="#2B2E32" BorderBrush="#60656B" BorderThickness="1">
+        <Grid ColumnDefinitions="*,17">
+            <TextBlock Text="{Binding Value, ElementName=Root}"
+                       FontSize="12"
+                       Foreground="#E1E4E8"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+            <Border Grid.Column="1" BorderBrush="#60656B" BorderThickness="1,0,0,0">
+                <Grid RowDefinitions="*,*">
+                    <Path Data="M 2,6 L 7,1 L 12,6 Z" Fill="#B9BEC5" Width="10" Height="6" Stretch="Uniform" />
+                    <Path Grid.Row="1" Data="M 2,1 L 7,6 L 12,1 Z" Fill="#B9BEC5" Width="10" Height="6" Stretch="Uniform" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

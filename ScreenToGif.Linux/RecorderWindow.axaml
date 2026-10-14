@@ -1,0 +1,100 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:ScreenToGif.Linux.Controls"
+        xmlns:icons="using:ScreenToGif.Linux"
+        x:Class="ScreenToGif.Linux.RecorderWindow"
+        Classes="capture-shell"
+        Title="ScreenToGif - Recorder"
+        Width="684"
+        Height="278"
+        MinWidth="684"
+        MinHeight="120"
+        CanResize="True"
+        Topmost="True"
+        Background="Transparent"
+        TransparencyLevelHint="Transparent"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Resources/Logo.ico">
+    <Grid RowDefinitions="*,31">
+        <Border x:Name="CaptureViewport"
+                Grid.Row="0"
+                Background="Transparent"
+                BorderBrush="#60656B"
+                BorderThickness="1"
+                ToolTip.Tip="Everything inside this frame is recorded." />
+
+        <Border x:Name="CommandBar" Grid.Row="1" Background="#25272A" BorderBrush="#555A60" BorderThickness="1,1,1,0">
+            <Grid Height="31" Margin="6,0" ColumnDefinitions="Auto,Auto,Auto,Auto,*,Auto,Auto">
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Button x:Name="SnapWindowButton" Classes="capture-tool" IsEnabled="False"
+                            ToolTip.Tip="Snapping the frame to a window needs a window-picker service built on global input hooks, which the Linux build does not have.">
+                        <icons:WindowsIcon Kind="Crosshair" Width="20" Height="20" />
+                    </Button>
+                    <Button x:Name="OptionsButton" Classes="capture-tool" Click="OptionsClick"
+                            ToolTip.Tip="Recorder options">
+                        <icons:WindowsIcon Kind="Options" Width="20" Height="20" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Border Classes="capture-separator" />
+                    <ComboBox x:Name="ModeSelector" Width="108" Margin="1,3"
+                              SelectionChanged="ModeChanged"
+                              ToolTip.Tip="How often a frame is captured." />
+                </StackPanel>
+
+                <StackPanel x:Name="FrequencyGroup" Grid.Column="2" Orientation="Horizontal">
+                    <Border Classes="capture-separator" />
+                    <controls:FrequencyIndicator Margin="1" />
+                    <NumericUpDown x:Name="FrequencyInput" Width="46" Margin="1,3"
+                                   Minimum="1" Maximum="60" Increment="1" FormatString="0"
+                                   ShowButtonSpinner="False" ClipValueToMinMax="True"
+                                   ValueChanged="FrequencyChanged" />
+                    <TextBlock x:Name="FrequencyUnit" Text="fps" FontSize="12" Margin="2,0" VerticalAlignment="Center" Foreground="#B9BEC5" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="3" Orientation="Horizontal">
+                    <Border Classes="capture-separator" />
+                    <NumericUpDown x:Name="CaptureWidthInput" Width="54" Margin="1,3"
+                                   Minimum="16" Maximum="8192" Increment="1" FormatString="0"
+                                   ShowButtonSpinner="False" ClipValueToMinMax="True"
+                                   ValueChanged="RegionSizeChanged"
+                                   KeyDown="RegionFieldKeyDown" LostFocus="RegionFieldLostFocus"
+                                   ToolTip.Tip="Width of the recorded region, in screen pixels. Press Enter or leave the field to apply it." />
+                    <TextBlock Text="×" FontSize="15" Margin="2,0" VerticalAlignment="Center" Foreground="#B9BEC5" />
+                    <NumericUpDown x:Name="CaptureHeightInput" Width="54" Margin="1,3"
+                                   Minimum="16" Maximum="8192" Increment="1" FormatString="0"
+                                   ShowButtonSpinner="False" ClipValueToMinMax="True"
+                                   ValueChanged="RegionSizeChanged"
+                                   KeyDown="RegionFieldKeyDown" LostFocus="RegionFieldLostFocus"
+                                   ToolTip.Tip="Height of the recorded region, in screen pixels. Press Enter or leave the field to apply it." />
+                    <TextBlock Text="px" FontSize="12" Margin="2,0" VerticalAlignment="Center" Foreground="#B9BEC5" />
+                </StackPanel>
+
+                <TextBlock x:Name="StatusLabel" Grid.Column="5" FontSize="12" Margin="6,0" Width="84"
+                           VerticalAlignment="Center" TextAlignment="Right"
+                           TextTrimming="CharacterEllipsis" Foreground="#B9BEC5" />
+
+                <StackPanel Grid.Column="6" Orientation="Horizontal">
+                    <Border Classes="capture-separator" Margin="3,3" />
+                    <Button x:Name="DiscardButton" Classes="capture-tool" Click="DiscardClick" IsVisible="False"
+                            ToolTip.Tip="Discard this recording (F9)">
+                        <icons:WindowsIcon Kind="Cancel" Width="18" Height="18" />
+                    </Button>
+                    <Button x:Name="StopButton" Classes="capture-tool" Click="StopClick" IsVisible="False"
+                            ToolTip.Tip="Stop and open the recording in the editor (F8)">
+                        <icons:WindowsIcon Kind="Stop" Width="18" Height="18" />
+                    </Button>
+                    <Button x:Name="RecordButton" Classes="capture-command" MinWidth="78" Click="RecordClick"
+                            ToolTip.Tip="Start recording (F7)">
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                            <icons:WindowsIcon x:Name="RecordButtonIcon" Kind="Record" Width="18" Height="18" />
+                            <TextBlock x:Name="RecordButtonLabel" Text="Record" FontSize="12"
+                                       VerticalAlignment="Center" TextWrapping="NoWrap" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

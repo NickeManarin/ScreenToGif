@@ -1,0 +1,11 @@
+# Transitions tab
+
+- Accept either one selected frame with a following neighbor or exactly two adjacent selected frames as a transition boundary. Reject discontiguous, last-frame-only, and larger selections before showing generation work as active.
+- Probe both boundary images before generation and reject mismatched dimensions with a resize/crop recovery instruction. Do not silently distort either endpoint.
+- Before creating an operation batch, bound each probed dimension and the aggregate generated workload (`width × height × frame count`) against the shared decoded-pixel ceiling. A per-frame dimension cap alone can allow billions of generated pixels.
+- Generate intermediates into one new operation directory and insert them only after the full set exists. A failed later FFmpeg call must delete earlier outputs and leave the timeline untouched.
+- FFmpeg `xfade` can generate Fade and `slideleft`, `slideright`, `slideup`, or `slidedown` intermediates from looped still images. Trim a single frame at each fraction `(index + 1) / (count + 1)` so endpoints stay represented only by the existing boundary frames.
+- Divide the requested duration across generated frames with integer quotient plus remainder distribution. The generated delays must sum exactly to the requested duration; rounding every frame independently drifts.
+- Select the inserted run and record the whole insertion as one history edit. This makes the result immediately previewable and gives Undo one user-level action rather than one action per generated frame.
+- Route both transition and smooth-loop insertion through one public sequence insertion seam, then test Fade and every Slide direction as an exact source→generated-run→destination timeline with generated selection and one-step Undo/Redo. Service-only pixel tests do not prove the editor insertion/history contract.
+- Direction tests must use spatially distinguishable endpoints and inspect opposite edges of a middle frame. Count, dimensions, delays, and distinct whole-frame hashes cannot detect all four Slide choices collapsing to Fade or to one direction. Also assert monotonic endpoint progression and cancellation cleanup after at least one staged frame.

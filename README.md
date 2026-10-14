@@ -68,6 +68,42 @@
     <img src="https://img.shields.io/discord/318260719680356352.svg" alt="Discord" />
   </a>
 </p>
+
+## Linux application
+
+The original `GifRecorder.sln` remains the Windows application. Linux support uses a separate Avalonia application in `ScreenToGif.Linux/`. The Linux application records a region of the screen or a webcam, edits the result on a timeline, and exports it. The Board interface remains a navigable preview.
+
+See [the Linux build and run guide](ScreenToGif.Linux/README.md) for prerequisites, distribution notes, Makefile shortcuts, publishing, and desktop-launcher installation.
+
+Launching the Linux application opens a Windows-like StartUp shortcut window. Recorder, Webcam, Board, and Editor are reachable from that window, and Options opens the Linux application settings. Use `--editor` or `--webcam` to bypass StartUp and open the editor or the webcam recorder directly.
+
+The Recorder captures a rectangle of the screen and hands the result to the Editor; see [its guide](ScreenToGif.Linux/docs/recorder.md) for what it does and does not do. Webcam discovers the machine's cameras, previews the selected one, and records it into the Editor; see [the webcam recorder guide](ScreenToGif.Linux/docs/webcam.md). Board remains a navigable interface preview: it shows the intended control arrangement but does not accept drawing, record frames, create projects, or hand work to the Editor. Unavailable controls remain disabled and explain the missing capability in tooltips.
+
+On Ubuntu, install the .NET 9 SDK and FFmpeg (`ffmpeg` and `ffprobe` must be on `PATH`). No additional .NET workload is required.
+
+```bash
+dotnet build ScreenToGif.Linux.sln
+dotnet test ScreenToGif.Linux.Tests/ScreenToGif.Linux.Tests.csproj
+dotnet run --project ScreenToGif.Linux/ScreenToGif.Linux.csproj
+dotnet run --project ScreenToGif.Linux/ScreenToGif.Linux.csproj -- --editor
+```
+
+The Linux Recorder supports:
+
+* capturing a region per second, per minute, per hour, or one frame at a time with Snap;
+* pausing and resuming;
+* stamping each frame with the delay it was actually on screen when recording per second at a free frame rate, and with the fixed delay that mode calls for otherwise;
+* recording the pointer and, optionally, counting down before starting;
+* opening the result in the Editor.
+
+The Linux editor supports:
+
+* importing still images, animated GIF/APNG files, and common video formats through the picker or drag-and-drop;
+* selecting one or more frames, reordering, deleting, and retiming them;
+* saving self-contained `.stg-linux` projects;
+* exporting GIF, APNG, MP4, and WebM.
+
+Screen recording needs an X11 session; under a native Wayland session the Recorder's Record control is disabled and names the portal-based backend it would need. Webcam capture goes through FFmpeg's V4L2 input and needs read access to a `/dev/video*` node, so a sandboxed package would need a PipeWire or desktop-portal path first. The Linux application does not support sketchboard drawing and recording, Windows `.stg` compatibility, or the Windows editor's advanced annotation/effects commands. Editing imported media depends on none of X11, Wayland, or desktop portal capture.
 	
 <h2>Would you like to help the project?</h2>
 

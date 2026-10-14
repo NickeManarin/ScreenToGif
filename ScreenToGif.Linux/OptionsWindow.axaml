@@ -1,0 +1,472 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:icons="using:ScreenToGif.Linux"
+        x:Class="ScreenToGif.Linux.OptionsWindow"
+        Title="ScreenToGif - Options"
+        Width="800"
+        Height="709"
+        MinWidth="780"
+        MinHeight="460"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Resources/Logo.ico"
+        Background="#1E1F22">
+    <Window.Resources>
+        <ControlTheme x:Key="SettingsExpanderTheme" TargetType="Expander">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid RowDefinitions="24,Auto" HorizontalAlignment="Stretch">
+                        <ToggleButton Grid.Row="0"
+                                      Classes="settings-header"
+                                      HorizontalAlignment="Stretch"
+                                      IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                      Background="Transparent"
+                                      BorderThickness="0"
+                                      MinHeight="0"
+                                      Height="24"
+                                      Padding="0"
+                                      VerticalAlignment="Top"
+                                      HorizontalContentAlignment="Stretch">
+                            <Grid ColumnDefinitions="Auto,*,24">
+                                <ContentPresenter Content="{TemplateBinding Header}" VerticalAlignment="Center" />
+                                <Border Grid.Column="1" Height="1" Background="#4B4F55" Margin="8,0,0,0" VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="2" Classes="chevron" Text="⌃" Foreground="#B9BEC5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                        </ToggleButton>
+                        <ContentPresenter Grid.Row="1"
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalContentAlignment="Stretch"
+                                          IsVisible="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </ControlTheme>
+    </Window.Resources>
+    <Window.Styles>
+        <Style Selector="TextBlock"><Setter Property="Foreground" Value="#E1E4E8" /></Style>
+        <Style Selector="Button:disabled"><Setter Property="ToolTip.ShowOnDisabled" Value="True" /></Style>
+        <Style Selector="CheckBox:disabled"><Setter Property="ToolTip.ShowOnDisabled" Value="True" /></Style>
+        <!-- A group header is a section label: Fluent's checked and hover fills would make it read as a pressed button. -->
+        <Style Selector="ToggleButton.settings-header:checked /template/ ContentPresenter#PART_ContentPresenter, ToggleButton.settings-header:pointerover /template/ ContentPresenter#PART_ContentPresenter, ToggleButton.settings-header:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#E1E4E8" />
+        </Style>
+        <Style Selector="ToggleButton.settings-header:not(:checked) TextBlock.chevron"><Setter Property="RenderTransform" Value="rotate(180deg)" /></Style>
+        <!-- A row that only applies under another setting dims as a whole and says which, when that setting is off. -->
+        <Style Selector="Grid.dependent-row"><Setter Property="ToolTip.ShowOnDisabled" Value="True" /></Style>
+        <Style Selector="Grid.dependent-row:disabled"><Setter Property="Opacity" Value="0.55" /></Style>
+        <Style Selector="CheckBox"><Setter Property="MinHeight" Value="0" /><Setter Property="Height" Value="28" /><Setter Property="Padding" Value="0" /></Style>
+        <Style Selector="ListBox.navigation"><Setter Property="Background" Value="Transparent" /><Setter Property="BorderThickness" Value="0" /></Style>
+        <Style Selector="ListBox.navigation ListBoxItem">
+            <Setter Property="Padding" Value="5,3" />
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="Foreground" Value="#E1E4E8" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+        <Style Selector="ListBox.navigation ListBoxItem:selected"><Setter Property="Background" Value="#315E82" /></Style>
+        <Style Selector="ListBox.navigation ListBoxItem:disabled"><Setter Property="Opacity" Value="0.46" /></Style>
+        <Style Selector="Expander.settings-group"><Setter Property="Theme" Value="{StaticResource SettingsExpanderTheme}" /><Setter Property="Margin" Value="4,0,6,0" /><Setter Property="IsExpanded" Value="True" /><Setter Property="Background" Value="Transparent" /><Setter Property="HorizontalAlignment" Value="Stretch" /><Setter Property="HorizontalContentAlignment" Value="Stretch" /></Style>
+        <Style Selector="Border.option-card">
+            <Setter Property="Background" Value="#25272A" />
+            <Setter Property="BorderBrush" Value="#4B4F55" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="4,2" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+        <Style Selector="Border.option-card RadioButton"><Setter Property="FontSize" Value="12" /></Style>
+        <Style Selector="Border.option-card:pointerover"><Setter Property="BorderBrush" Value="#76A9D4" /></Style>
+        <Style Selector="TextBlock.muted"><Setter Property="Foreground" Value="#9299A2" /></Style>
+        <Style Selector="TextBlock.label"><Setter Property="Foreground" Value="#B9BEC5" /><Setter Property="VerticalAlignment" Value="Center" /></Style>
+        <Style Selector="CheckBox.setting"><Setter Property="Margin" Value="15,0,5,0" /></Style>
+        <Style Selector="ComboBox.setting"><Setter Property="MinHeight" Value="28" /><Setter Property="VerticalContentAlignment" Value="Center" /></Style>
+        <Style Selector="TextBox.setting"><Setter Property="MinHeight" Value="27" /><Setter Property="VerticalContentAlignment" Value="Center" /></Style>
+        <Style Selector="Button.tool"><Setter Property="Width" Value="32" /><Setter Property="Height" Value="32" /><Setter Property="Padding" Value="3" /><Setter Property="FontSize" Value="20" /></Style>
+        <Style Selector="Button.donate"><Setter Property="MinWidth" Value="120" /><Setter Property="Height" Value="40" /><Setter Property="Margin" Value="4" /><Setter Property="BorderBrush" Value="#D6AD66" /><Setter Property="FontSize" Value="16" /><Setter Property="FontStyle" Value="Italic" /></Style>
+        <Style Selector="Border.table-header"><Setter Property="Background" Value="#315E82" /><Setter Property="Padding" Value="5" /></Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="*,40">
+        <Grid Grid.Row="0" Margin="3" ColumnDefinitions="138,*">
+            <ListBox x:Name="SectionsList" Classes="navigation" SelectionChanged="SectionSelectionChanged" SelectedIndex="0">
+                <ListBoxItem Tag="Application">
+                    <StackPanel Orientation="Horizontal" Spacing="6"><icons:WindowsIcon Kind="Options" Width="24" Height="24" /><TextBlock Text="Application" VerticalAlignment="Center" /></StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Tag="Recorder">
+                    <StackPanel Orientation="Horizontal" Spacing="6"><icons:WindowsIcon Kind="Record" Width="24" Height="24" /><TextBlock Text="Recorder" VerticalAlignment="Center" /></StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Tag="Editor">
+                    <StackPanel Orientation="Horizontal" Spacing="6"><icons:WindowsIcon Kind="File" Width="24" Height="24" /><TextBlock Text="Editor" VerticalAlignment="Center" /></StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Tag="Tasks">
+                    <StackPanel Orientation="Horizontal" Spacing="6"><icons:WindowsIcon Kind="Export" Width="24" Height="24" /><TextBlock Text="Tasks" VerticalAlignment="Center" /></StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Tag="Shortcuts">
+                    <StackPanel Orientation="Horizontal" Spacing="6"><icons:WindowsIcon Kind="Keyboard" Width="24" Height="24" /><TextBlock Text="Shortcuts" VerticalAlignment="Center" /></StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Tag="Language">
+                    <StackPanel Orientation="Horizontal" Spacing="6"><icons:WindowsIcon Kind="FreeText" Width="24" Height="24" /><TextBlock Text="Language" VerticalAlignment="Center" /></StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Tag="Storage">
+                    <StackPanel Orientation="Horizontal" Spacing="6"><icons:WindowsIcon Kind="Save" Width="24" Height="24" /><TextBlock Text="Storage" VerticalAlignment="Center" /></StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Tag="Cloud">
+                    <StackPanel Orientation="Horizontal" Spacing="6"><icons:WindowsIcon Kind="Open" Width="24" Height="24" /><TextBlock Text="Cloud" VerticalAlignment="Center" /></StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Tag="Extras">
+                    <StackPanel Orientation="Horizontal" Spacing="6"><icons:WindowsIcon Kind="Repeat" Width="24" Height="24" /><TextBlock Text="Extras" VerticalAlignment="Center" /></StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Tag="Donate" IsEnabled="False" ToolTip.Tip="Donations are deliberately unavailable in this Linux build." ToolTip.ShowOnDisabled="True">
+                    <StackPanel Orientation="Horizontal" Spacing="6"><TextBlock Text="$" Width="24" FontSize="21" Foreground="#E9C181" TextAlignment="Center" /><TextBlock Text="Donate" VerticalAlignment="Center" /></StackPanel>
+                </ListBoxItem>
+                <ListBoxItem Tag="About">
+                    <StackPanel Orientation="Horizontal" Spacing="6"><TextBlock Text="●" Width="24" FontSize="20" Foreground="#5D93C2" TextAlignment="Center" /><TextBlock Text="About" VerticalAlignment="Center" /></StackPanel>
+                </ListBoxItem>
+            </ListBox>
+
+            <ScrollViewer x:Name="ApplicationPage" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <Expander Classes="settings-group" Header="Startup">
+                        <StackPanel>
+                            <WrapPanel Margin="10,0,5,5" HorizontalAlignment="Center">
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Classes="option-card" Width="135">
+                                        <RadioButton x:Name="StartManuallyRadio" GroupName="StartupMode" IsCheckedChanged="StartupModeChanged">
+                                            <StackPanel Orientation="Horizontal" Spacing="4"><icons:WindowsIcon Kind="Cursor" Width="32" Height="32" /><TextBlock Text="Start&#xA;manually" VerticalAlignment="Center" /></StackPanel>
+                                        </RadioButton>
+                                    </Border>
+                                    <Border Classes="option-card" Width="135">
+                                        <RadioButton x:Name="StartAutomaticallyRadio" GroupName="StartupMode" IsCheckedChanged="StartupModeChanged">
+                                            <StackPanel Orientation="Horizontal" Spacing="4"><icons:WindowsIcon Kind="Play" Width="32" Height="32" /><TextBlock Text="Start with&#xA;Linux" VerticalAlignment="Center" /></StackPanel>
+                                        </RadioButton>
+                                    </Border>
+                                </StackPanel>
+                                <Border Width="1" Background="#4B4F55" Margin="8,3" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Classes="option-card" Width="155">
+                                        <RadioButton x:Name="SingleInstanceRadio" GroupName="InstanceMode">
+                                            <StackPanel Orientation="Horizontal" Spacing="4"><icons:WindowsIcon Kind="File" Width="32" Height="32" /><TextBlock Text="Allow only a&#xA;single instance" VerticalAlignment="Center" /></StackPanel>
+                                        </RadioButton>
+                                    </Border>
+                                    <Border Classes="option-card" Width="155">
+                                        <RadioButton x:Name="MultipleInstancesRadio" GroupName="InstanceMode">
+                                            <StackPanel Orientation="Horizontal" Spacing="4"><icons:WindowsIcon Kind="Copy" Width="32" Height="32" /><TextBlock Text="Allow multiple&#xA;instances" VerticalAlignment="Center" /></StackPanel>
+                                        </RadioButton>
+                                    </Border>
+                                </StackPanel>
+                            </WrapPanel>
+
+                            <CheckBox x:Name="StartMinimizedCheckBox" Classes="setting" Content="Start minimized to the system tray." IsCheckedChanged="StartupDependencyChanged" />
+                            <Grid Margin="15,0,5,5" ColumnDefinitions="Auto,160,*">
+                                <TextBlock Classes="label" Text="Start with:" Margin="2,0,5,0" />
+                                <ComboBox x:Name="StartupWindowComboBox" Grid.Column="1" Classes="setting" SelectionChanged="StartupWindowChanged">
+                                    <ComboBoxItem Content="Startup window" />
+                                    <ComboBoxItem Content="Screen recorder" IsEnabled="False" ToolTip.Tip="Screen recording is not available on Linux yet." />
+                                    <ComboBoxItem Content="Webcam recorder" ToolTip.Tip="Open the webcam recorder instead of the StartUp window." />
+                                    <ComboBoxItem Content="Board recorder" ToolTip.Tip="Open the Board recorder when the app starts." />
+                                    <ComboBoxItem Content="Editor" />
+                                </ComboBox>
+                                <TextBlock Grid.Column="2" Classes="muted" Text="Window shown first when the app starts." Margin="7,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </StackPanel>
+                    </Expander>
+
+                    <Expander Classes="settings-group" Header="Theme">
+                        <Grid Margin="15,3,5,5" ColumnDefinitions="Auto,*">
+                            <TextBlock Classes="label" Text="Color scheme:" Margin="2,0,5,0" />
+                            <ComboBox x:Name="ThemeComboBox" Grid.Column="1" Classes="setting" SelectionChanged="ThemeSelectionChanged">
+                                <ComboBoxItem Content="Light" />
+                                <ComboBoxItem Content="Medium" />
+                                <ComboBoxItem Content="Dark" />
+                                <ComboBoxItem Content="Follow system" />
+                            </ComboBox>
+                        </Grid>
+                    </Expander>
+
+                    <Expander Classes="settings-group" Header="System tray icon">
+                        <StackPanel>
+                            <CheckBox x:Name="ShowTrayIconCheckBox" Classes="setting" Content="Display the app in the system tray (notification area)." IsCheckedChanged="TrayDependencyChanged" />
+                            <CheckBox x:Name="KeepOpenCheckBox" Content="Keep the app open even if all windows are closed." Margin="30,3,5,3" />
+                            <Grid x:Name="TrayInteractionsGrid" Margin="30,0,5,5" ColumnDefinitions="Auto,170,Auto,140" RowDefinitions="Auto,Auto,Auto">
+                                <TextBlock Classes="label" Text="Left click:" Margin="2,0,3,0" />
+                                <ComboBox x:Name="LeftActionComboBox" Grid.Column="1" Classes="setting" SelectionChanged="TrayActionChanged">
+                                    <ComboBoxItem Content="Do nothing" /><ComboBoxItem Content="Open a window" /><ComboBoxItem Content="Minimize/restore all windows" /><ComboBoxItem Content="Minimize all windows" /><ComboBoxItem Content="Restore all windows" />
+                                </ComboBox>
+                                <TextBlock x:Name="LeftWindowLabel" Grid.Column="2" Classes="label" Text="Or else, opens:" Margin="7,0,4,0" />
+                                <ComboBox x:Name="LeftWindowComboBox" Grid.Column="3" Classes="setting">
+                                    <ComboBoxItem Content="No window" /><ComboBoxItem Content="Startup window" /><ComboBoxItem Content="Screen recorder" IsEnabled="False" /><ComboBoxItem Content="Webcam recorder" /><ComboBoxItem Content="Board recorder" /><ComboBoxItem Content="Editor" />
+                                </ComboBox>
+
+                                <TextBlock Grid.Row="1" Classes="label" Text="Left click (x2):" Margin="2,0,3,0" />
+                                <ComboBox x:Name="DoubleLeftActionComboBox" Grid.Row="1" Grid.Column="1" Classes="setting" IsEnabled="False" ToolTip.Tip="Avalonia's Linux tray API does not distinguish a double click.">
+                                    <ComboBoxItem Content="Do nothing" /><ComboBoxItem Content="Open a window" /><ComboBoxItem Content="Minimize/restore all windows" /><ComboBoxItem Content="Minimize all windows" /><ComboBoxItem Content="Restore all windows" />
+                                </ComboBox>
+                                <TextBlock Grid.Row="1" Grid.Column="2" Classes="label" Text="Window:" Margin="7,0,4,0" Opacity="0.55" />
+                                <ComboBox x:Name="DoubleLeftWindowComboBox" Grid.Row="1" Grid.Column="3" Classes="setting" IsEnabled="False" ToolTip.Tip="Avalonia's Linux tray API does not distinguish a double click.">
+                                    <ComboBoxItem Content="No window" /><ComboBoxItem Content="Startup window" /><ComboBoxItem Content="Screen recorder" /><ComboBoxItem Content="Webcam recorder" /><ComboBoxItem Content="Board recorder" /><ComboBoxItem Content="Editor" />
+                                </ComboBox>
+
+                                <TextBlock Grid.Row="2" Classes="label" Text="Middle click:" Margin="2,0,3,0" />
+                                <ComboBox x:Name="MiddleActionComboBox" Grid.Row="2" Grid.Column="1" Classes="setting" IsEnabled="False" ToolTip.Tip="Avalonia's Linux tray API does not expose middle clicks.">
+                                    <ComboBoxItem Content="Do nothing" /><ComboBoxItem Content="Open a window" /><ComboBoxItem Content="Minimize/restore all windows" /><ComboBoxItem Content="Minimize all windows" /><ComboBoxItem Content="Restore all windows" />
+                                </ComboBox>
+                                <TextBlock Grid.Row="2" Grid.Column="2" Classes="label" Text="Or else, opens:" Margin="7,0,4,0" Opacity="0.55" />
+                                <ComboBox x:Name="MiddleWindowComboBox" Grid.Row="2" Grid.Column="3" Classes="setting" IsEnabled="False" ToolTip.Tip="Avalonia's Linux tray API does not expose middle clicks.">
+                                    <ComboBoxItem Content="No window" /><ComboBoxItem Content="Startup window" /><ComboBoxItem Content="Screen recorder" /><ComboBoxItem Content="Webcam recorder" /><ComboBoxItem Content="Board recorder" /><ComboBoxItem Content="Editor" />
+                                </ComboBox>
+                            </Grid>
+                        </StackPanel>
+                    </Expander>
+
+                    <Expander Classes="settings-group" Header="General">
+                        <StackPanel>
+                            <CheckBox Classes="setting" Content="Workaround for the 'Not enough quota...' crash.  (Windows only)" IsEnabled="False" ToolTip.Tip="This workaround targets the Windows WPF dispatcher and does not apply on Linux." />
+                            <CheckBox x:Name="DisableHardwareAccelerationCheckBox" Classes="setting" Content="Disable hardware acceleration.  (Takes effect after restart)" />
+                            <CheckBox Classes="setting" Content="Check for translation updates." IsEnabled="False" ToolTip.Tip="Translation updates are not available in the Linux application yet." />
+                            <CheckBox Classes="setting" Content="Check for updates on startup." IsEnabled="False" ToolTip.Tip="Application updates are not available in the Linux application yet." />
+                            <CheckBox Content="Automatically install updates after closing the app." Margin="30,3,5,3" IsEnabled="False" ToolTip.Tip="Application updates are not available in the Linux application yet." />
+                            <CheckBox Content="Prompt me before the installation starts." Margin="45,3,5,3" IsEnabled="False" ToolTip.Tip="Application updates are not available in the Linux application yet." />
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+
+            <ScrollViewer x:Name="RecorderPage" Grid.Column="1" IsVisible="False" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <Expander Classes="settings-group" Header="Interface">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12" Margin="8"
+                                        IsEnabled="False" ToolTip.ShowOnDisabled="True"
+                                        ToolTip.Tip="The Linux recorder has one interface. The Old and New choice belongs to the Windows recorder's two WPF window implementations.">
+                                <Border Classes="option-card"><RadioButton IsChecked="True"><StackPanel Orientation="Horizontal" Spacing="8"><icons:WindowsIcon Kind="File" Width="42" Height="42" /><TextBlock Text="Old" VerticalAlignment="Center" /></StackPanel></RadioButton></Border>
+                                <Border Classes="option-card"><RadioButton><StackPanel Orientation="Horizontal" Spacing="8"><icons:WindowsIcon Kind="NewFile" Width="42" Height="42" /><TextBlock Text="New" VerticalAlignment="Center" /></StackPanel></RadioButton></Border>
+                            </StackPanel>
+                            <CheckBox Classes="setting" Content="Hide the title bar (thin mode)." IsEnabled="False" ToolTip.ShowOnDisabled="True"
+                                      ToolTip.Tip="Thin mode needs a custom window frame with its own drag and resize handling, which the Linux recorder does not have." />
+                            <CheckBox Classes="setting" Content="Display the discard button also while recording." IsChecked="True" IsEnabled="False" ToolTip.ShowOnDisabled="True"
+                                      ToolTip.Tip="The Linux recorder always shows Discard while recording or paused, so there is nothing to turn off." />
+                        </StackPanel>
+                    </Expander>
+                    <Expander Classes="settings-group" Header="Capture frequency">
+                        <StackPanel>
+                            <WrapPanel HorizontalAlignment="Center" Margin="5">
+                                <RadioButton x:Name="RecorderManualRadio" GroupName="RecorderFrequency" Content="Manual" Margin="8" IsCheckedChanged="RecorderFrequencyChanged" />
+                                <RadioButton Content="User interaction" Margin="8" IsEnabled="False" ToolTip.ShowOnDisabled="True"
+                                             ToolTip.Tip="Capturing on each click or keystroke needs global input hooks, which the Linux build does not have." />
+                                <RadioButton x:Name="RecorderPerSecondRadio" GroupName="RecorderFrequency" Content="Per second" Margin="8" IsCheckedChanged="RecorderFrequencyChanged" />
+                                <RadioButton x:Name="RecorderPerMinuteRadio" GroupName="RecorderFrequency" Content="Per minute" Margin="8" IsCheckedChanged="RecorderFrequencyChanged" />
+                                <RadioButton x:Name="RecorderPerHourRadio" GroupName="RecorderFrequency" Content="Per hour" Margin="8" IsCheckedChanged="RecorderFrequencyChanged" />
+                            </WrapPanel>
+                            <CheckBox x:Name="RecorderFixedFrameRateCheckBox" Classes="setting" Content="Fixed frame rate.  (Constant delay that does not change with recording lag)"
+                                      ToolTip.Tip="Applies only to Per second capture." />
+                            <Grid x:Name="RecorderManualDelayRow" Classes="dependent-row" Margin="30,3,5,3" ColumnDefinitions="Auto,120,*"
+                                  ToolTip.Tip="Used only when the capture frequency is Manual.">
+                                <TextBlock Text="Manual playback delay:" VerticalAlignment="Center" />
+                                <NumericUpDown x:Name="RecorderManualDelayUpDown" Grid.Column="1" Margin="8,0" MinWidth="0" Minimum="1" Maximum="10000" Increment="50" FormatString="0" ShowButtonSpinner="False" HorizontalContentAlignment="Center" />
+                                <TextBlock Grid.Column="2" Classes="muted" Text="Delay stamped on each frame captured with Snap, in milliseconds." VerticalAlignment="Center" Margin="8,0" TextWrapping="Wrap" />
+                            </Grid>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Classes="settings-group" Header="Capture mode">
+                        <StackPanel>
+                            <WrapPanel HorizontalAlignment="Center" Margin="5" IsEnabled="False" ToolTip.ShowOnDisabled="True"
+                                       ToolTip.Tip="BitBlt and DirectX are Windows GDI and DXGI capture back ends. The Linux recorder grabs the screen through X11, and the save-to-file and memory-cache choices belong to the Windows frame cache it does not use.">
+                                <RadioButton Content="BitBlt" Margin="10" IsChecked="True" /><RadioButton Content="DirectX" Margin="10" /><RadioButton Content="Save to file" Margin="10" /><RadioButton Content="Memory cache" Margin="10" />
+                            </WrapPanel>
+                            <CheckBox x:Name="RecorderShowCursorCheckBox" Classes="setting" Content="Show the mouse cursor in the recording." />
+                            <CheckBox Classes="setting" Content="Force memory cleanup during capture.  (Less memory, slower capture)" IsEnabled="False" ToolTip.ShowOnDisabled="True"
+                                      ToolTip.Tip="This drives the Windows frame cache's garbage collection. The Linux recorder writes each frame to disk as it is captured and keeps no such cache." />
+                            <CheckBox Classes="setting" Content="Improve capture performance on a remote desktop connection." IsEnabled="False" ToolTip.ShowOnDisabled="True"
+                                      ToolTip.Tip="This switches the Windows capture back end for Remote Desktop sessions, which has no counterpart in the X11 capture path." />
+                        </StackPanel>
+                    </Expander>
+                    <Expander Classes="settings-group" Header="Guidelines">
+                        <TextBlock Classes="muted" Margin="15,5" TextWrapping="Wrap"
+                                   Text="Rule-of-thirds and crosshair guidelines need an overlay drawn inside the recorder frame, which the Linux recorder does not have." />
+                    </Expander>
+                    <Expander Classes="settings-group" Header="Other">
+                        <StackPanel>
+                            <CheckBox x:Name="RecorderRememberSizeCheckBox" Classes="setting" Content="Remember the previous size of the recording area." IsCheckedChanged="RecorderDependencyChanged" />
+                            <CheckBox x:Name="RecorderRememberPositionCheckBox" Content="Remember the previous location of the recording area." Margin="30,3,5,3"
+                                      ToolTip.Tip="Turn on remembering the size to remember the location too." />
+                            <CheckBox x:Name="RecorderPreStartCheckBox" Classes="setting" Content="Use a pre start countdown." IsCheckedChanged="RecorderDependencyChanged" />
+                            <Grid x:Name="RecorderPreStartSecondsRow" Classes="dependent-row" Margin="30,3,5,3" ColumnDefinitions="Auto,120,*"
+                                  ToolTip.Tip="Turn on the pre start countdown to set its length.">
+                                <TextBlock Text="Countdown:" VerticalAlignment="Center" />
+                                <NumericUpDown x:Name="RecorderPreStartSecondsUpDown" Grid.Column="1" Margin="8,0" MinWidth="0" Minimum="1" Maximum="30" Increment="1" FormatString="0" ShowButtonSpinner="False" HorizontalContentAlignment="Center" />
+                                <TextBlock Grid.Column="2" Classes="muted" Text="Seconds to wait before the first frame is captured." VerticalAlignment="Center" Margin="8,0" TextWrapping="Wrap" />
+                            </Grid>
+                            <CheckBox Classes="setting" Content="Enable cursor following." IsEnabled="False" ToolTip.ShowOnDisabled="True"
+                                      ToolTip.Tip="Following the cursor needs global pointer tracking through input hooks, which the Linux build does not have." />
+                            <CheckBox x:Name="RecorderAskBeforeDiscardingCheckBox" Classes="setting" Content="Ask me before discarding the recording." />
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+
+            <ScrollViewer x:Name="EditorPage" Grid.Column="1" IsVisible="False" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <Expander Classes="settings-group" Header="Previewer background">
+                        <StackPanel>
+                            <Grid Margin="15,4" ColumnDefinitions="Auto,*"><TextBlock Classes="label" Text="Color scheme:" Margin="0,0,8,0" /><ComboBox Grid.Column="1" SelectedIndex="0"><ComboBoxItem Content="Very Light" /><ComboBoxItem Content="Light" /><ComboBoxItem Content="Medium" /><ComboBoxItem Content="Dark" /></ComboBox></Grid>
+                            <Grid Margin="15,4" ColumnDefinitions="Auto,*"><TextBlock Classes="label" Text="Grid size:" Margin="0,0,8,0" /><ComboBox Grid.Column="1" SelectedIndex="1"><ComboBoxItem Content="Small" /><ComboBoxItem Content="20 pt     Medium" /><ComboBoxItem Content="Large" /></ComboBox></Grid>
+                            <Grid Height="42" Margin="15,4" ColumnDefinitions="*,*,*"><Border BorderBrush="#4B4F55" BorderThickness="1" Background="#2B2E32" /><Border Grid.Column="1" BorderBrush="#4B4F55" BorderThickness="0,1,1,1" Background="#25272A" /><Border Grid.Column="2" BorderBrush="#4B4F55" BorderThickness="0,1,1,1" Background="#202124" /></Grid>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Classes="settings-group" Header="Interface">
+                        <StackPanel><CheckBox Classes="setting" Content="Display the encodings in a separate window." IsEnabled="False" ToolTip.Tip="The Linux editor exports in its main window." /><CheckBox Classes="setting" Content="Extend the titlebar (window chrome)." IsEnabled="False" ToolTip.Tip="Linux uses native desktop window chrome." /><CheckBox Classes="setting" Content="Automatically adjust the window size based on the frame size, right after loading." /><CheckBox Classes="setting" Content="Automatically adjust the frame zoom based on the window size, right after loading." IsChecked="True" /></StackPanel>
+                    </Expander>
+                    <Expander Classes="settings-group" Header="General">
+                        <StackPanel>
+                            <CheckBox x:Name="AskBeforeDeleteFramesCheckBox" Classes="setting" Content="Ask me before deleting frames." IsChecked="True" />
+                            <CheckBox x:Name="AskBeforeDiscardProjectCheckBox" Classes="setting" Content="Ask me before discarding a project." IsChecked="True" />
+                            <CheckBox x:Name="AskBeforeCloseEditorCheckBox" Classes="setting" Content="Ask me before closing the Editor (if there's a project opened)." IsChecked="True" />
+                            <CheckBox Classes="setting" Content="Enable triple-click to select the text." IsEnabled="False" ToolTip.Tip="Text overlay authoring is not available yet." />
+                            <CheckBox Classes="setting" Content="Draw the outline of captions outside the letters." IsEnabled="False" ToolTip.Tip="Caption authoring is not available yet." />
+                            <CheckBox x:Name="DropFramesSettingCheckBox" Classes="setting" Content="Drop frames when necessary." />
+                            <Grid Margin="15,3" ColumnDefinitions="Auto,75,*"><CheckBox x:Name="LimitUndoCheckBox" Content="Impose a limit to the undo/redo history." IsChecked="True" /><NumericUpDown x:Name="UndoLimitUpDown" Grid.Column="1" Minimum="1" Maximum="100" Value="50" Margin="8,0" /><TextBlock Grid.Column="2" Classes="muted" Text="Maximum number of actions stored" VerticalAlignment="Center" /></Grid>
+                            <CheckBox Classes="setting" Content="Sync the output folder among presets." IsEnabled="False" ToolTip.Tip="Export presets have not been ported yet." /><CheckBox Content="Also sync the filename." Margin="30,3,5,3" IsEnabled="False" /><CheckBox Content="Only sync among presets of the same file type." Margin="30,3,5,3" IsEnabled="False" />
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Grid x:Name="TasksPage" Grid.Column="1" IsVisible="False" Margin="10,8,5,8" RowDefinitions="Auto,*,Auto" ColumnDefinitions="*,38" Opacity="0.68" IsEnabled="False" ToolTip.Tip="Automated tasks require capture metadata and have not been ported yet.">
+                <TextBlock Grid.ColumnSpan="2" Text="List of automated tasks" Margin="0,0,0,6" />
+                <Border Grid.Row="1" BorderBrush="#4B4F55" BorderThickness="1">
+                    <Grid RowDefinitions="28,*"><Grid Classes="table-header" ColumnDefinitions="55,110,*"><TextBlock Text="Enabled" /><TextBlock Grid.Column="1" Text="Task" /><TextBlock Grid.Column="2" Text="Details" /></Grid><TextBlock Grid.Row="1" Classes="muted" Text="No automated tasks are available in the Linux editor." Margin="12" /></Grid>
+                </Border>
+                <StackPanel Grid.Row="1" Grid.Column="1" Spacing="6" Margin="6,0"><Button Classes="tool" Content="▲" /><Button Classes="tool" Content="▼" /><Button Classes="tool" Content="＋" /><Button Classes="tool" Content="✎" /><Button Classes="tool" Content="×" /></StackPanel>
+                <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Classes="muted" Text="These tasks run sequentially from top to bottom when a project opens." HorizontalAlignment="Center" Margin="5" />
+            </Grid>
+
+            <ScrollViewer x:Name="ShortcutsPage" Grid.Column="1" IsVisible="False" VerticalScrollBarVisibility="Auto">
+                <StackPanel Opacity="0.68" IsEnabled="False" ToolTip.Tip="Global shortcuts require a desktop-wide hotkey service that has not been ported yet.">
+                    <Expander Classes="settings-group" Header="Global"><Grid Margin="15,4" ColumnDefinitions="105,75,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="Desktop-wide hotkeys need a global key grab through an input hook or a desktop shortcut service, which the Linux build does not have."><TextBlock Classes="label" Text="Screen recorder:" /><TextBox Grid.Column="1" /><TextBlock Grid.Column="2" Classes="muted" Text="Opens the default screen recorder" Margin="8,0" /><TextBlock Grid.Row="1" Classes="label" Text="Webcam recorder:" /><TextBox Grid.Row="1" Grid.Column="1" /><TextBlock Grid.Row="1" Grid.Column="2" Classes="muted" Text="Opens the webcam recorder" Margin="8,0" /><TextBlock Grid.Row="2" Classes="label" Text="Board recorder:" /><TextBox Grid.Row="2" Grid.Column="1" /><TextBlock Grid.Row="2" Grid.Column="2" Classes="muted" Text="Opens the board recorder" Margin="8,0" /><TextBlock Grid.Row="3" Classes="label" Text="Editor:" /><TextBox Grid.Row="3" Grid.Column="1" /><TextBlock Grid.Row="3" Grid.Column="2" Classes="muted" Text="Opens another editor window" Margin="8,0" /><TextBlock Grid.Row="4" Classes="label" Text="Options:" /><TextBox Grid.Row="4" Grid.Column="1" /><TextBlock Grid.Row="4" Grid.Column="2" Classes="muted" Text="Opens the options window" Margin="8,0" /><TextBlock Grid.Row="5" Classes="label" Text="Exit:" /><TextBox Grid.Row="5" Grid.Column="1" /><TextBlock Grid.Row="5" Grid.Column="2" Classes="muted" Text="Closes all windows and exits" Margin="8,0" /></Grid></Expander>
+                    <Expander Classes="settings-group" Header="Recorders"><Grid Margin="15,4" ColumnDefinitions="105,75,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto"><TextBlock Classes="label" Text="Start/Pause:" /><TextBox Grid.Column="1" Text="F7" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="The recorder's shortcuts are fixed at F7, F8 and F9 and act only while the recorder window has focus. Rebinding them needs a shortcut editor the Linux build does not have." /><TextBlock Grid.Column="2" Classes="muted" Text="Starts or pauses recording, while focused" Margin="8,0" /><TextBlock Grid.Row="1" Classes="label" Text="Stop:" /><TextBox Grid.Row="1" Grid.Column="1" Text="F8" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="The recorder's shortcuts are fixed at F7, F8 and F9 and act only while the recorder window has focus. Rebinding them needs a shortcut editor the Linux build does not have." /><TextBlock Grid.Row="1" Grid.Column="2" Classes="muted" Text="Stops and opens the editor, while focused" Margin="8,0" /><TextBlock Grid.Row="2" Classes="label" Text="Discard:" /><TextBox Grid.Row="2" Grid.Column="1" Text="F9" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="The recorder's shortcuts are fixed at F7, F8 and F9 and act only while the recorder window has focus. Rebinding them needs a shortcut editor the Linux build does not have." /><TextBlock Grid.Row="2" Grid.Column="2" Classes="muted" Text="Discards the recording, while focused" Margin="8,0" /><TextBlock Grid.Row="3" Classes="label" Text="Cursor following:" /><TextBox Grid.Row="3" Grid.Column="1" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="Cursor following is unavailable on Linux, because following the cursor needs global pointer tracking through input hooks." /><TextBlock Grid.Row="3" Grid.Column="2" Classes="muted" Text="Toggles cursor following" Margin="8,0" /><TextBlock Grid.Row="4" Classes="label" Text="Disable following:" /><TextBox Grid.Row="4" Grid.Column="1" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="Cursor following is unavailable on Linux, because following the cursor needs global pointer tracking through input hooks." /><TextBlock Grid.Row="4" Grid.Column="2" Classes="muted" Text="Temporarily disables cursor following" Margin="8,0" /></Grid></Expander>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Grid x:Name="LanguagePage" Grid.Column="1" IsVisible="False" Margin="10,8,5,8" RowDefinitions="Auto,*">
+                <TextBlock Text="App's Language" Margin="0,0,0,6" />
+                <ListBox Grid.Row="1" SelectedIndex="0">
+                    <ListBoxItem Background="#315E82"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="●" Foreground="#5D93C2" FontSize="22" /><TextBlock Grid.Column="1" Text="Auto detect" /><TextBlock Grid.Column="2" Classes="muted" Text="Current OS language (if available)" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇸🇦" /><TextBlock Grid.Column="1" Text="Arabic / العربية" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇨🇳" /><TextBlock Grid.Column="1" Text="Chinese (Simplified) / 简体中文" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇨🇿" /><TextBlock Grid.Column="1" Text="Czech / Čeština" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇩🇰" /><TextBlock Grid.Column="1" Text="Danish / Dansk" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇳🇱" /><TextBlock Grid.Column="1" Text="Dutch / Nederlands" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇬🇧" /><TextBlock Grid.Column="1" Text="English" /><TextBlock Grid.Column="2" Classes="muted" Text="Built in" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇫🇮" /><TextBlock Grid.Column="1" Text="Finnish / Suomi" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇫🇷" /><TextBlock Grid.Column="1" Text="French / Français" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇩🇪" /><TextBlock Grid.Column="1" Text="German / Deutsch" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇬🇷" /><TextBlock Grid.Column="1" Text="Greek / Ελληνικά" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇮🇱" /><TextBlock Grid.Column="1" Text="Hebrew / עברית" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇮🇹" /><TextBlock Grid.Column="1" Text="Italian / Italiano" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇯🇵" /><TextBlock Grid.Column="1" Text="Japanese / 日本語" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇰🇷" /><TextBlock Grid.Column="1" Text="Korean / 한국어" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇵🇱" /><TextBlock Grid.Column="1" Text="Polish / Polski" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇵🇹" /><TextBlock Grid.Column="1" Text="Portuguese / Português" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                </ListBox>
+            </Grid>
+
+            <ScrollViewer x:Name="StoragePage" Grid.Column="1" IsVisible="False" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <Expander Classes="settings-group" Header="Status">
+                        <StackPanel Margin="15,2,5,6">
+                            <Grid ColumnDefinitions="Auto,*"><TextBlock Classes="label" Text="Volume:" /><TextBlock x:Name="StorageVolumeText" Grid.Column="1" Classes="muted" HorizontalAlignment="Right" /></Grid>
+                            <ProgressBar x:Name="StorageProgressBar" Height="20" Minimum="0" Maximum="100" Margin="0,4" />
+                            <TextBlock x:Name="StorageUsageText" Classes="muted" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Expander>
+                    <Expander Classes="settings-group" Header="Paths">
+                        <Grid Margin="15,2,5,6" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto">
+                            <TextBlock Classes="label" Text="Cache:" Margin="0,0,8,0" /><TextBox x:Name="CachePathTextBox" Grid.Column="1" Classes="setting" IsReadOnly="True" /><Button Grid.Column="2" Content="↗" Width="34" Margin="5,0" IsEnabled="False" ToolTip.Tip="The editor owns temporary workspaces automatically." />
+                            <TextBlock Grid.Row="1" Classes="label" Text="Logs:" Margin="0,0,8,0" /><TextBox Grid.Row="1" Grid.Column="1" Classes="setting" Text="System journal / standard error" IsReadOnly="True" /><Button Grid.Row="1" Grid.Column="2" Content="↗" Width="34" Margin="5,0" IsEnabled="False" ToolTip.Tip="A dedicated log folder has not been added yet." />
+                        </Grid>
+                    </Expander>
+                    <Expander Classes="settings-group" Header="Settings location">
+                        <Grid Margin="15,2,5,6" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto">
+                            <TextBlock Classes="label" Text="XDG config:" /><TextBlock x:Name="SettingsPathText" Grid.Column="1" Classes="muted" Margin="8,0" TextWrapping="Wrap" />
+                            <TextBlock Grid.Row="1" Classes="label" Text="Loading:" /><TextBlock Grid.Row="1" Grid.Column="1" Classes="muted" Margin="8,0" Text="ScreenToGif follows XDG_CONFIG_HOME and falls back to ~/.config." TextWrapping="Wrap" />
+                        </Grid>
+                    </Expander>
+                    <Expander Classes="settings-group" Header="Other">
+                        <StackPanel>
+                            <CheckBox x:Name="DeleteCacheOnCloseCheckBox" Classes="setting" Content="Delete all temporary project files when closing the app." />
+                            <CheckBox x:Name="RemoveOldProjectsCheckBox" Classes="setting" Content="Automatically remove stale temporary projects." IsChecked="True" />
+                            <Grid Margin="30,2" ColumnDefinitions="70,*"><NumericUpDown x:Name="RetentionDaysUpDown" Minimum="1" Maximum="30" Value="5" /><TextBlock Grid.Column="1" Classes="muted" Text="days before an abandoned temporary project can be removed" Margin="8,0" VerticalAlignment="Center" /></Grid>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Grid x:Name="CloudPage" Grid.Column="1" IsVisible="False" Margin="10,8,5,8" RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="*,38" Opacity="0.68" IsEnabled="False" ToolTip.Tip="Cloud upload services have not been ported to Linux yet.">
+                <Grid Grid.ColumnSpan="2" ColumnDefinitions="Auto,130,*"><TextBlock Classes="label" Text="Proxy mode:" Margin="0,0,8,0" /><ComboBox Grid.Column="1" SelectedIndex="0"><ComboBoxItem Content="Disabled" /><ComboBoxItem Content="System" /><ComboBoxItem Content="Manual" /></ComboBox></Grid>
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="Upload presets" Margin="0,10,0,6" />
+                <Border Grid.Row="2" BorderBrush="#4B4F55" BorderThickness="1"><Grid RowDefinitions="28,*"><Grid Classes="table-header" ColumnDefinitions="70,110,180,*"><TextBlock Text="Enabled" /><TextBlock Grid.Column="1" Text="Service" /><TextBlock Grid.Column="2" Text="Title" /><TextBlock Grid.Column="3" Text="Description" /></Grid><TextBlock Grid.Row="1" Classes="muted" Text="No upload presets are available." Margin="12" /></Grid></Border>
+                <StackPanel Grid.Row="2" Grid.Column="1" Spacing="6" Margin="6,0"><Button Classes="tool" Content="＋" /><Button Classes="tool" Content="✎" /><Button Classes="tool" Content="×" /><Button Classes="tool" Content="◷" /></StackPanel>
+            </Grid>
+
+            <ScrollViewer x:Name="ExtrasPage" Grid.Column="1" IsVisible="False" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <Expander Classes="settings-group" Header="Available external tools">
+                        <Grid Margin="15,5" ColumnDefinitions="*,*">
+                            <StackPanel Grid.Column="0" HorizontalAlignment="Center"><TextBlock Text="FFmpeg" HorizontalAlignment="Center" /><TextBlock x:Name="FfmpegStatusText" Classes="muted" Text="Used for media import and export" HorizontalAlignment="Center" /></StackPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center" Opacity="0.68"><TextBlock Text="Gifski" HorizontalAlignment="Center" /><TextBlock Classes="muted" Text="Not available in the Linux editor" HorizontalAlignment="Center" /></StackPanel>
+                        </Grid>
+                    </Expander>
+                    <Expander Classes="settings-group" Header="FFmpeg location">
+                        <Grid Margin="15,3,5,6" ColumnDefinitions="*,Auto"><TextBox x:Name="FfmpegPathTextBox" Classes="setting" PlaceholderText="ffmpeg" /><Button Grid.Column="1" Content="↗" Width="34" Margin="5,0" Click="TestFfmpegClick" ToolTip.Tip="Test this FFmpeg executable." /></Grid>
+                    </Expander>
+                    <Expander Classes="settings-group" Header="Gifski location">
+                        <Grid Margin="15,3,5,6" ColumnDefinitions="*,Auto" Opacity="0.68" IsEnabled="False"><TextBox Classes="setting" /><Button Grid.Column="1" Content="↗" Width="34" Margin="5,0" /></Grid>
+                    </Expander>
+                    <TextBlock Classes="muted" Text="FFmpeg is licensed separately from ScreenToGif. Gifski export has not been ported." HorizontalAlignment="Center" Margin="10,180,10,10" />
+                </StackPanel>
+            </ScrollViewer>
+
+            <ScrollViewer x:Name="DonatePage" Grid.Column="1" IsVisible="False" VerticalScrollBarVisibility="Auto" IsEnabled="False" Opacity="0.68" ToolTip.Tip="Donation actions are deliberately disabled in this Linux build.">
+                <StackPanel>
+                    <Expander Classes="settings-group" Header="PayPal">
+                        <StackPanel>
+                            <WrapPanel HorizontalAlignment="Center"><Button Classes="donate" Content="💳  Donate US$" /><Button Classes="donate" Content="💳  Donate €" /><Button Classes="donate" Content="💳  Donate" /></WrapPanel>
+                            <Grid Margin="80,0" ColumnDefinitions="*,*"><TextBlock Classes="muted" Text="US$ - USA Dollar" FontStyle="Italic" HorizontalAlignment="Center" /><TextBlock Grid.Column="1" Classes="muted" Text="€ - Euro" FontStyle="Italic" HorizontalAlignment="Center" /></Grid>
+                            <TextBlock Classes="muted" Text="Reference: screentogif • nicke@outlook.com.br" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,6" />
+                        </StackPanel>
+                    </Expander>
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto">
+                        <Expander Classes="settings-group" Header="Patreon"><Grid Margin="5" ColumnDefinitions="130,*"><Button Classes="donate" Content="🔴 Subscribe" /><TextBlock Grid.Column="1" Classes="muted" Text="Donate monthly via Patreon." FontStyle="Italic" VerticalAlignment="Center" TextWrapping="Wrap" /></Grid></Expander>
+                        <Expander Grid.Column="1" Classes="settings-group" Header="Flattr"><Grid Margin="5" ColumnDefinitions="130,*"><Button Classes="donate" Content="◯ Subscribe" /><TextBlock Grid.Column="1" Classes="muted" Text="Donate monthly via Flattr." FontStyle="Italic" VerticalAlignment="Center" TextWrapping="Wrap" /></Grid></Expander>
+                        <Expander Grid.Row="1" Classes="settings-group" Header="Steam"><Grid Margin="5" ColumnDefinitions="130,*"><Button Classes="donate" Content="▣ Gift games" /><TextBlock Grid.Column="1" Classes="muted" Text="Gift games via Steam.&#xA;nicke@outlook.com.br" FontStyle="Italic" VerticalAlignment="Center" TextWrapping="Wrap" /></Grid></Expander>
+                        <Expander Grid.Row="1" Grid.Column="1" Classes="settings-group" Header="GOG Galaxy"><Grid Margin="5" ColumnDefinitions="130,*"><Button Classes="donate" Content="▦ Gift games" /><TextBlock Grid.Column="1" Classes="muted" Text="Gift games via GOG.&#xA;nicke@outlook.com.br" FontStyle="Italic" VerticalAlignment="Center" TextWrapping="Wrap" /></Grid></Expander>
+                        <Expander Grid.Row="2" Classes="settings-group" Header="Ko-fi"><Grid Margin="5" ColumnDefinitions="130,*"><Button Classes="donate" Content="☕ Donate" /><TextBlock Grid.Column="1" Classes="muted" Text="Pay for a coffee via Ko-fi." FontStyle="Italic" VerticalAlignment="Center" TextWrapping="Wrap" /></Grid></Expander>
+                        <Expander Grid.Row="2" Grid.Column="1" Classes="settings-group" Header="Crypto currencies"><Grid Margin="5" ColumnDefinitions="130,*"><Button Classes="donate" Content="▤ Copy" /><TextBlock Grid.Column="1" Classes="muted" Text="Copy the BitcoinCash address." FontStyle="Italic" VerticalAlignment="Center" TextWrapping="Wrap" /></Grid></Expander>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <ScrollViewer x:Name="AboutPage" Grid.Column="1" IsVisible="False" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="12,10">
+                    <Grid ColumnDefinitions="72,*" Margin="90,0,0,12"><Border Width="58" Height="46" BorderBrush="#9299A2" BorderThickness="2"><TextBlock Text="S&gt;G" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border><StackPanel Grid.Column="1"><TextBlock Text="ScreenToGif    Linux preview" FontSize="19" /><TextBlock Text="github.com/NickeManarin/ScreenToGif" Foreground="#76A9D4" /></StackPanel></Grid>
+                    <Expander Classes="settings-group" Header="Contact"><Grid Margin="15,4" ColumnDefinitions="90,*" RowDefinitions="Auto,Auto"><TextBlock Classes="label" Text="Project:" /><TextBlock Grid.Column="1" Text="screentogif.com" Foreground="#76A9D4" /><TextBlock Grid.Row="1" Classes="label" Text="Issues:" /><TextBlock Grid.Row="1" Grid.Column="1" Text="github.com/NickeManarin/ScreenToGif/issues" Foreground="#76A9D4" /></Grid></Expander>
+                    <Expander Classes="settings-group" Header="Technical"><Grid Margin="15,4" ColumnDefinitions="90,*" RowDefinitions="Auto,Auto,Auto"><TextBlock Classes="label" Text="License:" /><TextBlock Grid.Column="1" Text="MS-PL / TL;DR Legal" Foreground="#76A9D4" /><TextBlock Grid.Row="1" Classes="label" Text="Source code:" /><TextBlock Grid.Row="1" Grid.Column="1" Text="github.com/NickeManarin/ScreenToGif" Foreground="#76A9D4" /><TextBlock Grid.Row="2" Classes="label" Text="Platform:" /><TextBlock Grid.Row="2" Grid.Column="1" Text="Avalonia on Linux" /></Grid></Expander>
+                    <Expander Classes="settings-group" Header="A big thanks to"><StackPanel Margin="15,4"><TextBlock Text="Visual Studio     visualstudio.com" /><TextBlock Text="ReSharper         jetbrains.com/resharper" /><TextBlock Text="All contributors, translators, supporters, and people who provided feedback." Margin="0,7,0,0" /></StackPanel></Expander>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Grid x:Name="UnavailablePage" Grid.Column="1" IsVisible="False">
+                <StackPanel Width="420" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+                    <TextBlock x:Name="UnavailableTitle" FontSize="24" HorizontalAlignment="Center" />
+                    <TextBlock x:Name="UnavailableMessage" Classes="muted" TextAlignment="Center" TextWrapping="Wrap" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="#25272A" ColumnDefinitions="*,Auto">
+            <TextBlock x:Name="StatusText" Margin="10,0" Classes="muted" VerticalAlignment="Center" />
+            <Button Grid.Column="1" Width="105" Margin="5" Padding="8,2" Click="OkClick">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="7"><TextBlock Text="✓" FontSize="18" /><TextBlock Text="Ok" VerticalAlignment="Center" /></StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
