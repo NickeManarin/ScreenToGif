@@ -97,7 +97,7 @@ public class ScreenRecorderViewModel : RecorderViewModel
     }
 
     public Rect MaximumBounds => IsDirectMode && CurrentMonitor != null ? CurrentMonitor.Bounds : 
-        new Rect(Monitors.Min(m => m.Bounds.X), Monitors.Min(m => m.Bounds.Y), Monitors.Max(m => m.Bounds.Right), Monitors.Max(m => m.Bounds.Bottom));
+        new Rect(Monitors.Min(m => m.Bounds.X), Monitors.Min(m => m.Bounds.Y), Monitors.Max(m => m.Bounds.Right) - Monitors.Min(m => m.Bounds.X), Monitors.Max(m => m.Bounds.Bottom) - Monitors.Min(m => m.Bounds.Y));
 
     public Style ButtonStyle
     {
