@@ -8,6 +8,7 @@
                       xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
                       x:Name="RecorderWindow" Title="ScreenToGif" SnapsToDevicePixels="True" UseLayoutRounding="True" AllowsTransparency="False"
                       WindowStyle="None" Topmost="True" Icon="../Resources/Logo.ico" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" MinWidth="220"
+                      ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static t:UserSettings.All}, Mode=OneWay}"
                       FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}" WindowStartupLocation="Manual"
                       Loaded="Window_Loaded" Activated="Window_Activated" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" Closing="Window_Closing">
 

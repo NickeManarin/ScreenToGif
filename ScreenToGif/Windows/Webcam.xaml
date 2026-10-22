@@ -7,6 +7,7 @@
                 x:Class="ScreenToGif.Windows.Webcam" x:Name="WebcamWindow" 
                 Title="{DynamicResource S.Webcam.Title}" Height="400" Width="600" MinWidth="200" MinHeight="200" 
                 Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}"
+                ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static t:UserSettings.All}, Mode=OneWay}"
                 Loaded="Window_Loaded" LocationChanged="Window_LocationChanged" Closing="Window_Closing">
 
     <Window.Resources>

@@ -792,6 +792,12 @@ public class UserSettings : INotifyPropertyChanged
         set => SetValue(value);
     }
 
+    public bool ShowInTaskbar
+    {
+        get => (bool)GetValue();
+        set => SetValue(value);
+    }
+
     public bool KeepOpen
     {
         get => (bool)GetValue();

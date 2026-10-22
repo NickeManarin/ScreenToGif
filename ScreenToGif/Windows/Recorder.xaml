@@ -9,6 +9,7 @@
                xmlns:u="clr-namespace:ScreenToGif.Util;assembly=ScreenToGif.Util"
                Title="ScreenToGif" SnapsToDevicePixels="True" UseLayoutRounding="True" AllowsTransparency="True" WindowStyle="None" 
                Topmost="True" Icon="../Resources/Logo.ico"
+               ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static t:UserSettings.All}, Mode=OneWay}"
                IsThin="{Binding RecorderThinMode, Source={x:Static t:UserSettings.All}}"
                IsFollowing="{Binding CursorFollowing, Source={x:Static t:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"

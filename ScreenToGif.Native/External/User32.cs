@@ -394,6 +394,10 @@ namespace ScreenToGif.Native.External
         [DllImport(Constants.User32, SetLastError = true)]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, SetWindowPosFlags uFlags);
 
+        [DllImport(Constants.User32)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool RedrawWindow(IntPtr hWnd, IntPtr updateRect, IntPtr updateRegion, uint flags);
+
         /// <summary>
         /// The SetWindowsHookEx function installs an application-defined hook procedure into a hook chain. 
         /// You would install a hook procedure to monitor the system for certain types of events. These events 

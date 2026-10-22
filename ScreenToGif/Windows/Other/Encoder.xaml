@@ -2,7 +2,9 @@
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:c="clr-namespace:ScreenToGif.Controls"
+            xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
             Title="{DynamicResource S.Encoder.Title}" Icon="/Resources/Logo.ico" Width="320" Height="400" 
+            ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static t:UserSettings.All}, Mode=OneWay}"
             MinWidth="300" MinHeight="300" Closing="Window_Closing" Activated="Window_Activated">
 
     <c:ExWindow.CommandBindings>

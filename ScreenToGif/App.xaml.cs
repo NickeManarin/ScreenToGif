@@ -166,6 +166,10 @@ public partial class App : IDisposable
 
         #region Tray icon and view model
 
+        //Windows hidden from the taskbar must remain accessible through the system tray.
+        if (!UserSettings.All.ShowInTaskbar)
+            UserSettings.All.ShowNotificationIcon = true;
+
         NotifyIcon = (NotifyIcon)FindResource("NotifyIcon");
 
         if (NotifyIcon != null)

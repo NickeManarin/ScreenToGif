@@ -70,6 +70,7 @@ public class ExWindow : Window
     static ExWindow()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(ExWindow), new FrameworkPropertyMetadata(typeof(ExWindow)));
+        ShowInTaskbarProperty.OverrideMetadata(typeof(ExWindow), new FrameworkPropertyMetadata(true, TaskbarHelper.ShowInTaskbarChanged));
     }
 
     public ExWindow()

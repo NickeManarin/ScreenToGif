@@ -177,11 +177,16 @@ public partial class ApplicationSettings : Page
 
     private void NotificationIconCheckBox_CheckedChanged(object sender, RoutedEventArgs e)
     {
-        //Can't have a minimized startup, if the icon is not present on the notification area.
+        //Keep the app accessible when the system tray icon is disabled.
         if (!UserSettings.All.ShowNotificationIcon)
+        {
             UserSettings.All.StartMinimized = false;
+            UserSettings.All.ShowInTaskbar = true;
+        }
 
         if (App.NotifyIcon != null)
             App.NotifyIcon.Visibility = UserSettings.All.ShowNotificationIcon ? Visibility.Visible : Visibility.Collapsed;
+
+        TaskbarHelper.QueueRepaint(Window.GetWindow(this));
     }
 }

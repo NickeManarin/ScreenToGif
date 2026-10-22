@@ -4,6 +4,7 @@
       xmlns:c="clr-namespace:ScreenToGif.Controls"
       xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
       xmlns:g="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
+      xmlns:u="clr-namespace:ScreenToGif.Util"
       Title="ApplicationSettings" Loaded="ApplicationSettings_Loaded">
 
     <Page.Resources>
@@ -215,7 +216,11 @@
             <Expander Grid.Row="3" Header="{DynamicResource S.Options.App.Tray}" IsExpanded="True">
                 <StackPanel>
                     <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.Tray.Show}" Margin="15,3,5,3" IsChecked="{Binding Path=ShowNotificationIcon, Mode=TwoWay}"
+                                        IsEnabled="{Binding Path=(u:TaskbarHelper.IsUpdating), RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource InvertedBool}}"
                                         CheckedChanged="NotificationIconCheckBox_CheckedChanged"/>
+                    <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.Tray.HideTaskbarIcon}" Info="{DynamicResource S.Options.App.Tray.HideTaskbarIcon.Info}"
+                                        IsEnabled="{Binding Path=(u:TaskbarHelper.IsUpdating), RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource InvertedBool}}"
+                                        Margin="30,3,5,3" IsChecked="{Binding Path=ShowInTaskbar, Mode=TwoWay, Converter={StaticResource InvertedBool}}" Checked="StartCheckBox_Checked"/>
                     <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.Tray.LeaveOpen}" Margin="30,3,5,3" IsChecked="{Binding Path=KeepOpen, Mode=TwoWay}"
                                         Visibility="{Binding ShowNotificationIcon, Converter={StaticResource Bool2Visibility}}"/>
 

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using ScreenToGif.Domain.Enums;
 using ScreenToGif.Model;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Controls;
 
@@ -14,6 +15,11 @@ public class BaseRecorder : Window
     public static readonly DependencyProperty StageProperty = DependencyProperty.Register(nameof(Stage), typeof(RecorderStages), typeof(BaseRecorder), new FrameworkPropertyMetadata(RecorderStages.Stopped));
     public static readonly DependencyProperty FrameCountProperty = DependencyProperty.Register(nameof(FrameCount), typeof(int), typeof(BaseRecorder), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
     public static readonly DependencyProperty HasImpreciseCaptureProperty = DependencyProperty.Register(nameof(HasImpreciseCapture), typeof(bool), typeof(BaseRecorder), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+
+    static BaseRecorder()
+    {
+        ShowInTaskbarProperty.OverrideMetadata(typeof(BaseRecorder), new FrameworkPropertyMetadata(true, TaskbarHelper.ShowInTaskbarChanged));
+    }
 
     /// <summary>
     /// The actual stage of the recorder.

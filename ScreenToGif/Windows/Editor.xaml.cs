@@ -657,7 +657,12 @@ namespace ScreenToGif.Windows
             }
 
             Encoder.Restore();
-            ShowInTaskbar = true;
+            //Restore the setting binding removed when starting a screen recording.
+            SetBinding(ShowInTaskbarProperty, new Binding(nameof(UserSettings.ShowInTaskbar))
+            {
+                Source = UserSettings.All,
+                Mode = BindingMode.OneWay
+            });
             WindowState = WindowState == WindowState.Minimized ? WindowState.Normal : WindowState;
         }
 

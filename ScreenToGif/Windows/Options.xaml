@@ -2,8 +2,10 @@
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:c="clr-namespace:ScreenToGif.Controls"
+            xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
             Title="{DynamicResource S.Options.Title}" Height="610" Width="800" MinWidth="780" MinHeight="460" 
             Icon="/Resources/Logo.ico" ShowCustomCaptionButtons="True" ExtendIntoTitleBar="False"
+            ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static t:UserSettings.All}, Mode=OneWay}"
             SizeToContent="Width" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
             Loaded="Window_Loaded" Closing="Window_Closing">
 

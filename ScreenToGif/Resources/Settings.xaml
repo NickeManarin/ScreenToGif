@@ -63,6 +63,7 @@
     <s:Boolean x:Key="InstallUpdates">True</s:Boolean>
     <s:Boolean x:Key="PromptToInstall">True</s:Boolean>
     <s:Boolean x:Key="ShowNotificationIcon">True</s:Boolean>
+    <s:Boolean x:Key="ShowInTaskbar">True</s:Boolean>
     <s:Boolean x:Key="KeepOpen">False</s:Boolean>
     <s:Int32 x:Key="LeftClickAction">2</s:Int32>
     <s:Int32 x:Key="LeftOpenWindow">1</s:Int32>

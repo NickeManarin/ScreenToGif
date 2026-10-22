@@ -2,9 +2,11 @@
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:n="clr-namespace:ScreenToGif.Controls"
+            xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
             x:Name="StartupWindow" Title="{DynamicResource S.StartUp.Title}" Height="220" Width="500"
             MinWidth="500" MinHeight="220" DataContext="{StaticResource AppViewModel}" UseLayoutRounding="True"
             Icon="/ScreenToGif;component/Resources/Logo.ico" Initialized="Startup_Initialized"
+            ShowInTaskbar="{Binding ShowInTaskbar, Source={x:Static t:UserSettings.All}, Mode=OneWay}"
             Loaded="Startup_Loaded" Closing="Startup_Closing">
 
     <Window.InputBindings>
