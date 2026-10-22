@@ -80,11 +80,14 @@ public sealed class X11RecordingIntegrationTests
     }
 
     [Theory]
-    [InlineData("XID", true)]
-    [InlineData("Wayland", false)]
-    [InlineData(null, false)]
-    public void Only_an_x11_session_reports_itself_capturable(string? handleDescriptor, bool expected) =>
-        Assert.Equal(expected, X11ScreenSource.IsSupportedSession(handleDescriptor));
+    [InlineData("XID", "x11", true)]
+    [InlineData("XID", null, true)]
+    [InlineData("XID", "wayland", false)]
+    [InlineData("XID", "Wayland", false)]
+    [InlineData("Wayland", "wayland", false)]
+    [InlineData(null, "x11", false)]
+    public void Only_an_x11_session_reports_itself_capturable(string? handleDescriptor, string? sessionType, bool expected) =>
+        Assert.Equal(expected, X11ScreenSource.IsSupportedSession(handleDescriptor, sessionType));
 
     private static void AssertSolidColour(string pngPath)
     {

@@ -103,7 +103,7 @@ The Linux editor supports:
 * saving self-contained `.stg-linux` projects;
 * exporting GIF, APNG, MP4, and WebM.
 
-Screen recording needs an X11 session; under a native Wayland session the Recorder's Record control is disabled and names the portal-based backend it would need. Webcam capture goes through FFmpeg's V4L2 input and needs read access to a `/dev/video*` node, so a sandboxed package would need a PipeWire or desktop-portal path first. The Linux application does not support sketchboard drawing and recording, Windows `.stg` compatibility, or the Windows editor's advanced annotation/effects commands. Editing imported media depends on none of X11, Wayland, or desktop portal capture.
+Screen recording needs an X11 session; under a Wayland session, including XWayland, the Recorder's Record control is disabled and names the portal-based backend it would need. Webcam capture goes through FFmpeg's V4L2 input and needs read access to a `/dev/video*` node, so a sandboxed package would need a PipeWire or desktop-portal path first. The Linux application does not support Windows `.stg` compatibility or the Windows editor's advanced annotation/effects commands. Editing imported media depends on none of X11, Wayland, or desktop portal capture.
 	
 <h2>Would you like to help the project?</h2>
 

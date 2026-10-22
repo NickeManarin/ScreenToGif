@@ -2,7 +2,7 @@
 
 The Recorder captures a rectangle of the screen into a project the Editor opens. It is a frame you position over what you want to record, with a command bar beneath it. Everything inside the frame is recorded; the command bar is not.
 
-Recording needs an X11 session. Under a native Wayland session the Record control is disabled and says so; see [Unavailable here](#unavailable-here).
+Recording needs an X11 session. Under a Wayland session, including XWayland, the Record control is disabled and says so; see [Unavailable here](#unavailable-here).
 
 ## The command bar
 

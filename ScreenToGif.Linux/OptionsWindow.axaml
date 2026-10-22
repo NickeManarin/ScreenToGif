@@ -11,35 +11,40 @@
         Icon="/Resources/Logo.ico"
         Background="#1E1F22">
     <Window.Resources>
-        <ControlTheme x:Key="SettingsExpanderTheme" TargetType="Expander">
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Grid RowDefinitions="24,Auto" HorizontalAlignment="Stretch">
-                        <ToggleButton Grid.Row="0"
-                                      Classes="settings-header"
-                                      HorizontalAlignment="Stretch"
-                                      IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                      Background="Transparent"
-                                      BorderThickness="0"
-                                      MinHeight="0"
-                                      Height="24"
-                                      Padding="0"
-                                      VerticalAlignment="Top"
-                                      HorizontalContentAlignment="Stretch">
-                            <Grid ColumnDefinitions="Auto,*,24">
-                                <ContentPresenter Content="{TemplateBinding Header}" VerticalAlignment="Center" />
-                                <Border Grid.Column="1" Height="1" Background="#4B4F55" Margin="8,0,0,0" VerticalAlignment="Center" />
-                                <TextBlock Grid.Column="2" Classes="chevron" Text="⌃" Foreground="#B9BEC5" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Grid>
-                        </ToggleButton>
-                        <ContentPresenter Grid.Row="1"
-                                          Content="{TemplateBinding Content}"
-                                          HorizontalContentAlignment="Stretch"
-                                          IsVisible="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter>
-        </ControlTheme>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://ScreenToGif.Linux/Resources/Flags.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <ControlTheme x:Key="SettingsExpanderTheme" TargetType="Expander">
+                <Setter Property="Template">
+                    <ControlTemplate>
+                        <Grid RowDefinitions="24,Auto" HorizontalAlignment="Stretch">
+                            <ToggleButton Grid.Row="0"
+                                          Classes="settings-header"
+                                          HorizontalAlignment="Stretch"
+                                          IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          Background="Transparent"
+                                          BorderThickness="0"
+                                          MinHeight="0"
+                                          Height="24"
+                                          Padding="0"
+                                          VerticalAlignment="Top"
+                                          HorizontalContentAlignment="Stretch">
+                                <Grid ColumnDefinitions="Auto,*,24">
+                                    <ContentPresenter Content="{TemplateBinding Header}" VerticalAlignment="Center" />
+                                    <Border Grid.Column="1" Height="1" Background="#4B4F55" Margin="8,0,0,0" VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="2" Classes="chevron" Text="⌃" Foreground="#B9BEC5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </ToggleButton>
+                            <ContentPresenter Grid.Row="1"
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalContentAlignment="Stretch"
+                                              IsVisible="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter>
+            </ControlTheme>
+        </ResourceDictionary>
     </Window.Resources>
     <Window.Styles>
         <Style Selector="TextBlock"><Setter Property="Foreground" Value="#E1E4E8" /></Style>
@@ -83,6 +88,8 @@
         <Style Selector="Button.tool"><Setter Property="Width" Value="32" /><Setter Property="Height" Value="32" /><Setter Property="Padding" Value="3" /><Setter Property="FontSize" Value="20" /></Style>
         <Style Selector="Button.donate"><Setter Property="MinWidth" Value="120" /><Setter Property="Height" Value="40" /><Setter Property="Margin" Value="4" /><Setter Property="BorderBrush" Value="#D6AD66" /><Setter Property="FontSize" Value="16" /><Setter Property="FontStyle" Value="Italic" /></Style>
         <Style Selector="Border.table-header"><Setter Property="Background" Value="#315E82" /><Setter Property="Padding" Value="5" /></Style>
+        <Style Selector="Grid.table-header > TextBlock"><Setter Property="Padding" Value="5,0" /></Style>
+        <Style Selector="Grid.about-details > TextBlock, StackPanel.about-details > TextBlock"><Setter Property="Padding" Value="3,5" /></Style>
     </Window.Styles>
 
     <Grid RowDefinitions="*,40">
@@ -186,10 +193,10 @@
                         <StackPanel>
                             <CheckBox x:Name="ShowTrayIconCheckBox" Classes="setting" Content="Display the app in the system tray (notification area)." IsCheckedChanged="TrayDependencyChanged" />
                             <CheckBox x:Name="KeepOpenCheckBox" Content="Keep the app open even if all windows are closed." Margin="30,3,5,3" />
-                            <Grid x:Name="TrayInteractionsGrid" Margin="30,0,5,5" ColumnDefinitions="Auto,170,Auto,140" RowDefinitions="Auto,Auto,Auto">
+                            <Grid x:Name="TrayInteractionsGrid" Margin="30,0,5,5" ColumnDefinitions="Auto,200,Auto,170" RowDefinitions="Auto,Auto,Auto">
                                 <TextBlock Classes="label" Text="Left click:" Margin="2,0,3,0" />
                                 <ComboBox x:Name="LeftActionComboBox" Grid.Column="1" Classes="setting" SelectionChanged="TrayActionChanged">
-                                    <ComboBoxItem Content="Do nothing" /><ComboBoxItem Content="Open a window" /><ComboBoxItem Content="Minimize/restore all windows" /><ComboBoxItem Content="Minimize all windows" /><ComboBoxItem Content="Restore all windows" />
+                                    <ComboBoxItem Content="Do nothing" /><ComboBoxItem Content="Open a window" /><ComboBoxItem Content="Minimize/restore all" ToolTip.Tip="Minimize or restore all ScreenToGif windows." /><ComboBoxItem Content="Minimize all" ToolTip.Tip="Minimize all ScreenToGif windows." /><ComboBoxItem Content="Restore all" ToolTip.Tip="Restore all ScreenToGif windows." />
                                 </ComboBox>
                                 <TextBlock x:Name="LeftWindowLabel" Grid.Column="2" Classes="label" Text="Or else, opens:" Margin="7,0,4,0" />
                                 <ComboBox x:Name="LeftWindowComboBox" Grid.Column="3" Classes="setting">
@@ -198,7 +205,7 @@
 
                                 <TextBlock Grid.Row="1" Classes="label" Text="Left click (x2):" Margin="2,0,3,0" />
                                 <ComboBox x:Name="DoubleLeftActionComboBox" Grid.Row="1" Grid.Column="1" Classes="setting" IsEnabled="False" ToolTip.Tip="Avalonia's Linux tray API does not distinguish a double click.">
-                                    <ComboBoxItem Content="Do nothing" /><ComboBoxItem Content="Open a window" /><ComboBoxItem Content="Minimize/restore all windows" /><ComboBoxItem Content="Minimize all windows" /><ComboBoxItem Content="Restore all windows" />
+                                    <ComboBoxItem Content="Do nothing" /><ComboBoxItem Content="Open a window" /><ComboBoxItem Content="Minimize/restore all" ToolTip.Tip="Minimize or restore all ScreenToGif windows." /><ComboBoxItem Content="Minimize all" ToolTip.Tip="Minimize all ScreenToGif windows." /><ComboBoxItem Content="Restore all" ToolTip.Tip="Restore all ScreenToGif windows." />
                                 </ComboBox>
                                 <TextBlock Grid.Row="1" Grid.Column="2" Classes="label" Text="Window:" Margin="7,0,4,0" Opacity="0.55" />
                                 <ComboBox x:Name="DoubleLeftWindowComboBox" Grid.Row="1" Grid.Column="3" Classes="setting" IsEnabled="False" ToolTip.Tip="Avalonia's Linux tray API does not distinguish a double click.">
@@ -207,7 +214,7 @@
 
                                 <TextBlock Grid.Row="2" Classes="label" Text="Middle click:" Margin="2,0,3,0" />
                                 <ComboBox x:Name="MiddleActionComboBox" Grid.Row="2" Grid.Column="1" Classes="setting" IsEnabled="False" ToolTip.Tip="Avalonia's Linux tray API does not expose middle clicks.">
-                                    <ComboBoxItem Content="Do nothing" /><ComboBoxItem Content="Open a window" /><ComboBoxItem Content="Minimize/restore all windows" /><ComboBoxItem Content="Minimize all windows" /><ComboBoxItem Content="Restore all windows" />
+                                    <ComboBoxItem Content="Do nothing" /><ComboBoxItem Content="Open a window" /><ComboBoxItem Content="Minimize/restore all" ToolTip.Tip="Minimize or restore all ScreenToGif windows." /><ComboBoxItem Content="Minimize all" ToolTip.Tip="Minimize all ScreenToGif windows." /><ComboBoxItem Content="Restore all" ToolTip.Tip="Restore all ScreenToGif windows." />
                                 </ComboBox>
                                 <TextBlock Grid.Row="2" Grid.Column="2" Classes="label" Text="Or else, opens:" Margin="7,0,4,0" Opacity="0.55" />
                                 <ComboBox x:Name="MiddleWindowComboBox" Grid.Row="2" Grid.Column="3" Classes="setting" IsEnabled="False" ToolTip.Tip="Avalonia's Linux tray API does not expose middle clicks.">
@@ -323,7 +330,7 @@
                             <CheckBox Classes="setting" Content="Enable triple-click to select the text." IsEnabled="False" ToolTip.Tip="Text overlay authoring is not available yet." />
                             <CheckBox Classes="setting" Content="Draw the outline of captions outside the letters." IsEnabled="False" ToolTip.Tip="Caption authoring is not available yet." />
                             <CheckBox x:Name="DropFramesSettingCheckBox" Classes="setting" Content="Drop frames when necessary." />
-                            <Grid Margin="15,3" ColumnDefinitions="Auto,75,*"><CheckBox x:Name="LimitUndoCheckBox" Content="Impose a limit to the undo/redo history." IsChecked="True" /><NumericUpDown x:Name="UndoLimitUpDown" Grid.Column="1" Minimum="1" Maximum="100" Value="50" Margin="8,0" /><TextBlock Grid.Column="2" Classes="muted" Text="Maximum number of actions stored" VerticalAlignment="Center" /></Grid>
+                            <Grid Margin="15,3" ColumnDefinitions="Auto,75,*"><CheckBox x:Name="LimitUndoCheckBox" Content="Impose a limit to the undo/redo history." IsChecked="True" /><NumericUpDown x:Name="UndoLimitUpDown" Grid.Column="1" Minimum="1" Maximum="100" Value="50" Margin="8,0" ShowButtonSpinner="False" /><TextBlock Grid.Column="2" Classes="muted" Text="Maximum number of actions stored" VerticalAlignment="Center" /></Grid>
                             <CheckBox Classes="setting" Content="Sync the output folder among presets." IsEnabled="False" ToolTip.Tip="Export presets have not been ported yet." /><CheckBox Content="Also sync the filename." Margin="30,3,5,3" IsEnabled="False" /><CheckBox Content="Only sync among presets of the same file type." Margin="30,3,5,3" IsEnabled="False" />
                         </StackPanel>
                     </Expander>
@@ -333,7 +340,7 @@
             <Grid x:Name="TasksPage" Grid.Column="1" IsVisible="False" Margin="10,8,5,8" RowDefinitions="Auto,*,Auto" ColumnDefinitions="*,38" Opacity="0.68" IsEnabled="False" ToolTip.Tip="Automated tasks require capture metadata and have not been ported yet.">
                 <TextBlock Grid.ColumnSpan="2" Text="List of automated tasks" Margin="0,0,0,6" />
                 <Border Grid.Row="1" BorderBrush="#4B4F55" BorderThickness="1">
-                    <Grid RowDefinitions="28,*"><Grid Classes="table-header" ColumnDefinitions="55,110,*"><TextBlock Text="Enabled" /><TextBlock Grid.Column="1" Text="Task" /><TextBlock Grid.Column="2" Text="Details" /></Grid><TextBlock Grid.Row="1" Classes="muted" Text="No automated tasks are available in the Linux editor." Margin="12" /></Grid>
+                    <Grid RowDefinitions="28,*"><Grid Classes="table-header" ColumnDefinitions="Auto,110,*"><TextBlock Text="Enabled" /><TextBlock Grid.Column="1" Text="Task" /><TextBlock Grid.Column="2" Text="Details" /></Grid><TextBlock Grid.Row="1" Classes="muted" Text="No automated tasks are available in the Linux editor." Margin="12" /></Grid>
                 </Border>
                 <StackPanel Grid.Row="1" Grid.Column="1" Spacing="6" Margin="6,0"><Button Classes="tool" Content="▲" /><Button Classes="tool" Content="▼" /><Button Classes="tool" Content="＋" /><Button Classes="tool" Content="✎" /><Button Classes="tool" Content="×" /></StackPanel>
                 <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Classes="muted" Text="These tasks run sequentially from top to bottom when a project opens." HorizontalAlignment="Center" Margin="5" />
@@ -341,31 +348,31 @@
 
             <ScrollViewer x:Name="ShortcutsPage" Grid.Column="1" IsVisible="False" VerticalScrollBarVisibility="Auto">
                 <StackPanel Opacity="0.68" IsEnabled="False" ToolTip.Tip="Global shortcuts require a desktop-wide hotkey service that has not been ported yet.">
-                    <Expander Classes="settings-group" Header="Global"><Grid Margin="15,4" ColumnDefinitions="105,75,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="Desktop-wide hotkeys need a global key grab through an input hook or a desktop shortcut service, which the Linux build does not have."><TextBlock Classes="label" Text="Screen recorder:" /><TextBox Grid.Column="1" /><TextBlock Grid.Column="2" Classes="muted" Text="Opens the default screen recorder" Margin="8,0" /><TextBlock Grid.Row="1" Classes="label" Text="Webcam recorder:" /><TextBox Grid.Row="1" Grid.Column="1" /><TextBlock Grid.Row="1" Grid.Column="2" Classes="muted" Text="Opens the webcam recorder" Margin="8,0" /><TextBlock Grid.Row="2" Classes="label" Text="Board recorder:" /><TextBox Grid.Row="2" Grid.Column="1" /><TextBlock Grid.Row="2" Grid.Column="2" Classes="muted" Text="Opens the board recorder" Margin="8,0" /><TextBlock Grid.Row="3" Classes="label" Text="Editor:" /><TextBox Grid.Row="3" Grid.Column="1" /><TextBlock Grid.Row="3" Grid.Column="2" Classes="muted" Text="Opens another editor window" Margin="8,0" /><TextBlock Grid.Row="4" Classes="label" Text="Options:" /><TextBox Grid.Row="4" Grid.Column="1" /><TextBlock Grid.Row="4" Grid.Column="2" Classes="muted" Text="Opens the options window" Margin="8,0" /><TextBlock Grid.Row="5" Classes="label" Text="Exit:" /><TextBox Grid.Row="5" Grid.Column="1" /><TextBlock Grid.Row="5" Grid.Column="2" Classes="muted" Text="Closes all windows and exits" Margin="8,0" /></Grid></Expander>
-                    <Expander Classes="settings-group" Header="Recorders"><Grid Margin="15,4" ColumnDefinitions="105,75,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto"><TextBlock Classes="label" Text="Start/Pause:" /><TextBox Grid.Column="1" Text="F7" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="The recorder's shortcuts are fixed at F7, F8 and F9 and act only while the recorder window has focus. Rebinding them needs a shortcut editor the Linux build does not have." /><TextBlock Grid.Column="2" Classes="muted" Text="Starts or pauses recording, while focused" Margin="8,0" /><TextBlock Grid.Row="1" Classes="label" Text="Stop:" /><TextBox Grid.Row="1" Grid.Column="1" Text="F8" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="The recorder's shortcuts are fixed at F7, F8 and F9 and act only while the recorder window has focus. Rebinding them needs a shortcut editor the Linux build does not have." /><TextBlock Grid.Row="1" Grid.Column="2" Classes="muted" Text="Stops and opens the editor, while focused" Margin="8,0" /><TextBlock Grid.Row="2" Classes="label" Text="Discard:" /><TextBox Grid.Row="2" Grid.Column="1" Text="F9" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="The recorder's shortcuts are fixed at F7, F8 and F9 and act only while the recorder window has focus. Rebinding them needs a shortcut editor the Linux build does not have." /><TextBlock Grid.Row="2" Grid.Column="2" Classes="muted" Text="Discards the recording, while focused" Margin="8,0" /><TextBlock Grid.Row="3" Classes="label" Text="Cursor following:" /><TextBox Grid.Row="3" Grid.Column="1" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="Cursor following is unavailable on Linux, because following the cursor needs global pointer tracking through input hooks." /><TextBlock Grid.Row="3" Grid.Column="2" Classes="muted" Text="Toggles cursor following" Margin="8,0" /><TextBlock Grid.Row="4" Classes="label" Text="Disable following:" /><TextBox Grid.Row="4" Grid.Column="1" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="Cursor following is unavailable on Linux, because following the cursor needs global pointer tracking through input hooks." /><TextBlock Grid.Row="4" Grid.Column="2" Classes="muted" Text="Temporarily disables cursor following" Margin="8,0" /></Grid></Expander>
+                    <Expander Classes="settings-group" Header="Global"><Grid Margin="15,4" ColumnDefinitions="Auto,75,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="Desktop-wide hotkeys need a global key grab through an input hook or a desktop shortcut service, which the Linux build does not have."><TextBlock Classes="label" Text="Screen recorder:" /><TextBox Grid.Column="1" /><TextBlock Grid.Column="2" Classes="muted" Text="Opens the default screen recorder" Margin="8,0" /><TextBlock Grid.Row="1" Classes="label" Text="Webcam recorder:" /><TextBox Grid.Row="1" Grid.Column="1" /><TextBlock Grid.Row="1" Grid.Column="2" Classes="muted" Text="Opens the webcam recorder" Margin="8,0" /><TextBlock Grid.Row="2" Classes="label" Text="Board recorder:" /><TextBox Grid.Row="2" Grid.Column="1" /><TextBlock Grid.Row="2" Grid.Column="2" Classes="muted" Text="Opens the board recorder" Margin="8,0" /><TextBlock Grid.Row="3" Classes="label" Text="Editor:" /><TextBox Grid.Row="3" Grid.Column="1" /><TextBlock Grid.Row="3" Grid.Column="2" Classes="muted" Text="Opens another editor window" Margin="8,0" /><TextBlock Grid.Row="4" Classes="label" Text="Options:" /><TextBox Grid.Row="4" Grid.Column="1" /><TextBlock Grid.Row="4" Grid.Column="2" Classes="muted" Text="Opens the options window" Margin="8,0" /><TextBlock Grid.Row="5" Classes="label" Text="Exit:" /><TextBox Grid.Row="5" Grid.Column="1" /><TextBlock Grid.Row="5" Grid.Column="2" Classes="muted" Text="Closes all windows and exits" Margin="8,0" /></Grid></Expander>
+                    <Expander Classes="settings-group" Header="Recorders"><Grid Margin="15,4" ColumnDefinitions="Auto,75,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto"><TextBlock Classes="label" Text="Start/Pause:" /><TextBox Grid.Column="1" Text="F7" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="The recorder's shortcuts are fixed at F7, F8 and F9 and act only while the recorder window has focus. Rebinding them needs a shortcut editor the Linux build does not have." /><TextBlock Grid.Column="2" Classes="muted" Text="Starts or pauses recording, while focused" Margin="8,0" /><TextBlock Grid.Row="1" Classes="label" Text="Stop:" /><TextBox Grid.Row="1" Grid.Column="1" Text="F8" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="The recorder's shortcuts are fixed at F7, F8 and F9 and act only while the recorder window has focus. Rebinding them needs a shortcut editor the Linux build does not have." /><TextBlock Grid.Row="1" Grid.Column="2" Classes="muted" Text="Stops and opens the editor, while focused" Margin="8,0" /><TextBlock Grid.Row="2" Classes="label" Text="Discard:" /><TextBox Grid.Row="2" Grid.Column="1" Text="F9" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="The recorder's shortcuts are fixed at F7, F8 and F9 and act only while the recorder window has focus. Rebinding them needs a shortcut editor the Linux build does not have." /><TextBlock Grid.Row="2" Grid.Column="2" Classes="muted" Text="Discards the recording, while focused" Margin="8,0" /><TextBlock Grid.Row="3" Classes="label" Text="Cursor following:" /><TextBox Grid.Row="3" Grid.Column="1" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="Cursor following is unavailable on Linux, because following the cursor needs global pointer tracking through input hooks." /><TextBlock Grid.Row="3" Grid.Column="2" Classes="muted" Text="Toggles cursor following" Margin="8,0" /><TextBlock Grid.Row="4" Classes="label" Text="Disable following:" /><TextBox Grid.Row="4" Grid.Column="1" IsEnabled="False" ToolTip.ShowOnDisabled="True" ToolTip.Tip="Cursor following is unavailable on Linux, because following the cursor needs global pointer tracking through input hooks." /><TextBlock Grid.Row="4" Grid.Column="2" Classes="muted" Text="Temporarily disables cursor following" Margin="8,0" /></Grid></Expander>
                 </StackPanel>
             </ScrollViewer>
 
             <Grid x:Name="LanguagePage" Grid.Column="1" IsVisible="False" Margin="10,8,5,8" RowDefinitions="Auto,*">
                 <TextBlock Text="App's Language" Margin="0,0,0,6" />
                 <ListBox Grid.Row="1" SelectedIndex="0">
-                    <ListBoxItem Background="#315E82"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="●" Foreground="#5D93C2" FontSize="22" /><TextBlock Grid.Column="1" Text="Auto detect" /><TextBlock Grid.Column="2" Classes="muted" Text="Current OS language (if available)" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇸🇦" /><TextBlock Grid.Column="1" Text="Arabic / العربية" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇨🇳" /><TextBlock Grid.Column="1" Text="Chinese (Simplified) / 简体中文" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇨🇿" /><TextBlock Grid.Column="1" Text="Czech / Čeština" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇩🇰" /><TextBlock Grid.Column="1" Text="Danish / Dansk" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇳🇱" /><TextBlock Grid.Column="1" Text="Dutch / Nederlands" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇬🇧" /><TextBlock Grid.Column="1" Text="English" /><TextBlock Grid.Column="2" Classes="muted" Text="Built in" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇫🇮" /><TextBlock Grid.Column="1" Text="Finnish / Suomi" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇫🇷" /><TextBlock Grid.Column="1" Text="French / Français" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇩🇪" /><TextBlock Grid.Column="1" Text="German / Deutsch" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇬🇷" /><TextBlock Grid.Column="1" Text="Greek / Ελληνικά" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇮🇱" /><TextBlock Grid.Column="1" Text="Hebrew / עברית" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇮🇹" /><TextBlock Grid.Column="1" Text="Italian / Italiano" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇯🇵" /><TextBlock Grid.Column="1" Text="Japanese / 日本語" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇰🇷" /><TextBlock Grid.Column="1" Text="Korean / 한국어" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇵🇱" /><TextBlock Grid.Column="1" Text="Polish / Polski" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
-                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,180,*"><TextBlock Text="🇵🇹" /><TextBlock Grid.Column="1" Text="Portuguese / Português" /><TextBlock Grid.Column="2" Classes="muted" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem Background="#315E82"><Grid ColumnDefinitions="32,*,180"><TextBlock Text="●" Foreground="#5D93C2" FontSize="22" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Auto detect" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Current OS language (if available)" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.SaudiArabia}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Arabic / العربية" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.China}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Chinese (Simplified) / 简体中文" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.CzechRepublic}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Czech / Čeština" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.Denmark}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Danish / Dansk" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.Netherlands}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Dutch / Nederlands" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.UnitedKingdom}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="English" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Built in" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.Finland}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Finnish / Suomi" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.France}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="French / Français" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.Germany}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="German / Deutsch" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.Greece}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Greek / Ελληνικά" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.Israel}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Hebrew / עברית" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.Italy}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Italian / Italiano" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.Japan}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Japanese / 日本語" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.SouthKorea}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Korean / 한국어" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.Poland}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Polish / Polski" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
+                    <ListBoxItem IsEnabled="False"><Grid ColumnDefinitions="32,*,180"><ContentControl Template="{StaticResource Flag.Portugal}" IsHitTestVisible="False" VerticalAlignment="Center" /><TextBlock Grid.Column="1" TextWrapping="Wrap" Text="Portuguese / Português" /><TextBlock Grid.Column="2" Classes="muted" TextWrapping="Wrap" Text="Community translation" /></Grid></ListBoxItem>
                 </ListBox>
             </Grid>
 
@@ -394,7 +401,7 @@
                         <StackPanel>
                             <CheckBox x:Name="DeleteCacheOnCloseCheckBox" Classes="setting" Content="Delete all temporary project files when closing the app." />
                             <CheckBox x:Name="RemoveOldProjectsCheckBox" Classes="setting" Content="Automatically remove stale temporary projects." IsChecked="True" />
-                            <Grid Margin="30,2" ColumnDefinitions="70,*"><NumericUpDown x:Name="RetentionDaysUpDown" Minimum="1" Maximum="30" Value="5" /><TextBlock Grid.Column="1" Classes="muted" Text="days before an abandoned temporary project can be removed" Margin="8,0" VerticalAlignment="Center" /></Grid>
+                            <Grid Margin="30,2" ColumnDefinitions="70,*"><NumericUpDown x:Name="RetentionDaysUpDown" Minimum="1" Maximum="30" Value="5" ShowButtonSpinner="False" /><TextBlock Grid.Column="1" Classes="muted" Text="days before an abandoned temporary project can be removed" Margin="8,0" VerticalAlignment="Center" /></Grid>
                         </StackPanel>
                     </Expander>
                 </StackPanel>
@@ -448,9 +455,9 @@
             <ScrollViewer x:Name="AboutPage" Grid.Column="1" IsVisible="False" VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="12,10">
                     <Grid ColumnDefinitions="72,*" Margin="90,0,0,12"><Border Width="58" Height="46" BorderBrush="#9299A2" BorderThickness="2"><TextBlock Text="S&gt;G" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border><StackPanel Grid.Column="1"><TextBlock Text="ScreenToGif    Linux preview" FontSize="19" /><TextBlock Text="github.com/NickeManarin/ScreenToGif" Foreground="#76A9D4" /></StackPanel></Grid>
-                    <Expander Classes="settings-group" Header="Contact"><Grid Margin="15,4" ColumnDefinitions="90,*" RowDefinitions="Auto,Auto"><TextBlock Classes="label" Text="Project:" /><TextBlock Grid.Column="1" Text="screentogif.com" Foreground="#76A9D4" /><TextBlock Grid.Row="1" Classes="label" Text="Issues:" /><TextBlock Grid.Row="1" Grid.Column="1" Text="github.com/NickeManarin/ScreenToGif/issues" Foreground="#76A9D4" /></Grid></Expander>
-                    <Expander Classes="settings-group" Header="Technical"><Grid Margin="15,4" ColumnDefinitions="90,*" RowDefinitions="Auto,Auto,Auto"><TextBlock Classes="label" Text="License:" /><TextBlock Grid.Column="1" Text="MS-PL / TL;DR Legal" Foreground="#76A9D4" /><TextBlock Grid.Row="1" Classes="label" Text="Source code:" /><TextBlock Grid.Row="1" Grid.Column="1" Text="github.com/NickeManarin/ScreenToGif" Foreground="#76A9D4" /><TextBlock Grid.Row="2" Classes="label" Text="Platform:" /><TextBlock Grid.Row="2" Grid.Column="1" Text="Avalonia on Linux" /></Grid></Expander>
-                    <Expander Classes="settings-group" Header="A big thanks to"><StackPanel Margin="15,4"><TextBlock Text="Visual Studio     visualstudio.com" /><TextBlock Text="ReSharper         jetbrains.com/resharper" /><TextBlock Text="All contributors, translators, supporters, and people who provided feedback." Margin="0,7,0,0" /></StackPanel></Expander>
+                    <Expander Classes="settings-group" Header="Contact"><Grid Classes="about-details" Margin="15,4" ColumnDefinitions="90,*" RowDefinitions="Auto,Auto"><TextBlock Classes="label" Text="Project:" /><TextBlock Grid.Column="1" Text="screentogif.com" Foreground="#76A9D4" /><TextBlock Grid.Row="1" Classes="label" Text="Issues:" /><TextBlock Grid.Row="1" Grid.Column="1" Text="github.com/NickeManarin/ScreenToGif/issues" Foreground="#76A9D4" /></Grid></Expander>
+                    <Expander Classes="settings-group" Header="Technical"><Grid Classes="about-details" Margin="15,4" ColumnDefinitions="90,*" RowDefinitions="Auto,Auto,Auto"><TextBlock Classes="label" Text="License:" /><TextBlock Grid.Column="1" Text="MS-PL / TL;DR Legal" Foreground="#76A9D4" /><TextBlock Grid.Row="1" Classes="label" Text="Source code:" /><TextBlock Grid.Row="1" Grid.Column="1" Text="github.com/NickeManarin/ScreenToGif" Foreground="#76A9D4" /><TextBlock Grid.Row="2" Classes="label" Text="Platform:" /><TextBlock Grid.Row="2" Grid.Column="1" Text="Avalonia on Linux" /></Grid></Expander>
+                    <Expander Classes="settings-group" Header="A big thanks to"><StackPanel Classes="about-details" Margin="15,4"><TextBlock Text="Visual Studio     visualstudio.com" /><TextBlock Text="ReSharper         jetbrains.com/resharper" /><TextBlock Text="All contributors, translators, supporters, and people who provided feedback." Margin="0,7,0,0" /></StackPanel></Expander>
                 </StackPanel>
             </ScrollViewer>
 

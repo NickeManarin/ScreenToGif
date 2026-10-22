@@ -6,7 +6,7 @@ The Board is the "record as you draw" recorder: a white canvas you draw on with 
 
 Four tools sit at the top left, and exactly one is active at a time: **Pen**, the point **Eraser**, **Selection**, and the **Stroke eraser**. Selection is disabled on Linux and its tooltip says so.
 
-Pen mode shows the brush settings: color, width and height from 1 to 100 pixels, an ellipse or rectangle stylus tip, **Fit to Curve**, and **Highlighter**. Point-eraser mode replaces them with the eraser's own width, height and tip; leaving that mode brings the brush settings back.
+Pen mode shows the brush settings: color, width and height from 1 to 100 pixels, an ellipse or rectangle stylus tip, **Fit to Curve**, and **Highlighter**. The two checkboxes share a horizontal row in the toolbar. Point-eraser mode replaces them with the eraser's own width, height and tip; leaving that mode brings the brush settings back.
 
 - The **pen** draws a stroke in the chosen color, as wide and as tall as the brush fields say, with the chosen tip.
 - **Fit to Curve** smooths each stroke as it is committed, so a hand-drawn line stops looking polygonal. The stroke's first and last points stay where they were drawn.

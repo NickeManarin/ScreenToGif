@@ -48,7 +48,7 @@ dotnet test ScreenToGif.Linux.Tests/ScreenToGif.Linux.Tests.csproj --no-restore
 dotnet run --project ScreenToGif.Linux/ScreenToGif.Linux.csproj --no-build
 ```
 
-The default launch opens the StartUp window. Its Recorder, Webcam, Board, and Editor destinations are reachable, and the Options button opens the Linux application settings. To open the editor, webcam recorder, or Board directly:
+The default launch opens the StartUp window. Its Recorder, Webcam, Board, and Editor destinations are reachable, and the Options button opens the Linux application settings. Closing Editor returns to StartUp after any unsaved-work confirmation; the tray's Exit command exits the application. To open the editor, webcam recorder, or Board directly:
 
 ```bash
 dotnet run --project ScreenToGif.Linux/ScreenToGif.Linux.csproj --no-build -- --editor
@@ -69,6 +69,20 @@ make editor
 ```
 
 Set `CONFIGURATION=Release` on any target when needed, for example `make publish CONFIGURATION=Release`. The published files are written to `artifacts/linux/<configuration>` at the repository root.
+
+### Check desktop compatibility
+
+The opt-in native-window check needs Python 3, `xdotool`, and `gdbus`, in addition to the build/runtime dependencies. From an unlocked desktop, run it separately from other UI smoke tests:
+
+```bash
+./ScreenToGif.Linux/scripts/check-desktop.sh /tmp/screentogif-desktop-evidence
+```
+
+The check uses temporary settings, opens only test-owned windows, and retains screenshots, a surface index, and test results in the given directory. It exercises the Board toolbar, Editor return paths, main window sizes, editor tabs, Options pages, dialogs, and Board-to-Editor media flow. Separate runs check command-line/settings startup and controlled webcam recording with generated video. It activates its own Editor for focus checks after verifying the window's process ID, and sends no desktop-wide keyboard or pointer input. A Wayland desktop runs the current UI through XWayland; the test does not establish native Wayland screen capture. The normal test suite skips these UI checks unless their opt-in environment variables are set.
+
+To repeat at a fractional scale without changing desktop settings, set `AVALONIA_GLOBAL_SCALE_FACTOR=1.25` for that command. The surface index records the actual scale used.
+
+The check covers application-owned dialogs and popups. The system's native open/save pickers need a separate visual check: GNOME can deny screenshots of their Wayland windows, even when accessibility can identify and cancel them.
 
 ## Install a local desktop launcher
 
@@ -111,7 +125,7 @@ Remove the application with `sudo apt remove screentogif`. Removing or purging t
 
 ## Current scope
 
-The Recorder captures a rectangle of the screen at a chosen frame rate, or one frame at a time, and hands the result to the Editor. It needs an X11 session: under a native Wayland session Record is disabled and says why. Window snapping, user-interaction capture, cursor following, guidelines, and desktop-wide hotkeys are not available; [`docs/recorder.md`](docs/recorder.md) lists each unavailable control beside the subsystem it needs, and [`docs/recorder-followups.md`](docs/recorder-followups.md) describes what each would take.
+The Recorder captures a rectangle of the screen at a chosen frame rate, or one frame at a time, and hands the result to the Editor. It needs an X11 session: under a Wayland session, including XWayland, Record is disabled and says why. Window snapping, user-interaction capture, cursor following, guidelines, and desktop-wide hotkeys are not available; [`docs/recorder.md`](docs/recorder.md) lists each unavailable control beside the subsystem it needs, and [`docs/recorder-followups.md`](docs/recorder-followups.md) describes what each would take.
 
 The Webcam recorder discovers the machine's cameras through V4L2, previews the selected one, and records it into the Editor. It needs read access to a `/dev/video*` node, which on most distributions means membership in the `video` group. See [`docs/webcam.md`](docs/webcam.md).
 

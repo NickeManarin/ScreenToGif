@@ -95,13 +95,13 @@
                     </StackPanel>
                 </StackPanel>
 
-                <StackPanel x:Name="BrushOptionsPanel" Grid.Column="2" Orientation="Vertical" Spacing="0" VerticalAlignment="Center">
-                    <CheckBox x:Name="FitToCurveCheckBox" Padding="0" FontSize="11" Height="15" MinHeight="0"
+                <StackPanel x:Name="BrushOptionsPanel" Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <CheckBox x:Name="FitToCurveCheckBox" Padding="0" FontSize="11" Height="26" MinHeight="0"
                               IsCheckedChanged="FitToCurveChanged"
                               ToolTip.Tip="Smooth each stroke into a fitted curve.">
                         <TextBlock Text="Fit to Curve" Margin="3,0,0,0" />
                     </CheckBox>
-                    <CheckBox x:Name="HighlighterCheckBox" Padding="0" FontSize="11" Height="15" MinHeight="0"
+                    <CheckBox x:Name="HighlighterCheckBox" Padding="0" FontSize="11" Height="26" MinHeight="0"
                               IsCheckedChanged="HighlighterChanged"
                               ToolTip.Tip="Draw translucent highlighter strokes.">
                         <TextBlock Text="Highlighter" Margin="3,0,0,0" />

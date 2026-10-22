@@ -385,7 +385,7 @@ public partial class App : Application, ICaptureShellHost
         }
     }
 
-    private void OpenWindow(LinuxTrayWindow target)
+    internal void OpenWindow(LinuxTrayWindow target)
     {
         if (Desktop is null)
             return;
@@ -420,7 +420,7 @@ public partial class App : Application, ICaptureShellHost
         window.Show();
     }
 
-    private void ExitApplication()
+    internal void ExitApplication()
     {
         _exiting = true;
         _trayIcon?.Dispose();

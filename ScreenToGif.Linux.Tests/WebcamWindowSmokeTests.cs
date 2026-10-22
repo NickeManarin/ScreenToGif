@@ -92,6 +92,11 @@ public sealed class WebcamWindowSmokeTests
             await Dispatcher.UIThread.InvokeAsync(() => devices.SelectedIndex = 0);
             await UntilAsync(() => resolutions.SelectedItem is CameraResolution(1920, 1080) && record.IsEnabled);
             var scale = await Dispatcher.UIThread.InvokeAsync(() => window.FindControl<Slider>("ScaleSlider")!);
+            await Dispatcher.UIThread.InvokeAsync(() =>
+                ((Flyout)window.FindControl<Button>("ScaleButton")!.Flyout!).ShowAt(window.FindControl<Button>("ScaleButton")!));
+            var scalePopup = await Dispatcher.UIThread.InvokeAsync(() => TopLevel.GetTopLevel(scale)!);
+            await ScreenshotAsync(scalePopup, "scale-popup");
+            await Dispatcher.UIThread.InvokeAsync(() => window.FindControl<Button>("ScaleButton")!.Flyout!.Hide());
             await Dispatcher.UIThread.InvokeAsync(() => scale.Value = 0.7);
             Assert.True(await Dispatcher.UIThread.InvokeAsync(() => window.Width > 960));
             await Task.Delay(100);
@@ -182,7 +187,7 @@ public sealed class WebcamWindowSmokeTests
         }
     }
 
-    private static async Task ScreenshotAsync(Window window, string name)
+    private static async Task ScreenshotAsync(TopLevel window, string name)
     {
         var directory = Environment.GetEnvironmentVariable("SCREENTOGIF_WEBCAM_SCREENSHOT_DIR");
         if (string.IsNullOrWhiteSpace(directory))

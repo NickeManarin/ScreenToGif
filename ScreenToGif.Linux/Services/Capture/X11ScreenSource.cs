@@ -23,11 +23,11 @@ public sealed class X11ScreenSource(string? displayName = null) : IScreenSource
     private bool? _cursorAvailable;
 
     /// <summary>
-    /// True when this session can be captured at all. A Wayland session reports a platform handle
-    /// descriptor other than <c>XID</c>, and has no X11 view of the desktop to grab.
+    /// XWayland also gives windows an XID, but cannot expose the native Wayland desktop.
     /// </summary>
-    public static bool IsSupportedSession(string? platformHandleDescriptor) =>
-        OperatingSystem.IsLinux() && string.Equals(platformHandleDescriptor, "XID", StringComparison.Ordinal);
+    public static bool IsSupportedSession(string? platformHandleDescriptor, string? sessionType) =>
+        OperatingSystem.IsLinux() && string.Equals(platformHandleDescriptor, "XID", StringComparison.Ordinal) &&
+        !string.Equals(sessionType, "wayland", StringComparison.OrdinalIgnoreCase);
 
     public CapturedFrame Capture(PixelRect region, bool includeCursor)
     {

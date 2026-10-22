@@ -67,9 +67,9 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
 
     private void RecorderOpened(object? sender, EventArgs e)
     {
-        if (!X11ScreenSource.IsSupportedSession(TryGetPlatformHandle()?.HandleDescriptor))
+        if (!X11ScreenSource.IsSupportedSession(TryGetPlatformHandle()?.HandleDescriptor,
+                Environment.GetEnvironmentVariable("XDG_SESSION_TYPE")))
         {
-            // ASM-3: no XID means a native Wayland session, which has no X11 view of the desktop.
             _sessionUnavailable = true;
             RecordButton.IsEnabled = false;
             ToolTip.SetTip(RecordButton,

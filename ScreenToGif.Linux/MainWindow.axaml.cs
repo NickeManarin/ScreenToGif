@@ -60,6 +60,7 @@ public partial class MainWindow : Window
         _history.SetBaseline(CaptureSnapshot());
         MarkClean();
         Closed += (_, _) => CleanupWorkspaces();
+        Closed += (_, _) => App.CurrentApp?.RestoreStartup();
     }
 
     private void ExitClick(object? sender, RoutedEventArgs e) => Close();
@@ -374,7 +375,7 @@ public partial class MainWindow : Window
 
     private void StopPreview() => _stopActivePreview();
 
-    private async Task RunOperationAsync(string description, Func<CancellationToken, Task> operation)
+    internal async Task RunOperationAsync(string description, Func<CancellationToken, Task> operation)
     {
         var result = await _operations.RunAsync(operation, BeginOperationUi, EndOperationUi);
         switch (result.Status)
