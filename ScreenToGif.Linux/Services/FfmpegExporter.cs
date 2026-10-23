@@ -189,11 +189,16 @@ public sealed class FfmpegExporter
         foreach (var frame in frames)
         {
             builder.Append("file ").AppendLine(QuoteConcatPath(frame.FilePath));
+            // image2 defaults to 25 fps; use project milliseconds before the output format rounds.
+            builder.AppendLine("option framerate 1000");
             builder.Append("duration ").AppendLine((Math.Max(1, frame.DelayMs) / 1000d).ToString("0.######", CultureInfo.InvariantCulture));
         }
 
         if (repeatLastFrame)
+        {
             builder.Append("file ").AppendLine(QuoteConcatPath(frames[^1].FilePath));
+            builder.AppendLine("option framerate 1000");
+        }
 
         return builder.ToString();
     }

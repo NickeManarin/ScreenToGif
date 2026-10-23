@@ -25,6 +25,8 @@ internal sealed class FakeScreenSource(PixelSize size) : IScreenSource
 
     public int CaptureCount { get; private set; }
 
+    public long? PresentationMilliseconds { get; set; }
+
     public bool LastRequestedCursor { get; private set; }
 
     public bool IsDisposed { get; private set; }
@@ -44,7 +46,7 @@ internal sealed class FakeScreenSource(PixelSize size) : IScreenSource
         var stride = size.Width * 4;
         var pixels = ArrayPool<byte>.Shared.Rent(stride * size.Height);
         Array.Fill(pixels, (byte)0x7F, 0, stride * size.Height);
-        return new CapturedFrame(size, stride, pixels);
+        return new CapturedFrame(size, stride, pixels, PresentationMilliseconds);
     }
 
     public void Dispose() => IsDisposed = true;

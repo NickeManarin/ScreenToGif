@@ -263,6 +263,33 @@ public sealed class LinuxEditorPipelineTests : IDisposable
     }
 
     [Fact]
+    public async Task Apng_preserves_measured_millisecond_delays_without_a_25fps_grid()
+    {
+        var frames = new[]
+        {
+            new EditorFrame(await CreateColorFrameAsync("red", "measured-red.png"), 17),
+            new EditorFrame(await CreateColorFrameAsync("white", "measured-white.png"), 83),
+            new EditorFrame(await CreateColorFrameAsync("blue", "measured-blue.png"), 107),
+            new EditorFrame(await CreateColorFrameAsync("green", "measured-green.png"), 211)
+        };
+        try
+        {
+            var output = Path.Combine(_root, "measured.apng");
+            await new FfmpegExporter(_ffmpeg).ExportAsync(frames, output);
+            var packets = await ReadPacketTimingAsync(output);
+            Assert.Equal(frames.Length, packets.Count);
+            var elapsed = 0;
+            for (var index = 0; index < frames.Length; index++)
+            {
+                Assert.Equal(elapsed, (int)Math.Round(packets[index].Pts * 1000));
+                Assert.Equal(frames[index].DelayMs, (int)Math.Round(packets[index].Duration * 1000));
+                elapsed += frames[index].DelayMs;
+            }
+        }
+        finally { DisposeFrames(frames); }
+    }
+
+    [Fact]
     public async Task A_last_frame_held_past_the_gif_limit_exports_at_the_limit()
     {
         var frames = new[]

@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Presenters;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
@@ -37,9 +38,16 @@ public sealed partial class DesktopWindowSmokeTests
             await Ui(() => sections.SelectedItem = item);
             var section = await Ui(() => item.Tag as string);
             var name = "options-" + section;
+            if (section == "Recorder")
+            {
+                await Task.Delay(100);
+                await Ui(() => options.FindControl<Control>("WaylandSourceReusePanel")!.BringIntoView());
+            }
             await CaptureAsync(options, name);
             await Ui(() => CheckOptionsTextLayout(options, section, layoutFailures));
             await ResizeAsync(options, await Ui(() => new Size(options.MinWidth, options.MinHeight)));
+            if (section == "Recorder")
+                await Ui(() => options.FindControl<Control>("WaylandSourceReusePanel")!.BringIntoView());
             await CaptureAsync(options, name + "-minimum");
             await Ui(() => CheckOptionsTextLayout(options, section, layoutFailures));
             if (section == "Language")
@@ -65,8 +73,23 @@ public sealed partial class DesktopWindowSmokeTests
             await UntilAsync(() => window.IsVisible && window.Bounds.Width > 0);
             await AtBothSizesAsync(window, kind.ToString().ToLowerInvariant());
             if (kind == CaptureShellKind.Recorder && Environment.GetEnvironmentVariable("XDG_SESSION_TYPE") == "wayland")
-                Assert.False(await Ui(() => window.FindControl<Button>("RecordButton")!.IsEnabled),
-                    "XWayland must not offer capture of the native Wayland desktop.");
+            {
+                Assert.True(await Ui(() => window.FindControl<Button>("RecordButton")!.IsEnabled),
+                    "Wayland offers source selection through the ScreenCast portal.");
+                Assert.True(await Ui(() => window.FindControl<Control>("WaylandInfo")!.IsVisible));
+                Assert.False(await Ui(() => window.FindControl<NumericUpDown>("CaptureWidthInput")!.IsEnabled),
+                    "A desktop frame cannot reposition the portal-selected source.");
+                await Ui(() =>
+                {
+                    var width = window.FindControl<NumericUpDown>("CaptureWidthInput")!;
+                    width.Value = 2;
+                    Assert.Equal(2m, width.Value);
+                    width.Value = 640;
+                    Assert.Equal(640m, width.Value);
+                    width.Value = null;
+                    Assert.Null(width.Value); // Clearing a selection must not restore a dead source's width.
+                });
+            }
             await Ui(window.Close);
         }
 
@@ -127,9 +150,16 @@ public sealed partial class DesktopWindowSmokeTests
 
     private static void CheckOptionsTextLayout(OptionsWindow options, string? section, List<string> failures)
     {
-        if (section is "Shortcuts" or "Language")
+        if (section is "Shortcuts" or "Language" or "Recorder")
         {
-            var page = options.FindControl<Control>(section + "Page")!;
+            var page = options.FindControl<Control>(section == "Recorder" ? "WaylandSourceReusePanel" : section + "Page")!;
+            if (section == "Recorder" && page.IsEffectivelyVisible)
+            {
+                var viewport = page.GetVisualAncestors().OfType<ScrollContentPresenter>().First();
+                var origin = page.TranslatePoint(default, viewport)!.Value;
+                if (origin.Y < -1 || origin.Y + page.Bounds.Height > viewport.Bounds.Height + 1)
+                    failures.Add("Recorder: the source-reuse controls must scroll fully into view.");
+            }
             foreach (var text in page.GetVisualDescendants().OfType<TextBlock>())
             {
                 if (string.IsNullOrEmpty(text.Text) || !text.IsEffectivelyVisible)

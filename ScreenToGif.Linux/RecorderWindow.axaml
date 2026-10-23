@@ -21,7 +21,15 @@
                 Background="Transparent"
                 BorderBrush="#60656B"
                 BorderThickness="1"
-                ToolTip.Tip="Everything inside this frame is recorded." />
+                ToolTip.Tip="Everything inside this frame is recorded.">
+            <StackPanel x:Name="WaylandInfo" IsVisible="False" Margin="16,8" Spacing="4"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Wayland screen sharing" FontWeight="SemiBold" Foreground="#E4E7EB" />
+                <TextBlock x:Name="WaylandSourceLabel" TextWrapping="Wrap" Foreground="#B9BEC5"
+                           Text="Press Record to choose a monitor or window in the desktop sharing dialog. The entire selected source is recorded; moving this window does not change the source." />
+                <TextBlock x:Name="WaylandStatus" TextWrapping="Wrap" Foreground="#E4E7EB" />
+            </StackPanel>
+        </Border>
 
         <Border x:Name="CommandBar" Grid.Row="1" Background="#25272A" BorderBrush="#555A60" BorderThickness="1,1,1,0">
             <Grid Height="31" Margin="6,0" ColumnDefinitions="Auto,Auto,Auto,Auto,*,Auto,Auto">

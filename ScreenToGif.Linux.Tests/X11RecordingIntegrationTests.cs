@@ -3,6 +3,7 @@ using Avalonia.Media.Imaging;
 using ScreenToGif.Linux.Services;
 using ScreenToGif.Linux.Services.Capture;
 using Xunit;
+using System.Runtime.InteropServices;
 
 namespace ScreenToGif.Linux.Tests;
 
@@ -59,6 +60,21 @@ public sealed class X11RecordingIntegrationTests
     }
 
     [Fact]
+    public void A_real_X11_cursor_appears_only_when_requested()
+    {
+        using var server = XvfbSession.Start(320, 240);
+        using var window = new CursorWindow(server.Display);
+        using var source = new X11ScreenSource(server.Display);
+        source.Capture(Region, false).Dispose();
+        server.Run("xdotool", "mousemove --sync 80 60");
+        using var hidden = source.Capture(Region, false);
+        using var shown = source.Capture(Region, true);
+        Assert.False(hidden.Pixels.SequenceEqual(shown.Pixels), "The real XFixes cursor must change captured pixels.");
+        for (var offset = 0; offset < hidden.Pixels.Length; offset += 4)
+            Assert.Equal(new byte[] { 0, 0, 255, 255 }, hidden.Pixels.Slice(offset, 4).ToArray());
+    }
+
+    [Fact]
     public void An_unreachable_display_reports_a_cause_rather_than_crashing()
     {
         using var source = new X11ScreenSource(":8123");
@@ -111,4 +127,27 @@ public sealed class X11RecordingIntegrationTests
             Assert.Equal((SolidBlue, SolidGreen, SolidRed, (byte)0xFF), pixel);
         }
     }
+    private sealed class CursorWindow : IDisposable
+    {
+        private readonly IntPtr _display;
+        internal CursorWindow(string displayName)
+        {
+            _display = XOpenDisplay(displayName);
+            Assert.NotEqual(IntPtr.Zero, _display);
+            var window = XCreateSimpleWindow(_display, XDefaultRootWindow(_display), 0, 0, 320, 240, 0, 0, 0xFF0000);
+            XDefineCursor(_display, window, XCreateFontCursor(_display, 34));
+            XMapWindow(_display, window);
+            XSync(_display, false);
+        }
+        public void Dispose() => XCloseDisplay(_display);
+        [DllImport("libX11.so.6")] private static extern IntPtr XOpenDisplay([MarshalAs(UnmanagedType.LPUTF8Str)] string name);
+        [DllImport("libX11.so.6")] private static extern int XCloseDisplay(IntPtr display);
+        [DllImport("libX11.so.6")] private static extern nuint XDefaultRootWindow(IntPtr display);
+        [DllImport("libX11.so.6")] private static extern nuint XCreateSimpleWindow(IntPtr display, nuint parent, int x, int y, uint width, uint height, uint border, nuint borderPixel, nuint background);
+        [DllImport("libX11.so.6")] private static extern nuint XCreateFontCursor(IntPtr display, uint shape);
+        [DllImport("libX11.so.6")] private static extern int XDefineCursor(IntPtr display, nuint window, nuint cursor);
+        [DllImport("libX11.so.6")] private static extern int XMapWindow(IntPtr display, nuint window);
+        [DllImport("libX11.so.6")] private static extern int XSync(IntPtr display, [MarshalAs(UnmanagedType.Bool)] bool discard);
+    }
+
 }

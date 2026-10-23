@@ -17,7 +17,11 @@ On Ubuntu, once the Microsoft .NET package feed is configured, the usual develop
 ```bash
 sudo apt update
 sudo apt install dotnet-sdk-9.0 ffmpeg
+# Additional runtime packages for Wayland screen recording:
+sudo apt install pipewire xdg-desktop-portal gstreamer1.0-pipewire gstreamer1.0-gl gstreamer1.0-plugins-base libgstreamer-plugins-base1.0-0
 ```
+
+Wayland recording needs GStreamer 1.24 or later, its PipeWire and OpenGL plugins, and a graphics driver supporting DMA-BUF export/import. The PipeWire plugin must support `DMA_DRM` negotiation (verified here with PipeWire/GStreamer plugin 1.6.2); installing a recent GStreamer library alone does not upgrade that plugin. Its GPU path preserves fractional-scale source geometry; the software-rendering option affects the app UI. Wayland also needs the portal backend supplied by the desktop environment, such as `xdg-desktop-portal-gnome` on GNOME. Record or Snap requests consent to share one complete monitor or window; the Recorder frame cannot select an arbitrary rectangle. The packaged app offers administrator-protected reuse of a once-approved source; this optional setting needs `pkexec` and a desktop supporting portal persistence. See [Recorder](docs/recorder.md#reuse-an-approved-wayland-source) for setup, forgetting a source, cursor behavior and selection limits.
 
 Most desktop distributions already include the native libraries Avalonia needs. For a minimal installation, install the distribution equivalents of `fontconfig`, `freetype`, `libX11`, `libX11-xcb`, `libXrender`, `libICE`, and `libSM` as well.
 
@@ -82,7 +86,23 @@ The check uses temporary settings, opens only test-owned windows, and retains sc
 
 To repeat at a fractional scale without changing desktop settings, set `AVALONIA_GLOBAL_SCALE_FACTOR=1.25` for that command. The surface index records the actual scale used.
 
+On an X11 session with a window manager and compositor, set `SCREENTOGIF_X11_RECORDING_SMOKE=1` on the desktop check to also record a changing test-owned window, pause/resume, stop into Editor and independently compare its APNG export. This needs `xvfb` and `x11-xserver-utils` for the controlled X11 fixtures.
+
 The check covers application-owned dialogs and popups. The system's native open/save pickers need a separate visual check: GNOME can deny screenshots of their Wayland windows, even when accessibility can identify and cancel them.
+
+### Check native Wayland recording
+
+The controlled capture tests use a private `dbus-daemon` and GStreamer generated video. Install `dbus`, `xvfb`, `x11-xserver-utils`, `xdotool`, `gstreamer1.0-plugins-base` and `gstreamer1.0-plugins-good` to run the full suite. The Good plugins provide independent rotation/crop references for the native pixel tests.
+
+The separate live check requires an unlocked GNOME Wayland desktop, the runtime packages above, and `python3-gi`, `python3-cairo`, and `gir1.2-gtk-4.0` for its native changing-content window:
+
+```bash
+bash ScreenToGif.Linux/scripts/check-wayland-recording.sh /tmp/screentogif-wayland-evidence
+```
+
+In the sharing dialog choose only **ScreenToGif Wayland test source**. The check records that window, pauses/resumes, opens Editor, plays and reverses the frames, then compares independently decoded APNG pixels and millisecond delays with the edited project. It retains projects, APNG, screenshots and results. Set `SCREENTOGIF_WAYLAND_CURSOR=1` to request an embedded cursor. Add `SCREENTOGIF_WAYLAND_CURSOR_PROBE=1`, then move the pointer to the center of the source's red square after Share; the check compares the marker's pixels with the cursor setting. `SCREENTOGIF_WAYLAND_MANUAL=1` checks three explicit Snaps, no autonomous frames, and recovery of those frames after closing the owned source. `SCREENTOGIF_WAYLAND_LIFECYCLE=1` instead checks cancel/decline, close during preparation, retry, discard/close confirmation, restart and Exit during sharing. Follow its terminal instructions: cancel the first dialog, allow the next to close automatically, then share the test source in each subsequent dialog. `SCREENTOGIF_WAYLAND_REUSE=1` checks administrator cancellation/enable, first consent, an automatic second session, and forgetting a source. It restores the original administrator policy and needs the installed helper. Follow its terminal instructions for the authentication and sharing dialogs. Run each variant separately with a fresh evidence directory; do not combine Manual, lifecycle and reuse variants.
+
+These opt-in tests are skipped in ordinary test runs; a skip is not native-capture evidence. A UI scale override changes the app's rendering, not the compositor's stream scale; fractional desktop capture needs its own native run.
 
 ## Install a local desktop launcher
 
@@ -119,13 +139,13 @@ sudo apt install ./artifacts/linux/screentogif_2.43.2-1_amd64.deb
 screentogif --help
 ```
 
-APT installs FFmpeg as a dependency, including the encoders used for MP4 and WebM export. Launch ScreenToGif from the applications menu or run `screentogif`. Screen recording requires an X11 session. Webcam recording requires access to the camera device, normally through membership in the `video` group; after changing group membership, log out and back in.
+APT installs FFmpeg as a dependency, including the encoders used for MP4 and WebM export. Launch ScreenToGif from the applications menu or run `screentogif`. Screen recording uses X11 or, on Wayland, the desktop sharing portal and the recommended GStreamer packages. Webcam recording requires access to the camera device, normally through membership in the `video` group; after changing group membership, log out and back in.
 
 Remove the application with `sudo apt remove screentogif`. Removing or purging the package leaves each user's settings and saved projects alone.
 
 ## Current scope
 
-The Recorder captures a rectangle of the screen at a chosen frame rate, or one frame at a time, and hands the result to the Editor. It needs an X11 session: under a Wayland session, including XWayland, Record is disabled and says why. Window snapping, user-interaction capture, cursor following, guidelines, and desktop-wide hotkeys are not available; [`docs/recorder.md`](docs/recorder.md) lists each unavailable control beside the subsystem it needs, and [`docs/recorder-followups.md`](docs/recorder-followups.md) describes what each would take.
+The Recorder captures a rectangle of the screen at a chosen frame rate, or one frame at a time, and hands the result to the Editor. On Wayland it records a full monitor or window chosen through desktop consent, using PipeWire and GStreamer; moving the Recorder does not change that source. Window snapping, user-interaction capture, cursor following, guidelines, and desktop-wide hotkeys are not available; [`docs/recorder.md`](docs/recorder.md) lists each unavailable control beside the subsystem it needs, and [`docs/recorder-followups.md`](docs/recorder-followups.md) describes what each would take.
 
 The Webcam recorder discovers the machine's cameras through V4L2, previews the selected one, and records it into the Editor. It needs read access to a `/dev/video*` node, which on most distributions means membership in the `video` group. See [`docs/webcam.md`](docs/webcam.md).
 

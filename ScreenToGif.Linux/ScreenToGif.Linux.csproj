@@ -14,6 +14,7 @@
     <AvaloniaResource Include="../ScreenToGif/Resources/Logo.ico" Link="Resources/Logo.ico" />
     <None Include="Resources/screentogif.png" CopyToOutputDirectory="PreserveNewest" />
     <None Include="screentogif.desktop" CopyToOutputDirectory="PreserveNewest" />
+    <PackageReference Include="Tmds.DBus.Protocol" />
     <PackageReference Include="Avalonia" />
     <PackageReference Include="Avalonia.Desktop" />
     <PackageReference Include="Avalonia.Themes.Fluent" />

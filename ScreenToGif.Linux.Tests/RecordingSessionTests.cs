@@ -15,6 +15,32 @@ public sealed class RecordingSessionTests
     private static readonly PixelRect Region = new(10, 20, 64, 48);
 
     [Fact]
+    public async Task Stream_timestamps_measure_frame_gaps_and_exclude_paused_time()
+    {
+        var clock = new FakeRecordingClock();
+        var source = new FakeScreenSource(Region.Size) { PresentationMilliseconds = 10 };
+        var writer = new FakeFrameWriter();
+        await using var session = new RecordingSession(source, writer, clock,
+            new RecordingSettings { FramesPerSecond = 10 }, () => Region);
+        session.Record();
+        session.Tick();
+        clock.Advance(100);
+        source.PresentationMilliseconds = 125;
+        session.Tick();
+        clock.Advance(25); // The native pull completed after the scheduled sample time.
+        session.Pause();
+        clock.Advance(5000);
+        session.Record();
+        clock.Advance(100);
+        source.PresentationMilliseconds = 5220;
+        session.Tick();
+        var frames = await session.StopAsync();
+        Assert.Equal(3, frames.Count);
+        Assert.Equal(115, frames[0].DelayMs);
+        Assert.Equal(95, frames[1].DelayMs);
+    }
+
+    [Fact]
     public void Record_moves_a_stopped_session_straight_to_recording_when_pre_start_is_off()
     {
         var harness = new Harness(new RecordingSettings { PreStartEnabled = false });

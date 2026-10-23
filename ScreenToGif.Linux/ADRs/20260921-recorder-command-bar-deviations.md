@@ -1,7 +1,7 @@
 # ADR: Where the Linux Recorder's command bar departs from the Windows one
 
 ## Status
-Accepted
+Accepted. The [Wayland capture decision](20261022-wayland-recording-through-portal-and-gstreamer.md) replaces the original Wayland disabled state with source selection and read-only stream dimensions.
 
 ## Area
 Recorder

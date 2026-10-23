@@ -34,6 +34,8 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
     private bool _isClosed;
     private bool _allowClose;
     private bool _sessionUnavailable;
+    private bool _wayland = WaylandScreenSource.IsWaylandSession(Environment.GetEnvironmentVariable("XDG_SESSION_TYPE"), null);
+    private CancellationTokenSource? _preparationCancellation;
 
     public RecorderWindow()
     {
@@ -67,17 +69,26 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
 
     private void RecorderOpened(object? sender, EventArgs e)
     {
-        if (!X11ScreenSource.IsSupportedSession(TryGetPlatformHandle()?.HandleDescriptor,
-                Environment.GetEnvironmentVariable("XDG_SESSION_TYPE")))
+        _wayland = WaylandScreenSource.IsWaylandSession(Environment.GetEnvironmentVariable("XDG_SESSION_TYPE"),
+            TryGetPlatformHandle()?.HandleDescriptor);
+        if (_wayland)
+        {
+            Height = MinHeight = 170;
+            CanResize = false;
+            CaptureWidthInput.Minimum = CaptureHeightInput.Minimum = 1;
+            CaptureViewport.Background = Avalonia.Media.Brush.Parse("#25272A");
+            WaylandInfo.IsVisible = true;
+            CaptureWidthInput.Value = CaptureHeightInput.Value = null;
+            UpdateWaylandSourcePrompt();
+        }
+        else if (!X11ScreenSource.IsSupportedSession(TryGetPlatformHandle()?.HandleDescriptor,
+                     Environment.GetEnvironmentVariable("XDG_SESSION_TYPE")))
         {
             _sessionUnavailable = true;
-            RecordButton.IsEnabled = false;
-            ToolTip.SetTip(RecordButton,
-                "Recording needs an X11 session. Under Wayland the screen is only reachable through the " +
-                "xdg-desktop-portal ScreenCast backend, which the Linux build does not have yet.");
-            ToolTip.SetTip(SnapWindowButton, ToolTip.GetTip(RecordButton));
-            SetStatusText("Recording is unavailable under Wayland.");
+            ToolTip.SetTip(RecordButton, "This desktop provides neither X11 capture nor a Wayland ScreenCast session.");
+            SetStatusText("Screen recording is unavailable in this session.");
         }
+        RenderCommands();
 
         RestoreRememberedSize();
         QueueInputRegionUpdate();
@@ -123,6 +134,7 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
     private async void RecorderClosed(object? sender, EventArgs e)
     {
         _isClosed = true;
+        _preparationCancellation?.Cancel();
         _inputRegion.Dispose();
         await TearDownRecordingAsync();
     }
@@ -154,7 +166,7 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
     {
         try
         {
-            if (_sessionUnavailable)
+            if (_sessionUnavailable || _preparationCancellation is not null || _isClosed)
                 return;
 
             if (_status.CanPause)
@@ -241,6 +253,7 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
 
         SeedFieldsFromSettings();
         _status = RecordingSession.IdleStatus(SelectedMode);
+        if (_wayland) UpdateWaylandSourcePrompt();
         RenderCommands();
     }
 
@@ -266,28 +279,80 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
         if (_loop is not null)
             return true;
 
+        if (_preparationCancellation is not null || _isClosed)
+            return false;
+
+        using var cancellation = new CancellationTokenSource();
+        _preparationCancellation = cancellation;
+        RenderCommands();
         EditorWorkspace? workspace = null;
+        IScreenSource? source = null;
+        PngFrameWriter? writer = null;
+        var settings = CurrentRecordingSettings();
+        string? preparationStatus = null;
         try
         {
+            IRecordingClock clock;
+            if (_wayland)
+            {
+                SetStatusText(CanReuseWaylandSource
+                    ? "Restoring the approved source. The desktop may ask you to choose again."
+                    : "Choose a source in the desktop sharing dialog.");
+                Topmost = false;
+                var handle = TryGetPlatformHandle();
+                var parent = handle?.HandleDescriptor == "XID" ? $"x11:{handle.Handle:x}" : string.Empty;
+                var wayland = await WaylandScreenSource.OpenAsync(parent, settings, cancellation.Token);
+                source = wayland;
+                clock = wayland;
+                _region = new PixelRect(wayland.Size);
+                ShowRegionInFields();
+                WaylandSourceLabel.Text = $"Recording the entire selected source: {_region.Width} × {_region.Height} pixels. " +
+                    "Moving this window does not change the source. " + (CanReuseWaylandSource
+                        ? "Stop or discard first; use Options → Forget recording source to choose another."
+                        : "Stop or discard before choosing another source.");
+            }
+            else
+            {
+                source = new X11ScreenSource();
+                clock = new StopwatchRecordingClock();
+            }
+            cancellation.Token.ThrowIfCancellationRequested();
             workspace = ProjectArchive.CreateWorkspace();
-            var writer = new PngFrameWriter(workspace.CreateBatch(EditorArtifactKind.Recordings));
-            var session = new RecordingSession(new X11ScreenSource(), writer, new StopwatchRecordingClock(),
-                CurrentRecordingSettings(), () => _region);
-
-            _workspace = workspace;
+            writer = new PngFrameWriter(workspace.CreateBatch(EditorArtifactKind.Recordings));
+            var session = new RecordingSession(source, writer, clock, settings, () => _region);
             _loop = new RecordingLoop(session, OnStatusChanged, OnRecordingFailed);
+            source = null;
+            writer = null;
+            _workspace = workspace;
+            workspace = null;
             return true;
+        }
+        catch (OperationCanceledException)
+        {
+            preparationStatus = "Screen sharing canceled. Press Record or Snap to choose a source again.";
+            return false;
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
         {
-            workspace?.Dispose();
-            _workspace = null;
             await ShowFailureAsync("The recording workspace could not be created",
-                $"Recorded frames are kept under {Path.GetTempPath()} until the recording is saved, and that " +
-                "folder must be writable with free space. Free some space or fix its permissions, or start " +
-                "ScreenToGif with TMPDIR set to a writable folder, then press Record or Snap again." +
+                $"Recorded frames are kept under {Path.GetTempPath()} until saved. Free some space or fix its permissions, " +
+                "or set TMPDIR to a writable folder, then press Record or Snap again." +
                 $"{Environment.NewLine}{Environment.NewLine}Details: {exception.Message}");
             return false;
+        }
+        finally
+        {
+            if (writer is not null) await writer.DisposeAsync();
+            source?.Dispose();
+            workspace?.Dispose();
+            _preparationCancellation = null;
+            if (!_isClosed)
+            {
+                Topmost = true;
+                if (_wayland && _loop is null) ReturnToIdle();
+                RenderCommands();
+                if (preparationStatus is not null) SetStatusText(preparationStatus);
+            }
         }
     }
 
@@ -373,6 +438,24 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
             SeedFieldsFromSettings();
 
         _status = RecordingSession.IdleStatus(SelectedMode);
+        if (_wayland && !_isClosed)
+        {
+            CaptureWidthInput.Value = CaptureHeightInput.Value = null;
+            UpdateWaylandSourcePrompt();
+        }
+    }
+
+    private static bool CanReuseWaylandSource =>
+        WaylandSourceReusePolicy.IsAllowed && new ScreenCastRestoreTokenStore().HasToken;
+
+    private void UpdateWaylandSourcePrompt()
+    {
+        WaylandSourceLabel.Text = CanReuseWaylandSource
+            ? "Press Record or Snap to reuse the approved source. To choose another, use Options → Forget recording source. The entire source is recorded; moving this window does not change it."
+            : "Press Record or Snap to choose a monitor or window in the desktop sharing dialog. The entire selected source is recorded; moving this window does not change it.";
+        ToolTip.SetTip(SnapWindowButton, CanReuseWaylandSource
+            ? "The approved source will be reused. Use Recorder options to forget it and choose another."
+            : "Choose a monitor or window in the desktop sharing dialog when you press Record or Snap.");
     }
 
     private async Task DisposeLoopAsync()
@@ -406,11 +489,12 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
     {
         var recording = IsRecordingUnderWay;
         var manual = SelectedMode == RecorderCaptureMode.Manual;
+        var preparing = _preparationCancellation is not null;
 
         DiscardButton.IsVisible = recording && _status.CanDiscard;
         StopButton.IsVisible = recording && _status.CanStop;
 
-        RecordButton.IsEnabled = !_sessionUnavailable && (!recording || _status.CanRecord || _status.CanPause ||
+        RecordButton.IsEnabled = !_sessionUnavailable && !preparing && (!recording || _status.CanRecord || _status.CanPause ||
                                                           _status.CanSnap);
         RecordButtonIcon.Kind = _status.CanPause ? "Pause" : manual ? "Camera" : "Record";
         RecordButtonLabel.Text = _status.CanPause ? "Pause" : manual ? "Snap" : recording ? "Resume" : "Record";
@@ -423,12 +507,13 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
 
         // Size is fixed once a recording starts; frequency re-opens while paused, as on Windows.
         var idle = !recording || _status.CanChangeRegion;
-        ModeSelector.IsEnabled = idle;
-        CaptureWidthInput.IsEnabled = idle;
-        CaptureHeightInput.IsEnabled = idle;
+        ModeSelector.IsEnabled = idle && !preparing;
+        OptionsButton.IsEnabled = !preparing;
+        CaptureWidthInput.IsEnabled = idle && !_wayland;
+        CaptureHeightInput.IsEnabled = idle && !_wayland;
         if (!idle && _regionFieldBeingTyped)
             ApplyRegionFields();
-        FrequencyInput.IsEnabled = !recording || _status.CanChangeFrequency;
+        FrequencyInput.IsEnabled = !preparing && (!recording || _status.CanChangeFrequency);
 
         // Manual captures only on Snap, so it has no rate to show; the other modes name their unit.
         FrequencyGroup.IsVisible = !manual;
@@ -442,13 +527,19 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
 
         // Disabling the fields is not enough on its own: the frame can also be resized by dragging
         // its edge, and a recording whose region changes size yields frames the editor cannot use.
-        CanResize = idle;
+        CanResize = idle && !_wayland;
         ReportRegion();
 
+        if (preparing) return;
         SetStatusText(_sessionUnavailable ? StatusLabel.Text ?? string.Empty : _status.StatusText);
     }
 
-    private void SetStatusText(string text) => StatusLabel.Text = text;
+    private void SetStatusText(string text)
+    {
+        StatusLabel.Text = text;
+        ToolTip.SetTip(StatusLabel, text);
+        if (_wayland) WaylandStatus.Text = text;
+    }
 
     private void ReportFailure(string message)
     {
@@ -504,7 +595,7 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
 
     private void RegionSizeChanged(object? sender, NumericUpDownValueChangedEventArgs e)
     {
-        if (_suppressFieldSync || _suppressRegionSync)
+        if (_wayland || _suppressFieldSync || _suppressRegionSync)
             return;
 
         // Typing raises a change per keystroke, and resizing the frame to a half-typed number
@@ -573,6 +664,11 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
     /// </summary>
     private void RefreshRegion()
     {
+        if (_wayland)
+        {
+            ReportRegion();
+            return;
+        }
         if (_isClosed || CaptureViewport.Bounds.Width <= 0)
             return;
 
@@ -616,10 +712,12 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
     /// lining the frame up against another window, or checking the capture independently, needs.
     /// </summary>
     private void ReportRegion() => ToolTip.SetTip(CaptureViewport,
-        $"Recording {_region.Width}\u00D7{_region.Height} pixels at {_region.X}, {_region.Y} on the desktop. " +
-        (IsRecordingUnderWay
-            ? "Drag the window to move this frame; its size is fixed until the recording ends."
-            : "Drag the window to move this frame, or resize it from any edge."));
+        _wayland
+            ? "Wayland records the entire monitor or window chosen in the desktop sharing dialog. The pixel size comes from the shared stream."
+            : $"Recording {_region.Width}\u00D7{_region.Height} pixels at {_region.X}, {_region.Y} on the desktop. " +
+              (IsRecordingUnderWay
+                  ? "Drag the window to move this frame; its size is fixed until the recording ends."
+                  : "Drag the window to move this frame, or resize it from any edge."));
 
     private void RestoreRememberedPosition()
     {
@@ -642,7 +740,7 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
     private void RestoreRememberedSize()
     {
         var settings = LinuxSettings.Current;
-        if (!settings.RecorderRememberSize)
+        if (_wayland || !settings.RecorderRememberSize)
             return;
 
         var size = RecorderRegion.WindowSizeFor(settings.RecorderWidth, settings.RecorderHeight,
@@ -659,7 +757,7 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
     private void RememberPlacement()
     {
         var current = LinuxSettings.Current;
-        var rememberSize = current.RecorderRememberSize &&
+        var rememberSize = !_wayland && current.RecorderRememberSize &&
                            (current.RecorderWidth != _region.Width || current.RecorderHeight != _region.Height);
         var rememberPosition = current.RecorderRememberPosition &&
                                (current.RecorderLeft != Position.X || current.RecorderTop != Position.Y);
@@ -732,6 +830,7 @@ public partial class RecorderWindow : Window, ICaptureShellWindow
 
     private void ApplyInputRegion()
     {
+        if (_wayland) return;
         var handle = TryGetPlatformHandle();
         _inputRegion.TryApply(handle?.Handle ?? IntPtr.Zero, handle?.HandleDescriptor, ClientSize, RenderScaling,
             CommandBar.Bounds.Height);

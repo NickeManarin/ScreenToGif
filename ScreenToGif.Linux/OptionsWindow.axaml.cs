@@ -26,6 +26,8 @@ public partial class OptionsWindow : Window
     private bool _ready;
     private bool _saving;
     private bool _allowClose;
+    private bool _updatingSourceReuse;
+    private CancellationTokenSource? _sourceReuseApproval;
 
     public OptionsWindow() : this(OptionsSection.Application)
     {
@@ -37,6 +39,7 @@ public partial class OptionsWindow : Window
         LoadSettings();
         LoadStorageStatus();
         Closing += WindowClosing;
+        Closed += (_, _) => _sourceReuseApproval?.Cancel();
         _ready = true;
         UpdateDependencies();
         ShowSection(section);
@@ -100,6 +103,61 @@ public partial class OptionsWindow : Window
         RecorderPreStartCheckBox.IsChecked = settings.RecorderPreStart;
         RecorderPreStartSecondsUpDown.Value = settings.RecorderPreStartSeconds;
         RecorderAskBeforeDiscardingCheckBox.IsChecked = settings.RecorderAskBeforeDiscarding;
+        LoadSourceReuseStatus();
+    }
+
+    private void LoadSourceReuseStatus()
+    {
+        _updatingSourceReuse = true;
+        try
+        {
+            WaylandSourceReusePanel.IsVisible = WaylandScreenSource.IsWaylandSession(
+                Environment.GetEnvironmentVariable("XDG_SESSION_TYPE"), TryGetPlatformHandle()?.HandleDescriptor);
+            WaylandSourceReuseCheckBox.IsChecked = WaylandSourceReusePolicy.IsAllowed;
+            WaylandSourceReuseCheckBox.IsEnabled = WaylandSourceReusePolicy.CanConfigure;
+            ForgetWaylandSourceButton.IsEnabled = new ScreenCastRestoreTokenStore().HasToken;
+            WaylandSourceReuseStatus.Text = !WaylandSourceReusePolicy.CanConfigure
+                ? "Administrator support is unavailable. Install the packaged app and pkexec to enable source reuse."
+                : !WaylandSourceReusePolicy.IsAllowed ? "Source reuse is off."
+                : new ScreenCastRestoreTokenStore().HasToken ? "An approved recording source is remembered."
+                : "No recording source is remembered yet. Choose one when starting the next recording.";
+        }
+        finally { _updatingSourceReuse = false; }
+    }
+
+    private async void WaylandSourceReuseChanged(object? sender, RoutedEventArgs e)
+    {
+        if (!_ready || _updatingSourceReuse || _sourceReuseApproval is not null) return;
+        var requested = WaylandSourceReuseCheckBox.IsChecked == true;
+        _updatingSourceReuse = true;
+        WaylandSourceReuseCheckBox.IsChecked = WaylandSourceReusePolicy.IsAllowed;
+        WaylandSourceReuseCheckBox.IsEnabled = false;
+        _updatingSourceReuse = false;
+        WaylandSourceReuseStatus.Text = "Waiting for administrator approval...";
+        using var approval = new CancellationTokenSource();
+        _sourceReuseApproval = approval;
+        string? message = null;
+        try
+        {
+            if (!await WaylandSourceReusePolicy.SetAllowedAsync(requested, approval.Token))
+                message = "Administrator approval was not granted. The setting is unchanged.";
+        }
+        catch (OperationCanceledException) { }
+        catch (Exception exception) when (exception is IOException or System.ComponentModel.Win32Exception or TimeoutException)
+        { message = exception.Message; }
+        finally
+        {
+            _sourceReuseApproval = null;
+            LoadSourceReuseStatus();
+            if (message is not null) WaylandSourceReuseStatus.Text = message;
+        }
+    }
+
+    private void ForgetWaylandSourceClick(object? sender, RoutedEventArgs e)
+    {
+        var forgotten = new ScreenCastRestoreTokenStore().Forget();
+        LoadSourceReuseStatus();
+        if (!forgotten) WaylandSourceReuseStatus.Text = "The source could not be forgotten. Check permissions on the app's configuration folder.";
     }
 
     private void RecorderFrequencyChanged(object? sender, RoutedEventArgs e)

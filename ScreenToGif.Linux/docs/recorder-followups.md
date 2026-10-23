@@ -6,15 +6,9 @@ A few terms recur. A **compositor** is the program that combines every window in
 
 ## Recording under Wayland
 
-**Windows does:** records the screen regardless of which display server is in use, because there is only one.
+The portal/PipeWire backend is implemented; its architecture is in the [Wayland capture decision](../ADRs/20261022-wayland-recording-through-portal-and-gstreamer.md). It uses the desktop's consent dialog, captures one full monitor/window in stream pixel coordinates, and negotiates hidden/embedded cursor mode. Administrator-protected source reuse requests the portal's persistence support after first-use approval. A supported ScreenCast administrator policy for first-use selection has not been identified; once-approved reuse is the implemented fallback. See [Recorder](recorder.md) for requirements, controls and recovery behavior.
 
-**Missing on Linux:** a capture backend built on the `org.freedesktop.portal.Desktop` ScreenCast interface over D-Bus, feeding a PipeWire stream. A native Wayland session exposes no way for a client to read the screen, by design. X11 clients under XWayland can read other XWayland windows but cannot read native Wayland ones.
-
-**Already established:** the ADR's Alternatives section evaluated the portal path and rejected it for this increment, not permanently. Its costs are recorded there: D-Bus session negotiation, a consent dialog for every recording, no first-class PipeWire library for .NET, and a portal that hands back a whole monitor or window rather than the Recorder's own rectangle, so frames would need cropping. Adding it is a new decision rather than a reversal of that one.
-
-**Detected by:** `X11ScreenSource.IsSupportedSession` checks the window handle and `XDG_SESSION_TYPE`. A Wayland session is unavailable even when the application has an XID under XWayland. The predicate has regression tests, and the desktop smoke check exercises the disabled Record control on Ubuntu 26.04 Wayland. This verifies the unavailable state; it does not provide a Wayland capture backend.
-
-**Corresponds to:** Record and Snap, disabled with a tooltip naming the portal backend.
+Arbitrary region cropping, source switching within a recording, cursor metadata composition and native Wayland UI rendering remain outside this implementation. Portal-provided compositor coordinates do not establish a mapping from the XWayland Recorder frame to stream pixels. Other compositor/configuration support needs native verification; controlled streams and Xvfb cannot establish it.
 
 ## User-interaction mode, and desktop-wide hotkeys
 

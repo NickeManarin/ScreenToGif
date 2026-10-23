@@ -361,6 +361,8 @@ public sealed class RecordingSession : IAsyncDisposable
             return;
         }
 
+        now = frame.PresentationMilliseconds ?? now;
+
         // The measured gap belongs to the previous frame: it is how long that frame was on screen.
         if (Settings.MeasuresRealDelays && _delays.Count > 0)
             _delays[^1] = (int)Math.Max(1, now - _lastCaptureMs);

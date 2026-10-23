@@ -68,7 +68,7 @@
         </Grid>
 
         <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" Background="#1E1F22">
-            <Button x:Name="RecorderShortcut" Grid.Column="0" Classes="shortcut" Click="OpenRecorderClick" ToolTip.Tip="Record a region of the screen to a project you can edit and export. Needs an X11 session; Wayland is not supported yet.">
+            <Button x:Name="RecorderShortcut" Grid.Column="0" Classes="shortcut" Click="OpenRecorderClick" ToolTip.Tip="Record screen content to edit and export. X11 records the frame region; Wayland asks you to share a monitor or window.">
                 <StackPanel Spacing="5">
                     <Canvas Width="40" Height="40" HorizontalAlignment="Center">
                         <Path Fill="#A02821" Data="M 40,20.656 C 40,30.673 31.880,38.793 21.863,38.793 C 11.846,38.793 3.725,30.673 3.725,20.656 C 3.725,10.639 11.846,2.518 21.863,2.518 C 31.880,2.518 40,10.639 40,20.656 Z" />

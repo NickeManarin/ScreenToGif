@@ -20,7 +20,8 @@ fi
 package=$(realpath -- "$package")
 # libc is a loader alias rather than a SONAME; resolve its Linux SONAME in the container.
 libraries=$(find "$repo_dir/ScreenToGif.Linux" -name '*.cs' -not -path '*/obj/*' -not -path '*/bin/*' \
-    -exec sed -n 's/.*\[DllImport("\(lib[^" ]*\)".*/\1/p' {} + | sort -u)
+    -exec sed -n -e 's/.*\[DllImport("\(lib[^" ]*\)".*/\1/p' \
+        -e 's/.*const string [^=]*= "\(lib[^" ]*\.so[^" ]*\)";.*/\1/p' {} + | sort -u)
 read -r -a images <<< "${DEB_TEST_IMAGES:-ubuntu:22.04 ubuntu:24.04 debian:12}"
 if [ "${#images[@]}" -eq 0 ]; then
     echo "Package test images: select at least one image with DEB_TEST_IMAGES, then rerun make deb-test." >&2
@@ -38,6 +39,25 @@ step='bare package install'
 trap 'echo "[$TEST_IMAGE] FAIL: $step. Fix the package or container/network prerequisite and rerun make deb-test." >&2' ERR
 apt-get update -qq
 apt-get install -y /package.deb
+
+step='administrator source-reuse helper'
+helper=/usr/lib/screentogif/allow-source-reuse
+test -x "$helper"
+test "$(stat -c %u "$helper")" = 0
+grep -q '<allow_active>auth_admin</allow_active>' /usr/share/polkit-1/actions/io.screentogif.source-reuse.policy
+if PKEXEC_UID=65534 "$helper" invalid >/dev/null 2>&1; then
+    echo 'The policy helper accepted an invalid action.' >&2
+    false
+fi
+PKEXEC_UID=65534 "$helper" enable
+test "$(stat -c %u:%a /var/lib/screentogif/source-reuse/65534)" = 0:644
+if runuser -u nobody -- env PKEXEC_UID=65534 "$helper" disable >/dev/null 2>&1; then
+    echo 'A non-root user changed the administrator policy.' >&2
+    false
+fi
+test -f /var/lib/screentogif/source-reuse/65534
+PKEXEC_UID=65534 "$helper" disable
+test ! -e /var/lib/screentogif/source-reuse/65534
 
 step='library resolution before test packages'
 while IFS= read -r -d '' file; do
@@ -93,7 +113,12 @@ cat /tmp/lintian.log
 if grep -q '^E:' /tmp/lintian.log || [ "${lintian_status:-0}" -gt 1 ]; then
     false
 fi
-echo "[$TEST_IMAGE] PASS: bare install, libraries, help, Xvfb startup, MP4/WebM, lintian"
+step='administrator policy purge'
+PKEXEC_UID=65534 "$helper" enable
+apt-get purge -y screentogif
+test ! -e /var/lib/screentogif/source-reuse
+test ! -e /usr/share/polkit-1/actions/io.screentogif.source-reuse.policy
+echo "[$TEST_IMAGE] PASS: bare install, protected helper, libraries, help, Xvfb startup, MP4/WebM, lintian, policy purge"
 CONTAINER
     then
         echo "[$image] Package test failed. Read the labelled failing step above; check Docker/network access if the container did not start, then rerun make deb-test." >&2

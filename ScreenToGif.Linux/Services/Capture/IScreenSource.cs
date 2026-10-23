@@ -16,7 +16,7 @@ public sealed class CapturedFrame : IDisposable
 {
     private byte[]? _pixels;
 
-    public CapturedFrame(PixelSize size, int stride, byte[] pooledPixels)
+    public CapturedFrame(PixelSize size, int stride, byte[] pooledPixels, long? presentationMilliseconds = null)
     {
         if (size.Width <= 0 || size.Height <= 0)
             throw new ArgumentOutOfRangeException(nameof(size), size, "A captured frame must have a positive size.");
@@ -25,10 +25,14 @@ public sealed class CapturedFrame : IDisposable
         if (pooledPixels.Length < (long)stride * size.Height)
             throw new ArgumentException("The pixel buffer is shorter than the frame it describes.", nameof(pooledPixels));
 
+        PresentationMilliseconds = presentationMilliseconds;
         Size = size;
         Stride = stride;
         _pixels = pooledPixels;
     }
+
+    /// <summary>Stream running time, when provided by an asynchronous frame source.</summary>
+    public long? PresentationMilliseconds { get; }
 
     public PixelSize Size { get; }
 

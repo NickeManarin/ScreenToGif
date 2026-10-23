@@ -13,6 +13,7 @@
     <PackageVersion Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageVersion Include="Microsoft.Windows.Compatibility" Version="8.0.0" />
+    <PackageVersion Include="Tmds.DBus.Protocol" Version="0.94.1" />
     <PackageVersion Include="Avalonia" Version="12.1.0" />
     <PackageVersion Include="Avalonia.Desktop" Version="12.1.0" />
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="12.1.0" />

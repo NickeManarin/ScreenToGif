@@ -51,6 +51,9 @@ mkdir -p "$stage/DEBIAN" "$stage/usr/lib/screentogif" "$stage/usr/bin" \
     "$stage/usr/share/applications" "$stage/usr/share/icons/hicolor/256x256/apps" \
     "$stage/usr/share/doc/screentogif"
 cp -a "$work_dir/publish/." "$stage/usr/lib/screentogif/"
+install -m 755 "$repo_dir/ScreenToGif.Linux/scripts/allow-source-reuse" "$stage/usr/lib/screentogif/allow-source-reuse"
+install -Dm 644 "$repo_dir/ScreenToGif.Linux/io.screentogif.source-reuse.policy" \
+    "$stage/usr/share/polkit-1/actions/io.screentogif.source-reuse.policy"
 find "$stage/usr/lib/screentogif" -name '*.pdb' -delete
 rm -f "$stage/usr/lib/screentogif/screentogif.desktop" "$stage/usr/lib/screentogif/Resources/screentogif.png"
 rmdir "$stage/usr/lib/screentogif/Resources" 2>/dev/null || true
@@ -91,16 +94,28 @@ Priority: optional
 Maintainer: Nicke Manarin <nicke@outlook.com.br>
 Homepage: https://nicke.tech/screentogif
 Installed-Size: $(du -sk "$stage/usr" | cut -f1)
+Recommends: gstreamer1.0-pipewire, gstreamer1.0-gl, gstreamer1.0-plugins-base, libgstreamer-plugins-base1.0-0, xdg-desktop-portal, pkexec | policykit-1
 Depends: ffmpeg, libc6 (>= 2.35), libgcc-s1, libstdc++6, zlib1g, libicu78 | libicu76 | libicu74 | libicu72 | libicu70, libssl3t64 | libssl3, libfontconfig1, libfreetype6, libx11-6, libx11-xcb1, libxcb1, libxext6, libxfixes3, libxrender1, libice6, libsm6
 Description: Screen, webcam and sketchboard recorder, with integrated editor
  Records and edits animated images and videos. Includes the .NET runtime.
- Screen recording needs an X11 session. Webcam recording needs membership
+ Screen recording uses X11 or the Wayland ScreenCast portal with PipeWire
+ and the recommended GStreamer packages. Webcam recording needs membership
  in the video group and access to a video device.
 EOF
 find "$stage" -type d -exec chmod 755 {} +
 find "$stage" -type f -exec chmod 644 {} +
 chmod 755 "$stage/usr/lib/screentogif/ScreenToGif.Linux"
 chmod 755 "$stage/usr/lib/screentogif/createdump"
+chmod 755 "$stage/usr/lib/screentogif/allow-source-reuse"
+cat > "$stage/DEBIAN/postrm" <<'EOF'
+#!/bin/sh
+set -e
+if [ "$1" = purge ]; then
+    rm -rf -- /var/lib/screentogif/source-reuse
+    rmdir /var/lib/screentogif 2>/dev/null || true
+fi
+EOF
+chmod 755 "$stage/DEBIAN/postrm"
 step='dpkg-deb archive creation'
 package="$output_dir/screentogif_${version}-1_amd64.deb"
 dpkg-deb --build --root-owner-group -Zxz "$stage" "$work_dir/output.deb"

@@ -100,6 +100,8 @@ public sealed partial class DesktopWindowSmokeTests
             if (returned == 1)
                 await CaptureAsync(await Ui(() => Desktop.Windows.OfType<StartupWindow>().Single()), "editor-return");
 
+            if (returned == 1 && Environment.GetEnvironmentVariable("SCREENTOGIF_X11_RECORDING_SMOKE") == "1")
+                await ExerciseX11RecorderAsync(app);
             if (returned == 1)
                 await ExerciseEditorRoutesAsync(app);
 

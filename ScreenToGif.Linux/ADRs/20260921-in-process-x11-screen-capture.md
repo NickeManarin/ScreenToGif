@@ -1,7 +1,7 @@
 # ADR: In-process X11 screen capture for the Linux Recorder
 
 ## Status
-Accepted
+Accepted for X11. The later [Wayland capture decision](20261022-wayland-recording-through-portal-and-gstreamer.md) implements the portal path deferred here.
 
 ## Area
 Recorder
