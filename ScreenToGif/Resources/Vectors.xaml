@@ -6,6 +6,12 @@
         <DrawingBrush.Drawing>
             <GeometryDrawing Brush="#ff8c8b8a" Geometry="M 15.554,15.551 L 0,15.551 L 0,24.440 L 15.554,24.440 L 15.554,39.995 L 24.442,39.995 L 24.442,24.440 L 40,24.440 L 40,15.551 L 24.442,15.551 L 24.442,0 L 15.554,0 L 15.554,15.551 Z"/>
         </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="Vector.Add.Green" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Brush="#FF73B982" Geometry="M 15.554,15.551 L 0,15.551 L 0,24.440 L 15.554,24.440 L 15.554,39.995 L 24.442,39.995 L 24.442,24.440 L 40,24.440 L 40,15.551 L 24.442,15.551 L 24.442,0 L 15.554,0 L 15.554,15.551 Z"/>
+        </DrawingBrush.Drawing>
     </DrawingBrush>    
     
     <DrawingBrush x:Key="Vector.Apng" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
@@ -1606,6 +1612,12 @@
     <DrawingBrush x:Key="Vector.Remove" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
         <DrawingBrush.Drawing>
             <GeometryDrawing Brush="#ff707070" Geometry="F1 M 15.111,15.041 C 14.486,15.990 -1.898,28.306 0.182,33.218 C 5.514,38.540 7.256,32.216 10.507,28.795 C 14.513,24.606 15.708,22.419 20.677,19.077 C 27.490,23.730 34.278,35.352 39.922,35.455 C 37.893,31.496 36.046,28.334 33.602,24.708 C 31.183,21.107 28.167,17.868 26.060,14.371 C 29.285,10.514 37.816,6.863 40,4.215 C 36.281,1.824 27.959,7.711 22.523,10.797 C 18.336,8.252 9.701,-2.110 3.797,0.384 C -1.768,2.725 3.303,6.941 5.982,8.458 C 8.583,9.923 13.654,12.854 15.111,15.041 Z"/>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="Vector.Remove.Red" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Brush="#FFE08080" Geometry="F1 M 15.111,15.041 C 14.486,15.990 -1.898,28.306 0.182,33.218 C 5.514,38.540 7.256,32.216 10.507,28.795 C 14.513,24.606 15.708,22.419 20.677,19.077 C 27.490,23.730 34.278,35.352 39.922,35.455 C 37.893,31.496 36.046,28.334 33.602,24.708 C 31.183,21.107 28.167,17.868 26.060,14.371 C 29.285,10.514 37.816,6.863 40,4.215 C 36.281,1.824 27.959,7.711 22.523,10.797 C 18.336,8.252 9.701,-2.110 3.797,0.384 C -1.768,2.725 3.303,6.941 5.982,8.458 C 8.583,9.923 13.654,12.854 15.111,15.041 Z"/>
         </DrawingBrush.Drawing>
     </DrawingBrush>
     
