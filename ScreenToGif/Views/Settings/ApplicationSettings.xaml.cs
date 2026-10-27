@@ -175,11 +175,31 @@ public partial class ApplicationSettings : Page
         UserSettings.All.ShowNotificationIcon = true;
     }
 
+    private void ShowTaskbarIconCheckBox_CheckedChanged(object sender, RoutedEventArgs e)
+    {
+        if (!UserSettings.All.ShowTaskbarIcon)
+        {
+            UserSettings.All.ShowNotificationIcon = true;
+
+            if (App.NotifyIcon != null)
+                App.NotifyIcon.Visibility = Visibility.Visible;
+        }
+
+        foreach (Window window in Application.Current.Windows)
+            App.UpdateTaskbarVisibility(window);
+    }
+
     private void NotificationIconCheckBox_CheckedChanged(object sender, RoutedEventArgs e)
     {
         //Can't have a minimized startup, if the icon is not present on the notification area.
         if (!UserSettings.All.ShowNotificationIcon)
+        {
             UserSettings.All.StartMinimized = false;
+            UserSettings.All.ShowTaskbarIcon = true;
+
+            foreach (Window window in Application.Current.Windows)
+                App.UpdateTaskbarVisibility(window);
+        }
 
         if (App.NotifyIcon != null)
             App.NotifyIcon.Visibility = UserSettings.All.ShowNotificationIcon ? Visibility.Visible : Visibility.Collapsed;

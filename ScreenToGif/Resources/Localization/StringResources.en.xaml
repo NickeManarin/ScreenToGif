@@ -264,6 +264,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Custom</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">Example colors.</s:String>
     <s:String x:Key="S.Options.App.Tray">System tray icon</s:String>
+    <s:String x:Key="S.Options.App.Tray.ShowTaskbar">Display the app on the taskbar.</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Display the app on the system tray (notification area).</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Keep the app open even if all windows are closed.</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">Do nothing</s:String>

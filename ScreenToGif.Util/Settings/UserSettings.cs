@@ -786,6 +786,12 @@ public class UserSettings : INotifyPropertyChanged
         set => SetValue(value);
     }
 
+    public bool ShowTaskbarIcon
+    {
+        get => (bool)GetValue();
+        set => SetValue(value);
+    }
+
     public bool ShowNotificationIcon
     {
         get => (bool)GetValue();

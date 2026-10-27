@@ -234,6 +234,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Своя</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">Пример цвета.</s:String>
     <s:String x:Key="S.Options.App.Tray">Значок в системном трее</s:String>
+    <s:String x:Key="S.Options.App.Tray.ShowTaskbar">Показывать значок на панели задач.</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Показывать значок в системном трее.</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Не выгружать программу, даже если все окна закрыты.</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">Ничего не делать</s:String>

@@ -657,7 +657,7 @@ namespace ScreenToGif.Windows
             }
 
             Encoder.Restore();
-            ShowInTaskbar = true;
+            ShowInTaskbar = UserSettings.All.ShowTaskbarIcon;
             WindowState = WindowState == WindowState.Minimized ? WindowState.Normal : WindowState;
         }
 

@@ -214,6 +214,8 @@
 
             <Expander Grid.Row="3" Header="{DynamicResource S.Options.App.Tray}" IsExpanded="True">
                 <StackPanel>
+                    <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.Tray.ShowTaskbar}" Margin="15,3,5,3" IsChecked="{Binding Path=ShowTaskbarIcon, Mode=TwoWay}"
+                                        CheckedChanged="ShowTaskbarIconCheckBox_CheckedChanged"/>
                     <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.Tray.Show}" Margin="15,3,5,3" IsChecked="{Binding Path=ShowNotificationIcon, Mode=TwoWay}"
                                         CheckedChanged="NotificationIconCheckBox_CheckedChanged"/>
                     <c:ExtendedCheckBox Text="{DynamicResource S.Options.App.Tray.LeaveOpen}" Margin="30,3,5,3" IsChecked="{Binding Path=KeepOpen, Mode=TwoWay}"

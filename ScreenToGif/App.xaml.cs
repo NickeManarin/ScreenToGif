@@ -40,6 +40,18 @@ public partial class App : IDisposable
     private readonly List<Exception> _exceptionList = [];
     private readonly Lock _lock = new();
 
+    private static readonly DependencyProperty HasTaskbarEntryProperty = DependencyProperty.RegisterAttached(
+        "HasTaskbarEntry", typeof(bool), typeof(App), new PropertyMetadata(false));
+
+    internal static void UpdateTaskbarVisibility(Window window)
+    {
+        if (window.ShowInTaskbar)
+            window.SetValue(HasTaskbarEntryProperty, true);
+
+        if ((bool)window.GetValue(HasTaskbarEntryProperty))
+            window.ShowInTaskbar = UserSettings.All.ShowTaskbarIcon;
+    }
+
     #endregion
 
     #region Events
@@ -67,6 +79,13 @@ public partial class App : IDisposable
 
         LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
         ThemeHelper.SelectTheme(UserSettings.All.MainTheme);
+
+        EventManager.RegisterClassHandler(typeof(Window), FrameworkElement.LoadedEvent,
+            new RoutedEventHandler((source, args) =>
+            {
+                if (ReferenceEquals(source, args.OriginalSource))
+                    UpdateTaskbarVisibility((Window)source);
+            }));
 
         //Listen to changes in theme.
         SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
