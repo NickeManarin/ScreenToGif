@@ -19,22 +19,31 @@ public class Other
         if (hWnd == IntPtr.Zero)
             return;
 
-        var hdc = User32.GetWindowDC(hWnd); //GetWindowDC((IntPtr) null);
+        var hdc = User32.GetWindowDC(hWnd);
+        if (hdc == IntPtr.Zero)
+            return;
 
-        User32.GetWindowRect(hWnd, out NativeRect rect);
+        try
+        {
+            User32.GetWindowRect(hWnd, out NativeRect rect);
 
-        //DwmGetWindowAttribute(hWnd, (int)DwmWindowAttribute.DwmwaExtendedFrameBounds, out rect, Marshal.SizeOf(typeof(Rect)));
-        User32.OffsetRect(ref rect, -rect.Left, -rect.Top);
+            //DwmGetWindowAttribute(hWnd, (int)DwmWindowAttribute.DwmwaExtendedFrameBounds, out rect, Marshal.SizeOf(typeof(Rect)));
+            User32.OffsetRect(ref rect, -rect.Left, -rect.Top);
 
-        const int frameWidth = 3;
+            const int frameWidth = 3;
 
-        Gdi32.PatBlt(hdc, rect.Left, rect.Top, rect.Right - rect.Left, frameWidth, Constants.DstInvert);
+            Gdi32.PatBlt(hdc, rect.Left, rect.Top, rect.Right - rect.Left, frameWidth, Constants.DstInvert);
 
-        Gdi32.PatBlt(hdc, rect.Left, rect.Bottom - frameWidth, frameWidth, -(rect.Bottom - rect.Top - 2 * frameWidth), Constants.DstInvert);
+            Gdi32.PatBlt(hdc, rect.Left, rect.Bottom - frameWidth, frameWidth, -(rect.Bottom - rect.Top - 2 * frameWidth), Constants.DstInvert);
 
-        Gdi32.PatBlt(hdc, rect.Right - frameWidth, rect.Top + frameWidth, frameWidth, rect.Bottom - rect.Top - 2 * frameWidth, Constants.DstInvert);
+            Gdi32.PatBlt(hdc, rect.Right - frameWidth, rect.Top + frameWidth, frameWidth, rect.Bottom - rect.Top - 2 * frameWidth, Constants.DstInvert);
 
-        Gdi32.PatBlt(hdc, rect.Right, rect.Bottom - frameWidth, -(rect.Right - rect.Left), frameWidth, Constants.DstInvert);
+            Gdi32.PatBlt(hdc, rect.Right, rect.Bottom - frameWidth, -(rect.Right - rect.Left), frameWidth, Constants.DstInvert);
+        }
+        finally
+        {
+            User32.ReleaseDC(hWnd, hdc);
+        }
     }
 
     public static bool ShowFileProperties(string filename)
