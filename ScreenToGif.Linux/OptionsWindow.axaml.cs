@@ -1,8 +1,5 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
-using Avalonia.Styling;
 using ScreenToGif.Linux.Services;
 using ScreenToGif.Linux.Services.Capture;
 using System.Diagnostics;
