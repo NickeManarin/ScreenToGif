@@ -236,6 +236,25 @@ public sealed partial class DesktopWindowSmokeTests
                 failures.Add($"{section}: the check box '{box.Content}' is centred at {markCenter} but its label at {labelCenter}.");
         }
 
+        // Windows hides the field under an off switch rather than dimming it, so it never sits beside a cleared box.
+        var dependents = new[]
+        {
+            (Page: "Editor", Box: "LimitUndoCheckBox", Field: "UndoLimitUpDown"),
+            (Page: "Storage", Box: "RemoveOldProjectsCheckBox", Field: "RetentionDaysUpDown")
+        };
+        foreach (var (_, boxName, fieldName) in dependents.Where(row => row.Page == section))
+        {
+            var box = options.FindControl<CheckBox>(boxName)!;
+            var field = options.FindControl<NumericUpDown>(fieldName)!;
+            var original = box.IsChecked;
+            foreach (var state in new[] { false, true, original })
+            {
+                box.IsChecked = state;
+                if (field.IsEffectivelyVisible != (state == true))
+                    failures.Add($"{section}: '{fieldName}' is {(field.IsEffectivelyVisible ? "shown" : "hidden")} while '{boxName}' is {(state == true ? "checked" : "clear")}.");
+            }
+        }
+
         // A stepper shows its arrows only while it can be changed, and the arrows must really step the value: the
         // spinner finds its buttons by template part name, so a renamed part draws arrows that never spin.
         foreach (var field in options.GetVisualDescendants().OfType<NumericUpDown>()

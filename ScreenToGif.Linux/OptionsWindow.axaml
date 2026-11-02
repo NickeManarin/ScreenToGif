@@ -319,7 +319,8 @@
                             <CheckBox Classes="setting" Content="Enable triple-click to select the text." IsEnabled="False" ToolTip.Tip="Text overlay authoring is not available yet." />
                             <CheckBox Classes="setting" Content="Draw the outline of captions outside the letters." IsEnabled="False" ToolTip.Tip="Caption authoring is not available yet." />
                             <CheckBox x:Name="DropFramesSettingCheckBox" Classes="setting" Content="Drop frames when necessary." />
-                            <Grid Margin="15,3" ColumnDefinitions="Auto,84,*"><CheckBox x:Name="LimitUndoCheckBox" Content="Impose a limit to the undo/redo history." IsChecked="True" /><NumericUpDown x:Name="UndoLimitUpDown" Classes="stepper" Grid.Column="1" Minimum="1" Maximum="100" Value="50" Margin="8,0" /><TextBlock Grid.Column="2" Classes="muted" Text="Maximum number of actions stored" VerticalAlignment="Center" TextWrapping="Wrap" /></Grid>
+                            <CheckBox x:Name="LimitUndoCheckBox" Classes="setting" Content="Impose a limit to the undo/redo history." IsChecked="True" />
+                            <Grid Margin="30,2" ColumnDefinitions="70,*" IsVisible="{Binding #LimitUndoCheckBox.IsChecked, FallbackValue=False}"><NumericUpDown x:Name="UndoLimitUpDown" Classes="stepper" Minimum="1" Maximum="100" Value="50" /><TextBlock Grid.Column="1" Classes="muted" Text="Maximum number of actions stored" Margin="8,0" VerticalAlignment="Center" TextWrapping="Wrap" /></Grid>
                             <CheckBox Classes="setting" Content="Sync the output folder among presets." IsEnabled="False" ToolTip.Tip="Export presets have not been ported yet." /><CheckBox Content="Also sync the filename." Margin="30,3,5,3" IsEnabled="False" /><CheckBox Content="Only sync among presets of the same file type." Margin="30,3,5,3" IsEnabled="False" />
                         </StackPanel>
                     </Expander>
@@ -390,7 +391,7 @@
                         <StackPanel>
                             <CheckBox x:Name="DeleteCacheOnCloseCheckBox" Classes="setting" Content="Delete all temporary project files when closing the app." />
                             <CheckBox x:Name="RemoveOldProjectsCheckBox" Classes="setting" Content="Automatically remove stale temporary projects." IsChecked="True" />
-                            <Grid Margin="30,2" ColumnDefinitions="70,*"><NumericUpDown x:Name="RetentionDaysUpDown" Classes="stepper" Minimum="1" Maximum="30" Value="5" /><TextBlock Grid.Column="1" Classes="muted" Text="days before an abandoned temporary project can be removed" Margin="8,0" VerticalAlignment="Center" /></Grid>
+                            <Grid Margin="30,2" ColumnDefinitions="70,*" IsVisible="{Binding #RemoveOldProjectsCheckBox.IsChecked, FallbackValue=False}"><NumericUpDown x:Name="RetentionDaysUpDown" Classes="stepper" Minimum="1" Maximum="30" Value="5" /><TextBlock Grid.Column="1" Classes="muted" Text="days before an abandoned temporary project can be removed" Margin="8,0" VerticalAlignment="Center" /></Grid>
                         </StackPanel>
                     </Expander>
                 </StackPanel>
