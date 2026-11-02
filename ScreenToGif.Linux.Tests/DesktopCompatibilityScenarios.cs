@@ -106,6 +106,23 @@ public sealed partial class DesktopWindowSmokeTests
         Assert.NotNull(trayRecorder);
         await Ui(trayRecorder!.Close);
 
+        // The tray menu offers every window the click settings can open, and each entry opens its own window.
+        var trayMenu = await Ui(() => TrayIcon.GetIcons(app)?.FirstOrDefault()?.Menu);
+        Assert.NotNull(trayMenu);
+        var trayItems = await Ui(() => trayMenu!.Items.OfType<NativeMenuItem>().ToArray());
+        var trayHeaders = await Ui(() => trayItems.Select(item => item.Header).ToArray());
+        Assert.Equal(LinuxLaunchTargets.TrayMenuEntries.Select(entry => entry.Header),
+            trayHeaders.Take(LinuxLaunchTargets.TrayMenuEntries.Count));
+        foreach (var (window, header) in LinuxLaunchTargets.TrayMenuEntries.Where(entry => LinuxLaunchTargets.ShellFor(entry.Window) is not null))
+        {
+            await Ui(() => ((INativeMenuItemExporterEventsImplBridge)trayItems.Single(item => item.Header == header)).RaiseClicked());
+            var opened = await Ui(() => Desktop.Windows.OfType<Window>()
+                .SingleOrDefault(candidate => candidate is RecorderWindow or WebcamWindow or BoardWindow));
+            Assert.True(opened is not null && opened.GetType().Name.StartsWith(window.ToString(), StringComparison.Ordinal),
+                $"The tray entry '{header}' opened {opened?.GetType().Name ?? "no window"}.");
+            await Ui(opened!.Close);
+        }
+
         var dialogs = await Ui(() => new Window[]
         {
             new ParameterDialog("Resize frames", ("Width (pixels)", "798"), ("Height (pixels)", "387")),

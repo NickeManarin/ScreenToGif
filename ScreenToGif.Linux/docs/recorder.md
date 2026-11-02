@@ -2,7 +2,7 @@
 
 The Recorder captures screen content into a project the Editor opens. On X11 it is a frame positioned over what you want to record; everything inside the frame is recorded, excluding its command bar.
 
-Open it from StartUp, by setting Options → Start with to "Screen recorder", or by choosing "Screen recorder" as the window a tray left click opens. Both choices open it through the same route as the StartUp button.
+Open it from StartUp, from the tray menu, by setting Options → Start with to "Screen recorder", or by choosing "Screen recorder" as the window a tray left click opens. Every route opens it through the same call as the StartUp button.
 
 On Wayland, Record or Snap opens the desktop's sharing dialog to choose one monitor or window. Screen sharing needs PipeWire, a working ScreenCast portal and GStreamer 1.24 or later with its PipeWire and OpenGL plugins, video library, and a graphics driver supporting DMA-BUF export/import. The PipeWire plugin must support `DMA_DRM` negotiation (verified here with PipeWire/GStreamer plugin 1.6.2); installing a recent GStreamer library alone does not upgrade that plugin. The GPU import/download path preserves source geometry at fractional scales. The software-rendering setting controls the app UI; capture still needs this graphics support. The application may use XWayland for its own windows; capture still goes through the portal.
 

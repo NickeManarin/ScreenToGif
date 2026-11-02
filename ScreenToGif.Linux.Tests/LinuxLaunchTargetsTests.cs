@@ -42,6 +42,16 @@ public sealed class LinuxLaunchTargetsTests : IDisposable
     }
 
     [Fact]
+    public void TheTrayMenuOffersEveryWindowTheClickSettingsCanOpen()
+    {
+        var offered = LinuxLaunchTargets.TrayMenuEntries.Select(entry => entry.Window).ToArray();
+        var choosable = Enum.GetValues<LinuxTrayWindow>().Where(window => window != LinuxTrayWindow.None).ToArray();
+
+        Assert.Equal(choosable.Order(), offered.Order());
+        Assert.Equal(offered.Length, LinuxLaunchTargets.TrayMenuEntries.Select(entry => entry.Header).Distinct().Count());
+    }
+
+    [Fact]
     public async Task ARecorderStartupAndTrayChoiceSurvivesTheSettingsFile()
     {
         var path = Path.Combine(_directory, "settings.json");

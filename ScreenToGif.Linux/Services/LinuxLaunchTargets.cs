@@ -23,4 +23,17 @@ public static class LinuxLaunchTargets
         LinuxTrayWindow.Board => CaptureShellKind.Board,
         _ => null
     };
+
+    /// <summary>
+    /// The windows the tray menu opens directly, in menu order: every tray window choice except None. The
+    /// menu is built from this list so a window the click settings can open is never missing from it.
+    /// </summary>
+    public static IReadOnlyList<(LinuxTrayWindow Window, string Header)> TrayMenuEntries { get; } =
+    [
+        (LinuxTrayWindow.Startup, "Startup window"),
+        (LinuxTrayWindow.Recorder, "Screen recorder"),
+        (LinuxTrayWindow.Webcam, "Webcam recorder"),
+        (LinuxTrayWindow.Board, "Board recorder"),
+        (LinuxTrayWindow.Editor, "Editor")
+    ];
 }

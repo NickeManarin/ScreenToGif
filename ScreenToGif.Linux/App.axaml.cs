@@ -272,9 +272,8 @@ public partial class App : Application, ICaptureShellHost
             return;
 
         var menu = new NativeMenu();
-        menu.Add(CreateMenuItem("Startup window", (_, _) => OpenWindow(LinuxTrayWindow.Startup)));
-        menu.Add(CreateMenuItem("Webcam recorder", (_, _) => OpenWindow(LinuxTrayWindow.Webcam)));
-        menu.Add(CreateMenuItem("Editor", (_, _) => OpenWindow(LinuxTrayWindow.Editor)));
+        foreach (var (window, header) in LinuxLaunchTargets.TrayMenuEntries)
+            menu.Add(CreateMenuItem(header, (_, _) => OpenWindow(window)));
         menu.Add(CreateMenuItem("Options", (_, _) => _ = ShowOptions()));
         menu.Add(new NativeMenuItemSeparator());
         menu.Add(CreateMenuItem("Exit", (_, _) => ExitApplication()));
