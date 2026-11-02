@@ -59,7 +59,7 @@ public partial class App : Application, ICaptureShellHost
     /// startup-window setting. A capture shell goes through the same coordinator every other entry
     /// point uses, so closing it takes one route whatever opened it.
     /// </summary>
-    private Window CreateStartupTargetWindow()
+    internal Window CreateStartupTargetWindow()
     {
         if (Program.StartInOptions)
             return new OptionsWindow();
@@ -71,12 +71,7 @@ public partial class App : Application, ICaptureShellHost
             ? CaptureShellKind.Webcam
             : Program.StartInBoard
                 ? CaptureShellKind.Board
-                : LinuxSettings.Current.StartupWindow switch
-                {
-                    LinuxStartupWindow.Webcam => CaptureShellKind.Webcam,
-                    LinuxStartupWindow.Board => CaptureShellKind.Board,
-                    _ => (CaptureShellKind?)null
-                };
+                : LinuxLaunchTargets.ShellFor(LinuxSettings.Current.StartupWindow);
         if (captureKind is null && LinuxSettings.Current.StartupWindow == LinuxStartupWindow.Editor)
             return CreateEditorWindow();
 
@@ -390,9 +385,9 @@ public partial class App : Application, ICaptureShellHost
         if (Desktop is null)
             return;
 
-        if (target is LinuxTrayWindow.Webcam or LinuxTrayWindow.Board)
+        if (LinuxLaunchTargets.ShellFor(target) is { } shell)
         {
-            OpenCaptureShell(target == LinuxTrayWindow.Board ? CaptureShellKind.Board : CaptureShellKind.Webcam);
+            OpenCaptureShell(shell);
             return;
         }
 

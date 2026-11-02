@@ -60,6 +60,7 @@ public sealed partial class DesktopWindowSmokeTests
             }
             await ResizeAsync(options, normalSize);
         }
+        await Ui(() => CheckLaunchChoices(options, layoutFailures));
         await Ui(options.Close);
         Assert.True(layoutFailures.Count == 0, string.Join(Environment.NewLine, layoutFailures));
 
@@ -93,6 +94,17 @@ public sealed partial class DesktopWindowSmokeTests
             }
             await Ui(window.Close);
         }
+
+        // Screen recorder is a real startup and tray choice: both routes open the Recorder, not StartUp.
+        await LinuxSettings.UpdateAsync(settings => settings.StartupWindow = LinuxStartupWindow.Recorder);
+        var startupTarget = await Ui(() => app.CreateStartupTargetWindow());
+        Assert.IsType<RecorderWindow>(startupTarget);
+        await Ui(startupTarget.Close);
+        await LinuxSettings.UpdateAsync(settings => settings.StartupWindow = LinuxStartupWindow.Startup);
+        await Ui(() => app.OpenWindow(LinuxTrayWindow.Recorder));
+        var trayRecorder = await Ui(() => Desktop.Windows.OfType<RecorderWindow>().SingleOrDefault());
+        Assert.NotNull(trayRecorder);
+        await Ui(trayRecorder!.Close);
 
         var dialogs = await Ui(() => new Window[]
         {
@@ -233,6 +245,46 @@ public sealed partial class DesktopWindowSmokeTests
             Click(down);
             if (raised != Math.Min(before!.Value + field.Increment, field.Maximum) || field.Value != before)
                 failures.Add($"{section}: the arrows of '{field.Name}' moved {before} to {raised} and back to {field.Value}.");
+        }
+    }
+
+    private static void CheckLaunchChoices(OptionsWindow options, List<string> failures)
+    {
+        // These combos list their windows in enum order, so an item's index is the stored value. An item left
+        // disabled, or a handler that puts the choice back, makes a window the application can open look
+        // unavailable, which is how Screen recorder sat disabled after the Recorder shipped.
+        var combos = new (string Name, Type Choices)[]
+        {
+            ("StartupWindowComboBox", typeof(LinuxStartupWindow)),
+            ("LeftWindowComboBox", typeof(LinuxTrayWindow)),
+            ("DoubleLeftWindowComboBox", typeof(LinuxTrayWindow)),
+            ("MiddleWindowComboBox", typeof(LinuxTrayWindow))
+        };
+        foreach (var (name, choices) in combos)
+        {
+            var combo = options.FindControl<ComboBox>(name)!;
+            var items = combo.Items.OfType<ComboBoxItem>().ToArray();
+            var count = Enum.GetNames(choices).Length;
+            if (items.Length != count)
+            {
+                failures.Add($"{name} lists {items.Length} windows for the {count} values of {choices.Name}.");
+                continue;
+            }
+
+            var recorder = Convert.ToInt32(Enum.Parse(choices, "Recorder"));
+            if (items[recorder].Content as string != "Screen recorder")
+                failures.Add($"{name} item {recorder} is '{items[recorder].Content}', not the Screen recorder.");
+
+            var original = combo.SelectedIndex;
+            for (var index = 0; index < items.Length; index++)
+            {
+                if (!items[index].IsEnabled)
+                    failures.Add($"{name}: '{items[index].Content}' is disabled.");
+                combo.SelectedIndex = index;
+                if (combo.SelectedIndex != index)
+                    failures.Add($"{name}: choosing '{items[index].Content}' left item {combo.SelectedIndex} selected.");
+            }
+            combo.SelectedIndex = original;
         }
     }
 

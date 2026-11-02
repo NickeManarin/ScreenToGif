@@ -169,9 +169,9 @@
                             <CheckBox x:Name="StartMinimizedCheckBox" Classes="setting" Content="Start minimized to the system tray." IsCheckedChanged="StartupDependencyChanged" />
                             <Grid Margin="15,0,5,5" ColumnDefinitions="Auto,160,*">
                                 <TextBlock Classes="label" Text="Start with:" Margin="2,0,5,0" />
-                                <ComboBox x:Name="StartupWindowComboBox" Grid.Column="1" Classes="setting" SelectionChanged="StartupWindowChanged">
+                                <ComboBox x:Name="StartupWindowComboBox" Grid.Column="1" Classes="setting">
                                     <ComboBoxItem Content="Startup window" />
-                                    <ComboBoxItem Content="Screen recorder" IsEnabled="False" ToolTip.Tip="Screen recording is not available on Linux yet." />
+                                    <ComboBoxItem Content="Screen recorder" ToolTip.Tip="Open the screen recorder instead of the StartUp window." />
                                     <ComboBoxItem Content="Webcam recorder" ToolTip.Tip="Open the webcam recorder instead of the StartUp window." />
                                     <ComboBoxItem Content="Board recorder" ToolTip.Tip="Open the Board recorder when the app starts." />
                                     <ComboBoxItem Content="Editor" />
@@ -204,7 +204,7 @@
                                 </ComboBox>
                                 <TextBlock x:Name="LeftWindowLabel" Grid.Column="2" Classes="label" Text="Or else, opens:" Margin="7,0,4,0" />
                                 <ComboBox x:Name="LeftWindowComboBox" Grid.Column="3" Classes="setting">
-                                    <ComboBoxItem Content="No window" /><ComboBoxItem Content="Startup window" /><ComboBoxItem Content="Screen recorder" IsEnabled="False" /><ComboBoxItem Content="Webcam recorder" /><ComboBoxItem Content="Board recorder" /><ComboBoxItem Content="Editor" />
+                                    <ComboBoxItem Content="No window" /><ComboBoxItem Content="Startup window" /><ComboBoxItem Content="Screen recorder" /><ComboBoxItem Content="Webcam recorder" /><ComboBoxItem Content="Board recorder" /><ComboBoxItem Content="Editor" />
                                 </ComboBox>
 
                                 <TextBlock Grid.Row="1" Classes="label" Text="Left click (x2):" Margin="2,0,3,0" />
