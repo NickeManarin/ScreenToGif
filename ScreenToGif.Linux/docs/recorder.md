@@ -91,9 +91,11 @@ These controls are visible but disabled, each with a tooltip naming what is miss
 | Cursor following | Global pointer tracking |
 | Rebinding the recorder shortcuts | A shortcut editor; the recorder's keys are fixed and act only while it has focus |
 | Desktop-wide hotkeys | Global input hooks, to receive a key the recorder does not have focus for |
-| Guidelines | An overlay drawn inside the recorder frame |
-| Thin mode | A custom window frame with its own drag and resize handling |
-| BitBlt, DirectX, save to file, memory cache | Windows capture backends and the frame cache this recorder does not keep |
-| Force memory cleanup, remote-desktop performance | The same Windows frame cache and its capture backend switch |
 
-Two Windows rows are settled rather than missing, and are disabled for that reason instead. Discard is always shown while recording or paused, so the row that would turn that off is fixed on. The Old and New interface choice picks between two window implementations the Windows recorder carries and this one does not, so it has nothing to choose between.
+Options leaves out the Windows recorder settings that Linux can never honor, instead of showing them disabled, as the [Options decision](../ADRs/20261102-options-omit-windows-only-controls.md) explains:
+
+- The BitBlt, DirectX, save-to-file and memory-cache capture modes, force memory cleanup, and remote-desktop performance belong to Windows capture back ends and a frame cache this recorder does not have. It captures through X11 or the Wayland portal and writes each frame to disk as it is captured.
+- The Old and New interface choice picks between two window implementations the Windows recorder carries and this one does not.
+- Thin mode needs a custom window frame with its own drag and resize handling, which Linux leaves to the desktop's window chrome.
+- Discard is always shown while recording or paused, so there is no setting to turn it off.
+- Guidelines have no group until the overlay in [`recorder-followups.md`](recorder-followups.md) exists.

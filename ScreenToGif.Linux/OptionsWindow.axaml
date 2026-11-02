@@ -226,7 +226,6 @@
 
                     <Expander Classes="settings-group" Header="General">
                         <StackPanel>
-                            <CheckBox Classes="setting" Content="Workaround for the 'Not enough quota...' crash.  (Windows only)" IsEnabled="False" ToolTip.Tip="This workaround targets the Windows WPF dispatcher and does not apply on Linux." />
                             <CheckBox x:Name="DisableHardwareAccelerationCheckBox" Classes="setting" Content="Disable hardware acceleration.  (Takes effect after restart)" />
                             <CheckBox Classes="setting" Content="Check for translation updates." IsEnabled="False" ToolTip.Tip="Translation updates are not available in the Linux application yet." />
                             <CheckBox Classes="setting" Content="Check for updates on startup." IsEnabled="False" ToolTip.Tip="Application updates are not available in the Linux application yet." />
@@ -239,20 +238,6 @@
 
             <ScrollViewer x:Name="RecorderPage" Grid.Column="1" IsVisible="False" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <Expander Classes="settings-group" Header="Interface">
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12" Margin="8"
-                                        IsEnabled="False" ToolTip.ShowOnDisabled="True"
-                                        ToolTip.Tip="The Linux recorder has one interface. The Old and New choice belongs to the Windows recorder's two WPF window implementations.">
-                                <Border Classes="option-card"><RadioButton IsChecked="True"><StackPanel Orientation="Horizontal" Spacing="8"><icons:WindowsIcon Kind="File" Width="42" Height="42" /><TextBlock Text="Old" VerticalAlignment="Center" /></StackPanel></RadioButton></Border>
-                                <Border Classes="option-card"><RadioButton><StackPanel Orientation="Horizontal" Spacing="8"><icons:WindowsIcon Kind="NewFile" Width="42" Height="42" /><TextBlock Text="New" VerticalAlignment="Center" /></StackPanel></RadioButton></Border>
-                            </StackPanel>
-                            <CheckBox Classes="setting" Content="Hide the title bar (thin mode)." IsEnabled="False" ToolTip.ShowOnDisabled="True"
-                                      ToolTip.Tip="Thin mode needs a custom window frame with its own drag and resize handling, which the Linux recorder does not have." />
-                            <CheckBox Classes="setting" Content="Display the discard button also while recording." IsChecked="True" IsEnabled="False" ToolTip.ShowOnDisabled="True"
-                                      ToolTip.Tip="The Linux recorder always shows Discard while recording or paused, so there is nothing to turn off." />
-                        </StackPanel>
-                    </Expander>
                     <Expander Classes="settings-group" Header="Capture frequency">
                         <StackPanel>
                             <WrapPanel HorizontalAlignment="Center" Margin="5">
@@ -275,10 +260,6 @@
                     </Expander>
                     <Expander Classes="settings-group" Header="Capture mode">
                         <StackPanel>
-                            <WrapPanel HorizontalAlignment="Center" Margin="5" IsEnabled="False" ToolTip.ShowOnDisabled="True"
-                                       ToolTip.Tip="BitBlt and DirectX are Windows GDI and DXGI capture back ends. The Linux recorder uses X11 or the Wayland sharing portal, and the save-to-file and memory-cache choices belong to the Windows frame cache it does not use.">
-                                <RadioButton Content="BitBlt" Margin="10" IsChecked="True" /><RadioButton Content="DirectX" Margin="10" /><RadioButton Content="Save to file" Margin="10" /><RadioButton Content="Memory cache" Margin="10" />
-                            </WrapPanel>
                             <CheckBox x:Name="RecorderShowCursorCheckBox" Classes="setting" Content="Show the mouse cursor in the recording." />
                             <StackPanel x:Name="WaylandSourceReusePanel" Margin="15,5" Spacing="6">
                                 <CheckBox x:Name="WaylandSourceReuseCheckBox" Content="Reuse the approved Wayland recording source."
@@ -288,15 +269,7 @@
                                 <Button x:Name="ForgetWaylandSourceButton" Content="Forget recording source" HorizontalAlignment="Left" Click="ForgetWaylandSourceClick" />
                                 <TextBlock x:Name="WaylandSourceReuseStatus" Classes="muted" TextWrapping="Wrap" />
                             </StackPanel>
-                            <CheckBox Classes="setting" Content="Force memory cleanup during capture.  (Less memory, slower capture)" IsEnabled="False" ToolTip.ShowOnDisabled="True"
-                                      ToolTip.Tip="This drives the Windows frame cache's garbage collection. The Linux recorder writes each frame to disk as it is captured and keeps no such cache." />
-                            <CheckBox Classes="setting" Content="Improve capture performance on a remote desktop connection." IsEnabled="False" ToolTip.ShowOnDisabled="True"
-                                      ToolTip.Tip="This switches the Windows capture back end for Remote Desktop sessions, which has no counterpart in the Linux capture back ends." />
                         </StackPanel>
-                    </Expander>
-                    <Expander Classes="settings-group" Header="Guidelines">
-                        <TextBlock Classes="muted" Margin="15,5" TextWrapping="Wrap"
-                                   Text="Rule-of-thirds and crosshair guidelines need an overlay drawn inside the recorder frame, which the Linux recorder does not have." />
                     </Expander>
                     <Expander Classes="settings-group" Header="Other">
                         <StackPanel>
@@ -328,7 +301,7 @@
                         </StackPanel>
                     </Expander>
                     <Expander Classes="settings-group" Header="Interface">
-                        <StackPanel><CheckBox Classes="setting" Content="Display the encodings in a separate window." IsEnabled="False" ToolTip.Tip="The Linux editor exports in its main window." /><CheckBox Classes="setting" Content="Extend the titlebar (window chrome)." IsEnabled="False" ToolTip.Tip="Linux uses native desktop window chrome." /><CheckBox Classes="setting" Content="Automatically adjust the window size based on the frame size, right after loading." /><CheckBox Classes="setting" Content="Automatically adjust the frame zoom based on the window size, right after loading." IsChecked="True" /></StackPanel>
+                        <StackPanel><CheckBox Classes="setting" Content="Automatically adjust the window size based on the frame size, right after loading." /><CheckBox Classes="setting" Content="Automatically adjust the frame zoom based on the window size, right after loading." IsChecked="True" /></StackPanel>
                     </Expander>
                     <Expander Classes="settings-group" Header="General">
                         <StackPanel>

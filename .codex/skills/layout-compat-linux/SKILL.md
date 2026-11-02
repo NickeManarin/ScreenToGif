@@ -23,7 +23,7 @@ Use stock Avalonia controls where their layout and state behavior can be styled 
 
 The first candidates are `ExtendedButton` equivalents and the ribbon/tab surface. Their templates own icon size, icon-to-text spacing, padding, wrapping, borders, and disabled states. A new subclass must exist to remove repeated drift, not merely to mirror a WPF class name.
 
-Preserve feature position even when its behavior is unavailable: render it disabled with the same geometry and grouping, then make its unavailable state clear through the existing tooltip convention.
+Preserve the position of a feature whose Linux subsystem is not ported yet: render it disabled with the same geometry and grouping, then make its unavailable state clear through the existing tooltip convention. Omit a Windows-only control that Linux can never honor, such as a Windows capture back end or window-chrome mode; a permanently disabled control only invites the question of when it will work. The Options decision is in [ADR 20261102](../../../ScreenToGif.Linux/ADRs/20261102-options-omit-windows-only-controls.md).
 
 ## Verify rendered geometry
 

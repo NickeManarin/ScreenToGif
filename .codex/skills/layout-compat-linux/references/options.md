@@ -26,7 +26,7 @@ Avalonia `TextBlock`s have no disabled appearance, so disabling only the input i
 
 The shared `CheckBox` style fixes its height at 28 units, so its content never wraps. A hint appended to the label text is clipped at the default 800-unit shell with no ellipsis; keep hints short or put them in a separate muted, wrapping `TextBlock` as the delay and countdown rows do.
 
-Keep unavailable features in their Windows positions with disabled affordances and tooltips. The Donate page content exists for parity evidence, but its navigation item is deliberately disabled and must remain inaccessible.
+Keep features whose Linux subsystem is not ported yet in their Windows positions with disabled affordances and tooltips. Omit controls Linux can never honor: the BitBlt, DirectX, save-to-file and memory-cache capture modes, the frame-cache and remote-desktop capture options, the Old and New recorder interface choice, thin mode, the always-on discard switch, the Guidelines note, the WPF dispatcher workaround, and the editor's separate-encodings-window and extended-titlebar options. A Windows capture of those pages therefore shows rows the Linux page deliberately lacks, so do not restore them to match it. The Donate page content exists for parity evidence, but its navigation item is deliberately disabled and must remain inaccessible.
 
 ## Initialization and navigation
 

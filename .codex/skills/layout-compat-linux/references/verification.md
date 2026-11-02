@@ -7,7 +7,7 @@ At the matching logical window size, compare the Linux client area against the W
 1. Outer grid bands and group boundaries align.
 2. Command positions, button bounds, and icon boxes align.
 3. Icon/text baselines, wrapping, and label spacing align.
-4. Disabled commands still occupy their Windows positions and read as unavailable.
+4. Disabled commands still occupy their Windows positions and read as unavailable. Options settings the [Options decision](../../../../ScreenToGif.Linux/ADRs/20261102-options-omit-windows-only-controls.md) omits are absent on purpose.
 5. Focus, hover, pressed, and disabled states do not shift surrounding layout.
 
 Check both an empty editor and an editor with media, because the preview and frame strip change state.

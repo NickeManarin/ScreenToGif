@@ -19,3 +19,4 @@
 | 2026-09-23 | [The tray icon is created once and hidden, never disposed while the application runs](20260923-tray-icon-is-hidden-not-disposed.md) | Accepted | Application lifetime |
 | 2026-10-22 | [Wayland screen capture through the portal and GStreamer](20261022-wayland-recording-through-portal-and-gstreamer.md) | Accepted | Recorder |
 | 2026-10-23 | [Administrator-approved Wayland source reuse](20261023-administrator-approved-wayland-source-reuse.md) | Accepted | Recorder, Options, Linux packaging |
+| 2026-11-02 | [Options leaves out Windows controls that Linux can never honor](20261102-options-omit-windows-only-controls.md) | Accepted | Options, Recorder, Editor |

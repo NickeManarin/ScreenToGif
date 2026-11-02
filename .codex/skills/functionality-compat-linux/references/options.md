@@ -4,7 +4,7 @@ Use this reference for settings persistence, Linux startup integration, tray beh
 
 ## Port only real contracts
 
-Render Windows settings whose backing Linux subsystem is absent in-place but disabled with the established tooltip convention. Task automation, global hotkeys, cloud providers, update and translation services, and Gifski remain unavailable until their underlying subsystem exists. Do not persist inert choices.
+Render a Windows setting whose Linux subsystem is absent but portable in its Windows position, disabled, with the established tooltip convention. Task automation, global hotkeys, cloud providers, update and translation services, and Gifski remain unavailable until their underlying subsystem exists. Do not render a setting that belongs to a Windows-only subsystem Linux will never have, such as a Windows capture back end or its frame cache; the [Options decision](../../../../ScreenToGif.Linux/ADRs/20261102-options-omit-windows-only-controls.md) lists them. Do not persist inert choices.
 
 Settings with an existing Linux seam should drive it rather than stop at UI state. Current seams include theme selection, single-instance startup, software rendering, tray visibility and left-click behavior, close/delete/discard confirmations, playback frame dropping, history capacity, stale-workspace cleanup, FFmpeg discovery, and the Recorder page (capture mode, fixed frame rate, manual delay, pointer, pre-start, discard confirmation, and remembered size and position).
 

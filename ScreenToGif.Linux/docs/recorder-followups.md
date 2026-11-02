@@ -50,7 +50,7 @@ Arbitrary region cropping, source switching within a recording, cursor metadata 
 
 **Watch for:** the guides must not appear in the recording. The Recorder grabs the composited screen with `XGetImage`, so anything it draws inside its own frame would be captured along with what is behind it.
 
-**Corresponds to:** the **Guidelines** group on the Options Recorder page, which explains why there is nothing to set instead of offering a row.
+**Corresponds to:** no control. The Options Recorder page has no Guidelines group until this overlay exists, and its settings arrive with it.
 
 ## Shared-memory capture
 
