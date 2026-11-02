@@ -1,0 +1,10 @@
+# The Linux port is authored and built on Linux, where the repository root's Windows line-ending
+# and final-newline conventions do not apply. Everything else is inherited from the root file.
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+[*.cs]
+end_of_line = lf
+insert_final_newline = true

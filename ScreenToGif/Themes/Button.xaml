@@ -487,6 +487,7 @@
 
     <!--Button • Borderless-->
     <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Borderless">
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>

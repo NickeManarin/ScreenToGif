@@ -18,3 +18,4 @@ obj
 bin
 /log.txt
 *.user
+/artifacts

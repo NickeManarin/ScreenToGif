@@ -1,0 +1,123 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- A numeric field with the Windows IntegerUpDown's compact spinner: one narrow column holding a small up
+         arrow over a small down arrow, instead of Fluent's two 34-unit buttons side by side. It is opt-in
+         (Classes="stepper") because the capture shells' fields are pinned to no spinner and tune the stock
+         Fluent template by selector. Only the right-hand spinner location is supported. -->
+    <Styles.Resources>
+        <ControlTheme x:Key="StepperRepeatButton" TargetType="RepeatButton">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter x:Name="PART_ContentPresenter"
+                                      Background="{TemplateBinding Background}"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Padding="{TemplateBinding Padding}" />
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Background" Value="{DynamicResource RepeatButtonBackgroundPointerOver}" />
+            </Style>
+            <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Background" Value="{DynamicResource RepeatButtonBackgroundPressed}" />
+            </Style>
+        </ControlTheme>
+
+        <!-- PART_IncreaseButton and PART_DecreaseButton are looked up by name: a rename leaves arrows that never spin. -->
+        <ControlTheme x:Key="StepperButtonSpinner" TargetType="ButtonSpinner">
+            <Setter Property="Foreground" Value="{DynamicResource TextControlForeground}" />
+            <Setter Property="Background" Value="{DynamicResource TextControlBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource TextControlBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="2" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Focusable" Value="True" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            ClipToBounds="True">
+                        <DockPanel>
+                            <Grid x:Name="PART_SpinnerPanel"
+                                  DockPanel.Dock="Right"
+                                  Width="22"
+                                  ColumnDefinitions="1,*"
+                                  RowDefinitions="*,1,*"
+                                  IsVisible="{TemplateBinding ShowButtonSpinner}">
+                                <Border x:Name="VerticalSeparator" Grid.RowSpan="3" Background="{TemplateBinding BorderBrush}" Opacity="0" />
+                                <RepeatButton x:Name="PART_IncreaseButton"
+                                              Grid.Column="1"
+                                              Theme="{StaticResource StepperRepeatButton}"
+                                              IsTabStop="False"
+                                              Focusable="False"
+                                              VerticalAlignment="Stretch"
+                                              Foreground="{TemplateBinding Foreground}">
+                                    <PathIcon Width="7" Height="4" Data="M0,4 L3.5,0 L7,4 Z" />
+                                </RepeatButton>
+                                <Border x:Name="HorizontalSeparator" Grid.Row="1" Grid.Column="1" Background="{TemplateBinding BorderBrush}" Opacity="0" />
+                                <RepeatButton x:Name="PART_DecreaseButton"
+                                              Grid.Row="2"
+                                              Grid.Column="1"
+                                              Theme="{StaticResource StepperRepeatButton}"
+                                              IsTabStop="False"
+                                              Focusable="False"
+                                              VerticalAlignment="Stretch"
+                                              Foreground="{TemplateBinding Foreground}">
+                                    <PathIcon Width="7" Height="4" Data="M0,0 L7,0 L3.5,4 Z" />
+                                </RepeatButton>
+                            </Grid>
+                            <ContentPresenter x:Name="PART_ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Padding="{TemplateBinding Padding}" />
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+            <!-- The separators show only while the pointer is over the field, as on Windows. -->
+            <Style Selector="^:pointerover /template/ Border#VerticalSeparator, ^:pointerover /template/ Border#HorizontalSeparator">
+                <Setter Property="Opacity" Value="1" />
+            </Style>
+            <!-- A disabled field has nothing to step, so the arrows go and the value gets the room. A pseudo-class
+                 setter outranks the template's ShowButtonSpinner binding. -->
+            <Style Selector="^:disabled /template/ Grid#PART_SpinnerPanel">
+                <Setter Property="IsVisible" Value="False" />
+            </Style>
+        </ControlTheme>
+    </Styles.Resources>
+
+    <Style Selector="NumericUpDown.stepper">
+        <Setter Property="Height" Value="28" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="Padding" Value="6,0" />
+        <Setter Property="CornerRadius" Value="2" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="NumericUpDown.stepper /template/ ButtonSpinner">
+        <Setter Property="Theme" Value="{StaticResource StepperButtonSpinner}" />
+    </Style>
+    <Style Selector="NumericUpDown.stepper:pointerover">
+        <Setter Property="BorderBrush" Value="{DynamicResource TextControlBorderBrushPointerOver}" />
+    </Style>
+    <Style Selector="NumericUpDown.stepper /template/ TextBox">
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="TextAlignment" Value="Center" />
+    </Style>
+</Styles>

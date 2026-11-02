@@ -1,0 +1,35 @@
+#!/bin/sh
+set -eu
+
+if [ "$(/usr/bin/id -u)" != 0 ]; then
+    echo 'Administrator authentication is required.' >&2
+    exit 1
+fi
+case "${PKEXEC_UID-}" in
+    ''|*[!0-9]*) echo 'Run this helper through pkexec as the desktop user.' >&2; exit 1 ;;
+esac
+if [ "$#" != 1 ]; then
+    echo 'Expected enable or disable.' >&2
+    exit 1
+fi
+case "$1" in
+    enable|disable) ;;
+    *) echo 'Expected enable or disable.' >&2; exit 1 ;;
+esac
+
+policy_dir=/var/lib/screentogif/source-reuse
+if [ -L /var/lib/screentogif ] || [ -L "$policy_dir" ]; then
+    echo 'The policy directory must not be a symbolic link.' >&2
+    exit 1
+fi
+/usr/bin/install -d -o 0 -g 0 -m 755 /var/lib/screentogif "$policy_dir"
+grant="$policy_dir/$PKEXEC_UID"
+if [ "$1" = disable ]; then
+    /usr/bin/rm -f -- "$grant"
+else
+    temporary=$(/usr/bin/mktemp "$policy_dir/.grant.XXXXXX")
+    trap '/usr/bin/rm -f -- "$temporary"' EXIT HUP INT TERM
+    printf 'enabled\n' > "$temporary"
+    /usr/bin/chmod 644 "$temporary"
+    /usr/bin/mv -fT -- "$temporary" "$grant"
+fi

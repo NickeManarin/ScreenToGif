@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+"http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <vendor>ScreenToGif</vendor>
+  <action id="io.screentogif.configure-source-reuse">
+    <description>Change ScreenToGif recording source reuse</description>
+    <message>Administrator authentication is required to change automatic reuse of an approved recording source.</message>
+    <icon_name>screentogif</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/lib/screentogif/allow-source-reuse</annotate>
+  </action>
+</policyconfig>

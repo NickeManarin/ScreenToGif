@@ -1,0 +1,44 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:ScreenToGif.Linux.Controls"
+        xmlns:icons="using:ScreenToGif.Linux">
+    <Style Selector="controls|RibbonTabItem">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="#B9BEC5" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_ContentBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="#45484E"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="4,4,0,0">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <icons:WindowsIcon Kind="{TemplateBinding IconKind}"
+                                           Width="14"
+                                           Height="14"
+                                           Margin="10,2,2,2"
+                                           Opacity="0.6"
+                                           VerticalAlignment="Center" />
+                        <ContentPresenter Grid.Column="1"
+                                          Content="{TemplateBinding Header}"
+                                          Margin="2,2,10,2"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="controls|RibbonTabItem:pointerover">
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="Background" Value="#34373B" />
+    </Style>
+    <Style Selector="controls|RibbonTabItem:selected">
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="Background" Value="#2B2E32" />
+        <Setter Property="BorderThickness" Value="1,1,1,0" />
+    </Style>
+</Styles>

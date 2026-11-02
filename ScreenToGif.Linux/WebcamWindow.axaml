@@ -1,0 +1,177 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:ScreenToGif.Linux.Controls"
+        xmlns:icons="using:ScreenToGif.Linux"
+        x:Class="ScreenToGif.Linux.WebcamWindow"
+        Classes="capture-shell webcam-shell"
+        Title="ScreenToGif - Webcam Recorder"
+        Width="780"
+        Height="391"
+        MinWidth="780"
+        MinHeight="260"
+        CanResize="True"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Resources/Logo.ico">
+    <Grid RowDefinitions="*,31">
+        <Border Grid.Row="0" Background="#202225" BorderBrush="#555A60" BorderThickness="1">
+            <Panel>
+                <Image x:Name="Preview" Stretch="Uniform" IsVisible="False" />
+
+                <StackPanel x:Name="StatusPanel"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            MaxWidth="460"
+                            Margin="24"
+                            Spacing="9">
+                    <TextBlock x:Name="StatusHeading"
+                               Text="Looking for cameras"
+                               FontSize="19"
+                               FontWeight="SemiBold"
+                               TextWrapping="Wrap" />
+                    <TextBlock x:Name="StatusMessage"
+                               Text=""
+                               FontSize="13"
+                               LineHeight="19"
+                               Foreground="#B9BEC5"
+                               TextWrapping="Wrap" />
+                    <!-- Fluent paints the header's hover and pressed states from theme brushes that a
+                         template style does not reach, which drew a black strip across the panel;
+                         they are overridden here, where the theme looks them up. -->
+                    <Expander x:Name="StatusDetail" Header="Details" IsVisible="False" Padding="8,6">
+                        <Expander.Resources>
+                            <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="Transparent" />
+                            <SolidColorBrush x:Key="ExpanderHeaderBackgroundPointerOver" Color="Transparent" />
+                            <SolidColorBrush x:Key="ExpanderHeaderBackgroundPressed" Color="Transparent" />
+                            <SolidColorBrush x:Key="ExpanderHeaderBorderBrush" Color="Transparent" />
+                            <SolidColorBrush x:Key="ExpanderHeaderBorderBrushPointerOver" Color="Transparent" />
+                            <SolidColorBrush x:Key="ExpanderHeaderBorderBrushPressed" Color="Transparent" />
+                            <SolidColorBrush x:Key="ExpanderChevronBackground" Color="Transparent" />
+                            <SolidColorBrush x:Key="ExpanderChevronBackgroundPointerOver" Color="Transparent" />
+                            <SolidColorBrush x:Key="ExpanderChevronBackgroundPressed" Color="Transparent" />
+                            <SolidColorBrush x:Key="ExpanderChevronBorderBrush" Color="Transparent" />
+                            <SolidColorBrush x:Key="ExpanderChevronBorderBrushPointerOver" Color="Transparent" />
+                            <SolidColorBrush x:Key="ExpanderChevronBorderBrushPressed" Color="Transparent" />
+                            <SolidColorBrush x:Key="ExpanderContentBackground" Color="#1B1D20" />
+                            <SolidColorBrush x:Key="ExpanderContentBorderBrush" Color="#3A3F46" />
+                        </Expander.Resources>
+                        <!-- FFmpeg's error output can run to many lines; the panel scrolls rather than
+                             pushing Refresh off the window. -->
+                        <ScrollViewer MaxHeight="120" HorizontalScrollBarVisibility="Disabled">
+                            <TextBlock x:Name="StatusDetailText"
+                                       FontSize="12"
+                                       FontFamily="monospace"
+                                       Foreground="#9AA0A7"
+                                       TextWrapping="Wrap" />
+                        </ScrollViewer>
+                    </Expander>
+                    <Button x:Name="StatusRetryButton"
+                            Content="Refresh"
+                            HorizontalAlignment="Left"
+                            IsVisible="False"
+                            Click="RefreshClick" />
+                </StackPanel>
+
+                <Border x:Name="RecordingBadge"
+                        IsVisible="False"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Margin="8"
+                        Padding="8,3"
+                        MinWidth="168"
+                        CornerRadius="3"
+                        Background="#CC1E2023"
+                        BorderBrush="#555A60"
+                        BorderThickness="1">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <icons:WindowsIcon x:Name="RecordingGlyph" Kind="Record" Width="11" Height="11" VerticalAlignment="Center" />
+                        <TextBlock x:Name="RecordingText"
+                                   Text="Recording"
+                                   FontSize="12"
+                                   FontFeatures="tnum"
+                                   Foreground="#E1E4E8"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                </Border>
+
+                <Border HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="8"
+                        Padding="6,2"
+                        CornerRadius="3"
+                        Background="#CC1E2023"
+                        BorderBrush="#555A60"
+                        BorderThickness="1"
+                        IsVisible="{Binding #CaptureSummary.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                    <TextBlock x:Name="CaptureSummary" Text="" FontSize="11" Foreground="#E1E4E8" />
+                </Border>
+            </Panel>
+        </Border>
+
+        <Border Grid.Row="1" Background="#25272A" BorderBrush="#555A60" BorderThickness="1,1,1,0">
+            <Grid Height="31" ColumnDefinitions="30,28,28,28,*,132,11,31,90,Auto,11,Auto,Auto,Auto">
+                <Button x:Name="OptionsButton" Grid.Column="1" Classes="capture-tool" Click="OptionsClick"
+                        ToolTip.Tip="Open the application options.">
+                    <icons:WindowsIcon Kind="Options" Width="20" Height="20" />
+                </Button>
+                <Button x:Name="ScaleButton" Grid.Column="2" Classes="capture-tool"
+                        ToolTip.Tip="Resize the preview window. The recording keeps the camera's own resolution.">
+                    <Button.Flyout>
+                        <Flyout Placement="Top">
+                            <StackPanel Width="210" Spacing="4">
+                                <TextBlock x:Name="ScaleLabel" Text="Preview scale: 0.5" FontSize="12" />
+                                <Slider x:Name="ScaleSlider" Minimum="0.4" Maximum="1.5" Value="0.5"
+                                        SmallChange="0.1" LargeChange="0.1" TickFrequency="0.1"
+                                        PropertyChanged="ScaleChanged" />
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                    <icons:WindowsIcon Kind="Resize" Width="20" Height="20" />
+                </Button>
+                <Button x:Name="RefreshButton" Grid.Column="3" Classes="capture-tool" Click="RefreshClick"
+                        ToolTip.Tip="Refresh: look for cameras again.">
+                    <icons:WindowsIcon Kind="Repeat" Width="20" Height="20" />
+                </Button>
+                <ComboBox x:Name="DeviceSelector" Grid.Column="4" MinWidth="120" Margin="0,3"
+                          PlaceholderText="No cameras"
+                          SelectionChanged="DeviceChanged"
+                          ToolTip.Tip="Choose which camera to preview and record." />
+                <ComboBox x:Name="ResolutionSelector" Grid.Column="5" Margin="5,3"
+                          PlaceholderText="Capture size" SelectionChanged="ResolutionChanged"
+                          AutomationProperties.Name="Capture size"
+                          ToolTip.Tip="Capture size. Recorded frames use these pixels; preview scale only changes the window." />
+                <Border Grid.Column="6" Classes="capture-separator" />
+                <Border Grid.Column="7" ToolTip.Tip="Frames captured per second, between 1 and 60.">
+                    <controls:FrequencyIndicator Margin="1" />
+                </Border>
+                <NumericUpDown x:Name="FrequencyInput" Grid.Column="8" Margin="1,3"
+                               Minimum="1" Maximum="60" Increment="1" FormatString="0"
+                               ShowButtonSpinner="True" AllowSpin="True"
+                               ValueChanged="FrameRateChanged"
+                               ToolTip.Tip="Frames captured per second, between 1 and 60." />
+                <TextBlock Grid.Column="9" Text="fps" FontSize="12" Margin="1,0" VerticalAlignment="Center" Foreground="#B9BEC5" />
+                <Border Grid.Column="10" Classes="capture-separator" />
+                <Button x:Name="DiscardButton" Grid.Column="11" Classes="capture-command" IsVisible="False" Click="DiscardClick"
+                        ToolTip.Tip="Throw away the frames recorded so far. Shortcut: F9">
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <icons:WindowsIcon Kind="Cancel" Width="16" Height="16" />
+                        <TextBlock Text="Discard" FontSize="12" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="RecordButton" Grid.Column="12" Classes="capture-command" IsEnabled="False" Click="RecordOrPauseClick"
+                        ToolTip.Tip="Start recording the preview. Shortcut: F7">
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <icons:WindowsIcon x:Name="RecordIcon" Kind="Record" Width="16" Height="16" />
+                        <TextBlock x:Name="RecordLabel" Text="Record" FontSize="12" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="StopButton" Grid.Column="13" Classes="capture-command" IsEnabled="False" Click="StopClick"
+                        ToolTip.Tip="End the recording and open it in the editor. Shortcut: F8">
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <icons:WindowsIcon Kind="Stop" Width="16" Height="16" />
+                        <TextBlock Text="Stop" FontSize="12" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

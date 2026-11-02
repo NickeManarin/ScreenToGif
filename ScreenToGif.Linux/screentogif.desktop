@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=ScreenToGif
+Comment=Edit and export animated GIFs and videos
+Exec=ScreenToGif.Linux
+Icon=screentogif
+Terminal=false
+Categories=AudioVideo;Video;
+StartupWMClass=ScreenToGif.Linux
