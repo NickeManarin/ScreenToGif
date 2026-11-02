@@ -298,14 +298,18 @@
             <ScrollViewer x:Name="EditorPage" Grid.Column="1" IsVisible="False" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
                     <Expander Classes="settings-group" Header="Previewer background">
-                        <StackPanel>
+                        <StackPanel Opacity="0.68" IsEnabled="False" ToolTip.ShowOnDisabled="True"
+                                    ToolTip.Tip="The Linux editor does not draw a choice of previewer background or grid yet.">
                             <Grid Margin="15,4" ColumnDefinitions="Auto,*"><TextBlock Classes="label" Text="Color scheme:" Margin="0,0,8,0" /><ComboBox Grid.Column="1" SelectedIndex="0"><ComboBoxItem Content="Very Light" /><ComboBoxItem Content="Light" /><ComboBoxItem Content="Medium" /><ComboBoxItem Content="Dark" /></ComboBox></Grid>
                             <Grid Margin="15,4" ColumnDefinitions="Auto,*"><TextBlock Classes="label" Text="Grid size:" Margin="0,0,8,0" /><ComboBox Grid.Column="1" SelectedIndex="1"><ComboBoxItem Content="Small" /><ComboBoxItem Content="20 pt     Medium" /><ComboBoxItem Content="Large" /></ComboBox></Grid>
                             <Grid Height="42" Margin="15,4" ColumnDefinitions="*,*,*"><Border BorderBrush="#4B4F55" BorderThickness="1" Background="#2B2E32" /><Border Grid.Column="1" BorderBrush="#4B4F55" BorderThickness="0,1,1,1" Background="#25272A" /><Border Grid.Column="2" BorderBrush="#4B4F55" BorderThickness="0,1,1,1" Background="#202124" /></Grid>
                         </StackPanel>
                     </Expander>
                     <Expander Classes="settings-group" Header="Interface">
-                        <StackPanel><CheckBox Classes="setting" Content="Automatically adjust the window size based on the frame size, right after loading." /><CheckBox Classes="setting" Content="Automatically adjust the frame zoom based on the window size, right after loading." IsChecked="True" /></StackPanel>
+                        <StackPanel>
+                            <CheckBox Classes="setting" Content="Automatically adjust the window size based on the frame size, right after loading." IsEnabled="False" ToolTip.Tip="The Linux editor does not resize its window to a loaded project yet." />
+                            <CheckBox Classes="setting" Content="Automatically adjust the frame zoom based on the window size, right after loading." IsEnabled="False" ToolTip.Tip="The Linux editor does not fit the zoom to its window on load yet." />
+                        </StackPanel>
                     </Expander>
                     <Expander Classes="settings-group" Header="General">
                         <StackPanel>
