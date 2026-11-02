@@ -18,6 +18,9 @@ public enum OptionsSection
 
 public partial class OptionsWindow : Window
 {
+    /// <summary>What the undo-limit field shows when the limit is off, so ticking the box again does not land on 1.</summary>
+    private const int DefaultUndoLimit = 50;
+
     private readonly LinuxAutostartService _autostart = new();
     private RecorderCaptureMode _seededCaptureMode;
     private bool _ready;
@@ -77,7 +80,7 @@ public partial class OptionsWindow : Window
         AskBeforeCloseEditorCheckBox.IsChecked = settings.AskBeforeCloseEditor;
         DropFramesSettingCheckBox.IsChecked = settings.DropFramesWhenBehind;
         LimitUndoCheckBox.IsChecked = settings.UndoLimit > 0;
-        UndoLimitUpDown.Value = Math.Clamp(settings.UndoLimit, 1, 100);
+        UndoLimitUpDown.Value = settings.UndoLimit > 0 ? Math.Clamp(settings.UndoLimit, 1, 100) : DefaultUndoLimit;
         DeleteCacheOnCloseCheckBox.IsChecked = settings.DeleteCacheOnClose;
         RemoveOldProjectsCheckBox.IsChecked = settings.RemoveOldProjects;
         RetentionDaysUpDown.Value = Math.Clamp(settings.ProjectRetentionDays, 1, 30);
@@ -282,7 +285,7 @@ public partial class OptionsWindow : Window
         settings.AskBeforeDiscardProject = AskBeforeDiscardProjectCheckBox.IsChecked == true;
         settings.AskBeforeCloseEditor = AskBeforeCloseEditorCheckBox.IsChecked == true;
         settings.DropFramesWhenBehind = DropFramesSettingCheckBox.IsChecked == true;
-        settings.UndoLimit = LimitUndoCheckBox.IsChecked == true ? (int)(UndoLimitUpDown.Value ?? 50) : 0;
+        settings.UndoLimit = LimitUndoCheckBox.IsChecked == true ? (int)(UndoLimitUpDown.Value ?? DefaultUndoLimit) : 0;
         settings.DeleteCacheOnClose = DeleteCacheOnCloseCheckBox.IsChecked == true;
         settings.RemoveOldProjects = RemoveOldProjectsCheckBox.IsChecked == true;
         settings.ProjectRetentionDays = (int)(RetentionDaysUpDown.Value ?? 5);

@@ -61,6 +61,15 @@ public sealed partial class DesktopWindowSmokeTests
             await ResizeAsync(options, normalSize);
         }
         await Ui(() => CheckLaunchChoices(options, layoutFailures));
+
+        // With the limit off the field must not read 1, or ticking the box again would cap the history at one step.
+        await LinuxSettings.UpdateAsync(settings => settings.UndoLimit = 0);
+        var limitOff = await Ui(() => new OptionsWindow());
+        Assert.False(await Ui(() => limitOff.FindControl<CheckBox>("LimitUndoCheckBox")!.IsChecked));
+        Assert.Equal(50m, await Ui(() => limitOff.FindControl<NumericUpDown>("UndoLimitUpDown")!.Value));
+        await Ui(limitOff.Close);
+        await LinuxSettings.UpdateAsync(settings => settings.UndoLimit = 50);
+
         await Ui(options.Close);
         Assert.True(layoutFailures.Count == 0, string.Join(Environment.NewLine, layoutFailures));
 
