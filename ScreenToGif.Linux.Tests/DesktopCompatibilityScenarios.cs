@@ -45,6 +45,7 @@ public sealed partial class DesktopWindowSmokeTests
             }
             await CaptureAsync(options, name);
             await Ui(() => CheckOptionsTextLayout(options, section, layoutFailures));
+            await Ui(() => CheckOptionsFields(options, section, layoutFailures));
             await ResizeAsync(options, await Ui(() => new Size(options.MinWidth, options.MinHeight)));
             if (section == "Recorder")
                 await Ui(() => options.FindControl<Control>("WaylandSourceReusePanel")!.BringIntoView());
@@ -150,7 +151,7 @@ public sealed partial class DesktopWindowSmokeTests
 
     private static void CheckOptionsTextLayout(OptionsWindow options, string? section, List<string> failures)
     {
-        if (section is "Shortcuts" or "Language" or "Recorder")
+        if (section is "Shortcuts" or "Language" or "Recorder" or "Editor" or "Storage")
         {
             var page = options.FindControl<Control>(section == "Recorder" ? "WaylandSourceReusePanel" : section + "Page")!;
             if (section == "Recorder" && page.IsEffectivelyVisible)
@@ -186,6 +187,52 @@ public sealed partial class DesktopWindowSmokeTests
                 if (bottom > nextTop)
                     failures.Add($"About: {groups[index - 1].Header} content ends at {bottom}, over {groups[index].Header} at {nextTop}.");
             }
+        }
+    }
+
+    private static void CheckOptionsFields(OptionsWindow options, string? section, List<string> failures)
+    {
+        // Fluent draws a check box in a strip as tall as the CheckBoxMinHeight resource, pinned to the top of the control,
+        // while the label centres in the control's own height, so a row whose height differs from the resource shows its
+        // label off the box's centre.
+        foreach (var box in options.GetVisualDescendants().OfType<CheckBox>().Where(candidate => candidate.IsEffectivelyVisible))
+        {
+            var mark = box.GetVisualDescendants().OfType<Border>().FirstOrDefault(part => part.Name == "NormalRectangle");
+            var label = box.GetVisualDescendants().OfType<ContentPresenter>().FirstOrDefault(part => part.Name == "PART_ContentPresenter");
+            if (mark is null || label?.Child is null)
+                continue;
+            var markCenter = mark.TranslatePoint(new Point(0, mark.Bounds.Height / 2), options)!.Value.Y;
+            var labelCenter = label.TranslatePoint(new Point(0, label.Bounds.Height / 2), options)!.Value.Y;
+            if (Math.Abs(markCenter - labelCenter) > 0.5)
+                failures.Add($"{section}: the check box '{box.Content}' is centred at {markCenter} but its label at {labelCenter}.");
+        }
+
+        // A stepper shows its arrows only while it can be changed, and the arrows must really step the value: the
+        // spinner finds its buttons by template part name, so a renamed part draws arrows that never spin.
+        foreach (var field in options.GetVisualDescendants().OfType<NumericUpDown>()
+                     .Where(candidate => candidate.Classes.Contains("stepper") && candidate.IsEffectivelyVisible))
+        {
+            var panel = field.GetVisualDescendants().OfType<Grid>().FirstOrDefault(part => part.Name == "PART_SpinnerPanel");
+            var up = field.GetVisualDescendants().OfType<RepeatButton>().FirstOrDefault(part => part.Name == "PART_IncreaseButton");
+            var down = field.GetVisualDescendants().OfType<RepeatButton>().FirstOrDefault(part => part.Name == "PART_DecreaseButton");
+            if (panel is null || up is null || down is null)
+            {
+                failures.Add($"{section}: '{field.Name}' did not get the stepper template.");
+                continue;
+            }
+            if (panel.IsEffectivelyVisible != field.IsEffectivelyEnabled)
+            {
+                failures.Add($"{section}: '{field.Name}' is {(field.IsEffectivelyEnabled ? "enabled" : "disabled")} but its arrows are {(panel.IsEffectivelyVisible ? "shown" : "hidden")}.");
+                continue;
+            }
+            if (!field.IsEffectivelyEnabled)
+                continue;
+            var before = field.Value;
+            Click(up);
+            var raised = field.Value;
+            Click(down);
+            if (raised != Math.Min(before!.Value + field.Increment, field.Maximum) || field.Value != before)
+                failures.Add($"{section}: the arrows of '{field.Name}' moved {before} to {raised} and back to {field.Value}.");
         }
     }
 

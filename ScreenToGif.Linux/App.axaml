@@ -7,5 +7,6 @@
         <StyleInclude Source="avares://ScreenToGif.Linux/Themes/RibbonButton.axaml" />
         <StyleInclude Source="avares://ScreenToGif.Linux/Themes/RibbonTabItem.axaml" />
         <StyleInclude Source="avares://ScreenToGif.Linux/Themes/CaptureShell.axaml" />
+        <StyleInclude Source="avares://ScreenToGif.Linux/Themes/StepperField.axaml" />
     </Application.Styles>
 </Application>

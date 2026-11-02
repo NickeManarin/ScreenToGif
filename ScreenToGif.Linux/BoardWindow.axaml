@@ -13,6 +13,13 @@
         Topmost="True"
         WindowStartupLocation="CenterScreen"
         Icon="/Resources/Logo.ico">
+    <Window.Resources>
+        <!-- Fluent draws a check box inside a strip as tall as this resource, pinned to the top of the control; the two
+             check boxes here are 26 units high, so the default 32 would put the box 3 units below the label's centre. At
+             this 11-point size the cap height still centres 1 pixel under the box, which the labels' 1-unit bottom margin
+             lifts back. -->
+        <x:Double x:Key="CheckBoxMinHeight">26</x:Double>
+    </Window.Resources>
     <Grid RowDefinitions="33,*,31">
         <Border Grid.Row="0" Background="#25272A" BorderBrush="#555A60" BorderThickness="1,0,1,1">
             <Grid Height="32" Margin="6,0" ColumnDefinitions="Auto,Auto,Auto,*">
@@ -99,12 +106,12 @@
                     <CheckBox x:Name="FitToCurveCheckBox" Padding="0" FontSize="11" Height="26" MinHeight="0"
                               IsCheckedChanged="FitToCurveChanged"
                               ToolTip.Tip="Smooth each stroke into a fitted curve.">
-                        <TextBlock Text="Fit to Curve" Margin="3,0,0,0" />
+                        <TextBlock Text="Fit to Curve" Margin="3,0,0,1" />
                     </CheckBox>
                     <CheckBox x:Name="HighlighterCheckBox" Padding="0" FontSize="11" Height="26" MinHeight="0"
                               IsCheckedChanged="HighlighterChanged"
                               ToolTip.Tip="Draw translucent highlighter strokes.">
-                        <TextBlock Text="Highlighter" Margin="3,0,0,0" />
+                        <TextBlock Text="Highlighter" Margin="3,0,0,1" />
                     </CheckBox>
                 </StackPanel>
             </Grid>

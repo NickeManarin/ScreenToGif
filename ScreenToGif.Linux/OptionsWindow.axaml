@@ -15,6 +15,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude Source="avares://ScreenToGif.Linux/Resources/Flags.axaml" />
             </ResourceDictionary.MergedDictionaries>
+            <x:Double x:Key="CheckBoxMinHeight">28</x:Double>
             <ControlTheme x:Key="SettingsExpanderTheme" TargetType="Expander">
                 <Setter Property="Template">
                     <ControlTemplate>
@@ -59,7 +60,10 @@
         <!-- A row that only applies under another setting dims as a whole and says which, when that setting is off. -->
         <Style Selector="Grid.dependent-row"><Setter Property="ToolTip.ShowOnDisabled" Value="True" /></Style>
         <Style Selector="Grid.dependent-row:disabled"><Setter Property="Opacity" Value="0.55" /></Style>
-        <Style Selector="CheckBox"><Setter Property="MinHeight" Value="0" /><Setter Property="Height" Value="28" /><Setter Property="Padding" Value="0" /></Style>
+        <!-- Fluent draws the box inside a strip as tall as CheckBoxMinHeight, pinned to the top of the control, while the
+             label centres in the control's own height. The row is 28 units, so the resource says 28 as well; left at
+             32 the box centres at 16 and the label at 14. The inset is the Windows gap (1 margin + 4 padding + 1 margin). -->
+        <Style Selector="CheckBox"><Setter Property="MinHeight" Value="0" /><Setter Property="Height" Value="28" /><Setter Property="Padding" Value="6,0,0,0" /></Style>
         <Style Selector="ListBox.navigation"><Setter Property="Background" Value="Transparent" /><Setter Property="BorderThickness" Value="0" /></Style>
         <Style Selector="ListBox.navigation ListBoxItem">
             <Setter Property="Padding" Value="5,3" />
@@ -253,7 +257,7 @@
                             <Grid x:Name="RecorderManualDelayRow" Classes="dependent-row" Margin="30,3,5,3" ColumnDefinitions="Auto,120,*"
                                   ToolTip.Tip="Used only when the capture frequency is Manual.">
                                 <TextBlock Text="Manual playback delay:" VerticalAlignment="Center" />
-                                <NumericUpDown x:Name="RecorderManualDelayUpDown" Grid.Column="1" Margin="8,0" MinWidth="0" Minimum="1" Maximum="10000" Increment="50" FormatString="0" ShowButtonSpinner="False" HorizontalContentAlignment="Center" />
+                                <NumericUpDown x:Name="RecorderManualDelayUpDown" Classes="stepper" Grid.Column="1" Margin="8,0" Minimum="1" Maximum="10000" Increment="50" FormatString="0" />
                                 <TextBlock Grid.Column="2" Classes="muted" Text="Delay stamped on each frame captured with Snap, in milliseconds." VerticalAlignment="Center" Margin="8,0" TextWrapping="Wrap" />
                             </Grid>
                         </StackPanel>
@@ -280,7 +284,7 @@
                             <Grid x:Name="RecorderPreStartSecondsRow" Classes="dependent-row" Margin="30,3,5,3" ColumnDefinitions="Auto,120,*"
                                   ToolTip.Tip="Turn on the pre start countdown to set its length.">
                                 <TextBlock Text="Countdown:" VerticalAlignment="Center" />
-                                <NumericUpDown x:Name="RecorderPreStartSecondsUpDown" Grid.Column="1" Margin="8,0" MinWidth="0" Minimum="1" Maximum="30" Increment="1" FormatString="0" ShowButtonSpinner="False" HorizontalContentAlignment="Center" />
+                                <NumericUpDown x:Name="RecorderPreStartSecondsUpDown" Classes="stepper" Grid.Column="1" Margin="8,0" Minimum="1" Maximum="30" Increment="1" FormatString="0" />
                                 <TextBlock Grid.Column="2" Classes="muted" Text="Seconds to wait before the first frame is captured." VerticalAlignment="Center" Margin="8,0" TextWrapping="Wrap" />
                             </Grid>
                             <CheckBox Classes="setting" Content="Enable cursor following." IsEnabled="False" ToolTip.ShowOnDisabled="True"
@@ -311,7 +315,7 @@
                             <CheckBox Classes="setting" Content="Enable triple-click to select the text." IsEnabled="False" ToolTip.Tip="Text overlay authoring is not available yet." />
                             <CheckBox Classes="setting" Content="Draw the outline of captions outside the letters." IsEnabled="False" ToolTip.Tip="Caption authoring is not available yet." />
                             <CheckBox x:Name="DropFramesSettingCheckBox" Classes="setting" Content="Drop frames when necessary." />
-                            <Grid Margin="15,3" ColumnDefinitions="Auto,75,*"><CheckBox x:Name="LimitUndoCheckBox" Content="Impose a limit to the undo/redo history." IsChecked="True" /><NumericUpDown x:Name="UndoLimitUpDown" Grid.Column="1" Minimum="1" Maximum="100" Value="50" Margin="8,0" ShowButtonSpinner="False" /><TextBlock Grid.Column="2" Classes="muted" Text="Maximum number of actions stored" VerticalAlignment="Center" /></Grid>
+                            <Grid Margin="15,3" ColumnDefinitions="Auto,84,*"><CheckBox x:Name="LimitUndoCheckBox" Content="Impose a limit to the undo/redo history." IsChecked="True" /><NumericUpDown x:Name="UndoLimitUpDown" Classes="stepper" Grid.Column="1" Minimum="1" Maximum="100" Value="50" Margin="8,0" /><TextBlock Grid.Column="2" Classes="muted" Text="Maximum number of actions stored" VerticalAlignment="Center" TextWrapping="Wrap" /></Grid>
                             <CheckBox Classes="setting" Content="Sync the output folder among presets." IsEnabled="False" ToolTip.Tip="Export presets have not been ported yet." /><CheckBox Content="Also sync the filename." Margin="30,3,5,3" IsEnabled="False" /><CheckBox Content="Only sync among presets of the same file type." Margin="30,3,5,3" IsEnabled="False" />
                         </StackPanel>
                     </Expander>
@@ -382,7 +386,7 @@
                         <StackPanel>
                             <CheckBox x:Name="DeleteCacheOnCloseCheckBox" Classes="setting" Content="Delete all temporary project files when closing the app." />
                             <CheckBox x:Name="RemoveOldProjectsCheckBox" Classes="setting" Content="Automatically remove stale temporary projects." IsChecked="True" />
-                            <Grid Margin="30,2" ColumnDefinitions="70,*"><NumericUpDown x:Name="RetentionDaysUpDown" Minimum="1" Maximum="30" Value="5" ShowButtonSpinner="False" /><TextBlock Grid.Column="1" Classes="muted" Text="days before an abandoned temporary project can be removed" Margin="8,0" VerticalAlignment="Center" /></Grid>
+                            <Grid Margin="30,2" ColumnDefinitions="70,*"><NumericUpDown x:Name="RetentionDaysUpDown" Classes="stepper" Minimum="1" Maximum="30" Value="5" /><TextBlock Grid.Column="1" Classes="muted" Text="days before an abandoned temporary project can be removed" Margin="8,0" VerticalAlignment="Center" /></Grid>
                         </StackPanel>
                     </Expander>
                 </StackPanel>
