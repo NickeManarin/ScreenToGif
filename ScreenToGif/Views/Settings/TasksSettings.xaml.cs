@@ -33,6 +33,15 @@ public partial class TasksSettings : Page
             Watch(task);
     }
 
+    private void TasksSettings_Unloaded(object sender, RoutedEventArgs e)
+    {
+        if (_effectList == null)
+            return;
+
+        foreach (var task in _effectList)
+            Unwatch(task);
+    }
+
     /// <summary>
     /// A tick changes only the task, so the list is set again to be saved (#1487).
     /// </summary>
@@ -42,9 +51,15 @@ public partial class TasksSettings : Page
         task.PropertyChanged += Task_PropertyChanged;
     }
 
+    private void Unwatch(BaseTaskViewModel task)
+    {
+        task.PropertyChanged -= Task_PropertyChanged;
+    }
+
     private void Task_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName != nameof(BaseTaskViewModel.IsEnabled))
+        //A copy being edited in the task dialog carries this handler too; only a task in the list counts.
+        if (e.PropertyName != nameof(BaseTaskViewModel.IsEnabled) || sender is not BaseTaskViewModel task || !_effectList.Contains(task))
             return;
 
         UserSettings.All.AutomatedTasksList = new ArrayList(_effectList.ToArray());
@@ -110,7 +125,7 @@ public partial class TasksSettings : Page
     private void Edit_Executed(object sender, ExecutedRoutedEventArgs e)
     {
         var index = TasksDataGrid.SelectedIndex;
-        var selected = _effectList[TasksDataGrid.SelectedIndex].ShallowCopy();
+        var selected = _effectList[index].ShallowCopy();
 
         var eff = new AutomatedTask { CurrentTask = selected, IsEditing = true };
         var result = eff.ShowDialog();
@@ -118,7 +133,8 @@ public partial class TasksSettings : Page
         if (result != true)
             return;
 
-        _effectList[TasksDataGrid.SelectedIndex] = eff.CurrentTask;
+        Unwatch(_effectList[index]);
+        _effectList[index] = eff.CurrentTask;
         Watch(eff.CurrentTask);
         TasksDataGrid.Items.Refresh();
         TasksDataGrid.SelectedIndex = index;
@@ -129,6 +145,7 @@ public partial class TasksSettings : Page
     private void Remove_Executed(object sender, ExecutedRoutedEventArgs e)
     {
         var index = TasksDataGrid.SelectedIndex;
+        Unwatch(_effectList[index]);
         _effectList.RemoveAt(TasksDataGrid.SelectedIndex);
 
         //Automatically selects the closest item from the position of the one that was removed.
