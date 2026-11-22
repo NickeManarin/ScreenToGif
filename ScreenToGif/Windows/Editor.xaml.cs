@@ -72,6 +72,7 @@ namespace ScreenToGif.Windows
         public static readonly DependencyProperty FrameDpiProperty = DependencyProperty.Register(nameof(FrameDpi), typeof(double), typeof(Editor));
         public static readonly DependencyProperty IsCancelableProperty = DependencyProperty.Register(nameof(IsCancelable), typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
         public static readonly DependencyProperty HasImprecisePlaybackProperty = DependencyProperty.Register(nameof(HasImprecisePlayback), typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty PanelTitleProperty = DependencyProperty.Register(nameof(PanelTitle), typeof(string), typeof(Editor), new FrameworkPropertyMetadata(null, PanelTitle_PropertyChanged));
 
         /// <summary>
         /// True if there is a value inside the list of frames.
@@ -170,6 +171,25 @@ namespace ScreenToGif.Windows
         {
             get => (bool)GetValue(HasImprecisePlaybackProperty);
             set => SetValue(HasImprecisePlaybackProperty, value);
+        }
+
+        /// <summary>
+        /// The title of the side panel, in the current language.
+        /// It's set as a resource reference, so it follows a language change while the panel is open.
+        /// </summary>
+        public string PanelTitle
+        {
+            get => (string)GetValue(PanelTitleProperty);
+            set => SetValue(PanelTitleProperty, value);
+        }
+
+        private static void PanelTitle_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not Editor editor)
+                return;
+
+            //Some titles break in two lines in the ribbon, but the panel title fits in one.
+            editor.ActionTitleTextBlock.Text = (e.NewValue as string ?? "").Replace("\n", " ").Replace("\\n", " ").Replace("\r", " ").Replace("&#10;", " ").Replace("&#x0d;", " ");
         }
 
         #endregion
@@ -605,7 +625,7 @@ namespace ScreenToGif.Windows
         private void NewProject_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.NewAnimation, LocalizationHelper.Get("S.Editor.File.Blank", true), "Vector.File.New", ApplyNewProjectButton_Click);
+            ShowPanel(PanelTypes.NewAnimation, "S.Editor.File.Blank", "Vector.File.New", ApplyNewProjectButton_Click);
         }
 
         private void ApplyNewProjectButton_Click(object sender, RoutedEventArgs e)
@@ -860,7 +880,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            ShowPanel(PanelTypes.SaveAs, LocalizationHelper.Get("S.Editor.File.Save", true), "Vector.Save", SaveAsButton_Click);
+            ShowPanel(PanelTypes.SaveAs, "S.Editor.File.Save", "Vector.Save", SaveAsButton_Click);
         }
 
         private async void SaveAsButton_Click(object sender, RoutedEventArgs e)
@@ -959,7 +979,7 @@ namespace ScreenToGif.Windows
             e.Handled = true;
             Pause();
 
-            ShowPanel(PanelTypes.LoadRecent, LocalizationHelper.Get("S.Editor.File.LoadRecent", true), "Vector.Project", LoadRecentButton_Click);
+            ShowPanel(PanelTypes.LoadRecent, "S.Editor.File.LoadRecent", "Vector.Project", LoadRecentButton_Click);
         }
 
         private void RecentDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -1153,7 +1173,7 @@ namespace ScreenToGif.Windows
 
             ShowHint("S.Hint.Cut", false, selected.Count);
 
-            ShowPanel(PanelTypes.Clipboard, LocalizationHelper.Get("S.Editor.Home.Clipboard", true), "Vector.Paste");
+            ShowPanel(PanelTypes.Clipboard, "S.Editor.Home.Clipboard", "Vector.Paste");
         }
 
         private void Copy_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1197,7 +1217,7 @@ namespace ScreenToGif.Windows
 
             ShowHint("S.Hint.Copy", false, selected.Count);
 
-            ShowPanel(PanelTypes.Clipboard, LocalizationHelper.Get("S.Editor.Home.Clipboard", true), "Vector.Paste");
+            ShowPanel(PanelTypes.Clipboard, "S.Editor.Home.Clipboard", "Vector.Paste");
         }
 
         private void Paste_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -1227,7 +1247,7 @@ namespace ScreenToGif.Windows
 
         private void ShowClipboardButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowPanel(PanelTypes.Clipboard, LocalizationHelper.Get("S.Editor.Home.Clipboard", true), "Vector.Paste");
+            ShowPanel(PanelTypes.Clipboard, "S.Editor.Home.Clipboard", "Vector.Paste");
         }
 
 
@@ -1665,7 +1685,7 @@ namespace ScreenToGif.Windows
         private void RemoveDuplicates_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.RemoveDuplicates, LocalizationHelper.Get("S.Editor.Edit.Frames.Duplicates", true), "Vector.RemoveImage", ApplyRemoveDuplicatesCountButton_Click);
+            ShowPanel(PanelTypes.RemoveDuplicates, "S.Editor.Edit.Frames.Duplicates", "Vector.RemoveImage", ApplyRemoveDuplicatesCountButton_Click);
         }
 
         private async void ApplyRemoveDuplicatesCountButton_Click(object sender, RoutedEventArgs e)
@@ -1690,7 +1710,7 @@ namespace ScreenToGif.Windows
         private void Reduce_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.ReduceFrames, LocalizationHelper.Get("S.Editor.Edit.Frames.Reduce", true), "Vector.RemoveImage", ApplyReduceFrameCountButton_Click);
+            ShowPanel(PanelTypes.ReduceFrames, "S.Editor.Edit.Frames.Reduce", "Vector.RemoveImage", ApplyReduceFrameCountButton_Click);
         }
 
         private async void ApplyReduceFrameCountButton_Click(object sender, RoutedEventArgs e)
@@ -1737,7 +1757,7 @@ namespace ScreenToGif.Windows
         private void SmoothLoop_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.SmoothLoop, LocalizationHelper.Get("S.Editor.Edit.Frames.SmoothLoop", true), "Vector.Repeat", ApplySmoothLoopButton_Click);
+            ShowPanel(PanelTypes.SmoothLoop, "S.Editor.Edit.Frames.SmoothLoop", "Vector.Repeat", ApplySmoothLoopButton_Click);
         }
 
         private async void ApplySmoothLoopButton_Click(object sender, RoutedEventArgs e)
@@ -1886,7 +1906,7 @@ namespace ScreenToGif.Windows
         private void OverrideDelay_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.OverrideDelay, LocalizationHelper.Get("S.Editor.Edit.Delay.Override", true), "Vector.OverrideDelay", ApplyOverrideDelayButton_Click);
+            ShowPanel(PanelTypes.OverrideDelay, "S.Editor.Edit.Delay.Override", "Vector.OverrideDelay", ApplyOverrideDelayButton_Click);
         }
 
         private async void ApplyOverrideDelayButton_Click(object sender, RoutedEventArgs e)
@@ -1915,7 +1935,7 @@ namespace ScreenToGif.Windows
         private void IncreaseDecreaseDelay_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.IncreaseDecreaseDelay, LocalizationHelper.Get("S.Editor.Edit.Delay.IncreaseDecrease", true), "Vector.IncreaseDecreaseDelay", ApplyIncreaseDecreaseDelayButtonClick);
+            ShowPanel(PanelTypes.IncreaseDecreaseDelay, "S.Editor.Edit.Delay.IncreaseDecrease", "Vector.IncreaseDecreaseDelay", ApplyIncreaseDecreaseDelayButtonClick);
         }
 
         private async void ApplyIncreaseDecreaseDelayButtonClick(object sender, RoutedEventArgs e)
@@ -1949,7 +1969,7 @@ namespace ScreenToGif.Windows
         private void ScaleDelay_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.ScaleDelay, LocalizationHelper.Get("S.Editor.Edit.Delay.Scale", true), "Vector.ScaleDelay", ApplyScaleDelayButtonClick);
+            ShowPanel(PanelTypes.ScaleDelay, "S.Editor.Edit.Delay.Scale", "Vector.ScaleDelay", ApplyScaleDelayButtonClick);
         }
 
         private async void ApplyScaleDelayButtonClick(object sender, RoutedEventArgs e)
@@ -1995,7 +2015,7 @@ namespace ScreenToGif.Windows
 
         private void Resize_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            ShowPanel(PanelTypes.Resize, LocalizationHelper.Get("S.Editor.Image.Resize", true), "Vector.Resize", ApplyResizeButton_Click);
+            ShowPanel(PanelTypes.Resize, "S.Editor.Image.Resize", "Vector.Resize", ApplyResizeButton_Click);
         }
 
         private async void ApplyResizeButton_Click(object sender, RoutedEventArgs e)
@@ -2029,7 +2049,7 @@ namespace ScreenToGif.Windows
         private void Crop_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.Crop, LocalizationHelper.Get("S.Editor.Image.Crop", true), "Vector.Crop", ApplyCropButton_Click);
+            ShowPanel(PanelTypes.Crop, "S.Editor.Image.Crop", "Vector.Crop", ApplyCropButton_Click);
         }
 
         private CroppingAdorner _cropAdorner;
@@ -2162,7 +2182,7 @@ namespace ScreenToGif.Windows
         private void FlipRotate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.FlipRotate, LocalizationHelper.Get("S.Editor.Image.FlipRotate", true), "Vector.FlipHorizontal", ApplyFlipRotateButton_Click);
+            ShowPanel(PanelTypes.FlipRotate, "S.Editor.Image.FlipRotate", "Vector.FlipHorizontal", ApplyFlipRotateButton_Click);
         }
 
         private async void ApplyFlipRotateButton_Click(object sender, RoutedEventArgs e)
@@ -2198,7 +2218,7 @@ namespace ScreenToGif.Windows
         private void Caption_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.Caption, LocalizationHelper.Get("S.Editor.Image.Caption", true), "Vector.Caption", ApplyCaptionButton_Click);
+            ShowPanel(PanelTypes.Caption, "S.Editor.Image.Caption", "Vector.Caption", ApplyCaptionButton_Click);
         }
 
         private async void ApplyCaptionButton_Click(object sender, RoutedEventArgs e)
@@ -2234,7 +2254,7 @@ namespace ScreenToGif.Windows
         private void FreeText_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.FreeText, LocalizationHelper.Get("S.Editor.Image.FreeText", true), "Vector.FreeText", ApplyFreeTextButton_Click);
+            ShowPanel(PanelTypes.FreeText, "S.Editor.Image.FreeText", "Vector.FreeText", ApplyFreeTextButton_Click);
         }
 
         private void FreeTextTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -2284,7 +2304,7 @@ namespace ScreenToGif.Windows
         private void TitleFrame_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.TitleFrame, LocalizationHelper.Get("S.Editor.Image.TitleFrame", true), "Vector.TitleFrame", ApplyTitleFrameButton_Click);
+            ShowPanel(PanelTypes.TitleFrame, "S.Editor.Image.TitleFrame", "Vector.TitleFrame", ApplyTitleFrameButton_Click);
         }
 
         private async void ApplyTitleFrameButton_Click(object sender, RoutedEventArgs e)
@@ -2314,7 +2334,7 @@ namespace ScreenToGif.Windows
         private void KeyStrokes_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.KeyStrokes, LocalizationHelper.Get("S.Editor.Image.KeyStrokes", true), "Vector.Keyboard", ApplyKeyStrokesButton_Click);
+            ShowPanel(PanelTypes.KeyStrokes, "S.Editor.Image.KeyStrokes", "Vector.Keyboard", ApplyKeyStrokesButton_Click);
         }
 
         private void EditKeyStrokesButton_Click(object sender, RoutedEventArgs e)
@@ -2361,7 +2381,7 @@ namespace ScreenToGif.Windows
         private void FreeDrawing_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.FreeDrawing, LocalizationHelper.Get("S.Editor.Image.FreeDrawing", true), "Vector.FreeDrawing", ApplyFreeDrawingButton_Click);
+            ShowPanel(PanelTypes.FreeDrawing, "S.Editor.Image.FreeDrawing", "Vector.FreeDrawing", ApplyFreeDrawingButton_Click);
         }
 
         private async void ApplyFreeDrawingButton_Click(object sender, RoutedEventArgs e)
@@ -2399,7 +2419,7 @@ namespace ScreenToGif.Windows
         private void Shapes_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.Shapes, LocalizationHelper.Get("S.Editor.Image.Shape", true), "Vector.Ellipse", ApplyShapesButton_Click);
+            ShowPanel(PanelTypes.Shapes, "S.Editor.Image.Shape", "Vector.Ellipse", ApplyShapesButton_Click);
         }
 
         private void ShapeModes_Checked(object sender, RoutedEventArgs e)
@@ -2477,7 +2497,7 @@ namespace ScreenToGif.Windows
         private void MouseEvents_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.MouseEvents, LocalizationHelper.Get("S.Editor.Image.MouseEvents", true), "Vector.Cursor", ApplyMouseEventsButton_Click);
+            ShowPanel(PanelTypes.MouseEvents, "S.Editor.Image.MouseEvents", "Vector.Cursor", ApplyMouseEventsButton_Click);
         }
 
         private async void ApplyMouseEventsButton_Click(object sender, RoutedEventArgs e)
@@ -2497,7 +2517,7 @@ namespace ScreenToGif.Windows
         private void Watermark_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.Watermark, LocalizationHelper.Get("S.Editor.Image.Watermark", true), "Vector.Watermark", ApplyWatermarkButton_Click);
+            ShowPanel(PanelTypes.Watermark, "S.Editor.Image.Watermark", "Vector.Watermark", ApplyWatermarkButton_Click);
 
             TopWatermarkDoubleUpDown.Scale = LeftWatermarkDoubleUpDown.Scale = this.Scale();
             TopWatermarkDoubleUpDown.Value = UserSettings.All.WatermarkTop;
@@ -2589,7 +2609,7 @@ namespace ScreenToGif.Windows
         private void Border_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.Border, LocalizationHelper.Get("S.Editor.Image.Border", true), "Vector.Border", ApplyBorderButton_Click);
+            ShowPanel(PanelTypes.Border, "S.Editor.Image.Border", "Vector.Border", ApplyBorderButton_Click);
         }
 
         private void BorderProperties_ValueChanged(object sender, RoutedEventArgs e)
@@ -2651,7 +2671,7 @@ namespace ScreenToGif.Windows
         private void Shadow_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.Shadow, LocalizationHelper.Get("S.Editor.Image.Shadow", true), "Vector.Shadow", ApplyShadowButton_Click);
+            ShowPanel(PanelTypes.Shadow, "S.Editor.Image.Shadow", "Vector.Shadow", ApplyShadowButton_Click);
         }
 
         private void ShadowProperties_ValueChanged(object sender, RoutedEventArgs e)
@@ -2725,7 +2745,7 @@ namespace ScreenToGif.Windows
         private void Obfuscate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.Obfuscate, LocalizationHelper.Get("S.Editor.Image.Obfuscate", true), "Vector.Obfuscate", ApplyObfuscateButton_Click);
+            ShowPanel(PanelTypes.Obfuscate, "S.Editor.Image.Obfuscate", "Vector.Obfuscate", ApplyObfuscateButton_Click);
         }
 
         private async void ApplyObfuscateButton_Click(object sender, RoutedEventArgs e)
@@ -2755,7 +2775,7 @@ namespace ScreenToGif.Windows
         private void Cinemagraph_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.Cinemagraph, LocalizationHelper.Get("S.Editor.Image.Cinemagraph", true), "Vector.Cinemagraph", ApplyCinemagraphButton_Click);
+            ShowPanel(PanelTypes.Cinemagraph, "S.Editor.Image.Cinemagraph", "Vector.Cinemagraph", ApplyCinemagraphButton_Click);
         }
 
         private async void ApplyCinemagraphButton_Click(object sender, RoutedEventArgs e)
@@ -2817,7 +2837,7 @@ namespace ScreenToGif.Windows
             ProgressHorizontalRectangle.Width = size.Width / 2;
             ProgressVerticalRectangle.Height = size.Height / 2;
 
-            ShowPanel(PanelTypes.Progress, LocalizationHelper.Get("S.Editor.Image.Progress", true), "Vector.Progress", ApplyProgressButton_Click);
+            ShowPanel(PanelTypes.Progress, "S.Editor.Image.Progress", "Vector.Progress", ApplyProgressButton_Click);
         }
 
         private void ProgressPrecisionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2883,7 +2903,7 @@ namespace ScreenToGif.Windows
         private void Fade_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.Fade, LocalizationHelper.Get("S.Editor.Fade.Title", true), "Vector.Fade", ApplyFadeButtonButton_Click);
+            ShowPanel(PanelTypes.Fade, "S.Editor.Fade.Title", "Vector.Fade", ApplyFadeButtonButton_Click);
         }
 
         private async void ApplyFadeButtonButton_Click(object sender, RoutedEventArgs e)
@@ -2919,7 +2939,7 @@ namespace ScreenToGif.Windows
         private void Slide_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.Slide, LocalizationHelper.Get("S.Editor.Slide.Title", true), "Vector.Slide", ApplySlideButtonButton_Click);
+            ShowPanel(PanelTypes.Slide, "S.Editor.Slide.Title", "Vector.Slide", ApplySlideButtonButton_Click);
         }
 
         private async void ApplySlideButtonButton_Click(object sender, RoutedEventArgs e)
@@ -4522,7 +4542,7 @@ namespace ScreenToGif.Windows
             SetFocusOnCurrentFrame();
         }
 
-        private async void ShowPanel(PanelTypes type, string title, string vector, Action<object, RoutedEventArgs> apply = null)
+        private async void ShowPanel(PanelTypes type, string titleKey, string vector, Action<object, RoutedEventArgs> apply = null)
         {
             var focusFirstVisibleChild = true;
 
@@ -4545,7 +4565,7 @@ namespace ScreenToGif.Windows
 
             #region Commons
 
-            ActionTitleTextBlock.Text = title;
+            SetResourceReference(PanelTitleProperty, titleKey);
             ActionIconBorder.Background = FindResource(vector) as Brush;
 
             if (apply != null)
